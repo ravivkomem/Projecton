@@ -2,14 +2,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class mysqlConnection {
+public class MysqlConnection {
 	
 	/* Initialize database constants */
 	/*TODO: Update constants name to suit the project */
-    private static final String DATABASE_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/database_name"; // URL requires Update
+    private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ICM?serverTimezone=IST"; // URL requires Update
     private static final String USERNAME = "root";  // UserName requires update
-    private static final String PASSWORD = "";		// Password requires update
+    private static final String PASSWORD = "Aa123456";		// Password requires update
 	
     /* Private variables declaration */
     private Connection connection;
