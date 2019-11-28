@@ -8,8 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text layoutX="173.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="supervisor managment" wrappingWidth="309.13671875">
          <font>
@@ -26,7 +25,7 @@
       </TableView>
       <Text layoutX="22.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Display extra details for request ID" wrappingWidth="196.13671875" />
       <TextField layoutX="226.0" layoutY="300.0" />
-      <Button layoutX="52.0" layoutY="333.0" mnemonicParsing="false" text="View" />
+      <Button layoutX="399.0" layoutY="300.0" mnemonicParsing="false" text="View" />
       <Button layoutX="39.0" layoutY="96.0" mnemonicParsing="false" text="Refresh Table" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" />
    </children>
