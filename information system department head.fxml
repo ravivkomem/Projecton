@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <Text layoutX="100.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information System Department Head">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TableView layoutX="31.0" layoutY="69.0" prefHeight="200.0" prefWidth="436.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="EmployeeID" />
+          <TableColumn prefWidth="75.0" text="FirstName" />
+            <TableColumn prefWidth="75.0" text="LastName" />
+            <TableColumn minWidth="0.0" prefWidth="209.5999755859375" text="Permission Set">
+               <columns>
+                  <TableColumn prefWidth="75.0" text="X" />
+                  <TableColumn prefWidth="75.0" text="Y" />
+                  <TableColumn prefWidth="75.0" text="Z" />
+               </columns>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <Button layoutX="447.0" layoutY="304.0" mnemonicParsing="false" text="updatePermission" />
+      <Button layoutX="491.0" layoutY="125.0" mnemonicParsing="false" text="Button" />
+   </children>
+</AnchorPane>
