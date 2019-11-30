@@ -8,35 +8,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="GUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.DemoLandingController">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="919.0">
-         <children>
-            <Text layoutX="53.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Request ID">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
-            <Text layoutX="340.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ICM" wrappingWidth="101.0625">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Text>
-            <TextField layoutX="242.0" layoutY="90.0" />
-            <Button layoutX="419.0" layoutY="90.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="View" />
-            <TableView layoutX="9.0" layoutY="138.0" prefHeight="218.0" prefWidth="763.0">
-               <columns>
-                  <TableColumn prefWidth="98.0" text="InitaitorName" />
-                  <TableColumn prefWidth="90.0" text="Subsystem" />
-                  <TableColumn prefWidth="107.0" text="Current state" />
-                  <TableColumn prefWidth="161.0" text="Change Description" />
-                  <TableColumn prefWidth="124.0" text="Status" />
-                  <TableColumn prefWidth="182.0" text="HandlerName" />
-               </columns>
-            </TableView>
-            <Button layoutX="340.0" layoutY="388.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="82.0" text="Update" />
-         </children>
-      </AnchorPane>
+      <Text layoutX="20.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter change request ID">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="340.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ICM" wrappingWidth="101.0625">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <TextField fx:id="changeRequestTextField" layoutX="250.0" layoutY="90.0" promptText="Enter change request ID" />
+      <Button fx:id="viewButton" layoutX="419.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#displayChangeRequestDetails" prefHeight="25.0" prefWidth="64.0" text="View" />
+      <TableView fx:id="changeRequestDetailsTableView" layoutX="9.0" layoutY="138.0" prefHeight="218.0" prefWidth="763.0" visible="false">
+         <columns>
+            <TableColumn prefWidth="98.0" text="InitaitorName" />
+            <TableColumn prefWidth="90.0" text="Subsystem" />
+            <TableColumn prefWidth="107.0" text="Current state" />
+            <TableColumn prefWidth="161.0" text="Change Description" />
+            <TableColumn prefWidth="124.0" text="Status" />
+            <TableColumn prefWidth="182.0" text="HandlerName" />
+         </columns>
+      </TableView>
+      <Button fx:id="updateButton" layoutX="340.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#updateChangeRequestTable" prefHeight="43.0" prefWidth="82.0" text="Update" visible="false" />
    </children>
 </AnchorPane>

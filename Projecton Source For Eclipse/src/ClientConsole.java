@@ -3,8 +3,12 @@
 // license found at www.lloseng.com 
 
 import java.io.*;
+
+import boundries.ProjectFX;
 import client.*;
 import common.*;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * This class constructs the UI for a chat client.  It implements the
@@ -16,7 +20,7 @@ import common.*;
  * @author Dr Robert Lagani&egrave;re
  * @version July 2000
  */
-public class ClientConsole implements ChatIF 
+public class ClientConsole implements ChatIF
 {
   //Class variables *************************************************
   
@@ -31,7 +35,6 @@ public class ClientConsole implements ChatIF
    * The instance of the client that created this ConsoleChat.
    */
   ChatClient client;
-
   
   //Constructors ****************************************************
 
@@ -117,6 +120,7 @@ public class ClientConsole implements ChatIF
     }
     ClientConsole chat= new ClientConsole(host, DEFAULT_PORT);
     chat.accept();  //Wait for console data
+   
+    
   }
 }
-//End of ConsoleChat class
