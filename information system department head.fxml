@@ -7,30 +7,37 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="591.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="100.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information System Department Head">
+      <Text layoutX="142.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information System Department Head">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutX="31.0" layoutY="69.0" prefHeight="200.0" prefWidth="436.0">
+      <TableView layoutX="31.0" layoutY="69.0" prefHeight="280.0" prefWidth="565.0">
         <columns>
           <TableColumn prefWidth="75.0" text="EmployeeID" />
           <TableColumn prefWidth="75.0" text="FirstName" />
             <TableColumn prefWidth="75.0" text="LastName" />
-            <TableColumn minWidth="0.0" prefWidth="209.5999755859375" text="Permission Set">
+            <TableColumn minWidth="0.0" prefWidth="339.0" text="Permission Set">
                <columns>
-                  <TableColumn prefWidth="75.0" text="X" />
-                  <TableColumn prefWidth="75.0" text="Y" />
-                  <TableColumn prefWidth="75.0" text="Z" />
+                  <TableColumn prefWidth="95.0" text="X" />
+                  <TableColumn prefWidth="90.0" text="Y" />
+                  <TableColumn minWidth="7.0" prefWidth="151.0" text="Z" />
                </columns>
             </TableColumn>
         </columns>
       </TableView>
-      <Button layoutX="447.0" layoutY="304.0" mnemonicParsing="false" text="updatePermission" />
-      <Button layoutX="491.0" layoutY="125.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="26.0" layoutY="358.0" mnemonicParsing="false" text="Update Premission Table" />
+      <Button layoutX="22.0" layoutY="533.0" mnemonicParsing="false" text="Back" />
+      <Button layoutX="642.0" layoutY="69.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="123.0" text="View all workers" />
+      <Button layoutX="631.0" layoutY="102.0" mnemonicParsing="false" text="View all change Request" />
+      <Button layoutX="660.0" layoutY="137.0" mnemonicParsing="false" text="Reports Page" />
+      <Text layoutX="634.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Actions">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
