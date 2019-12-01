@@ -48,6 +48,7 @@ public class EchoServer extends AbstractServer
   public void handleMessageFromClient
     (Object msg, ConnectionToClient client)
   {
+	  	MysqlConnection sqlConnection = new MysqlConnection();
 	    System.out.println("Message received: " + msg + " from " + client);
 	    this.sendToAllClients(msg);
 	  }

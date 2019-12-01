@@ -1,5 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MysqlConnection {
@@ -7,7 +9,7 @@ public class MysqlConnection {
 	/* Initialize database constants */
 	/*TODO: Update constants name to suit the project */
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ICM?serverTimezone=IST"; // URL requires Update
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/ICM?serverTimezone=IST"; // URL requires Update
     private static final String USERNAME = "root";  // UserName requires update
     private static final String PASSWORD = "Aa123456";		// Password requires update
 	
@@ -55,6 +57,20 @@ public class MysqlConnection {
                 e.printStackTrace();
             }
         }
+    }
+    
+    public ResultSet getResult(String objMessage)
+    {
+    	this.connect();
+    	try {
+			PreparedStatement ps = connection.prepareStatement(objMessage);
+			ResultSet rs = ps.executeQuery();
+			this.disconnect();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
     
 }
