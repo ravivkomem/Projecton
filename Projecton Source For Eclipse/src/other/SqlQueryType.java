@@ -2,13 +2,13 @@ package other;
 
 public enum SqlQueryType {
 	
-	FirstSqlQuery,	/* == -1 */
+	FIRST_SQL_QUERY,	/* == -1 */
 	
-	Login,
-	GetAllChangeRequests,
-	GetChangeRequestById,
+	LOGIN,
+	GET_ALL_CHANGE_REQUESTS,
+	GET_CHANGE_REQUEST_BY_ID,
 	
-	MaxSqlQuery; /* == number of queries */
+	MAX_SQL_QUERY; /* == number of queries */
 	
 	public int getCode() {
         return ordinal()-1;
@@ -16,10 +16,10 @@ public enum SqlQueryType {
 	
 	public static void main(String args[])
 	{		
-		String[] sqlArray = new String[MaxSqlQuery.getCode()];
-		sqlArray[GetAllChangeRequests.getCode()] = "Hello";
-		sqlArray[GetChangeRequestById.getCode()] = "SELECT * FROM requirement WHERE userName =?";
-		sqlArray[Login.getCode()] = "Empty";
+		String[] sqlArray = new String[MAX_SQL_QUERY.getCode()];
+		sqlArray[GET_ALL_CHANGE_REQUESTS.getCode()] = "SELECT * FROM requirement";
+		sqlArray[GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM requirement WHERE userName = ?";
+		sqlArray[LOGIN.getCode()] = "SELECT * FROM requirement WHERE userName = ? AND password = ?";
 		
 		for (String sql : sqlArray) 
 		{
