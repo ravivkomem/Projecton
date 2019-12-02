@@ -1,11 +1,12 @@
 package boundries;
 
-import com.sun.glass.events.MouseEvent;
+
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class DemoLandingBoundries {
 
@@ -21,13 +22,15 @@ public class DemoLandingBoundries {
     @FXML
     private Button updateButton;
 
+
+
     @FXML
     void displayChangeRequestDetails(MouseEvent event) {
     	System.out.println(changeRequestTextField.getText());
     	changeRequestDetailsTableView.setVisible(true);
     	updateButton.setVisible(true);
+    	DemoLandingController.sendMsgToServer(changeRequestTextField.getText());
     }
-
     @FXML
     void updateChangeRequestTable(MouseEvent event) {
 

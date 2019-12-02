@@ -17,7 +17,7 @@ public class ProjectFX extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		AnchorPane anchorPane;
-		DemoLandingController controller;
+		DemoLandingBoundries controller;
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("DemoLandingPage.fxml"));

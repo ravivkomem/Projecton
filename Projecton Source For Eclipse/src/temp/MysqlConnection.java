@@ -1,3 +1,4 @@
+package temp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -61,16 +62,21 @@ public class MysqlConnection {
     
     public ResultSet getResult(String objMessage)
     {
+    	ResultSet rs =null;
     	this.connect();
     	try {
 			PreparedStatement ps = connection.prepareStatement(objMessage);
-			ResultSet rs = ps.executeQuery();
-			this.disconnect();
+			rs = ps.executeQuery();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	finally {
+    		//this.disconnect();
+    	}
     	
+    	return rs;
     }
     
 }
