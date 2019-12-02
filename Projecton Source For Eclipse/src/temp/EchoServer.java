@@ -1,8 +1,12 @@
+package temp;
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import ocsf.server.*;
 
 /**
@@ -49,8 +53,16 @@ public class EchoServer extends AbstractServer
     (Object msg, ConnectionToClient client)
   {
 	  	MysqlConnection sqlConnection = new MysqlConnection();
-	    System.out.println("Message received: " + msg + " from " + client);
-	    this.sendToAllClients(msg);
+	  	ResultSet rs = sqlConnection.getResult((String)msg);
+	  	try {
+			 rs.next();
+	  		System.out.println("Message received: " + rs.getString("ChangeRequestID") + " from " + client);
+			 this.sendToAllClients(msg);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
 	  }
 
     

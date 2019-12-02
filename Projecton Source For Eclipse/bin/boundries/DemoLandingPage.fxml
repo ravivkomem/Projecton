@@ -21,7 +21,7 @@
          </font>
       </Text>
       <TextField fx:id="changeRequestTextField" layoutX="250.0" layoutY="90.0" promptText="Enter change request ID" />
-      <Button fx:id="viewButton" layoutX="419.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#displayChangeRequestDetails" prefHeight="25.0" prefWidth="64.0" text="View" />
+    <Button fx:id="viewButton" layoutX="419.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#displayChangeRequestDetails" prefHeight="25.0" prefWidth="64.0" text="View" />
       <TableView fx:id="changeRequestDetailsTableView" layoutX="9.0" layoutY="138.0" prefHeight="218.0" prefWidth="763.0" visible="false">
          <columns>
             <TableColumn prefWidth="98.0" text="InitaitorName" />
@@ -32,6 +32,6 @@
             <TableColumn prefWidth="182.0" text="HandlerName" />
          </columns>
       </TableView>
-      <Button fx:id="updateButton" layoutX="340.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#updateChangeRequestTable" prefHeight="43.0" prefWidth="82.0" text="Update" visible="false" />
+     <Button fx:id="updateButton" layoutX="340.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#updateChangeRequestTable" prefHeight="43.0" prefWidth="82.0" text="Update" visible="false" />
    </children>
 </AnchorPane>
