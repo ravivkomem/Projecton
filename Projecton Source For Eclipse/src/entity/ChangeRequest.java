@@ -1,18 +1,20 @@
 package entity;
 
 public class ChangeRequest {
+	private int changeRequestID;
+	private String intiator;
 	private String selectSysystem;
 	private String currentStateDiscription;
 	private String changeRequestDescription;
+	private String changeRequestStatus;
+	private String handler;
+	
 	private String changeRequestComment;
 	private String changeRequestDocuments;
-	private int changeRequestID;
 	private String changeRequestExplanation;
-	private String changeRequestIntiatorName;
 	private String changeRequestStep;
-	private String changeRequestStatus;
 	private String stepLeader;
-	private String handleName;
+	
 	public ChangeRequest(String selectSysystem, String currentStateDiscription, String changeRequestDescription,
 			int changeRequestID, String changeRequestExplanation, String changeRequestIntiatorName,
 			String changeRequestStatus, String handleName) {
@@ -22,9 +24,9 @@ public class ChangeRequest {
 		this.changeRequestDescription = changeRequestDescription;
 		this.changeRequestID = changeRequestID;
 		this.changeRequestExplanation = changeRequestExplanation;
-		this.changeRequestIntiatorName = changeRequestIntiatorName;
+		this.intiator = changeRequestIntiatorName;
 		this.changeRequestStatus = changeRequestStatus;
-		this.handleName = handleName;
+		this.handler = handleName;
 	}
 	
 	
@@ -35,9 +37,9 @@ public class ChangeRequest {
 		this.currentStateDiscription = currentStateDiscription;
 		this.changeRequestDescription = changeRequestDescription;
 		this.changeRequestID = changeRequestID;
-		this.changeRequestIntiatorName = changeRequestIntiatorName;
+		this.intiator = changeRequestIntiatorName;
 		this.changeRequestStatus = changeRequestStatus;
-		this.handleName = handleName;
+		this.handler = handleName;
 	}
 
 
@@ -84,10 +86,10 @@ public class ChangeRequest {
 		this.changeRequestExplanation = changeRequestExplanation;
 	}
 	public String getChangeRequestIntiatorName() {
-		return changeRequestIntiatorName;
+		return intiator;
 	}
 	public void setChangeRequestIntiatorName(String changeRequestIntiatorName) {
-		this.changeRequestIntiatorName = changeRequestIntiatorName;
+		this.intiator = changeRequestIntiatorName;
 	}
 	public String getChangeRequestStep() {
 		return changeRequestStep;
@@ -108,10 +110,10 @@ public class ChangeRequest {
 		this.stepLeader = stepLeader;
 	}
 	public String getHandleName() {
-		return handleName;
+		return handler;
 	}
 	public void setHandleName(String handleName) {
-		this.handleName = handleName;
+		this.handler = handleName;
 	}
 	
 	

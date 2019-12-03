@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import other.ServerEvent;
 import other.SqlResult;
 
-public class DemoLandingBoundries {
+public class DemoLandingBoundries implements Initializable {
 
     @FXML
     private TextField changeRequestTextField;
@@ -33,10 +33,10 @@ public class DemoLandingBoundries {
     private TableView<ChangeRequest> changeRequestDetailsTableView;
     
     @FXML
-    private TableColumn<ChangeRequest, String> initiatorNameColumn;
-
-    @FXML
     private TableColumn<ChangeRequest, String> subsystemColumn;
+    
+    @FXML
+    private TableColumn<ChangeRequest, String> initaitorColumn;
 
     @FXML
     private TableColumn<ChangeRequest, String> currentStateColumn;
@@ -45,10 +45,10 @@ public class DemoLandingBoundries {
     private TableColumn<ChangeRequest, String> changeDescriptionColumn;
 
     @FXML
-    private TableColumn<ChangeRequest, String> statusColumn;
-
+    private TableColumn<ChangeRequest, String> handlerColumn;
+    
     @FXML
-    private TableColumn<ChangeRequest, String> handlerNameColumn;
+    private TableColumn<ChangeRequest, String> statusColumn;
     
     @FXML
     private Button updateButton;
@@ -72,33 +72,17 @@ public class DemoLandingBoundries {
     public void displayChangeRequestTable(ArrayList<ChangeRequest> results)
     {
     	list = FXCollections.observableArrayList(results);
-    	initiatorNameColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestIntiatorName"));
+    	changeRequestDetailsTableView.setItems(list);
+    }
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		handlerColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("intiator"));
     	subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectSysystem"));
     	currentStateColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDiscription"));
     	changeDescriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
     	statusColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestStatus"));
-    	handlerNameColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("handleName"));
-    	
-    	
-//    	for(ChangeRequest obj: results) {
-//    		list.add(obj);
-//    	}
-    	
-//    	for (ArrayList<Object> rowArray : results.getResultData())
-//    	{
-//    		/*Remove the ID because it is not needed for the table */
-//    		rowArray.remove(0);
-//    		ArrayList<String> stringArray = new ArrayList<String>();
-//    		for (Object obj : rowArray)
-//    		{
-//    			String string = (String)obj;
-//    			stringArray.add(string);
-//    		}
-//    		list.add(stringArray);		
-//    	}
-    	
-    	changeRequestDetailsTableView.setItems(list);
-    }
+    	handlerColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("handler"));
+	}
     
 
 }
