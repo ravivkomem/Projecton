@@ -5,8 +5,13 @@
 package client;
 
 import ocsf.client.*;
+import other.ServerEvent;
+import other.SqlResult;
 import common.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * This class overrides some of the methods defined in the abstract
@@ -27,7 +32,8 @@ public class ChatClient extends AbstractClient
    */
   ChatIF clientUI; 
 
-  
+  /* Static variables */
+  public static List<ServerEvent> changeRequestByIdListeners = new ArrayList<ServerEvent>();
   //Constructors ****************************************************
   
   /**
@@ -64,7 +70,7 @@ public class ChatClient extends AbstractClient
    *
    * @param message The message from the UI.    
    */
-  public void handleMessageFromClientUI(String message)  
+  public void handleMessageFromClientUI(Object message)  
   {
     try
     {
@@ -90,5 +96,21 @@ public class ChatClient extends AbstractClient
     catch(IOException e) {}
     System.exit(0);
   }
+  
+  public static void addChangeRequestByIdListeners(ServerEvent toAdd) {
+		if (!changeRequestByIdListeners.contains(toAdd)) {
+			changeRequestByIdListeners.add(toAdd);
+		}
+	}
+
+	public void getChangeRequestByIdListeners(SqlResult result) {
+		// Notify everybody that may be interested.
+		System.out.println("in th lisner " + result);
+		for (ServerEvent hl : changeRequestByIdListeners) {
+			hl.getChangeRequestByIdResultDelivery(result);
+		}
+	}
+  
+  
 }
 //End of ChatClient class

@@ -57,7 +57,7 @@ public class EchoServer extends AbstractServer
 	  	try {
 			 rs.next();
 	  		System.out.println("Message received: " + rs.getString("ChangeRequestID") + " from " + client);
-			 this.sendToAllClients(msg);
+			 this.sendToAllClients(rs.getString("ChangeRequestID"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
