@@ -6,10 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SqlResult { 
+	
 	private ArrayList<ArrayList<Object>> resultData;
+	private SqlQueryType actionType;
 
-	public SqlResult (ResultSet rs)
+	public SqlResult (ResultSet rs, SqlQueryType actionType)
 	{
+		this.actionType = actionType;
+		
 		resultData = new ArrayList<ArrayList<Object>>();
 		ResultSetMetaData rsmd;
 		try {
@@ -30,5 +34,10 @@ public class SqlResult {
 	public ArrayList<ArrayList<Object>> getResultData()
 	{
 		return resultData;
+	}
+	
+	public SqlQueryType getActionType()
+	{
+		return actionType;
 	}
 }

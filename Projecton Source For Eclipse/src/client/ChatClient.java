@@ -8,6 +8,8 @@ import ocsf.client.*;
 import other.ServerEvent;
 import other.SqlResult;
 import common.*;
+import javafx.application.Platform;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +64,16 @@ public class ChatClient extends AbstractClient
    */
   public void handleMessageFromServer(Object msg) 
   {
-    clientUI.display(msg.toString());
+	  SqlResult result = (SqlResult) msg;
+
+		switch (result.getActionType()) {
+			case GET_CHANGE_REQUEST_BY_ID:
+				Platform.runLater(() -> {
+					this.getChangeRequestByIdListeners(result);
+				});
+				break;
+			default:
+		}
   }
 
   /**
@@ -78,8 +89,7 @@ public class ChatClient extends AbstractClient
     }
     catch(IOException e)
     {
-      clientUI.display
-        ("Could not send message to server.  Terminating client.");
+      clientUI.display("Could not send message to server.  Terminating client.");
       quit();
     }
   }
@@ -105,7 +115,7 @@ public class ChatClient extends AbstractClient
 
 	public void getChangeRequestByIdListeners(SqlResult result) {
 		// Notify everybody that may be interested.
-		System.out.println("in th lisner " + result);
+		System.out.println("In the listener " + result.getResultData().toString());
 		for (ServerEvent hl : changeRequestByIdListeners) {
 			hl.getChangeRequestByIdResultDelivery(result);
 		}

@@ -14,21 +14,6 @@ public enum SqlQueryType {
 	public int getCode() {
         return ordinal()-1;
 	}
-	
-	public static void main(String args[])
-	{		
-		String[] sqlArray = new String[MAX_SQL_QUERY.getCode()];
-		sqlArray[GET_ALL_CHANGE_REQUESTS.getCode()] = "SELECT * FROM requirement";
-		sqlArray[GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM requirement WHERE userName = ?";
-		sqlArray[LOGIN.getCode()] = "SELECT * FROM requirement WHERE userName = ? AND password = ?";
-		sqlArray[MA_KORE.getCode()]="SELECT ***";
-		
-		for (String sql : sqlArray) 
-		{
-			System.out.println(sql);
-		}
-	}
-	
 }
 
 

@@ -29,7 +29,7 @@ public class DemoLandingBoundries {
     	System.out.println(changeRequestTextField.getText());
     	changeRequestDetailsTableView.setVisible(true);
     	updateButton.setVisible(true);
-    	DemoLandingController.sendMsgToServer(changeRequestTextField.getText());
+    	DemoLandingController.getChangeRequestById(changeRequestTextField.getText());
     }
     @FXML
     void updateChangeRequestTable(MouseEvent event) {

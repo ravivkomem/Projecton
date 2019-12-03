@@ -4,16 +4,19 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import other.*;
+
 
 public class MysqlConnection {
 	
 	/* Initialize database constants */
 	/*TODO: Update constants name to suit the project */
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/ICM?serverTimezone=IST"; // URL requires Update
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/icm?serverTimezone=IST"; // URL requires Update
     private static final String USERNAME = "root";  // UserName requires update
     private static final String PASSWORD = "Aa123456";		// Password requires update
-	
+    private static String[] sqlArray;
+    
     /* Private variables declaration */
     private Connection connection;
 
@@ -60,23 +63,54 @@ public class MysqlConnection {
         }
     }
     
-    public ResultSet getResult(String objMessage)
+    public SqlResult getResult(SqlAction sqlAction)
     {
-    	ResultSet rs =null;
+    	ResultSet rs = null;
+    	SqlResult sqlResult = null;
+    	
     	this.connect();
     	try {
-			PreparedStatement ps = connection.prepareStatement(objMessage);
+			PreparedStatement ps = connection.prepareStatement(sqlArray[sqlAction.getActionType().getCode()]);
+			for (int i = 1; i<=sqlAction.getActionVars().size(); i++)
+			{
+				/* In Array List we start from 0 */
+				Object obj = sqlAction.getActionVars().get(i-1); 
+				if (obj instanceof Integer) {
+					Integer num = (Integer) obj;
+					ps.setInt(i, num);
+				}
+				if (obj instanceof Double) {
+					Double dNum = (Double) obj;
+					ps.setDouble(i, dNum);
+				}
+				if (obj instanceof Float) {
+					Float fNum = (Float) obj;
+					ps.setFloat(i, fNum);
+				}
+				if (obj instanceof String) {
+					String string = (String) obj;
+					ps.setString(i, string);
+				}
+					
+			}
 			rs = ps.executeQuery();
-			
+			sqlResult = new SqlResult(rs, sqlAction.getActionType());
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	finally {
-    		//this.disconnect();
+    		this.disconnect();
     	}
     	
-    	return rs;
+    	return sqlResult;
+    }
+    
+    public static void initSqlArray() 
+    {
+    	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
+    	sqlArray[SqlQueryType.GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
     }
     
 }

@@ -1,8 +1,9 @@
 package other;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SqlAction
+public class SqlAction implements Serializable
 {
 	private SqlQueryType actionType;
 	private ArrayList<Object> actionVars;

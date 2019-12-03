@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ocsf.server.*;
+import other.SqlAction;
+import other.SqlResult;
 
 /**
  * This class overrides some of the methods in the abstract 
@@ -49,21 +51,14 @@ public class EchoServer extends AbstractServer
    * @param msg The message received from the client.
    * @param client The connection from which the message originated.
    */
-  public void handleMessageFromClient
-    (Object msg, ConnectionToClient client)
+  public void handleMessageFromClient (Object msg, ConnectionToClient client)
   {
+	  	SqlAction sqlAction = (SqlAction) msg;
 	  	MysqlConnection sqlConnection = new MysqlConnection();
-	  	ResultSet rs = sqlConnection.getResult((String)msg);
-	  	try {
-			 rs.next();
-	  		System.out.println("Message received: " + rs.getString("ChangeRequestID") + " from " + client);
-			 this.sendToAllClients(rs.getString("ChangeRequestID"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	   
-	  }
+	  	SqlResult sqlResult = sqlConnection.getResult(sqlAction);
+	  	System.out.println("Message received: " + sqlResult.getResultData().toString() + " from " + client);
+		//this.sendToAllClients(rs.getString("ChangeRequestID"));
+  }
 
     
   /**
