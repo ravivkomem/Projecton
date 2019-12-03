@@ -28,8 +28,6 @@ public class ProjectFX extends Application {
 			/*TODO: Change null to actual ip of server */
 			String[] args = null;
 			ClientConsole.connection(args);
-			/*TODO: Check if we want to init the sql array here */
-			//MysqlConnection.initSqlArray();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;

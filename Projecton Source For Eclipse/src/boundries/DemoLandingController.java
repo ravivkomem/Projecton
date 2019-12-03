@@ -13,7 +13,14 @@ import other.SqlResult;
 
 public class DemoLandingController extends ServerEvent {
 
-	public static void getChangeRequestById (String changeRequestId)
+	private DemoLandingBoundries myBoundry;
+	
+	public DemoLandingController(DemoLandingBoundries myBoundry) 
+	{
+		this.myBoundry = myBoundry;
+	}
+	
+	public void getChangeRequestById (String changeRequestId)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
@@ -24,7 +31,7 @@ public class DemoLandingController extends ServerEvent {
 	
 	public void getChangeRequestByIdResultDelivery(SqlResult results) {
 		Platform.runLater(() -> {
-			DemoLandingBoundries.displayChangeRequestTable(results);
+			myBoundry.displayChangeRequestTable(results);
 		});
 	}
 }

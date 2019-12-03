@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.DemoLandingBoundries">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="477.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.DemoLandingBoundries">
    <children>
       <Text layoutX="20.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter change request ID">
          <font>
@@ -24,11 +24,11 @@
     <Button fx:id="viewButton" layoutX="419.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#displayChangeRequestDetails" prefHeight="25.0" prefWidth="64.0" text="View" />
       <TableView fx:id="changeRequestDetailsTableView" layoutX="9.0" layoutY="138.0" prefHeight="218.0" prefWidth="763.0" visible="false">
          <columns>
-            <TableColumn prefWidth="98.0" text="InitaitorName" />
-            <TableColumn prefWidth="90.0" text="Subsystem" />
-            <TableColumn prefWidth="107.0" text="Current state" />
-            <TableColumn prefWidth="161.0" text="Change Description" />
-            <TableColumn prefWidth="124.0" text="Status" />
+            <TableColumn fx:id="initaitorNameColumn" prefWidth="98.0" text="InitaitorName" />
+            <TableColumn fx:id="subsystemColumn" prefWidth="90.0" text="Subsystem" />
+            <TableColumn fx:id="currentStateColumn" prefWidth="107.0" text="Current state" />
+            <TableColumn fx:id="changeDescriptionColumn" prefWidth="161.0" text="Change Description" />
+            <TableColumn fx:id="statusColumn" prefWidth="124.0" text="Status" />
             <TableColumn prefWidth="182.0" text="HandlerName" />
          </columns>
       </TableView>

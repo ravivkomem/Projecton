@@ -92,6 +92,7 @@ public class EchoServer extends AbstractServer
    */
   public static void main(String[] args) 
   {
+	MysqlConnection.initSqlArray();
     int port = 0; //Port to listen on
 
     try
