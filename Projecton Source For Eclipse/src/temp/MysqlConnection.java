@@ -15,7 +15,7 @@ public class MysqlConnection {
     private static final String DATABASE_URL = "jdbc:mysql://localhost/icm?serverTimezone=IST"; // URL requires Update
     private static final String USERNAME = "root";  // UserName requires update
     private static final String PASSWORD = "Aa123456";		// Password requires update
-    private static String[] sqlArray;
+    private String[] sqlArray;
     
     /* Private variables declaration */
     private Connection connection;
@@ -68,8 +68,10 @@ public class MysqlConnection {
     	ResultSet rs = null;
     	SqlResult sqlResult = null;
     	
+    	this.initSqlArray();
     	this.connect();
     	try {
+    		
 			PreparedStatement ps = connection.prepareStatement(sqlArray[sqlAction.getActionType().getCode()]);
 			for (int i = 1; i<=sqlAction.getActionVars().size(); i++)
 			{
@@ -107,7 +109,7 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
-    public static void initSqlArray() 
+    private void initSqlArray() 
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	sqlArray[SqlQueryType.GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
