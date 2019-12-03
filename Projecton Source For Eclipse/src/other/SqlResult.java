@@ -1,11 +1,12 @@
 package other;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SqlResult { 
+public class SqlResult implements Serializable{ 
 	
 	private ArrayList<ArrayList<Object>> resultData;
 	private SqlQueryType actionType;

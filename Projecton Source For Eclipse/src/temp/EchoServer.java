@@ -57,7 +57,7 @@ public class EchoServer extends AbstractServer
 	  	MysqlConnection sqlConnection = new MysqlConnection();
 	  	SqlResult sqlResult = sqlConnection.getResult(sqlAction);
 	  	System.out.println("Message received: " + sqlResult.getResultData().toString() + " from " + client);
-		//this.sendToAllClients(rs.getString("ChangeRequestID"));
+		this.sendToClient(sqlResult, client);
   }
 
     

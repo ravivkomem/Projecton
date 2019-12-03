@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import other.SqlResult;
 
 public class DemoLandingBoundries {
 
@@ -22,8 +23,6 @@ public class DemoLandingBoundries {
     @FXML
     private Button updateButton;
 
-
-
     @FXML
     void displayChangeRequestDetails(MouseEvent event) {
     	System.out.println(changeRequestTextField.getText());
@@ -35,5 +34,10 @@ public class DemoLandingBoundries {
     void updateChangeRequestTable(MouseEvent event) {
 
     }
+    public static void displayChangeRequestTable(SqlResult results)
+    {
+    	System.out.println("I am in boundry: " + results.getResultData().toString());
+    }
+    
 
 }
