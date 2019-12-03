@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.LogInBoundry">
+   <children>
+      <Pane fx:id="FirstPane" prefHeight="217.0" prefWidth="412.0">
+         <children>
+            <GridPane layoutX="57.0" layoutY="92.0" prefHeight="44.0" prefWidth="332.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="155.0" text="insert server ip" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="18.0" fx:id="x12" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <textFill>
+                        <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="BLACK" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                     <effect>
+                        <ColorAdjust brightness="-1.0" />
+                     </effect>
+                  </Label>
+                  <TextField fx:id="ServerIPtext" prefHeight="31.0" prefWidth="220.0" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets right="10.0" />
+                     </GridPane.margin>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </TextField>
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="344.0" minWidth="10.0" prefWidth="183.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.0" minWidth="10.0" prefWidth="216.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="355.0" minWidth="10.0" prefWidth="25.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+            <Label layoutX="144.0" layoutY="14.0" text="Login">
+               <font>
+                  <Font name="System Bold Italic" size="48.0" />
+               </font>
+               <textFill>
+                  <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#181f79" />
+                        <Stop color="#d2cece" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+            </Label>
+            <Button fx:id="Connectbtn" layoutX="163.0" layoutY="153.0" mnemonicParsing="false" onAction="#ConnectToServer" prefHeight="25.0" prefWidth="69.0" style="-fx-background-radius: 10;" text="connect" textFill="BLACK">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
