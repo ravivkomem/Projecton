@@ -1,4 +1,4 @@
-package temp;
+package server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -112,6 +112,7 @@ public class MysqlConnection {
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	sqlArray[SqlQueryType.GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT subsystem FROM icm.requirements";
     }
     
 }

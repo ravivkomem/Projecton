@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import client.ChatClient;
-import entity.ChangeRequest;
+import controllers.DemoLandingController;
+import entities.ChangeRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import javafx.scene.input.MouseEvent;
 import other.ServerEvent;
 import other.SqlResult;
 
-public class DemoLandingBoundries implements Initializable {
+public class DemoLandingBoundry implements Initializable {
 
     @FXML
     private TextField changeRequestTextField;
@@ -59,7 +60,6 @@ public class DemoLandingBoundries implements Initializable {
     
     @FXML
     void displayChangeRequestDetails(MouseEvent event) {
-    	System.out.println(changeRequestTextField.getText());
     	changeRequestDetailsTableView.setVisible(true);
     	updateButton.setVisible(true);
     	//ChatClient.changeRequestByIdListeners.add(this);

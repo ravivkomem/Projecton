@@ -4,7 +4,7 @@ public enum SqlQueryType {
 	
 	FIRST_SQL_QUERY,	/* == -1 */
 	
-	LOGIN,
+	VERIFY_LOGIN,
 	GET_ALL_CHANGE_REQUESTS,
 	GET_CHANGE_REQUEST_BY_ID,
 	MA_KORE,

@@ -1,15 +1,10 @@
-package temp;
+package client;
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
 import java.io.*;
 
-import boundries.ProjectFX;
-import client.*;
-import common.*;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
 /**
  * This class constructs the UI for a chat client.  It implements the

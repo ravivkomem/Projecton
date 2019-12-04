@@ -6,8 +6,8 @@ package client;
 
 import ocsf.client.*;
 import other.ServerEvent;
+import controllers.LoginController;
 import other.SqlResult;
-import common.*;
 import javafx.application.Platform;
 
 import java.io.*;
@@ -67,6 +67,7 @@ public class ChatClient extends AbstractClient
 	  SqlResult result = (SqlResult) msg;
 
 		switch (result.getActionType()) {
+			case VERIFY_LOGIN: 
 			case GET_CHANGE_REQUEST_BY_ID:
 				Platform.runLater(() -> {
 					this.getChangeRequestByIdListeners(result);
@@ -118,6 +119,11 @@ public class ChatClient extends AbstractClient
 		System.out.println("In the listener " + result.getResultData().toString());
 		for (ServerEvent hl : changeRequestByIdListeners) {
 			hl.getChangeRequestByIdResultDelivery(result);
+			if (hl instanceof LoginController)
+			{
+				LoginController controller = (LoginController)hl;
+				controller.getResultFromClient(result);
+			}
 		}
 	}
   

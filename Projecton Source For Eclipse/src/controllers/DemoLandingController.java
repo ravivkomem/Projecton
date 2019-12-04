@@ -1,22 +1,22 @@
-package boundries;
-
-import temp.ClientConsole;
+package controllers;
 
 import java.util.ArrayList;
 
+import boundries.DemoLandingBoundry;
 import client.ChatClient;
+import client.ClientConsole;
+import entities.ChangeRequest;
 import javafx.application.Platform;
 import other.ServerEvent;
 import other.SqlAction;
 import other.SqlQueryType;
 import other.SqlResult;
-import entity.ChangeRequest;
 
 public class DemoLandingController extends ServerEvent {
 
-	private DemoLandingBoundries myBoundry;
+	private DemoLandingBoundry myBoundry;
 	
-	public DemoLandingController(DemoLandingBoundries myBoundry) 
+	public DemoLandingController(DemoLandingBoundry myBoundry) 
 	{
 		this.myBoundry = myBoundry;
 	}
