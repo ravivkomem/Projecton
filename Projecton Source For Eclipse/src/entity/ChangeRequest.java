@@ -2,7 +2,7 @@ package entity;
 
 public class ChangeRequest {
 	private int changeRequestID;
-	private String intiator;
+	private String initiator;
 	private String selectSysystem;
 	private String currentStateDiscription;
 	private String changeRequestDescription;
@@ -24,7 +24,7 @@ public class ChangeRequest {
 		this.changeRequestDescription = changeRequestDescription;
 		this.changeRequestID = changeRequestID;
 		this.changeRequestExplanation = changeRequestExplanation;
-		this.intiator = changeRequestIntiatorName;
+		this.initiator = changeRequestIntiatorName;
 		this.changeRequestStatus = changeRequestStatus;
 		this.handler = handleName;
 	}
@@ -37,7 +37,7 @@ public class ChangeRequest {
 		this.currentStateDiscription = currentStateDiscription;
 		this.changeRequestDescription = changeRequestDescription;
 		this.changeRequestID = changeRequestID;
-		this.intiator = changeRequestIntiatorName;
+		this.initiator = changeRequestIntiatorName;
 		this.changeRequestStatus = changeRequestStatus;
 		this.handler = handleName;
 	}
@@ -86,10 +86,10 @@ public class ChangeRequest {
 		this.changeRequestExplanation = changeRequestExplanation;
 	}
 	public String getChangeRequestIntiatorName() {
-		return intiator;
+		return initiator;
 	}
 	public void setChangeRequestIntiatorName(String changeRequestIntiatorName) {
-		this.intiator = changeRequestIntiatorName;
+		this.initiator = changeRequestIntiatorName;
 	}
 	public String getChangeRequestStep() {
 		return changeRequestStep;

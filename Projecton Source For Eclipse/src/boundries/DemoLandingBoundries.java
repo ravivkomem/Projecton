@@ -33,10 +33,10 @@ public class DemoLandingBoundries implements Initializable {
     private TableView<ChangeRequest> changeRequestDetailsTableView;
     
     @FXML
-    private TableColumn<ChangeRequest, String> subsystemColumn;
+    private TableColumn<ChangeRequest, String> initaitorColumn;
     
     @FXML
-    private TableColumn<ChangeRequest, String> initaitorColumn;
+    private TableColumn<ChangeRequest, String> subsystemColumn;
 
     @FXML
     private TableColumn<ChangeRequest, String> currentStateColumn;
@@ -65,24 +65,26 @@ public class DemoLandingBoundries implements Initializable {
     	//ChatClient.changeRequestByIdListeners.add(this);
     	demoLandingController.getChangeRequestById(changeRequestTextField.getText());
     }
+    
     @FXML
     void updateChangeRequestTable(MouseEvent event) {
     	
     }
+    
     public void displayChangeRequestTable(ArrayList<ChangeRequest> results)
     {
     	list = FXCollections.observableArrayList(results);
     	changeRequestDetailsTableView.setItems(list);
     }
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		handlerColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("intiator"));
+		initaitorColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("initiator"));
     	subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectSysystem"));
     	currentStateColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDiscription"));
     	changeDescriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
     	statusColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestStatus"));
     	handlerColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("handler"));
-	}
-    
+	}  
 
 }
