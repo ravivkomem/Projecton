@@ -42,8 +42,8 @@ public class DemoLandingController extends ServerEvent {
 				String changeRequestStatus = (String) rowList.get(5);
 				String handleName = (String) rowList.get(6);
 				changeRequestList.add
-				(new ChangeRequest(selectSysystem, currentStateDiscription, changeRequestDescription,
-						changeRequestID, changeRequestIntiatorName, changeRequestStatus, handleName));
+				(new ChangeRequest(changeRequestID,changeRequestIntiatorName,selectSysystem,currentStateDiscription,
+						changeRequestDescription,changeRequestStatus,handleName));
 			}
 			myBoundry.displayChangeRequestTable(changeRequestList);
 		});
