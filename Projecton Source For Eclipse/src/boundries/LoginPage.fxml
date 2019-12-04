@@ -39,5 +39,10 @@
             <Font size="38.0" />
          </font>
       </Label>
+      <ImageView fx:id="loadingLoginGif" fitHeight="104.0" fitWidth="253.0" layoutX="578.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../resources/loginPendingGIF.gif" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

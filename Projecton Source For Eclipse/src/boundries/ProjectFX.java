@@ -19,11 +19,10 @@ public class ProjectFX extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		AnchorPane anchorPane;
-		//DemoLandingBoundry controller;
-		LoginPageBoundry controller;
+		DemoLandingBoundry controller;
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("LoginPage.fxml"));
+			loader.setLocation(getClass().getResource("DemoLandingPage.fxml"));
 			anchorPane = loader.load();
 			controller = loader.getController();
 			/*TODO: Change null to actual ip of server */
