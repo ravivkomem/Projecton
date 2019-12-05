@@ -65,7 +65,6 @@ public class MysqlConnection {
     
     public SqlResult getResult(SqlAction sqlAction)
     {
-    	ResultSet rs = null;
     	SqlResult sqlResult = null;
     
     	this.connect();
@@ -94,8 +93,20 @@ public class MysqlConnection {
 				}
 					
 			}
-			rs = ps.executeQuery();
-			sqlResult = new SqlResult(rs, sqlAction.getActionType());
+			switch(sqlAction.getActionType())
+			{
+				case GET_CHANGE_REQUEST_BY_ID:
+					sqlResult = new SqlResult(ps.executeQuery(), sqlAction.getActionType());
+					break;
+				case UPDATE_CHANGE_REQUEST_BY_ID:
+					sqlResult = new SqlResult(ps.executeUpdate(), sqlAction.getActionType());
+					break;
+				
+				default:
+					break;
+			}
+			
+			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -111,6 +122,10 @@ public class MysqlConnection {
     public static void initSqlArray() 
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_BY_ID.getCode()] = "UPDATE icm.requirements "
+    			+ "SET InitaitorName = ?, Subsystem = ?, CurrentState = ?, ChangeDescription = ?, Status = ?,"
+    			+ " HandlerName = ? "
+    			+ "WHERE ChangeRequestID = ? ";
     	sqlArray[SqlQueryType.GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
     }
     

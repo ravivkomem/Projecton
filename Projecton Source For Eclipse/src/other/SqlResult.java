@@ -32,6 +32,16 @@ public class SqlResult implements Serializable{
 		}
 	}
 	
+	public SqlResult (int num, SqlQueryType actionType)
+	{
+		this.actionType = actionType;
+		
+		resultData = new ArrayList<ArrayList<Object>>();
+		ArrayList<Object> resultRow = new ArrayList<Object>();
+		resultRow.add(num);
+		resultData.add(resultRow);
+	}
+	
 	public ArrayList<ArrayList<Object>> getResultData()
 	{
 		return resultData;

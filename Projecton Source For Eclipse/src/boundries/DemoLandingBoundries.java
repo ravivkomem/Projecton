@@ -23,8 +23,21 @@ import other.SqlResult;
 
 public class DemoLandingBoundries implements Initializable {
 
+    @FXML	private TextField changeRequestTextField;
+    @FXML   private TextField intiatorNameTextField;
+    @FXML   private TextField subsystemTextField;
+
     @FXML
-    private TextField changeRequestTextField;
+    private TextField currentStateTextField;
+
+    @FXML
+    private TextField statusTextField;
+
+    @FXML
+    private TextField changeDescriptionTextField;
+
+    @FXML
+    private TextField handlerNameTextField;
 
     @FXML
     private Button viewButton;
@@ -53,28 +66,65 @@ public class DemoLandingBoundries implements Initializable {
     @FXML
     private Button updateButton;
     
+    private ChangeRequest currentChangeRequest;
+    
     private DemoLandingController demoLandingController = new DemoLandingController(this);
     
     ObservableList<ChangeRequest> list;
     
     @FXML
-    void displayChangeRequestDetails(MouseEvent event) {
+    void getChangeRequestDetails(MouseEvent event) {
     	System.out.println(changeRequestTextField.getText());
     	changeRequestDetailsTableView.setVisible(true);
     	updateButton.setVisible(true);
     	//ChatClient.changeRequestByIdListeners.add(this);
     	demoLandingController.getChangeRequestById(changeRequestTextField.getText());
-    }
-    
-    @FXML
-    void updateChangeRequestTable(MouseEvent event) {
     	
     }
     
-    public void displayChangeRequestTable(ArrayList<ChangeRequest> results)
+    @FXML
+    void updateChangeRequestDetails(MouseEvent event) {
+    	
+    	/*TODO: Consider do something for empty text field */
+    	currentChangeRequest.setInitiator(intiatorNameTextField.getText());
+    	currentChangeRequest.setSelectSysystem(subsystemTextField.getText());
+    	currentChangeRequest.setCurrentStateDiscription(currentStateTextField.getText());   
+     	currentChangeRequest.setChangeRequestStatus(statusTextField.getText());
+    	currentChangeRequest.setChangeRequestDescription(changeDescriptionTextField.getText());
+    	currentChangeRequest.setHandler(handlerNameTextField.getText());
+    	demoLandingController.updateChangeRequest(currentChangeRequest);
+    }
+    
+    public void displayChangeRequestDetails(ChangeRequest result)
     {
-    	list = FXCollections.observableArrayList(results);
+    	list = FXCollections.observableArrayList();
+    	list.add(result);
+    	this.currentChangeRequest = result;
+    	
+    	/*TODO: Add something to do incase result == null */
     	changeRequestDetailsTableView.setItems(list);
+    	
+    	intiatorNameTextField.setText(currentChangeRequest.getInitiator());
+    	subsystemTextField.setText(currentChangeRequest.getSelectSysystem());
+    	currentStateTextField.setText(currentChangeRequest.getCurrentStateDiscription());
+    	statusTextField.setText(currentChangeRequest.getChangeRequestStatus());
+    	changeDescriptionTextField.setText(currentChangeRequest.getChangeRequestDescription());
+    	handlerNameTextField.setText(currentChangeRequest.getHandler());
+    	
+    	
+    }
+    
+    public void getChangeRequestUpdateDetails (int affectedRows)
+    {
+    	if (affectedRows <= 0)
+    	{
+    		/*DO something - error no update */
+    	}
+    	else 
+    	{
+    		/*TODO: Add pop up window for successfull update */
+    		demoLandingController.getChangeRequestById(Integer.toString(currentChangeRequest.getChangeRequestID()));
+    	}
     }
     
 	@Override

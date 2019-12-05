@@ -36,6 +36,7 @@ public class ChatClient extends AbstractClient
 
   /* Static variables */
   public static List<ServerEvent> changeRequestByIdListeners = new ArrayList<ServerEvent>();
+  public static List<ServerEvent> updateChangeRequestByIdListeners = new ArrayList<ServerEvent>();
   //Constructors ****************************************************
   
   /**
@@ -72,6 +73,10 @@ public class ChatClient extends AbstractClient
 					this.getChangeRequestByIdListeners(result);
 				});
 				break;
+			case UPDATE_CHANGE_REQUEST_BY_ID:
+				Platform.runLater(() -> {
+					this.updateChangeRequestByIdListeners(result);
+				});
 			default:
 		}
   }
@@ -107,7 +112,7 @@ public class ChatClient extends AbstractClient
     System.exit(0);
   }
   
-  public static void addChangeRequestByIdListeners(ServerEvent toAdd) {
+  	public static void addChangeRequestByIdListeners(ServerEvent toAdd) {
 		if (!changeRequestByIdListeners.contains(toAdd)) {
 			changeRequestByIdListeners.add(toAdd);
 		}
@@ -118,6 +123,14 @@ public class ChatClient extends AbstractClient
 		System.out.println("In the listener " + result.getResultData().toString());
 		for (ServerEvent hl : changeRequestByIdListeners) {
 			hl.getChangeRequestByIdResultDelivery(result);
+		}
+	}
+	
+	public void updateChangeRequestByIdListeners(SqlResult result) {
+		// Notify everybody that may be interested.
+		System.out.println("In the listener " + result.getResultData().toString());
+		for (ServerEvent hl : updateChangeRequestByIdListeners) {
+			hl.updateChangeRequestByIdResultDelivery(result);
 		}
 	}
   

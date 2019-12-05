@@ -7,7 +7,7 @@ public enum SqlQueryType {
 	LOGIN,
 	GET_ALL_CHANGE_REQUESTS,
 	GET_CHANGE_REQUEST_BY_ID,
-	MA_KORE,
+	UPDATE_CHANGE_REQUEST_BY_ID,
 	
 	MAX_SQL_QUERY; /* == number of queries */
 	
