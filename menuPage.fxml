@@ -30,7 +30,14 @@
                                     <Image url="@image/btnBreak.png" />
                                  </image>
                               </ImageView>
-                              <Button fx:id="btnHome" contentDisplay="TOP" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="61.0" prefWidth="127.0" text="Home" AnchorPane.bottomAnchor="425.0" />
+                              <Button fx:id="btnHome" contentDisplay="TOP" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" text="Home" AnchorPane.bottomAnchor="415.0">
+                                 <graphic>
+                                    <ImageView fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/home.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
                               <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="45.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@image/btnBreak.png" />
@@ -82,5 +89,17 @@
             <Image url="@image/lightbulb-background.png" />
          </image>
       </ImageView>
+      <Button layoutX="515.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/logOut.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
