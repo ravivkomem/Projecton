@@ -12,6 +12,8 @@ import server.MysqlConnection;
 
 public class ProjectFX extends Application {
 
+	public static Stage mainStage;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -37,6 +39,7 @@ public class ProjectFX extends Application {
 		stage.setTitle("ICM Demo");
 		stage.setScene(scene);
 		stage.show();
+		mainStage = stage;
 		
 	}
 

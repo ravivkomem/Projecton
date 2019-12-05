@@ -19,8 +19,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import other.ServerEvent;
 import other.SqlResult;
+import other.Toast;
 
 public class DemoLandingBoundry implements Initializable {
 
@@ -46,6 +49,9 @@ public class DemoLandingBoundry implements Initializable {
     @FXML private TableColumn<ChangeRequest, String> handlerColumn;  
     @FXML private TableColumn<ChangeRequest, String> statusColumn;
    
+    /* Boundry Stage */
+    @FXML private AnchorPane stagePane;
+    
     /* Local variables */
     private ChangeRequest currentChangeRequest;
     private DemoLandingController demoLandingController = new DemoLandingController(this);
@@ -107,6 +113,7 @@ public class DemoLandingBoundry implements Initializable {
     	else 
     	{
     		/*TODO: Add pop up window for successful update */
+    		Toast.makeText(ProjectFX.mainStage, "Update Finished Successfully", 3000, 500, 500);
     		demoLandingController.getChangeRequestById(Integer.toString(currentChangeRequest.getChangeRequestID()));
     	}
     }
