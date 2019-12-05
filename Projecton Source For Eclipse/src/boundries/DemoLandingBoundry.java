@@ -3,10 +3,8 @@ package boundries;
 
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import client.ChatClient;
 import controllers.DemoLandingController;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
@@ -20,9 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import other.ServerEvent;
-import other.SqlResult;
 import other.Toast;
 
 public class DemoLandingBoundry implements Initializable {
@@ -49,7 +44,7 @@ public class DemoLandingBoundry implements Initializable {
     @FXML private TableColumn<ChangeRequest, String> handlerColumn;  
     @FXML private TableColumn<ChangeRequest, String> statusColumn;
    
-    /* Boundry Stage */
+    /* Boundary Stage */
     @FXML private AnchorPane stagePane;
     
     /* Local variables */
@@ -113,13 +108,14 @@ public class DemoLandingBoundry implements Initializable {
     	else 
     	{
     		/*TODO: Add pop up window for successful update */
-    		Toast.makeText(ProjectFX.mainStage, "Update Finished Successfully", 3000, 500, 500);
+    		Toast.makeText(ProjectFX.mainStage, "Update Finished Successfully", 1500, 500, 500);
     		demoLandingController.getChangeRequestById(Integer.toString(currentChangeRequest.getChangeRequestID()));
     	}
     }
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		/*TODO: Set certain FXML object as invisible: TableView, Update, TextFields... */
 		initaitorColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("initiator"));
     	subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectSysystem"));
     	currentStateColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDiscription"));
