@@ -34,9 +34,10 @@ public class DemoLandingController extends ServerEvent {
 		Platform.runLater(() -> {
 			ChangeRequest changeRequest = null;
 			/* At most only one result, because change request ID is primary key */
-			ArrayList<Object> resultList = results.getResultData().get(0);
-			if (!resultList.isEmpty())
+			if (!results.getResultData().isEmpty())
 			{
+				ArrayList<Object> resultList = results.getResultData().get(0);
+				
 				Integer changeRequestID = (Integer) resultList.get(0);
 				String changeRequestIntiatorName = (String) resultList.get(1);
 				String selectSysystem = (String) resultList.get(2);

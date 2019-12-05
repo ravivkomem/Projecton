@@ -70,7 +70,7 @@ public class DemoLandingBoundries implements Initializable {
     
     private DemoLandingController demoLandingController = new DemoLandingController(this);
     
-    ObservableList<ChangeRequest> list;
+    ObservableList<ChangeRequest> list =  FXCollections.observableArrayList();
     
     @FXML
     void getChangeRequestDetails(MouseEvent event) {
@@ -97,20 +97,24 @@ public class DemoLandingBoundries implements Initializable {
     
     public void displayChangeRequestDetails(ChangeRequest result)
     {
-    	list = FXCollections.observableArrayList();
-    	list.add(result);
-    	this.currentChangeRequest = result;
-    	
-    	/*TODO: Add something to do incase result == null */
-    	changeRequestDetailsTableView.setItems(list);
-    	
-    	intiatorNameTextField.setText(currentChangeRequest.getInitiator());
-    	subsystemTextField.setText(currentChangeRequest.getSelectSysystem());
-    	currentStateTextField.setText(currentChangeRequest.getCurrentStateDiscription());
-    	statusTextField.setText(currentChangeRequest.getChangeRequestStatus());
-    	changeDescriptionTextField.setText(currentChangeRequest.getChangeRequestDescription());
-    	handlerNameTextField.setText(currentChangeRequest.getHandler());
-    	
+    	list.clear();
+    	if (result == null)
+    	{
+    		/*DO SOMETHING */
+    	}
+    	else
+    	{
+    		list.add(result);
+        	this.currentChangeRequest = result;
+        	changeRequestDetailsTableView.setItems(list);
+        	
+        	intiatorNameTextField.setText(currentChangeRequest.getInitiator());
+        	subsystemTextField.setText(currentChangeRequest.getSelectSysystem());
+        	currentStateTextField.setText(currentChangeRequest.getCurrentStateDiscription());
+        	statusTextField.setText(currentChangeRequest.getChangeRequestStatus());
+        	changeDescriptionTextField.setText(currentChangeRequest.getChangeRequestDescription());
+        	handlerNameTextField.setText(currentChangeRequest.getHandler());
+    	}
     	
     }
     
