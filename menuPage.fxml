@@ -97,7 +97,7 @@
                         <Image url="@image/btnBreak.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnSell" contentDisplay="TOP" layoutX="3.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Following Request" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="btnSell" contentDisplay="TOP" layoutX="3.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request Status" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -110,13 +110,27 @@
                         <Image url="@image/btnBreak.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="3.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="b" />
+                  <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="3.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@image/btnBreak.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnAbout" contentDisplay="TOP" layoutX="3.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="b" />
+                  <Button fx:id="btnAbout" contentDisplay="TOP" layoutX="3.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Tech Manager">
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@image/bayan-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children>
             </AnchorPane>
          </children>
