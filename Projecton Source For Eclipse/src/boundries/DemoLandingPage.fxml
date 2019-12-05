@@ -21,17 +21,32 @@
          </font>
       </Text>
       <TextField fx:id="changeRequestTextField" layoutX="250.0" layoutY="90.0" promptText="Enter change request ID" />
-    <Button fx:id="viewButton" layoutX="419.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#displayChangeRequestDetails" prefHeight="25.0" prefWidth="64.0" text="View" />
-      <TableView fx:id="changeRequestDetailsTableView" layoutX="9.0" layoutY="138.0" prefHeight="218.0" prefWidth="763.0" visible="false">
+
+    <Button fx:id="viewButton" layoutX="419.0" layoutY="90.0" mnemonicParsing="false" onMouseClicked="#getChangeRequestDetails" prefHeight="25.0" prefWidth="64.0" text="View" />
+      <TableView fx:id="changeRequestDetailsTableView" layoutX="9.0" layoutY="138.0" prefHeight="218.0" prefWidth="494.0">
          <columns>
-            <TableColumn fx:id="initaitorColumn" prefWidth="98.0" text="InitaitorName" />
-            <TableColumn fx:id="subsystemColumn" prefWidth="90.0" text="Subsystem" />
-            <TableColumn fx:id="currentStateColumn" prefWidth="107.0" text="Current state" />
-            <TableColumn fx:id="changeDescriptionColumn" prefWidth="161.0" text="Change Description" />
-            <TableColumn fx:id="statusColumn" prefWidth="124.0" text="Status" />
-            <TableColumn fx:id="handlerColumn" prefWidth="182.0" text="HandlerName" />
+
+            <TableColumn fx:id="initaitorColumn" prefWidth="86.0" text="InitaitorName" />
+            <TableColumn fx:id="subsystemColumn" prefWidth="74.0" text="Subsystem" />
+            <TableColumn fx:id="currentStateColumn" prefWidth="83.6666259765625" text="Current state" />
+            <TableColumn fx:id="changeDescriptionColumn" prefWidth="116.33331298828125" text="Change Description" />
+            <TableColumn fx:id="statusColumn" prefWidth="44.3333740234375" text="Status" />
+            <TableColumn fx:id="handlerColumn" prefWidth="86.33331298828125" text="HandlerName" />
          </columns>
       </TableView>
-     <Button fx:id="updateButton" layoutX="340.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#updateChangeRequestTable" prefHeight="43.0" prefWidth="82.0" text="Update" visible="false" />
+  
+     <Button fx:id="updateButton" layoutX="656.0" layoutY="376.0" mnemonicParsing="false" onMouseClicked="#updateChangeRequestDetails" prefHeight="43.0" prefWidth="82.0" text="Update" />
+      <TextField fx:id="intiatorNameTextField" layoutX="622.0" layoutY="150.0" />
+      <TextField fx:id="subsystemTextField" layoutX="622.0" layoutY="183.0" />
+      <TextField fx:id="currentStateTextField" layoutX="622.0" layoutY="214.0" />
+      <TextField fx:id="statusTextField" layoutX="622.0" layoutY="282.0" />
+      <TextField fx:id="changeDescriptionTextField" layoutX="622.0" layoutY="247.0" />
+      <TextField fx:id="handlerNameTextField" layoutX="622.0" layoutY="314.0" />
+      <Text layoutX="535.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Initiator Name" />
+      <Text layoutX="545.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subsystem" />
+      <Text layoutX="538.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current State" />
+      <Text layoutX="510.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Description" />
+      <Text layoutX="562.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status" />
+      <Text layoutX="534.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Handler Name" />
    </children>
 </AnchorPane>

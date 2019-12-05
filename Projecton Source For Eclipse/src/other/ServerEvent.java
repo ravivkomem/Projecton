@@ -10,5 +10,9 @@ public class ServerEvent implements Serializable {
 	public void getChangeRequestByIdResultDelivery(SqlResult results) {
 		
 	}
+	
+	public void updateChangeRequestByIdResultDelivery (SqlResult results) {
+		
+	}
 
 }

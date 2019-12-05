@@ -24,57 +24,91 @@ import other.SqlResult;
 
 public class DemoLandingBoundry implements Initializable {
 
-    @FXML
-    private TextField changeRequestTextField;
+	/* FXML Text Fields */
+    @FXML private TextField changeRequestTextField;
+    @FXML private TextField intiatorNameTextField;
+    @FXML private TextField subsystemTextField;
+    @FXML private TextField currentStateTextField;
+    @FXML private TextField statusTextField;
+    @FXML private TextField changeDescriptionTextField;
+    @FXML private TextField handlerNameTextField;
 
-    @FXML
-    private Button viewButton;
-
-    @FXML
-    private TableView<ChangeRequest> changeRequestDetailsTableView;
+    /* FXML Buttons */
+    @FXML private Button viewButton;
+    @FXML private Button updateButton;
     
-    @FXML
-    private TableColumn<ChangeRequest, String> initaitorColumn;
-    
-    @FXML
-    private TableColumn<ChangeRequest, String> subsystemColumn;
-
-    @FXML
-    private TableColumn<ChangeRequest, String> currentStateColumn;
-
-    @FXML
-    private TableColumn<ChangeRequest, String> changeDescriptionColumn;
-
-    @FXML
-    private TableColumn<ChangeRequest, String> handlerColumn;
-    
-    @FXML
-    private TableColumn<ChangeRequest, String> statusColumn;
-    
-    @FXML
-    private Button updateButton;
-    
+    /* FXML TableView */
+    @FXML private TableView<ChangeRequest> changeRequestDetailsTableView;
+    @FXML private TableColumn<ChangeRequest, String> initaitorColumn;
+    @FXML private TableColumn<ChangeRequest, String> subsystemColumn;
+    @FXML private TableColumn<ChangeRequest, String> currentStateColumn;
+    @FXML private TableColumn<ChangeRequest, String> changeDescriptionColumn;
+    @FXML private TableColumn<ChangeRequest, String> handlerColumn;  
+    @FXML private TableColumn<ChangeRequest, String> statusColumn;
+   
+    /* Local variables */
+    private ChangeRequest currentChangeRequest;
     private DemoLandingController demoLandingController = new DemoLandingController(this);
+    ObservableList<ChangeRequest> list =  FXCollections.observableArrayList();
     
-    ObservableList<ChangeRequest> list;
-    
+    /* Methods */
     @FXML
-    void displayChangeRequestDetails(MouseEvent event) {
+    void getChangeRequestDetails(MouseEvent event) {
+    	/*TODO: Change visibility to be true once result received */
     	changeRequestDetailsTableView.setVisible(true);
     	updateButton.setVisible(true);
-    	//ChatClient.changeRequestByIdListeners.add(this);
     	demoLandingController.getChangeRequestById(changeRequestTextField.getText());
-    }
-    
-    @FXML
-    void updateChangeRequestTable(MouseEvent event) {
     	
     }
     
-    public void displayChangeRequestTable(ArrayList<ChangeRequest> results)
+    public void displayChangeRequestDetails(ChangeRequest result)
     {
-    	list = FXCollections.observableArrayList(results);
-    	changeRequestDetailsTableView.setItems(list);
+    	list.clear();
+    	if (result == null)
+    	{
+    		/*TODO: Error no result found */
+    	}
+    	else
+    	{
+    		/*TODO: Display the TableView and TextFields */
+    		list.add(result);
+        	this.currentChangeRequest = result;
+        	changeRequestDetailsTableView.setItems(list);
+        	
+        	intiatorNameTextField.setText(currentChangeRequest.getInitiator());
+        	subsystemTextField.setText(currentChangeRequest.getSelectSysystem());
+        	currentStateTextField.setText(currentChangeRequest.getCurrentStateDiscription());
+        	statusTextField.setText(currentChangeRequest.getChangeRequestStatus());
+        	changeDescriptionTextField.setText(currentChangeRequest.getChangeRequestDescription());
+        	handlerNameTextField.setText(currentChangeRequest.getHandler());
+    	}	
+    }
+    
+    
+    @FXML
+    void updateChangeRequestDetails(MouseEvent event) {
+    	
+    	/*TODO: Consider do something for empty text field */
+    	currentChangeRequest.setInitiator(intiatorNameTextField.getText());
+    	currentChangeRequest.setSelectSysystem(subsystemTextField.getText());
+    	currentChangeRequest.setCurrentStateDiscription(currentStateTextField.getText());   
+     	currentChangeRequest.setChangeRequestStatus(statusTextField.getText());
+    	currentChangeRequest.setChangeRequestDescription(changeDescriptionTextField.getText());
+    	currentChangeRequest.setHandler(handlerNameTextField.getText());
+    	demoLandingController.updateChangeRequest(currentChangeRequest);
+    }
+    
+    public void getChangeRequestUpdateDetails (int affectedRows)
+    {
+    	if (affectedRows <= 0)
+    	{
+    		/*TODO: Error no update */
+    	}
+    	else 
+    	{
+    		/*TODO: Add pop up window for successful update */
+    		demoLandingController.getChangeRequestById(Integer.toString(currentChangeRequest.getChangeRequestID()));
+    	}
     }
     
 	@Override
