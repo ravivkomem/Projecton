@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import server.MysqlConnection;
 
 public class ProjectFX extends Application {
 
@@ -21,12 +20,12 @@ public class ProjectFX extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		AnchorPane anchorPane;
-		DemoLandingBoundry controller;
+		/* DemoLandingBoundry controller; */
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("DemoLandingPage.fxml"));
 			anchorPane = loader.load();
-			controller = loader.getController();
+			/* controller = loader.getController(); */
 			/*TODO: Change null to actual ip of server */
 			String[] args = null;
 			ClientConsole.connection(args);

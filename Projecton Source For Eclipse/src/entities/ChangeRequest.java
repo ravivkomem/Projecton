@@ -1,5 +1,6 @@
 package entities;
 
+/*TODO: Change names and make this class better */
 public class ChangeRequest {
 	private int changeRequestID;
 	private String initiator;
