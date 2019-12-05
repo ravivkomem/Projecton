@@ -14,19 +14,98 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <AnchorPane prefHeight="550.0" prefWidth="134.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+         <children>
+            <Text fill="#5a5e65" layoutX="38.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnHome" contentDisplay="TOP" layoutX="4.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Requests List" AnchorPane.bottomAnchor="437.0">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnStore" contentDisplay="TOP" layoutX="3.0" layoutY="121.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Add Comment" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutX="3.0" layoutY="276.0" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Committee Director">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/supervisor_716246.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/btnBreak.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnSell" contentDisplay="TOP" layoutX="3.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/25089-200.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="3.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/icon-clock-21.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/btnBreak.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
       <Text layoutX="226.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Committee Decision" wrappingWidth="358.658203125">
          <font>
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="74.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Request ID" wrappingWidth="145.30078125">
+      <Text layoutX="162.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Request ID" wrappingWidth="145.30078125">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <TextField layoutX="237.0" layoutY="75.0" prefHeight="23.0" prefWidth="121.0" />
+      <TextField layoutX="325.0" layoutY="75.0" prefHeight="23.0" prefWidth="121.0" />
       <Button layoutX="466.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="View" />
-      <TableView layoutX="387.0" layoutY="164.0" prefHeight="189.0" prefWidth="177.0">
+      <TableView layoutX="387.0" layoutY="259.0" prefHeight="189.0" prefWidth="177.0">
         <columns>
           <TableColumn prefWidth="95.0" text="Employee ID" />
           <TableColumn minWidth="0.0" prefWidth="89.0" text="Comment" />
@@ -37,31 +116,21 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="160.0" layoutY="175.0" prefHeight="168.0" prefWidth="154.0" promptText="Write your comment" />
-      <Text layoutX="197.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Comment" wrappingWidth="80.77735328674316" />
-      <Button layoutX="207.0" layoutY="348.0" mnemonicParsing="false" text="Submit" />
-      <Button layoutX="448.0" layoutY="364.0" mnemonicParsing="false" text="Refresh" />
+      <TextField layoutX="158.0" layoutY="269.0" prefHeight="168.0" prefWidth="154.0" promptText="Write your comment" />
+      <Button layoutX="199.0" layoutY="462.0" mnemonicParsing="false" text="Submit" />
+      <Button layoutX="448.0" layoutY="462.0" mnemonicParsing="false" text="Refresh" />
       <TextArea layoutX="641.0" layoutY="181.0" prefHeight="38.0" prefWidth="85.0" />
       <Text layoutX="641.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining" />
-      <Button layoutX="79.0" layoutY="498.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="135.0" text="Time Extension" wrapText="true">
-         <graphic>
-            <ImageView fitHeight="29.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/icon-clock-21.jpg" />
-               </image>
-            </ImageView>
-         </graphic></Button>
-      <Button layoutX="21.0" layoutY="549.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="13.0" layoutY="234.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="98.0" text="Analysis Report" wrapText="true">
-         <graphic>
-            <ImageView fitHeight="30.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/25089-200.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ComboBox layoutX="314.0" layoutY="460.0" prefHeight="25.0" prefWidth="154.0" promptText="Choch Your Decision" />
-      <Button layoutX="491.0" layoutY="460.0" mnemonicParsing="false" text="Send" />
+      <Button layoutX="21.0" layoutY="562.0" mnemonicParsing="false" text="Back" />
+      <ComboBox layoutX="248.0" layoutY="525.0" prefHeight="25.0" prefWidth="154.0" promptText="Choch Your Decision" />
+      <Button layoutX="445.0" layoutY="525.0" mnemonicParsing="false" text="Send" />
+      <TableView layoutX="235.0" layoutY="161.0" prefHeight="78.0" prefWidth="302.0">
+         <columns>
+            <TableColumn prefWidth="75.0" text="ID" />
+            <TableColumn prefWidth="77.0" text="Description" />
+            <TableColumn prefWidth="73.0" text="Date" />
+            <TableColumn prefWidth="75.0" text="status" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
