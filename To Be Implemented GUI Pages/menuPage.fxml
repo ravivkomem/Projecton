@@ -30,7 +30,7 @@
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@image/logOut.png" />
+                  <Image url="@../image/logOut.png" />
                </image>
             </ImageView>
          </graphic>
@@ -40,7 +40,7 @@
       </Button>
       <ImageView fitHeight="292.0" fitWidth="304.0" layoutX="201.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@image/website-design-animation-1.gif" />
+            <Image url="@../image/website-design-animation-1.gif" />
          </image>
       </ImageView>
       <AnchorPane fx:id="acDashBord" prefHeight="530.0" prefWidth="135.0">
@@ -54,28 +54,28 @@
                   </Text>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="115.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/btnBreak.png" />
+                        <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnHome" contentDisplay="TOP" layoutX="4.0" layoutY="42.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home" AnchorPane.bottomAnchor="437.0">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/home.png" />
+                              <Image url="@../image/home.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/btnBreak.png" />
+                        <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnStore" contentDisplay="TOP" layoutX="3.0" layoutY="121.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Uploade Request" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
+                              <Image url="@../image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -83,51 +83,51 @@
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/supervisor_716246.png" />
+                              <Image url="@../image/supervisor_716246.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/btnBreak.png" />
+                        <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/btnBreak.png" />
+                        <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnSell" contentDisplay="TOP" layoutX="3.0" layoutY="199.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request Status" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/pending-audit-5214b49ea33f18973f7de218a80b5125.png" />
+                              <Image url="@../image/pending-audit-5214b49ea33f18973f7de218a80b5125.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="523.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/btnBreak.png" />
+                        <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="3.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
+                              <Image url="@../image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
                   <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="435.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@image/btnBreak.png" />
+                        <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="btnAbout" contentDisplay="TOP" layoutX="3.0" layoutY="442.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Tech Manager">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@image/bayan-icon.png" />
+                              <Image url="@../image/bayan-icon.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
