@@ -16,7 +16,7 @@
             <Image url="@../image/2.jpg" />
          </image>
       </ImageView>
-      <AnchorPane prefHeight="254.0" prefWidth="133.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <AnchorPane prefHeight="250.0" prefWidth="133.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
