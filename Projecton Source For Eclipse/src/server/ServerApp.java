@@ -28,7 +28,7 @@ public static String[] newargs;
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent e) {
-				MysqlConnection mysql = new MysqlConnection();
+				//MysqlConnection mysql = new MysqlConnection();
 				//mysql.exitAllClients();
 				System.exit(0);
 			}

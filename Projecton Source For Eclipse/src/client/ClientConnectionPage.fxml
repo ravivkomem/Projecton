@@ -16,7 +16,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.LogInBoundry">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.ConnectToServer">
    <children>
       <ImageView fitHeight="306.0" fitWidth="479.0" layoutY="-89.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -46,7 +46,7 @@
                         <ColorAdjust brightness="-1.0" />
                      </effect>
                   </Label>
-                  <TextField fx:id="ServerIPtext" prefHeight="31.0" prefWidth="220.0" style="-fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="ServerIPtext" prefHeight="31.0" prefWidth="220.0" style="-fx-background-radius: 10;" text="127.0.0.1" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
@@ -65,9 +65,9 @@
                   <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Label layoutX="144.0" layoutY="14.0" text="Login">
+            <Label layoutX="48.0" layoutY="14.0" text="Connect To Server">
                <font>
-                  <Font name="System Bold Italic" size="48.0" />
+                  <Font name="System Bold Italic" size="37.0" />
                </font>
                <textFill>
                   <LinearGradient cycleMethod="REPEAT" endX="1.0" endY="1.0">
@@ -78,7 +78,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Button fx:id="Connectbtn" layoutX="163.0" layoutY="153.0" mnemonicParsing="false" onAction="#ConnectToServer" prefHeight="25.0" prefWidth="69.0" style="-fx-background-radius: 10;" text="connect" textFill="BLACK">
+            <Button fx:id="Connectbtn" layoutX="163.0" layoutY="153.0" mnemonicParsing="false" onMouseClicked="#connectionToServer" prefHeight="25.0" prefWidth="69.0" style="-fx-background-radius: 10;" text="connect" textFill="BLACK">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font>
