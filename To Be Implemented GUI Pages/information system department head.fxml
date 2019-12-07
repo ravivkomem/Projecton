@@ -23,11 +23,11 @@
                   <Image url="@../image/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnHome" contentDisplay="TOP" layoutX="2.0" layoutY="44.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Worker List" AnchorPane.bottomAnchor="353.0">
+            <Button fx:id="btnHome" contentDisplay="TOP" layoutX="2.0" layoutY="44.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Employee" AnchorPane.bottomAnchor="353.0">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
+                        <Image url="@../image/supervisor-icon-29.jpg" />
                      </image>
                   </ImageView>
                </graphic>
@@ -68,18 +68,11 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutX="153.0" layoutY="98.0" prefHeight="280.0" prefWidth="565.0">
+      <TableView layoutX="267.0" layoutY="149.0" prefHeight="128.0" prefWidth="223.0">
         <columns>
           <TableColumn prefWidth="75.0" text="EmployeeID" />
           <TableColumn prefWidth="75.0" text="FirstName" />
             <TableColumn prefWidth="75.0" text="LastName" />
-            <TableColumn minWidth="0.0" prefWidth="339.0" text="Permission Set">
-               <columns>
-                  <TableColumn prefWidth="95.0" text="X" />
-                  <TableColumn prefWidth="90.0" text="Y" />
-                  <TableColumn minWidth="7.0" prefWidth="151.0" text="Z" />
-               </columns>
-            </TableColumn>
         </columns>
       </TableView>
       <Button layoutX="153.0" layoutY="387.0" mnemonicParsing="false" text="Update Premission Table" />
