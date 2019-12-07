@@ -27,9 +27,9 @@ public class ServerStartGui extends ServerEvent {
     	
     	if (flag==1) {
     		flag=0;
-    		mysql = new MysqlConnection();
+    		//mysql = new MysqlConnection();
     		//mysql.exitAllClients();
-    		//EchoServer.temp.close();
+    		EchoServer.temp.close();
     	//	ChatClient.AddExitAlllistener(this);
     	//	UserController.exitAllClients();
     	}
@@ -37,7 +37,7 @@ public class ServerStartGui extends ServerEvent {
 
     @FXML
     void connectServer(ActionEvent event) {
-    	//EchoServer.StartServer(ServerApp.newargs); 
+    	EchoServer.startServer(ServerApp.newargs); 
     	flag=1;
     }
 

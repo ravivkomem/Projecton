@@ -90,7 +90,7 @@ public class EchoServer extends AbstractServer
    * @param args[0] The port number to listen on.  Defaults to 5555 
    *          if no argument is entered.
    */
-  public static void main(String[] args) 
+  public static void startServer(String[] args) 
   {
 	MysqlConnection.initSqlArray();
     int port = 0; //Port to listen on
@@ -105,6 +105,7 @@ public class EchoServer extends AbstractServer
     }
 	
     EchoServer sv = new EchoServer(port);
+    setSv(sv);
     
     try 
     {
@@ -115,5 +116,14 @@ public class EchoServer extends AbstractServer
       System.out.println("ERROR - Could not listen for clients!");
     }
   }
+  
+  public static EchoServer temp;
+  
+  public static void setSv(EchoServer sv) {
+		temp = sv;
+	}
+  
 }
+
+
 //End of EchoServer class
