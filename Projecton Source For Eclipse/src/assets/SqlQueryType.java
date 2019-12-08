@@ -1,4 +1,4 @@
-package other;
+package assets;
 
 public enum SqlQueryType {
 	

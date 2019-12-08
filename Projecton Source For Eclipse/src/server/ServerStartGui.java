@@ -2,12 +2,12 @@ package server;
 
 import java.io.IOException;
 
+import assets.ServerEvent;
 import client.ChatClient;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import other.ServerEvent;
 
 
 public class ServerStartGui extends ServerEvent {

@@ -1,4 +1,4 @@
-package other;
+package assets;
 
 import java.io.Serializable;
 import java.sql.ResultSet;

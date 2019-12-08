@@ -5,14 +5,15 @@
 package client;
 
 import ocsf.client.*;
-import other.ServerEvent;
 import controllers.LoginController;
-import other.SqlResult;
 import javafx.application.Platform;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import assets.ServerEvent;
+import assets.SqlResult;
 
 
 /**

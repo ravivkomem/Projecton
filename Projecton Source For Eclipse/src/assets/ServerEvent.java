@@ -1,4 +1,4 @@
-package other;
+package assets;
 
 /*TODO: Check why IOException */
 import java.io.IOException;
