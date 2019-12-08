@@ -2,15 +2,15 @@ package controllers;
 
 import java.util.ArrayList;
 
+import assets.ServerEvent;
+import assets.SqlAction;
+import assets.SqlQueryType;
+import assets.SqlResult;
 import boundries.DemoLandingBoundry;
 import client.ChatClient;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import javafx.application.Platform;
-import other.ServerEvent;
-import other.SqlAction;
-import other.SqlQueryType;
-import other.SqlResult;
 
 public class DemoLandingController extends ServerEvent {
 

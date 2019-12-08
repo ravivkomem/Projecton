@@ -1,5 +1,6 @@
 package boundries;
 
+import assets.Toast;
 import client.ClientConsole;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -7,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import other.Toast;
 
 
 public class ConnectToServer {

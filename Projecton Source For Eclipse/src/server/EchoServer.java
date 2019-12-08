@@ -7,9 +7,9 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import assets.SqlAction;
+import assets.SqlResult;
 import ocsf.server.*;
-import other.SqlAction;
-import other.SqlResult;
 
 /**
  * This class overrides some of the methods in the abstract 

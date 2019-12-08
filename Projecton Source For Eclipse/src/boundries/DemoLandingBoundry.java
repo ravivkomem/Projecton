@@ -5,6 +5,7 @@ package boundries;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import assets.Toast;
 import controllers.DemoLandingController;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
@@ -18,7 +19,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import other.Toast;
 
 public class DemoLandingBoundry implements Initializable {
 
