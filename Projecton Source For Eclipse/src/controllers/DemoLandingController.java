@@ -27,7 +27,7 @@ public class DemoLandingController extends ServerEvent {
 		varArray.add(changeRequestId);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CHANGE_REQUEST_BY_ID, varArray);
 		ChatClient.changeRequestByIdListeners.add(this);
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);    // ask raviv
 	}
 	
 	public void getChangeRequestByIdResultDelivery(SqlResult results) {

@@ -119,7 +119,7 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
-    public static void initSqlArray() 
+    public static void initSqlArray()   // ask raviv
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_BY_ID.getCode()] = "UPDATE icm.requirements "
