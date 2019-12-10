@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="590.0" fitWidth="852.0" layoutY="-113.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../image/2.jpg" />
+            <Image url="@../../resources/2.jpg" />
          </image>
       </ImageView>
       <Text layoutX="20.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter change request ID">

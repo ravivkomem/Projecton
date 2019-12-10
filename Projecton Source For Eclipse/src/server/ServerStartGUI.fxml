@@ -14,7 +14,7 @@
          <children>
             <ImageView fitHeight="196.0" fitWidth="408.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../image/2.jpg" />
+                  <Image url="@../../resources/2.jpg" />
                </image>
             </ImageView>
             <Label layoutX="134.0" layoutY="17.0" prefHeight="48.0" prefWidth="139.0" text="Server Options">
