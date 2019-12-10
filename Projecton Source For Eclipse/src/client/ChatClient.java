@@ -122,7 +122,6 @@ public class ChatClient extends AbstractClient
 
 	public void getChangeRequestByIdListeners(SqlResult result) {
 		// Notify everybody that may be interested.
-		System.out.println("In the listener " + result.getResultData().toString());
 		for (ServerEvent hl : changeRequestByIdListeners) {
 			hl.getChangeRequestByIdResultDelivery(result);
 			if (hl instanceof LoginController)
@@ -135,7 +134,6 @@ public class ChatClient extends AbstractClient
 	
 	public void updateChangeRequestByIdListeners(SqlResult result) {
 		// Notify everybody that may be interested.
-		System.out.println("In the listener " + result.getResultData().toString());
 		for (ServerEvent hl : updateChangeRequestByIdListeners) {
 			hl.updateChangeRequestByIdResultDelivery(result);
 		}
