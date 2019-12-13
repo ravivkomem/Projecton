@@ -77,12 +77,12 @@
                   <Image url="@../image/btnBreak.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="52.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="52.0" layoutY="93.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../image/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell1" contentDisplay="TOP" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnSell1" contentDisplay="TOP" layoutX="8.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" visible="false" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -124,7 +124,7 @@
       <Button layoutX="21.0" layoutY="548.0" mnemonicParsing="false" text="Back" />
       <ComboBox layoutX="243.0" layoutY="483.0" prefHeight="25.0" prefWidth="166.0" promptText="Choose Your Decision" visible="false" />
       <Button layoutX="440.0" layoutY="483.0" mnemonicParsing="false" text="Send" visible="false" />
-      <TableView layoutX="202.0" layoutY="86.0" prefHeight="109.0" prefWidth="349.0">
+      <TableView layoutX="202.0" layoutY="86.0" prefHeight="109.0" prefWidth="349.0" visible="false">
          <columns>
             <TableColumn prefWidth="75.0" text="ID" />
             <TableColumn prefWidth="144.66668701171875" text="Description" />
