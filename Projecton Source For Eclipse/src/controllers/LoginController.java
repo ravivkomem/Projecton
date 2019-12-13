@@ -6,7 +6,7 @@ import assets.ServerEvent;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
-import boundries.LoginPageBoundry;
+import boundries.LoginPageBoundary;
 import client.ChatClient;
 import client.ClientConsole;
 import entities.ChangeRequest;
@@ -14,10 +14,10 @@ import javafx.application.Platform;
 
 public class LoginController extends ServerEvent{
 
-	private LoginPageBoundry myBoundry;
+	private LoginPageBoundary myBoundry;
 
 	
-	public LoginController (LoginPageBoundry loginPageboundry)
+	public LoginController (LoginPageBoundary loginPageboundry)
 	{
 		this.myBoundry = loginPageboundry;
 	}

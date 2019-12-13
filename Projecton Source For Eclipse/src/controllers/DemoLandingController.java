@@ -19,15 +19,16 @@ public class DemoLandingController extends ServerEvent {
 	public DemoLandingController(DemoLandingBoundry myBoundry) 
 	{
 		this.myBoundry = myBoundry;
+		ChatClient.changeRequestByIdListeners.add(this);
 	}
 	
 	public void getChangeRequestById (String changeRequestId)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_CHANGE_REQUEST_BY_ID, varArray);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID, varArray);
 		ChatClient.changeRequestByIdListeners.add(this);
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);    // ask raviv
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
 	public void getChangeRequestByIdResultDelivery(SqlResult results) {
@@ -48,7 +49,7 @@ public class DemoLandingController extends ServerEvent {
 				changeRequest = new ChangeRequest(changeRequestID,changeRequestIntiatorName,selectSysystem,currentStateDiscription,
 						changeRequestDescription,changeRequestStatus,handleName);
 			}
-			ChatClient.changeRequestByIdListeners.remove(this);
+			//ChatClient.changeRequestByIdListeners.remove(this);
 			myBoundry.displayChangeRequestDetails(changeRequest);
 		});
 	}

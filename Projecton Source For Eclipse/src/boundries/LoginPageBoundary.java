@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /*TODO: Add methods for the links or remove them */
-public class LoginPageBoundry {
+public class LoginPageBoundary {
 
     @FXML private TextField userNameTextField;
     @FXML private PasswordField passwordTextField;
