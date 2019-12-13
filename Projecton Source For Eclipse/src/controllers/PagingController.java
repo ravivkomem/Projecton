@@ -10,12 +10,12 @@ import javafx.scene.layout.Pane;
 
 public class PagingController {
 	
-	public void loadBoundray (String s)
+	public void loadBoundray (String path)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		Pane root;
 		try {
-			root = loader.load(getClass().getResource(s));
+			root = loader.load(getClass().getResource(path));
 			Scene scene = new Scene(root);			
 			ProjectFX.mainStage.setScene(scene);		
 			ProjectFX.mainStage.show();

@@ -2,49 +2,73 @@ package controllers;
 
 import java.util.ArrayList;
 
-import assets.ServerEvent;
+import entities.User;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
 import boundries.LoginPageBoundary;
-import client.ChatClient;
 import client.ClientConsole;
-import entities.ChangeRequest;
 import javafx.application.Platform;
 
-public class LoginController extends ServerEvent{
+/**
+ * 
+ * @author Raviv Komem
+ * This controller handles all communication between the OFSF client and the Login page
+ */
+public class LoginController extends BasicController{
 
-	private LoginPageBoundary myBoundry;
+	private LoginPageBoundary myBoundary;
 
-	
-	public LoginController (LoginPageBoundary loginPageboundry)
+	public LoginController (LoginPageBoundary loginPageboundary)
 	{
-		this.myBoundry = loginPageboundry;
+		this.myBoundary = loginPageboundary;
 	}
 	
-	public String verifyLoginCredtinals (String userName, String password)
+	public void verifyLoginCredtinals (String userName, String password)
 	{
-		String result = null;
+		/*TODO: Check if userName already exists in logged users list */
+		
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(userName);
 		varArray.add(password);
-		/*TODO: Update the login sql and the var array */
-		SqlAction sqlAction = new SqlAction(SqlQueryType.VERIFY_LOGIN, new ArrayList<>());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.VERIFY_LOGIN, varArray);
 		
-		ChatClient.changeRequestByIdListeners.add(this);
+		this.subscribeToClientDeliveries();
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		
-		return result;
-		
 	}
 	
 	public void getResultFromClient(SqlResult result)
 	{
 		Platform.runLater(() -> {
-			myBoundry.displayLoginError();
+			switch(result.getActionType())
+			{
+				case VERIFY_LOGIN:
+					User resultUser = this.parseResultToUser(result);
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.handleUserAttempInformation(resultUser);
+					break;
+				
+				default:
+					break;
+			}
 		});
 		return;
 		
+	}
+	
+	private User parseResultToUser(SqlResult result)
+	{
+		User resultUser = null;
+		if (!result.getResultData().isEmpty())
+		{
+			ArrayList<Object> resultList = result.getResultData().get(0);
+			
+			String userName = (String) resultList.get(0);
+			String userPermission = (String) resultList.get(1);
+			String userEmail = (String) resultList.get(2);
+			resultUser = new User(userName, userPermission, userEmail);
+		}
+		return resultUser;
 	}
 	
 }

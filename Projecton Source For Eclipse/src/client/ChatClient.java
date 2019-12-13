@@ -5,6 +5,7 @@
 package client;
 
 import ocsf.client.*;
+import controllers.BasicController;
 import controllers.LoginController;
 import javafx.application.Platform;
 
@@ -38,6 +39,8 @@ public class ChatClient extends AbstractClient
   /* Static variables */
   public static List<ServerEvent> changeRequestByIdListeners = new ArrayList<ServerEvent>();
   public static List<ServerEvent> updateChangeRequestByIdListeners = new ArrayList<ServerEvent>();
+  
+  private static List<BasicController> deliverySubscribers = new ArrayList<BasicController>();
   //Constructors ****************************************************
   
   /**
@@ -69,7 +72,14 @@ public class ChatClient extends AbstractClient
 	  SqlResult result = (SqlResult) msg;
 
 		switch (result.getActionType()) {
-			case VERIFY_LOGIN: 
+			case VERIFY_LOGIN:
+				Platform.runLater(() -> {
+					for (BasicController bc : deliverySubscribers)
+					{
+						bc.getResultFromClient(result);
+					}
+				});
+				break;
 			case SELECT_CHANGE_REQUEST_BY_ID:
 				Platform.runLater(() -> {
 					this.getChangeRequestByIdListeners(result);
@@ -114,21 +124,22 @@ public class ChatClient extends AbstractClient
     System.exit(0);
   }
   
-  	public static void addChangeRequestByIdListeners(ServerEvent toAdd) {
-		if (!changeRequestByIdListeners.contains(toAdd)) {
-			changeRequestByIdListeners.add(toAdd);
+  	public static void joinSubscription(BasicController basicController) {
+		if (!deliverySubscribers.contains(basicController)) {
+			deliverySubscribers.add(basicController);
 		}
 	}
+  	
+  	public static void unSubscribe (BasicController basicController) {
+  		if (deliverySubscribers.contains(basicController)) {
+			deliverySubscribers.remove(basicController);
+		}
+  	}
 
 	public void getChangeRequestByIdListeners(SqlResult result) {
 		// Notify everybody that may be interested.
 		for (ServerEvent hl : changeRequestByIdListeners) {
 			hl.getChangeRequestByIdResultDelivery(result);
-			if (hl instanceof LoginController)
-			{
-				LoginController controller = (LoginController)hl;
-				controller.getResultFromClient(result);
-			}
 		}
 	}
 	

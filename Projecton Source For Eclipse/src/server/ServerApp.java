@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 
+import assets.ProjectPages;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,7 @@ public static String[] newargs;
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
-		URL url = getClass().getResource("/server/ServerStartGUI.fxml");
+		URL url = getClass().getResource(ProjectPages.SERVER_START_PAGE.getPath());
 		Parent pane = FXMLLoader.load(url);
 		Scene scene = new Scene(pane);
 		// setting the stage

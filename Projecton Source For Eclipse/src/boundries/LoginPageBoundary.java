@@ -1,68 +1,78 @@
 package boundries;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import assets.ProjectPages;
+import assets.Toast;
 import controllers.LoginController;
-import javafx.event.ActionEvent;
+import entities.User;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-/*TODO: Add methods for the links or remove them */
-public class LoginPageBoundary {
+public class LoginPageBoundary implements Initializable{
 
-    @FXML private TextField userNameTextField;
-    @FXML private PasswordField passwordTextField;
-    @FXML private Button loginButton;
-    @FXML private Button registertrationButton;
-    @FXML private Button exitButton;
-    @FXML private Hyperlink ForgotPasswordLink; 
-    @FXML private Hyperlink ContectUsLink;
-    @FXML private Hyperlink PrivacyTermLink;
-    @FXML private ImageView loadingLoginGif;
-   
+	/* FXML Elements */
+    @FXML
+    private TextField userNameTextField;
+    @FXML
+    private PasswordField userPasswordField;
+    @FXML
+    private Button signInButton;
+    @FXML
+    private ImageView loginLoadingImageView;
+    
+    /* Private variables */
     private LoginController myController = new LoginController(this);
+    private int loginAttempts = 0;
     
+    /* Methods */
     @FXML
-    void exitSystem(MouseEvent event) {
-    	System.out.println("Client is closed");
-    	System.exit(0);
-    }
-
-    @FXML
-    void ClickbtnContactus(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ClickbtnForgotPass(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ClickbtnPrivacyTerms(ActionEvent event) {
-
-    }
-
-    @FXML
-    void ClickbtnRegistration(ActionEvent event) {
-
-    }
-    @FXML
-    void loginAttemp(ActionEvent event) {
-    	loadingLoginGif.setVisible(true);
-    	String result = myController.verifyLoginCredtinals(userNameTextField.getText(), passwordTextField.getText());
-    	System.out.println("bla");
- 
+    void signInButtonPressed(MouseEvent event) {
+    	String userName = userNameTextField.getText();
+    	String userPassword = userPasswordField.getText();
+    	
+    	if (userName.equals("") || userPassword.equals(""))
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "Please fill all the fields", 1500, 500, 500);
+    	}
+    	else 
+    	{
+    		loginLoadingImageView.setVisible(true);
+    		myController.verifyLoginCredtinals(userName, userPassword);
+    	}
     }
     
-    public void displayLoginError ()
+    public void handleUserAttempInformation(User resultUser)
     {
-    	loadingLoginGif.setVisible(false);
-    	userNameTextField.setText("INCORRECT");
-    	passwordTextField.setText("INCORRECT");
+    	loginLoadingImageView.setVisible(false);
+    	
+    	if (resultUser == null)
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "User name or password are incorrect", 1500, 500, 500);
+    		loginAttempts++;
+    		if (loginAttempts == 3)
+        	{
+        		/*TODO: Lock user login  */
+        	}
+    	}
+    	else 
+    	{
+    		/*TODO: Add user to the logged users list */
+    		ProjectFX.currentUser = resultUser;
+    		loginLoadingImageView.getScene().getWindow().hide();
+    		ProjectFX.pagingController.loadBoundray(ProjectPages.DEMO_LANDING_PAGE.getPath());
+    	}
     }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		loginLoadingImageView.setVisible(false);
+	}
 
 }

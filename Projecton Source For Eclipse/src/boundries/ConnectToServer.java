@@ -1,5 +1,6 @@
 package boundries;
 
+import assets.ProjectPages;
 import assets.Toast;
 import client.ClientConsole;
 import javafx.fxml.FXML;
@@ -34,7 +35,7 @@ public class ConnectToServer {
     		String [] args = {serverIp};
     		ClientConsole.connection(args);
     		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-    		ProjectFX.pagingController.loadBoundray("/boundries/DemoLandingPage.fxml");
+    		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
     	}
     	
     }

@@ -127,8 +127,10 @@ public class MysqlConnection {
     			+ "SET InitaitorName = ?, Subsystem = ?, CurrentState = ?, ChangeDescription = ?, Status = ?,"
     			+ " HandlerName = ? "
     			+ "WHERE ChangeRequestID = ? ";
-    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
-    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT subsystem FROM icm.requirements";
+    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements "
+    			+ "WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT userName, userPermission, userEmail FROM icm.users "
+    			+ "WHERE userName = ? AND userPassword = ?";
     }
     
 }
