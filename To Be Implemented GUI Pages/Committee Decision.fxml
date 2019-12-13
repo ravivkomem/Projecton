@@ -19,19 +19,19 @@
             <Image url="@../image/2.jpg" />
          </image>
       </ImageView>
-      <AnchorPane prefHeight="491.0" prefWidth="134.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <AnchorPane prefHeight="419.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
-            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="107.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/btnBreak.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnStore" contentDisplay="TOP" layoutX="3.0" layoutY="204.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Add Comment" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnStore" contentDisplay="TOP" layoutX="3.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Add Comment" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -40,7 +40,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutX="3.0" layoutY="292.0" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Committee Director">
+            <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutX="3.0" layoutY="211.0" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Committee Director">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,12 +49,12 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="371.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell" contentDisplay="TOP" layoutX="4.0" layoutY="109.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnSell" contentDisplay="TOP" layoutX="4.0" layoutY="28.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -63,7 +63,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="3.0" layoutY="391.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+            <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="3.0" layoutY="310.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -72,7 +72,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../image/btnBreak.png" />
                </image>
