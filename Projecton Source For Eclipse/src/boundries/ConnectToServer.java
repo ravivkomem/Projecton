@@ -35,7 +35,7 @@ public class ConnectToServer {
     		String [] args = {serverIp};
     		ClientConsole.connection(args);
     		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-    		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+    		ProjectFX.pagingController.loadBoundray(ProjectPages.DEMO_LANDING_PAGE.getPath());
     	}
     	
     }
