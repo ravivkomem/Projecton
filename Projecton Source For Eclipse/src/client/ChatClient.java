@@ -70,7 +70,7 @@ public class ChatClient extends AbstractClient
 
 		switch (result.getActionType()) {
 			case VERIFY_LOGIN: 
-			case GET_CHANGE_REQUEST_BY_ID:
+			case SELECT_CHANGE_REQUEST_BY_ID:
 				Platform.runLater(() -> {
 					this.getChangeRequestByIdListeners(result);
 				});

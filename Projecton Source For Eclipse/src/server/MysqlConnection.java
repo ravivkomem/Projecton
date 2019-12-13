@@ -91,15 +91,15 @@ public class MysqlConnection {
 				if (obj instanceof String) {
 					String string = (String) obj;
 					ps.setString(i, string);
-				}
-					
+				}	
 			}
-			switch(sqlAction.getActionType())
+			
+			switch(sqlAction.getActionType().getExecutionType())
 			{
-				case GET_CHANGE_REQUEST_BY_ID:
+				case EXECUTE_QUERY:
 					sqlResult = new SqlResult(ps.executeQuery(), sqlAction.getActionType());
 					break;
-				case UPDATE_CHANGE_REQUEST_BY_ID:
+				case UPDATE_QUERY:
 					sqlResult = new SqlResult(ps.executeUpdate(), sqlAction.getActionType());
 					break;
 				
@@ -120,14 +120,14 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
-    public static void initSqlArray()   // ask raviv
+    public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_BY_ID.getCode()] = "UPDATE icm.requirements "
     			+ "SET InitaitorName = ?, Subsystem = ?, CurrentState = ?, ChangeDescription = ?, Status = ?,"
     			+ " HandlerName = ? "
     			+ "WHERE ChangeRequestID = ? ";
-    	sqlArray[SqlQueryType.GET_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements WHERE ChangeRequestID = ?";
     	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT subsystem FROM icm.requirements";
     }
     
