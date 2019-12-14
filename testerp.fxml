@@ -16,7 +16,7 @@
    <children>
       <ImageView fitHeight="564.0" fitWidth="755.0" layoutX="6.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/2.jpg" />
+            <Image url="@Projecton/image/2.jpg" />
          </image>
       </ImageView>
       <Text layoutX="292.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tester Page">
@@ -44,42 +44,42 @@
          <children>
             <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@Projecton/image/btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnHome" contentDisplay="TOP" layoutX="2.0" layoutY="44.0" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" AnchorPane.bottomAnchor="353.0">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
+                        <Image url="@Projecton/image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@Projecton/image/btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnStore" contentDisplay="TOP" layoutX="3.0" layoutY="81.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Decision" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
+                        <Image url="@Projecton/image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@Projecton/image/btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnSell" contentDisplay="TOP" layoutX="3.0" layoutY="159.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/25089-200.png" />
+                        <Image url="@Projecton/image/25089-200.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -88,7 +88,7 @@
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/icon-clock-21.jpg" />
+                        <Image url="@Projecton/image/icon-clock-21.jpg" />
                      </image>
                   </ImageView>
                </graphic>
@@ -107,7 +107,7 @@
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/logOut.png" />
+                  <Image url="@Projecton/image/logOut.png" />
                </image>
             </ImageView>
          </graphic>
