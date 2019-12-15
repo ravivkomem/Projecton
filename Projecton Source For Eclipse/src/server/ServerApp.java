@@ -2,8 +2,6 @@ package server;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
-
 import assets.ProjectPages;
 import javafx.application.Application;
 import javafx.event.EventHandler;

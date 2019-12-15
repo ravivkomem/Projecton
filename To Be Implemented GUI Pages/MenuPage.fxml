@@ -10,10 +10,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="550.0" prefWidth="135.0" style="-fx-background-color: white;" />
-      <Text layoutX="333.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello User">
+      <Text fx:id="helloUserTextField" layoutX="333.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello User">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
@@ -26,7 +26,7 @@
             </LinearGradient>
          </fill>
       </Text>
-      <Button layoutX="656.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+      <Button fx:id="logoutButton" layoutX="656.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#userLogout" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -57,20 +57,11 @@
                         <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnStore" contentDisplay="TOP" layoutX="3.0" layoutY="91.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Upload Request" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="uploadRequestButton" contentDisplay="TOP" layoutX="3.0" layoutY="91.0" mnemonicParsing="false" onAction="#loadUploadRequestPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Upload Request" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button fx:id="btnEmplopye" contentDisplay="TOP" layoutX="3.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Supervisor">
-                     <graphic>
-                        <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../image/supervisor_716246.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -85,7 +76,7 @@
                         <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnSell" contentDisplay="TOP" layoutX="3.0" layoutY="174.0" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="My Requests" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="viewMyRequestsButton" contentDisplay="TOP" layoutX="3.0" layoutY="174.0" mnemonicParsing="false" onAction="#loadMyRequestsPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="My Requests" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -94,7 +85,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="btnSettings" contentDisplay="TOP" layoutX="2.0" layoutY="260.0" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Work Station">
+                  <Button fx:id="workStationButton" contentDisplay="TOP" layoutX="2.0" layoutY="260.0" mnemonicParsing="false" onAction="#loadWorkStationPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Work Station">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -108,7 +99,7 @@
                         <Image url="@../image/btnBreak.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnAbout" contentDisplay="TOP" layoutX="2.0" layoutY="353.0" mnemonicParsing="false" onAction="#btnAboutOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Tech Manager">
+                  <Button fx:id="btnAbout" contentDisplay="TOP" layoutX="2.0" layoutY="353.0" mnemonicParsing="false" onAction="#loadTechManagerPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Tech Manager">
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>

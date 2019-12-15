@@ -3,9 +3,6 @@ package server;
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
 
-import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import assets.SqlAction;
 import assets.SqlResult;

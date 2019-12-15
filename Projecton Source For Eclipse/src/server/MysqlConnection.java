@@ -1,12 +1,10 @@
 package server;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import assets.*;
-
 
 public class MysqlConnection {
 	
@@ -129,7 +127,9 @@ public class MysqlConnection {
     			+ "WHERE ChangeRequestID = ? ";
     	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements "
     			+ "WHERE ChangeRequestID = ?";
-    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT UserName, Permission, Email FROM icm.user "
+    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT * FROM icm.user "
+    			+ "WHERE UserName = ? AND Password = ?";
+    	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
     }
     

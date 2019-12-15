@@ -15,6 +15,7 @@ import javafx.application.Platform;
  * @author Raviv Komem
  * This controller handles all communication between the OFSF client and the Login page
  */
+@SuppressWarnings("serial")
 public class LoginController extends BasicController{
 
 	private LoginPageBoundary myBoundary;
@@ -63,10 +64,19 @@ public class LoginController extends BasicController{
 		{
 			ArrayList<Object> resultList = result.getResultData().get(0);
 			
-			String userName = (String) resultList.get(0);
-			String userPermission = (String) resultList.get(1);
-			String userEmail = (String) resultList.get(2);
-			resultUser = new User(userName, userPermission, userEmail);
+			int userID = (Integer) resultList.get(0);
+			String userName = (String) resultList.get(1);
+			String password = (String) resultList.get(2);
+			String firstName = (String) resultList.get(3);
+			String lastName = (String) resultList.get(4);
+			String email = (String) resultList.get(5);
+			String department = (String) resultList.get(6);
+			String jobDescription = (String) resultList.get(7);
+			String permission = (String) resultList.get(8);
+			String phoneNumber= (String) resultList.get(9);
+			
+			resultUser = new User(userID, userName, password, firstName, lastName, email,
+					department, jobDescription, permission, phoneNumber);
 		}
 		return resultUser;
 	}
