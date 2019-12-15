@@ -21,7 +21,7 @@
          </image>
       </ImageView>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="212.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information System Department Head">
+      <Text layoutX="327.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tech Manager">
          <font>
             <Font size="24.0" />
          </font>
@@ -56,9 +56,9 @@
       <TextField layoutX="444.0" layoutY="213.0" />
       <TextField layoutX="444.0" layoutY="254.0" />
       <TextField layoutX="444.0" layoutY="289.0" />
-      <Text layoutX="376.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" />
+      <Text layoutX="371.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" />
       <TextField layoutX="444.0" layoutY="326.0" />
-      <VBox alignment="TOP_CENTER" prefHeight="419.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="322.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
@@ -128,5 +128,7 @@
       </TableView>
       <ComboBox layoutX="249.0" layoutY="185.0" prefHeight="25.0" prefWidth="164.0" promptText="- select report type -" visible="false" />
       <Button layoutX="444.0" layoutY="185.0" mnemonicParsing="false" text="view" visible="false" />
+      <TextField layoutX="444.0" layoutY="362.0" />
+      <Text layoutX="371.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
    </children>
 </AnchorPane>
