@@ -129,8 +129,8 @@ public class MysqlConnection {
     			+ "WHERE ChangeRequestID = ? ";
     	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements "
     			+ "WHERE ChangeRequestID = ?";
-    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT userName, userPermission, userEmail FROM icm.users "
-    			+ "WHERE userName = ? AND userPassword = ?";
+    	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT UserName, Permission, Email FROM icm.user "
+    			+ "WHERE UserName = ? AND Password = ?";
     }
     
 }
