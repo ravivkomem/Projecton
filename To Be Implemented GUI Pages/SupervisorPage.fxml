@@ -24,7 +24,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <VBox alignment="TOP_CENTER" prefHeight="451.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="383.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
@@ -59,20 +59,6 @@
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/supervisor-icon-29.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/btnBreak.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnSell1111" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Duration" textAlignment="CENTER" wrapText="true">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/Finance_SME_Start_Up_Out_Line_53-512.png" />
                      </image>
                   </ImageView>
                </graphic>
