@@ -12,9 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="758.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="600.0" fitWidth="758.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
          <image>
             <Image url="@../Projecton%20Source%20For%20Eclipse/resources/background_image.jpg" />
          </image>
@@ -27,12 +27,12 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView layoutX="138.0" layoutY="111.0" prefHeight="333.0" prefWidth="505.0">
+      <TableView layoutX="147.0" layoutY="111.0" prefHeight="333.0" prefWidth="465.0">
         <columns>
           <TableColumn prefWidth="92.0" text="Request ID" />
             <TableColumn prefWidth="116.0" text="Step" />
-            <TableColumn prefWidth="146.0" text="Description " />
-            <TableColumn prefWidth="198.0" text="SubSystem" />
+            <TableColumn prefWidth="166.6666259765625" text="Description " />
+            <TableColumn prefWidth="88.0" text="SubSystem" />
         </columns>
       </TableView>
       <Text fill="#eb0000" layoutX="250.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are no Change Request submitted" textAlignment="JUSTIFY">
@@ -40,7 +40,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="btnStore" contentDisplay="TOP" layoutX="648.0" layoutY="111.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="77.0" prefWidth="100.0" text="Refresh Station" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="btnStore" contentDisplay="TOP" layoutX="620.0" layoutY="111.0" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="77.0" prefWidth="100.0" text="Refresh Station" textAlignment="CENTER" wrapText="true">
          <graphic>
             <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -84,9 +84,9 @@
             </ImageView>
             <Button fx:id="btnEmplopye11" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Execution Step">
                <graphic>
-                  <ImageView fitHeight="81.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="69.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Projecton%20Source%20For%20Eclipse/resources/execution_image.png" />
+                        <Image url="@../image/shejiyeiconwklipd5vzrc.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -100,7 +100,7 @@
                <graphic>
                   <ImageView fitHeight="78.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../Projecton%20Source%20For%20Eclipse/resources/testing_image.png" />
+                        <Image url="@../image/bl_373_applicant_student_requirements_paperwork_register_sign_up-512.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -133,7 +133,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="313.0" layoutY="458.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="194.0" text="Start Change Request Work" />
-      <TextField layoutX="138.0" layoutY="458.0" prefHeight="25.0" prefWidth="169.0" promptText="Selected change request ID" />
+      <Button layoutX="325.0" layoutY="458.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="194.0" text="Start Change Request Work" />
+      <TextField layoutX="150.0" layoutY="458.0" prefHeight="25.0" prefWidth="169.0" promptText="Selected change request ID" />
    </children>
 </AnchorPane>
