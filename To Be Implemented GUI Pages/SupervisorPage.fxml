@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -137,5 +138,8 @@
       <ComboBox layoutX="219.0" layoutY="339.0" prefWidth="150.0" promptText="- select -" />
       <Button layoutX="394.0" layoutY="339.0" mnemonicParsing="false" text="Approve" />
       <Button layoutX="468.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="deny" />
+      <Button layoutX="404.0" layoutY="380.0" mnemonicParsing="false" text="send" visible="false" />
+      <TextField layoutX="251.0" layoutY="380.0" promptText="send message to initiator" visible="false" />
+      <Button layoutX="353.0" layoutY="405.0" mnemonicParsing="false" text="Close" visible="false" />
    </children>
 </AnchorPane>
