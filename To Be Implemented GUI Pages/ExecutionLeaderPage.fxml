@@ -24,7 +24,6 @@
       </Text>
       <Text layoutX="169.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Details" />
       <Button layoutX="21.0" layoutY="562.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="293.0" layoutY="490.0" mnemonicParsing="false" text="Time Extention" />
       <Button layoutX="620.0" layoutY="490.0" mnemonicParsing="false" text="Commit" />
       <Text layoutX="164.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter time required for execution" wrappingWidth="186.51171651482582" />
       <TextField layoutX="350.0" layoutY="276.0" />
