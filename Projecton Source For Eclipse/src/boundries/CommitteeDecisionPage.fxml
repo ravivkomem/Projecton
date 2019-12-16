@@ -13,83 +13,116 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.CommitteeDecisionBoundry">
    <children>
       <ImageView fitHeight="612.0" fitWidth="758.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/2.jpg" />
+            <Image url="@2.jpg" />
          </image>
       </ImageView>
+      <AnchorPane fx:id="addCommentPane" layoutX="146.0" layoutY="183.0" prefHeight="316.0" prefWidth="565.0" visible="false">
+         <children>
+            <TableView fx:id="commentTable_addComment" layoutX="270.0" layoutY="36.0" prefHeight="180.0" prefWidth="273.0">
+              <columns>
+                <TableColumn fx:id="employeeIdAddColumn" prefWidth="95.0" text="Employee ID" />
+                <TableColumn fx:id="commentAddColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
+              </columns>
+            </TableView>
+            <TextField fx:id="addComentTextField" alignment="CENTER" layoutX="69.0" layoutY="36.0" prefHeight="180.0" prefWidth="159.0" promptText="Write your comment" />
+            <Button fx:id="btnSubmitComment" layoutX="114.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#submitComment" text="Submit" />
+            <Button fx:id="btnRefreshTable" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="377.0" layoutY="221.0" mnemonicParsing="false" onMouseClicked="#refreshTableDetails" prefHeight="49.0" prefWidth="59.0" text="Refresh">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/refresh_symbol.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="committeeDirectorPane" layoutX="142.0" layoutY="189.0" prefHeight="398.0" prefWidth="592.0" visible="false">
+         <children>
+            <TableView fx:id="commentTabelDirector" layoutX="64.0" layoutY="73.0" prefHeight="180.0" prefWidth="359.0">
+               <columns>
+                  <TableColumn fx:id="employeeIdDirectorColumn" prefWidth="95.0" text="Employee ID" />
+                  <TableColumn fx:id="commentDirectorColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
+               </columns>
+            </TableView>
+            <ComboBox fx:id="decisionComboBox" layoutX="77.0" layoutY="293.0" prefHeight="25.0" prefWidth="166.0" promptText="Choose Your Decision" />
+            <Button fx:id="btnSendDecision" layoutX="253.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#sendDirectorDecision" text="Send" />
+         </children>
+      </AnchorPane>
       <VBox alignment="TOP_CENTER" prefHeight="419.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
-            <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/home.png" />
+                        <Image url="@../resources/home.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@../resources/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnAnalysisReport" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadAnalysisReportPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/25089-200.png" />
+                        <Image url="@../resources/analysis_image.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@../resources/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnStore" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Add Comment" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnAddComment" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadAddCommentPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Add Comment" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/33524225-4ed3895e-d83e-11e7-8549-066c96bbab6c.png" />
+                        <Image url="@../resources/upload_request_image.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@../resources/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnEmplopye" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Committee Director">
+            <Button fx:id="btnCommitteeDirector" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadCommitteeDirectorPage" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Committee Director">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/supervisor_716246.png" />
+                        <Image url="@../resources/supervisor_716246.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@../resources/btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSettings" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+            <Button fx:id="btnTimeExtension" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadTimeExtensionPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/icon-clock-21.jpg" />
+                        <Image url="@../resources/icon-clock-21.jpg" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@../resources/btnBreak.png" />
                </image>
             </ImageView>
          </children>
@@ -99,45 +132,20 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="162.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Request ID" visible="false" wrappingWidth="145.30078125">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <TextField layoutX="325.0" layoutY="75.0" prefHeight="23.0" prefWidth="121.0" visible="false" />
-      <Button layoutX="466.0" layoutY="75.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="59.0" text="View" visible="false" />
-      <TableView layoutX="417.0" layoutY="242.0" prefHeight="180.0" prefWidth="273.0">
-        <columns>
-          <TableColumn prefWidth="95.0" text="Employee ID" />
-          <TableColumn minWidth="0.0" prefWidth="177.0" text="Comment" />
-        </columns>
-      </TableView>
-      <Text fill="RED" layoutX="298.0" layoutY="133.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid request ID!" visible="false" wrappingWidth="177.078125">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-      <TextField alignment="CENTER" layoutX="192.0" layoutY="242.0" prefHeight="180.0" prefWidth="159.0" promptText="Write your comment" />
-      <Button layoutX="238.0" layoutY="435.0" mnemonicParsing="false" text="Submit" />
-      <Button layoutX="483.0" layoutY="435.0" mnemonicParsing="false" text="Refresh" />
-      <TextArea layoutX="622.0" layoutY="105.0" prefHeight="38.0" prefWidth="85.0" />
+      <TextArea fx:id="timeRemainingTextAria" layoutX="622.0" layoutY="105.0" prefHeight="38.0" prefWidth="85.0" />
       <Text layoutX="622.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining" />
-      <Button layoutX="21.0" layoutY="548.0" mnemonicParsing="false" text="Back" />
-      <ComboBox layoutX="243.0" layoutY="483.0" prefHeight="25.0" prefWidth="166.0" promptText="Choose Your Decision" visible="false" />
-      <Button layoutX="440.0" layoutY="483.0" mnemonicParsing="false" text="Send" visible="false" />
-      <TableView layoutX="202.0" layoutY="86.0" prefHeight="109.0" prefWidth="349.0" visible="false">
+      <Button fx:id="btnBack" layoutX="21.0" layoutY="548.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
+      <TableView fx:id="requestInfoTable" layoutX="207.0" layoutY="105.0" prefHeight="78.0" prefWidth="359.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="144.66668701171875" text="Description" />
-            <TableColumn prefWidth="62.33331298828125" text="Date" />
-            <TableColumn prefWidth="69.66668701171875" text="status" />
+            <TableColumn fx:id="requestIdColumn" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="283.0" text="Description" />
          </columns>
       </TableView>
-      <Button layoutX="665.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+      <Button fx:id="btnLogout" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#userLogout" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/logOut.png" />
+                  <Image url="@../resources/logOut.png" />
                </image>
             </ImageView>
          </graphic>
@@ -145,11 +153,5 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView layoutX="269.0" layoutY="227.0" prefHeight="180.0" prefWidth="273.0" visible="false">
-         <columns>
-            <TableColumn prefWidth="95.0" text="Employee ID" />
-            <TableColumn minWidth="0.0" prefWidth="177.0" text="Comment" />
-         </columns>
-      </TableView>
    </children>
 </AnchorPane>
