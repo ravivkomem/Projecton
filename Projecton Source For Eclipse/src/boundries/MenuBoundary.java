@@ -31,7 +31,9 @@ public class MenuBoundary implements Initializable {
     @FXML
     private Button workStationButton;
     @FXML
-    private Button techManagerButton;
+    private Button supervisorButton;
+    @FXML
+    private Button departmentHeadButton;
     @FXML
     private ImageView menuImageBreak;
     @FXML
@@ -39,10 +41,10 @@ public class MenuBoundary implements Initializable {
     @FXML
     private ImageView myRequestsImageBreak;
     @FXML
-    private ImageView workStationImageBreak;
+    private ImageView workStation_DepartmentHeadImageBreak;
     @FXML
-    private ImageView techManagerImageBreak;
-
+    private ImageView supervisorImageBreak;
+    
     /*Boundary Methods*/
     @FXML
     void loadMyRequestsPage(ActionEvent event) {
@@ -50,8 +52,8 @@ public class MenuBoundary implements Initializable {
     }
 
     @FXML
-    void loadTechManagerPage(ActionEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, techManagerButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    void loadSupervisorPage(ActionEvent event) {
+    	Toast.makeText(ProjectFX.mainStage, supervisorButton.getText() + " Button not implemented yet", 1500, 500, 500);
     }
 
     @FXML
@@ -59,6 +61,11 @@ public class MenuBoundary implements Initializable {
     	Toast.makeText(ProjectFX.mainStage, uploadRequestButton.getText() + " Button not implemented yet", 1500, 500, 500);
     }
 
+    @FXML
+    void loadDepartmentHeadPage(ActionEvent event) {
+    	Toast.makeText(ProjectFX.mainStage, departmentHeadButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    }
+    
     @FXML
     void loadWorkStationPage(ActionEvent event) {
     	Toast.makeText(ProjectFX.mainStage, workStationButton.getText() + " Button not implemented yet", 1500, 500, 500);
@@ -74,21 +81,35 @@ public class MenuBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	    uploadRequestButton.setVisible(false);
+	    /*Hide all buttons*/
+		uploadRequestButton.setVisible(false);
 	    viewMyRequestsButton.setVisible(false);
 	    workStationButton.setVisible(false);
-	    techManagerButton.setVisible(false);
+	    departmentHeadButton.setVisible(false);
+	    supervisorButton.setVisible(false);
+	    /*Hide all image breaks*/
 	    uploadRequestImageBreak.setVisible(false);
 	    myRequestsImageBreak.setVisible(false);
-	    workStationImageBreak.setVisible(false);
-	    techManagerImageBreak.setVisible(false);
+	    workStation_DepartmentHeadImageBreak.setVisible(false);
+	    supervisorImageBreak.setVisible(false);
 
-	    
 		helloUserTextField.setText("Hello " + ProjectFX.currentUser.getFirstName() + " " + ProjectFX.currentUser.getLastName());
 		
 		/* Displaying the proper buttons */
 		switch (ProjectFX.currentUser.getPermission())
 		{
+		
+		case "INFORMATION_ENGINEERING_DEPARTMENT_HEAD":
+			uploadRequestButton.setVisible(true);
+			uploadRequestImageBreak.setVisible(true);
+			
+		    viewMyRequestsButton.setVisible(true);
+		    myRequestsImageBreak.setVisible(true);
+		    
+		    departmentHeadButton.setVisible(true);
+		    workStation_DepartmentHeadImageBreak.setVisible(true);
+		    break;
+		    
 		case "SUPERVISOR":
 			uploadRequestButton.setVisible(true);
 			uploadRequestImageBreak.setVisible(true);
@@ -97,12 +118,14 @@ public class MenuBoundary implements Initializable {
 		    myRequestsImageBreak.setVisible(true);
 		    
 		    workStationButton.setVisible(true);
-		    workStationImageBreak.setVisible(true);
+		    workStation_DepartmentHeadImageBreak.setVisible(true);
 		    
-		    techManagerButton.setVisible(true);
-		    techManagerImageBreak.setVisible(true);
+		    supervisorButton.setVisible(true);
+		    supervisorImageBreak.setVisible(true);
 		    break;
 		    
+		/*Same displays for committee members and information engineers*/
+		case "COMMITTEE_MEMBER":
 		case "INFORMATION_ENGINEER":
 			uploadRequestButton.setVisible(true);
 			uploadRequestImageBreak.setVisible(true);
@@ -111,9 +134,9 @@ public class MenuBoundary implements Initializable {
 		    myRequestsImageBreak.setVisible(true);
 		    
 		    workStationButton.setVisible(true);
-		    workStationImageBreak.setVisible(true);
-		    break;
-		    
+		    workStation_DepartmentHeadImageBreak.setVisible(true);
+			break;
+			
 		case "BASIC_USER":
 			uploadRequestButton.setVisible(true);
 			uploadRequestImageBreak.setVisible(true);

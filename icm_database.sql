@@ -137,7 +137,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',000),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',000),(3,'itay','1234','Itay','Daviv','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',000),(4,'lee','1234','Lee','Hogi','leehogi@gmail.com','Mathmatics','Worker','BASIC_USER','1230911821',000),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTE_MEMBER','3214891123',000);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',000),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',000),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',000),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',000),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',000);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -150,4 +150,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-15 23:39:31
+-- Dump completed on 2019-12-16 17:47:19
