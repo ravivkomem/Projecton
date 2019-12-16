@@ -1,6 +1,7 @@
 package boundries;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.sun.prism.impl.ps.CachingEllipseRep;
@@ -14,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -85,7 +87,7 @@ public class CommitteeDecisionBoundry implements Initializable{
     private TextArea timeRemainingTextAria;
 
     @FXML
-    private ComboBox<?> decisionComboBox;
+    private ComboBox<String> decisionComboBox;
 
    private CommitteDecisionController myController= new CommitteDecisionController(this);
    private ChangeRequest currentChangeRequest;
@@ -111,37 +113,51 @@ public class CommitteeDecisionBoundry implements Initializable{
 
     @FXML
     void loadCommitteeDirectorPage(MouseEvent event) {
-    	
+    	addCommentPane.setVisible(false);
+    	committeeDirectorPane.setVisible(true);
+    	myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
     }
 
     @FXML
     void loadHomePage(MouseEvent event) {
-
+    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
     }
 
     @FXML
     void loadPreviousPage(MouseEvent event) {
-
+    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
     }
 
     @FXML
     void loadTimeExtensionPage(MouseEvent event) {
-
+    	
     }
 
     @FXML
     void refreshTableDetails(MouseEvent event) {
-
+    	myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
     }
 
     @FXML
     void sendDirectorDecision(MouseEvent event) {
+    	switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
+    	case "Approve":
+    		break;
+    	case "Deny":
+    		break;
+    	case "more information":
+    		break;
+    	default:
+    		break;
+    	}
 
     }
 
     @FXML
     void submitComment(MouseEvent event) {
-    	
+    	//take the comment from the text field and insert to sql table
     }
 
     @FXML
@@ -150,6 +166,15 @@ public class CommitteeDecisionBoundry implements Initializable{
     	ProjectFX.currentUser = null;
 		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+    }
+    
+    public void handleCommitteeCommentResult(ArrayList<CommitteeComment> resultList) {
+    	commentList.clear();
+    	if(!resultList.isEmpty()) {
+    		commentList.addAll(resultList);
+    		commentTable_addComment.setItems(commentList);
+    		commentTabelDirector.setItems(commentList);
+    	}
     }
 
 	@Override
@@ -160,6 +185,10 @@ public class CommitteeDecisionBoundry implements Initializable{
 		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
 		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
+		
+		decisionComboBox.getItems().add("Approve");
+		decisionComboBox.getItems().add("Deny");
+		decisionComboBox.getItems().add("More information");
 		
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
