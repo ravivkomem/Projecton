@@ -1,48 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="900.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.LoginPageBoundry">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="451.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.LoginPageBoundary">
    <children>
-      <ImageView fitHeight="565.0" fitWidth="900.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true" />
-      <Pane prefHeight="565.0" prefWidth="365.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane prefHeight="451.0" prefWidth="306.0" style="-fx-background-color: #e0f0ff;">
          <children>
-            <ImageView fitHeight="565.0" fitWidth="365.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="207.0" fitWidth="421.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../resources/loginPageImage.jpg" />
+                  <Image url="@../../resources/networkingImage.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="85.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ICM">
+               <font>
+                  <Font name="Trebuchet MS Bold" size="96.0" />
+               </font>
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#1cd2f6" />
+                        <Stop color="#5860c0" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <stroke>
+                  <LinearGradient endX="1.0" endY="1.0">
+                     <stops>
+                        <Stop color="#91c09c" />
+                        <Stop color="#6f76c5" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </stroke>
+            </Text>
+            <Text fill="#4378a1" layoutX="11.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Braude Information Systems Change Management">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Text>
+         </children></Pane>
+      <AnchorPane layoutX="320.0" layoutY="74.0" prefHeight="257.0" prefWidth="290.0" style="-fx-background-color: white; -fx-border-color: black;">
+         <children>
+            <Label layoutX="82.0" layoutY="31.0" text="Welcome">
+               <font>
+                  <Font name="System Bold" size="29.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="5.0" layoutY="83.0" prefHeight="97.0" prefWidth="281.0" vgap="10.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TextField fx:id="userNameTextField" prefHeight="25.0" prefWidth="276.0" promptText="User Name" GridPane.columnSpan="2" />
+                  <PasswordField fx:id="userPasswordField" prefHeight="25.0" prefWidth="274.0" promptText="Password" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Button fx:id="signInButton" layoutX="113.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#signInButtonPressed" prefHeight="32.0" prefWidth="64.0" style="-fx-background-radius: 100; -fx-background-color: #e0f0ff;" text="Sign In">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="loginLoadingImageView" fitHeight="126.0" fitWidth="121.0" layoutX="77.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/loginPendingGIF.gif" />
                </image>
             </ImageView>
          </children>
-      </Pane>
-      <TextField fx:id="userNameTextField" layoutX="476.0" layoutY="153.0" prefHeight="45.0" prefWidth="344.0" promptText="User Name" style="-fx-background-radius: 100;" />
-      <Button fx:id="loginButton" layoutX="714.0" layoutY="265.0" mnemonicParsing="false" onAction="#loginAttemp" prefHeight="45.0" prefWidth="106.0" style="-fx-background-radius: 100;" text="Log In" />
-      <Button fx:id="registertrationButton" layoutX="475.0" layoutY="351.0" mnemonicParsing="false" onAction="#ClickbtnRegistration" prefHeight="36.0" prefWidth="344.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768); -fx-background-radius: 100; -fx-background-insets: 0,1,2,3; -fx-padding: 12 30 12 30;" styleClass="ra" text="Registration" textFill="WHITE" />
-      <Button fx:id="exitButton" layoutX="477.0" layoutY="426.0" mnemonicParsing="false" onMouseClicked="#exitSystem" prefHeight="36.0" prefWidth="344.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768); -fx-background-radius: 100; -fx-background-insets: 0,1,2,3; -fx-padding: 12 30 12 30;;" text="Exit Sytem" textFill="WHITE" />
-      <Hyperlink fx:id="ForgotPasswordLink" layoutX="476.0" layoutY="274.0" onAction="#ClickbtnForgotPass" text="Forgot Password" />
-      <Hyperlink fx:id="ContectUsLink" accessibleRole="BUTTON" layoutX="718.0" layoutY="527.0" onAction="#ClickbtnContactus" text="contect us" />
-      <Hyperlink fx:id="PrivacyTermLink" accessibleRole="BUTTON" layoutX="803.0" layoutY="527.0" onAction="#ClickbtnPrivacyTerms" text="privacy term" />
-      <Line endX="100.0" layoutX="719.0" layoutY="336.0" startX="-240.0" stroke="#5b88e8" />
-      <Line endX="100.0" layoutX="719.0" layoutY="408.0" startX="-240.0" stroke="#5b88e8" />
-      <PasswordField fx:id="passwordTextField" layoutX="476.0" layoutY="207.0" prefHeight="45.0" prefWidth="344.0" promptText="Password" style="-fx-background-radius: 100;" />
-      <Label layoutX="507.0" layoutY="69.0" text="ICM Login Page">
-         <font>
-            <Font size="38.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="loadingLoginGif" fitHeight="104.0" fitWidth="253.0" layoutX="578.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../../resources/loginPendingGIF.gif" />
-         </image>
-      </ImageView>
+      </AnchorPane>
    </children>
 </AnchorPane>
