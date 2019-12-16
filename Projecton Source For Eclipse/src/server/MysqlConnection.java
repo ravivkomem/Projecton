@@ -131,6 +131,8 @@ public class MysqlConnection {
     			+ "WHERE UserName = ? AND Password = ?";
     	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
+    	sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
+    			+ "WHERE requestId = ?";
     }
     
 }

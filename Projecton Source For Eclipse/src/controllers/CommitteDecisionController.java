@@ -20,7 +20,7 @@ public class CommitteDecisionController extends BasicController{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(id);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID, varArray);
-		this.subscribeToClientDeliveries();
+		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
