@@ -1,6 +1,7 @@
 package server;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -89,7 +90,11 @@ public class MysqlConnection {
 				if (obj instanceof String) {
 					String string = (String) obj;
 					ps.setString(i, string);
-				}	
+				}
+				if (obj instanceof Date) {
+					Date date = (Date) obj;
+					ps.setDate(i, date);
+				}
 			}
 			
 			switch(sqlAction.getActionType().getExecutionType())
@@ -135,7 +140,9 @@ public class MysqlConnection {
     			+ "WHERE requestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]="INSERT INTO `committee_comment`(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
-    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= "INSERT INTO icm.change_request() VALUES (?,?,?,?,?,?,?)";
+    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= "INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
+    			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
+    			+ "Status,HandlerUserName,UploadedFiles) VALUES (?,?,?,?,?,?,?,?,?,?)";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE HandlerUserName = ?";

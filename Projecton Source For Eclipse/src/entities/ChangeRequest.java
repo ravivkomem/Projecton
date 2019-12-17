@@ -9,12 +9,16 @@ public class ChangeRequest {
 	private String changeRequestDescription;
 	private String changeRequestStatus;
 	private String handler;
+	private String changeRequestDate;
 	
+
+
 	private String changeRequestComment;
 	private String changeRequestDocuments;
 	private String changeRequestExplanation;
 	private String changeRequestStep;
 	private String stepLeader;
+
 	
 	public ChangeRequest(String selectSysystem, String currentStateDiscription, String changeRequestDescription,
 			int changeRequestID, String changeRequestExplanation, String changeRequestIntiatorName,
@@ -33,7 +37,7 @@ public class ChangeRequest {
 	/*Constructor for uploading new change request*/
 	public ChangeRequest(String initiator, String selectSysystem, String currentStateDiscription,
 			String changeRequestDescription, String changeRequestComment, String changeRequestDocuments,
-			String changeRequestExplanation) {
+			String changeRequestExplanation,String changeRequestDate,String changeRequestStatus,String handler) {
 		super();
 		this.initiator = initiator;
 		this.selectSysystem = selectSysystem;
@@ -42,6 +46,9 @@ public class ChangeRequest {
 		this.changeRequestComment = changeRequestComment;
 		this.changeRequestDocuments = changeRequestDocuments;
 		this.changeRequestExplanation = changeRequestExplanation;
+		this.changeRequestDate=changeRequestDate;
+		this.changeRequestStatus=changeRequestStatus;
+		this.handler=handler;
 	}
 
 
@@ -175,6 +182,13 @@ public class ChangeRequest {
 
 	public void setStepLeader(String stepLeader) {
 		this.stepLeader = stepLeader;
+	}
+	public String getChangeRequestDate() {
+		return changeRequestDate;
+	}
+
+	public void setChangeRequestDate(String changeRequestDate) {
+		this.changeRequestDate = changeRequestDate;
 	}
 
 
