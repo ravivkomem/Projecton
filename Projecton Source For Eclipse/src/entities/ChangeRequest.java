@@ -30,6 +30,20 @@ public class ChangeRequest {
 		this.handler = handleName;
 	}
 
+	/*Constructor for uploading new change request*/
+	public ChangeRequest(String initiator, String selectSysystem, String currentStateDiscription,
+			String changeRequestDescription, String changeRequestComment, String changeRequestDocuments,
+			String changeRequestExplanation) {
+		super();
+		this.initiator = initiator;
+		this.selectSysystem = selectSysystem;
+		this.currentStateDiscription = currentStateDiscription;
+		this.changeRequestDescription = changeRequestDescription;
+		this.changeRequestComment = changeRequestComment;
+		this.changeRequestDocuments = changeRequestDocuments;
+		this.changeRequestExplanation = changeRequestExplanation;
+	}
+
 
 	public ChangeRequest(int changeRequestID, String initiator, String selectSysystem, String currentStateDiscription,
 			String changeRequestDescription, String changeRequestStatus, String handler) {

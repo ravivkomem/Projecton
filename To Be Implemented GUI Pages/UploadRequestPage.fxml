@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UploadChangeRequestBoundary">
    <children>
-      <ImageView fitHeight="601.0" fitWidth="758.0">
+      <ImageView fitHeight="601.0" fitWidth="758.0" onMouseClicked="#browseFileToUpload">
          <image>
             <Image url="@../image/2.jpg" />
          </image>
@@ -21,14 +21,14 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="23.0" layoutY="562.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="backButton" layoutX="23.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#backBtn" text="Back" />
       <Text layoutX="39.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub System:" />
       <Text layoutX="34.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current state description:" wrappingWidth="144.99999323487282" />
       <Text layoutX="35.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change request description:" wrappingWidth="175.77166748046875" />
-      <Button layoutX="667.0" layoutY="226.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="62.0" text="Browse..." />
+      <Button layoutX="665.0" layoutY="226.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" text="Browse..." />
       <Text layoutX="34.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reason:" />
       <Text layoutX="433.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comment:" />
-      <Button layoutX="655.0" layoutY="17.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+      <Button fx:id="logoutButton" layoutX="655.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#logoutUser" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,13 +40,13 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <ComboBox layoutX="218.0" layoutY="111.0" prefWidth="150.0" promptText="- sub system-" />
-      <Button layoutX="565.0" layoutY="513.0" mnemonicParsing="false" text="Submit" />
-      <TextField alignment="TOP_LEFT" layoutX="219.0" layoutY="187.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
-      <TextField alignment="TOP_LEFT" layoutX="219.0" layoutY="306.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
-      <TextField alignment="TOP_LEFT" layoutX="219.0" layoutY="409.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
-      <TextField alignment="TOP_LEFT" layoutX="518.0" layoutY="111.0" prefHeight="80.0" prefWidth="149.0" />
-      <Text layoutX="433.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload File:" />
-      <TextField alignment="TOP_LEFT" layoutX="518.0" layoutY="226.0" prefHeight="17.0" prefWidth="149.0" />
+      <ComboBox fx:id="subSystemComboBox" layoutX="218.0" layoutY="111.0" prefWidth="150.0" promptText="- sub system-" />
+      <Button fx:id="submitUploadChangeRequestButton" layoutX="565.0" layoutY="513.0" mnemonicParsing="false" onMouseClicked="#submitChangeRequestBtn" text="Submit" />
+      <TextField fx:id="currentStateDescriptionField" alignment="TOP_LEFT" layoutX="219.0" layoutY="187.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
+      <TextField fx:id="ChangeReqestDescriptionField" alignment="TOP_LEFT" layoutX="219.0" layoutY="306.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
+      <TextField fx:id="reasonField" alignment="TOP_LEFT" layoutX="219.0" layoutY="409.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
+      <TextField fx:id="commentField" alignment="TOP_LEFT" layoutX="516.0" layoutY="111.0" prefHeight="80.0" prefWidth="149.0" />
+      <Text layoutX="428.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload File:" />
+      <TextField alignment="TOP_LEFT" layoutX="516.0" layoutY="226.0" prefHeight="17.0" prefWidth="149.0" />
    </children>
 </AnchorPane>
