@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
-import boundries.CommitteeDecisionBoundry;
+import boundries.CommitteeDecisionBoundary;
 import client.ClientConsole;
 import entities.CommitteeComment;
 import javafx.application.Platform;
@@ -17,9 +17,9 @@ import javafx.application.Platform;
 
 public class CommitteDecisionController extends BasicController{
 	
-	private CommitteeDecisionBoundry myBoundary;
+	private CommitteeDecisionBoundary myBoundary;
 	
-	public CommitteDecisionController(CommitteeDecisionBoundry myBoundary){
+	public CommitteDecisionController(CommitteeDecisionBoundary myBoundary){
 		this.myBoundary=myBoundary;
 	}
 	

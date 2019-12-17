@@ -33,7 +33,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CommitteeDecisionBoundry implements Initializable {
+public class CommitteeDecisionBoundary implements Initializable , DataInitializable{
 
 	@FXML
 	private AnchorPane addCommentPane;
@@ -104,10 +104,6 @@ public class CommitteeDecisionBoundry implements Initializable {
 	private ChangeRequest currentChangeRequest;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
-
-	public void setCurrentChangeRequest(ChangeRequest currentChangeRequest) {
-		this.currentChangeRequest = currentChangeRequest;
-	}
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -248,6 +244,11 @@ public class CommitteeDecisionBoundry implements Initializable {
 			break;
 		}
 
+	}
+
+	@Override
+	public void initData(Object data) {
+		currentChangeRequest=(ChangeRequest)data;	
 	}
 
 }
