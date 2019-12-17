@@ -138,6 +138,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE HandlerUserName = ?";
+    	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    	    	+ "WHERE HandlerUserName = ? AND CurrentStep = 'Analysis'";
     }
     
 }

@@ -6,14 +6,21 @@ import java.util.ResourceBundle;
 
 import assets.ProjectPages;
 import assets.Toast;
-import entities.ChangeRequest;
+import controllers.WorkStationController;
+import entities.ChangeRequestNew;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class WorkStationBoundary implements Initializable{
@@ -22,17 +29,20 @@ public class WorkStationBoundary implements Initializable{
 	 * ****** FXML Objects ***********
 	 * ******************************/
 	
+	/*Text Field*/
+    @FXML
+    private TextField selectChangeRequestIdTextField;
 	/* TableView */
     @FXML
-    private TableView<ChangeRequest> changeRequestTableView;
+    private TableView<ChangeRequestNew> changeRequestTableView;
     @FXML
-    private TableColumn<ChangeRequest, Integer> requestIdColumn;
+    private TableColumn<ChangeRequestNew, Integer> requestIdColumn;
     @FXML
-    private TableColumn<ChangeRequest, String> stepColumn;
+    private TableColumn<ChangeRequestNew, String> stepColumn;
     @FXML
-    private TableColumn<ChangeRequest, String> descriptionColumn;
+    private TableColumn<ChangeRequestNew, String> descriptionColumn;
     @FXML
-    private TableColumn<ChangeRequest, String> subsystemColumn;
+    private TableColumn<ChangeRequestNew, String> subsystemColumn;
     
     /*Buttons*/
     @FXML
@@ -54,15 +64,20 @@ public class WorkStationBoundary implements Initializable{
     @FXML
     private Button startChangeRequestWorkButton;
     
+    
+    /*Private Variables */
+    private WorkStationController myController = new WorkStationController(this);
+	ObservableList<ChangeRequestNew> list = FXCollections.observableArrayList();
+	
     /* FXML Methods */
     @FXML
     void displayAllWorkChangeRequests(MouseEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, viewAllWorkButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	myController.selectAllChangeRequestByHandlerUserName(ProjectFX.currentUser.getUserName());
     }
 
     @FXML
     void displayAnalysisStepChangeRequests(MouseEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, viewAnalysisStepWorkButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	myController.selectAnalysisStepChangeRequestByHandlerUserName(ProjectFX.currentUser.getUserName());
     }
 
     @FXML
@@ -105,15 +120,37 @@ public class WorkStationBoundary implements Initializable{
     }
 
     /* public methods */
-    public void loadTableView(List<ChangeRequest> changeRequestsList)
+    public void loadTableView(List<ChangeRequestNew> changeRequestsList)
     {
+    	list.clear();
+    	list.addAll(changeRequestsList);
+    	changeRequestTableView.setVisible(true);
+    	changeRequestTableView.setItems(list);
     	
     }
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, Integer>("changeRequestID"));
+		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, String>("currentStep"));
+		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, String>("desiredChangeDescription"));
+		subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, String>("selectedSubsystem"));
 		
+		changeRequestTableView.setRowFactory(tv -> {
+		    TableRow<ChangeRequestNew> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
+		        {
+		        	ChangeRequestNew clickedChangeRequest = row.getItem();
+		        	selectChangeRequestIdTextField.setText(Integer.toString(clickedChangeRequest.getChangeRequestID()));
+		        	
+		        }
+		    });
+		    return row ;
+		});
 		
+		changeRequestTableView.setVisible(false);
+		this.displayAllWorkChangeRequests(null);
 	}
 
 }
