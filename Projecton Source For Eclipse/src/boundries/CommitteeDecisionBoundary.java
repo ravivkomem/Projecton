@@ -105,10 +105,6 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 
-	public void setCurrentChangeRequest(ChangeRequest currentChangeRequest) {
-		this.currentChangeRequest = currentChangeRequest;
-	}
-
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
 		addCommentPane.setVisible(true);
@@ -252,8 +248,7 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@Override
 	public void initData(Object data) {
-		
-		
+		currentChangeRequest=(ChangeRequest)data;	
 	}
 
 }
