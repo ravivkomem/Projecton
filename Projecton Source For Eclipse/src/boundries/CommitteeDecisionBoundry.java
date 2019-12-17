@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -92,6 +93,12 @@ public class CommitteeDecisionBoundry implements Initializable {
 
 	@FXML
 	private ComboBox<String> decisionComboBox;
+	
+    @FXML
+    private ImageView image3point1;
+
+    @FXML
+    private ImageView image3point2;
 
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
@@ -224,16 +231,18 @@ public class CommitteeDecisionBoundry implements Initializable {
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
 		btnCommitteeDirector.setVisible(false);
-		;
 		btnTimeExtension.setVisible(false);
+		image3point1.setVisible(false);
+		image3point2.setVisible(false);
 
 		switch (ProjectFX.currentUser.getPermission()) {
 		case "COMMITTEE_MEMBER":
 			break;
 		case "COMMITTEE_DIRECTOR":
 			btnCommitteeDirector.setVisible(true);
-			;
 			btnTimeExtension.setVisible(true);
+			image3point1.setVisible(true);
+			image3point2.setVisible(true);
 			break;
 		default:
 			break;
