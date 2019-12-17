@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="531.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@2.jpg" />
+            <Image url="@background_image.jpg" />
          </image>
       </ImageView>
       <Text layoutX="154.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Extension" wrappingWidth="222.453125">
