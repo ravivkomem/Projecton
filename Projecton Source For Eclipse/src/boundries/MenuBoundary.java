@@ -69,7 +69,7 @@ public class MenuBoundary implements Initializable {
     
     @FXML
     void loadWorkStationPage(ActionEvent event) {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+    	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
     }
 
