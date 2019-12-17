@@ -17,10 +17,10 @@ import javafx.application.Platform;
 
 public class CommitteDecisionController extends BasicController{
 	
-	private CommitteeDecisionBoundry myBoundry;
+	private CommitteeDecisionBoundry myBoundary;
 	
-	public CommitteDecisionController(CommitteeDecisionBoundry myBoundry){
-		this.myBoundry=myBoundry;
+	public CommitteDecisionController(CommitteeDecisionBoundry myBoundary){
+		this.myBoundary=myBoundary;
 	}
 	
 	public void getCommentsByRequestId(String id) {
@@ -50,7 +50,7 @@ public class CommitteDecisionController extends BasicController{
 					ArrayList<CommitteeComment> resultList=new ArrayList<>();
 					resultList.addAll(this.changeResultToCommitteeComment(result));
 					this.unsubscribeFromClientDeliveries();
-					myBoundry.handleCommitteeCommentResult(resultList);
+					myBoundary.handleCommitteeCommentResult(resultList);
 					break;
 				case INSERT_NEW_COMMITTEE_COMMENT:
 					//check what the returns

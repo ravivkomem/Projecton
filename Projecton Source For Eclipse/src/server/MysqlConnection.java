@@ -136,6 +136,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]="INSERT INTO `committee_comment`(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= "INSERT INTO icm.change_request() VALUES (?,?,?,?,?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE HandlerUserName = ?";
     }
     
 }

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: icm
+-- Host: localhost    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -50,7 +50,7 @@ DROP TABLE IF EXISTS `change_request`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `change_request` (
-  `ChangeRequestID` int(11) NOT NULL,
+  `ChangeRequestID` int(11) NOT NULL AUTO_INCREMENT,
   `InitiatorUserName` varchar(45) NOT NULL,
   `StartDate` date NOT NULL,
   `SelectedSubsystem` varchar(45) NOT NULL,
@@ -64,6 +64,7 @@ CREATE TABLE `change_request` (
   `UploadedFiles` varchar(45) NOT NULL,
   `EndDate` date DEFAULT NULL,
   PRIMARY KEY (`ChangeRequestID`),
+  UNIQUE KEY `ChangeRequestID_UNIQUE` (`ChangeRequestID`),
   KEY `UserName_idx` (`InitiatorUserName`,`HandlerUserName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -75,6 +76,30 @@ CREATE TABLE `change_request` (
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `committee_comment`
+--
+
+DROP TABLE IF EXISTS `committee_comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `committee_comment` (
+  `requestId` int(11) NOT NULL,
+  `employeeId` varchar(45) DEFAULT NULL,
+  `comment` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`requestId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `committee_comment`
+--
+
+LOCK TABLES `committee_comment` WRITE;
+/*!40000 ALTER TABLE `committee_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `committee_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -150,4 +175,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-16 17:47:19
+-- Dump completed on 2019-12-17 14:14:07
