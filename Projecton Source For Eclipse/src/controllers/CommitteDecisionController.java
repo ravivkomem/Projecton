@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
-import boundries.CommitteeDecisionBoundry;
+import boundries.CommitteeDecisionBoundary;
 import client.ClientConsole;
 import entities.CommitteeComment;
 import javafx.application.Platform;
@@ -17,10 +17,10 @@ import javafx.application.Platform;
 
 public class CommitteDecisionController extends BasicController{
 	
-	private CommitteeDecisionBoundry myBoundry;
+	private CommitteeDecisionBoundary myBoundary;
 	
-	public CommitteDecisionController(CommitteeDecisionBoundry myBoundry){
-		this.myBoundry=myBoundry;
+	public CommitteDecisionController(CommitteeDecisionBoundary myBoundary){
+		this.myBoundary=myBoundary;
 	}
 	
 	public void getCommentsByRequestId(String id) {
@@ -50,7 +50,7 @@ public class CommitteDecisionController extends BasicController{
 					ArrayList<CommitteeComment> resultList=new ArrayList<>();
 					resultList.addAll(this.changeResultToCommitteeComment(result));
 					this.unsubscribeFromClientDeliveries();
-					myBoundry.handleCommitteeCommentResult(resultList);
+					myBoundary.handleCommitteeCommentResult(resultList);
 					break;
 				case INSERT_NEW_COMMITTEE_COMMENT:
 					//check what the returns
