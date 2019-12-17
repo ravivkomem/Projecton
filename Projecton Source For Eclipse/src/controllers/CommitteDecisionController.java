@@ -50,7 +50,7 @@ public class CommitteDecisionController extends BasicController{
 					ArrayList<CommitteeComment> resultList=new ArrayList<>();
 					resultList.addAll(this.changeResultToCommitteeComment(result));
 					this.unsubscribeFromClientDeliveries();
-					myBoundary.handleCommitteeCommentResult(resultList);
+					myBoundary.handleCommitteeCommentResultForTable(resultList);
 					break;
 				case INSERT_NEW_COMMITTEE_COMMENT:
 					//check what the returns
