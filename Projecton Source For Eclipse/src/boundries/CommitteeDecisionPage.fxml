@@ -17,7 +17,7 @@
    <children>
       <ImageView fitHeight="612.0" fitWidth="758.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@2.jpg" />
+            <Image url="@background_image.jpg" />
          </image>
       </ImageView>
       <AnchorPane fx:id="addCommentPane" layoutX="146.0" layoutY="183.0" prefHeight="316.0" prefWidth="565.0" visible="false">
@@ -34,7 +34,7 @@
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/refresh_symbol.jpg" />
+                        <Image url="@refresh_symbol.jpg" />
                      </image>
                   </ImageView>
                </graphic>
@@ -59,70 +59,70 @@
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/home.png" />
+                        <Image url="@home.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnAnalysisReport" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadAnalysisReportPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/analysis_image.png" />
+                        <Image url="@analysis_image.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnAddComment" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadAddCommentPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Add Comment" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/upload_request_image.png" />
+                        <Image url="@upload_request_image.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnCommitteeDirector" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadCommitteeDirectorPage" prefHeight="69.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Committee Director">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/supervisor_716246.png" />
+                        <Image url="@supervisor.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="btnTimeExtension" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadTimeExtensionPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon-clock-21.jpg" />
+                        <Image url="@icon-clock-21.jpg" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
          </children>
@@ -135,7 +135,7 @@
       <TextArea fx:id="timeRemainingTextAria" layoutX="622.0" layoutY="105.0" prefHeight="38.0" prefWidth="85.0" />
       <Text layoutX="622.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining" />
       <Button fx:id="btnBack" layoutX="21.0" layoutY="548.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
-      <TableView fx:id="requestInfoTable" layoutX="207.0" layoutY="105.0" prefHeight="78.0" prefWidth="359.0">
+      <TableView fx:id="requestInfoTable" layoutX="207.0" layoutY="105.0" prefHeight="78.0" prefWidth="366.0">
          <columns>
             <TableColumn fx:id="requestIdColumn" prefWidth="75.0" text="ID" />
             <TableColumn fx:id="descriptionColumn" prefWidth="283.0" text="Description" />
@@ -145,7 +145,7 @@
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../resources/logOut.png" />
+                  <Image url="@logout_symbol.png" />
                </image>
             </ImageView>
          </graphic>
