@@ -15,6 +15,7 @@ public enum SqlQueryType {
 	SELECT_CHANGE_REQUEST_BY_ID(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_CHANGE_REQUEST_BY_ID(SqlExecutionType.UPDATE_QUERY),
 	SELECT_COMMENTS_BY_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
+	INSERT_NEW_COMMITTEE_COMMENT(SqlExecutionType.UPDATE_QUERY),
 	/* Number of queries */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY); 
 

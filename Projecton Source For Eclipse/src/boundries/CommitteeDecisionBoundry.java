@@ -1,5 +1,6 @@
 package boundries;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -18,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
@@ -27,155 +30,178 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-public class CommitteeDecisionBoundry implements Initializable{
+public class CommitteeDecisionBoundry implements Initializable {
 
-    @FXML
-    private AnchorPane addCommentPane;
-    @FXML
-    private AnchorPane committeeDirectorPane;
-    
-    @FXML
-    private Button btnHomePage;
-    @FXML
-    private Button btnAnalysisReport;
-    @FXML
-    private Button btnAddComment;
-    @FXML
-    private Button btnCommitteeDirector;
-    @FXML
-    private Button btnTimeExtension;
-    @FXML
-    private Button btnSubmitComment;
-    @FXML
-    private Button btnRefreshTable;
-    @FXML
-    private Button btnBack;
-    @FXML
-    private Button btnSendDecision;
-    @FXML
-    private Button btnLogout;
-    
-    //Add comment table
-    @FXML
-    private TableView<CommitteeComment> commentTable_addComment;
-    @FXML
-    private TableColumn<CommitteeComment, Integer> employeeIdAddColumn;
-    @FXML
-    private TableColumn<CommitteeComment, String> commentAddColumn;
+	@FXML
+	private AnchorPane addCommentPane;
+	@FXML
+	private AnchorPane committeeDirectorPane;
 
-    //request details table
-    @FXML
-    private TableView<ChangeRequest> requestInfoTable;
-    @FXML
-    private TableColumn<ChangeRequest, Integer> requestIdColumn;
-    @FXML
-    private TableColumn<ChangeRequest, String> descriptionColumn;
+	@FXML
+	private Button btnHomePage;
+	@FXML
+	private Button btnAnalysisReport;
+	@FXML
+	private Button btnAddComment;
+	@FXML
+	private Button btnCommitteeDirector;
+	@FXML
+	private Button btnTimeExtension;
+	@FXML
+	private Button btnSubmitComment;
+	@FXML
+	private Button btnRefreshTable;
+	@FXML
+	private Button btnBack;
+	@FXML
+	private Button btnSendDecision;
+	@FXML
+	private Button btnLogout;
 
-    //comment director table
-    @FXML
-    private TableView<CommitteeComment> commentTabelDirector;
-    @FXML
-    private TableColumn<CommitteeComment, Integer> employeeIdDirectorColumn;
-    @FXML
-    private TableColumn<CommitteeComment, String> commentDirectorColumn;
-    
-    @FXML
-    private TextField addComentTextField;
+	// Add comment table
+	@FXML
+	private TableView<CommitteeComment> commentTable_addComment;
+	@FXML
+	private TableColumn<CommitteeComment, Integer> employeeIdAddColumn;
+	@FXML
+	private TableColumn<CommitteeComment, String> commentAddColumn;
 
-    @FXML
-    private TextArea timeRemainingTextAria;
+	// request details table
+	@FXML
+	private TableView<ChangeRequest> requestInfoTable;
+	@FXML
+	private TableColumn<ChangeRequest, Integer> requestIdColumn;
+	@FXML
+	private TableColumn<ChangeRequest, String> descriptionColumn;
 
-    @FXML
-    private ComboBox<String> decisionComboBox;
+	// comment director table
+	@FXML
+	private TableView<CommitteeComment> commentTabelDirector;
+	@FXML
+	private TableColumn<CommitteeComment, Integer> employeeIdDirectorColumn;
+	@FXML
+	private TableColumn<CommitteeComment, String> commentDirectorColumn;
 
-   private CommitteDecisionController myController= new CommitteDecisionController(this);
-   private ChangeRequest currentChangeRequest;
-   ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
-   ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
-   
-   
-   public void setCurrentChangeRequest(ChangeRequest currentChangeRequest) {
-	this.currentChangeRequest = currentChangeRequest;
-   }
+	@FXML
+	private TextField addComentTextField;
 
-   @FXML
-   void loadAddCommentPage(MouseEvent event) {
-	   addCommentPane.setVisible(true);
-	   committeeDirectorPane.setVisible(false);
-	   myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
-   }
-    
-    @FXML
-    void loadAnalysisReportPage(MouseEvent event) {
-    	
-    }
+	@FXML
+	private TextArea timeRemainingTextAria;
 
-    @FXML
-    void loadCommitteeDirectorPage(MouseEvent event) {
-    	addCommentPane.setVisible(false);
-    	committeeDirectorPane.setVisible(true);
-    	myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
-    }
+	@FXML
+	private ComboBox<String> decisionComboBox;
 
-    @FXML
-    void loadHomePage(MouseEvent event) {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	private CommitteDecisionController myController = new CommitteDecisionController(this);
+	private ChangeRequest currentChangeRequest;
+	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
+	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
+
+	public void setCurrentChangeRequest(ChangeRequest currentChangeRequest) {
+		this.currentChangeRequest = currentChangeRequest;
+	}
+
+	@FXML
+	void loadAddCommentPage(MouseEvent event) {
+		addCommentPane.setVisible(true);
+		committeeDirectorPane.setVisible(false);
+		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+	}
+
+	@FXML
+	void loadAnalysisReportPage(MouseEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
+			Parent root;
+			root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@FXML
+	void loadCommitteeDirectorPage(MouseEvent event) {
+		addCommentPane.setVisible(false);
+		committeeDirectorPane.setVisible(true);
+		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+	}
+
+	@FXML
+	void loadHomePage(MouseEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
-    }
+	}
 
-    @FXML
-    void loadPreviousPage(MouseEvent event) {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	@FXML
+	void loadPreviousPage(MouseEvent event) {
+		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
-    }
+	}
 
-    @FXML
-    void loadTimeExtensionPage(MouseEvent event) {
-    	
-    }
+	@FXML
+	void loadTimeExtensionPage(MouseEvent event) {
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
+			Parent root;
+			root = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-    @FXML
-    void refreshTableDetails(MouseEvent event) {
-    	myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
-    }
+	}
 
-    @FXML
-    void sendDirectorDecision(MouseEvent event) {
-    	switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
-    	case "Approve":
-    		break;
-    	case "Deny":
-    		break;
-    	case "more information":
-    		break;
-    	default:
-    		break;
-    	}
+	@FXML
+	void refreshTableDetails(MouseEvent event) {
+		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+	}
 
-    }
+	@FXML
+	void sendDirectorDecision(MouseEvent event) {
+		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
+		case "Approve":
+			// move to the next step
+			break;
+		case "Deny":
+			// move to closing step
+			break;
+		case "More information":
+			// ?
+			break;
+		default:
+			break;
+		}
 
-    @FXML
-    void submitComment(MouseEvent event) {
-    	//take the comment from the text field and insert to sql table
-    }
+	}
 
-    @FXML
-    void userLogout(MouseEvent event) {
-    	/*TODO: Remove user from connected list */
-    	ProjectFX.currentUser = null;
-		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	@FXML
+	void submitComment(MouseEvent event) {
+		CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
+				ProjectFX.currentUser.getUserID(), addComentTextField.getText());
+		myController.insertNewCommentToDB(newComment);
+	}
+
+	@FXML
+	void userLogout(MouseEvent event) {
+		ProjectFX.currentUser = null;
+		((Node) event.getSource()).getScene().getWindow().hide(); 		// hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
-    }
-    
-    public void handleCommitteeCommentResult(ArrayList<CommitteeComment> resultList) {
-    	commentList.clear();
-    	if(!resultList.isEmpty()) {
-    		commentList.addAll(resultList);
-    		commentTable_addComment.setItems(commentList);
-    		commentTabelDirector.setItems(commentList);
-    	}
-    }
+	}
+
+	public void handleCommitteeCommentResult(ArrayList<CommitteeComment> resultList) {
+		commentList.clear();
+		if (!resultList.isEmpty()) {
+			commentList.addAll(resultList);
+			commentTable_addComment.setItems(commentList);
+			commentTabelDirector.setItems(commentList);
+		}
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -186,26 +212,33 @@ public class CommitteeDecisionBoundry implements Initializable{
 		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		
+		requestList.add(currentChangeRequest);
+		requestInfoTable.setItems(requestList);
+		
 		decisionComboBox.getItems().add("Approve");
 		decisionComboBox.getItems().add("Deny");
 		decisionComboBox.getItems().add("More information");
-		
+
+		// initialize timeRemainingTextAria
+
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
-		btnCommitteeDirector.setVisible(false);;
-	    btnTimeExtension.setVisible(false);
-	    
-		switch (ProjectFX.currentUser.getPermission()){
+		btnCommitteeDirector.setVisible(false);
+		;
+		btnTimeExtension.setVisible(false);
+
+		switch (ProjectFX.currentUser.getPermission()) {
 		case "COMMITTEE_MEMBER":
 			break;
 		case "COMMITTEE_DIRECTOR":
-			btnCommitteeDirector.setVisible(true);;
-		    btnTimeExtension.setVisible(true);
+			btnCommitteeDirector.setVisible(true);
+			;
+			btnTimeExtension.setVisible(true);
 			break;
 		default:
 			break;
 		}
-		
+
 	}
 
 }
