@@ -2,6 +2,7 @@ package controllers;
 
 import java.io.IOException;
 
+import boundries.DataInitializable;
 import boundries.ProjectFX;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -34,14 +35,12 @@ public class PagingController {
 			Scene scene = new Scene(root);			
 			ProjectFX.mainStage.setScene(scene);		
 			ProjectFX.mainStage.show();
-			Boundary boundary = loader.getController();		
+			DataInitializable boundary = loader.getController();		
 			boundary.initData(obj);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 
 }

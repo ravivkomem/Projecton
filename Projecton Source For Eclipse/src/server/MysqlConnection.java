@@ -135,6 +135,9 @@ public class MysqlConnection {
     			+ "WHERE requestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]="INSERT INTO `committee_comment`(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    			"SELECT ChangeRequestID, CurrentStep, DesiredChangeDescription, SelectedSubsystem FROM icm.change_request "
+    			+ "WHERE HandlerUserName = ?";
     }
     
 }

@@ -93,7 +93,15 @@ public class WorkStationBoundary implements Initializable{
 
     @FXML
     void refreshStation(ActionEvent event) {
+    	Toast.makeText(ProjectFX.mainStage, refreshStationButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    }
 
+    @FXML
+    void userLogout(MouseEvent event) {
+    	/*TODO: Remove user from connected list */
+    	ProjectFX.currentUser = null;
+		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
     }
 
     /* public methods */
