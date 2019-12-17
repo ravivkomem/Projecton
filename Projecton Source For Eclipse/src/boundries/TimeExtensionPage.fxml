@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="531.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/2.jpg" />
+            <Image url="@2.jpg" />
          </image>
       </ImageView>
       <Text layoutX="154.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Extension" wrappingWidth="222.453125">
@@ -20,24 +20,23 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="52.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional day">
+      <Text layoutX="52.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional day">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text layoutX="52.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reason" wrappingWidth="93.13671875">
+      <Text layoutX="52.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reason:" wrappingWidth="93.13671875">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="394.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" wrappingWidth="83.99999925494194">
+      <Text fill="RED" layoutX="376.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" wrappingWidth="83.99999925494194">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <TextField layoutX="213.0" layoutY="90.0" prefHeight="25.0" prefWidth="84.0" />
-      <TextField layoutX="153.0" layoutY="137.0" prefHeight="59.0" prefWidth="146.0" />
-      <Button layoutX="235.0" layoutY="253.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="63.0" text="Submit" />
-      <Button layoutX="47.0" layoutY="461.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Back" />
+      <TextField layoutX="213.0" layoutY="134.0" prefHeight="25.0" prefWidth="84.0" />
+      <TextField layoutX="161.0" layoutY="228.0" prefHeight="59.0" prefWidth="146.0" />
+      <Button layoutX="234.0" layoutY="338.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="63.0" text="Submit" />
    </children>
 </AnchorPane>

@@ -133,6 +133,8 @@ public class MysqlConnection {
     			+ "WHERE UserName = ? AND Password = ?";
     	sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
     			+ "WHERE requestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]="INSERT INTO `committee_comment`(requestId,employeeId,comment)"
+    			+ " VALUES (?,?,?)";
     }
     
 }

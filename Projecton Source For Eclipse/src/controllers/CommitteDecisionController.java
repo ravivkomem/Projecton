@@ -30,6 +30,16 @@ public class CommitteDecisionController extends BasicController{
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	public void insertNewCommentToDB(CommitteeComment newComment) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newComment.getRequestId());
+		varArray.add(newComment.getEmployeeId());
+		varArray.add(newComment.getComment());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -42,7 +52,10 @@ public class CommitteDecisionController extends BasicController{
 					this.unsubscribeFromClientDeliveries();
 					myBoundry.handleCommitteeCommentResult(resultList);
 					break;
-				
+				case INSERT_NEW_COMMITTEE_COMMENT:
+					//check what the returns
+					this.unsubscribeFromClientDeliveries();
+					break;
 				default:
 					break;
 			}
