@@ -23,9 +23,23 @@ public class PagingController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-//		BasicController studentFormController = loader.getController();		
-//		studentFormController.loadStudent(Test.students.get(itemIndex));
+	}
+	
+	public void loadBoundary (String path, Object obj)
+	{
+		FXMLLoader loader = new FXMLLoader();
+		Pane root;
+		try {
+			root = loader.load(getClass().getResource(path));
+			Scene scene = new Scene(root);			
+			ProjectFX.mainStage.setScene(scene);		
+			ProjectFX.mainStage.show();
+			Boundary boundary = loader.getController();		
+			boundary.initData(obj);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}

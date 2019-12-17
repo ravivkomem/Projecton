@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.MenuBoundary">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.MenuBoundary">
    <children>
       <BorderPane prefHeight="550.0" prefWidth="135.0" style="-fx-background-color: white;" />
       <Text fx:id="helloUserTextField" layoutX="158.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello User" textAlignment="CENTER">
@@ -49,38 +49,38 @@
                <children>
                   <ImageView fx:id="menuImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/btnBreak.png" />
+                        <Image url="@btnBreak.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="uploadRequestImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/btnBreak.png" />
+                        <Image url="@btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="uploadRequestButton" contentDisplay="TOP" layoutX="3.0" layoutY="91.0" mnemonicParsing="false" onAction="#loadUploadRequestPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Upload Request" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/upload_request_image.png" />
+                              <Image url="@uploadRequest.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <ImageView fx:id="myRequestsImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/btnBreak.png" />
+                        <Image url="@btnBreak.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="workStation_DepartmentHeadImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="344.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/btnBreak.png" />
+                        <Image url="@btnBreak.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="viewMyRequestsButton" contentDisplay="TOP" layoutX="3.0" layoutY="174.0" mnemonicParsing="false" onAction="#loadMyRequestsPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="My Requests" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/my_requests_image.png" />
+                              <Image url="@my_requests_image.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -89,14 +89,14 @@
                      <graphic>
                         <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/work_station_image.png" />
+                              <Image url="@work_station_image.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
                   <ImageView fx:id="supervisorImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="48.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/btnBreak.png" />
+                        <Image url="@btnBreak.png" />
                      </image>
                   </ImageView>
                   <Text fill="#5a5e65" layoutX="37.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
@@ -117,7 +117,7 @@
                      <graphic>
                         <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/tech_manage_image.png" />
+                              <Image url="@tech_manage_image.png" />
                            </image>
                         </ImageView>
                      </graphic>
