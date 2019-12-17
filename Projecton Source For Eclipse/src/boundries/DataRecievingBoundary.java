@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
 
-public class BasicBoundary implements Initializable {
+public class DataRecievingBoundary implements Initializable {
 
 	public void loadPage()
 	{
