@@ -110,7 +110,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
 		addCommentPane.setVisible(true);
-		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
@@ -132,7 +132,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 	void loadCommitteeDirectorPage(MouseEvent event) {
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(true);
-		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
@@ -144,8 +144,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
-		// window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -167,7 +166,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 
 	@FXML
 	void refreshTableDetails(MouseEvent event) {
-		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML

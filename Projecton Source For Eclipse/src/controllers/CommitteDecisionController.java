@@ -25,7 +25,7 @@ public class CommitteDecisionController extends BasicController{
 		this.myBoundary=myBoundary;
 	}
 	
-	public void getCommentsByRequestId(String id) {
+	public void getCommentsByRequestId(int id) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(id);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID, varArray);
