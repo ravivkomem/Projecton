@@ -116,7 +116,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	/*incase the user didnt fill all the required fields*/
 	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
-	    		/*why crush ? */
+	    		//check the case while all the fields are empty 
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 	    	}
 	    	/*while the required fields are filled properly create a new change request and send to the controller*/
@@ -126,16 +126,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
 	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
 	    			myController.insertNewChangeRequest(newChangeRequest);
-	    			Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
-	    			/*TimeUnit.SECONDS.sleep(2);
-	    			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-	    			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());*/
+	    			//Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
 	    		}
-	    	
-	    	
-	    	
-	    	//changeRequestIdField.setText()
-	    	//newChangeRequest.getChangeRequestID()
 	    }
 	    public void printMessageToUserUploadedNewChangeRequest(int affectedRows){
 	    	if (affectedRows==1)

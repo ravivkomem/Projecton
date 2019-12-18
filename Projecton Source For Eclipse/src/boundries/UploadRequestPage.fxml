@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="601.0" fitWidth="758.0">
          <image>
-            <Image url="@2.jpg" />
+            <Image url="@background_image.jpg" />
          </image>
       </ImageView>
       <Text layoutX="266.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload Change Request" textAlignment="CENTER">

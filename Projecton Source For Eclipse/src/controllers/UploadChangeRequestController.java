@@ -63,12 +63,25 @@ private UploadChangeRequestBoundary myBoundary;
 					myBoundary.printMessageToUserUploadedNewChangeRequest(affectedRows);
 					/* If 1 then do another query for the new change request ID */
 					break;
+				case SELECT_NEW_CHANGE_REQUEST_ID:
+					affectedRows = (Integer) (result.getResultData().get(0).get(0));
+					myBoundary.printMessageToUserUploadedNewChangeRequest(affectedRows);
+					
 				
 				default:
 					break;
 			}
 		});
 		return;
+		
+	}
+	public void getIdOfNewChangeRequestUploaded(ChangeRequest changerequest)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changerequest.getInitiator());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_NEW_CHANGE_REQUEST_ID, varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 		
 	}
 
