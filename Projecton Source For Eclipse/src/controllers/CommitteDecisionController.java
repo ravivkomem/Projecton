@@ -55,9 +55,11 @@ public class CommitteDecisionController extends BasicController{
 					myBoundary.handleCommitteeCommentResultForTable(resultList);
 					break;
 				case INSERT_NEW_COMMITTEE_COMMENT:
-					//check what the returns
+					/* insert query return only one int value */
+					int affectedRows;
+					affectedRows = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
-					myBoundary.committeeCommentInsertToDBSuccessfully();
+					myBoundary.committeeCommentInsertToDBSuccessfully(affectedRows);
 					break;
 				default:
 					break;
