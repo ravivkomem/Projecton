@@ -11,22 +11,28 @@ import entities.ChangeRequest;
 import entities.ChangeRequestNew;
 import entities.CommitteeComment;
 import javafx.application.Platform;
+import javafx.scene.control.Alert.AlertType;
+import java.math.BigInteger; 
 
 public class UploadChangeRequestController extends BasicController {
 
-private UploadChangeRequestBoundary myBoundary;
+	private UploadChangeRequestBoundary myBoundary;
+	private ChangeRequest currentChangeRequest;
 	
-	public UploadChangeRequestController(UploadChangeRequestBoundary myBoundry){
+	public UploadChangeRequestController(UploadChangeRequestBoundary myBoundary){
 		this.myBoundary=myBoundary;
 	}
 	/*building the querey and update the database */
 	public void insertNewChangeRequest(ChangeRequest newchangerequest)
 	{
-		/*incase the user didnt fill the comment field or upload any extra documents*/
-		if (newchangerequest.getChangeRequestComment().equalsIgnoreCase(""))
-			newchangerequest.setChangeRequestComment(" ");
-		if (newchangerequest.getChangeRequestDocuments().equalsIgnoreCase(""))
-			newchangerequest.setChangeRequestDocuments(" ");
+		currentChangeRequest = newchangerequest;
+		/*TODO: Function to get list of all information engineer (INFORMATION_ENGINEER, SUPERVISOR,
+		 * COMMITTE_MEMBER, COMMITTEE_DIRECTOR)
+		 * Set to change request handler from Random of list (0 to list.size -1 )
+		 */
+		
+		
+		/*TODO: all this in another function after you recieved handler name*/
 		ArrayList<Object> varArray = new ArrayList<>();
 		/*add current step field*/
 		varArray.add(newchangerequest.getInitiator());
@@ -50,39 +56,26 @@ private UploadChangeRequestBoundary myBoundary;
 	
 	@Override
 	public void getResultFromClient(SqlResult result) {
+		
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
 				case INSERT_NEW_CHANGE_REQUEST:
+					int changeRequestId = -1;
 					this.unsubscribeFromClientDeliveries();
-					int affectedRows;
-					/* At most only one result, because update query only return one value */
-					affectedRows = (Integer) (result.getResultData().get(0).get(0));
-					/*TODO: If 0 then display Error message */
-					//if (affectedRows==0)
-					myBoundary.printMessageToUserUploadedNewChangeRequest(affectedRows);
-					/* If 1 then do another query for the new change request ID */
+					/*TODO: Check if result is empty ---> something wrong happend */
+					if (true /*NOT EMPTY */)
+					{
+						changeRequestId = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
+					}
+					myBoundary.displayChangeRequestId(changeRequestId);
 					break;
-				case SELECT_NEW_CHANGE_REQUEST_ID:
-					affectedRows = (Integer) (result.getResultData().get(0).get(0));
-					myBoundary.printMessageToUserUploadedNewChangeRequest(affectedRows);
-					
 				
 				default:
 					break;
 			}
 		});
-		return;
-		
-	}
-	public void getIdOfNewChangeRequestUploaded(ChangeRequest changerequest)
-	{
-		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(changerequest.getInitiator());
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_NEW_CHANGE_REQUEST_ID, varArray);
-		this.subscribeToClientDeliveries();		//subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		
+		return;	
 	}
 
 }

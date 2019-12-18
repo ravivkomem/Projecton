@@ -8,6 +8,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.concurrent.TimeUnit;
@@ -19,6 +20,7 @@ import controllers.DemoLandingController;
 import controllers.PagingController;
 import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
+import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,7 +28,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -74,9 +79,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    
 	    private UploadChangeRequestController myController= new UploadChangeRequestController(this);
 	    private ChangeRequest newChangeRequest;
+	    private final String CURRENT_STEP = "ANALAYZER_AUTO_APPOINT";
 	    java.sql.Date uploadChangeRequestDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-	 
-	    
 	    
 
 	    @FXML
@@ -86,7 +90,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 
 	    @FXML
 	    void backToHomePage(MouseEvent event) {
-	    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	    	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
 	    }
 
@@ -94,13 +98,13 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    void logoutUser(MouseEvent event) {
 	    	/*TODO: Remove user from connected list */
 	    	ProjectFX.currentUser = null;
-			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 
 	    @FXML
 	    /*Create new change request via boundray page */
-	    void uploadNewChangeRequest(MouseEvent event) throws InterruptedException {
+	    void uploadNewChangeRequest(MouseEvent event) {
 
 	    	String newChangeRequestSelectedSystem= subSystemComboBox.getSelectionModel().getSelectedItem();
 	    	String newCurrentStateDescription= currentStateDescriptionField.getText();
@@ -111,8 +115,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newChangeRequestDocuments = uploadedFileNameField.getText();
 	    	String newChangeRequestDate = uploadChangeRequestDate.toString();
 	    	String newChangeRequestStatus= "Active";
-	    	String HandlerUserName="Lior";//TODO needs to be random
-	    	String newCurrentStep= "Analysis";
+	    	String HandlerUserName="XXXX";//TODO needs to be random
+	    	String newCurrentStep= CURRENT_STEP;
 	    	/*incase the user didnt fill all the required fields*/
 	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
@@ -129,21 +133,25 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    			//Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
 	    		}
 	    }
-	    public void printMessageToUserUploadedNewChangeRequest(int affectedRows){
-	    	if (affectedRows==1)
+	    public void displayChangeRequestId(int changeRequestId){
+	    	if(changeRequestId == -1)
 	    	{
-	    		Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
-	    		//newChangeRequest.getChangeRequestID()
-	    		//Integer id=newChangeRequest.getChangeRequestID();
-	    		//System.out.println(id.toString());
+	    		Toast.makeText(ProjectFX.mainStage, "The change request did not upload successfully", 1500, 500, 500);
 	    	}
 	    	else
 	    	{
-	    		Toast.makeText(ProjectFX.mainStage, "The change request did not upload successfully", 1500, 500, 500);
-	    		//TODO: what else ?
-	    		
-	    	}
+	    		message(AlertType.INFORMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");
+	    	}	
 	    }
+	    
+	    
+		public static Optional<ButtonType> message(AlertType alert, String msg, String mess) {
+			Alert alert2 = new Alert(alert);
+			alert2.setTitle(msg);
+			alert2.setHeaderText(mess);
+			return alert2.showAndWait();
+		}
+	    
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			subSystemComboBox.getItems().add("Lecturer Information Station");
@@ -159,7 +167,6 @@ public class UploadChangeRequestBoundary implements Initializable {
 			
 		}
 		
-
 	}
 
 	
