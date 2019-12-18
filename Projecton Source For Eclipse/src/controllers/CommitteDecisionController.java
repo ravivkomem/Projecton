@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
+import assets.Toast;
 import boundries.CommitteeDecisionBoundary;
+import boundries.ProjectFX;
 import client.ClientConsole;
 import entities.CommitteeComment;
 import javafx.application.Platform;
@@ -55,6 +57,7 @@ public class CommitteDecisionController extends BasicController{
 				case INSERT_NEW_COMMITTEE_COMMENT:
 					//check what the returns
 					this.unsubscribeFromClientDeliveries();
+					myBoundary.committeeCommentInsertToDBSuccessfully();
 					break;
 				default:
 					break;

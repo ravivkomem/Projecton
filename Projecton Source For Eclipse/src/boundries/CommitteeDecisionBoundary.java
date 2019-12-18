@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.sun.prism.impl.ps.CachingEllipseRep;
 
 import assets.ProjectPages;
+import assets.Toast;
 import controllers.CommitteDecisionController;
 import controllers.LoginController;
 import entities.ChangeRequest;
@@ -205,6 +206,10 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 			commentTable_addComment.setItems(commentList);
 			commentTabelDirector.setItems(commentList);
 		}
+	}
+	
+	public void committeeCommentInsertToDBSuccessfully() {
+		Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
 	}
 
 	@Override

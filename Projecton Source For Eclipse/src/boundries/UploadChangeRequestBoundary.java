@@ -101,8 +101,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    @FXML
 	    /*Create new change request via boundray page */
 	    void uploadNewChangeRequest(MouseEvent event) throws InterruptedException {
-	    	while (true)
-	    	{
+
 	    	String newChangeRequestSelectedSystem= subSystemComboBox.getSelectionModel().getSelectedItem();
 	    	String newCurrentStateDescription= currentStateDescriptionField.getText();
 	    	String newChangeRequestDescription = changeRequestDescriptionField.getText();
@@ -115,7 +114,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String HandlerUserName="Lior";//TODO needs to be random
 	    	String newCurrentStep= "Analysis";
 	    	/*incase the user didnt fill all the required fields*/
-	    	if (newChangeRequestSelectedSystem.equalsIgnoreCase("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
+	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
 	    		/*why crush ? */
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
@@ -131,10 +130,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    			/*TimeUnit.SECONDS.sleep(2);
 	    			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 	    			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());*/
-	    			break;
 	    		}
 	    	
-	    	}
 	    	
 	    	
 	    	//changeRequestIdField.setText()
@@ -145,8 +142,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
 	    		//newChangeRequest.getChangeRequestID()
-	    		Integer id=newChangeRequest.getChangeRequestID();
-	    		System.out.println(id.toString());
+	    		//Integer id=newChangeRequest.getChangeRequestID();
+	    		//System.out.println(id.toString());
 	    	}
 	    	else
 	    	{
