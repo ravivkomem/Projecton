@@ -112,27 +112,44 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newChangeRequestDate = uploadChangeRequestDate.toString();
 	    	String newChangeRequestStatus= "Active";
 	    	String HandlerUserName="Lior";//TODO needs to be random
+	    	String newCurrentStep= "Analysis";
 	    	/*incase the user didnt fill all the required fields*/
 	    	if (newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 	    	}
-	    	/*while the required fields are filled create a new change request and send to the controller*/
+	    	/*while the required fields are filled properly create a new change request and send to the controller*/
 	    	else
 	    		{
 	    	newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
 	    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
-	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName);
+	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
+	    			myController.insertNewChangeRequest(newChangeRequest);
+	    			//Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
 	    			break;
 	    		}
-	    	Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
+	    	
 	    	}
-	    	myController.insertNewChangeRequest(newChangeRequest);
+	    	
 	    	
 	    	//changeRequestIdField.setText()
 	    	//newChangeRequest.getChangeRequestID()
 	    }
-
+	    public void printMessageToUserUploadedNewChangeRequest(int affectedRows){
+	    	if (affectedRows==1)
+	    	{
+	    		Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
+	    		//newChangeRequest.getChangeRequestID()
+	    		Integer id=newChangeRequest.getChangeRequestID();
+	    		System.out.println(id.toString());
+	    	}
+	    	else
+	    	{
+	    		Toast.makeText(ProjectFX.mainStage, "The change request did not upload successfully", 1500, 500, 500);
+	    		//TODO: what else ?
+	    		
+	    	}
+	    }
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			subSystemComboBox.getItems().add("Lecturer Information Station");
