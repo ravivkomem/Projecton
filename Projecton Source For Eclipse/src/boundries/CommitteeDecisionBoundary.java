@@ -151,6 +151,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
+		//give time extension page change request and stuff
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
 			Parent root;
@@ -179,7 +180,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 			// move to closing step
 			break;
 		case "More information":
-			// ?
+			// move to analyzer page
 			break;
 		default:
 			break;

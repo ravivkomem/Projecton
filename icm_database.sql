@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `analysis_report`
+--
+
+DROP TABLE IF EXISTS `analysis_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `analysis_report` (
+  `AnalysisReportID` int(11) NOT NULL,
+  `ChangeRequestID` varchar(45) NOT NULL,
+  `Header` varchar(45) NOT NULL,
+  `ChangeSpecifications` varchar(45) NOT NULL,
+  `Comments` varchar(45) NOT NULL,
+  PRIMARY KEY (`AnalysisReportID`,`ChangeRequestID`),
+  UNIQUE KEY `AnalysisReportID_UNIQUE` (`AnalysisReportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analysis_report`
+--
+
+LOCK TABLES `analysis_report` WRITE;
+/*!40000 ALTER TABLE `analysis_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `analysis_report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `analysis_step`
 --
 
@@ -108,6 +135,34 @@ LOCK TABLES `committee_comment` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `committee_step`
+--
+
+DROP TABLE IF EXISTS `committee_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `committee_step` (
+  `CommitteeStepId` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestId` int(11) NOT NULL,
+  `HandlerUserName` varchar(45) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EstimatedEndDate` date DEFAULT NULL,
+  `EndDate` date DEFAULT NULL,
+  PRIMARY KEY (`CommitteeStepId`),
+  UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `committee_step`
+--
+
+LOCK TABLES `committee_step` WRITE;
+/*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `execution_step`
 --
 
@@ -190,6 +245,35 @@ INSERT INTO `requirements` VALUES (1,'Raviv','Moodle','Bad','Make it Good','Acti
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tester_step`
+--
+
+DROP TABLE IF EXISTS `tester_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tester_step` (
+  `TesterStepId` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestId` int(11) NOT NULL,
+  `HandlerUserName` varchar(45) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EstimatedEndDate` date DEFAULT NULL,
+  `EndDate` date DEFAULT NULL,
+  `TesterFailReport` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`TesterStepId`),
+  UNIQUE KEY `TesterStepId_UNIQUE` (`TesterStepId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tester_step`
+--
+
+LOCK TABLES `tester_step` WRITE;
+/*!40000 ALTER TABLE `tester_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tester_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `time_extension`
 --
 
@@ -261,4 +345,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-18 21:30:10
+-- Dump completed on 2019-12-18 22:00:19
