@@ -142,7 +142,7 @@ public class MysqlConnection {
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= "INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
-    			+ "Status,HandlerUserName,UploadedFiles) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    			+ "Status,CurrentStep,HandlerUserName,UploadedFiles) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE HandlerUserName = ?";

@@ -37,7 +37,7 @@ public class ChangeRequest {
 	/*Constructor for uploading new change request*/
 	public ChangeRequest(String initiator, String selectSysystem, String currentStateDiscription,
 			String changeRequestDescription, String changeRequestComment, String changeRequestDocuments,
-			String changeRequestExplanation,String changeRequestDate,String changeRequestStatus,String handler) {
+			String changeRequestExplanation,String changeRequestDate,String changeRequestStatus,String handler,String changeRequestStep) {
 		super();
 		this.initiator = initiator;
 		this.selectSysystem = selectSysystem;
@@ -49,6 +49,7 @@ public class ChangeRequest {
 		this.changeRequestDate=changeRequestDate;
 		this.changeRequestStatus=changeRequestStatus;
 		this.handler=handler;
+		this.changeRequestStep=changeRequestStep;
 	}
 
 

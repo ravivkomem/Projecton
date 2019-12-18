@@ -107,13 +107,14 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
-		addCommentPane.setVisible(true);
 		committeeDirectorPane.setVisible(false);
+		addCommentPane.setVisible(true);
 		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
 	}
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
+		//give analysis report page the change request id to show the correct report
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
 			Parent root;
@@ -135,13 +136,13 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		//((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
 	}
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		//((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -193,11 +194,11 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.currentUser = null;
-		((Node) event.getSource()).getScene().getWindow().hide(); 		// hiding primary window
+		//((Node) event.getSource()).getScene().getWindow().hide(); 		// hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
-	public void handleCommitteeCommentResult(ArrayList<CommitteeComment> resultList) {
+	public void handleCommitteeCommentResultForTable(ArrayList<CommitteeComment> resultList) {
 		commentList.clear();
 		if (!resultList.isEmpty()) {
 			commentList.addAll(resultList);
