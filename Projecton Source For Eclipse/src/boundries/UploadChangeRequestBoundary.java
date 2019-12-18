@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import assets.ProjectPages;
 import assets.Toast;
@@ -80,7 +81,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
-
+	    	
 	    }
 
 	    @FXML
@@ -99,7 +100,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 
 	    @FXML
 	    /*Create new change request via boundray page */
-	    void uploadNewChangeRequest(MouseEvent event) {
+	    void uploadNewChangeRequest(MouseEvent event) throws InterruptedException {
 	    	while (true)
 	    	{
 	    	String newChangeRequestSelectedSystem= subSystemComboBox.getSelectionModel().getSelectedItem();
@@ -114,18 +115,22 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String HandlerUserName="Lior";//TODO needs to be random
 	    	String newCurrentStep= "Analysis";
 	    	/*incase the user didnt fill all the required fields*/
-	    	if (newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
+	    	if (newChangeRequestSelectedSystem.equalsIgnoreCase("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
+	    		/*why crush ? */
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 	    	}
 	    	/*while the required fields are filled properly create a new change request and send to the controller*/
 	    	else
 	    		{
-	    	newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
+	    			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
 	    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
 	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
 	    			myController.insertNewChangeRequest(newChangeRequest);
-	    			//Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
+	    			Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
+	    			/*TimeUnit.SECONDS.sleep(2);
+	    			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	    			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());*/
 	    			break;
 	    		}
 	    	

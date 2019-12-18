@@ -22,6 +22,11 @@ private UploadChangeRequestBoundary myBoundary;
 	/*building the querey and update the database */
 	public void insertNewChangeRequest(ChangeRequest newchangerequest)
 	{
+		/*incase the user didnt fill the comment field or upload any extra documents*/
+		if (newchangerequest.getChangeRequestComment().equalsIgnoreCase(""))
+			newchangerequest.setChangeRequestComment(" ");
+		if (newchangerequest.getChangeRequestDocuments().equalsIgnoreCase(""))
+			newchangerequest.setChangeRequestDocuments(" ");
 		ArrayList<Object> varArray = new ArrayList<>();
 		/*add current step field*/
 		varArray.add(newchangerequest.getInitiator());
