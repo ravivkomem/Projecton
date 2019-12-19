@@ -173,13 +173,22 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 	void sendDirectorDecision(MouseEvent event) {
 		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
 		case "Approve":
-			// move to the next step
+			/* move to the next step
+			 * update committee_step
+			 * update execution_step
+			 * update changeRequest table*/ 
 			break;
 		case "Deny":
-			// move to closing step
+			/* move to closing step
+			 * update committee_step
+			 * update close_step
+			 * update changeRequest table*/ 
 			break;
 		case "More information":
-			// move to analyzer page
+			/* move to analyzer step
+			 * update committee_step
+			 * update analyzer_step
+			 * update changeRequest table*/
 			break;
 		default:
 			break;

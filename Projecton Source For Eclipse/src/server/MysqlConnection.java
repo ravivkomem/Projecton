@@ -164,10 +164,14 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     	    	+ "WHERE HandlerUserName = ? AND CurrentStep = 'Analysis'";
-sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
-+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ";
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ";
+    	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
+    			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ";
+    	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
+    			"SELECT UserName FROM icm.user "
+    			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
+    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
     }
     
 }
