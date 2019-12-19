@@ -59,7 +59,7 @@ public class MenuBoundary implements Initializable {
     @FXML
     void loadUploadRequestPage(ActionEvent event) {
     	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		ProjectFX.pagingController.loadBoundray(ProjectPages.UPLOAD_REQUEST_PAGE.getPath());
+		ProjectFX.pagingController.loadBoundary(ProjectPages.UPLOAD_REQUEST_PAGE.getPath());
     }
 
     @FXML
@@ -70,7 +70,7 @@ public class MenuBoundary implements Initializable {
     @FXML
     void loadWorkStationPage(ActionEvent event) {
     	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
+		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
 
     @FXML
@@ -78,7 +78,7 @@ public class MenuBoundary implements Initializable {
     	/*TODO: Remove user from connected list */
     	ProjectFX.currentUser = null;
 		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
 	@Override

@@ -139,13 +139,13 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 	void loadHomePage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
 		// window
-		ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
+		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
+		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
@@ -211,7 +211,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 	void userLogout(MouseEvent event) {
 		ProjectFX.currentUser = null;
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
 	public void handleCommitteeCommentResultForTable(ArrayList<CommitteeComment> resultList) {

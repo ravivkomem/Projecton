@@ -158,12 +158,35 @@ public class MysqlConnection {
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
     			+ "Status,CurrentStep,HandlerUserName,UploadedFiles) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_NOT_COMMITTEE.getCode()] =
     			"SELECT * FROM icm.change_request "
-    			+ "WHERE HandlerUserName = ?";
+    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
+    			+ "AND (CurrentStep = 'ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK') "; /*Tester Step*/
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_MEMBER.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
+    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK' " /*Tester Step*/
+    			+ "OR CurrentStep = 'COMMITTEE_WORK')"; /* Committee Step */
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_DIRECTOR.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
+    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK' " /*Tester Step*/
+    			+ "OR CurrentStep = 'COMMITTEE_WORK' " /* Committee Step */
+    			+ "OR CurrentStep = 'EXECUTION_LEADEAR_SUPERVISOR_APPOINT')"; /* Committee director */
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
-    	    	+ "WHERE HandlerUserName = ? AND CurrentStep = 'Analysis'";
+    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
+    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK')";
+    	sqlArray[SqlQueryType.SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
+    			+ "AND (CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK')";
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ";
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "

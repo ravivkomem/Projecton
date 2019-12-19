@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
-import boundries.LoginPageBoundary;
+import boundries.ProjectFX;
 import boundries.WorkStationBoundary;
 import client.ClientConsole;
 import entities.ChangeRequestNew;
-import entities.User;
 import javafx.application.Platform;
 
 @SuppressWarnings("serial")
@@ -23,21 +22,50 @@ public class WorkStationController extends BasicController{
 		this.myBoundary = workStationBoundary;
 	}
 	
-	public void selectAllChangeRequestByHandlerUserName(String handlerUserName)
+	public void selectAllChangeRequestByHandlerUserName()
 	{
+		SqlQueryType requiredSqlQueryType;
 		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(handlerUserName);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME, varArray);
+		varArray.add(ProjectFX.currentUser.getUserName());
+		
+		switch (ProjectFX.currentUser.getPermission())
+		{
+			case "INFORMATION_ENGINEER":
+			case "SUPERVISOR":
+				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_NOT_COMMITTEE;
+				break;
+			case "COMMITTEE_MEMBER":
+				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_MEMBER;
+				break;
+			case "COMMITTEE_DIRECTOR":
+				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_DIRECTOR;
+				break;
+			
+			default:
+				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_NOT_COMMITTEE;
+				break;
+		}
+		SqlAction sqlAction = new SqlAction(requiredSqlQueryType, varArray);
 		
 		this.subscribeToClientDeliveries();
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	public void selectAnalysisStepChangeRequestByHandlerUserName(String handlerUserName)
+	public void selectAnalysisStepChangeRequestByHandlerUserName()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(handlerUserName);
+		varArray.add(ProjectFX.currentUser.getUserName());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME, varArray);
+		
+		this.subscribeToClientDeliveries();
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
+	public void selectExecutionStepChangeRequestByHandlerUserName()
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(ProjectFX.currentUser.getUserName());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME, varArray);
 		
 		this.subscribeToClientDeliveries();
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
@@ -49,8 +77,11 @@ public class WorkStationController extends BasicController{
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
-				case SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME:
+				case SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_NOT_COMMITTEE:
+				case SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_MEMBER:
+				case SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_DIRECTOR:
 				case SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME:
+				case SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME:
 					ArrayList<ChangeRequestNew> resultChangeRequestList = this.parseResultToChangeRequestList(result);
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.loadTableView(resultChangeRequestList);

@@ -66,7 +66,7 @@ public class LoginPageBoundary implements Initializable{
     		/*TODO: Add user to the logged users list */
     		ProjectFX.currentUser = resultUser;
     		loginLoadingImageView.getScene().getWindow().hide();
-    		ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
+    		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     	}
     }
 

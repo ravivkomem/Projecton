@@ -91,7 +91,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    @FXML
 	    /*move the user back to the home page */
 	    void backToHomePage(MouseEvent event) {
-			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	    }
 
 	    @FXML
@@ -99,7 +99,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    void logoutUser(MouseEvent event) {
 	    	/*TODO: Remove user from connected list */
 	    	ProjectFX.currentUser = null;
-			ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 
 	    @FXML

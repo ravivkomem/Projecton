@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 
 public class PagingController {
 	
-	public void loadBoundray (String path)
+	public void loadBoundary (String path)
 	{
 		FXMLLoader loader = new FXMLLoader();
 		Pane root;
