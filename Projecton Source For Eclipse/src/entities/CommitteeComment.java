@@ -1,15 +1,32 @@
 package entities;
 
 public class CommitteeComment {
+	int commentId;
 	int requestId;
 	int employeeId;
 	String comment;
+	
 	
 	public CommitteeComment(int requestId, int employeeId, String comment) {
 		super();
 		this.requestId = requestId;
 		this.employeeId = employeeId;
 		this.comment = comment;
+	}
+	
+	public CommitteeComment(int commentId, int requestId, int employeeId, String comment) {
+		super();
+		this.commentId = commentId;
+		this.requestId = requestId;
+		this.employeeId = employeeId;
+		this.comment = comment;
+	}
+
+	public int getCommentId() {
+		return commentId;
+	}
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
 	}
 	public int getRequestId() {
 		return requestId;
@@ -29,5 +46,7 @@ public class CommitteeComment {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
+	
 	
 }
