@@ -225,6 +225,7 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//currentChangeRequest=new ChangeRequest(2,"lee", "bad", "good","good", "active", "ido");
 		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));

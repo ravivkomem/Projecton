@@ -72,7 +72,8 @@ public class CommitteDecisionController extends BasicController{
 	private ArrayList<CommitteeComment> changeResultToCommitteeComment(SqlResult result){
 		ArrayList<CommitteeComment> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
-			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(String)a.get(2));
+			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(int)a.get(2),
+					(String)a.get(3));
 			resultList.add(comment);
 		}
 		

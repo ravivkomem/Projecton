@@ -150,7 +150,7 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
     	sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
-    			+ "WHERE requestId = ?";
+    			+ " WHERE requestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
     			"INSERT INTO icm.committee_comment(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
