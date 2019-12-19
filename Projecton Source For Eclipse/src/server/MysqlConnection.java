@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
+
 import assets.*;
 
 public class MysqlConnection {
@@ -66,11 +68,18 @@ public class MysqlConnection {
     public SqlResult getResult(SqlAction sqlAction)
     {
     	SqlResult sqlResult = null;
+    	PreparedStatement ps = null;
     
     	this.connect();
     	try {
-    		
-			PreparedStatement ps = connection.prepareStatement(sqlArray[sqlAction.getActionType().getCode()]);
+    		if (sqlAction.getActionType().getExecutionType() == SqlQueryType.SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID)
+    		{
+    			ps = connection.prepareStatement(sqlArray[sqlAction.getActionType().getCode()], Statement.RETURN_GENERATED_KEYS);
+    		}
+    		else
+    		{
+    			ps = connection.prepareStatement(sqlArray[sqlAction.getActionType().getCode()]);
+    		}
 			for (int i = 1; i<=sqlAction.getActionVars().size(); i++)
 			{
 				/* In Array List we start from 0 */
@@ -105,7 +114,11 @@ public class MysqlConnection {
 				case UPDATE_QUERY:
 					sqlResult = new SqlResult(ps.executeUpdate(), sqlAction.getActionType());
 					break;
-				
+				case INSERT_GET_AUTO_INCREMENT_ID:
+					if (ps.executeUpdate() != 0)
+					{
+						sqlResult = new SqlResult(ps.getGeneratedKeys(), sqlAction.getActionType());
+					}
 				default:
 					break;
 			}
@@ -137,10 +150,12 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
     	sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
-    			+ "WHERE requestId = ?";
-    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]="INSERT INTO icm.committee_comment(requestId,employeeId,comment)"
+    			+ " WHERE requestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
+    			"INSERT INTO icm.committee_comment(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
-    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= "INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
+    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
+    			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
     			+ "Status,CurrentStep,HandlerUserName,UploadedFiles) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =

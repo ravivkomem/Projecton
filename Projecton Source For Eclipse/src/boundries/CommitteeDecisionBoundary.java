@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CommitteeDecisionBoundary implements Initializable , DataInitializable{
+public class CommitteeDecisionBoundary implements Initializable, DataInitializable {
 
 	@FXML
 	private AnchorPane addCommentPane;
@@ -94,12 +94,12 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@FXML
 	private ComboBox<String> decisionComboBox;
-	
-    @FXML
-    private ImageView image3point1;
 
-    @FXML
-    private ImageView image3point2;
+	@FXML
+	private ImageView image3point1;
+
+	@FXML
+	private ImageView image3point2;
 
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
@@ -110,12 +110,12 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
 		addCommentPane.setVisible(true);
-		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
-		//give analysis report page the change request id to show the correct report
+		// give analysis report page the change request id to show the correct report
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
 			Parent root;
@@ -132,23 +132,25 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 	void loadCommitteeDirectorPage(MouseEvent event) {
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(true);
-		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		//((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
+		// window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
 	}
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		//((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
+		//give time extension page change request and stuff
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
 			Parent root;
@@ -164,7 +166,7 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@FXML
 	void refreshTableDetails(MouseEvent event) {
-		myController.getCommentsByRequestId(String.valueOf(currentChangeRequest.getChangeRequestID()));
+		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
@@ -177,7 +179,7 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 			// move to closing step
 			break;
 		case "More information":
-			// ?
+			// move to analyzer page
 			break;
 		default:
 			break;
@@ -187,15 +189,19 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@FXML
 	void submitComment(MouseEvent event) {
-		CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
-				ProjectFX.currentUser.getUserID(), addComentTextField.getText());
-		myController.insertNewCommentToDB(newComment);
+		if (addComentTextField.getText().equals("")) {
+			Toast.makeText(ProjectFX.mainStage, "Please add comment first", 1500, 500, 500);
+		} else {
+			CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
+					ProjectFX.currentUser.getUserID(), addComentTextField.getText());
+			myController.insertNewCommentToDB(newComment);
+		}
 	}
 
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.currentUser = null;
-		//((Node) event.getSource()).getScene().getWindow().hide(); 		// hiding primary window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
@@ -207,23 +213,30 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 			commentTabelDirector.setItems(commentList);
 		}
 	}
-	
-	public void committeeCommentInsertToDBSuccessfully() {
-		Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
+
+	public void committeeCommentInsertToDBSuccessfully(int affectedRows) {
+		if (affectedRows == 1) {
+			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
+		} else {
+			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
+		}
+
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		//currentChangeRequest=new ChangeRequest(2,"lee", "bad", "good","good", "active", "ido");
 		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
-		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
+		descriptionColumn
+				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
 		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
-		
+
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
-		
+
 		decisionComboBox.getItems().add("Approve");
 		decisionComboBox.getItems().add("Deny");
 		decisionComboBox.getItems().add("More information");
@@ -254,7 +267,7 @@ public class CommitteeDecisionBoundary implements Initializable , DataInitializa
 
 	@Override
 	public void initData(Object data) {
-		currentChangeRequest=(ChangeRequest)data;	
+		currentChangeRequest = (ChangeRequest) data;
 	}
 
 }

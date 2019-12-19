@@ -25,7 +25,7 @@ public class CommitteDecisionController extends BasicController{
 		this.myBoundary=myBoundary;
 	}
 	
-	public void getCommentsByRequestId(String id) {
+	public void getCommentsByRequestId(int id) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(id);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID, varArray);
@@ -55,9 +55,11 @@ public class CommitteDecisionController extends BasicController{
 					myBoundary.handleCommitteeCommentResultForTable(resultList);
 					break;
 				case INSERT_NEW_COMMITTEE_COMMENT:
-					//check what the returns
+					/* insert query return only one int value */
+					int affectedRows;
+					affectedRows = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
-					myBoundary.committeeCommentInsertToDBSuccessfully();
+					myBoundary.committeeCommentInsertToDBSuccessfully(affectedRows);
 					break;
 				default:
 					break;
@@ -70,7 +72,8 @@ public class CommitteDecisionController extends BasicController{
 	private ArrayList<CommitteeComment> changeResultToCommitteeComment(SqlResult result){
 		ArrayList<CommitteeComment> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
-			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(String)a.get(2));
+			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(int)a.get(2),
+					(String)a.get(3));
 			resultList.add(comment);
 		}
 		

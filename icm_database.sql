@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: icm
+-- Host: localhost    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -43,6 +43,37 @@ LOCK TABLES `analysis_report` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `analysis_step`
+--
+
+DROP TABLE IF EXISTS `analysis_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `analysis_step` (
+  `AnalysisStepID` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestID` int(11) NOT NULL,
+  `HandlerUserName` varchar(45) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EstimatedEndDate` date NOT NULL,
+  `EndDate` date NOT NULL,
+  `AnalysisReportHeader` varchar(45) DEFAULT NULL,
+  `AnalysisReportSpecification` varchar(45) DEFAULT NULL,
+  `AnalysisReportComments` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`AnalysisStepID`),
+  UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analysis_step`
+--
+
+LOCK TABLES `analysis_step` WRITE;
+/*!40000 ALTER TABLE `analysis_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `analysis_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `change_request`
 --
 
@@ -66,7 +97,7 @@ CREATE TABLE `change_request` (
   PRIMARY KEY (`ChangeRequestID`),
   UNIQUE KEY `ChangeRequestID_UNIQUE` (`ChangeRequestID`),
   KEY `UserName_idx` (`InitiatorUserName`,`HandlerUserName`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -75,7 +106,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','In Progress','Analysis','lior','blabla','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','In Progress','Testing','lior','blablabla','2021-12-19');
+INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','In Progress','Analysis','lior','blabla','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','In Progress','Testing','lior','blablabla','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Active','Lior','','Analysis',NULL),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','Analysis','Lior','',NULL),(5,'itay','2019-12-18','Class Rooms With Computers','asd','asd','asd','asd','Active','Analysis','Lior','asd',NULL),(6,'itay','2019-12-18','Class Rooms With Computers','asd','asd','asd','asd','Active','Analysis','Lior','asd',NULL),(7,'ido','2019-12-18','Employee Information Station','a','b','c','','Active','Analysis','Lior','',NULL),(8,'ido','2019-12-18','Class Rooms With Computers','a','b','c',' ','Active','Analysis','Lior',' ',NULL),(9,'ido','2019-12-18','Class Rooms With Computers','a','b','c',' ','Active','Analysis','Lior',' ',NULL),(10,'ido','2019-12-18','Student Information Station','aaa','bbb','ccc',' ','Active','Analysis','Lior',' ',NULL),(11,'lee','2019-12-18','Employee Information Station','a1','b2','c3',' ','Active','Analysis','Lior',' ',NULL),(12,'lee','2019-12-18','Lecturer Information Station','as','ad','ac',' ','Active','Analysis','Lior',' ',NULL),(13,'ido','2019-12-18','Laboratory','a','b','c',' ','Active','Analysis','Lior',' ',NULL),(14,'ido','2019-12-18','Student Information Station','aaaa','bbbb','cccc','dddd','Active','Analysis','Lior',' ',NULL),(15,'ido','2019-12-18','Employee Information Station','asdf','assf','asdf',' ','Active','Analysis','Lior',' ',NULL),(16,'ido','2019-12-18','Moodle System','a','b','c','d','Active','Analysis','Lior','e',NULL),(17,'lior','2019-12-18','Library System','a1','b2','x3','c3','Active','Analysis','Lior','c3',NULL),(18,'ido','2019-12-18','Moodle System','1','1','1',' ','Active','Analysis','Lior',' ',NULL),(19,'ido','2019-12-18','Class Rooms With Computers','11','11','11','11','Active','Analysis','Lior','11',NULL),(20,'raviv','2019-12-18','Moodle System','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(21,'ido','2019-12-18','Employee Information Station','4','5','4',' ','Active','Analysis','Lior',' ',NULL),(22,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(23,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(24,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(25,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(26,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(27,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(28,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(29,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(30,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(31,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(32,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(33,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(34,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(35,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(36,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(37,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(38,'ido','2019-12-18','Moodle System','ab','b','c','d','Active','Analysis','Lior','e',NULL),(39,'ido','2019-12-18','Student Information Station','a1','b','c','d','Active','Analysis','Lior',' ',NULL),(40,'ido','2019-12-18','Moodle System','1','1','1','1','Active','Analysis','Lior','1',NULL),(41,'ido','2019-12-18','Moodle System','1','1','1','1','Active','Analysis','Lior','1',NULL),(42,'raviv','2019-12-18','Employee Information Station','a','b','c','b','Active','Analysis','Lior','c',NULL),(43,'raviv','2019-12-18','Laboratory','aaa','aaa','aaa',' ','Active','Analysis','Lior',' ',NULL),(44,'ido','2019-12-18','Student Information Station','a','b','c','e','Active','Analysis','Lior','d',NULL),(45,'ido','2019-12-18','Class Rooms With Computers','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(46,'ido','2019-12-18','Student Information Station','a','a','a','a','Active','Analysis','Lior','a',NULL),(47,'ido','2019-12-18','Moodle System','aa','aa','aa','aa','Active','Analysis','Lior','aa',NULL),(48,'ido','2019-12-18','Library System','a','a','a','aa','Active','Analysis','Lior','a',NULL),(49,'ido','2019-12-18','Library System','a','a','a','a','Active','Analysis','Lior','a',NULL),(50,'ido','2019-12-18','Class Rooms With Computers','a','a','a','a','Active','Analysis','Lior','a',NULL),(51,'ido','2019-12-18','Employee Information Station','a','a','a','a','Active','Analysis','Lior','a',NULL),(52,'ido','2019-12-18','Employee Information Station','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(53,'ido','2019-12-18','Employee Information Station','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(54,'ido','2019-12-18','Moodle System','a','a','a','a','Active','Analysis','Lior','a',NULL),(55,'ido','2019-12-18','Employee Information Station','a','aa','a','a','Active','Analysis','Lior','a',NULL),(56,'ido','2019-12-18','Employee Information Station','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(57,'ido','2019-12-18','Employee Information Station','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(58,'ido','2019-12-18','Employee Information Station','a','a','a',' ','Active','Analysis','Lior',' ',NULL),(59,'ido','2019-12-18','Moodle System','a','a','a','a','Active','Analysis','Lior','a',NULL),(60,'ido','2019-12-18','Employee Information Station','a','a','a','a','Active','Analysis','Lior','a',NULL),(61,'ido','2019-12-18','Employee Information Station','a','a','a','a','Active','Analysis','Lior','a',NULL),(62,'lior','2019-12-18','Employee Information Station','a','a','a','a','Active','Analysis','Lior','a',NULL),(63,'ido','2019-12-18','Employee Information Station','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','Lior',' ',NULL),(64,'ido','2019-12-18','Employee Information Station','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','Lior','',NULL),(65,'ido','2019-12-18','Employee Information Station','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','Lior','',NULL),(66,'ido','2019-12-18','Employee Information Station','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','Lior','',NULL),(67,'ido','2019-12-18','Employee Information Station','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','Lior','',NULL),(68,'ido','2019-12-18','Employee Information Station','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','Lior','',NULL);
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,6 +132,87 @@ CREATE TABLE `committee_comment` (
 LOCK TABLES `committee_comment` WRITE;
 /*!40000 ALTER TABLE `committee_comment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `committee_comment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `committee_step`
+--
+
+DROP TABLE IF EXISTS `committee_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `committee_step` (
+  `CommitteeStepId` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestId` int(11) NOT NULL,
+  `HandlerUserName` varchar(45) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EstimatedEndDate` date DEFAULT NULL,
+  `EndDate` date DEFAULT NULL,
+  PRIMARY KEY (`CommitteeStepId`),
+  UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `committee_step`
+--
+
+LOCK TABLES `committee_step` WRITE;
+/*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `execution_step`
+--
+
+DROP TABLE IF EXISTS `execution_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `execution_step` (
+  `ExecutionStepID` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestID` int(11) NOT NULL,
+  `HandlerUserName` varchar(45) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EstimatedEndDate` date NOT NULL,
+  `EndDate` date DEFAULT NULL,
+  PRIMARY KEY (`ExecutionStepID`),
+  UNIQUE KEY `ExecutionStepID_UNIQUE` (`ExecutionStepID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `execution_step`
+--
+
+LOCK TABLES `execution_step` WRITE;
+/*!40000 ALTER TABLE `execution_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `execution_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `file`
+--
+
+DROP TABLE IF EXISTS `file`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `file` (
+  `FileID` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestID` varchar(45) NOT NULL,
+  `FileEnding` varchar(45) NOT NULL,
+  PRIMARY KEY (`FileID`),
+  UNIQUE KEY `FileID_UNIQUE` (`FileID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `file`
+--
+
+LOCK TABLES `file` WRITE;
+/*!40000 ALTER TABLE `file` DISABLE KEYS */;
+/*!40000 ALTER TABLE `file` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -130,6 +242,63 @@ LOCK TABLES `requirements` WRITE;
 /*!40000 ALTER TABLE `requirements` DISABLE KEYS */;
 INSERT INTO `requirements` VALUES (1,'Raviv','Moodle','Bad','Make it Good','Active','Lee'),(2,'Ido','ClassBoost','Delays with video','Add loading buffer','Suspended','Lior');
 /*!40000 ALTER TABLE `requirements` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tester_step`
+--
+
+DROP TABLE IF EXISTS `tester_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tester_step` (
+  `TesterStepId` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestId` int(11) NOT NULL,
+  `HandlerUserName` varchar(45) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EstimatedEndDate` date DEFAULT NULL,
+  `EndDate` date DEFAULT NULL,
+  `TesterFailReport` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`TesterStepId`),
+  UNIQUE KEY `TesterStepId_UNIQUE` (`TesterStepId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tester_step`
+--
+
+LOCK TABLES `tester_step` WRITE;
+/*!40000 ALTER TABLE `tester_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tester_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `time_extension`
+--
+
+DROP TABLE IF EXISTS `time_extension`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `time_extension` (
+  `TimeExtensionID` int(11) NOT NULL AUTO_INCREMENT,
+  `StepID` varchar(45) NOT NULL,
+  `StepType` varchar(45) NOT NULL,
+  `NewDate` varchar(45) NOT NULL,
+  `Reason` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) NOT NULL,
+  PRIMARY KEY (`TimeExtensionID`),
+  UNIQUE KEY `TimeExtensionID_UNIQUE` (`TimeExtensionID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `time_extension`
+--
+
+LOCK TABLES `time_extension` WRITE;
+/*!40000 ALTER TABLE `time_extension` DISABLE KEYS */;
+/*!40000 ALTER TABLE `time_extension` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -176,4 +345,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-17 18:12:13
+-- Dump completed on 2019-12-18 22:00:19
