@@ -44,7 +44,7 @@
       <Text layoutX="357.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time remaining :" />
       <VBox alignment="TOP_CENTER" prefHeight="249.0" prefWidth="127.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
-            <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="homepageButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#LoadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
