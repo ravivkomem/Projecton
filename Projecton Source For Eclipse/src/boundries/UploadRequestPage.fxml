@@ -41,7 +41,7 @@
          </font>
       </Button>
       <ComboBox fx:id="subSystemComboBox" layoutX="218.0" layoutY="111.0" prefWidth="150.0" promptText="- sub system-" />
-      <Button fx:id="submitBtn" layoutX="438.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#uploadNewChangeRequest" text="Submit" />
+      <Button fx:id="submitBtn" layoutX="438.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#uploadNewChangeRequest" prefHeight="31.0" prefWidth="209.0" text="Submit" />
       <TextField fx:id="currentStateDescriptionField" alignment="TOP_LEFT" layoutX="219.0" layoutY="187.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
       <TextField fx:id="changeRequestDescriptionField" alignment="TOP_LEFT" layoutX="219.0" layoutY="306.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
       <TextField fx:id="reasonField" alignment="TOP_LEFT" layoutX="219.0" layoutY="409.0" prefHeight="80.0" prefWidth="149.0" promptText="*" />
@@ -50,7 +50,5 @@
       <TextField fx:id="uploadedFileNameField" alignment="TOP_LEFT" layoutX="518.0" layoutY="226.0" prefHeight="17.0" prefWidth="149.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="433.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text layoutX="394.0" layoutY="505.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request ID :" />
-      <TextField fx:id="changeRequestIdField" layoutX="533.0" layoutY="484.0" />
    </children>
 </AnchorPane>

@@ -43,7 +43,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class UploadChangeRequestBoundary implements Initializable {
-
+	/*FXML ELEMENTS*/
 	    @FXML
 	    private Button backBtn;
 
@@ -67,38 +67,38 @@ public class UploadChangeRequestBoundary implements Initializable {
 
 	    @FXML
 	    private TextField reasonField;
-
+	   
 	    @FXML
 	    private TextField commentField;
 
 	    @FXML
 	    private TextField uploadedFileNameField;
 	    
-	    @FXML
-	    private TextField changeRequestIdField;
 	    
-	    private UploadChangeRequestController myController= new UploadChangeRequestController(this);
+	    
+	    
+	    private UploadChangeRequestController myController= new UploadChangeRequestController(this);////connection to my controller 
 	    private ChangeRequest newChangeRequest;
 	    private final String CURRENT_STEP = "ANALAYZER_AUTO_APPOINT";
 	    java.sql.Date uploadChangeRequestDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 	    
-
+	    /*FXML METHODES*/
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
 	    	
 	    }
 
 	    @FXML
+	    /*move the user back to the home page */
 	    void backToHomePage(MouseEvent event) {
-	    	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
 	    }
 
 	    @FXML
+	    /*Logout the user from the system*/
 	    void logoutUser(MouseEvent event) {
 	    	/*TODO: Remove user from connected list */
 	    	ProjectFX.currentUser = null;
-			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 
@@ -115,12 +115,11 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newChangeRequestDocuments = uploadedFileNameField.getText();
 	    	String newChangeRequestDate = uploadChangeRequestDate.toString();
 	    	String newChangeRequestStatus= "Active";
-	    	String HandlerUserName="XXXX";//TODO needs to be random
+	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
 	    	/*incase the user didnt fill all the required fields*/
 	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
-	    		//check the case while all the fields are empty 
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 	    	}
 	    	/*while the required fields are filled properly create a new change request and send to the controller*/
@@ -129,22 +128,31 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
 	    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
 	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
-	    			myController.insertNewChangeRequest(newChangeRequest);
-	    			//Toast.makeText(ProjectFX.mainStage, "Change request submitted", 1500, 500, 500);
+	    			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
 	    		}
 	    }
+	    /*incase the query succeeded display window with the new change request id */
 	    public void displayChangeRequestId(int changeRequestId){
+	    	/*incase there was a problem*/
 	    	if(changeRequestId == -1)
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "The change request did not upload successfully", 1500, 500, 500);
 	    	}
+	    	/*before showing the window with the new change request id 
+	    	 * initialize the fields for the next change request*/
 	    	else
 	    	{
-	    		message(AlertType.INFORMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");
+	    		 commentField.setText("");
+	    		 reasonField.setText("");
+	    		 changeRequestDescriptionField.setText("");
+	    		 currentStateDescriptionField.setText("");
+	    		 uploadedFileNameField.setText("");
+	    		 subSystemComboBox.setPromptText("-sub systems-");
+	    		message(AlertType.INFORMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
 	    	}	
 	    }
 	    
-	    
+	    /*this method will show the window with the new change request id */
 		public static Optional<ButtonType> message(AlertType alert, String msg, String mess) {
 			Alert alert2 = new Alert(alert);
 			alert2.setTitle(msg);
@@ -153,6 +161,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 		}
 	    
 		@Override
+		/*initialize the combo box in this gui page  */
 		public void initialize(URL location, ResourceBundle resources) {
 			subSystemComboBox.getItems().add("Lecturer Information Station");
 			subSystemComboBox.getItems().add("Student Information Station");
@@ -163,7 +172,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			subSystemComboBox.getItems().add("Laboratory");
 			subSystemComboBox.getItems().add("Computer Farm");
 			subSystemComboBox.getItems().add("College Website");
-			changeRequestIdField.setVisible(false);
+			
 			
 		}
 		

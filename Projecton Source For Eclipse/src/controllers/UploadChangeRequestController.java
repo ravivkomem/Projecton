@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import assets.SqlAction;
 import assets.SqlQueryType;
@@ -20,39 +21,36 @@ public class UploadChangeRequestController extends BasicController {
 	private ChangeRequest currentChangeRequest;
 	
 	public UploadChangeRequestController(UploadChangeRequestBoundary myBoundary){
-		this.myBoundary=myBoundary;
+		this.myBoundary=myBoundary;//connection to my boundary  
 	}
 	/*building the querey and update the database */
-	public void insertNewChangeRequest(ChangeRequest newchangerequest)
+	public void buildChangeRequestBeforeSendToDataBase(ChangeRequest newchangerequest)
 	{
-		currentChangeRequest = newchangerequest;
-		/*TODO: Function to get list of all information engineer (INFORMATION_ENGINEER, SUPERVISOR,
-		 * COMMITTE_MEMBER, COMMITTEE_DIRECTOR)
-		 * Set to change request handler from Random of list (0 to list.size -1 )
-		 */
+		currentChangeRequest = newchangerequest;//get the information about the change request from boundary 
+		this.chooseAutomaticallyAnalyzer();//pick the analyzer randomly 
 		
-		
-		/*TODO: all this in another function after you recieved handler name*/
+	}
+	
+	private void uploadTheInsertedNewChangeRequestToDataBase()
+	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		/*add current step field*/
-		varArray.add(newchangerequest.getInitiator());
-		varArray.add(newchangerequest.getChangeRequestDate());
-		varArray.add(newchangerequest.getSelectSysystem());
-		varArray.add(newchangerequest.getCurrentStateDiscription());
-		varArray.add(newchangerequest.getChangeRequestDescription());
-		varArray.add(newchangerequest.getChangeRequestExplanation());
-		varArray.add(newchangerequest.getChangeRequestComment());
-		varArray.add(newchangerequest.getChangeRequestStatus());
-		varArray.add(newchangerequest.getChangeRequestStep());
-		varArray.add(newchangerequest.getHandler());
-		varArray.add(newchangerequest.getChangeRequestDocuments());
-		
+		varArray.add(currentChangeRequest.getInitiator());
+		varArray.add(currentChangeRequest.getChangeRequestDate());
+		varArray.add(currentChangeRequest.getSelectSysystem());
+		varArray.add(currentChangeRequest.getCurrentStateDiscription());
+		varArray.add(currentChangeRequest.getChangeRequestDescription());
+		varArray.add(currentChangeRequest.getChangeRequestExplanation());
+		varArray.add(currentChangeRequest.getChangeRequestComment());
+		varArray.add(currentChangeRequest.getChangeRequestStatus());
+		varArray.add(currentChangeRequest.getChangeRequestStep());
+		varArray.add(currentChangeRequest.getHandler());
+		varArray.add(currentChangeRequest.getChangeRequestDocuments());
+		/*execute the insert new change request query */
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_CHANGE_REQUEST,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		}
-	
-	
+	}
 	
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -64,18 +62,37 @@ public class UploadChangeRequestController extends BasicController {
 					int changeRequestId = -1;
 					this.unsubscribeFromClientDeliveries();
 					/*TODO: Check if result is empty ---> something wrong happend */
-					if (true /*NOT EMPTY */)
+					if (true)
 					{
 						changeRequestId = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
 					}
 					myBoundary.displayChangeRequestId(changeRequestId);
 					break;
-				
+				case SELECT_ALL_INFROMATION_ENGINEERS:
+					this.unsubscribeFromClientDeliveries();
+					ArrayList<String> informationEngineers = new ArrayList<String>();
+					for (ArrayList<Object> informationEngineerRow : result.getResultData())
+					{
+						String currEngineer = (String) informationEngineerRow.get(0);
+						informationEngineers.add(currEngineer);
+					}
+					Random rand = new Random();
+					int randEngineerIndex = rand.nextInt(informationEngineers.size());
+					currentChangeRequest.setHandler(informationEngineers.get(randEngineerIndex));
+					uploadTheInsertedNewChangeRequestToDataBase();
 				default:
 					break;
 			}
 		});
 		return;	
+	}
+	/*execute the select all information engineers query  */
+	public void chooseAutomaticallyAnalyzer()
+	{
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
 	}
 
 }
