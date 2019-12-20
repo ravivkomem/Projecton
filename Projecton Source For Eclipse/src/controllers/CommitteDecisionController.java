@@ -42,6 +42,14 @@ public class CommitteDecisionController extends BasicController{
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	public void updateCommitteeStepDB(Integer changeRequestID) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COMMITTEE_STEP,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -79,4 +87,6 @@ public class CommitteDecisionController extends BasicController{
 		
 		return resultList;
 	}
+
+	
 }
