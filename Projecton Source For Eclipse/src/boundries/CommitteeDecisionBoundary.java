@@ -3,6 +3,7 @@ package boundries;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import com.sun.prism.impl.ps.CachingEllipseRep;
@@ -105,6 +106,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	private ChangeRequest currentChangeRequest;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
+	java.sql.Date endStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -177,7 +179,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			 * update committee_step
 			 * update execution_step
 			 * update changeRequest table*/ 
-			myController.updateCommitteeStepDB(currentChangeRequest.getChangeRequestID());
+			myController.updateCommitteeStepDB("CLOSED",endStepDate,currentChangeRequest.getChangeRequestID());
 			break;
 		case "Deny":
 			/* move to closing step

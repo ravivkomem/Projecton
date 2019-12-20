@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import assets.SqlAction;
@@ -43,8 +44,10 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	public void updateCommitteeStepDB(Integer changeRequestID) {
+	public void updateCommitteeStepDB(String status,Date date,Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(status);
+		varArray.add(date);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COMMITTEE_STEP,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
@@ -68,6 +71,9 @@ public class CommitteDecisionController extends BasicController{
 					affectedRows = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.committeeCommentInsertToDBSuccessfully(affectedRows);
+					break;
+				case UPDATE_COMMITTEE_STEP:
+					/*TODO check if affected rows == 1*/
 					break;
 				default:
 					break;
