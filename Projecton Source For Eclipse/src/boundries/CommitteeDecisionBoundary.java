@@ -243,8 +243,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 
-		
-
+		decisionComboBox.getItems().add("Approve");
+		decisionComboBox.getItems().add("Deny");
+		decisionComboBox.getItems().add("More information");
+		timeRemainingTextAria.setEditable(false);
 		// initialize timeRemainingTextAria
 
 		addCommentPane.setVisible(false);
@@ -274,10 +276,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		currentChangeRequest = (ChangeRequest) data;
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
-
-		decisionComboBox.getItems().add("Approve");
-		decisionComboBox.getItems().add("Deny");
-		decisionComboBox.getItems().add("More information");
 	}
 
 }
