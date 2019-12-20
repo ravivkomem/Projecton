@@ -1,6 +1,7 @@
 package boundries;
 
 import java.awt.List;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -85,7 +86,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    /*FXML METHODES*/
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
-	    	
+	    	//File newFile=new File(LocalFilePath);
 	    }
 
 	    @FXML
@@ -117,7 +118,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newChangeRequestStatus= "Active";
 	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
-	    	/*incase the user didnt fill all the required fields*/
+	    	/*in case the user didn't fill all the required fields*/
 	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
@@ -148,12 +149,12 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    		 currentStateDescriptionField.setText("");
 	    		 uploadedFileNameField.setText("");
 	    		 subSystemComboBox.setPromptText("-sub systems-");
-	    		message(AlertType.INFORMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
+	    		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
 	    	}	
 	    }
 	    
 	    /*this method will show the window with the new change request id */
-		public static Optional<ButtonType> message(AlertType alert, String msg, String mess) {
+		public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 			Alert alert2 = new Alert(alert);
 			alert2.setTitle(msg);
 			alert2.setHeaderText(mess);
@@ -172,10 +173,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			subSystemComboBox.getItems().add("Laboratory");
 			subSystemComboBox.getItems().add("Computer Farm");
 			subSystemComboBox.getItems().add("College Website");
-			
-			
 		}
-		
 	}
 
 	
