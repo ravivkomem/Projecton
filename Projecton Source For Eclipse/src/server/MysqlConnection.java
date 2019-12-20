@@ -155,8 +155,8 @@ public class MysqlConnection {
     			"INSERT INTO icm.committee_comment(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
-    			"UPDATE icm.committee_step SET Status = ? WHERE CommitteeStepId = (SELECT MAX (CommitteeStepId) "
-    			+ "FROM icm.committee_step WHERE ChangeRequestId = ?)";
+    			"UPDATE icm.committee_step SET Status = ? WHERE ChangeRequestId = ?" + 
+    			" ORDER BY CommitteeStepId DESC LIMIT 1";
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
