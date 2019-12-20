@@ -24,7 +24,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class TesterBoundary implements Initializable,DataInitializable {
+public class TesterBoundary implements DataInitializable {
 	private ChangeRequest currentChangeRequest;
 private TesterController mycontroller = new TesterController(this);
     @FXML
@@ -32,27 +32,18 @@ private TesterController mycontroller = new TesterController(this);
 
 	    @FXML
 	    private Button backButton;
-
 	    @FXML
 	    private Button setButton;
-
 	    @FXML
 	    private Button reportfailButton;
-
 	    @FXML
 	    private TextField failuredetailsField;
-
 	    @FXML
 	    private Button logoutButton;
-
 	    @FXML
 	    private Button homepageButton;
-
 	    @FXML
 	    private Button analysisreportButton;
-
-	    @FXML
-	    private ImageView timeextensionButton;
 
 	    @FXML
 	    private TextArea timeremainingField;
@@ -64,23 +55,8 @@ private TesterController mycontroller = new TesterController(this);
 	    void LogOut(MouseEvent event) {
 	    	ProjectFX.currentUser = null;
 			//((Node) event.getSource()).getScene().getWindow().hide(); 		// hiding primary window
-			ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	    }
-
-	    /*	    @FXML
-	    void ShowTimeExtension(MouseEvent event) {
-	    	try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
-				Parent root;
-				root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.show();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-	    }*/
 
 	    @FXML
 	    void loadAnalysisReport(MouseEvent event) {
@@ -99,13 +75,13 @@ private TesterController mycontroller = new TesterController(this);
 	    @FXML
 	    void loadHomePage(MouseEvent event) {
 	    //	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	    }
 
 	    @FXML
 	    void loadPreviousPage(MouseEvent event) {
 	    //	((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-			ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	    }
 
 	    @FXML
@@ -125,7 +101,7 @@ private TesterController mycontroller = new TesterController(this);
 
 	    @FXML
 	    void setReportFail(MouseEvent event) {
-	    	currentChangeRequest.setChangeRequestStep("Execution");
+	    	currentChangeRequest.setCurrentStep("Execution");
 			mycontroller.updateChangeRequestStep(currentChangeRequest,failuredetailsField.getText());
 
 	    }

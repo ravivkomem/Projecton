@@ -239,16 +239,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		descriptionColumn
-				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
+				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
 		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 
-		requestList.add(currentChangeRequest);
-		requestInfoTable.setItems(requestList);
-
-		decisionComboBox.getItems().add("Approve");
-		decisionComboBox.getItems().add("Deny");
-		decisionComboBox.getItems().add("More information");
+		
 
 		// initialize timeRemainingTextAria
 
@@ -277,6 +272,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
+		requestList.add(currentChangeRequest);
+		requestInfoTable.setItems(requestList);
+
+		decisionComboBox.getItems().add("Approve");
+		decisionComboBox.getItems().add("Deny");
+		decisionComboBox.getItems().add("More information");
 	}
 
 }

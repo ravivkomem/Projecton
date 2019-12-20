@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.TesterBoundary">
    <children>
       <ImageView fitHeight="601.0" fitWidth="758.0" layoutX="-5.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -52,7 +52,7 @@
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="analysisreportButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadAnalysisReport" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
@@ -66,12 +66,12 @@
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
             <Button fx:id="timeextensionButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadTimeExtensionPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension" textAlignment="CENTER" wrapText="true">
                <graphic>
-                  <ImageView fx:id="timeextensionButton" fitHeight="35.0" fitWidth="52.0" onMouseClicked="#ShowTimeExtension" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@icon-clock-21.jpg" />
                      </image>
@@ -80,7 +80,7 @@
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
          </children>
