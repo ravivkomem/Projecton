@@ -3,11 +3,10 @@ package entities;
 import java.sql.Date;
 
 public class ChangeRequestNew {
-
-	public ChangeRequestNew(int changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
+	
+	public ChangeRequestNew(Integer changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
 			String currentStateDescription, String desiredChangeDescription, String desiredChangeExplanation,
-			String desiredChangeComments, String status, String currentStep, String handlerUserName,
-			String uploadedFiles, Date endDate) {
+			String desiredChangeComments, String status, String currentStep, String handlerUserName, Date endDate) {
 		super();
 		this.changeRequestID = changeRequestID;
 		InitiatorUserName = initiatorUserName;
@@ -20,7 +19,6 @@ public class ChangeRequestNew {
 		this.status = status;
 		this.currentStep = currentStep;
 		this.handlerUserName = handlerUserName;
-		this.uploadedFiles = uploadedFiles;
 		this.endDate = endDate;
 	}
 	
@@ -35,10 +33,9 @@ public class ChangeRequestNew {
 	private String status;
 	private String currentStep;
 	private String handlerUserName;
-	private String uploadedFiles;
 	private Date endDate;
 	
-	public int getChangeRequestID() {
+	public Integer getChangeRequestID() {
 		return changeRequestID;
 	}
 	public void setChangeRequestID(Integer changeRequestID) {
@@ -103,12 +100,6 @@ public class ChangeRequestNew {
 	}
 	public void setHandlerUserName(String handlerUserName) {
 		this.handlerUserName = handlerUserName;
-	}
-	public String getUploadedFiles() {
-		return uploadedFiles;
-	}
-	public void setUploadedFiles(String uploadedFiles) {
-		this.uploadedFiles = uploadedFiles;
 	}
 	public Date getEndDate() {
 		return endDate;
