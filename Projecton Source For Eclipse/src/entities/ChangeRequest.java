@@ -20,6 +20,39 @@ public class ChangeRequest {
 		this.currentStep = currentStep;
 		this.handlerUserName = handlerUserName;
 		this.endDate = endDate;
+		
+		switch(currentStep)
+		{
+		
+			case "AUTO_ANALYZER_APPOINT":
+			case "ANALYSIS_SET_TIME":
+			case "ANALYSIS_APPROVE_TIME":
+			case "ANALYSIS_WORK":
+				actualStep = "Analysis";
+				break;
+				
+			case "EXECUTION_SET_TIME":
+			case "EXECUTION_APPROVE_TIME":
+			case "EXECUTION_WORK":
+				actualStep = "Execution";
+				break;
+			
+			case "TESTING_WORK":
+				actualStep = "Testing";
+				break;
+			
+			case "COMMITTEE_WORK":
+				actualStep = "Committee";
+				break;
+				
+			case "TESTER_APPOINT":
+				actualStep = "Appoint Tester";
+				break;
+			
+			default:
+				actualStep = currentStep;
+				break;
+		}
 	}
 	
 	public ChangeRequest(String InitiatorUserName,String selectedSubsystem,String currentStateDescription,String desiredChangeDescription,
@@ -34,7 +67,40 @@ public class ChangeRequest {
 		this.startDate=startDate;
 		this.status=status;
 		this.handlerUserName=handlerUserName;
-		this.currentStep=currentStep;	
+		this.currentStep=currentStep;
+		
+		switch(currentStep)
+		{
+		
+			case "AUTO_ANALYZER_APPOINT":
+			case "ANALYSIS_SET_TIME":
+			case "ANALYSIS_APPROVE_TIME":
+			case "ANALYSIS_WORK":
+				actualStep = "Analysis";
+				break;
+				
+			case "EXECUTION_SET_TIME":
+			case "EXECUTION_APPROVE_TIME":
+			case "EXECUTION_WORK":
+				actualStep = "Execution";
+				break;
+			
+			case "TESTING_WORK":
+				actualStep = "Testing";
+				break;
+			
+			case "COMMITTEE_WORK":
+				actualStep = "Committee";
+				break;
+				
+			case "TESTER_APPOINT":
+				actualStep = "Appoint Tester";
+				break;
+			
+			default:
+				actualStep = currentStep;
+				break;
+		}
 	}
 	
 	private Integer changeRequestID;
@@ -49,6 +115,7 @@ public class ChangeRequest {
 	private String currentStep;
 	private String handlerUserName;
 	private Date endDate;
+	private String actualStep;
 	
 	public Integer getChangeRequestID() {
 		return changeRequestID;
@@ -121,6 +188,14 @@ public class ChangeRequest {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getActualStep() {
+		return actualStep;
+	}
+
+	public void setActualStep(String actualStep) {
+		this.actualStep = actualStep;
 	}
 	
 }

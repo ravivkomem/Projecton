@@ -16,33 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `analysis_report`
---
-
-DROP TABLE IF EXISTS `analysis_report`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `analysis_report` (
-  `AnalysisReportID` int(11) NOT NULL,
-  `ChangeRequestID` varchar(45) NOT NULL,
-  `Header` varchar(45) NOT NULL,
-  `ChangeSpecifications` varchar(45) NOT NULL,
-  `Comments` varchar(45) NOT NULL,
-  PRIMARY KEY (`AnalysisReportID`,`ChangeRequestID`),
-  UNIQUE KEY `AnalysisReportID_UNIQUE` (`AnalysisReportID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `analysis_report`
---
-
-LOCK TABLES `analysis_report` WRITE;
-/*!40000 ALTER TABLE `analysis_report` DISABLE KEYS */;
-/*!40000 ALTER TABLE `analysis_report` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `analysis_step`
 --
 
@@ -59,6 +32,7 @@ CREATE TABLE `analysis_step` (
   `AnalysisReportHeader` varchar(45) DEFAULT NULL,
   `AnalysisReportSpecification` varchar(45) DEFAULT NULL,
   `AnalysisReportComments` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) NOT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -110,6 +84,33 @@ INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make
 UNLOCK TABLES;
 
 --
+-- Table structure for table `closing_step`
+--
+
+DROP TABLE IF EXISTS `closing_step`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `closing_step` (
+  `ClosingStepID` int(11) NOT NULL AUTO_INCREMENT,
+  `ChangeRequestID` int(11) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EndDate` date DEFAULT NULL,
+  `Status` varchar(45) NOT NULL COMMENT 'Close_Active\nClose_Finish\nDeny_Active\nDeny_Finish',
+  PRIMARY KEY (`ClosingStepID`),
+  UNIQUE KEY `ClosingStepID_UNIQUE` (`ClosingStepID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `closing_step`
+--
+
+LOCK TABLES `closing_step` WRITE;
+/*!40000 ALTER TABLE `closing_step` DISABLE KEYS */;
+/*!40000 ALTER TABLE `closing_step` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `committee_comment`
 --
 
@@ -149,6 +150,7 @@ CREATE TABLE `committee_step` (
   `StartDate` date NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
+  `Status` varchar(45) NOT NULL,
   PRIMARY KEY (`CommitteeStepId`),
   UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -174,6 +176,7 @@ CREATE TABLE `execution_step` (
   `ExecutionStepID` int(11) NOT NULL AUTO_INCREMENT,
   `ChangeRequestID` int(11) NOT NULL,
   `HandlerUserName` varchar(45) NOT NULL,
+  `Status` varchar(45) NOT NULL,
   `StartDate` date NOT NULL,
   `EstimatedEndDate` date NOT NULL,
   `EndDate` date DEFAULT NULL,
@@ -217,35 +220,6 @@ LOCK TABLES `file` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `requirements`
---
-
-DROP TABLE IF EXISTS `requirements`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `requirements` (
-  `ChangeRequestID` int(11) NOT NULL,
-  `InitaitorName` varchar(45) DEFAULT NULL,
-  `Subsystem` varchar(45) DEFAULT NULL,
-  `CurrentState` varchar(45) DEFAULT NULL,
-  `ChangeDescription` varchar(45) DEFAULT NULL,
-  `Status` varchar(45) DEFAULT NULL,
-  `HandlerName` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ChangeRequestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `requirements`
---
-
-LOCK TABLES `requirements` WRITE;
-/*!40000 ALTER TABLE `requirements` DISABLE KEYS */;
-INSERT INTO `requirements` VALUES (1,'Raviv','Moodle','Bad','Make it Good','Active','Lee'),(2,'Ido','ClassBoost','Delays with video','Add loading buffer','Suspended','Lior');
-/*!40000 ALTER TABLE `requirements` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tester_step`
 --
 
@@ -256,10 +230,11 @@ CREATE TABLE `tester_step` (
   `TesterStepId` int(11) NOT NULL AUTO_INCREMENT,
   `ChangeRequestId` int(11) NOT NULL,
   `HandlerUserName` varchar(45) NOT NULL,
+  `Status` varchar(45) NOT NULL,
+  `TesterFailReport` varchar(45) DEFAULT NULL,
   `StartDate` date NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
-  `TesterFailReport` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`TesterStepId`),
   UNIQUE KEY `TesterStepId_UNIQUE` (`TesterStepId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -346,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-20 10:52:04
+-- Dump completed on 2019-12-20 16:11:58

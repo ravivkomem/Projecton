@@ -143,12 +143,13 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	else
 	    	{
 	    		myController.sendFilesToServer(uploadedFileNameField.getText(), changeRequestId);
-	    		 commentField.setText("");
-	    		 reasonField.setText("");
-	    		 changeRequestDescriptionField.setText("");
-	    		 currentStateDescriptionField.setText("");
-	    		 uploadedFileNameField.setText("");
-	    		 subSystemComboBox.setPromptText("-sub systems-");
+	    		
+	    		commentField.setText("");
+	    		reasonField.setText("");
+	    		changeRequestDescriptionField.setText("");
+	    		currentStateDescriptionField.setText("");
+	    		uploadedFileNameField.setText("");
+	    		subSystemComboBox.setPromptText("-sub systems-");
 	    		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
 	    	}	
 	    }

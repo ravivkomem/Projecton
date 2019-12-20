@@ -2,7 +2,10 @@
 /boundries/
 /client/
 /controllers/
+/assets/
+/client/
 /entities/
+/server/
 /ocsf/
 /resources/
 /server/
