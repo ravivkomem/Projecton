@@ -11,6 +11,7 @@ import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.MyFile;
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
 import java.math.BigInteger; 
@@ -49,6 +50,30 @@ public class UploadChangeRequestController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_CHANGE_REQUEST,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
+	public void sendFilesToServer(String path, Integer chnageRequestId)
+	{
+		if (path.equals(""))
+		{
+			/*DO NOTHING */
+		}
+		else
+		{
+			MyFile newFile = MyFile.parseToMyFile(path);
+			
+			String extension = "";
+
+			int i = path.lastIndexOf('.');
+			if (i > 0) {
+			    extension = path.substring(i+1);
+			}
+			
+			ArrayList<Object> varArray = new ArrayList<>();
+			varArray.add(chnageRequestId);
+			varArray.add(extension);
+			
+		}
 	}
 	
 	@Override

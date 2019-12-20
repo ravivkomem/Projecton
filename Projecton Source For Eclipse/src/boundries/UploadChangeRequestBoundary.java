@@ -106,6 +106,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    /*Create new change request via boundray page */
 	    void uploadNewChangeRequest(MouseEvent event) {
 
+	    	
 	    	String newChangeRequestSelectedSystem= subSystemComboBox.getSelectionModel().getSelectedItem();
 	    	String newCurrentStateDescription= currentStateDescriptionField.getText();
 	    	String newChangeRequestDescription = changeRequestDescriptionField.getText();
@@ -141,6 +142,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	 * initialize the fields for the next change request*/
 	    	else
 	    	{
+	    		myController.sendFilesToServer(uploadedFileNameField.getText(), changeRequestId);
 	    		 commentField.setText("");
 	    		 reasonField.setText("");
 	    		 changeRequestDescriptionField.setText("");
