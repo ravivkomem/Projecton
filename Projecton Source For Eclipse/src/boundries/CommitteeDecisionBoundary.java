@@ -177,6 +177,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			 * update committee_step
 			 * update execution_step
 			 * update changeRequest table*/ 
+			myController.updateCommitteeStepDB(currentChangeRequest.getChangeRequestID());
 			break;
 		case "Deny":
 			/* move to closing step
@@ -234,7 +235,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//currentChangeRequest=new ChangeRequest(2,"lee", "bad", "good","good", "active", "ido");
 		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
