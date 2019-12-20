@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CommitteeDecisionBoundary implements Initializable, DataInitializable {
+public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	private AnchorPane addCommentPane;

@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.CommitteDecisionController;
-import controllers.DemoLandingController;
 import controllers.PagingController;
 import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
@@ -127,7 +126,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    		{
 	    			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
 	    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
-	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
+	    			newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
 	    			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
 	    		}
 	    }
