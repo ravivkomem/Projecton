@@ -9,7 +9,7 @@ import assets.SqlResult;
 import boundries.UploadChangeRequestBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
-import entities.ChangeRequestNew;
+import entities.ChangeRequest;
 import entities.CommitteeComment;
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
@@ -36,16 +36,15 @@ public class UploadChangeRequestController extends BasicController {
 		ArrayList<Object> varArray = new ArrayList<>();
 		/*add current step field*/
 		varArray.add(currentChangeRequest.getInitiator());
-		varArray.add(currentChangeRequest.getChangeRequestDate());
-		varArray.add(currentChangeRequest.getSelectSysystem());
-		varArray.add(currentChangeRequest.getCurrentStateDiscription());
-		varArray.add(currentChangeRequest.getChangeRequestDescription());
-		varArray.add(currentChangeRequest.getChangeRequestExplanation());
-		varArray.add(currentChangeRequest.getChangeRequestComment());
-		varArray.add(currentChangeRequest.getChangeRequestStatus());
-		varArray.add(currentChangeRequest.getChangeRequestStep());
-		varArray.add(currentChangeRequest.getHandler());
-		varArray.add(currentChangeRequest.getChangeRequestDocuments());
+		varArray.add(currentChangeRequest.getStartDate());
+		varArray.add(currentChangeRequest.getSelectedSubsystem());
+		varArray.add(currentChangeRequest.getCurrentStateDescription());
+		varArray.add(currentChangeRequest.getDesiredChangeDescription());
+		varArray.add(currentChangeRequest.getDesiredChangeExplanation());
+		varArray.add(currentChangeRequest.getDesiredChangeComments());
+		varArray.add(currentChangeRequest.getStatus());
+		varArray.add(currentChangeRequest.getCurrentStep());
+		varArray.add(currentChangeRequest.getHandlerUserName());
 		/*execute the insert new change request query */
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_CHANGE_REQUEST,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array

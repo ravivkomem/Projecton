@@ -2,9 +2,9 @@ package entities;
 
 import java.sql.Date;
 
-public class ChangeRequestNew {
+public class ChangeRequest {
 	
-	public ChangeRequestNew(Integer changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
+	public ChangeRequest(Integer changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
 			String currentStateDescription, String desiredChangeDescription, String desiredChangeExplanation,
 			String desiredChangeComments, String status, String currentStep, String handlerUserName, Date endDate) {
 		super();
