@@ -9,7 +9,7 @@ import assets.SqlResult;
 import boundries.ProjectFX;
 import boundries.WorkStationBoundary;
 import client.ClientConsole;
-import entities.ChangeRequestNew;
+import entities.ChangeRequest;
 import javafx.application.Platform;
 
 @SuppressWarnings("serial")
@@ -82,7 +82,7 @@ public class WorkStationController extends BasicController{
 				case SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_DIRECTOR:
 				case SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME:
 				case SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME:
-					ArrayList<ChangeRequestNew> resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					ArrayList<ChangeRequest> resultChangeRequestList = this.parseResultToChangeRequestList(result);
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.loadTableView(resultChangeRequestList);
 					break;
@@ -94,9 +94,9 @@ public class WorkStationController extends BasicController{
 		return;
 	}
 	
-	private ArrayList<ChangeRequestNew> parseResultToChangeRequestList (SqlResult result)
+	private ArrayList<ChangeRequest> parseResultToChangeRequestList (SqlResult result)
 	{
-		ArrayList<ChangeRequestNew> changeRequestList = new ArrayList<ChangeRequestNew>();
+		ArrayList<ChangeRequest> changeRequestList = new ArrayList<ChangeRequest>();
 		
 		for (ArrayList<Object> resultRow : result.getResultData())
 		{
@@ -114,12 +114,11 @@ public class WorkStationController extends BasicController{
 				String status= (String) resultRow.get(8);
 				String currentStep = (String) resultRow.get(9);
 				String handlerUserName = (String) resultRow.get(10);
-				String uploadedFiles = (String) resultRow.get(11);
-				Date endDate = (Date) resultRow.get(12);
+				Date endDate = (Date) resultRow.get(11);
 				
-				ChangeRequestNew currentChangeRequest = new ChangeRequestNew
+				ChangeRequest currentChangeRequest = new ChangeRequest
 						(changeRequestID, InitiatorUserName, startDate, selectedSubsystem, currentStateDescription, desiredChangeDescription,
-						desiredChangeExplanation, desiredChangeComments, status,currentStep, handlerUserName, uploadedFiles, endDate);
+						desiredChangeExplanation, desiredChangeComments, status,currentStep, handlerUserName, endDate);
 				changeRequestList.add(currentChangeRequest);
 			}
 		}

@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.WorkStationController;
-import entities.ChangeRequestNew;
+import entities.ChangeRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,15 +37,15 @@ public class WorkStationBoundary implements Initializable{
     private TextArea selectedChangeRequestIdTextArea;
 	/* TableView */
     @FXML
-    private TableView<ChangeRequestNew> changeRequestTableView;
+    private TableView<ChangeRequest> changeRequestTableView;
     @FXML
-    private TableColumn<ChangeRequestNew, Integer> requestIdColumn;
+    private TableColumn<ChangeRequest, Integer> requestIdColumn;
     @FXML
-    private TableColumn<ChangeRequestNew, String> stepColumn;
+    private TableColumn<ChangeRequest, String> stepColumn;
     @FXML
-    private TableColumn<ChangeRequestNew, String> descriptionColumn;
+    private TableColumn<ChangeRequest, String> descriptionColumn;
     @FXML
-    private TableColumn<ChangeRequestNew, String> subsystemColumn;
+    private TableColumn<ChangeRequest, String> subsystemColumn;
     
     /*Buttons*/
     @FXML
@@ -70,8 +70,8 @@ public class WorkStationBoundary implements Initializable{
     
     /*Private Variables */
     private WorkStationController myController = new WorkStationController(this);
-	ObservableList<ChangeRequestNew> list = FXCollections.observableArrayList();
-	private ChangeRequestNew clickedChangeRequest;
+	ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
+	private ChangeRequest clickedChangeRequest;
 	
     /* FXML Methods */
     @FXML
@@ -170,7 +170,7 @@ public class WorkStationBoundary implements Initializable{
     }
 
     /* public methods */
-    public void loadTableView(List<ChangeRequestNew> changeRequestsList)
+    public void loadTableView(List<ChangeRequest> changeRequestsList)
     {
     	list.clear();
     	list.addAll(changeRequestsList);
@@ -181,13 +181,13 @@ public class WorkStationBoundary implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		clickedChangeRequest = null;
-		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, Integer>("changeRequestID"));
-		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, String>("currentStep"));
-		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, String>("desiredChangeDescription"));
-		subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequestNew, String>("selectedSubsystem"));
+		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
+		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStep"));
+		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
+		subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
 		
 		changeRequestTableView.setRowFactory(tv -> {
-		    TableRow<ChangeRequestNew> row = new TableRow<>();
+		    TableRow<ChangeRequest> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
 		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
 		        {

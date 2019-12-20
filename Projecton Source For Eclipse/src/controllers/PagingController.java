@@ -32,11 +32,13 @@ public class PagingController {
 		Pane root;
 		try {
 			root = loader.load(getClass().getResource(path));
+			DataInitializable boundary = loader.getController();
+			boundary.initialize(null, null);
+			boundary.initData(obj);
 			Scene scene = new Scene(root);			
 			ProjectFX.mainStage.setScene(scene);		
 			ProjectFX.mainStage.show();
-			DataInitializable boundary = loader.getController();		
-			boundary.initData(obj);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

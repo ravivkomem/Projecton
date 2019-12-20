@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: icm
+-- Host: 127.0.0.1    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -92,7 +92,6 @@ CREATE TABLE `change_request` (
   `Status` varchar(45) NOT NULL,
   `CurrentStep` varchar(45) NOT NULL,
   `HandlerUserName` varchar(45) NOT NULL,
-  `UploadedFiles` varchar(45) NOT NULL,
   `EndDate` date DEFAULT NULL,
   PRIMARY KEY (`ChangeRequestID`),
   UNIQUE KEY `ChangeRequestID_UNIQUE` (`ChangeRequestID`),
@@ -106,7 +105,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','blabla','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','blablabla','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Active','ANALYSIS_WORK','lior','Analysis',NULL),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior','',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior','sfd',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido','afsd',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior','afsd',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Active','TESTING_WORK','lior','fdasafsdfdas',NULL),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior','fsdafdasdfas',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','COMMITTEE_WORK','ido','fdsadfsa',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO','fdssadfasfd',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay','afdssdfasfadsdfa',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay','fsdafdasfdsa',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior','sfdasfdsafsda',NULL);
+INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Active','ANALYSIS_WORK','lior',NULL),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Active','TESTING_WORK','lior',NULL),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','COMMITTEE_WORK','ido',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior',NULL);
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,4 +346,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-20  9:55:30
+-- Dump completed on 2019-12-20 10:52:04

@@ -1,196 +1,111 @@
 package entities;
 
-/*TODO: Change names and make this class better */
+import java.sql.Date;
+
 public class ChangeRequest {
-	private int changeRequestID;
-	private String initiator;
-	private String selectSysystem;
-	private String currentStateDiscription;
-	private String changeRequestDescription;
-	private String changeRequestStatus;
-	private String handler;
-	private String changeRequestDate;
 	
-
-
-	private String changeRequestComment;
-	private String changeRequestDocuments;
-	private String changeRequestExplanation;
-	private String changeRequestStep;
-	private String stepLeader;
-
-	
-	public ChangeRequest(String selectSysystem, String currentStateDiscription, String changeRequestDescription,
-			int changeRequestID, String changeRequestExplanation, String changeRequestIntiatorName,
-			String changeRequestStatus, String handleName) {
-		super();
-		this.selectSysystem = selectSysystem;
-		this.currentStateDiscription = currentStateDiscription;
-		this.changeRequestDescription = changeRequestDescription;
-		this.changeRequestID = changeRequestID;
-		this.changeRequestExplanation = changeRequestExplanation;
-		this.initiator = changeRequestIntiatorName;
-		this.changeRequestStatus = changeRequestStatus;
-		this.handler = handleName;
-	}
-
-	/*Constructor for uploading new change request*/
-	public ChangeRequest(String initiator, String selectSysystem, String currentStateDiscription,
-			String changeRequestDescription, String changeRequestComment, String changeRequestDocuments,
-			String changeRequestExplanation,String changeRequestDate,String changeRequestStatus,String handler,String changeRequestStep) {
-		super();
-		this.initiator = initiator;
-		this.selectSysystem = selectSysystem;
-		this.currentStateDiscription = currentStateDiscription;
-		this.changeRequestDescription = changeRequestDescription;
-		this.changeRequestComment = changeRequestComment;
-		this.changeRequestDocuments = changeRequestDocuments;
-		this.changeRequestExplanation = changeRequestExplanation;
-		this.changeRequestDate=changeRequestDate;
-		this.changeRequestStatus=changeRequestStatus;
-		this.handler=handler;
-		this.changeRequestStep=changeRequestStep;
-	}
-
-
-	public ChangeRequest(int changeRequestID, String initiator, String selectSysystem, String currentStateDiscription,
-			String changeRequestDescription, String changeRequestStatus, String handler) {
+	public ChangeRequest(Integer changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
+			String currentStateDescription, String desiredChangeDescription, String desiredChangeExplanation,
+			String desiredChangeComments, String status, String currentStep, String handlerUserName, Date endDate) {
 		super();
 		this.changeRequestID = changeRequestID;
-		this.initiator = initiator;
-		this.selectSysystem = selectSysystem;
-		this.currentStateDiscription = currentStateDiscription;
-		this.changeRequestDescription = changeRequestDescription;
-		this.changeRequestStatus = changeRequestStatus;
-		this.handler = handler;
+		InitiatorUserName = initiatorUserName;
+		this.startDate = startDate;
+		this.selectedSubsystem = selectedSubsystem;
+		this.currentStateDescription = currentStateDescription;
+		this.desiredChangeDescription = desiredChangeDescription;
+		this.desiredChangeExplanation = desiredChangeExplanation;
+		this.desiredChangeComments = desiredChangeComments;
+		this.status = status;
+		this.currentStep = currentStep;
+		this.handlerUserName = handlerUserName;
+		this.endDate = endDate;
 	}
-
-
-	public int getChangeRequestID() {
+	
+	private Integer changeRequestID;
+	private String InitiatorUserName;
+	private Date startDate;
+	private String selectedSubsystem;
+	private String currentStateDescription;
+	private String desiredChangeDescription;
+	private String desiredChangeExplanation;
+	private String desiredChangeComments;
+	private String status;
+	private String currentStep;
+	private String handlerUserName;
+	private Date endDate;
+	
+	public Integer getChangeRequestID() {
 		return changeRequestID;
 	}
-
-
-	public void setChangeRequestID(int changeRequestID) {
+	public void setChangeRequestID(Integer changeRequestID) {
 		this.changeRequestID = changeRequestID;
 	}
-
-
-	public String getInitiator() {
-		return initiator;
+	public String getInitiatorUserName() {
+		return InitiatorUserName;
 	}
-
-
-	public void setInitiator(String initiator) {
-		this.initiator = initiator;
+	public void setInitiatorUserName(String initiatorUserName) {
+		InitiatorUserName = initiatorUserName;
 	}
-
-
-	public String getSelectSysystem() {
-		return selectSysystem;
+	public Date getStartDate() {
+		return startDate;
 	}
-
-
-	public void setSelectSysystem(String selectSysystem) {
-		this.selectSysystem = selectSysystem;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
-
-
-	public String getCurrentStateDiscription() {
-		return currentStateDiscription;
+	public String getSelectedSubsystem() {
+		return selectedSubsystem;
 	}
-
-
-	public void setCurrentStateDiscription(String currentStateDiscription) {
-		this.currentStateDiscription = currentStateDiscription;
+	public void setSelectedSubsystem(String selectedSubsystem) {
+		this.selectedSubsystem = selectedSubsystem;
 	}
-
-
-	public String getChangeRequestDescription() {
-		return changeRequestDescription;
+	public String getCurrentStateDescription() {
+		return currentStateDescription;
 	}
-
-
-	public void setChangeRequestDescription(String changeRequestDescription) {
-		this.changeRequestDescription = changeRequestDescription;
+	public void setCurrentStateDescription(String currentStateDescription) {
+		this.currentStateDescription = currentStateDescription;
 	}
-
-
-	public String getChangeRequestStatus() {
-		return changeRequestStatus;
+	public String getDesiredChangeDescription() {
+		return desiredChangeDescription;
 	}
-
-
-	public void setChangeRequestStatus(String changeRequestStatus) {
-		this.changeRequestStatus = changeRequestStatus;
+	public void setDesiredChangeDescription(String desiredChangeDescription) {
+		this.desiredChangeDescription = desiredChangeDescription;
 	}
-
-
-	public String getHandler() {
-		return handler;
+	public String getDesiredChangeExplanation() {
+		return desiredChangeExplanation;
 	}
-
-
-	public void setHandler(String handler) {
-		this.handler = handler;
+	public void setDesiredChangeExplanation(String desiredChangeExplanation) {
+		this.desiredChangeExplanation = desiredChangeExplanation;
 	}
-
-
-	public String getChangeRequestComment() {
-		return changeRequestComment;
+	public String getDesiredChangeComments() {
+		return desiredChangeComments;
 	}
-
-
-	public void setChangeRequestComment(String changeRequestComment) {
-		this.changeRequestComment = changeRequestComment;
+	public void setDesiredChangeComments(String desiredChangeComments) {
+		this.desiredChangeComments = desiredChangeComments;
 	}
-
-
-	public String getChangeRequestDocuments() {
-		return changeRequestDocuments;
+	public String getStatus() {
+		return status;
 	}
-
-
-	public void setChangeRequestDocuments(String changeRequestDocuments) {
-		this.changeRequestDocuments = changeRequestDocuments;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-
-
-	public String getChangeRequestExplanation() {
-		return changeRequestExplanation;
+	public String getCurrentStep() {
+		return currentStep;
 	}
-
-
-	public void setChangeRequestExplanation(String changeRequestExplanation) {
-		this.changeRequestExplanation = changeRequestExplanation;
+	public void setCurrentStep(String currentStep) {
+		this.currentStep = currentStep;
 	}
-
-
-	public String getChangeRequestStep() {
-		return changeRequestStep;
+	public String getHandlerUserName() {
+		return handlerUserName;
 	}
-
-
-	public void setChangeRequestStep(String changeRequestStep) {
-		this.changeRequestStep = changeRequestStep;
+	public void setHandlerUserName(String handlerUserName) {
+		this.handlerUserName = handlerUserName;
 	}
-
-
-	public String getStepLeader() {
-		return stepLeader;
+	public Date getEndDate() {
+		return endDate;
 	}
-
-
-	public void setStepLeader(String stepLeader) {
-		this.stepLeader = stepLeader;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
-	public String getChangeRequestDate() {
-		return changeRequestDate;
-	}
-
-	public void setChangeRequestDate(String changeRequestDate) {
-		this.changeRequestDate = changeRequestDate;
-	}
-
-
+	
 }
