@@ -152,7 +152,7 @@
          </font>
       </Button>
       <Button fx:id="startChangeRequestWorkButton" layoutX="337.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#loadChangeRequestWorkPage" prefHeight="24.0" prefWidth="191.0" text="Start Change Request Work" />
-      <TextField fx:id="selectChangeRequestIdTextField" layoutX="178.0" layoutY="555.0" prefHeight="25.0" prefWidth="170.0" promptText="Selected Change Request ID" />
+      <TextField fx:id="selectChangeRequestIdTextField" layoutX="147.0" layoutY="510.0" prefHeight="25.0" prefWidth="170.0" promptText="Selected Change Request ID" />
       <TextArea fx:id="selectedChangeRequestIdTextArea" layoutX="150.0" layoutY="452.0" prefHeight="17.0" prefWidth="177.0" promptText="Selected Change Request ID" />
    </children>
 </AnchorPane>

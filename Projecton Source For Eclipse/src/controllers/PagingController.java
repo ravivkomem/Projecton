@@ -28,15 +28,16 @@ public class PagingController {
 	
 	public void loadBoundary (String path, Object obj)
 	{
-		FXMLLoader loader = new FXMLLoader();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
 		Pane root;
 		try {
-			root = loader.load(getClass().getResource(path));
+			root = loader.load();
+			DataInitializable boundary = loader.getController();
+			boundary.initData(obj);
 			Scene scene = new Scene(root);			
 			ProjectFX.mainStage.setScene(scene);		
 			ProjectFX.mainStage.show();
-			DataInitializable boundary = loader.getController();		
-			boundary.initData(obj);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

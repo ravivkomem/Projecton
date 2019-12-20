@@ -137,22 +137,21 @@ public class WorkStationBoundary implements Initializable{
     			
     			/*Tester Step Statuses */
     			case "TESTING_WORK":
-    				//ProjectFX.pagingController.loadBoundary(ProjectPages.TESTER_PAGE.getPath(), clickedChangeRequest);
+    				ProjectFX.pagingController.loadBoundary(ProjectPages.TESTER_PAGE.getPath(), clickedChangeRequest);
+    				break;
     				
     			/*Default -- Do nothing */
     			default:
+    				Toast.makeText(ProjectFX.mainStage, startChangeRequestWorkButton.getText() + " Button not implemented yet", 1500, 500, 500);
     				break;
     		
     		}
-    		
     	}
     	
-    	Toast.makeText(ProjectFX.mainStage, startChangeRequestWorkButton.getText() + " Button not implemented yet", 1500, 500, 500);
     }
 
     @FXML
     void loadHomePage(ActionEvent event) {
-    	((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
 
@@ -165,7 +164,6 @@ public class WorkStationBoundary implements Initializable{
     void userLogout(MouseEvent event) {
     	/*TODO: Remove user from connected list */
     	ProjectFX.currentUser = null;
-		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
@@ -181,6 +179,8 @@ public class WorkStationBoundary implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		clickedChangeRequest = null;
+		selectedChangeRequestIdTextArea.setEditable(false);
+		
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStep"));
 		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
@@ -192,7 +192,6 @@ public class WorkStationBoundary implements Initializable{
 		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
 		        {
 		        	clickedChangeRequest = row.getItem();
-		        	selectChangeRequestIdTextField.setText(Integer.toString(clickedChangeRequest.getChangeRequestID()));
 		        	selectedChangeRequestIdTextArea.setText(Integer.toString(clickedChangeRequest.getChangeRequestID()));
 		        	
 		        }

@@ -34,7 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CommitteeDecisionBoundary implements Initializable, DataInitializable {
+public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	private AnchorPane addCommentPane;
@@ -239,17 +239,14 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		descriptionColumn
-				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("changeRequestDescription"));
+				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
 		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
-
-		requestList.add(currentChangeRequest);
-		requestInfoTable.setItems(requestList);
 
 		decisionComboBox.getItems().add("Approve");
 		decisionComboBox.getItems().add("Deny");
 		decisionComboBox.getItems().add("More information");
-
+		timeRemainingTextAria.setEditable(false);
 		// initialize timeRemainingTextAria
 
 		addCommentPane.setVisible(false);
@@ -277,6 +274,8 @@ public class CommitteeDecisionBoundary implements Initializable, DataInitializab
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
+		requestList.add(currentChangeRequest);
+		requestInfoTable.setItems(requestList);
 	}
 
 }

@@ -1,6 +1,7 @@
 package boundries;
 
 import java.awt.List;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -16,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.CommitteDecisionController;
-import controllers.DemoLandingController;
 import controllers.PagingController;
 import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
@@ -85,7 +85,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    /*FXML METHODES*/
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
-	    	
+	    	//File newFile=new File(LocalFilePath);
 	    }
 
 	    @FXML
@@ -106,18 +106,18 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    /*Create new change request via boundray page */
 	    void uploadNewChangeRequest(MouseEvent event) {
 
+	    	
 	    	String newChangeRequestSelectedSystem= subSystemComboBox.getSelectionModel().getSelectedItem();
 	    	String newCurrentStateDescription= currentStateDescriptionField.getText();
 	    	String newChangeRequestDescription = changeRequestDescriptionField.getText();
 	    	String newInitiator = ProjectFX.currentUser.getUserName();
 	    	String newChangeRequestComment = commentField.getText();
 	    	String newChangeRequestExplanation =  reasonField.getText();
-	    	String newChangeRequestDocuments = uploadedFileNameField.getText();
-	    	String newChangeRequestDate = uploadChangeRequestDate.toString();
+	    	Date newChangeRequestDate = uploadChangeRequestDate;
 	    	String newChangeRequestStatus= "Active";
 	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
-	    	/*incase the user didnt fill all the required fields*/
+	    	/*in case the user didn't fill all the required fields*/
 	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
@@ -127,7 +127,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    		{
 	    			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
 	    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
-	    			newChangeRequestDocuments,newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
+	    			newChangeRequestExplanation,newChangeRequestDate,newChangeRequestStatus,HandlerUserName,newCurrentStep);
 	    			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
 	    		}
 	    }
@@ -142,18 +142,19 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	 * initialize the fields for the next change request*/
 	    	else
 	    	{
+	    		myController.sendFilesToServer(uploadedFileNameField.getText(), changeRequestId);
 	    		 commentField.setText("");
 	    		 reasonField.setText("");
 	    		 changeRequestDescriptionField.setText("");
 	    		 currentStateDescriptionField.setText("");
 	    		 uploadedFileNameField.setText("");
 	    		 subSystemComboBox.setPromptText("-sub systems-");
-	    		message(AlertType.INFORMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
+	    		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
 	    	}	
 	    }
 	    
 	    /*this method will show the window with the new change request id */
-		public static Optional<ButtonType> message(AlertType alert, String msg, String mess) {
+		public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 			Alert alert2 = new Alert(alert);
 			alert2.setTitle(msg);
 			alert2.setHeaderText(mess);
@@ -172,10 +173,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			subSystemComboBox.getItems().add("Laboratory");
 			subSystemComboBox.getItems().add("Computer Farm");
 			subSystemComboBox.getItems().add("College Website");
-			
-			
 		}
-		
 	}
 
 	
