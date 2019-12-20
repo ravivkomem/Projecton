@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: icm
+-- Host: localhost    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -118,10 +118,12 @@ DROP TABLE IF EXISTS `committee_comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `committee_comment` (
+  `commentId` int(11) NOT NULL AUTO_INCREMENT,
   `requestId` int(11) NOT NULL,
-  `employeeId` varchar(45) DEFAULT NULL,
-  `comment` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`requestId`)
+  `employeeId` int(11) NOT NULL,
+  `comment` varchar(45) NOT NULL,
+  PRIMARY KEY (`commentId`),
+  UNIQUE KEY `commentId_UNIQUE` (`commentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -345,4 +347,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-20  0:35:47
+-- Dump completed on 2019-12-20  9:55:30
