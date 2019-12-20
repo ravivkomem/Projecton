@@ -157,7 +157,7 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
-    			+ "Status,CurrentStep,HandlerUserName,UploadedFiles) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_NOT_COMMITTEE.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "

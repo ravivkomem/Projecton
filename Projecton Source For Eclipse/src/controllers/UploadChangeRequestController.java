@@ -35,7 +35,7 @@ public class UploadChangeRequestController extends BasicController {
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		/*add current step field*/
-		varArray.add(currentChangeRequest.getInitiator());
+		varArray.add(currentChangeRequest.getInitiatorUserName());
 		varArray.add(currentChangeRequest.getStartDate());
 		varArray.add(currentChangeRequest.getSelectedSubsystem());
 		varArray.add(currentChangeRequest.getCurrentStateDescription());
@@ -77,7 +77,7 @@ public class UploadChangeRequestController extends BasicController {
 					}
 					Random rand = new Random();
 					int randEngineerIndex = rand.nextInt(informationEngineers.size());
-					currentChangeRequest.setHandler(informationEngineers.get(randEngineerIndex));
+					currentChangeRequest.setHandlerUserName(informationEngineers.get(randEngineerIndex));
 					uploadTheInsertedNewChangeRequestToDataBase();
 				default:
 					break;

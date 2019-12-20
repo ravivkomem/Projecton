@@ -22,6 +22,21 @@ public class ChangeRequest {
 		this.endDate = endDate;
 	}
 	
+	public ChangeRequest(String InitiatorUserName,String selectedSubsystem,String currentStateDescription,String desiredChangeDescription,
+			String desiredChangeComments,String desiredChangeExplanation,Date startDate, String status,String handlerUserName,String currentStep)
+	{
+		this.InitiatorUserName=InitiatorUserName;
+		this.selectedSubsystem=selectedSubsystem;
+		this.currentStateDescription=currentStateDescription;
+		this.desiredChangeDescription=desiredChangeDescription;
+		this.desiredChangeComments=desiredChangeComments;
+		this.desiredChangeExplanation=desiredChangeExplanation;
+		this.startDate=startDate;
+		this.status=status;
+		this.handlerUserName=handlerUserName;
+		this.currentStep=currentStep;	
+	}
+	
 	private Integer changeRequestID;
 	private String InitiatorUserName;
 	private Date startDate;

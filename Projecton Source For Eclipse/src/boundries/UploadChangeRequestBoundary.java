@@ -112,8 +112,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newInitiator = ProjectFX.currentUser.getUserName();
 	    	String newChangeRequestComment = commentField.getText();
 	    	String newChangeRequestExplanation =  reasonField.getText();
-	    	String newChangeRequestDocuments = uploadedFileNameField.getText();
-	    	String newChangeRequestDate = uploadChangeRequestDate.toString();
+	    	Date newChangeRequestDate = uploadChangeRequestDate;
 	    	String newChangeRequestStatus= "Active";
 	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
