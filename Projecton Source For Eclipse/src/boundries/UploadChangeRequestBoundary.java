@@ -86,6 +86,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
 	    	//File newFile=new File(LocalFilePath);
+	    	myController.sendFilesToServer(uploadedFileNameField.getText(), newChangeRequest.getChangeRequestID());
 	    }
 
 	    @FXML
