@@ -8,6 +8,7 @@ import assets.SqlResult;
 import boundries.AnalysisReportBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
+import javafx.application.Platform;
 
 public class AnalysisReportController extends BasicController {
 	
@@ -17,7 +18,7 @@ public class AnalysisReportController extends BasicController {
 		this.myBoundary=myBoundary;
 	}
 	
-	public void askForAnalysisReportByChangeRequestId(Integer changeRequestId) {
+	public void getAnalysisReportByChangeRequestId(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID, varArray);
@@ -27,8 +28,28 @@ public class AnalysisReportController extends BasicController {
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
-		// TODO Auto-generated method stub
-
+		Platform.runLater(() -> {
+			switch(result.getActionType())
+			{
+			case SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID:
+				ArrayList<Object> resultList = createArrayListFromResult(result);
+				myBoundary.displayAnalysisReport(resultList);
+				break;
+			default:
+				break;
+			}
+		});
+		return;
+	}
+	
+	private ArrayList<Object> createArrayListFromResult(SqlResult result){
+		ArrayList<Object> resultList = new ArrayList<>();
+		resultList.add(result.getResultData().get(0).get(2));
+		resultList.add(result.getResultData().get(0).get(8));
+		resultList.add(result.getResultData().get(0).get(9));
+		resultList.add(result.getResultData().get(0).get(10));
+		resultList.add(result.getResultData().get(0).get(11));
+		return resultList;
 	}
 
 }

@@ -102,6 +102,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private ImageView image3point2;
 
+	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
@@ -125,6 +126,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.show();
+			analysisReportBoundary.setCurrentChangeRequest(currentChangeRequest);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
