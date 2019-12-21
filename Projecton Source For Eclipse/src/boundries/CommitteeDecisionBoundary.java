@@ -183,16 +183,21 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 					"",currentChangeRequest.getChangeRequestID());
 			break;
 		case "Deny":
-			/* move to closing step
+			/* move to closing step:
 			 * update committee_step
 			 * update close_step
 			 * update changeRequest table*/ 
+			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
+			myController.updateChangeRequestCurrentStep("DENY_STEP","",currentChangeRequest.getChangeRequestID());
+			myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(),updateStepDate,"ACTIVE");
 			break;
 		case "More information":
-			/* move to analyzer step
+			/* move to analyzer step:
 			 * update committee_step
 			 * update analyzer_step
 			 * update changeRequest table*/
+			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
+			
 			break;
 		default:
 			break;

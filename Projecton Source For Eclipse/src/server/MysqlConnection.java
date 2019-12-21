@@ -209,6 +209,8 @@ public class MysqlConnection {
     			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
     			"UPDATE icm.committee_step SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
+    			+ " VALUES (?,?,?)";
     }
     
 }

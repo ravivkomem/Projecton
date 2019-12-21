@@ -63,6 +63,16 @@ public class CommitteDecisionController extends BasicController{
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	public void insertToClosingStepDbTable(Integer changeRequestID, Date StartStepDate, String Status) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		varArray.add(StartStepDate);
+		varArray.add(Status);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_CLOSING_STEP,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -85,6 +95,11 @@ public class CommitteDecisionController extends BasicController{
 				case UPDATE_COMMITTEE_STEP:
 					/*TODO check if affected rows == 1*/
 					break;
+				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
+					/*TODO check if affected rows == 1*/
+					break;
+				case INSERT_NEW_CLOSING_STEP:
+					break;
 				default:
 					break;
 			}
@@ -103,6 +118,8 @@ public class CommitteDecisionController extends BasicController{
 		
 		return resultList;
 	}
+
+	
 
 	
 
