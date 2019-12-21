@@ -1,8 +1,8 @@
-/assets/
 /boundries/
 /client/
+/resources/
+/assets/
 /controllers/
 /entities/
 /ocsf/
-/resources/
 /server/

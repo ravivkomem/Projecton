@@ -211,8 +211,13 @@ public class MysqlConnection {
     			"UPDATE icm.committee_step SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
+		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
+				"INSERT INTO icm.execution_aproves(ExecutionTime)"
+				+ " VALUES (?)";
     }
     
 }
+
+
 
 
