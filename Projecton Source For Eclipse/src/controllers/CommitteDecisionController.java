@@ -2,6 +2,7 @@ package controllers;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Random;
 
 import assets.SqlAction;
 import assets.SqlQueryType;
@@ -100,6 +101,19 @@ public class CommitteDecisionController extends BasicController{
 					break;
 				case INSERT_NEW_CLOSING_STEP:
 					break;
+				case SELECT_ALL_INFROMATION_ENGINEERS:
+					this.unsubscribeFromClientDeliveries();
+					ArrayList<String> informationEngineers = new ArrayList<String>();
+					for (ArrayList<Object> informationEngineerRow : result.getResultData())
+					{
+						String currEngineer = (String) informationEngineerRow.get(0);
+						informationEngineers.add(currEngineer);
+					}
+					Random rand = new Random();
+					int randEngineerIndex = rand.nextInt(informationEngineers.size());
+					String handlerUserName=informationEngineers.get(randEngineerIndex);
+					myBoundary.createObjectForUpdateChangeRequestDetails(handlerUserName);
+					break;
 				default:
 					break;
 			}
@@ -119,9 +133,13 @@ public class CommitteDecisionController extends BasicController{
 		return resultList;
 	}
 
-	
-
-	
+	/*execute the select all information engineers query */
+	public void chooseAutomaticallyAnalyzer()
+	{
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	
 }

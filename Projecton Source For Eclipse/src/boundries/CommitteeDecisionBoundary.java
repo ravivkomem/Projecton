@@ -139,8 +139,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
-		// window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
 
@@ -163,7 +162,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@FXML
@@ -188,16 +186,16 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			 * update close_step
 			 * update changeRequest table*/ 
 			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
-			myController.updateChangeRequestCurrentStep("DENY_STEP","",currentChangeRequest.getChangeRequestID());
 			myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(),updateStepDate,"ACTIVE");
+			myController.updateChangeRequestCurrentStep("DENY_STEP","",currentChangeRequest.getChangeRequestID());
 			break;
 		case "More information":
 			/* move to analyzer step:
 			 * update committee_step
-			 * update analyzer_step
+			 * choose analyzer
 			 * update changeRequest table*/
 			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
-			
+			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
 			break;
@@ -238,7 +236,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		} else {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}
-
+	}
+	
+	public void createObjectForUpdateChangeRequestDetails(String handlerUserName) {
+		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT",handlerUserName
+				,currentChangeRequest.getChangeRequestID());
 	}
 
 	@Override
@@ -254,6 +256,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("Approve");
 		decisionComboBox.getItems().add("Deny");
 		decisionComboBox.getItems().add("More information");
+		
 		timeRemainingTextAria.setEditable(false);
 		// initialize timeRemainingTextAria
 
