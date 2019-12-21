@@ -207,6 +207,8 @@ public class MysqlConnection {
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
     			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
+    			"UPDATE icm.committee_step SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     }
     
 }

@@ -106,7 +106,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	private ChangeRequest currentChangeRequest;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
-	java.sql.Date endStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -175,11 +175,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void sendDirectorDecision(MouseEvent event) {
 		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
 		case "Approve":
-			/* move to the next step
+			/* move to the next step:
 			 * update committee_step
-			 * update execution_step
 			 * update changeRequest table*/ 
-			myController.updateCommitteeStepDB("CLOSED",endStepDate,currentChangeRequest.getChangeRequestID());
+			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
+			myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT",
+					"",currentChangeRequest.getChangeRequestID());
 			break;
 		case "Deny":
 			/* move to closing step
