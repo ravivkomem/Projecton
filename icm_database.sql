@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: icm
+-- Host: localhost    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `analysis_report`
+--
+
+DROP TABLE IF EXISTS `analysis_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `analysis_report` (
+  `AnalysisReportID` int(11) NOT NULL,
+  `ChangeRequestID` varchar(45) NOT NULL,
+  `Header` varchar(45) NOT NULL,
+  `ChangeSpecifications` varchar(45) NOT NULL,
+  `Comments` varchar(45) NOT NULL,
+  PRIMARY KEY (`AnalysisReportID`,`ChangeRequestID`),
+  UNIQUE KEY `AnalysisReportID_UNIQUE` (`AnalysisReportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analysis_report`
+--
+
+LOCK TABLES `analysis_report` WRITE;
+/*!40000 ALTER TABLE `analysis_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `analysis_report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `analysis_step`
 --
 
@@ -27,12 +54,14 @@ CREATE TABLE `analysis_step` (
   `ChangeRequestID` int(11) NOT NULL,
   `HandlerUserName` varchar(45) NOT NULL,
   `StartDate` date NOT NULL,
-  `EstimatedEndDate` date NOT NULL,
-  `EndDate` date NOT NULL,
-  `AnalysisReportHeader` varchar(45) DEFAULT NULL,
-  `AnalysisReportSpecification` varchar(45) DEFAULT NULL,
-  `AnalysisReportComments` varchar(45) DEFAULT NULL,
   `Status` varchar(45) NOT NULL,
+  `EstimatedEndDate` date DEFAULT NULL,
+  `EndDate` date DEFAULT NULL,
+  `AnalysisReportHeader` varchar(45) DEFAULT NULL,
+  `AnalysisReportDescription` varchar(45) DEFAULT NULL,
+  `AnalysisReportAdvantages` varchar(45) DEFAULT NULL,
+  `AnalysisReportDuration` varchar(45) DEFAULT NULL,
+  `AnalysisReportConstraints` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -153,7 +182,7 @@ CREATE TABLE `committee_step` (
   `Status` varchar(45) NOT NULL,
   PRIMARY KEY (`CommitteeStepId`),
   UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,6 +191,7 @@ CREATE TABLE `committee_step` (
 
 LOCK TABLES `committee_step` WRITE;
 /*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
+INSERT INTO `committee_step` VALUES (1,2,'lee','2019-12-19',NULL,NULL,'deny'),(2,2,'lee','2019-12-19',NULL,'2019-12-20','active'),(3,3,'lee','2019-12-19',NULL,NULL,'deny');
 /*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,6 +247,35 @@ CREATE TABLE `file` (
 LOCK TABLES `file` WRITE;
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
 /*!40000 ALTER TABLE `file` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `requirements`
+--
+
+DROP TABLE IF EXISTS `requirements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `requirements` (
+  `ChangeRequestID` int(11) NOT NULL,
+  `InitaitorName` varchar(45) DEFAULT NULL,
+  `Subsystem` varchar(45) DEFAULT NULL,
+  `CurrentState` varchar(45) DEFAULT NULL,
+  `ChangeDescription` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  `HandlerName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ChangeRequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `requirements`
+--
+
+LOCK TABLES `requirements` WRITE;
+/*!40000 ALTER TABLE `requirements` DISABLE KEYS */;
+INSERT INTO `requirements` VALUES (1,'Raviv','Moodle','Bad','Make it Good','Active','Lee'),(2,'Ido','ClassBoost','Delays with video','Add loading buffer','Suspended','Lior');
+/*!40000 ALTER TABLE `requirements` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -321,4 +380,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-20 16:11:58
+-- Dump completed on 2019-12-21 21:31:40
