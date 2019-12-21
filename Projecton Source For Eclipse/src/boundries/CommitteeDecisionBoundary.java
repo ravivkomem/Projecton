@@ -112,7 +112,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
 		addCommentPane.setVisible(true);
-		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
@@ -134,7 +134,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void loadCommitteeDirectorPage(MouseEvent event) {
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(true);
-		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
@@ -166,7 +166,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void refreshTableDetails(MouseEvent event) {
-		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
