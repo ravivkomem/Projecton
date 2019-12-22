@@ -267,7 +267,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("More information");
 		
 		timeRemainingTextAria.setEditable(false);
-		// initialize timeRemainingTextAria
+		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
 
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);

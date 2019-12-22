@@ -215,6 +215,9 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE.getCode()] = 
+				"SELECT StartDate FROM icm.committee_step WHERE ChangeRequestId = ?"
+				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
     }
     
 }
