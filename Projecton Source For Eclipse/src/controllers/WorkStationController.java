@@ -26,7 +26,7 @@ public class WorkStationController extends BasicController{
 	{
 		SqlQueryType requiredSqlQueryType;
 		ArrayList<Object> varArray = new ArrayList<>();
-		//varArray.add(ProjectFX.currentUser.getUserName());
+		varArray.add(ProjectFX.currentUser.getUserName());
 		
 		switch (ProjectFX.currentUser.getPermission())
 		{

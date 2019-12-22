@@ -170,16 +170,16 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_MEMBER.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' "
-    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "AND ((HandlerUserName = ? AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
     			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
-    			+ "OR CurrentStep = 'TESTING_WORK' " /*Tester Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK')) " /*Tester Step*/
     			+ "OR CurrentStep = 'COMMITTEE_WORK')"; /* Committee Step */
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_DIRECTOR.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' "
-    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "AND ((HandlerUserName = ? AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
     			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
-    			+ "OR CurrentStep = 'TESTING_WORK' " /*Tester Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK')) " /*Tester Step*/
     			+ "OR CurrentStep = 'COMMITTEE_WORK' " /* Committee Step */
     			+ "OR CurrentStep = 'TESTER_APPOINT')"; /* Committee director */
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME.getCode()] =
