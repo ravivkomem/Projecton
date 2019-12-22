@@ -2,6 +2,8 @@ package boundries;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Optional;
@@ -37,6 +39,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CommitteeDecisionBoundary implements DataInitializable {
@@ -105,6 +108,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	private ImageView image3point2;
+	
+    @FXML
+    private Text timeRemainingTxt;
+    
+    @FXML
+    private Text delayTimeTxt;
 
 	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
@@ -205,7 +214,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
-			//TODO toast
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
 			return;
 		}
 		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
@@ -251,6 +260,26 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT",handlerUserName
 				,currentChangeRequest.getChangeRequestID());
 	}
+	
+	/**
+	 * this method display time remaining for the step or delay time
+	 * @param estimatedEndDate
+	 */
+	public void displayTimeRemaining(Date estimatedEndDate) {
+		Date todayDate=updateStepDate;
+		long daysBetween;
+		if(estimatedEndDate.before(todayDate)) {
+			delayTimeTxt.setVisible(true);
+			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
+			timeRemainingTextAria.setText(""+(daysBetween-1));
+		}
+		else {
+			timeRemainingTxt.setVisible(true);
+			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
+			timeRemainingTextAria.setText(""+(daysBetween+1));
+		}
+		
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -267,7 +296,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("More information");
 		
 		timeRemainingTextAria.setEditable(false);
-		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
 
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
@@ -296,6 +324,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		currentChangeRequest = (ChangeRequest) data;
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
+		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
 	}
 	
 	/*this method will show the window with the new change request id */
