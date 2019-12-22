@@ -119,7 +119,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
 	    	/*in case the user didn't fill all the required fields*/
-	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
+	    	if (subSystemComboBox.getSelectionModel().isEmpty()|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 	    	}
