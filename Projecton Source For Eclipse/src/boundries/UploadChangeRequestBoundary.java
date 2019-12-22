@@ -40,6 +40,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class UploadChangeRequestBoundary implements Initializable {
@@ -85,8 +86,10 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    /*FXML METHODES*/
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
-	    	//File newFile=new File(LocalFilePath);
-	    	myController.sendFilesToServer(uploadedFileNameField.getText(), newChangeRequest.getChangeRequestID());
+	    	FileChooser fileChooser = new FileChooser();
+	    	fileChooser.setTitle("Open Resource File");
+	    	File selectedFile = fileChooser.showOpenDialog(ProjectFX.mainStage);
+	    	uploadedFileNameField.setText(selectedFile.getPath());
 	    }
 
 	    @FXML
