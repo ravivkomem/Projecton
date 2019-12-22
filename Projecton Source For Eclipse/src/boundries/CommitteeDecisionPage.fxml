@@ -24,7 +24,7 @@
          <children>
             <TableView fx:id="commentTable_addComment" layoutX="270.0" layoutY="36.0" prefHeight="180.0" prefWidth="273.0">
               <columns>
-                <TableColumn fx:id="employeeIdAddColumn" prefWidth="95.0" text="Employee ID" />
+                <TableColumn fx:id="employeeIdAddColumn" prefWidth="95.0" text="User Name" />
                 <TableColumn fx:id="commentAddColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
               </columns>
             </TableView>
@@ -45,7 +45,7 @@
          <children>
             <TableView fx:id="commentTabelDirector" layoutX="64.0" layoutY="73.0" prefHeight="180.0" prefWidth="359.0">
                <columns>
-                  <TableColumn fx:id="employeeIdDirectorColumn" prefWidth="95.0" text="Employee ID" />
+                  <TableColumn fx:id="employeeIdDirectorColumn" prefWidth="95.0" text="User Name" />
                   <TableColumn fx:id="commentDirectorColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
                </columns>
             </TableView>

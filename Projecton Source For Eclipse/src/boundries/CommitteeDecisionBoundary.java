@@ -74,7 +74,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableView<CommitteeComment> commentTable_addComment;
 	@FXML
-	private TableColumn<CommitteeComment, Integer> employeeIdAddColumn;
+	private TableColumn<CommitteeComment, String> employeeIdAddColumn;
 	@FXML
 	private TableColumn<CommitteeComment, String> commentAddColumn;
 
@@ -90,7 +90,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableView<CommitteeComment> commentTabelDirector;
 	@FXML
-	private TableColumn<CommitteeComment, Integer> employeeIdDirectorColumn;
+	private TableColumn<CommitteeComment, String> employeeIdDirectorColumn;
 	@FXML
 	private TableColumn<CommitteeComment, String> commentDirectorColumn;
 
@@ -187,6 +187,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
+		if(decisionComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+			return;
+		}
 		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
 		case "Approve":
 			/* move to the next step:
@@ -214,8 +218,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
-			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
-			return;
+			break;
 		}
 		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
@@ -227,7 +230,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "Please add comment first", 1500, 500, 500);
 		} else {
 			CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
-					ProjectFX.currentUser.getUserID(), addComentTextField.getText());
+					ProjectFX.currentUser.getUserName(), addComentTextField.getText());
 			myController.insertNewCommentToDB(newComment);
 		}
 	}
@@ -283,12 +286,13 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
+		//employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
+		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		descriptionColumn
 				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
-		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
+		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 
 		decisionComboBox.getItems().add("Approve");
