@@ -214,7 +214,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
-			//TODO toast
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
 			return;
 		}
 		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
@@ -271,12 +271,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		if(estimatedEndDate.before(todayDate)) {
 			delayTimeTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
-			timeRemainingTextAria.setText(""+daysBetween);
+			timeRemainingTextAria.setText(""+(daysBetween-1));
 		}
 		else {
 			timeRemainingTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
-			timeRemainingTextAria.setText(""+daysBetween);
+			timeRemainingTextAria.setText(""+(daysBetween+1));
 		}
 		
 	}
