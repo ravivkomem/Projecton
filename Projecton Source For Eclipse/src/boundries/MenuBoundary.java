@@ -127,6 +127,7 @@ public class MenuBoundary implements Initializable {
 		    break;
 		    
 		/*Same displays for committee members and information engineers*/
+		case "COMMITTEE_DIRECTOR":
 		case "COMMITTEE_MEMBER":
 		case "INFORMATION_ENGINEER":
 			uploadRequestButton.setVisible(true);

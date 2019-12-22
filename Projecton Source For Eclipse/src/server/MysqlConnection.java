@@ -154,49 +154,74 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
     			"INSERT INTO icm.committee_comment(requestId,employeeId,comment)"
     			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
+    			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
+    			" ORDER BY CommitteeStepId DESC LIMIT 1";
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
     			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_NOT_COMMITTEE.getCode()] =
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_NOT_COMMITTEE.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
     			+ "AND (CurrentStep = 'ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
     			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
     			+ "OR CurrentStep = 'TESTING_WORK') "; /*Tester Step*/
-    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_MEMBER.getCode()] =
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_MEMBER.getCode()] =
     			"SELECT * FROM icm.change_request "
-    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
-    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "WHERE Status = 'Active' "
+    			+ "AND ((HandlerUserName = ? AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
     			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
-    			+ "OR CurrentStep = 'TESTING_WORK' " /*Tester Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK')) " /*Tester Step*/
     			+ "OR CurrentStep = 'COMMITTEE_WORK')"; /* Committee Step */
-    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_INITIATOR_NAME_COMMITTEE_DIRECTOR.getCode()] =
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_DIRECTOR.getCode()] =
     			"SELECT * FROM icm.change_request "
-    			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
-    			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
+    			+ "WHERE Status = 'Active' "
+    			+ "AND ((HandlerUserName = ? AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK' " /*Analysis Step*/
     			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
-    			+ "OR CurrentStep = 'TESTING_WORK' " /*Tester Step*/
+    			+ "OR CurrentStep = 'TESTING_WORK')) " /*Tester Step*/
     			+ "OR CurrentStep = 'COMMITTEE_WORK' " /* Committee Step */
-    			+ "OR CurrentStep = 'EXECUTION_LEADEAR_SUPERVISOR_APPOINT')"; /* Committee director */
-    	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    			+ "OR CurrentStep = 'TESTER_APPOINT')"; /* Committee director */
+    	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
     			+ "AND (CurrentStep ='ANALYSIS_SET_TIME' OR CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'ANALYSIS_WORK')";
-    	sqlArray[SqlQueryType.SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_INITIATOR_NAME.getCode()] =
+    	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_CHANGE_REQUESTS.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE Status = 'Active' AND CurrentStep ='COMMITTEE_WORK'";
+    	sqlArray[SqlQueryType.SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
     			+ "AND (CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK')";
+    	sqlArray[SqlQueryType.SELECT_TESTER_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE Status = 'Active' AND HandlerUserName = ? AND CurrentStep = 'TESTING_WORK'";
+    	sqlArray[SqlQueryType.SELECT_TESTER_APPOINT_CHANGE_REQUESTS.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE Status = 'Active' AND CurrentStep = 'TESTER_APPOINT'";
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
-    			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ";
-    	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
-    			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ";
+    			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
     	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
     			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
+    			+ " VALUES (?,?,?)";
+		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
+				"INSERT INTO icm.execution_aproves(ExecutionTime)"
+				+ " VALUES (?)";
+		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
+				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
+				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE.getCode()] = 
+				"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestId = ?"
+				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
     }
     
 }
+
+
 
 

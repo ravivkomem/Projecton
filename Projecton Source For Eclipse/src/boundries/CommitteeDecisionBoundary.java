@@ -2,7 +2,11 @@ package boundries;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.sun.prism.impl.ps.CachingEllipseRep;
@@ -22,16 +26,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CommitteeDecisionBoundary implements DataInitializable {
@@ -100,17 +108,25 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	private ImageView image3point2;
+	
+    @FXML
+    private Text timeRemainingTxt;
+    
+    @FXML
+    private Text delayTimeTxt;
 
+	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
+	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
 		addCommentPane.setVisible(true);
-		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
@@ -123,6 +139,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.show();
+			analysisReportBoundary=fxmlLoader.getController();
+			analysisReportBoundary.setCurrentChangeRequest(currentChangeRequest);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -132,13 +150,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void loadCommitteeDirectorPage(MouseEvent event) {
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(true);
-		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
-		// window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
 
@@ -161,39 +178,47 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@FXML
 	void refreshTableDetails(MouseEvent event) {
-		myController.getCommentsByRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
 		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
 		case "Approve":
-			/* move to the next step
+			/* move to the next step:
 			 * update committee_step
-			 * update execution_step
 			 * update changeRequest table*/ 
+			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
+			myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT",
+					"",currentChangeRequest.getChangeRequestID());
 			break;
 		case "Deny":
-			/* move to closing step
+			/* move to closing step:
 			 * update committee_step
 			 * update close_step
 			 * update changeRequest table*/ 
+			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
+			myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(),updateStepDate,"ACTIVE");
+			myController.updateChangeRequestCurrentStep("DENY_STEP","",currentChangeRequest.getChangeRequestID());
 			break;
 		case "More information":
-			/* move to analyzer step
+			/* move to analyzer step:
 			 * update committee_step
-			 * update analyzer_step
+			 * choose analyzer
 			 * update changeRequest table*/
+			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
+			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
-			break;
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+			return;
 		}
-
+		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
@@ -229,12 +254,35 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		} else {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}
-
+	}
+	
+	public void createObjectForUpdateChangeRequestDetails(String handlerUserName) {
+		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT",handlerUserName
+				,currentChangeRequest.getChangeRequestID());
+	}
+	
+	/**
+	 * this method display time remaining for the step or delay time
+	 * @param estimatedEndDate
+	 */
+	public void displayTimeRemaining(Date estimatedEndDate) {
+		Date todayDate=updateStepDate;
+		long daysBetween;
+		if(estimatedEndDate.before(todayDate)) {
+			delayTimeTxt.setVisible(true);
+			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
+			timeRemainingTextAria.setText(""+(daysBetween-1));
+		}
+		else {
+			timeRemainingTxt.setVisible(true);
+			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
+			timeRemainingTextAria.setText(""+(daysBetween+1));
+		}
+		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//currentChangeRequest=new ChangeRequest(2,"lee", "bad", "good","good", "active", "ido");
 		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
@@ -246,8 +294,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("Approve");
 		decisionComboBox.getItems().add("Deny");
 		decisionComboBox.getItems().add("More information");
+		
 		timeRemainingTextAria.setEditable(false);
-		// initialize timeRemainingTextAria
 
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
@@ -276,6 +324,15 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		currentChangeRequest = (ChangeRequest) data;
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
+		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
+	}
+	
+	/*this method will show the window with the new change request id */
+	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
+		Alert alert2 = new Alert(alert);
+		alert2.setTitle(msg);
+		alert2.setHeaderText(mess);
+		return alert2.showAndWait();
 	}
 
 }

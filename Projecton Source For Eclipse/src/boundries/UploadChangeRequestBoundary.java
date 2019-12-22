@@ -40,6 +40,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class UploadChangeRequestBoundary implements Initializable {
@@ -85,7 +86,10 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    /*FXML METHODES*/
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
-	    	//File newFile=new File(LocalFilePath);
+	    	FileChooser fileChooser = new FileChooser();
+	    	fileChooser.setTitle("Open Resource File");
+	    	File selectedFile = fileChooser.showOpenDialog(ProjectFX.mainStage);
+	    	uploadedFileNameField.setText(selectedFile.getPath());
 	    }
 
 	    @FXML
@@ -118,7 +122,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
 	    	/*in case the user didn't fill all the required fields*/
-	    	if (newChangeRequestSelectedSystem.equals("")|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
+	    	if (subSystemComboBox.getSelectionModel().isEmpty()|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
 	    	{
 	    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 	    	}
@@ -143,12 +147,13 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	else
 	    	{
 	    		myController.sendFilesToServer(uploadedFileNameField.getText(), changeRequestId);
-	    		 commentField.setText("");
-	    		 reasonField.setText("");
-	    		 changeRequestDescriptionField.setText("");
-	    		 currentStateDescriptionField.setText("");
-	    		 uploadedFileNameField.setText("");
-	    		 subSystemComboBox.setPromptText("-sub systems-");
+	    		
+	    		commentField.setText("");
+	    		reasonField.setText("");
+	    		changeRequestDescriptionField.setText("");
+	    		currentStateDescriptionField.setText("");
+	    		uploadedFileNameField.setText("");
+	    		subSystemComboBox.setPromptText("-sub systems-");
 	    		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
 	    	}	
 	    }

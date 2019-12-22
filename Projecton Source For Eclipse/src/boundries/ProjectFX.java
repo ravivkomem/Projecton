@@ -36,7 +36,7 @@ public class ProjectFX extends Application {
 		}
 
 		Scene scene = new Scene(pane);
-		stage.setTitle("ICM Demo");
+		stage.setTitle("ICM");
 		stage.setScene(scene);
 		stage.show();
 		mainStage = stage;

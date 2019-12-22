@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import assets.SqlAction;
+import assets.SqlFileAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
 import boundries.UploadChangeRequestBoundary;
@@ -72,6 +73,9 @@ public class UploadChangeRequestController extends BasicController {
 			ArrayList<Object> varArray = new ArrayList<>();
 			varArray.add(chnageRequestId);
 			varArray.add(extension);
+			SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.INSERT_NEW_FILE, varArray, newFile);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlFileAction);
 			
 		}
 	}

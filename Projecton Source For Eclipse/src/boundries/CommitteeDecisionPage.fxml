@@ -133,12 +133,12 @@
          </font>
       </Text>
       <TextArea fx:id="timeRemainingTextAria" layoutX="622.0" layoutY="105.0" prefHeight="38.0" prefWidth="85.0" />
-      <Text layoutX="622.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining" />
+      <Text fx:id="timeRemainingTxt" layoutX="622.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining" visible="false" />
       <Button fx:id="btnBack" layoutX="21.0" layoutY="548.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
-      <TableView fx:id="requestInfoTable" layoutX="207.0" layoutY="105.0" prefHeight="78.0" prefWidth="366.0">
+      <TableView fx:id="requestInfoTable" layoutX="203.0" layoutY="105.0" prefHeight="69.0" prefWidth="368.0">
          <columns>
             <TableColumn fx:id="requestIdColumn" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="283.0" text="Description" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="289.33331298828125" text="Description" />
          </columns>
       </TableView>
       <Button fx:id="btnLogout" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#userLogout" style="-fx-background-color: #2196F3;" text="log out">
@@ -153,5 +153,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
+      <Text fx:id="delayTimeTxt" layoutX="634.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delay Time" visible="false" />
    </children>
 </AnchorPane>

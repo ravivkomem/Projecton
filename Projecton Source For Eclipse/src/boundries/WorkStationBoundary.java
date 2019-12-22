@@ -21,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
@@ -31,8 +32,6 @@ public class WorkStationBoundary implements Initializable{
 	 * ******************************/
 	
 	/*Text Field*/
-    @FXML
-    private TextField selectChangeRequestIdTextField;
     @FXML
     private TextArea selectedChangeRequestIdTextArea;
 	/* TableView */
@@ -46,12 +45,13 @@ public class WorkStationBoundary implements Initializable{
     private TableColumn<ChangeRequest, String> descriptionColumn;
     @FXML
     private TableColumn<ChangeRequest, String> subsystemColumn;
-    
     /*Buttons*/
     @FXML
     private Button refreshStationButton;
     @FXML
     private Button homePageButton;
+    @FXML
+    private Button logoutButton;
     @FXML
     private Button viewAllWorkButton;
     @FXML
@@ -63,40 +63,53 @@ public class WorkStationBoundary implements Initializable{
     @FXML
     private Button viewCommitteStepButton;
     @FXML
-    private Button logoutButton;
+    private Button viewTesterAppointButton;
     @FXML
     private Button startChangeRequestWorkButton;
+    /*Image Views*/
+    @FXML
+    private ImageView committeeButtonBreakImage;
     
     
-    /*Private Variables */
+    
+    /* ***************************************
+     * ********** Private Variables ***********
+     * ***************************************/
     private WorkStationController myController = new WorkStationController(this);
 	ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
 	private ChangeRequest clickedChangeRequest;
 	
-    /* FXML Methods */
+    /* ***************************************
+     * ********** FXML Methods ***************
+     * ***************************************/
     @FXML
     void displayAllWorkChangeRequests(MouseEvent event) {
-    	myController.selectAllChangeRequestByHandlerUserName();
+    	myController.selectAllChangeRequest();
     }
 
     @FXML
     void displayAnalysisStepChangeRequests(MouseEvent event) {
-    	myController.selectAnalysisStepChangeRequestByHandlerUserName();
+    	myController.selectAnalysisStepChangeRequest();
     }
 
     @FXML
     void displayCommitteDecisionChangeRequests(MouseEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, viewCommitteStepButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	myController.selectCommitteeStepChangeRequest();
     }
 
     @FXML
     void displayExecutionStepChangeRequests(MouseEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, viewExecutionStepButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	myController.selectExecutionStepChangeRequest();
     }
 
     @FXML
     void displayTesterStepChangeRequests(MouseEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, viewTesterStepButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	myController.selectTesterStepChangeRequest();
+    }
+    
+    @FXML
+    void displayTesterAppointChangeRequest(MouseEvent event) {
+    	myController.selectTesterAppointStepChangeRequest();
     }
 
     @FXML
@@ -130,7 +143,7 @@ public class WorkStationBoundary implements Initializable{
     				break;
     			
     			/*Committee Director setting tester status */
-    			case "TESTER_COMMITTEE_DIRECTOR_APPOINT": 
+    			case "TESTER_APPOINT": 
     				/*TODO: Load the committee director page */
     				Toast.makeText(ProjectFX.mainStage, "Not implemented yet - TESTER_COMMITTEE_DIRECTOR_APPOINT", 1500, 500, 500);
     				break;
@@ -167,22 +180,31 @@ public class WorkStationBoundary implements Initializable{
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
-    /* public methods */
+    /* *****************************************
+     * ********** Public Methods ***************
+     * *****************************************/
+    
     public void loadTableView(List<ChangeRequest> changeRequestsList)
     {
     	list.clear();
     	list.addAll(changeRequestsList);
     	changeRequestTableView.setItems(list);
-    	changeRequestTableView.setVisible(true);
+    	
+    	if (!list.isEmpty())
+    	{
+    		changeRequestTableView.setVisible(true);
+        	selectedChangeRequestIdTextArea.setVisible(true);
+    		changeRequestTableView.setVisible(true);
+    		refreshStationButton.setVisible(true);
+    		startChangeRequestWorkButton.setVisible(true);
+    	}
     }
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		clickedChangeRequest = null;
-		selectedChangeRequestIdTextArea.setEditable(false);
-		
+		/* Set the table view */
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
-		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStep"));
+		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("actualStep"));
 		descriptionColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
 		subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
 		
@@ -198,8 +220,32 @@ public class WorkStationBoundary implements Initializable{
 		    });
 		    return row ;
 		});
-		
+		/* Reset all local variables */
+		clickedChangeRequest = null;
+		/* Hide displays */
+		selectedChangeRequestIdTextArea.setEditable(false);
+		selectedChangeRequestIdTextArea.setVisible(false);
 		changeRequestTableView.setVisible(false);
+		refreshStationButton.setVisible(false);
+		startChangeRequestWorkButton.setVisible(false);
+		viewCommitteStepButton.setVisible(false);
+		viewTesterAppointButton.setVisible(false);
+		committeeButtonBreakImage.setVisible(false);
+		
+		/* Displays with preconditions */
+		String userPermission = ProjectFX.currentUser.getPermission(); 
+		if (userPermission.equals("COMMITTEE_MEMBER"))
+		{
+			viewCommitteStepButton.setVisible(true);
+		}
+		else if (userPermission.equals("COMMITTEE_DIRECTOR"))
+		{
+			viewCommitteStepButton.setVisible(true);
+			committeeButtonBreakImage.setVisible(true);
+			viewTesterAppointButton.setVisible(true);
+		}
+		
+		/* Call the method to automaticaly display */
 		this.displayAllWorkChangeRequests(null);
 	}
 
