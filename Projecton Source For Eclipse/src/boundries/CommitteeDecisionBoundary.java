@@ -121,6 +121,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	
+	Stage myTimeExtensionStage = null;
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -156,7 +158,9 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		myTimeExtensionStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
+		
 	}
 
 	@FXML
@@ -168,7 +172,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
 		//give time extension page change request and stuff
-		try {
+		/* try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
 			Parent root;
 			root = (Parent) fxmlLoader.load();
@@ -177,7 +181,20 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} */
+		if (myTimeExtensionStage == null)
+		{
+			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
 		}
+		else if (myTimeExtensionStage.isShowing())
+		{
+			Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
+		} 
+		else
+		{
+			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+		}
+		
 	}
 
 	@FXML
