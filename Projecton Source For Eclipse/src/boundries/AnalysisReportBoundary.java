@@ -46,20 +46,12 @@ public class AnalysisReportBoundary implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-//		descriptionTextArea.setEditable(false);
-//		advavtagesTextArea.setEditable(false);
-//		constraintsTextArea.setEditable(false);
-		
+		descriptionTextArea.setEditable(false);
+		advavtagesTextArea.setEditable(false);
+		constraintsTextArea.setEditable(false);
 	}
     
     public void displayAnalysisReport(ArrayList<Object> resultList) {
-    	reportPageTitle = new Text();
-		subsystemTxt = new Text();
-		authorTxt = new Text();
-		durationTxt= new Text();
-		descriptionTextArea = new TextArea();
-		advavtagesTextArea = new TextArea();
-		constraintsTextArea = new TextArea();
     	reportPageTitle.setText("Report Of Request No."+currentChangeRequest.getChangeRequestID().toString());
     	subsystemTxt.setText(currentChangeRequest.getSelectedSubsystem());
     	authorTxt.setText((String)resultList.get(0));

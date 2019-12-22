@@ -126,6 +126,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			Stage stage = new Stage();
 			stage.setScene(new Scene(root));
 			stage.show();
+			analysisReportBoundary=fxmlLoader.getController();
 			analysisReportBoundary.setCurrentChangeRequest(currentChangeRequest);
 		} catch (IOException e) {
 			e.printStackTrace();
