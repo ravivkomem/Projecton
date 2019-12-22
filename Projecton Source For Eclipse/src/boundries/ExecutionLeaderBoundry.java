@@ -28,6 +28,9 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    private Button btnBack;
+	    
+	    @FXML
+	    private TextField txtWorkingOnChangeRequestNumber;
 
 	    @FXML
 	    private Button btnCommitExcution;
@@ -40,23 +43,24 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    private Button btnLogOut;
+	    
+	    @FXML
+	    private Button btnCommitExecution;
 
 	    @FXML
 	    private TextArea txtChangeRequestDetails;
 
 	    @FXML
-	    private ImageView btnHomePage;
+	    private Button btnHomePage;
 
 	    @FXML
-	    private ImageView btnAnalysisReport;
+	    private Button btnAnalysisReport;
 
 	    @FXML
-	    private ImageView btnTimeExtension;
+	    private Button btnTimeExtension;
 	    
 	    
-	    
-	    
-	    
+ 
 	    private ExecutionLeaderController myController = new ExecutionLeaderController(this);
 	    private ChangeRequest myChangerequest;
 	    
@@ -77,7 +81,7 @@ import javafx.stage.Stage;
 		}
 	    
 		@FXML
-	    void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)
+	    void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)  // submiting execution time
 	    {
 	    	
 	    	if (txtTimeForExecution.getText().equals("")) {
@@ -90,7 +94,8 @@ import javafx.stage.Stage;
 			}
 	    }
 	    @FXML
-		public void ExecutionAprovedtInsertToDBSuccessfully(int affectedRows) {
+		public void ExecutionAprovedtInsertToDBSuccessfully(int affectedRows)
+	    {
 			if (affectedRows == 1) {
 				Toast.makeText(ProjectFX.mainStage, "The ExecutionTime uploaded successfully", 1500, 500, 500);
 			} else {
@@ -98,30 +103,30 @@ import javafx.stage.Stage;
 			}
 
 		}
-	    
+	       
 	    @FXML
-	    void UpdateDBForFinishExecution(MouseEvent event)
+	    void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event)  // when execution commit working
 	    {
 
 	    }
 
 	    @FXML
-	    void BackToLastPageFromExecutionPage(MouseEvent event)
+	    void BackToLastPageFromExecutionPage(MouseEvent event)       // back to the work station page
 	    {
-	    	ProjectFX.pagingController.loadBoundray(ProjectPages.WORK_STATION_PAGE.getPath());
+	    	ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	    }
 
 	    @FXML
-	    void LogOutFromExecutionLeaderPage(MouseEvent event)
+	    void LogOutFromExecutionLeaderPage(MouseEvent event)        // logout from execution page
 	    {
 	       	/*TODO: Remove user from connected list */
 	    	ProjectFX.currentUser = null;
 			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-			ProjectFX.pagingController.loadBoundray(ProjectPages.LOGIN_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 
 	    @FXML
-	    void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event)
+	    void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event)    // opet time extension
 	    {
 	    	try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
@@ -137,14 +142,14 @@ import javafx.stage.Stage;
 	    }
 
 	    @FXML
-	    void ReturnToHomePageFromExecutionLeaderPage(MouseEvent event)
+	    void ReturnToHomePageFromExecutionLeaderPage(MouseEvent event)     // return home page
 	    {
 	     	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-			ProjectFX.pagingController.loadBoundray(ProjectPages.MENU_PAGE.getPath());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	    }
 
 	    @FXML
-	    void ShowAnalysisReportFromExecutionLeaderPage(MouseEvent event)
+	    void ShowAnalysisReportFromExecutionLeaderPage(MouseEvent event)   // show anaylisis report
 	    {
 	    	// give analysis report page the change request id to show the correct report
 			try {
