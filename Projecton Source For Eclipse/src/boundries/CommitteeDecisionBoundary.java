@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.sun.prism.impl.ps.CachingEllipseRep;
@@ -23,12 +24,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -201,9 +205,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
-			break;
+			//TODO toast
+			return;
 		}
-
+		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
@@ -290,6 +296,14 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		currentChangeRequest = (ChangeRequest) data;
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
+	}
+	
+	/*this method will show the window with the new change request id */
+	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
+		Alert alert2 = new Alert(alert);
+		alert2.setTitle(msg);
+		alert2.setHeaderText(mess);
+		return alert2.showAndWait();
 	}
 
 }
