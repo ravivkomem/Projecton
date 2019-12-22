@@ -122,6 +122,10 @@ public class CommitteDecisionController extends BasicController{
 					String handlerUserName=informationEngineers.get(randEngineerIndex);
 					myBoundary.createObjectForUpdateChangeRequestDetails(handlerUserName);
 					break;
+				case SELECT_COMMITTEE_STEP_START_DATE:
+					Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
+					myBoundary.displayTimeRemaining(estimatedEndDate);
+					break;
 				default:
 					break;
 			}
