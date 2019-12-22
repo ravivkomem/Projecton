@@ -6,7 +6,6 @@ public enum ProjectPages {
 	CONNECT_TO_SERVER_PAGE("/client/ClientConnectionPage.fxml"),
 	LOGIN_PAGE("/boundries/LoginPage.fxml"),
 	MENU_PAGE("/boundries/MenuPage.fxml"),
-	DEMO_LANDING_PAGE("/boundries/DemoLandingPage.fxml"),
 	WORK_STATION_PAGE("/boundries/WorkStationPage.fxml"),
 	UPLOAD_REQUEST_PAGE("/boundries/UploadRequestPage.fxml"),
 	TIME_EXTENSION_PAGE("/boundries/TimeExtensionPage.fxml"),
