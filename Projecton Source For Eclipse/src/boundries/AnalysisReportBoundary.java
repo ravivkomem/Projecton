@@ -4,12 +4,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import assets.Toast;
 import controllers.AnalysisReportController;
 import controllers.CommitteDecisionController;
 import entities.ChangeRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 public class AnalysisReportBoundary implements Initializable{
@@ -35,6 +39,9 @@ public class AnalysisReportBoundary implements Initializable{
     @FXML
     private Text subsystemTxt;
     
+    @FXML
+    private Button btnClosePage;
+    
     private ChangeRequest currentChangeRequest;
 
     private AnalysisReportController myController = new AnalysisReportController(this);
@@ -52,6 +59,10 @@ public class AnalysisReportBoundary implements Initializable{
 	}
     
     public void displayAnalysisReport(ArrayList<Object> resultList) {
+    	if(resultList==null) {
+    		return;
+    	}
+    	else {
     	reportPageTitle.setText("Report Of Request No."+currentChangeRequest.getChangeRequestID().toString());
     	subsystemTxt.setText(currentChangeRequest.getSelectedSubsystem());
     	authorTxt.setText((String)resultList.get(0));
@@ -59,6 +70,12 @@ public class AnalysisReportBoundary implements Initializable{
     	advavtagesTextArea.setText((String)resultList.get(2));
     	constraintsTextArea.setText((String)resultList.get(3));
     	durationTxt.setText((String)resultList.get(4));
+    	}
+    }
+    
+    @FXML
+    void closingPage(MouseEvent event) {
+    	((Node) event.getSource()).getScene().getWindow().hide();
     }
 
 }

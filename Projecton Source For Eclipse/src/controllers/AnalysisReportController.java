@@ -44,12 +44,15 @@ public class AnalysisReportController extends BasicController {
 	
 	private ArrayList<Object> createArrayListFromResult(SqlResult result){
 		ArrayList<Object> resultList = new ArrayList<>();
-		resultList.add(result.getResultData().get(0).get(2));
-		resultList.add(result.getResultData().get(0).get(8));
-		resultList.add(result.getResultData().get(0).get(9));
-		resultList.add(result.getResultData().get(0).get(10));
-		resultList.add(result.getResultData().get(0).get(11));
-		return resultList;
+		if(!result.getResultData().isEmpty()) {
+			resultList.add(result.getResultData().get(0).get(2));
+			resultList.add(result.getResultData().get(0).get(8));
+			resultList.add(result.getResultData().get(0).get(9));
+			resultList.add(result.getResultData().get(0).get(10));
+			resultList.add(result.getResultData().get(0).get(11));
+			return resultList;
+		}
+		return null;
 	}
 
 }
