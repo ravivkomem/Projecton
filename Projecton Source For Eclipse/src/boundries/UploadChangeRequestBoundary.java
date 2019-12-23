@@ -158,6 +158,19 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	}	
 	    }
 	    
+	    public void recieveFileUploadId(int fileID)
+	    {
+	    	if(fileID == 1)
+	    	{
+	    		/*File uploaded successfully - DO NOTHING */
+	    	}
+	    	else
+	    	{
+	    		/*TODO: maybe delete the change request */
+	    		Toast.makeText(ProjectFX.mainStage, "File uploaded successfully", 1500, 500, 500);
+	    	}
+	    }
+	    
 	    /*this method will show the window with the new change request id */
 		public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 			Alert alert2 = new Alert(alert);

@@ -109,7 +109,7 @@ public class UploadChangeRequestController extends BasicController {
 					break;
 				case INSERT_NEW_FILE:
 					/*TODO: Do something */
-					int affectedRows = (int)result.getResultData().get(0).get(0);
+					int fileID = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
 					
 					break;
 				default:

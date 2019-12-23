@@ -33,6 +33,7 @@ public class EchoServer extends AbstractServer
    * The default port to listen on.
    */
   final public static int DEFAULT_PORT = 5555;
+  final public static String FILLE_DIRECTORY ="R:\\ServerFiles\\";
   
   //Constructors ****************************************************
   
@@ -70,7 +71,7 @@ public class EchoServer extends AbstractServer
 		 MyFile uploadedFile = sqlFileAction.getMyFile();
 		 int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
 		 String fileExtension = (String)sqlFileAction.getActionVars().get(1);
-		 String filePath = "D:\\"+fileIndex+"."+fileExtension;
+		 String filePath = FILLE_DIRECTORY+fileIndex+"."+fileExtension;
 		 
 		 System.out.println("File path is: " + filePath);
 		 try (FileOutputStream fileOuputStream = new FileOutputStream(filePath))
