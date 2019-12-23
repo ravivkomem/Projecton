@@ -15,8 +15,9 @@ import entities.CommitteeComment;
 import javafx.application.Platform;
 
 /**
+ * 
  * @author Lee Hugi
- * This controller handle with the committee decision page
+ *This controller handle with the committee decision page
  */
 
 public class CommitteDecisionController extends BasicController{

@@ -45,10 +45,6 @@ public class AnalysisReportBoundary implements DataInitializable{
     private ChangeRequest currentChangeRequest;
 
     private AnalysisReportController myController = new AnalysisReportController(this);
-    
-	public void setCurrentChangeRequest(ChangeRequest currentChangeRequest) {
-		this.currentChangeRequest = currentChangeRequest;
-	}
 	
 	@Override
 	public void initData(Object data) {
