@@ -218,6 +218,9 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
+				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
+		
     }
     
 }

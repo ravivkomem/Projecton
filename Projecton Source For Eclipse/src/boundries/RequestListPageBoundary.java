@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class RequestListPageBoundary implements Initializable {
@@ -42,6 +43,7 @@ public class RequestListPageBoundary implements Initializable {
     private Button logoutUser;
     
     private RequestListPageController myController= new RequestListPageController(this);
+    
     /*FXML Methods*/
 
     @FXML
@@ -51,7 +53,7 @@ public class RequestListPageBoundary implements Initializable {
 
     @FXML
     void extraDetailsShows(MouseEvent event) {
-
+    	
     }
 
     @FXML
@@ -62,8 +64,11 @@ public class RequestListPageBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		
+		requstIdClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
+		statusClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("status"));
+		descClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDescription"));
+		subSystemClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
+		myController.fillNecessaryFieldsInTable();
 	}
 
 }

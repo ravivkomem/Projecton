@@ -39,6 +39,8 @@ public enum SqlQueryType {
 	/*Upload Change Request Queries */
 	INSERT_NEW_FILE(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	INSERT_NEW_CHANGE_REQUEST(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
+	/*View Request List Queries*/
+	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER(SqlExecutionType.EXECUTE_QUERY),
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
 

@@ -48,8 +48,8 @@ public class MenuBoundary implements Initializable {
     /*Boundary Methods*/
     @FXML
     void loadMyRequestsPage(ActionEvent event) {
-    	//ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
-    	Toast.makeText(ProjectFX.mainStage, viewMyRequestsButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
+    	//Toast.makeText(ProjectFX.mainStage, viewMyRequestsButton.getText() + " Button not implemented yet", 1500, 500, 500);
     }
 
     @FXML
