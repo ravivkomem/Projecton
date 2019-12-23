@@ -134,30 +134,32 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
-			Parent root;
-			root = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
-			analysisReportBoundary=fxmlLoader.getController();
-			analysisReportBoundary.setCurrentChangeRequest(currentChangeRequest);
-		} catch (IOException e) {
-			e.printStackTrace();
+//		try {
+//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
+//			Parent root;
+//			root = (Parent) fxmlLoader.load();
+//			Stage stage = new Stage();
+//			stage.setScene(new Scene(root));
+//			stage.show();
+//			analysisReportBoundary=fxmlLoader.getController();
+//			analysisReportBoundary.initData(currentChangeRequest);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		if (myAnalysisReportStage == null)
+		{
+			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+					(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),currentChangeRequest);
 		}
-//		if (myAnalysisReportStage == null)
-//		{
-//			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath());
-//		}
-//		else if (myAnalysisReportStage.isShowing())
-//		{
-//			Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
-//		} 
-//		else
-//		{
-//			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath());
-//		}
+		else if (myAnalysisReportStage.isShowing())
+		{
+			Toast.makeText(ProjectFX.mainStage, "Analysis Report Window is already open", 1500, 500, 500);
+		} 
+		else
+		{
+			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+					(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),currentChangeRequest);
+		}
 		
 	}
 
@@ -320,7 +322,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));

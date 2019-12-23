@@ -53,7 +53,7 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     private TableColumn<User, Integer> clmEmployeId;
     @FXML
-    private TableColumn<User, String> EmployeNameColumn;
+    private TableColumn<User, String> EmployeeNameColumn;
 
     /*employee details*/
     @FXML
@@ -102,7 +102,9 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void loadEmployeePage(MouseEvent event) {
-
+		reportPageAnchorPane.setVisible(false);
+		requestListTable.setVisible(false);
+		employeeAnchorPane.setVisible(true);
     }
 
     @FXML
@@ -117,12 +119,17 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void loadReportPage(MouseEvent event) {
-
+    	employeeAnchorPane.setVisible(false);
+		requestListTable.setVisible(false);
+		reportPageAnchorPane.setVisible(true);
     }
 
     @FXML
     void loadRequestListPage(MouseEvent event) {
-
+    	employeeAnchorPane.setVisible(false);
+    	reportPageAnchorPane.setVisible(false);
+		requestListTable.setVisible(true);
+		
     }
 
     @FXML
@@ -157,6 +164,8 @@ public class TechManagerBoundary implements DataInitializable{
 		descriptionColumn
 		.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
 		subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
+		
+		EmployeeNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
 		
 		myController.getAllTheActiveChangeRequest();
 	}

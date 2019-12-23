@@ -149,14 +149,7 @@ public class MysqlConnection {
     			+ "WHERE UserName = ? AND Password = ?";
     	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
-    	sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
-    			+ " WHERE requestId = ?";
-    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
-    			"INSERT INTO icm.committee_comment(requestId,userName,comment)"
-    			+ " VALUES (?,?,?)";
-    	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
-    			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
-    			" ORDER BY CommitteeStepId DESC LIMIT 1";
+    	
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
@@ -213,19 +206,12 @@ public class MysqlConnection {
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
     			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
-    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
-    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
-    			+ " VALUES (?,?,?)";
 		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
 				"INSERT INTO icm.execution_aproves(ExecutionTime)"
 				+ " VALUES (?)";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
-		sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE.getCode()] = 
-				"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestId = ?"
-				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
 		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
 				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		
@@ -235,6 +221,31 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
 				"INSERT INTO icm.time_extension(StepType,NewDate,Reason,Status) " + 
 				"VALUES (?,?,?,'NEW')";
+		
+		/* *****************************************************
+		 * *************** Committee Queries **************
+		 * *****************************************************/
+		sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE.getCode()] = 
+				"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestId = ?"
+				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
+    			+ " WHERE requestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
+    			"INSERT INTO icm.committee_comment(requestId,userName,comment)"
+    			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
+    			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
+    			" ORDER BY CommitteeStepId DESC LIMIT 1";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
+    			+ " VALUES (?,?,?)";
+    	
+    	/* *****************************************************
+		 * *************** Tech Manager Queries **************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
     }
     
 }
