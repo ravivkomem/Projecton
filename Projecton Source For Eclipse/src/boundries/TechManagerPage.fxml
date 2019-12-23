@@ -13,25 +13,24 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.TechManagerBoundary">
    <children>
       <ImageView fitHeight="601.0" fitWidth="758.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../image/2.jpg" />
+            <Image url="@background_image.jpg" />
          </image>
       </ImageView>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="327.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tech Manager">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="14.0" layoutY="562.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="665.0" layoutY="13.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
+      <Button fx:id="btnLogOut" layoutX="665.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#logOutUser" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/logOut.png" />
+                  <Image url="@logout_symbol.png" />
                </image>
             </ImageView>
          </graphic>
@@ -39,96 +38,104 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <TableView fx:id="tblEmoyeeList" layoutX="138.0" layoutY="113.0" onKeyReleased="#tblViewOnClick" onMouseClicked="#tblEmloyeOnClick" prefHeight="311.0" prefWidth="200.0">
-         <columns>
-            <TableColumn fx:id="clmEmployeId" prefWidth="75.0" text="ID" visible="false" />
-            <TableColumn fx:id="clmEmployeName" prefWidth="138.0" text="Employee List" />
-         </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <TextField fx:id="tfSearch" layoutX="138.0" layoutY="87.0" onAction="#tfSearchOnAction" prefHeight="26.0" prefWidth="200.0" promptText="Search Employee" />
-      <Text layoutX="372.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
-      <Text layoutX="372.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
-      <Text layoutX="372.0" layoutY="308.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position:" />
-      <Hyperlink fx:id="hlViewPermission" layoutX="615.0" layoutY="415.0" onAction="#hlViewPermissionOnAction" text="View Permissions" />
-      <TextField layoutX="444.0" layoutY="213.0" />
-      <TextField layoutX="444.0" layoutY="254.0" />
-      <TextField layoutX="444.0" layoutY="289.0" />
-      <Text layoutX="371.0" layoutY="343.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" />
-      <TextField layoutX="444.0" layoutY="326.0" />
       <VBox alignment="TOP_CENTER" prefHeight="322.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
-            <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/home.png" />
+                        <Image url="@home.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnHome" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnHomeOnClick" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Employee">
-               <graphic>
-                  <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../image/supervisor-icon-29.jpg" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../image/btnBreak.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnStore" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnRequestList" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadRequestListPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/request%20list.png" />
+                        <Image url="@17-512.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Report Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnEmployee" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadEmployeePage" prefHeight="71.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Employee">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@supervisor-icon-29.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnReportPage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadReportPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Report Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/25089-200.png" />
+                        <Image url="@request%20list.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../image/btnBreak.png" />
+                  <Image url="@btnBreak.png" />
                </image>
             </ImageView>
          </children>
       </VBox>
-      <TableView layoutX="221.0" layoutY="129.0" prefHeight="218.0" prefWidth="425.0" visible="false">
+      <AnchorPane fx:id="employeeAnchorPane" layoutX="138.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
+         <children>
+            <Text layoutX="231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
+            <TextField fx:id="searchEmployeeTextField" layoutY="1.0" onInputMethodTextChanged="#EmployeeListFiltering" prefHeight="26.0" prefWidth="200.0" promptText="Search Employee" />
+            <TableView fx:id="employeeListTable" layoutY="26.0" onKeyReleased="#ViewEmployeeOnRowClick" onMouseClicked="#tblEmloyeOnClick" prefHeight="311.0" prefWidth="200.0">
+               <columns>
+                  <TableColumn fx:id="clmEmployeId" prefWidth="75.0" text="ID" visible="false" />
+                  <TableColumn fx:id="EmployeNameColumn" prefWidth="138.0" text="Employee List" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <TextField fx:id="userNameTextField" layoutX="305.0" layoutY="134.0" />
+            <Text layoutX="231.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
+            <TextField fx:id="emailTextField" layoutX="305.0" layoutY="168.0" />
+            <Text layoutX="231.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position:" />
+            <TextField fx:id="positionTextField" layoutX="305.0" layoutY="203.0" />
+            <Text layoutX="230.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" />
+            <TextField fx:id="numberTextField" layoutX="305.0" layoutY="241.0" />
+            <TextField fx:id="departmentTextField" layoutX="305.0" layoutY="279.0" />
+            <Text layoutX="228.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
+            <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="View Permissions" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="requestListTable" layoutX="201.0" layoutY="149.0" prefHeight="218.0" prefWidth="425.0">
          <columns>
-            <TableColumn prefWidth="92.0" text="Request ID" />
-            <TableColumn prefWidth="71.33331298828125" text="Step" />
-            <TableColumn prefWidth="163.6666259765625" text="Description " />
-            <TableColumn prefWidth="94.6666259765625" text="SubSystem" />
+            <TableColumn fx:id="requestIdColumn" prefWidth="92.0" text="Request ID" />
+            <TableColumn fx:id="stepColumn" prefWidth="71.33331298828125" text="Step" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="163.6666259765625" text="Description " />
+            <TableColumn fx:id="subsystemColumn" prefWidth="94.6666259765625" text="SubSystem" />
          </columns>
       </TableView>
-      <ComboBox layoutX="249.0" layoutY="185.0" prefHeight="25.0" prefWidth="164.0" promptText="- select report type -" visible="false" />
-      <Button layoutX="444.0" layoutY="185.0" mnemonicParsing="false" text="view" visible="false" />
-      <TextField layoutX="444.0" layoutY="362.0" />
-      <Text layoutX="371.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
+      <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="455.0" prefWidth="603.0" visible="false">
+         <children>
+            <ComboBox fx:id="reportTypeComboBox" layoutX="85.0" layoutY="1.0" prefHeight="25.0" prefWidth="164.0" promptText="- select report type -" />
+            <Button fx:id="viewReportButton" layoutX="249.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#loadSpecificReport" text="view" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
