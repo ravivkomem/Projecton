@@ -123,6 +123,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 	
 	Stage myTimeExtensionStage = null;
+	Stage myAnalysisReportStage= null;
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -133,7 +134,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
-		// give analysis report page the change request id to show the correct report
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
 			Parent root;
@@ -146,6 +146,19 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+//		if (myAnalysisReportStage == null)
+//		{
+//			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath());
+//		}
+//		else if (myAnalysisReportStage.isShowing())
+//		{
+//			Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
+//		} 
+//		else
+//		{
+//			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath());
+//		}
+		
 	}
 
 	@FXML
@@ -159,6 +172,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void loadHomePage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		myTimeExtensionStage.close();
+		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 		
 	}
@@ -166,6 +180,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		myTimeExtensionStage.close();
+		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -255,7 +271,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.currentUser = null;
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		myTimeExtensionStage.close();
+		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
