@@ -43,7 +43,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="40.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Extension Information:" underline="true">
+      <Text layoutX="40.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information:" underline="true">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

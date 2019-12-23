@@ -122,7 +122,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 	
-	Stage myTimeExtensionStage = null;
+	private Stage myTimeExtensionStage = null;
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
