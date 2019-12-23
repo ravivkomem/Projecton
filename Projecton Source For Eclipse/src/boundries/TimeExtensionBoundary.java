@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import assets.Step;
 import assets.Toast;
+import controllers.TimeExtensionController;
 import entities.ChangeRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,6 +49,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
 	 * *************************************/
     private Alert alert = new Alert(AlertType.ERROR);
     private Step myStep;
+    private TimeExtensionController myController = new TimeExtensionController(this);
     
 	/* *************************************
 	 * ********* FXML Methods **************
@@ -60,6 +62,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     @FXML
     void submitTimeExtensionRequest(ActionEvent event) {
     	
+    	/*Check if any of the field are empty */
     	if (datePicker.getValue() == null)
     	{
     		alert.setTitle("ERROR");
@@ -67,10 +70,21 @@ public class TimeExtensionBoundary implements DataInitializable  {
     		alert.setContentText("Date field is empty");
     		alert.show();
     	}
+    	else if (reasonTextField.getText().equals(""))
+    	{
+    		alert.setTitle("ERROR");
+    		alert.setHeaderText("Must fill all required fields");
+    		alert.setContentText("Reason field is empty");
+    		alert.show();
+    	}
+    	/* Both fields are full and valid */
     	else
     	{
     		java.sql.Date selectedDate = java.sql.Date.valueOf(datePicker.getValue());
+    		String timeExtensionReadon = reasonTextField.getText();
+    		
     		System.out.println(selectedDate.toString());
+    		
     	}
     	
     }
@@ -89,10 +103,12 @@ public class TimeExtensionBoundary implements DataInitializable  {
 		try 
 		{
 			Step myStep = (Step) data;
+			timeExtensionHeaderText.setText("Requesting Time Extension For Change Request No."+myStep.getChangeRequestID());
 			currentStepTextField.setText(myStep.getType().getStepName());
 			currentEndDateTextField.setText(myStep.getEstimatedEndDate().toString());
 		}
-		catch (ClassCastException e)
+		/* Either null pointer exception or class cast */
+		catch (Exception e)
 		{
 			e.printStackTrace();
 			Toast.makeText(ProjectFX.mainStage, "Error Loading Time Extension Page", 1500, 500, 500);

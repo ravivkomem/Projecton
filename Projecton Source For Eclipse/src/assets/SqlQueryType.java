@@ -41,6 +41,8 @@ public enum SqlQueryType {
 	INSERT_NEW_CHANGE_REQUEST(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	/*View Request List Queries*/
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER(SqlExecutionType.EXECUTE_QUERY),
+	/*Time Extension Queries*/
+	INSERT_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
 

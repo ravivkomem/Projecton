@@ -161,6 +161,10 @@ public class MysqlConnection {
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
     			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    	
+    	/* *****************************************************
+		 * *************** Work Station Queries ****************
+		 * *****************************************************/
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_NOT_COMMITTEE.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
@@ -199,6 +203,10 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_TESTER_APPOINT_CHANGE_REQUESTS.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND CurrentStep = 'TESTER_APPOINT'";
+    	
+    	/* *****************************************************
+		 * *************** XXX Queries **************
+		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
     	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
@@ -221,6 +229,12 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
 				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		
+		/* *****************************************************
+		 * *************** Time Extension Queries **************
+		 * *****************************************************/
+		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
+				"INSERT INTO icm.time_extension(StepType,NewDate,Reason,Status) " + 
+				"VALUES (?,?,?,'NEW')";
     }
     
 }
