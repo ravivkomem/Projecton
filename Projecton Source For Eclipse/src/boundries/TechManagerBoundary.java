@@ -1,6 +1,7 @@
 package boundries;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -105,6 +106,7 @@ public class TechManagerBoundary implements DataInitializable{
 		reportPageAnchorPane.setVisible(false);
 		requestListTable.setVisible(false);
 		employeeAnchorPane.setVisible(true);
+		myController.getAllTheEmployee();
     }
 
     @FXML
@@ -173,6 +175,22 @@ public class TechManagerBoundary implements DataInitializable{
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest)data;
+	}
+	
+	public void displayChangeRequestTable(ArrayList<ChangeRequest> resultList) {
+		requestList.clear();
+		if (!resultList.isEmpty()) {
+			requestList.addAll(resultList);
+			requestListTable.setItems(requestList);
+		}
+	}
+	
+	public void displayAllTheEmployeesTable(ArrayList<User> resultList) {
+		employeeList.clear();
+		if (!resultList.isEmpty()) {
+			employeeList.addAll(resultList);
+			employeeListTable.setItems(employeeList);
+		}
 	}
 
 }
