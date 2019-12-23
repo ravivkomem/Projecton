@@ -3,6 +3,7 @@ package boundries;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import assets.Step;
 import assets.Toast;
 import entities.ChangeRequest;
 import javafx.event.ActionEvent;
@@ -46,9 +47,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
 	 * ******* Private Variables ***********
 	 * *************************************/
     private Alert alert = new Alert(AlertType.ERROR);
-    private ChangeRequest workingChangeRequest;
-    //private WorkStep workingStep;
-    
+    private Step myStep;
     
 	/* *************************************
 	 * ********* FXML Methods **************
@@ -82,20 +81,20 @@ public class TimeExtensionBoundary implements DataInitializable  {
 		currentEndDateTextField.setEditable(false);
 		
 		reasonTextField.setAlignment(Pos.TOP_LEFT);
-		
-		
 	}
 
 	@Override
 	public void initData(Object data) {
 		
-		if (data instanceof Integer)
+		try 
 		{
-			/*TODO: Need to be step type 
-			 * TODO: Initialize currentStep and current End Date*/
+			Step myStep = (Step) data;
+			currentStepTextField.setText(myStep.getType().getStepName());
+			currentEndDateTextField.setText(myStep.getEstimatedEndDate().toString());
 		}
-		else 
+		catch (ClassCastException e)
 		{
+			e.printStackTrace();
 			Toast.makeText(ProjectFX.mainStage, "Error Loading Time Extension Page", 1500, 500, 500);
 			this.closeTimeExtensionPage(new ActionEvent());
 		}
