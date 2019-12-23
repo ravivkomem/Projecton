@@ -124,6 +124,7 @@ public class TechManagerBoundary implements DataInitializable{
     	employeeAnchorPane.setVisible(false);
 		requestListTable.setVisible(false);
 		reportPageAnchorPane.setVisible(true);
+		
     }
 
     @FXML
@@ -131,7 +132,7 @@ public class TechManagerBoundary implements DataInitializable{
     	employeeAnchorPane.setVisible(false);
     	reportPageAnchorPane.setVisible(false);
 		requestListTable.setVisible(true);
-		
+		myController.getAllTheActiveChangeRequest();
     }
 
     @FXML

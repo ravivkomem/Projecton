@@ -10,7 +10,14 @@ import boundries.TechManagerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.User;
 import javafx.application.Platform;
+
+/**
+ * 
+ * @author Lee Hugi
+ *This controller handle with the Tech Manager page
+ */
 
 public class TechManagerController extends BasicController {
 	private TechManagerBoundary myBoundry;
@@ -38,8 +45,12 @@ public class TechManagerController extends BasicController {
 		Platform.runLater(() -> {
 			switch (result.getActionType()) {
 			case SELECT_ALL_ACTIVE_CHANGE_REQUESTS:
-				ArrayList<ChangeRequest> resultList = createChangeRequestFromResult(result);
-				
+				ArrayList<ChangeRequest> changeRequestList = createChangeRequestFromResult(result);
+				myBoundry.displayChangeRequestTable(changeRequestList);
+				break;
+			case SELECT_ALL_EMPLOYEE:
+				ArrayList<User> userList = createUserListFromResult(result);
+				myBoundry.displayAllTheEmployeesTable(userList);
 				break;
 			default:
 				break;
@@ -48,7 +59,12 @@ public class TechManagerController extends BasicController {
 		});
 		return;
 	}
-
+	
+	/**
+	 * The method create from result ChangeRequest list
+	 * @param result
+	 * @return change request list
+	 */
 	private ArrayList<ChangeRequest> createChangeRequestFromResult(SqlResult result){
 		ArrayList<ChangeRequest> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
@@ -56,6 +72,21 @@ public class TechManagerController extends BasicController {
 					(String)a.get(4), (String)a.get(5), (String)a.get(6),(String)a.get(7), (String)a.get(8),
 					(String)a.get(9), (String)a.get(10), (Date)a.get(11));
 			resultList.add(changeRequest);
+		}
+		return resultList;
+	}
+	
+	/**
+	 * The method create from result User list
+	 * @param result
+	 * @return user list
+	 */
+	private ArrayList<User> createUserListFromResult(SqlResult result){
+		ArrayList<User> resultList=new ArrayList<>();
+		for(ArrayList<Object> a: result.getResultData()) {
+			User user=new User((Integer)a.get(0), (String)a.get(1), (String)a.get(2),(String)a.get(3), 
+				(String)a.get(4), (String)a.get(5),(String)a.get(6),(String)a.get(7), (String)a.get(8), (String)a.get(9));
+			resultList.add(user);
 		}
 		return resultList;
 	}
