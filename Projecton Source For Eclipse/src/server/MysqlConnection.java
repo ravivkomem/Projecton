@@ -219,8 +219,8 @@ public class MysqlConnection {
 		 * *************** Time Extension Queries **************
 		 * *****************************************************/
 		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
-				"INSERT INTO icm.time_extension(StepType,NewDate,Reason,Status) " + 
-				"VALUES (?,?,?,'NEW')";
+				"INSERT INTO icm.time_extension(StepID,StepType,NewDate,Reason,Status) " + 
+				"VALUES (?,?,?,?,'NEW')";
 		
 		/* *****************************************************
 		 * *************** Committee Queries **************
