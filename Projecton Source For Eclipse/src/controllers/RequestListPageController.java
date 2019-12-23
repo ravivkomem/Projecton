@@ -1,19 +1,21 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import entities.ChangeRequest;
-import entities.CommitteeComment;
 import entities.ChangeRequest;
 
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
+import assets.Toast;
+import boundries.ProjectFX;
 import boundries.RequestListPageBoundary;
-import boundries.UploadChangeRequestBoundary;
 import client.ClientConsole;
 import javafx.application.Platform;
 
+@SuppressWarnings("serial")
 public class RequestListPageController extends BasicController {
+	
 	private RequestListPageBoundary myBoundary;
 
 	public RequestListPageController(RequestListPageBoundary myBoundary)
@@ -27,9 +29,10 @@ public class RequestListPageController extends BasicController {
 		{
 			switch(result.getActionType())
 			{
-			case SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER:
-				ArrayList<ChangeRequest> resultList =new ArrayList<>();
-				this.unsubscribeFromClientDeliveries();
+				case SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER:
+					ArrayList<ChangeRequest> resultList = this.parseSqlResultToChangeRequestArrayList(result);
+					/*TODO: Send to boundary */
+					this.unsubscribeFromClientDeliveries();
 				
 				
 			default:
@@ -39,13 +42,39 @@ public class RequestListPageController extends BasicController {
 		});
 		
 	}
-	public ArrayList<ChangeRequest> getChangeRequestNecessaryFields(SqlResult result)
+	public ArrayList<ChangeRequest> parseSqlResultToChangeRequestArrayList(SqlResult result)
 	{
-		ArrayList<ChangeRequest> resultList=new ArrayList <>();
-		for(ArrayList<Object> arr: result.getResultData()) {
-			ChangeRequest currentChangeRequest=new ChangeRequest((int)arr.get(0),(Date)arr.get(2)),(String)arr.get(3),(String)arr.get(4),(String)arr.get(5),(String)arr.get(6),(String)arr.get(7),(String)arr.get(8),(String)arr.get(9),(String)arr.get(10),(String)arr.get(11),(String)arr.get(12))
-			resultList.add(currentChangeRequest);
+		ArrayList<ChangeRequest> resultList = new ArrayList <>();
+		
+		for(ArrayList<Object> resultRow: result.getResultData()) {
+			try
+			{
+				Integer changeRequestID = (int)resultRow.get(0);
+				String InitiatorUserName = (String)resultRow.get(1);
+				Date startDate = (Date)resultRow.get(2);
+				String selectedSubsystem = (String)resultRow.get(3);
+				String currentStateDescription = (String)resultRow.get(4);
+				String desiredChangeDescription = (String)resultRow.get(5);
+				String desiredChangeExplanation = (String)resultRow.get(6);
+				String desiredChangeComments = (String)resultRow.get(7);
+				String status = (String)resultRow.get(8);
+				String currentStep = (String)resultRow.get(9);
+				String handlerUserName = (String)resultRow.get(10);
+				Date endDate = (Date)resultRow.get(11);
+				
+				ChangeRequest currentChangeRequest = new ChangeRequest(
+						changeRequestID, InitiatorUserName, startDate, selectedSubsystem, currentStateDescription, desiredChangeDescription,
+						desiredChangeExplanation, desiredChangeComments, status, currentStep, handlerUserName, endDate);
+				
+				resultList.add(currentChangeRequest);
+				
+			}
+			catch (Exception e)
+			{
+				Toast.makeText(ProjectFX.mainStage, "ERROR IN CONTROLLER", 1500, 500, 500);
+			}
 		}
+		
 		return resultList;
 		
 		

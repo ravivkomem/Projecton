@@ -87,7 +87,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
 	    	FileChooser fileChooser = new FileChooser();
-	    	fileChooser.setTitle("Open Resource File");
+	    	fileChooser.setTitle("Select Resource File");
 	    	File selectedFile = fileChooser.showOpenDialog(ProjectFX.mainStage);
 	    	uploadedFileNameField.setText(selectedFile.getPath());
 	    }
@@ -169,6 +169,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 		@Override
 		/*initialize the combo box in this gui page  */
 		public void initialize(URL location, ResourceBundle resources) {
+			uploadedFileNameField.setEditable(false);
+			
 			subSystemComboBox.getItems().add("Lecturer Information Station");
 			subSystemComboBox.getItems().add("Student Information Station");
 			subSystemComboBox.getItems().add("Employee Information Station");

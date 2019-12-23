@@ -150,11 +150,6 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
     	
-    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
-    			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
-    			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
-    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    	
     	/* *****************************************************
 		 * *************** Work Station Queries ****************
 		 * *****************************************************/
@@ -202,10 +197,6 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
-    	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
-    			"SELECT UserName FROM icm.user "
-    			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
-    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
 		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
 				"INSERT INTO icm.execution_aproves(ExecutionTime)"
 				+ " VALUES (?)";
@@ -249,6 +240,21 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR 'COMMITTEE_MEMBER' OR 'COMMITTEE_DIRECTOR'";
+    	
+    	/* *****************************************************
+		 * *********** Upload Change Request Queries ***********
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
+    			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
+    			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
+    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
+    			"SELECT UserName FROM icm.user "
+    			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
+    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
+    	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
+    			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
+    			+ "VALUES (?,?)";
     }
     
 }
