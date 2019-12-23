@@ -49,7 +49,6 @@ public class MenuBoundary implements Initializable {
     @FXML
     void loadMyRequestsPage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
-    	//Toast.makeText(ProjectFX.mainStage, viewMyRequestsButton.getText() + " Button not implemented yet", 1500, 500, 500);
     }
 
     @FXML
@@ -74,9 +73,7 @@ public class MenuBoundary implements Initializable {
 
     @FXML
     void userLogout(MouseEvent event) {
-    	/*TODO: Remove user from connected list */
-    	ProjectFX.currentUser = null;
-		((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 

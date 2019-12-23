@@ -167,7 +167,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	else
 	    	{
 	    		/*TODO: maybe delete the change request */
-	    		Toast.makeText(ProjectFX.mainStage, "File uploaded successfully", 1500, 500, 500);
+	    		Toast.makeText(ProjectFX.mainStage, "File had problems with upload", 1500, 500, 500);
 	    	}
 	    }
 	    

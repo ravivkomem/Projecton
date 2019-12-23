@@ -63,10 +63,16 @@ public class LoginPageBoundary implements Initializable{
     	}
     	else 
     	{
-    		/*TODO: Add user to the logged users list */
-    		ProjectFX.currentUser = resultUser;
-    		loginLoadingImageView.getScene().getWindow().hide();
-    		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
+    		if (resultUser.isLogged() == true)
+    		{
+    			Toast.makeText(ProjectFX.mainStage, "This user is already logged", 1500, 500, 500);
+    		}
+    		else
+    		{
+    			myController.changeUserLoginStatus(resultUser, true);
+    			ProjectFX.currentUser = resultUser;
+        		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
+    		}
     	}
     }
 

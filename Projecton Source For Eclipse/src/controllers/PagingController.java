@@ -1,9 +1,14 @@
 package controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import assets.SqlAction;
+import assets.SqlQueryType;
+import assets.SqlResult;
 import boundries.DataInitializable;
 import boundries.ProjectFX;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +16,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
-public class PagingController {
+@SuppressWarnings("serial")
+public class PagingController extends BasicController {
 	
 	public void loadBoundary (String path)
 	{
@@ -78,6 +84,42 @@ public class PagingController {
 			e.printStackTrace();
 		}
 		return stage;
+	}
+	
+	public void userLogout()
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(false);
+		varArray.add(ProjectFX.currentUser.getUserID());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_USER_LOGIN_STATUS, varArray);
+		
+		this.sendSqlActionToClient(sqlAction);
+	}
+
+	@Override
+	public void getResultFromClient(SqlResult result) {
+		Platform.runLater(() -> {
+			switch(result.getActionType())
+			{
+				case UPDATE_USER_LOGIN_STATUS:
+					int affectedRows = (int)result.getResultData().get(0).get(0);		
+					this.unsubscribeFromClientDeliveries();
+					
+					if (affectedRows == 0)
+					{
+						System.out.println("Error with user logout");
+					}
+					else
+					{
+						ProjectFX.currentUser = null;
+					}
+					break;
+				default:
+					break;
+			}
+		});
+		return;
+		
 	}
 	
 

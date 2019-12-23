@@ -104,6 +104,10 @@ public class MysqlConnection {
 					Date date = (Date) obj;
 					ps.setDate(i, date);
 				}
+				if (obj instanceof Boolean) {
+					Boolean bool = (Boolean) obj;
+					ps.setBoolean(i, bool);
+				}
 			}
 			
 			switch(sqlAction.getActionType().getExecutionType())
@@ -139,17 +143,15 @@ public class MysqlConnection {
     public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_BY_ID.getCode()] = "UPDATE icm.requirements "
-    			+ "SET InitaitorName = ?, Subsystem = ?, CurrentState = ?, ChangeDescription = ?, Status = ?,"
-    			+ " HandlerName = ? "
-    			+ "WHERE ChangeRequestID = ? ";
-    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements "
-    			+ "WHERE ChangeRequestID = ?";
+    	
+    	/* *****************************************************
+		 * *************** Login Queries ****************
+		 * *****************************************************/
     	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT * FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
-    	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
-    			+ "WHERE UserName = ? AND Password = ?";
-    	
+    	sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE icm.user "
+    			+ "SET isLogged = ? WHERE UserID = ?";
+ 
     	/* *****************************************************
 		 * *************** Work Station Queries ****************
 		 * *****************************************************/

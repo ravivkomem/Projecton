@@ -3,7 +3,7 @@ package entities;
 public class User {
 
 	public User(int userID, String userName, String password, String firstName, String lastName, String email,
-			String department, String jobDescription, String permission, String phoneNumber) {
+			String department, String jobDescription, String permission, String phoneNumber, boolean isLogged) {
 		super();
 		this.userID = userID;
 		this.userName = userName;
@@ -15,6 +15,7 @@ public class User {
 		this.jobDescription = jobDescription;
 		this.permission = permission;
 		this.phoneNumber = phoneNumber;
+		this.isLogged = isLogged;
 	}
 	
 	private int userID;
@@ -27,7 +28,14 @@ public class User {
 	private String jobDescription;
 	private String permission;
 	private String phoneNumber;
+	private boolean isLogged;
 	
+	public boolean isLogged() {
+		return isLogged;
+	}
+	public void setLogged(boolean isLogged) {
+		this.isLogged = isLogged;
+	}
 	public int getUserID() {
 		return userID;
 	}

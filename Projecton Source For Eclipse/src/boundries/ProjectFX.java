@@ -1,6 +1,7 @@
 package boundries;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import assets.ProjectPages;
 import controllers.PagingController;
@@ -8,8 +9,11 @@ import entities.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class ProjectFX extends Application {
 
@@ -42,6 +46,32 @@ public class ProjectFX extends Application {
 		mainStage = stage;
 		pagingController = new PagingController();
 		
+		mainStage.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+		
 	}
+	
+	private void closeWindowEvent(WindowEvent event) {
+        System.out.println("Window close request ...");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.getButtonTypes().remove(ButtonType.OK);
+        alert.getButtonTypes().add(ButtonType.CANCEL);
+        alert.getButtonTypes().add(ButtonType.YES);
+        alert.setTitle("Quit application");
+        alert.setContentText(String.format("Are you sure you want to quit?"));
+        alert.initOwner(mainStage.getOwner());
+        Optional<ButtonType> res = alert.showAndWait();
+
+        if(res.isPresent()) 
+        {
+            if(res.get().equals(ButtonType.CANCEL))
+            {
+            	event.consume();
+            }
+            else if (currentUser != null)
+            {
+            	pagingController.userLogout();
+            }
+        }
+    }
 
 }
