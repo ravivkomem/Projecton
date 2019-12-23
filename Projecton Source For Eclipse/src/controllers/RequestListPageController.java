@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 import entities.ChangeRequest;
+import entities.CommitteeComment;
 import entities.ChangeRequest;
 
 import assets.SqlAction;
@@ -40,7 +41,13 @@ public class RequestListPageController extends BasicController {
 	}
 	public ArrayList<ChangeRequest> getChangeRequestNecessaryFields(SqlResult result)
 	{
-		ArrayList<ChangeRequest>
+		ArrayList<ChangeRequest> resultList=new ArrayList <>();
+		for(ArrayList<Object> arr: result.getResultData()) {
+			ChangeRequest currentChangeRequest=new ChangeRequest((int)arr.get(0),(Date)arr.get(2)),(String)arr.get(3),(String)arr.get(4),(String)arr.get(5),(String)arr.get(6),(String)arr.get(7),(String)arr.get(8),(String)arr.get(9),(String)arr.get(10),(String)arr.get(11),(String)arr.get(12))
+			resultList.add(currentChangeRequest);
+		}
+		return resultList;
+		
 		
 	}
 	public void fillNecessaryFieldsInTable()
