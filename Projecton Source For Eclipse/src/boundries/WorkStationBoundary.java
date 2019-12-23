@@ -245,7 +245,7 @@ public class WorkStationBoundary implements Initializable{
 			viewTesterAppointButton.setVisible(true);
 		}
 		
-		/* Call the method to automaticaly display */
+		/* Call the method to automatically display */
 		this.displayAllWorkChangeRequests(null);
 	}
 

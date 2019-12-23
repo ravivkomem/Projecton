@@ -1,12 +1,14 @@
 package boundries;
 
 import java.net.URL;
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import assets.Step;
+import assets.StepType;
 import assets.Toast;
 import controllers.TimeExtensionController;
-import entities.ChangeRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
@@ -47,9 +50,11 @@ public class TimeExtensionBoundary implements DataInitializable  {
     /* *************************************
 	 * ******* Private Variables ***********
 	 * *************************************/
-    private Alert alert = new Alert(AlertType.ERROR);
-    private Step myStep;
+    private Alert alert = new Alert(AlertType.NONE);
+    //private Step myStep;
+    private Step myStep = new Step(StepType.COMMITTEE, 2, 78, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
     private TimeExtensionController myController = new TimeExtensionController(this);
+    private TimeExtensionBoundary myInstance = this;
     
 	/* *************************************
 	 * ********* FXML Methods **************
@@ -65,6 +70,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	/*Check if any of the field are empty */
     	if (datePicker.getValue() == null)
     	{
+    		alert.setAlertType(AlertType.ERROR);
     		alert.setTitle("ERROR");
     		alert.setHeaderText("Must fill all required fields");
     		alert.setContentText("Date field is empty");
@@ -72,23 +78,64 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	}
     	else if (reasonTextField.getText().equals(""))
     	{
+    		alert.setAlertType(AlertType.ERROR);
     		alert.setTitle("ERROR");
     		alert.setHeaderText("Must fill all required fields");
     		alert.setContentText("Reason field is empty");
     		alert.show();
     	}
-    	/* Both fields are full and valid */
     	else
     	{
-    		java.sql.Date selectedDate = java.sql.Date.valueOf(datePicker.getValue());
-    		String timeExtensionReadon = reasonTextField.getText();
-    		
-    		System.out.println(selectedDate.toString());
-    		
+    		Date selectedDate = Date.valueOf(datePicker.getValue());
+        	/* Date is prior to the current date */
+        	if (selectedDate.toLocalDate().isBefore(myStep.getEstimatedEndDate().toLocalDate()))
+        	{
+        		alert.setAlertType(AlertType.ERROR);
+        		alert.setTitle("ERROR");
+        		alert.setHeaderText("Date error");
+        		alert.setContentText("You can not select a date before the current estimated end date");
+        		alert.show();
+        	}
+        	/* Both fields are full and valid */
+        	else
+        	{
+        		String timeExtensionReason = reasonTextField.getText();
+        		myController.submitTimeExtensionRequest(myStep, selectedDate, timeExtensionReason);
+        	}
+    	}
+    }
+
+    /* *************************************
+	 * ********* Public Methods ************
+	 * *************************************/
+    
+    public void recieveSubmissionAnswer(int affectedRows)
+    {
+    	if (affectedRows == 1)
+    	{
+    		alert.setAlertType(AlertType.CONFIRMATION);
+    		alert.setTitle("Success");
+    		alert.setHeaderText("Your time extension request was submitted successfully");
+    		alert.setContentText("The page will now close");
+    		alert.show();
+    		alert.setOnCloseRequest(new EventHandler <DialogEvent>() {
+    			 @Override
+		        public void handle (DialogEvent dialogEvent) {
+    				 myInstance.closeTimeExtensionButton.getScene().getWindow().hide();
+		        }
+    		});
+    	}
+    	else
+    	{
+    		alert.setAlertType(AlertType.WARNING);
+    		alert.setTitle("WARNING");
+    		alert.setHeaderText("SERVER ISSUES");
+    		alert.setContentText("The request was not recieved by the server, please try again later");
+    		alert.show();
     	}
     	
     }
-
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		currentStepTextField.setEditable(false);
