@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="531.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="514.0" prefWidth="531.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.TimeExtensionBoundary">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="531.0" layoutY="116.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="514.0" fitWidth="531.0" pickOnBounds="true">
          <image>
             <Image url="@background_image.jpg" />
          </image>
@@ -20,23 +21,49 @@
             <Font size="32.0" />
          </font>
       </Text>
-      <Text layoutX="52.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional day">
+      <Text layoutX="40.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New day">
          <font>
-            <Font size="20.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Text layoutX="52.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reason:" wrappingWidth="93.13671875">
+      <Text layoutX="40.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reason:" wrappingWidth="93.13671875">
          <font>
-            <Font size="20.0" />
+            <Font size="16.0" />
          </font>
       </Text>
-      <Text fill="RED" layoutX="376.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Error" wrappingWidth="83.99999925494194">
+      <TextField fx:id="reasonTextField" layoutX="110.0" layoutY="303.0" prefHeight="105.0" prefWidth="201.0" />
+      <Button fx:id="subimitTimeExtensionButton" layoutX="216.0" layoutY="419.0" mnemonicParsing="false" onAction="#submitTimeExtensionRequest" prefHeight="27.0" prefWidth="100.0" text="Submit Form">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="closeTimeExtensionButton" layoutX="416.0" layoutY="464.0" mnemonicParsing="false" onAction="#closeTimeExtensionPage" prefHeight="25.0" prefWidth="84.0" text="Close" />
+      <DatePicker fx:id="datePicker" layoutX="137.0" layoutY="268.0" />
+      <Text fx:id="timeExtensionHeaderText" layoutX="40.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requesting Time Extension For Change Request No.XX" wrappingWidth="402.13671875">
+         <font>
+            <Font size="16.0" />
          </font>
       </Text>
-      <TextField layoutX="213.0" layoutY="134.0" prefHeight="25.0" prefWidth="84.0" />
-      <TextField layoutX="161.0" layoutY="228.0" prefHeight="59.0" prefWidth="146.0" />
-      <Button layoutX="234.0" layoutY="338.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="63.0" text="Submit" />
+      <Text layoutX="40.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Extension Information:" underline="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="40.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Step">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="currentStepTextField" layoutX="180.0" layoutY="137.0" prefHeight="25.0" prefWidth="128.0" text="YYYY" />
+      <Text layoutX="40.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current End Date">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="currentEndDateTextField" layoutX="180.0" layoutY="181.0" prefHeight="25.0" prefWidth="128.0" text="ZZZZ" />
+      <Text layoutX="40.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fill Form:" underline="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

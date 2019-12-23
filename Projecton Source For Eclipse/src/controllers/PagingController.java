@@ -5,8 +5,10 @@ import java.io.IOException;
 import boundries.DataInitializable;
 import boundries.ProjectFX;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 public class PagingController {
@@ -26,6 +28,7 @@ public class PagingController {
 		}
 	}
 	
+	/*TODO: Check if the boundary is indeed DataInitializable */
 	public void loadBoundary (String path, Object obj)
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -39,9 +42,25 @@ public class PagingController {
 			ProjectFX.mainStage.show();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public Stage loadAdditionalStage(String path)
+	{
+		Stage stage = null;
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+			Parent root;
+			root = (Parent) loader.load();
+			stage = new Stage();
+			stage.setScene(new Scene(root));
+			stage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return stage;
+	}
+	
 
 }
