@@ -11,6 +11,7 @@ import assets.Toast;
 import boundries.CommitteeDecisionBoundary;
 import boundries.ProjectFX;
 import client.ClientConsole;
+import entities.ChangeRequest;
 import entities.CommitteeComment;
 import javafx.application.Platform;
 
@@ -80,6 +81,14 @@ public class CommitteDecisionController extends BasicController{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
+	public void getCommitteeStepDetails(Integer changeRequestId) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestId);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}

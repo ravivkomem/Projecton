@@ -73,12 +73,12 @@ public class PagingController extends BasicController {
 		Stage stage = null;
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-			DataInitializable boundary = loader.getController();
-			boundary.initData(data);
 			Parent root;
 			root = (Parent) loader.load();
 			stage = new Stage();
 			stage.setScene(new Scene(root));
+			DataInitializable boundary = loader.getController();
+			boundary.initData(data);
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -17,6 +17,7 @@ import controllers.CommitteDecisionController;
 import controllers.LoginController;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.Step;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -120,6 +121,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
+	private Step committeeStep;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -175,8 +177,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		myTimeExtensionStage.close();
-		myAnalysisReportStage.close();
+		if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 		
 	}
@@ -184,8 +188,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		myTimeExtensionStage.close();
-		myAnalysisReportStage.close();
+		if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -275,8 +281,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
-		myTimeExtensionStage.close();
-		myAnalysisReportStage.close();
+		if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
@@ -367,6 +375,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
 		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
+		myController.getCommitteeStepDetails(currentChangeRequest.getChangeRequestID());
 	}
 	
 	/*this method will show the window with the new change request id */

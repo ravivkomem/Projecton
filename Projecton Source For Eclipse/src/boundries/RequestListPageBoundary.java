@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import assets.Toast;
 import controllers.PagingController;
 import controllers.RequestListPageController;
 import controllers.UploadChangeRequestController;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class RequestListPageBoundary implements Initializable {
 	/*Table FXML*/
@@ -36,6 +38,9 @@ public class RequestListPageBoundary implements Initializable {
 
     @FXML
     private TableColumn<ChangeRequest, String> subSystemClm;
+    /*FXML TextField*/
+    @FXML
+    private Text noSubmitingRequest;
 
     /*Button FXML*/
     @FXML
@@ -74,15 +79,21 @@ public class RequestListPageBoundary implements Initializable {
 		statusClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("status"));
 		descClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDescription"));
 		subSystemClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
+		noSubmitingRequest.setVisible(false);
 		myController.fillNecessaryFieldsInTable();
 	}
 	public void displayAllChangeRequestsForSpecifcUser(ArrayList<ChangeRequest> resultList)
 	{
 		requestList.clear();
-		if (!resultList.isEmpty()) {
+		if (!resultList.isEmpty()) 
+		{
 			requestList.addAll(resultList);
-			basicDetailsTbl.setItems(requestList);
-			
+			basicDetailsTbl.setItems(requestList); 
+		}
+		else
+		{
+			noSubmitingRequest.setVisible(true);
+			viewExtraDetailsBtn.setVisible(false);
 		}
 		
 	}
