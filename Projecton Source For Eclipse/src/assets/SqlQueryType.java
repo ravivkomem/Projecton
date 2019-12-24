@@ -46,6 +46,8 @@ public enum SqlQueryType {
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER(SqlExecutionType.EXECUTE_QUERY),
 	/*Time Extension Queries*/
 	INSERT_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
+	/* Appoint Tester Queries */
+	SELECT_ALL_COMMITTEE_MEMBERS(SqlExecutionType.EXECUTE_QUERY),
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
 

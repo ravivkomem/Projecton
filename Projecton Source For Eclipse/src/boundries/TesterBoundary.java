@@ -60,6 +60,8 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 	    @FXML
 	    private ComboBox<String> testapprovalComboBox;
 
+	    private static final String APROVE_STRING = "Approval";
+	    private static final String DENY_STRING = "Deny";
 	    @FXML
 	    void LogOut(MouseEvent event) {
 	    	ProjectFX.currentUser = null;
@@ -121,18 +123,19 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 	    @FXML
 	    void setTest(MouseEvent event) {
 	    	switch (testapprovalComboBox.getSelectionModel().getSelectedItem()) {
-			case "Approve":
+			case APROVE_STRING:
 				// Update Information and move to next step
 				mycontroller.updateChangeRequestStep(currentChangeRequest, "-","CLOSED",updateStepDate);
 				mycontroller.updateChangeRequestCurrentStep("CLOSING_STEP","",currentChangeRequest.getChangeRequestID());
 				ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 				break;
-			case "Deny":
+			case DENY_STRING:
 				FailDetailsPane.setVisible(true);
 				
 				break;
 			
 			default:
+				System.out.println("Error reached default in switch case");
 				break;
 			}
 	    }
@@ -167,8 +170,8 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 		// TODO Auto-generated method stub
 		timeremainingField.setEditable(false);
 		FailDetailsPane.setVisible(false);
-		testapprovalComboBox.getItems().add("Deny");
-		testapprovalComboBox.getItems().add("Approval");
+		testapprovalComboBox.getItems().add(DENY_STRING);
+		testapprovalComboBox.getItems().add(APROVE_STRING);
 		
 		
 	}
