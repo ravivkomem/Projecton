@@ -32,6 +32,12 @@ import javafx.stage.Stage;
 		private Button btnRefresh;
 		
 		@FXML
+		private Text timeRemainingTxt;
+		
+	    @FXML
+	    private Text delayTimeTxt;
+		
+		@FXML
 		private Text txtBuildChangeRequestDetails;
 		
 		@FXML
@@ -48,6 +54,9 @@ import javafx.stage.Stage;
 
 	    @FXML
 	    private Button btnCommitExcution;
+	    
+	    @FXML
+	    private TextArea timeRemainingTextAria;
 
 	    @FXML
 	    private DatePicker txtTimeForExecution;
