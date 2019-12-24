@@ -53,8 +53,13 @@
             <Button fx:id="btnSendDecision" layoutX="253.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#sendDirectorDecision" text="Send" />
          </children>
       </AnchorPane>
-      <VBox alignment="TOP_CENTER" prefHeight="419.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="458.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
+            <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icm%20icom%20til.png" />
+               </image>
+            </ImageView>
             <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
@@ -154,5 +159,10 @@
          </font>
       </Button>
       <Text fx:id="delayTimeTxt" layoutX="634.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delay Time" visible="false" />
+      <Text fx:id="changeRequestNoText" layoutX="333.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request No.">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

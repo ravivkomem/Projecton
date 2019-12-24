@@ -231,6 +231,9 @@ public class MysqlConnection {
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
+    			"SELECT * FROM icm.committee_step WHERE ChangeRequestId = ?"
+    			+ " ORDER BY CommitteeStepId DESC LIMIT 1";
     	
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************

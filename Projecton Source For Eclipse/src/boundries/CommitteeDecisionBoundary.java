@@ -17,6 +17,7 @@ import controllers.CommitteDecisionController;
 import controllers.LoginController;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.Step;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -114,10 +115,13 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     
     @FXML
     private Text delayTimeTxt;
+    @FXML
+    private Text changeRequestNoText;
 
 	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
+	private Step committeeStep;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
@@ -273,7 +277,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
-		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 		myTimeExtensionStage.close();
 		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
@@ -311,12 +314,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		if(estimatedEndDate.before(todayDate)) {
 			delayTimeTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
-			timeRemainingTextAria.setText(""+(daysBetween-1));
+			timeRemainingTextAria.setText(""+(daysBetween-1)+" Days");
 		}
 		else {
 			timeRemainingTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
-			timeRemainingTextAria.setText(""+(daysBetween+1));
+			timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
 		}
 		
 	}
@@ -336,7 +339,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("More information");
 		
 		timeRemainingTextAria.setEditable(false);
-
+		
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
 		btnCommitteeDirector.setVisible(false);
@@ -362,9 +365,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
+		changeRequestNoText.setText("Change Request No."+currentChangeRequest.getChangeRequestID());
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
 		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
+		myController.getCommitteeStepDetails(currentChangeRequest.getChangeRequestID());
 	}
 	
 	/*this method will show the window with the new change request id */

@@ -15,11 +15,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -87,18 +89,14 @@ public class TechManagerBoundary implements DataInitializable{
     private ComboBox<String> reportTypeComboBox;
     
 	private ChangeRequest currentChangeRequest;
+	private User employeeUser;
 	TechManagerController myController = new TechManagerController(this);
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
 
     @FXML
     void EmployeeListFiltering(InputMethodEvent event) {
-
-    }
-
-    @FXML
-    void ViewEmployeeOnRowClick(KeyEvent event) {
-
+    	
     }
 
     @FXML
@@ -124,7 +122,7 @@ public class TechManagerBoundary implements DataInitializable{
     	employeeAnchorPane.setVisible(false);
 		requestListTable.setVisible(false);
 		reportPageAnchorPane.setVisible(true);
-		
+		/*TODO reports*/
     }
 
     @FXML
@@ -142,18 +140,13 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void loagViewPermissionsPage(MouseEvent event) {
-
+    	
     }
 
     @FXML
     void logOutUser(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
-    }
-
-    @FXML
-    void tblEmloyeOnClick(MouseEvent event) {
-
     }
 
 	@Override
@@ -170,6 +163,22 @@ public class TechManagerBoundary implements DataInitializable{
 		
 		EmployeeNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
 		
+		employeeListTable.setRowFactory(tv -> {
+		    TableRow<User> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
+		        {
+		        	employeeUser = row.getItem();
+		            userNameTextField.setText(employeeUser.getUserName());
+		            emailTextField.setText(employeeUser.getEmail());
+		            positionTextField.setText(employeeUser.getPermission());
+		            numberTextField.setText(employeeUser.getPhoneNumber());
+		            departmentTextField.setText(employeeUser.getDepartment());
+		        }
+		    });
+		    return row ;
+		});
+
 		myController.getAllTheActiveChangeRequest();
 	}
 
