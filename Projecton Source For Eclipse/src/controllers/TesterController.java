@@ -35,12 +35,23 @@ private TesterBoundary MyBoundary;
 			MyBoundary.updateTesterPageToDBSuccessfully(affectedRows);
 			
 			break;
+		case SELECT_COMMITTEE_STEP_START_DATE:
+			Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
+			MyBoundary.displayTimeRemaining(estimatedEndDate);
+			break;
 
 		default:
 			break;
 		}
 		});
 		return;
+	}
+	public void getStartTimeFromTesterStep(Integer changeRequestId) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestId);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
 	public void updateChangeRequestStep(ChangeRequest changerequest, String failReport,String Status ,Date date) {

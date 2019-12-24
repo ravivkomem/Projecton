@@ -181,6 +181,7 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 		// TODO Auto-generated method stub
 		currentChangeRequest = (ChangeRequest)data;
 		pageHeaderText.setText("Working on change request No."+ currentChangeRequest.getChangeRequestID());
+		mycontroller.getStartTimeFromTesterStep(currentChangeRequest.getChangeRequestID());
 	}
 
 	}

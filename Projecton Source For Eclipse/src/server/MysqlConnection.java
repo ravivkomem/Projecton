@@ -205,6 +205,9 @@ public class MysqlConnection {
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
 		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
 				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
+		sqlArray[SqlQueryType.SELECT_TESTER_STEP_START_DATE.getCode()] = 
+				"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestId = ?"
+				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
 		
 		/* *****************************************************
 		 * *************** Time Extension Queries **************
