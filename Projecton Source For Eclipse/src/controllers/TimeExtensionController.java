@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
-import assets.Step;
 import boundries.TimeExtensionBoundary;
+import entities.Step;
 import javafx.application.Platform;
 
 @SuppressWarnings("serial")

@@ -28,14 +28,14 @@ public class TechManagerController extends BasicController {
 
 	public void getAllTheActiveChangeRequest() {
 		//create varArray or send null?
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS, null);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS, new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
 	public void getAllTheEmployee() {
 		//create varArray or send null?
-				SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, null);
+				SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, new ArrayList<Object>());
 				this.subscribeToClientDeliveries();		//subscribe to listener array
 				ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}

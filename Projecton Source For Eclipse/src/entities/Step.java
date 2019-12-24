@@ -1,6 +1,8 @@
-package assets;
+package entities;
 
 import java.sql.Date;
+
+import assets.StepType;
 
 /** 
  * 
