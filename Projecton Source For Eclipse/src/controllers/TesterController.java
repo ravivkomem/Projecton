@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import assets.SqlAction;
@@ -41,14 +42,27 @@ private TesterBoundary MyBoundary;
 		});
 		return;
 	}
-	public void updateChangeRequestStep(ChangeRequest changerequest, String failReport) {
+	
+	public void updateChangeRequestStep(ChangeRequest changerequest, String failReport,String Status ,Date date) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(failReport);
+		varArray.add(Status);
+		varArray.add(date);
 		varArray.add(changerequest.getChangeRequestID());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TESTER_STEP,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	public void updateChangeRequestCurrentStep(String currentStep, String HamdlerUserName, Integer changeRequestID) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(currentStep);
+		varArray.add(HamdlerUserName);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 
 	
 

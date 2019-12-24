@@ -113,8 +113,8 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 	    @FXML
 	    void setReportFail(MouseEvent event) {
 	    	//currentChangeRequest.setCurrentStep("Execution");
-			mycontroller.updateChangeRequestStep(currentChangeRequest,failuredetailsField.getText(),"CLOSED",updateStepDate);
-
+			mycontroller.updateChangeRequestStep(currentChangeRequest,failuredetailsField.getText().toString(),"CLOSED",updateStepDate);
+			mycontroller.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT","",currentChangeRequest.getChangeRequestID());
 	    }
 
 	    @FXML
@@ -123,6 +123,7 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 			case "Approve":
 				// Update Information and move to next step
 				mycontroller.updateChangeRequestStep(currentChangeRequest, "-","CLOSED",updateStepDate);
+				mycontroller.updateChangeRequestCurrentStep("CLOSING_STEP","",currentChangeRequest.getChangeRequestID());
 				break;
 			case "Deny":
 				FailDetailsPane.setVisible(true);
