@@ -115,6 +115,7 @@ public class RequestListPageBoundary implements Initializable {
 		{
 			noSubmitingRequest.setVisible(true);
 			viewExtraDetailsBtn.setVisible(false);
+			displaySpecificID.setVisible(false);
 		}
 		
 	}
