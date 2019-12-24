@@ -65,6 +65,7 @@ public class RequestListPageBoundary implements Initializable {
     @FXML
     void logout(MouseEvent event) {
     	ProjectFX.pagingController.userLogout();
+		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
 	@Override
