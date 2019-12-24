@@ -39,8 +39,13 @@
       </Button>
       <Text layoutX="334.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test Results" wrappingWidth="91.33593446016312" />
       <Text fx:id="timeDisplayText" layoutX="557.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
-      <VBox alignment="TOP_CENTER" prefHeight="249.0" prefWidth="127.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="332.0" prefWidth="127.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
+            <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icm%20icom%20til.png" />
+               </image>
+            </ImageView>
             <Button fx:id="homepageButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
