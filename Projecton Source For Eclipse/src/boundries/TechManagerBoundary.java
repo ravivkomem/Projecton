@@ -88,7 +88,6 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     private ComboBox<String> reportTypeComboBox;
     
-	private ChangeRequest currentChangeRequest;
 	private User employeeUser;
 	TechManagerController myController = new TechManagerController(this);
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
@@ -184,7 +183,7 @@ public class TechManagerBoundary implements DataInitializable{
 
 	@Override
 	public void initData(Object data) {
-		currentChangeRequest = (ChangeRequest)data;
+		
 	}
 	
 	public void displayChangeRequestTable(ArrayList<ChangeRequest> resultList) {
