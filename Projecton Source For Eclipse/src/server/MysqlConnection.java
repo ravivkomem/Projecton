@@ -200,9 +200,9 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
-		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
-				"INSERT INTO icm.execution_aproves(ExecutionTime)"
-				+ " VALUES (?)";
+		//sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
+				//"INSERT INTO icm.execution_aproves(ExecutionTime)"
+				//+ " VALUES (?)";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";

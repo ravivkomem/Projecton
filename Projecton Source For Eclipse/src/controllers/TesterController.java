@@ -50,6 +50,7 @@ private TesterBoundary MyBoundary;
 		varArray.add(date);
 		varArray.add(changerequest.getChangeRequestID());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TESTER_STEP,varArray);
+		
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
