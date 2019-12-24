@@ -22,6 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class WorkStationBoundary implements Initializable{
 
@@ -74,8 +75,9 @@ public class WorkStationBoundary implements Initializable{
      * ********** Private Variables ***********
      * ***************************************/
     private WorkStationController myController = new WorkStationController(this);
-	ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
+	private ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
 	private ChangeRequest clickedChangeRequest;
+	Stage myTesterAppointStage = null;
 	
     /* ***************************************
      * ********** FXML Methods ***************
@@ -142,8 +144,19 @@ public class WorkStationBoundary implements Initializable{
     			
     			/*Committee Director setting tester status */
     			case "TESTER_APPOINT": 
-    				/*TODO: Load the committee director page */
-    				Toast.makeText(ProjectFX.mainStage, "Not implemented yet - TESTER_COMMITTEE_DIRECTOR_APPOINT", 1500, 500, 500);
+    				if (myTesterAppointStage == null)
+    				{
+    					myTesterAppointStage = ProjectFX.pagingController.loadAdditionalStage
+    							(ProjectPages.APPOINT_TESTER.getPath(),clickedChangeRequest);
+    				}
+    				else if (myTesterAppointStage.isShowing())
+    				{
+    					Toast.makeText(ProjectFX.mainStage, "Analysis Report Window is already open", 1500, 500, 500);
+    				} 
+    				else
+    				{
+    					myTesterAppointStage.show();
+    				}
     				break;
     			
     			/*Tester Step Statuses */

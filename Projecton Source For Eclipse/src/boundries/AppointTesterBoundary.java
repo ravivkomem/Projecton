@@ -1,10 +1,14 @@
 package boundries;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import assets.Toast;
 import controllers.AppointTesterController;
 import entities.ChangeRequest;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,7 +26,7 @@ public class AppointTesterBoundary implements DataInitializable{
 	
 	/*ComboBox*/
     @FXML
-    private ComboBox<?> committeMembersComboBox;
+    private ComboBox<String> committeMembersComboBox;
     /*Text*/
     @FXML
     private Text changeRequestNumberTextField;
@@ -43,6 +47,7 @@ public class AppointTesterBoundary implements DataInitializable{
 	 * **** Private Objects *****
 	 * **************************/
     private ChangeRequest myChangeRequest;
+    private ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
     private AppointTesterController myController = new AppointTesterController(this);
 
     /* **************************
@@ -50,12 +55,12 @@ public class AppointTesterBoundary implements DataInitializable{
 	 * **************************/
     @FXML
     void closeAppointTesterPage(ActionEvent event) {
-
+    	backButton.getScene().getWindow().hide();
     }
 
     @FXML
     void setCommitteMember(ActionEvent event) {
-
+    	
     }
 
     /* ****************************
@@ -84,6 +89,27 @@ public class AppointTesterBoundary implements DataInitializable{
 			ChangeRequest changeRequest = (ChangeRequest)data;
 			myChangeRequest = changeRequest;
 			myController.getAllCommitteMembers();
+			list.add(myChangeRequest);
+			
+		}
+		
+	}
+
+	public void recieveAllCommitteeMembers(ArrayList<String> committeeMembersList) {
+		
+		if (committeeMembersList.isEmpty())
+		{
+			Toast.makeText(ProjectFX.mainStage, "Error recieving committee members", 1500, 500, 500);
+			this.closeAppointTesterPage(null);
+		}
+		else
+		{
+			committeMembersComboBox.setVisible(true);
+			changeRequestDetailsTableView.setVisible(true);
+			setButton.setVisible(true);
+			committeMembersComboBox.getItems().addAll(committeeMembersList);
+			changeRequestDetailsTableView.getItems().addAll(list);
+			changeRequestNumberTextField.setText("Change Request No." + myChangeRequest.getChangeRequestID());
 			
 		}
 		
