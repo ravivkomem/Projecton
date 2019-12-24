@@ -35,7 +35,7 @@ private TesterBoundary MyBoundary;
 			MyBoundary.updateTesterPageToDBSuccessfully(affectedRows);
 			
 			break;
-		case SELECT_COMMITTEE_STEP_START_DATE:
+		case SELECT_TESTER_STEP_START_DATE:
 			Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
 			MyBoundary.displayTimeRemaining(estimatedEndDate);
 			break;
@@ -49,7 +49,7 @@ private TesterBoundary MyBoundary;
 	public void getStartTimeFromTesterStep(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE,varArray);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_TESTER_STEP_START_DATE,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}

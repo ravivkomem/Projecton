@@ -207,7 +207,7 @@ public class MysqlConnection {
 				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		sqlArray[SqlQueryType.SELECT_TESTER_STEP_START_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestId = ?"
-				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
+				+ " ORDER BY TesterStepId DESC LIMIT 1";
 		
 		/* *****************************************************
 		 * *************** Time Extension Queries **************

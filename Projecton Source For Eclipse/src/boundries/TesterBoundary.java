@@ -64,8 +64,7 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 	    private static final String DENY_STRING = "Deny";
 	    @FXML
 	    void LogOut(MouseEvent event) {
-	    	ProjectFX.currentUser = null;
-			//((Node) event.getSource()).getScene().getWindow().hide(); 		// hiding primary window
+	    	ProjectFX.pagingController.userLogout();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 
