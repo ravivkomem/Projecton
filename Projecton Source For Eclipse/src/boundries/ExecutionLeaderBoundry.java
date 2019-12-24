@@ -1,8 +1,11 @@
 package boundries;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.sql.Date;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -25,6 +28,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 	public class ExecutionLeaderBoundry implements Initializable,DataInitializable {
+		@FXML
+		private Button btnRefresh;
+		
 		@FXML
 		private Text txtBuildChangeRequestDetails;
 		
@@ -71,6 +77,10 @@ import javafx.stage.Stage;
  
 	    private ExecutionLeaderController myController = new ExecutionLeaderController(this);
 	    private ChangeRequest myChangerequest;
+	    private int flag=0;
+	    java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	   
+	   
 	    
 	    
 	    
@@ -92,9 +102,13 @@ import javafx.stage.Stage;
 			txtWaitingForTomeApprovalPopUp.setVisible(false);
 			btnCommitExecution.setVisible(false);
 			txtWorkingOnChangeRequestNumber.setVisible(true);
-			
-				
+			btnRefresh.setVisible(false);	
 			//txtChangeRequestDetails.setText(myChangerequest.getChangeRequestDescription());	
+		}
+		
+		public void setflag()
+		{
+			flag=1;
 		}
 	    
 		@FXML
@@ -108,6 +122,10 @@ import javafx.stage.Stage;
 				Date estimatedDateChoosen = Date.valueOf(txtTimeForExecution.getValue());
 				myController.insertNewEstimatedDateToExecutionStepAndChangeRequestIDStep(estimatedDateChoosen,myChangerequest.getChangeRequestID());
 				myController.updateNewChangeRequestIdStepToExecutionApprovedTime(myChangerequest.getChangeRequestID());
+				btnRefresh.setVisible(true);
+				txtBuildEnterTimeRequiredForExecution.setVisible(false);
+				txtTimeForExecution.setVisible(false);
+				btnSubmitForTimeRequiredForExecution.setVisible(false);
 				
 			}
 	    }
@@ -125,7 +143,7 @@ import javafx.stage.Stage;
 	    @FXML
 	    void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event)  // when execution commit working
 	    {
-
+	    	
 	    }
 
 	    @FXML
@@ -181,6 +199,39 @@ import javafx.stage.Stage;
 				e.printStackTrace();
 			}
 	    }
+	    
+	    @FXML
+	    void GetAgainTheChangeRequestToSeeStatus(MouseEvent event)  // Refresh button
+	    {
+	    	if(flag==0)
+	    	myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+	    	else
+	    	myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());	
+	    }
+
+		public void ShowCommitButton()
+		{
+			
+			Toast.makeText(ProjectFX.mainStage, "Supervisor approved your estimated time", 1500, 500, 500);
+			btnCommitExecution.setVisible(true);
+		}
+
+		public void ShowEstimatedDateMinusStartDate(Date estimatedEndDate)
+		{	
+			Date todayDate=updateStepDate;
+			long daysBetween;
+			if(estimatedEndDate.before(todayDate)) {
+				delayTimeTxt.setVisible(true);
+				daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
+				timeRemainingTextAria.setText(""+(daysBetween-1)+" Days");
+			}
+			else {
+				timeRemainingTxt.setVisible(true);
+				daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
+				timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
+			}
+			
+		}
 
 	
 	}

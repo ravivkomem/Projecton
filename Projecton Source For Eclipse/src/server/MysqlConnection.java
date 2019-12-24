@@ -209,6 +209,7 @@ public class MysqlConnection {
 				"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY TesterStepId DESC LIMIT 1";
 		
+		
 		/* *****************************************************
 		 * *************** Time Extension Queries **************
 		 * *****************************************************/
@@ -265,6 +266,13 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_COMMITTEE_MEMBERS.getCode()] =
     			"SELECT UserName FROM icm.user "
     			+ "WHERE Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
+    	
+    	sqlArray[SqlQueryType.SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK.getCode()] = 
+				"SELECT CurrentStep FROM icm.change_request WHERE ChangeRequestId = ?";
+    	
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_DATE_MINUS_START_DATE.getCode()] = 
+				"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestId = ?";
+    	
     }
     
 }

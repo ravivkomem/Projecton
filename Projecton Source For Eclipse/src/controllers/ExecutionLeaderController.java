@@ -37,8 +37,20 @@ public class ExecutionLeaderController extends BasicController {
 					affectedRows2 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					myBoundry.ExecutionAprovedtInsertToDBSuccessfully(affectedRows2);	
+				case SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK:
+					String currentStep = (String)(result.getResultData().get(0).get(0));
+					if(currentStep.equals("EXECUTION_WORK"))
+					{		
+					myBoundry.ShowCommitButton();
+					myBoundry.setflag();
+					}
+				case SELECT_ESTIMATED_DATE_MINUS_START_DATE:
+					Date estimatedDate = (Date)(result.getResultData().get(0).get(0));
+					myBoundry.ShowEstimatedDateMinusStartDate(estimatedDate);
+					
 				default:
 					break;
+			
 			}
 		});
 		return;
@@ -62,6 +74,24 @@ public class ExecutionLeaderController extends BasicController {
 		varArray.add("EXECUTION_APPROVE_TIME");
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
+	}
+
+	public void SelectCurrentStepIfItsExecutionWork(Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
+	}
+
+	public void SelectEstimatedDateMinusStartDate(Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_DATE_MINUS_START_DATE, varArray);	
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
