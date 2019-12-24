@@ -25,12 +25,18 @@ public class ExecutionLeaderController extends BasicController {
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
+				
 				case INSERT_NEW_EXECUTION_ESTIMATED_TIME:
 					int affectedRows;
 					affectedRows = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					myBoundry.ExecutionAprovedtInsertToDBSuccessfully(affectedRows);
 					break;
+				case UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS:
+					int affectedRows2;
+					affectedRows2 = (Integer) (result.getResultData().get(0).get(0));
+					this.unsubscribeFromClientDeliveries();
+					myBoundry.ExecutionAprovedtInsertToDBSuccessfully(affectedRows2);	
 				default:
 					break;
 			}
