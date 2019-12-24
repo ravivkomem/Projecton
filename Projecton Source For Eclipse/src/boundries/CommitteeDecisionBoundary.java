@@ -114,6 +114,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     
     @FXML
     private Text delayTimeTxt;
+    @FXML
+    private Text changeRequestNoText;
 
 	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
@@ -273,7 +275,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
-		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 		myTimeExtensionStage.close();
 		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
@@ -311,12 +312,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		if(estimatedEndDate.before(todayDate)) {
 			delayTimeTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
-			timeRemainingTextAria.setText(""+(daysBetween-1));
+			timeRemainingTextAria.setText(""+(daysBetween-1)+" Days");
 		}
 		else {
 			timeRemainingTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
-			timeRemainingTextAria.setText(""+(daysBetween+1));
+			timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
 		}
 		
 	}
@@ -336,7 +337,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("More information");
 		
 		timeRemainingTextAria.setEditable(false);
-
+		
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
 		btnCommitteeDirector.setVisible(false);
@@ -362,6 +363,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
+		changeRequestNoText.setText("Change Request No."+currentChangeRequest.getChangeRequestID());
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
 		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());

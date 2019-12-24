@@ -101,8 +101,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    @FXML
 	    /*Logout the user from the system*/
 	    void logoutUser(MouseEvent event) {
-	    	/*TODO: Remove user from connected list */
-	    	ProjectFX.currentUser = null;
+	    	ProjectFX.pagingController.userLogout();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 

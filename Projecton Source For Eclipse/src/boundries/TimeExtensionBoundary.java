@@ -5,10 +5,10 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
-import assets.Step;
 import assets.StepType;
 import assets.Toast;
 import controllers.TimeExtensionController;
+import entities.Step;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

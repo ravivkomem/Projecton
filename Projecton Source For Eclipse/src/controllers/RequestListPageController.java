@@ -31,8 +31,8 @@ public class RequestListPageController extends BasicController {
 			{
 				case SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER:
 					ArrayList<ChangeRequest> resultList = this.parseSqlResultToChangeRequestArrayList(result);
-					/*TODO: Send to boundary */
 					this.unsubscribeFromClientDeliveries();
+					myBoundary.displayAllChangeRequestsForSpecifcUser(resultList);
 				
 				
 			default:
@@ -81,7 +81,9 @@ public class RequestListPageController extends BasicController {
 	}
 	public void fillNecessaryFieldsInTable()
 	{
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER,new ArrayList<Object>());
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(ProjectFX.currentUser);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}

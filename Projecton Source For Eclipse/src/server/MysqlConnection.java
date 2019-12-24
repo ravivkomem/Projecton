@@ -205,8 +205,6 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
-		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
-				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		
 		/* *****************************************************
 		 * *************** Time Extension Queries **************
@@ -257,6 +255,11 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
     			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
     			+ "VALUES (?,?)";
+    	/* *****************************************************
+		 * *********** Request List Queries ***********
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
+				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
     }
     
 }
