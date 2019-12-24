@@ -195,20 +195,19 @@ public class MysqlConnection {
     			+ "WHERE Status = 'Active' AND CurrentStep = 'TESTER_APPOINT'";
     	
     	/* *****************************************************
-		 * *************** XXX Queries **************
+		 * *************** Tester Queries **************
 		 * *****************************************************/
+    	
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
-    			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
-		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_ESTIMATED_TIME.getCode()]=
-				"INSERT INTO icm.execution_step(EstimatedEndDate)"
-				+ " VALUES (?) WHERE ChangeRequestId = ? ";
-		
-		sqlArray[SqlQueryType.UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS.getCode()]=
-				"UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestId = ?";
-		
+    			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
+		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
+				"INSERT INTO icm.execution_aproves(ExecutionTime)"
+				+ " VALUES (?)";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
+				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		
 		/* *****************************************************
 		 * *************** Time Extension Queries **************
@@ -235,9 +234,6 @@ public class MysqlConnection {
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
-    	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
-    			"SELECT * FROM icm.committee_step WHERE ChangeRequestId = ?"
-    			+ " ORDER BY CommitteeStepId DESC LIMIT 1";
     	
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
@@ -262,11 +258,6 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
     			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
     			+ "VALUES (?,?)";
-    	/* *****************************************************
-		 * *********** Request List Queries ***********
-		 * *****************************************************/
-    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
-				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
     }
     
 }

@@ -115,6 +115,7 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 	    	//currentChangeRequest.setCurrentStep("Execution");
 			mycontroller.updateChangeRequestStep(currentChangeRequest,failuredetailsField.getText().toString(),"CLOSED",updateStepDate);
 			mycontroller.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT","",currentChangeRequest.getChangeRequestID());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	    }
 
 	    @FXML
@@ -124,6 +125,7 @@ java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime(
 				// Update Information and move to next step
 				mycontroller.updateChangeRequestStep(currentChangeRequest, "-","CLOSED",updateStepDate);
 				mycontroller.updateChangeRequestCurrentStep("CLOSING_STEP","",currentChangeRequest.getChangeRequestID());
+				ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 				break;
 			case "Deny":
 				FailDetailsPane.setVisible(true);
