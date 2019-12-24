@@ -1,12 +1,17 @@
 package boundries;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import controllers.PagingController;
 import controllers.RequestListPageController;
 import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
+import entities.CommitteeComment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -43,6 +48,7 @@ public class RequestListPageBoundary implements Initializable {
     private Button logoutUser;
     
     private RequestListPageController myController= new RequestListPageController(this);
+    ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
     
     /*FXML Methods*/
 
@@ -58,8 +64,7 @@ public class RequestListPageBoundary implements Initializable {
 
     @FXML
     void logout(MouseEvent event) {
-    	ProjectFX.currentUser = null;
-		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
+    	ProjectFX.pagingController.userLogout();
     }
 
 	@Override
@@ -69,6 +74,16 @@ public class RequestListPageBoundary implements Initializable {
 		descClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDescription"));
 		subSystemClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
 		myController.fillNecessaryFieldsInTable();
+	}
+	public void displayAllChangeRequestsForSpecifcUser(ArrayList<ChangeRequest> resultList)
+	{
+		requestList.clear();
+		if (!resultList.isEmpty()) {
+			requestList.addAll(resultList);
+			basicDetailsTbl.setItems(requestList);
+			
+		}
+		
 	}
 
 }
