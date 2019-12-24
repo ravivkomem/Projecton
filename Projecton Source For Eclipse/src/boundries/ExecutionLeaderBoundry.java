@@ -2,6 +2,7 @@ package boundries;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -15,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -42,7 +44,7 @@ import javafx.stage.Stage;
 	    private Button btnCommitExcution;
 
 	    @FXML
-	    private TextField txtTimeForExecution;
+	    private DatePicker txtTimeForExecution;
 
 	    @FXML
 	    private Button btnSubmitForTimeRequiredForExecution;
@@ -77,7 +79,7 @@ import javafx.stage.Stage;
 			// TODO Auto-generated method stub
 			myChangerequest = (ChangeRequest) data;
 			txtWorkingOnChangeRequestNumber.setText("Working On Change Request Nomber " + myChangerequest.getChangeRequestID());
-			 txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
+			txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
 			
 			
 			
@@ -88,14 +90,10 @@ import javafx.stage.Stage;
 		{
 			//myChangerequest=new ChangeRequest(2,"lee", "Moodle", "Bad","good", "active", "itay");
 			txtWaitingForTomeApprovalPopUp.setVisible(false);
-			txtWorkingOnChangeRequestNumber.setVisible(true);
 			btnCommitExecution.setVisible(false);
+			txtWorkingOnChangeRequestNumber.setVisible(true);
 			
-			
-			
-			
-			
-			
+				
 			//txtChangeRequestDetails.setText(myChangerequest.getChangeRequestDescription());	
 		}
 	    
@@ -103,12 +101,13 @@ import javafx.stage.Stage;
 	    void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)  // submiting execution time
 	    {
 	    	
-	    	if (txtTimeForExecution.getText().equals("")) {
+	    	if (txtTimeForExecution.getValue().equals(null)) {
 				Toast.makeText(ProjectFX.mainStage, "Please add Time Execution first", 1500, 500, 500);
 			} else {
 				txtWaitingForTomeApprovalPopUp.setVisible(true);
-				ExecutionAproves executionAprove = new ExecutionAproves(txtTimeForExecution.getText());
-				myController.insertNewExecutionAprovetToDB(executionAprove);
+				Date estimatedDateChoosen = Date.valueOf(txtTimeForExecution.getValue());
+				myController.insertNewEstimatedDateToExecutionStepAndChangeRequestIDStep(estimatedDateChoosen,myChangerequest.getChangeRequestID());
+				myController.updateNewChangeRequestIdStepToExecutionApprovedTime(myChangerequest.getChangeRequestID());
 				
 			}
 	    }

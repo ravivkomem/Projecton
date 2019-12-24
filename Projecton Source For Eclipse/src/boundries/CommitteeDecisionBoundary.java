@@ -177,8 +177,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		myTimeExtensionStage.close();
-		myAnalysisReportStage.close();
+		if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 		
 	}
@@ -186,8 +188,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		myTimeExtensionStage.close();
-		myAnalysisReportStage.close();
+		if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -277,8 +281,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
-		myTimeExtensionStage.close();
-		myAnalysisReportStage.close();
+		if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
 

@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.TesterBoundary">
    <children>
-      <ImageView fitHeight="601.0" fitWidth="758.0" layoutX="-5.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="601.0" fitWidth="766.0" layoutX="-5.0" pickOnBounds="true">
          <image>
             <Image url="@background_image.jpg" />
          </image>
@@ -24,7 +24,7 @@
          </font>
       </Text>
       <Button fx:id="backButton" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
-      <Button fx:id="setButton" layoutX="325.0" layoutY="267.0" mnemonicParsing="false" onMouseClicked="#setTest" text="set" />
+      <Button fx:id="setButton" layoutX="358.0" layoutY="207.0" mnemonicParsing="false" onMouseClicked="#setTest" text="set" />
       <Button fx:id="logoutButton" layoutX="651.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#LogOut" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -37,8 +37,8 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Text layoutX="162.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test approval:" />
-      <Text layoutX="357.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time remaining :" />
+      <Text layoutX="334.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test Results" wrappingWidth="91.33593446016312" />
+      <Text fx:id="timeDisplayText" layoutX="557.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
       <VBox alignment="TOP_CENTER" prefHeight="249.0" prefWidth="127.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <Button fx:id="homepageButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
@@ -85,14 +85,19 @@
             </ImageView>
          </children>
       </VBox>
-      <TextArea fx:id="timeremainingField" layoutX="361.0" layoutY="132.0" prefHeight="43.0" prefWidth="79.0" />
-      <ComboBox fx:id="testapprovalComboBox" layoutX="149.0" layoutY="267.0" prefHeight="25.0" prefWidth="176.0" promptText="- select your decision -" />
-      <AnchorPane fx:id="FailDetailsPane" layoutX="422.0" layoutY="192.0" prefHeight="200.0" prefWidth="270.0">
+      <TextArea fx:id="timeremainingField" layoutX="563.0" layoutY="141.0" prefHeight="43.0" prefWidth="79.0" />
+      <ComboBox fx:id="testapprovalComboBox" layoutX="278.0" layoutY="172.0" prefHeight="25.0" prefWidth="176.0" promptText="- select your decision -" />
+      <AnchorPane fx:id="FailDetailsPane" layoutX="244.0" layoutY="232.0" prefHeight="200.0" prefWidth="270.0">
          <children>
-            <TextField fx:id="failuredetailsField" layoutX="99.0" layoutY="47.0" prefHeight="106.0" prefWidth="149.0" />
-            <Button fx:id="reportfailButton" layoutX="137.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#setReportFail" text="Report Fail" />
-            <Text layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Failure details:" wrappingWidth="148.9999933987856" />
+            <Text layoutX="83.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Failure details:" wrappingWidth="148.9999933987856" />
+            <TextField fx:id="failuredetailsField" layoutX="54.0" layoutY="47.0" prefHeight="106.0" prefWidth="149.0" />
+            <Button fx:id="reportfailButton" layoutX="84.0" layoutY="161.0" mnemonicParsing="false" onMouseClicked="#setReportFail" text="Report Fail" />
          </children>
       </AnchorPane>
+      <Text fx:id="pageHeaderText" layoutX="213.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on change request No. XX" wrappingWidth="332.00000508129597">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
