@@ -11,12 +11,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class AppointTesterBoundary implements DataInitializable{
 
@@ -41,7 +44,7 @@ public class AppointTesterBoundary implements DataInitializable{
     @FXML
     private Button setButton;
     @FXML
-    private Button backButton;
+    private Button closeButton;
     
     /* **************************
 	 * **** Private Objects *****
@@ -49,18 +52,27 @@ public class AppointTesterBoundary implements DataInitializable{
     private ChangeRequest myChangeRequest;
     private ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
     private AppointTesterController myController = new AppointTesterController(this);
+    private Alert alert = new Alert (AlertType.NONE);
 
     /* **************************
 	 * ****** FXML Methods ******
 	 * **************************/
     @FXML
     void closeAppointTesterPage(ActionEvent event) {
-    	backButton.getScene().getWindow().hide();
+    	 Stage stage = (Stage) closeButton.getScene().getWindow();
+    	 stage.close();
     }
 
     @FXML
     void setCommitteMember(ActionEvent event) {
-    	
+    	if (committeMembersComboBox.getValue() == null)
+    	{
+    		alert.setAlertType(AlertType.ERROR);
+    		alert.setTitle("ERROR");
+    		alert.setHeaderText("ComboBox Error");
+    		alert.setContentText("Please select committee member");
+    		alert.showAndWait();
+    	}
     }
 
     /* ****************************
@@ -95,6 +107,11 @@ public class AppointTesterBoundary implements DataInitializable{
 		
 	}
 
+	/** 
+	 * This method is for getting all the committeeMembers 
+	 * Once the boundary receive it it will initialize the combobox and all the displays
+	 * @param committeeMembersList
+	 */
 	public void recieveAllCommitteeMembers(ArrayList<String> committeeMembersList) {
 		
 		if (committeeMembersList.isEmpty())

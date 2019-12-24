@@ -28,7 +28,7 @@ public class AppointTesterController extends BasicController{
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.recieveAllCommitteeMembers(this.parseSqlResultToArrayListString(result));
 					break;
-
+				
 				default:
 					break;
 			}
