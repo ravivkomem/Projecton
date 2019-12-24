@@ -200,9 +200,6 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
-		//sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
-				//"INSERT INTO icm.execution_aproves(ExecutionTime)"
-				//+ " VALUES (?)";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
@@ -258,6 +255,13 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
     			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
     			+ "VALUES (?,?)";
+    	
+    	/* *****************************************************
+		 * ************* Appoint Tester Queries ****************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_COMMITTEE_MEMBERS.getCode()] =
+    			"SELECT UserName FROM icm.user "
+    			+ "WHERE Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
     }
     
 }
