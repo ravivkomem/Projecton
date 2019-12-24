@@ -82,7 +82,7 @@ public class RequestListPageController extends BasicController {
 	public void fillNecessaryFieldsInTable()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(ProjectFX.currentUser);
+		varArray.add(ProjectFX.currentUser.getUserName());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
