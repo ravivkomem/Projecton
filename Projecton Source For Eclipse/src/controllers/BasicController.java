@@ -2,8 +2,10 @@ package controllers;
 
 import java.io.Serializable;
 
+import assets.SqlAction;
 import assets.SqlResult;
 import client.ChatClient;
+import client.ClientConsole;
 
 public abstract class BasicController implements Serializable {
 	
@@ -38,6 +40,12 @@ public abstract class BasicController implements Serializable {
 			}
 			
 		}
+	}
+	
+	protected void sendSqlActionToClient(SqlAction sqlAction)
+	{
+		this.subscribeToClientDeliveries();
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
 }

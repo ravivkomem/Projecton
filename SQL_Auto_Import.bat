@@ -23,6 +23,6 @@ rem echo running jarfix
 rem pushd %mypath%
 rem Start /b /wait jarfix.exe
 
-subst R: /D
+REM subst R: /D
 
 pause

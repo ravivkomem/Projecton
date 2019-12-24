@@ -4,8 +4,15 @@ package server;
 // license found at www.lloseng.com 
 
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+
 import assets.SqlAction;
+import assets.SqlFileAction;
 import assets.SqlResult;
+import entities.MyFile;
 import ocsf.server.*;
 
 /**
@@ -26,6 +33,7 @@ public class EchoServer extends AbstractServer
    * The default port to listen on.
    */
   final public static int DEFAULT_PORT = 5555;
+  final public static String FILLE_DIRECTORY ="R:\\ServerFiles\\";
   
   //Constructors ****************************************************
   
@@ -50,10 +58,35 @@ public class EchoServer extends AbstractServer
    */
   public void handleMessageFromClient (Object msg, ConnectionToClient client)
   {
-	  	SqlAction sqlAction = (SqlAction) msg;
-	  	MysqlConnection sqlConnection = new MysqlConnection();
-	  	SqlResult sqlResult = sqlConnection.getResult(sqlAction);
-	  	System.out.println("Message received: " + sqlResult.getResultData().toString() + " from " + client);
+	  SqlAction sqlAction = (SqlAction) msg;
+	  MysqlConnection sqlConnection = new MysqlConnection();
+	  SqlResult sqlResult = sqlConnection.getResult(sqlAction);
+	  System.out.println("Message received: " + sqlResult.getResultData().toString() + " from " + client);
+	 
+	  /* If it is a file request also upload it to the server */
+	  if(msg instanceof SqlFileAction)
+	  {
+	
+		 SqlFileAction sqlFileAction = (SqlFileAction)msg;
+		 MyFile uploadedFile = sqlFileAction.getMyFile();
+		 int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
+		 String fileExtension = (String)sqlFileAction.getActionVars().get(1);
+		 String filePath = FILLE_DIRECTORY+fileIndex+"."+fileExtension;
+		 
+		 System.out.println("File path is: " + filePath);
+		 try (FileOutputStream fileOuputStream = new FileOutputStream(filePath))
+		 {
+			 fileOuputStream.write(uploadedFile.getMybytearray());
+		 } 
+		 catch (FileNotFoundException e) {
+			e.printStackTrace();
+		 } 
+		 catch (IOException e) {
+			e.printStackTrace();
+		 }
+		 
+	  }
+	  	
 		this.sendToClient(sqlResult, client);
   }
 

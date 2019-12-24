@@ -74,9 +74,7 @@ public class UploadChangeRequestController extends BasicController {
 			varArray.add(chnageRequestId);
 			varArray.add(extension);
 			SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.INSERT_NEW_FILE, varArray, newFile);
-			this.subscribeToClientDeliveries();		//subscribe to listener array
-			ClientConsole.client.handleMessageFromClientUI(sqlFileAction);
-			
+			this.sendSqlActionToClient(sqlFileAction);
 		}
 	}
 	
@@ -108,6 +106,12 @@ public class UploadChangeRequestController extends BasicController {
 					int randEngineerIndex = rand.nextInt(informationEngineers.size());
 					currentChangeRequest.setHandlerUserName(informationEngineers.get(randEngineerIndex));
 					uploadTheInsertedNewChangeRequestToDataBase();
+					break;
+				case INSERT_NEW_FILE:
+					/*TODO: Do something */
+					int fileID = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
+					
+					break;
 				default:
 					break;
 			}

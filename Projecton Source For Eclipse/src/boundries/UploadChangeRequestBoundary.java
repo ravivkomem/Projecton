@@ -87,7 +87,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    @FXML
 	    void BrowseFileToUpload(MouseEvent event) {
 	    	FileChooser fileChooser = new FileChooser();
-	    	fileChooser.setTitle("Open Resource File");
+	    	fileChooser.setTitle("Select Resource File");
 	    	File selectedFile = fileChooser.showOpenDialog(ProjectFX.mainStage);
 	    	uploadedFileNameField.setText(selectedFile.getPath());
 	    }
@@ -158,6 +158,19 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	}	
 	    }
 	    
+	    public void recieveFileUploadId(int fileID)
+	    {
+	    	if(fileID == 1)
+	    	{
+	    		/*File uploaded successfully - DO NOTHING */
+	    	}
+	    	else
+	    	{
+	    		/*TODO: maybe delete the change request */
+	    		Toast.makeText(ProjectFX.mainStage, "File had problems with upload", 1500, 500, 500);
+	    	}
+	    }
+	    
 	    /*this method will show the window with the new change request id */
 		public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 			Alert alert2 = new Alert(alert);
@@ -169,6 +182,8 @@ public class UploadChangeRequestBoundary implements Initializable {
 		@Override
 		/*initialize the combo box in this gui page  */
 		public void initialize(URL location, ResourceBundle resources) {
+			uploadedFileNameField.setEditable(false);
+			
 			subSystemComboBox.getItems().add("Lecturer Information Station");
 			subSystemComboBox.getItems().add("Student Information Station");
 			subSystemComboBox.getItems().add("Employee Information Station");

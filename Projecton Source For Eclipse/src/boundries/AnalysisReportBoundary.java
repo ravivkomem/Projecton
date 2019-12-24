@@ -16,7 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
-public class AnalysisReportBoundary implements Initializable{
+public class AnalysisReportBoundary implements DataInitializable{
 
     @FXML
     private Text reportPageTitle;
@@ -45,9 +45,10 @@ public class AnalysisReportBoundary implements Initializable{
     private ChangeRequest currentChangeRequest;
 
     private AnalysisReportController myController = new AnalysisReportController(this);
-    
-	public void setCurrentChangeRequest(ChangeRequest currentChangeRequest) {
-		this.currentChangeRequest = currentChangeRequest;
+	
+	@Override
+	public void initData(Object data) {
+		this.currentChangeRequest = (ChangeRequest)data;
 		myController.getAnalysisReportByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 

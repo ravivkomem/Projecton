@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: icm
+-- Host: 127.0.0.1    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -99,7 +99,7 @@ CREATE TABLE `change_request` (
   PRIMARY KEY (`ChangeRequestID`),
   UNIQUE KEY `ChangeRequestID_UNIQUE` (`ChangeRequestID`),
   KEY `UserName_idx` (`InitiatorUserName`,`HandlerUserName`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Active','ANALYSIS_WORK','lior',NULL),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Active','TESTING_WORK','lior',NULL),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior',NULL);
+INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Active','ANALYSIS_WORK','lior',NULL),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Active','TESTING_WORK','lior',NULL),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','Active','ANALAYZER_AUTO_APPOINT','itayz',NULL);
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,7 +237,7 @@ CREATE TABLE `file` (
   `FileEnding` varchar(45) NOT NULL,
   PRIMARY KEY (`FileID`),
   UNIQUE KEY `FileID_UNIQUE` (`FileID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -246,6 +246,7 @@ CREATE TABLE `file` (
 
 LOCK TABLES `file` WRITE;
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
+INSERT INTO `file` VALUES (1,'79','jpg');
 /*!40000 ALTER TABLE `file` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -354,7 +355,7 @@ CREATE TABLE `user` (
   `JobDescription` varchar(45) NOT NULL,
   `Permission` varchar(45) NOT NULL,
   `PhoneNumber` varchar(45) NOT NULL,
-  `IsLogged` tinyint(3) unsigned zerofill NOT NULL,
+  `IsLogged` tinyint(1) unsigned zerofill NOT NULL,
   PRIMARY KEY (`UserID`),
   UNIQUE KEY `UserID_UNIQUE` (`UserID`),
   UNIQUE KEY `UserName_UNIQUE` (`UserName`)
@@ -367,7 +368,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',000),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',000),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',000),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',000),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',000),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',000);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -380,4 +381,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-22 19:06:30
+-- Dump completed on 2019-12-23 22:04:52

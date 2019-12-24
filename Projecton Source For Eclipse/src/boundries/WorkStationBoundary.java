@@ -13,13 +13,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -175,8 +173,7 @@ public class WorkStationBoundary implements Initializable{
 
     @FXML
     void userLogout(MouseEvent event) {
-    	/*TODO: Remove user from connected list */
-    	ProjectFX.currentUser = null;
+    	ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
@@ -245,7 +242,7 @@ public class WorkStationBoundary implements Initializable{
 			viewTesterAppointButton.setVisible(true);
 		}
 		
-		/* Call the method to automaticaly display */
+		/* Call the method to automatically display */
 		this.displayAllWorkChangeRequests(null);
 	}
 

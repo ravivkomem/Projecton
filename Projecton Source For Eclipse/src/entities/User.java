@@ -3,6 +3,22 @@ package entities;
 public class User {
 
 	public User(int userID, String userName, String password, String firstName, String lastName, String email,
+			String department, String jobDescription, String permission, String phoneNumber, boolean isLogged) {
+		super();
+		this.userID = userID;
+		this.userName = userName;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.department = department;
+		this.jobDescription = jobDescription;
+		this.permission = permission;
+		this.phoneNumber = phoneNumber;
+		this.isLogged = isLogged;
+	}
+	
+	public User(int userID, String userName, String password, String firstName, String lastName, String email,
 			String department, String jobDescription, String permission, String phoneNumber) {
 		super();
 		this.userID = userID;
@@ -16,7 +32,9 @@ public class User {
 		this.permission = permission;
 		this.phoneNumber = phoneNumber;
 	}
-	
+
+
+
 	private int userID;
 	private String userName;
 	private String password;
@@ -27,7 +45,14 @@ public class User {
 	private String jobDescription;
 	private String permission;
 	private String phoneNumber;
+	private boolean isLogged;
 	
+	public boolean isLogged() {
+		return isLogged;
+	}
+	public void setLogged(boolean isLogged) {
+		this.isLogged = isLogged;
+	}
 	public int getUserID() {
 		return userID;
 	}

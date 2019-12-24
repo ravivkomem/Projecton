@@ -104,6 +104,10 @@ public class MysqlConnection {
 					Date date = (Date) obj;
 					ps.setDate(i, date);
 				}
+				if (obj instanceof Boolean) {
+					Boolean bool = (Boolean) obj;
+					ps.setBoolean(i, bool);
+				}
 			}
 			
 			switch(sqlAction.getActionType().getExecutionType())
@@ -139,28 +143,18 @@ public class MysqlConnection {
     public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_BY_ID.getCode()] = "UPDATE icm.requirements "
-    			+ "SET InitaitorName = ?, Subsystem = ?, CurrentState = ?, ChangeDescription = ?, Status = ?,"
-    			+ " HandlerName = ? "
-    			+ "WHERE ChangeRequestID = ? ";
-    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] = "SELECT * FROM icm.requirements "
-    			+ "WHERE ChangeRequestID = ?";
+    	
+    	/* *****************************************************
+		 * *************** Login Queries ****************
+		 * *****************************************************/
     	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT * FROM icm.user "
     			+ "WHERE UserName = ? AND Password = ?";
-    	sqlArray[SqlQueryType.GET_USER_CONNECTION_STATUS.getCode()] = "SELECT IsLogged FROM icm.user "
-    			+ "WHERE UserName = ? AND Password = ?";
-    	sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
-    			+ " WHERE requestId = ?";
-    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
-    			"INSERT INTO icm.committee_comment(requestId,employeeId,comment)"
-    			+ " VALUES (?,?,?)";
-    	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
-    			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
-    			" ORDER BY CommitteeStepId DESC LIMIT 1";
-    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
-    			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
-    			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
-    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    	sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE icm.user "
+    			+ "SET isLogged = ? WHERE UserID = ?";
+ 
+    	/* *****************************************************
+		 * *************** Work Station Queries ****************
+		 * *****************************************************/
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_NOT_COMMITTEE.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "
@@ -199,25 +193,70 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_TESTER_APPOINT_CHANGE_REQUESTS.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND CurrentStep = 'TESTER_APPOINT'";
+    	
+    	/* *****************************************************
+		 * *************** XXX Queries **************
+		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
-    	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
-    			"SELECT UserName FROM icm.user "
-    			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
-    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
-    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
-    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
-    			+ " VALUES (?,?,?)";
 		sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_APROVE.getCode()]=
 				"INSERT INTO icm.execution_aproves(ExecutionTime)"
 				+ " VALUES (?)";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
+				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
+		
+		/* *****************************************************
+		 * *************** Time Extension Queries **************
+		 * *****************************************************/
+		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
+				"INSERT INTO icm.time_extension(StepID,StepType,NewDate,Reason,Status) " + 
+				"VALUES (?,?,?,?,'NEW')";
+		
+		/* *****************************************************
+		 * *************** Committee Queries **************
+		 * *****************************************************/
 		sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_START_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
+    			+ " WHERE requestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
+    			"INSERT INTO icm.committee_comment(requestId,userName,comment)"
+    			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
+    			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
+    			" ORDER BY CommitteeStepId DESC LIMIT 1";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
+    			+ " VALUES (?,?,?)";
+    	
+    	/* *****************************************************
+		 * *************** Tech Manager Queries **************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
+    	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
+    			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
+    			" OR 'COMMITTEE_MEMBER' OR 'COMMITTEE_DIRECTOR'";
+    	
+    	/* *****************************************************
+		 * *********** Upload Change Request Queries ***********
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
+    			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
+    			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
+    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
+    			"SELECT UserName FROM icm.user "
+    			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
+    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
+    	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
+    			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
+    			+ "VALUES (?,?)";
     }
     
 }

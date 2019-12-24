@@ -74,7 +74,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableView<CommitteeComment> commentTable_addComment;
 	@FXML
-	private TableColumn<CommitteeComment, Integer> employeeIdAddColumn;
+	private TableColumn<CommitteeComment, String> employeeIdAddColumn;
 	@FXML
 	private TableColumn<CommitteeComment, String> commentAddColumn;
 
@@ -90,7 +90,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableView<CommitteeComment> commentTabelDirector;
 	@FXML
-	private TableColumn<CommitteeComment, Integer> employeeIdDirectorColumn;
+	private TableColumn<CommitteeComment, String> employeeIdDirectorColumn;
 	@FXML
 	private TableColumn<CommitteeComment, String> commentDirectorColumn;
 
@@ -121,6 +121,9 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	
+	Stage myTimeExtensionStage = null;
+	Stage myAnalysisReportStage= null;
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -131,19 +134,33 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
-		// give analysis report page the change request id to show the correct report
-		try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
-			Parent root;
-			root = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
-			analysisReportBoundary=fxmlLoader.getController();
-			analysisReportBoundary.setCurrentChangeRequest(currentChangeRequest);
-		} catch (IOException e) {
-			e.printStackTrace();
+//		try {
+//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
+//			Parent root;
+//			root = (Parent) fxmlLoader.load();
+//			Stage stage = new Stage();
+//			stage.setScene(new Scene(root));
+//			stage.show();
+//			analysisReportBoundary=fxmlLoader.getController();
+//			analysisReportBoundary.initData(currentChangeRequest);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+		if (myAnalysisReportStage == null)
+		{
+			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+					(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),currentChangeRequest);
 		}
+		else if (myAnalysisReportStage.isShowing())
+		{
+			Toast.makeText(ProjectFX.mainStage, "Analysis Report Window is already open", 1500, 500, 500);
+		} 
+		else
+		{
+			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+					(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),currentChangeRequest);
+		}
+		
 	}
 
 	@FXML
@@ -156,19 +173,24 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		myTimeExtensionStage.close();
+		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
+		
 	}
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
 		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		myTimeExtensionStage.close();
+		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
 		//give time extension page change request and stuff
-		try {
+		/* try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
 			Parent root;
 			root = (Parent) fxmlLoader.load();
@@ -177,7 +199,20 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			stage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} */
+		if (myTimeExtensionStage == null)
+		{
+			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
 		}
+		else if (myTimeExtensionStage.isShowing())
+		{
+			Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
+		} 
+		else
+		{
+			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+		}
+		
 	}
 
 	@FXML
@@ -187,6 +222,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
+		if(decisionComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+			return;
+		}
 		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
 		case "Approve":
 			/* move to the next step:
@@ -214,8 +253,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			myController.chooseAutomaticallyAnalyzer();
 			break;
 		default:
-			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
-			return;
+			break;
 		}
 		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
@@ -227,15 +265,17 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "Please add comment first", 1500, 500, 500);
 		} else {
 			CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
-					ProjectFX.currentUser.getUserID(), addComentTextField.getText());
+					ProjectFX.currentUser.getUserName(), addComentTextField.getText());
 			myController.insertNewCommentToDB(newComment);
 		}
 	}
 
 	@FXML
 	void userLogout(MouseEvent event) {
-		ProjectFX.currentUser = null;
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+		ProjectFX.pagingController.userLogout();
+		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
+		myTimeExtensionStage.close();
+		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
@@ -283,12 +323,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
+		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		descriptionColumn
 				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
-		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, Integer>("employeeId"));
+		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 
 		decisionComboBox.getItems().add("Approve");

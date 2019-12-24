@@ -15,8 +15,9 @@ import entities.CommitteeComment;
 import javafx.application.Platform;
 
 /**
+ * 
  * @author Lee Hugi
- * This controller handle with the committee decision page
+ *This controller handle with the committee decision page
  */
 
 public class CommitteDecisionController extends BasicController{
@@ -38,7 +39,7 @@ public class CommitteDecisionController extends BasicController{
 	public void insertNewCommentToDB(CommitteeComment newComment) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(newComment.getRequestId());
-		varArray.add(newComment.getEmployeeId());
+		varArray.add(newComment.getEmployeeUserName());
 		varArray.add(newComment.getComment());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
@@ -137,7 +138,7 @@ public class CommitteDecisionController extends BasicController{
 	private ArrayList<CommitteeComment> changeResultToCommitteeComment(SqlResult result){
 		ArrayList<CommitteeComment> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
-			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(int)a.get(2),
+			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(String)a.get(2),
 					(String)a.get(3));
 			resultList.add(comment);
 		}

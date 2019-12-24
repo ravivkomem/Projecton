@@ -3,22 +3,22 @@ package entities;
 public class CommitteeComment {
 	int commentId;
 	int requestId;
-	int employeeId;
+	String employeeUserName;
 	String comment;
 	
 	
-	public CommitteeComment(int requestId, int employeeId, String comment) {
+	public CommitteeComment(int requestId, String userName, String comment) {
 		super();
 		this.requestId = requestId;
-		this.employeeId = employeeId;
+		this.employeeUserName = userName;
 		this.comment = comment;
 	}
 	
-	public CommitteeComment(int commentId, int requestId, int employeeId, String comment) {
+	public CommitteeComment(int commentId, int requestId, String userName, String comment) {
 		super();
 		this.commentId = commentId;
 		this.requestId = requestId;
-		this.employeeId = employeeId;
+		this.employeeUserName = userName;
 		this.comment = comment;
 	}
 
@@ -34,11 +34,11 @@ public class CommitteeComment {
 	public void setRequestId(int requestId) {
 		this.requestId = requestId;
 	}
-	public int getEmployeeId() {
-		return employeeId;
+	public String getEmployeeUserName() {
+		return employeeUserName;
 	}
-	public void setEmployeeId(int employeeId) {
-		this.employeeId = employeeId;
+	public void setEmployeeUserName(String employeeUserName) {
+		this.employeeUserName = employeeUserName;
 	}
 	public String getComment() {
 		return comment;

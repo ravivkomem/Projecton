@@ -38,6 +38,16 @@ public class LoginController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	public void changeUserLoginStatus(User user, boolean loginStatus)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(loginStatus);
+		varArray.add(user.getUserID());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_USER_LOGIN_STATUS, varArray);
+		
+		this.sendSqlActionToClient(sqlAction);
+	}
+	
 	public void getResultFromClient(SqlResult result)
 	{
 		Platform.runLater(() -> {
@@ -48,7 +58,16 @@ public class LoginController extends BasicController{
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleUserAttempInformation(resultUser);
 					break;
-				
+				case UPDATE_USER_LOGIN_STATUS:
+					int affectedRows = (int)result.getResultData().get(0).get(0);
+					this.unsubscribeFromClientDeliveries();
+					
+					if (affectedRows != 1)
+					{
+						System.out.println("Error with user login");
+					}
+					
+					break;
 				default:
 					break;
 			}
@@ -74,9 +93,10 @@ public class LoginController extends BasicController{
 			String jobDescription = (String) resultList.get(7);
 			String permission = (String) resultList.get(8);
 			String phoneNumber= (String) resultList.get(9);
-			
+			boolean isLogged = (Boolean) resultList.get(10);
+
 			resultUser = new User(userID, userName, password, firstName, lastName, email,
-					department, jobDescription, permission, phoneNumber);
+					department, jobDescription, permission, phoneNumber, isLogged);
 		}
 		return resultUser;
 	}
