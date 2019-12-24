@@ -24,13 +24,19 @@ import javafx.stage.Stage;
 
 	public class ExecutionLeaderBoundry implements Initializable,DataInitializable {
 		@FXML
+		private Text txtBuildChangeRequestDetails;
+		
+		@FXML
+		 private Text txtBuildEnterTimeRequiredForExecution;
+		
+		@FXML
 		private Text txtWaitingForTomeApprovalPopUp;
 
 	    @FXML
 	    private Button btnBack;
 	    
 	    @FXML
-	    private TextField txtWorkingOnChangeRequestNumber;
+	    private Text txtWorkingOnChangeRequestNumber;
 
 	    @FXML
 	    private Button btnCommitExcution;
@@ -70,6 +76,11 @@ import javafx.stage.Stage;
 		public void initData(Object data) {
 			// TODO Auto-generated method stub
 			myChangerequest = (ChangeRequest) data;
+			txtWorkingOnChangeRequestNumber.setText("Working On Change Request Nomber " + myChangerequest.getChangeRequestID());
+			 txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
+			
+			
+			
 		}
 	    
 		@Override
@@ -77,6 +88,14 @@ import javafx.stage.Stage;
 		{
 			//myChangerequest=new ChangeRequest(2,"lee", "Moodle", "Bad","good", "active", "itay");
 			txtWaitingForTomeApprovalPopUp.setVisible(false);
+			txtWorkingOnChangeRequestNumber.setVisible(true);
+			btnCommitExecution.setVisible(false);
+			
+			
+			
+			
+			
+			
 			//txtChangeRequestDetails.setText(myChangerequest.getChangeRequestDescription());	
 		}
 	    

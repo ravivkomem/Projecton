@@ -272,7 +272,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void userLogout(MouseEvent event) {
-		ProjectFX.currentUser = null;
+		ProjectFX.pagingController.userLogout();
+		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 		myTimeExtensionStage.close();
 		myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
