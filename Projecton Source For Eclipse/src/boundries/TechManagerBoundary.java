@@ -147,7 +147,7 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void logOutUser(MouseEvent event) {
-		ProjectFX.currentUser = null;
+		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
