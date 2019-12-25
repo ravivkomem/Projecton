@@ -10,6 +10,7 @@ public enum ProjectPages {
 	UPLOAD_REQUEST_PAGE("/boundries/UploadRequestPage.fxml"),
 	TIME_EXTENSION_PAGE("/boundries/TimeExtensionPage.fxml"),
 	TECH_MANAGER_PAGE("/boundries/TechManagerPage.fxml"),
+	EMPLOYEE_PERMISSION("/boundries/EmployeePermission.fxml"),
 	SUPERVISOR_PAGE("/boundries/SupervisorPage.fxml"),
 	REQUEST_LIST_PAGE("/boundries/RequestListPage.fxml"),
 	EXTRA_DETAILS_PAGE("/boundries/ExtraDetailsPage.fxml"),

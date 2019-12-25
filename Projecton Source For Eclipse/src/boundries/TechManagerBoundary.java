@@ -140,7 +140,12 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void loagViewPermissionsPage(MouseEvent event) {
-    	
+    	ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
+    	dataList.add(new ArrayList<Object>());
+    	dataList.add(new ArrayList<Object>());
+    	dataList.get(0).add(employeeUser);
+    	dataList.get(1).addAll(users);
+    	ProjectFX.pagingController.loadAdditionalStage(ProjectPages.EMPLOYEE_PERMISSION.getPath(), dataList);
     }
 
     @FXML
@@ -171,7 +176,7 @@ public class TechManagerBoundary implements DataInitializable{
 		        	employeeUser = row.getItem();
 		            userNameTextField.setText(employeeUser.getUserName());
 		            emailTextField.setText(employeeUser.getEmail());
-		            positionTextField.setText(employeeUser.getPermission());
+		            positionTextField.setText(employeeUser.getJobDescription());
 		            numberTextField.setText(employeeUser.getPhoneNumber());
 		            departmentTextField.setText(employeeUser.getDepartment());
 		        }
