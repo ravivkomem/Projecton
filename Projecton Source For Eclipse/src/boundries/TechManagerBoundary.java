@@ -89,6 +89,7 @@ public class TechManagerBoundary implements DataInitializable{
     private ComboBox<String> reportTypeComboBox;
     
 	private User employeeUser;
+	private ArrayList<User> users = new ArrayList<>(); 
 	TechManagerController myController = new TechManagerController(this);
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
@@ -197,6 +198,7 @@ public class TechManagerBoundary implements DataInitializable{
 	public void displayAllTheEmployeesTable(ArrayList<User> resultList) {
 		employeeList.clear();
 		if (!resultList.isEmpty()) {
+			users.addAll(resultList);
 			employeeList.addAll(resultList);
 			employeeListTable.setItems(employeeList);
 		}

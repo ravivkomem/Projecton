@@ -243,7 +243,7 @@ public class MysqlConnection {
     			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
-    			" OR 'COMMITTEE_MEMBER' OR 'COMMITTEE_DIRECTOR'";
+    			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
