@@ -6,7 +6,6 @@ import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
 import boundries.AppointTesterBoundary;
-import entities.User;
 import javafx.application.Platform;
 
 @SuppressWarnings("serial")
@@ -22,13 +21,22 @@ public class AppointTesterController extends BasicController{
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
+			int affectedRows;
 			switch(result.getActionType())
 			{
 				case SELECT_ALL_COMMITTEE_MEMBERS:
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.recieveAllCommitteeMembers(this.parseSqlResultToArrayListString(result));
 					break;
-				
+				case UPDATE_CHANGE_REQUEST_STEP_AND_HANDLER:
+					this.unsubscribeFromClientDeliveries();
+					affectedRows = (int) result.getResultData().get(0).get(0);
+					myBoundary.recieveChangeRequestUpdateResult(affectedRows);
+				case INSERT_NEW_TESTER_STEP:
+					this.unsubscribeFromClientDeliveries();
+					affectedRows = (int) result.getResultData().get(0).get(0);
+					myBoundary.recieveNewTesterStepResult(affectedRows);
+					
 				default:
 					break;
 			}
@@ -56,6 +64,28 @@ public class AppointTesterController extends BasicController{
 		}
 		
 		return committeeMembersList;
+	}
+
+	public void updateChangeRequestStepAndHandler(String committeeMemberSelected, int changeRequestId) {
+		
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add("TESTING_WORK");
+		varArray.add(committeeMemberSelected);
+		varArray.add(changeRequestId);
+		
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AND_HANDLER, varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
+
+	public void createNewTesterStep(String committeeMemberSelected, int changeRequestID) {
+		
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add(changeRequestID);
+		varArray.add(committeeMemberSelected);
+		varArray.add(TimeManager.getCurrentDate());
+		
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_TESTER_STEP, varArray);
+		this.sendSqlActionToClient(sqlAction);
 	}
 
 }
