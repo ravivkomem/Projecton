@@ -248,7 +248,7 @@ public class MysqlConnection {
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
     	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
-    			"UPDATE icm.user SET Permission = ? WHERE UserID = ?";
+    			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
