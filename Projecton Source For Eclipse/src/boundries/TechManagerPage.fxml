@@ -128,12 +128,12 @@
             <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="View Permissions" />
          </children>
       </AnchorPane>
-      <TableView fx:id="requestListTable" layoutX="201.0" layoutY="149.0" prefHeight="218.0" prefWidth="425.0">
+      <TableView fx:id="requestListTable" layoutX="187.0" layoutY="149.0" prefHeight="277.0" prefWidth="493.0">
          <columns>
-            <TableColumn fx:id="requestIdColumn" prefWidth="92.0" text="Request ID" />
-            <TableColumn fx:id="stepColumn" prefWidth="71.33331298828125" text="Step" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="163.6666259765625" text="Description " />
-            <TableColumn fx:id="subsystemColumn" prefWidth="94.6666259765625" text="SubSystem" />
+            <TableColumn fx:id="requestIdColumn" prefWidth="69.33331298828125" text="Request ID" />
+            <TableColumn fx:id="stepColumn" prefWidth="81.0" text="Step" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="178.0" text="Description " />
+            <TableColumn fx:id="subsystemColumn" prefWidth="158.0" text="SubSystem" />
          </columns>
       </TableView>
       <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="455.0" prefWidth="603.0" visible="false">

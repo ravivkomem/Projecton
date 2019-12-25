@@ -115,11 +115,15 @@ public class CommitteDecisionController extends BasicController{
 					break;
 				case UPDATE_COMMITTEE_STEP:
 					/*TODO check if affected rows == 1*/
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
 					/*TODO check if affected rows == 1*/
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case INSERT_NEW_CLOSING_STEP:
+					/*TODO check if affected rows == 1*/
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case SELECT_ALL_INFROMATION_ENGINEERS:
 					this.unsubscribeFromClientDeliveries();
@@ -160,13 +164,11 @@ public class CommitteDecisionController extends BasicController{
 					(String)a.get(3));
 			resultList.add(comment);
 		}
-		
 		return resultList;
 	}
 
 	/*execute the select all information engineers query */
-	public void chooseAutomaticallyAnalyzer()
-	{
+	public void chooseAutomaticallyAnalyzer(){
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
