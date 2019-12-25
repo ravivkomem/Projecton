@@ -159,20 +159,17 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
-		// window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if (!(myAnalysisReportStage == null))
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
-
 	}
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
-		// window
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if (!(myAnalysisReportStage == null))
@@ -185,12 +182,12 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		// give time extension page change request and stuff
 		if (myTimeExtensionStage == null) {
 			myTimeExtensionStage = ProjectFX.pagingController
-					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),committeeStep);
 		} else if (myTimeExtensionStage.isShowing()) {
 			Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
 		} else {
 			myTimeExtensionStage = ProjectFX.pagingController
-					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),committeeStep);
 		}
 
 	}
@@ -202,14 +199,16 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
-		if (decisionComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
+		if (decisionComboBox.getSelectionModel().isEmpty()) {
 			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
 			return;
 		} else {
 			switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
 			case "Approve":
 				/*
-				 * move to the next step: update committee_step update changeRequest table
+				 * move to the next step:
+				 * update committee_step 
+				 * update changeRequest table
 				 */
 				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
 				myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT", "",
@@ -217,8 +216,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				break;
 			case "Deny":
 				/*
-				 * move to closing step: update committee_step update close_step update
-				 * changeRequest table
+				 * move to closing step: 
+				 * update committee_step 
+				 * update close_step 
+				 * update changeRequest table
 				 */
 				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
 				myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
@@ -227,7 +228,9 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				break;
 			case "More information":
 				/*
-				 * move to analyzer step: update committee_step choose analyzer update
+				 * move to analyzer step: 
+				 * update committee_step 
+				 * choose analyzer update
 				 * changeRequest table
 				 */
 				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
@@ -303,8 +306,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		}
 	}
 
-	public void createCommitteStepDetails() {
-
+	public void createCommitteStepDetails(Step resultStep) {
+		committeeStep = resultStep;
 	}
 
 	@Override

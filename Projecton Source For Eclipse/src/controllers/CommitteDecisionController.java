@@ -7,12 +7,14 @@ import java.util.Random;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
+import assets.StepType;
 import assets.Toast;
 import boundries.CommitteeDecisionBoundary;
 import boundries.ProjectFX;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.Step;
 import javafx.application.Platform;
 
 /**
@@ -137,7 +139,11 @@ public class CommitteDecisionController extends BasicController{
 					myBoundary.displayTimeRemaining(estimatedEndDate);
 					break;
 				case SELECT_COMMITTEE_STEP_DETAILS:
-					
+					Step newStep =  new Step(StepType.COMMITTEE, (Integer)result.getResultData().get(0).get(0),
+							(Integer)result.getResultData().get(0).get(1),(String)result.getResultData().get(0).get(2),
+							(Date)result.getResultData().get(0).get(3),(String)result.getResultData().get(0).get(6),
+							(Date)result.getResultData().get(0).get(4),(Date)result.getResultData().get(0).get(5));
+					myBoundary.createCommitteStepDetails(newStep);
 					break;
 				default:
 					break;
