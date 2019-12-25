@@ -138,18 +138,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
-//		try {
-//			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
-//			Parent root;
-//			root = (Parent) fxmlLoader.load();
-//			Stage stage = new Stage();
-//			stage.setScene(new Scene(root));
-//			stage.show();
-//			analysisReportBoundary=fxmlLoader.getController();
-//			analysisReportBoundary.initData(currentChangeRequest);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 		if (myAnalysisReportStage == null)
 		{
 			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
@@ -198,16 +186,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
 		//give time extension page change request and stuff
-		/* try {
-			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
-			Parent root;
-			root = (Parent) fxmlLoader.load();
-			Stage stage = new Stage();
-			stage.setScene(new Scene(root));
-			stage.show();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} */
 		if (myTimeExtensionStage == null)
 		{
 			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());

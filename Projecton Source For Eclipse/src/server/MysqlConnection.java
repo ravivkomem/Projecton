@@ -247,6 +247,9 @@ public class MysqlConnection {
     
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
+    			"SELECT * FROM icm.committee_step WHERE ChangeRequestId = ? "
+    			+ "ORDER BY CommitteeStepId DESC LIMIT 1";
     	
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
@@ -255,7 +258,7 @@ public class MysqlConnection {
     			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
-    			" OR 'COMMITTEE_MEMBER' OR 'COMMITTEE_DIRECTOR'";
+    			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
