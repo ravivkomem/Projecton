@@ -43,15 +43,21 @@ public class ExecutionLeaderController extends BasicController {
 					{		
 					myBoundry.ShowCommitButton();
 					myBoundry.setflag();
+					this.unsubscribeFromClientDeliveries();
 					}
 				case SELECT_ESTIMATED_DATE_MINUS_START_DATE:
 					Date estimatedDate = (Date)(result.getResultData().get(0).get(0));
 					myBoundry.ShowEstimatedDateMinusStartDate(estimatedDate);
+					this.unsubscribeFromClientDeliveries();
 				case UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP:
-					myBoundry.ShowFinishToast();
+					int affectedRows3;
+					affectedRows3 =(Integer) (result.getResultData().get(0).get(0));
+					myBoundry.ShowFinishToast(affectedRows3);
+					this.unsubscribeFromClientDeliveries();
 					
 				case UPDATE_CURRENT_STEP_TO_TESTER:
 					this.unsubscribeFromClientDeliveries();
+				
 					
 				default:
 					break;
@@ -105,6 +111,8 @@ public class ExecutionLeaderController extends BasicController {
 	{
 		// TODO Auto-generated method stub
 		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add("CLOSE");
+		varArray.add(myBoundry.getDate());
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
@@ -115,6 +123,8 @@ public class ExecutionLeaderController extends BasicController {
 	public void UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add("TESTER_COMMITTEE_DIRECTOR_APPOINT");
+		varArray.add(null);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array

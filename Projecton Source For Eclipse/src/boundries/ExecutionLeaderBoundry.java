@@ -86,8 +86,13 @@ import javafx.stage.Stage;
  
 	    private ExecutionLeaderController myController = new ExecutionLeaderController(this);
 	    private ChangeRequest myChangerequest;
-	    private int flag=0;
+	    private int flag;
 	    java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	    
+	    public Date getDate()
+	    {
+	    	return updateStepDate;
+	    }
 	   
 	   
 	    
@@ -99,9 +104,7 @@ import javafx.stage.Stage;
 			myChangerequest = (ChangeRequest) data;
 			txtWorkingOnChangeRequestNumber.setText("Working On Change Request Nomber " + myChangerequest.getChangeRequestID());
 			txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
-			
-			
-			
+		
 		}
 	    
 		@Override
@@ -110,8 +113,14 @@ import javafx.stage.Stage;
 			//myChangerequest=new ChangeRequest(2,"lee", "Moodle", "Bad","good", "active", "itay");
 			txtWaitingForTomeApprovalPopUp.setVisible(false);
 			btnCommitExecution.setVisible(false);
+			btnRefresh.setVisible(false);
 			txtWorkingOnChangeRequestNumber.setVisible(true);
-			btnRefresh.setVisible(false);	
+			timeRemainingTextAria.setVisible(false);
+			delayTimeTxt.setVisible(false);
+			timeRemainingTxt.setVisible(false);
+			flag=0;
+			
+			
 			//txtChangeRequestDetails.setText(myChangerequest.getChangeRequestDescription());	
 		}
 		
@@ -121,7 +130,7 @@ import javafx.stage.Stage;
 		}
 	    
 		@FXML
-	    void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)  // submiting execution time
+	    void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)  // submit execution time
 	    {
 	    	
 	    	if (txtTimeForExecution.getValue().equals(null)) {
@@ -135,6 +144,7 @@ import javafx.stage.Stage;
 				txtBuildEnterTimeRequiredForExecution.setVisible(false);
 				txtTimeForExecution.setVisible(false);
 				btnSubmitForTimeRequiredForExecution.setVisible(false);
+			
 				
 			}
 	    }
@@ -233,20 +243,23 @@ import javafx.stage.Stage;
 			long daysBetween;
 			if(estimatedEndDate.before(todayDate)) {
 				delayTimeTxt.setVisible(true);
+				timeRemainingTextAria.setVisible(true);
 				daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
 				timeRemainingTextAria.setText(""+(daysBetween-1)+" Days");
 			}
 			else {
 				timeRemainingTxt.setVisible(true);
+				timeRemainingTextAria.setVisible(true);
 				daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
 				timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
 			}
 			
 		}
 
-		public void ShowFinishToast()
+		public void ShowFinishToast(int affectedrows)
 		{
 			// TODO Auto-generated method stub
+			if(affectedrows==2)
 			Toast.makeText(ProjectFX.mainStage, "Execution Step is finished", 1500, 500, 500);
 			
 		}

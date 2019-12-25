@@ -231,20 +231,10 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
-    	
-    	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
-    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
-    			" ORDER BY ExecutionStepID DESC LIMIT 1";
-    	
-    
+ 
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     	
-    	
-    	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
-    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
-    	
-    
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
@@ -282,11 +272,33 @@ public class MysqlConnection {
     			"SELECT UserName FROM icm.user "
     			+ "WHERE Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
     	
+    	
+    	
+    	/*******************************************************
+    	 * *************Execution Leader Queries****************
+    	 *******************************************************
+    	 *******************************************************/
+    	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
+    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
+    			" ORDER BY ExecutionStepID DESC LIMIT 1";
+    	
+    	
     	sqlArray[SqlQueryType.SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK.getCode()] = 
 				"SELECT CurrentStep FROM icm.change_request WHERE ChangeRequestId = ?";
     	
+    	
     	sqlArray[SqlQueryType.SELECT_ESTIMATED_DATE_MINUS_START_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestId = ?";
+    	
+     	sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_ESTIMATED_TIME.getCode()]=                   // update estimated end time in execution step
+    			"UPDATE icm.execution_step SET EstimatedEndDate = ? WHERE ChangeRequestId = ?";
+     	
+     	sqlArray[SqlQueryType.UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS.getCode()]=             // update change request status
+    			"UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestId = ?";
+     	
+     	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	
     	
     }
     

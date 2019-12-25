@@ -105,5 +105,6 @@
       <Button fx:id="btnRefresh" layoutX="389.0" layoutY="502.0" mnemonicParsing="false" onMouseClicked="#GetAgainTheChangeRequestToSeeStatus" text="Refresh" />
       <Text fx:id="delayTimeTxt" layoutX="69.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time is in delay" wrappingWidth="66.99999850988388" />
       <Text fx:id="timeRemainingTxt" layoutX="201.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time left" wrappingWidth="69.99999792687595" />
+      <TextArea fx:id="txtChangeRequestDetails" layoutX="342.0" layoutY="206.0" prefHeight="112.0" prefWidth="234.0" />
    </children>
 </AnchorPane>
