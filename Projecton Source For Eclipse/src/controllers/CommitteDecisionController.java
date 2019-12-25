@@ -26,6 +26,7 @@ import javafx.application.Platform;
 public class CommitteDecisionController extends BasicController{
 	
 	private CommitteeDecisionBoundary myBoundary;
+	private int flag=0;
 	
 	public CommitteDecisionController(CommitteeDecisionBoundary myBoundary){
 		this.myBoundary=myBoundary;
@@ -115,15 +116,27 @@ public class CommitteDecisionController extends BasicController{
 					break;
 				case UPDATE_COMMITTEE_STEP:
 					/*TODO check if affected rows == 1*/
+					int affectedRows2;
+					affectedRows2 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
+					if(affectedRows2 == 1)
+						flag++;
 					break;
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
 					/*TODO check if affected rows == 1*/
+					int affectedRows3;
+					affectedRows3 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
+					if(affectedRows3 == 1)
+						flag++;
 					break;
 				case INSERT_NEW_CLOSING_STEP:
 					/*TODO check if affected rows == 1*/
+					int affectedRows4;
+					affectedRows4 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
+					if(affectedRows4 == 1)
+						flag++;
 					break;
 				case SELECT_ALL_INFROMATION_ENGINEERS:
 					this.unsubscribeFromClientDeliveries();
@@ -172,6 +185,10 @@ public class CommitteDecisionController extends BasicController{
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+	public boolean getFlag(int cnt) {
+		return (cnt==flag);
 	}
 
 	

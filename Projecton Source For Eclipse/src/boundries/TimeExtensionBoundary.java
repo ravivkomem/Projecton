@@ -113,7 +113,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     {
     	if (affectedRows == 1)
     	{
-    		alert.setAlertType(AlertType.CONFIRMATION);
+    		alert.setAlertType(AlertType.INFORMATION);
     		alert.setTitle("Success");
     		alert.setHeaderText("Your time extension request was submitted successfully");
     		alert.setContentText("The page will now close");
