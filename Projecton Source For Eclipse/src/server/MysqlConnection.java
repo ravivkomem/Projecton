@@ -231,8 +231,20 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
+    	
+    	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
+    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
+    			" ORDER BY ExecutionStepID DESC LIMIT 1";
+    	
+    
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	
+    	
+    	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	
+    
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
     	

@@ -49,7 +49,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="txtChangeRequestDetails" layoutX="345.0" layoutY="192.0" prefHeight="99.0" prefWidth="262.0" />
+      <TextArea fx:id="timeRemainingTextAria" layoutX="168.0" layoutY="417.0" prefHeight="78.0" prefWidth="137.0" />
       <VBox alignment="TOP_CENTER" prefHeight="282.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ReturnToHomePageFromExecutionLeaderPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
@@ -102,5 +102,8 @@
          </font>
       </Text>
       <DatePicker fx:id="txtTimeForExecution" layoutX="345.0" layoutY="365.0" />
+      <Button fx:id="btnRefresh" layoutX="389.0" layoutY="502.0" mnemonicParsing="false" onMouseClicked="#GetAgainTheChangeRequestToSeeStatus" text="Refresh" />
+      <Text fx:id="delayTimeTxt" layoutX="69.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time is in delay" wrappingWidth="66.99999850988388" />
+      <Text fx:id="timeRemainingTxt" layoutX="201.0" layoutY="528.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time left" wrappingWidth="69.99999792687595" />
    </children>
 </AnchorPane>

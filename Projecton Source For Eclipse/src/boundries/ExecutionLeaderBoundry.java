@@ -152,6 +152,8 @@ import javafx.stage.Stage;
 	    @FXML
 	    void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event)  // when execution commit working
 	    {
+	    	myController.UpdateExecutionLeaderDateAndStatus(myChangerequest.getChangeRequestID());
+	    	myController.UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(myChangerequest.getChangeRequestID()); 
 	    	
 	    }
 
@@ -239,6 +241,13 @@ import javafx.stage.Stage;
 				daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
 				timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
 			}
+			
+		}
+
+		public void ShowFinishToast()
+		{
+			// TODO Auto-generated method stub
+			Toast.makeText(ProjectFX.mainStage, "Execution Step is finished", 1500, 500, 500);
 			
 		}
 
