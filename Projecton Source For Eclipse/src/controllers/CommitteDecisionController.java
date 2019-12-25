@@ -136,6 +136,9 @@ public class CommitteDecisionController extends BasicController{
 					Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
 					myBoundary.displayTimeRemaining(estimatedEndDate);
 					break;
+				case SELECT_COMMITTEE_STEP_DETAILS:
+					
+					break;
 				default:
 					break;
 			}

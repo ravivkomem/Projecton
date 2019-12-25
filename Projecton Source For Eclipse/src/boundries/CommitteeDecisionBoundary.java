@@ -109,25 +109,25 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	private ImageView image3point2;
-	
-    @FXML
-    private Text timeRemainingTxt;
-    
-    @FXML
-    private Text delayTimeTxt;
-    @FXML
-    private Text changeRequestNoText;
 
-	private AnalysisReportBoundary analysisReportBoundary=new AnalysisReportBoundary();
+	@FXML
+	private Text timeRemainingTxt;
+
+	@FXML
+	private Text delayTimeTxt;
+	@FXML
+	private Text changeRequestNoText;
+
+	private AnalysisReportBoundary analysisReportBoundary = new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
 	private Step committeeStep;
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-	
+
 	Stage myTimeExtensionStage = null;
-	Stage myAnalysisReportStage= null;
+	Stage myAnalysisReportStage = null;
 
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
@@ -138,21 +138,16 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
-		if (myAnalysisReportStage == null)
-		{
-			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
-					(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),currentChangeRequest);
-		}
-		else if (myAnalysisReportStage.isShowing())
-		{
+		if (myAnalysisReportStage == null) {
+			myAnalysisReportStage = ProjectFX.pagingController
+					.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath(), currentChangeRequest);
+		} else if (myAnalysisReportStage.isShowing()) {
 			Toast.makeText(ProjectFX.mainStage, "Analysis Report Window is already open", 1500, 500, 500);
-		} 
-		else
-		{
-			myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
-					(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),currentChangeRequest);
+		} else {
+			myAnalysisReportStage = ProjectFX.pagingController
+					.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath(), currentChangeRequest);
 		}
-		
+
 	}
 
 	@FXML
@@ -164,41 +159,40 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		if(!(myTimeExtensionStage == null))
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
+		// window
+		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
-		if(!(myAnalysisReportStage == null))
+		if (!(myAnalysisReportStage == null))
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
-		
+
 	}
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-		if(!(myTimeExtensionStage == null))
+		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary
+		// window
+		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
-		if(!(myAnalysisReportStage == null))
+		if (!(myAnalysisReportStage == null))
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
-		//give time extension page change request and stuff
-		if (myTimeExtensionStage == null)
-		{
-			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
-		}
-		else if (myTimeExtensionStage.isShowing())
-		{
+		// give time extension page change request and stuff
+		if (myTimeExtensionStage == null) {
+			myTimeExtensionStage = ProjectFX.pagingController
+					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+		} else if (myTimeExtensionStage.isShowing()) {
 			Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
-		} 
-		else
-		{
-			myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+		} else {
+			myTimeExtensionStage = ProjectFX.pagingController
+					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
 		}
-		
+
 	}
 
 	@FXML
@@ -208,41 +202,43 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
-		if(decisionComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
+		if (decisionComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
 			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
 			return;
+		} else {
+			switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
+			case "Approve":
+				/*
+				 * move to the next step: update committee_step update changeRequest table
+				 */
+				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
+				myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT", "",
+						currentChangeRequest.getChangeRequestID());
+				break;
+			case "Deny":
+				/*
+				 * move to closing step: update committee_step update close_step update
+				 * changeRequest table
+				 */
+				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
+				myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
+						"ACTIVE");
+				myController.updateChangeRequestCurrentStep("DENY_STEP", "", currentChangeRequest.getChangeRequestID());
+				break;
+			case "More information":
+				/*
+				 * move to analyzer step: update committee_step choose analyzer update
+				 * changeRequest table
+				 */
+				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
+				myController.chooseAutomaticallyAnalyzer();
+				break;
+			default:
+				break;
+			}
+			popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 		}
-		switch (decisionComboBox.getSelectionModel().getSelectedItem()) {
-		case "Approve":
-			/* move to the next step:
-			 * update committee_step
-			 * update changeRequest table*/ 
-			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
-			myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT",
-					"",currentChangeRequest.getChangeRequestID());
-			break;
-		case "Deny":
-			/* move to closing step:
-			 * update committee_step
-			 * update close_step
-			 * update changeRequest table*/ 
-			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
-			myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(),updateStepDate,"ACTIVE");
-			myController.updateChangeRequestCurrentStep("DENY_STEP","",currentChangeRequest.getChangeRequestID());
-			break;
-		case "More information":
-			/* move to analyzer step:
-			 * update committee_step
-			 * choose analyzer
-			 * update changeRequest table*/
-			myController.updateCommitteeStepDB("CLOSED",updateStepDate,currentChangeRequest.getChangeRequestID());
-			myController.chooseAutomaticallyAnalyzer();
-			break;
-		default:
-			break;
-		}
-		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
-		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
@@ -259,9 +255,9 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	void userLogout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
-		if(!(myTimeExtensionStage == null))
+		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
-		if(!(myAnalysisReportStage == null))
+		if (!(myAnalysisReportStage == null))
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
@@ -282,30 +278,33 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}
 	}
-	
+
 	public void createObjectForUpdateChangeRequestDetails(String handlerUserName) {
-		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT",handlerUserName
-				,currentChangeRequest.getChangeRequestID());
+		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT", handlerUserName,
+				currentChangeRequest.getChangeRequestID());
 	}
-	
+
 	/**
 	 * this method display time remaining for the step or delay time
+	 * 
 	 * @param estimatedEndDate
 	 */
 	public void displayTimeRemaining(Date estimatedEndDate) {
-		Date todayDate=updateStepDate;
+		Date todayDate = updateStepDate;
 		long daysBetween;
-		if(estimatedEndDate.before(todayDate)) {
+		if (estimatedEndDate.before(todayDate)) {
 			delayTimeTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
-			timeRemainingTextAria.setText(""+(daysBetween-1)+" Days");
-		}
-		else {
+			timeRemainingTextAria.setText("" + (daysBetween - 1) + " Days");
+		} else {
 			timeRemainingTxt.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
-			timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
+			timeRemainingTextAria.setText("" + (daysBetween + 1) + " Days");
 		}
-		
+	}
+
+	public void createCommitteStepDetails() {
+
 	}
 
 	@Override
@@ -315,15 +314,16 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		descriptionColumn
 				.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
-		employeeIdDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
+		employeeIdDirectorColumn
+				.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentDirectorColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 
 		decisionComboBox.getItems().add("Approve");
 		decisionComboBox.getItems().add("Deny");
 		decisionComboBox.getItems().add("More information");
-		
+
 		timeRemainingTextAria.setEditable(false);
-		
+
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
 		btnCommitteeDirector.setVisible(false);
@@ -349,14 +349,14 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
-		changeRequestNoText.setText("Change Request No."+currentChangeRequest.getChangeRequestID());
+		changeRequestNoText.setText("Change Request No." + currentChangeRequest.getChangeRequestID());
 		requestList.add(currentChangeRequest);
 		requestInfoTable.setItems(requestList);
 		myController.getStartTimeFromCommitteeStep(currentChangeRequest.getChangeRequestID());
 		myController.getCommitteeStepDetails(currentChangeRequest.getChangeRequestID());
 	}
-	
-	/*this method will show the window with the new change request id */
+
+	/* this method will show the window with the new change request id */
 	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 		Alert alert2 = new Alert(alert);
 		alert2.setTitle(msg);
