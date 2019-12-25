@@ -143,8 +143,10 @@ public class TechManagerBoundary implements DataInitializable{
     	ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
     	dataList.add(new ArrayList<Object>());
     	dataList.add(new ArrayList<Object>());
+    	dataList.add(new ArrayList<Object>());
     	dataList.get(0).add(employeeUser);
     	dataList.get(1).addAll(users);
+    	dataList.get(2).add(this);
     	ProjectFX.pagingController.loadAdditionalStage(ProjectPages.EMPLOYEE_PERMISSION.getPath(), dataList);
     }
 
@@ -152,6 +154,16 @@ public class TechManagerBoundary implements DataInitializable{
     void logOutUser(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
+    }
+    
+    public void setEmployeeListChanges(User employeeNewUser) {
+    	employeeUser = employeeNewUser;
+    	for(int i=0;i<users.size();i++) {
+			if(users.get(i).getUserID() == employeeUser.getUserID()) {
+				users.set(i, employeeUser);
+				return;
+			}
+		}
     }
 
 	@Override

@@ -34,6 +34,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     private User employeeUser;
 	private ArrayList<User> users = new ArrayList<>(); 
 	private EmployeePermissionController myController = new EmployeePermissionController(this);
+	private TechManagerBoundary techManagerBoundry;
 	
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
@@ -44,8 +45,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		switch (newPremissionComboBox.getSelectionModel().getSelectedItem()) {
 		case "INFORMATION_ENGINEER":
 			errorText.setVisible(false);
-			myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",employeeUser.getUserID());
 			employeeUser.setPermission("INFORMATION_ENGINEER");
+			employeeUser.setJobDescription("Information Engineer");
+			myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",employeeUser.getUserID());
+			techManagerBoundry.setEmployeeListChanges(employeeUser);
 			break;
 		case "SUPERVISOR":
 			errorText.setVisible(false);
@@ -57,6 +60,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				}
 			}
 			employeeUser.setPermission("SUPERVISOR");
+			employeeUser.setJobDescription("Supervisor");
 			myController.updateEmployeePermission("SUPERVISOR","Supervisor",employeeUser.getUserID());
 			break;
 		case "COMMITTEE_MEMBER":
@@ -73,6 +77,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			}
 			else {
 				employeeUser.setPermission("COMMITTEE_MEMBER");
+				employeeUser.setJobDescription("Committee member");
 				myController.updateEmployeePermission("COMMITTEE_MEMBER","Committee member",employeeUser.getUserID());
 			}
 			break;
@@ -92,6 +97,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	public void initData(Object data) {
 		employeeUser = (User)(((ArrayList<ArrayList<Object>>) data).get(0).get(0));
 		users.addAll(((ArrayList<ArrayList<User>>) data).get(1));
+		techManagerBoundry = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
 		employeeNameText.setText("Permission: "+employeeUser.getFirstName()+" "+employeeUser.getLastName());
 		permossionTextField.setText(employeeUser.getPermission());
 	}
