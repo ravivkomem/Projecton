@@ -271,10 +271,15 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_COMMITTEE_MEMBERS.getCode()] =
     			"SELECT UserName FROM icm.user "
     			+ "WHERE Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AND_HANDLER.getCode()] =
+    			"UPDATE icm.change_request "
+    			+ "SET CurrentStep = ?, HandlerUserName = ? "
+    			+ "WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_TESTER_STEP.getCode()] =
+    			"INSERT INTO icm.tester_step(ChangeRequestId,HandlerUserName,Status,StartDate) "
+    	    	+ "VALUES (?,?,'Active',?)";
     	
-    	
-    	
-    	/*******************************************************
+    	/* ******************************************************
     	 * *************Execution Leader Queries****************
     	 *******************************************************
     	 *******************************************************/
