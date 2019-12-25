@@ -13,6 +13,7 @@ import assets.Toast;
 import controllers.ExecutionLeaderController;
 import entities.ChangeRequest;
 import entities.ExecutionAproves;
+import entities.Step;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -88,6 +89,9 @@ import javafx.stage.Stage;
 	    private ChangeRequest myChangerequest;
 	    private int flag;
 	    java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		Stage myTimeExtensionStage = null;
+		Stage myAnalysisReportStage= null;
+		Step executionStep;
 	    
 	    public Date getDate()
 	    {
@@ -104,6 +108,7 @@ import javafx.stage.Stage;
 			myChangerequest = (ChangeRequest) data;
 			txtWorkingOnChangeRequestNumber.setText("Working On Change Request Nomber " + myChangerequest.getChangeRequestID());
 			txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
+			myController.GetStepDetails(myChangerequest.getChangeRequestID());
 		
 		}
 	    
@@ -163,7 +168,8 @@ import javafx.stage.Stage;
 	    void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event)  // when execution commit working
 	    {
 	    	myController.UpdateExecutionLeaderDateAndStatus(myChangerequest.getChangeRequestID());
-	    	myController.UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(myChangerequest.getChangeRequestID()); 
+	    	myController.UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(myChangerequest.getChangeRequestID());
+	    	
 	    	
 	    }
 
@@ -185,15 +191,17 @@ import javafx.stage.Stage;
 	    @FXML
 	    void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event)    // opet time extension
 	    {
-	    	try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
-				Parent root;
-				root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.show();
-			} catch (IOException e) {
-				e.printStackTrace();
+	    	if (myTimeExtensionStage == null)
+			{
+				myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
+			}
+			else if (myTimeExtensionStage.isShowing())
+			{
+				Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
+			} 
+			else
+			{
+				myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath());
 			}
 
 	    }
@@ -202,32 +210,42 @@ import javafx.stage.Stage;
 	    void ReturnToHomePageFromExecutionLeaderPage(MouseEvent event)     // return home page
 	    {
 	     	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	    	if(!(myTimeExtensionStage == null))
+				myTimeExtensionStage.close();
+			if(!(myAnalysisReportStage == null))
+				myAnalysisReportStage.close();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	    }
 
 	    @FXML
 	    void ShowAnalysisReportFromExecutionLeaderPage(MouseEvent event)   // show anaylisis report
 	    {
-	    	// give analysis report page the change request id to show the correct report
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
-				Parent root;
-				root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.show();
-			} catch (IOException e) {
-				e.printStackTrace();
+	    	if (myAnalysisReportStage == null)
+			{
+				myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+						(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),myChangerequest);
+			}
+			else if (myAnalysisReportStage.isShowing())
+			{
+				Toast.makeText(ProjectFX.mainStage, "Analysis Report Window is already open", 1500, 500, 500);
+			} 
+			else
+			{
+				myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+						(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),myChangerequest);
 			}
 	    }
 	    
 	    @FXML
 	    void GetAgainTheChangeRequestToSeeStatus(MouseEvent event)  // Refresh button
 	    {
-	    	if(flag==0)
-	    	myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
-	    	else
-	    	myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());	
+	    	
+	    	 myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+	    	 
+//	    	if(flag==0)
+//    	myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+//	    	else
+//	    	myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());	
 	    }
 
 		public void ShowCommitButton()
@@ -235,6 +253,7 @@ import javafx.stage.Stage;
 			
 			Toast.makeText(ProjectFX.mainStage, "Supervisor approved your estimated time", 1500, 500, 500);
 			btnCommitExecution.setVisible(true);
+			myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());
 		}
 
 		public void ShowEstimatedDateMinusStartDate(Date estimatedEndDate)
@@ -259,9 +278,37 @@ import javafx.stage.Stage;
 		public void ShowFinishToast(int affectedrows)
 		{
 			// TODO Auto-generated method stub
-			if(affectedrows==2)
+			if(affectedrows==1)
 			Toast.makeText(ProjectFX.mainStage, "Execution Step is finished", 1500, 500, 500);
+			 
 			
+		}
+
+
+
+
+
+		public void SupervisorDidNotAproveYet()
+		{
+				
+				Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve yet", 1500, 500, 500);
+				txtWaitingForTomeApprovalPopUp.setVisible(true);
+		}
+
+
+
+
+
+		public void SetStep(Step executionStep2)
+		{
+			executionStep=executionStep2;
+			if(!(executionStep.getEstimatedEndDate()==null)) {
+				btnRefresh.setVisible(true);
+				txtBuildEnterTimeRequiredForExecution.setVisible(false);
+				txtTimeForExecution.setVisible(false);
+				btnSubmitForTimeRequiredForExecution.setVisible(false);
+				 myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+			}
 		}
 
 	
