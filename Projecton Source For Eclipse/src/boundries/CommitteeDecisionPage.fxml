@@ -45,8 +45,8 @@
          <children>
             <TableView fx:id="commentTabelDirector" layoutX="64.0" layoutY="73.0" prefHeight="180.0" prefWidth="359.0">
                <columns>
-                  <TableColumn fx:id="employeeIdDirectorColumn" prefWidth="95.0" text="User Name" />
-                  <TableColumn fx:id="commentDirectorColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
+                  <TableColumn fx:id="employeeIdDirectorColumn" prefWidth="100.33331298828125" text="User Name" />
+                  <TableColumn fx:id="commentDirectorColumn" minWidth="0.0" prefWidth="257.66668701171875" text="Comment" />
                </columns>
             </TableView>
             <ComboBox fx:id="decisionComboBox" layoutX="77.0" layoutY="293.0" prefHeight="25.0" prefWidth="166.0" promptText="Choose Your Decision" />

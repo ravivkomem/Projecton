@@ -231,10 +231,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
- 
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
-    	
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
@@ -249,6 +247,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
+    	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
+    			"UPDATE icm.user SET Permission = ? WHERE UserID = ?";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
