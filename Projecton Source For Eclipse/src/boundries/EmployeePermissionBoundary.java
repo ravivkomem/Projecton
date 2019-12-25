@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import assets.ProjectPages;
 import assets.Toast;
+import controllers.EmployeePermissionController;
 import entities.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,6 +22,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     @FXML
     private Text employeeNameText;
     @FXML
+    private Text errorText;
+    
+    @FXML
     private TextField permossionTextField;
     @FXML
     private ComboBox<String> newPremissionComboBox;
@@ -29,25 +33,26 @@ public class EmployeePermissionBoundary implements DataInitializable{
     
     private User employeeUser;
 	private ArrayList<User> users = new ArrayList<>(); 
+	private EmployeePermissionController myController = new EmployeePermissionController(this);
 	
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
     	if(newPremissionComboBox.getSelectionModel().getSelectedItem().isEmpty()) {
-			//enter text "Please select permission"
+    		errorText.setText("Please select permission");
 			return;
 		}
 		switch (newPremissionComboBox.getSelectionModel().getSelectedItem()) {
 		case "INFORMATION_ENGINEER":
-			
+			myController.updateEmployeePermission("INFORMATION_ENGINEER",employeeUser.getUserID());
 			break;
 		case "SUPERVISOR":
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
-					//enter text "There is already user with supervisor permission"
+					errorText.setText("There is already user with supervisor permission");
 					return;
 				}
 			}
-			//make query that update the permission
+			myController.updateEmployeePermission("SUPERVISOR",employeeUser.getUserID());
 			break;
 		case "COMMITTEE_MEMBER":
 			int cnt=0;
@@ -58,9 +63,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				}
 			}
 			if(cnt==2) {
-				//enter text "There is 2 users with this permission"
+				errorText.setText("There are already 2 users with this permission");
 			}
-				
+			else {
+				myController.updateEmployeePermission("COMMITTEE_MEMBER",employeeUser.getUserID());
+			}
 			break;
 		default:
 			break;
