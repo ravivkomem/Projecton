@@ -49,10 +49,16 @@ public enum SqlQueryType {
 	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	/*View Request List Queries*/
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER(SqlExecutionType.EXECUTE_QUERY),
-	/*Time Extension Queries*/
-	INSERT_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
 	
-	/* Appoint Tester Queries */
+	/* *****************************************
+	 * ********Time Extension Queries***********
+	 * *****************************************/
+	INSERT_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
+	COUNT_TIME_EXTENSION_BY_STEP(SqlExecutionType.EXECUTE_QUERY),
+	
+	/* *****************************************
+	 * ********Appoint Tester Queries***********
+	 * *****************************************/
 	SELECT_ALL_COMMITTEE_MEMBERS(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_CHANGE_REQUEST_STEP_AND_HANDLER(SqlExecutionType.UPDATE_QUERY),
 	INSERT_NEW_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),

@@ -26,4 +26,17 @@ public class TimeManager {
 
 		return daysBetween;
 	}
+	
+	public static Date getBiggerDate (Date first, Date second)
+	{
+		long dayDiffrence = getDaysBetween(first, second);
+		if (dayDiffrence > 0)
+		{
+			return second;
+		}
+		else
+		{
+			return first;
+		}
+	}
 }

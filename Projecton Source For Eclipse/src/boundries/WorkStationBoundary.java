@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
-import assets.SqlQueryType;
 import assets.Toast;
 import controllers.WorkStationController;
 import entities.ChangeRequest;
@@ -179,7 +178,7 @@ public class WorkStationBoundary implements Initializable{
     @FXML
     void loadHomePage(ActionEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
-		myTesterAppointStage.close();
+		closeMyStages();
     }
 
     @FXML
@@ -215,7 +214,7 @@ public class WorkStationBoundary implements Initializable{
     void userLogout(MouseEvent event) {
     	ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
-		myTesterAppointStage.close();
+		closeMyStages();
     }
 
     /* *****************************************
@@ -292,6 +291,21 @@ public class WorkStationBoundary implements Initializable{
 		this.currentFilter = filter;
 	}
 	
+	/* ******************************
+	 * ******* Private Methods ******
+	 * ******************************/
+	private void closeMyStages()
+	{
+		if (myTesterAppointStage != null)
+		{
+			myTesterAppointStage.close();
+		}
+			
+	}
+	
+	/* ******************************
+	 * ********* Enumerators ********
+	 * ******************************/
 	public enum WorkStationFilter
 	{
 		ALL_CHANGE_REQUEST,

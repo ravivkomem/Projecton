@@ -216,6 +216,9 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
 				"INSERT INTO icm.time_extension(StepID,StepType,NewDate,Reason,Status) " + 
 				"VALUES (?,?,?,?,'NEW')";
+		sqlArray[SqlQueryType.COUNT_TIME_EXTENSION_BY_STEP.getCode()]=
+				"SELECT COUNT(*) FROM icm.time_extension "
+				+ "WHERE StepID = ? AND StepType = ?";
 		
 		/* *****************************************************
 		 * *************** Committee Queries **************

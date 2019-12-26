@@ -78,8 +78,8 @@ public class PagingController extends BasicController {
 			stage = new Stage();
 			stage.setScene(new Scene(root));
 			DataInitializable boundary = loader.getController();
-			boundary.initData(data);
 			stage.show();
+			boundary.initData(data);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
