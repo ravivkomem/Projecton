@@ -32,7 +32,7 @@ public class EmployeePermissionController extends BasicController{
 		Platform.runLater(() -> {
 			switch (result.getActionType()) {
 			case UPDATE_EMPLOYEE_PERMISSION:
-			
+				
 			default:
 				break;
 			}

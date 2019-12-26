@@ -3,17 +3,10 @@ package boundries;
 import java.awt.Window;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.ResourceBundle.Control;
 
-import javax.xml.transform.Source;
 
-import com.mysql.cj.jdbc.Driver;
-
-import assets.ProjectPages;
-import assets.Toast;
 import controllers.EmployeePermissionController;
 import entities.User;
 import javafx.fxml.FXML;
@@ -66,7 +59,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
 					handleSupervasior(u,employeeUser);
-					return;
+					//((Node) event.getSource()).getScene().getWindow().hide();
 				}
 			}
 			employeeUser.setPermission("SUPERVISOR");
@@ -102,8 +95,6 @@ public class EmployeePermissionBoundary implements DataInitializable{
     public void checkIfTableUpdateSuccess(int affectedRows) {
     	if(affectedRows == 1) {
     		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
-    		
-    		//((Node) event.getSource()).getScene().getWindow().hide();
     	}
     }
     
