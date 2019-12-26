@@ -1,10 +1,14 @@
 package boundries;
 
+import java.awt.Window;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.ResourceBundle.Control;
+
+import javax.xml.transform.Source;
 
 import com.mysql.cj.jdbc.Driver;
 
@@ -22,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class EmployeePermissionBoundary implements DataInitializable{
 
@@ -92,8 +97,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		default:
 			break;
 		}
-		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
-		((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
+    public void checkIfTableUpdateSuccess(int affectedRows) {
+    	if(affectedRows == 1) {
+    		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+    		
+    		//((Node) event.getSource()).getScene().getWindow().hide();
+    	}
     }
     
     /**
@@ -106,10 +117,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
         if(result.get() == ButtonType.OK) {
-        	System.out.println("ok");
+//        	if(newSupervasior.getPermission().equals("COMMITTEE_MEMBER")) {
+//        		
+//        	}
+//        	else if(newSupervasior.getPermission().equals("COMMITTEE_DIRECTOR")) {
+//        		
+//        	}
         	myController.updateEmployeePermission("SUPERVISOR","Supervisor",newSupervasior.getUserID());
-        	myController.updateEmployeePermission(newSupervasior.getPermission(),newSupervasior.getJobDescription()
-        			,oldSuperVaser.getUserID());
+        	myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",oldSuperVaser.getUserID());
         }
         else if(result.get() == ButtonType.CANCEL||result.get() == ButtonType.CLOSE){
         	System.out.println("cancel");
