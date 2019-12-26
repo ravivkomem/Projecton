@@ -10,6 +10,12 @@ import client.ClientConsole;
 import entities.ChangeRequest;
 import javafx.application.Platform;
 
+/**
+ * 
+ * @author leehu
+ *This controller handle with the analysis report page
+ *
+ */
 public class AnalysisReportController extends BasicController {
 	
 	AnalysisReportBoundary myBoundary;

@@ -9,6 +9,12 @@ import boundries.EmployeePermissionBoundary;
 import client.ClientConsole;
 import javafx.application.Platform;
 
+/**
+ * 
+ * @author Lee Hugi
+ * This controller handle with the employee permission page
+ *
+ */
 public class EmployeePermissionController extends BasicController{
 
 	private EmployeePermissionBoundary myBoundary;
