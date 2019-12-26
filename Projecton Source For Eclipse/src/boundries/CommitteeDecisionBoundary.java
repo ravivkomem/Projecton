@@ -200,7 +200,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
-		int cnt=0;
 		if (decisionComboBox.getSelectionModel().isEmpty()) {
 			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
 			return;
@@ -215,7 +214,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
 				myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT", "",
 						currentChangeRequest.getChangeRequestID());
-				cnt=2;
 				break;
 			case "Deny":
 				/*
@@ -228,7 +226,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
 						"ACTIVE");
 				myController.updateChangeRequestCurrentStep("DENY_STEP", "", currentChangeRequest.getChangeRequestID());
-				cnt=3;
 				break;
 			case "More information":
 				/*
@@ -239,18 +236,17 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 */
 				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
 				myController.chooseAutomaticallyAnalyzer();
-				cnt=1;
 				break;
 			default:
 				break;
 			}
-			if(myController.getFlag(cnt)) {
+			//if(null) {
 				popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
-			}
-			else {
-				Toast.makeText(ProjectFX.mainStage, "The system run into a problem please try again later", 1500, 500, 500);
-			}
+			//}
+			//else {
+			//	Toast.makeText(ProjectFX.mainStage, "The system run into a problem please try again later", 1500, 500, 500);
+			//}
 		}
 	}
 
@@ -303,18 +299,20 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * @param estimatedEndDate
 	 */
 	public void displayTimeRemaining(Date estimatedEndDate) {
-//		Date todayDate = updateStepDate;
-//		long daysBetween;
-//		if (estimatedEndDate.before(todayDate)) {
-//			delayTimeTxt.setVisible(true);
-//			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
-//			timeRemainingTextAria.setText("" + (daysBetween - 1) + " Days");
-//		} else {
-//			timeRemainingTxt.setVisible(true);
-//			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
-//			timeRemainingTextAria.setText("" + (daysBetween + 1) + " Days");
-//		}
-		System.out.println(TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate));
+		Date todayDate = updateStepDate;
+		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
+		if(daysBetween < 0) {
+			delayTimeTxt.setVisible(true);
+			timeRemainingTextAria.setText(Math.abs(daysBetween) + " Days");
+		}
+		else if(daysBetween == 0) {
+			timeRemainingTxt.setVisible(true);
+			timeRemainingTextAria.setText("Last Day");
+		}
+		else {
+			timeRemainingTxt.setVisible(true);
+			timeRemainingTextAria.setText(daysBetween + " Days");
+		}
 	}
 
 	public void createCommitteStepDetails(Step resultStep) {

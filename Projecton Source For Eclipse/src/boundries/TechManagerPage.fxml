@@ -106,7 +106,6 @@
       <AnchorPane fx:id="employeeAnchorPane" layoutX="138.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
          <children>
             <Text layoutX="231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
-            <TextField fx:id="searchEmployeeTextField" layoutY="1.0" onInputMethodTextChanged="#EmployeeListFiltering" prefHeight="26.0" prefWidth="200.0" promptText="Search Employee" />
             <TableView fx:id="employeeListTable" layoutY="26.0" prefHeight="311.0" prefWidth="200.0">
                <columns>
                   <TableColumn fx:id="clmEmployeId" prefWidth="75.0" text="ID" visible="false" />

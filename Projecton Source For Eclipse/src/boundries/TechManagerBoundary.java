@@ -47,9 +47,6 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     private AnchorPane reportPageAnchorPane;
 
-    @FXML
-    private TextField searchEmployeeTextField;
-
     /*employee table*/
     @FXML
     private TableView<User> employeeListTable;
@@ -95,11 +92,6 @@ public class TechManagerBoundary implements DataInitializable{
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
 
     @FXML
-    void EmployeeListFiltering(InputMethodEvent event) {
-    	
-    }
-
-    @FXML
     void loadEmployeePage(MouseEvent event) {
 		reportPageAnchorPane.setVisible(false);
 		requestListTable.setVisible(false);
@@ -135,7 +127,7 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void loadSpecificReport(MouseEvent event) {
-
+    	/*TODO reports*/
     }
 
     @FXML

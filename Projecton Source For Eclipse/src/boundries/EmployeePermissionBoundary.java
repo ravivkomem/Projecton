@@ -3,14 +3,20 @@ package boundries;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.ResourceBundle;
+
+import com.mysql.cj.jdbc.Driver;
 
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.EmployeePermissionController;
 import entities.User;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -54,8 +60,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			errorText.setVisible(false);
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
-					errorText.setText("There is already user with supervisor permission");
-					errorText.setVisible(true);
+					handleSupervasior(u,employeeUser);
 					return;
 				}
 			}
@@ -81,9 +86,34 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				myController.updateEmployeePermission("COMMITTEE_MEMBER","Committee member",employeeUser.getUserID());
 			}
 			break;
+		case "COMMITTEE_DIRECTOR":
+			
+			break;
 		default:
 			break;
 		}
+		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+		((Node) event.getSource()).getScene().getWindow().hide();
+    }
+    
+    /**
+     * this method handle with the problem that tech manager give permission that already exist
+     * to anther user
+     * @param newSupervasior
+     * @param oldSuperVaser
+     */
+    private void handleSupervasior(User newSupervasior, User oldSuperVaser) {
+        Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
+        		+ "user with supervisor permission\nDo you want to replace?");
+        if(result.get() == ButtonType.OK) {
+        	System.out.println("ok");
+        	myController.updateEmployeePermission("SUPERVISOR","Supervisor",newSupervasior.getUserID());
+        	myController.updateEmployeePermission(newSupervasior.getPermission(),newSupervasior.getJobDescription()
+        			,oldSuperVaser.getUserID());
+        }
+        else if(result.get() == ButtonType.CANCEL||result.get() == ButtonType.CLOSE){
+        	System.out.println("cancel");
+        }
     }
 
 	@Override
@@ -91,6 +121,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		newPremissionComboBox.getItems().add("INFORMATION_ENGINEER");
 		newPremissionComboBox.getItems().add("SUPERVISOR");
 		newPremissionComboBox.getItems().add("COMMITTEE_MEMBER");
+		newPremissionComboBox.getItems().add("COMMITTEE_DIRECTOR");
 	}
 
 	@Override
@@ -100,6 +131,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		techManagerBoundry = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
 		employeeNameText.setText("Permission: "+employeeUser.getFirstName()+" "+employeeUser.getLastName());
 		permossionTextField.setText(employeeUser.getPermission());
+	}
+	
+	/* this method will show the window with the new change request id */
+	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
+		Alert alert2 = new Alert(alert);
+		alert2.setTitle(msg);
+		alert2.setHeaderText(mess);
+		return alert2.showAndWait();
 	}
 
 }
