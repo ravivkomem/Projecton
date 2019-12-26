@@ -68,6 +68,10 @@ public class ExecutionLeaderController extends BasicController {
 					this.unsubscribeFromClientDeliveries();
 				break;
 				case SELECT_EXECUTIOM_STEP_DETAILS:
+					if(result.getResultData().get(0)==null)
+					{
+						myBoundry.ErrorInLoadingExecutionPage();
+					}
 					Step executionStep=new Step(StepType.EXECUTION,(Integer)result.getResultData().get(0).get(0),(Integer) result.getResultData().get(0).get(1),(String) result.getResultData().get(0).get(2),
 							(Date) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(3),
 							(Date) result.getResultData().get(0).get(5), (Date)result.getResultData().get(0).get(6));
