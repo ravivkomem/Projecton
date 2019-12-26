@@ -240,13 +240,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			default:
 				break;
 			}
-			//if(null) {
-				popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+			popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
-			//}
-			//else {
-			//	Toast.makeText(ProjectFX.mainStage, "The system run into a problem please try again later", 1500, 500, 500);
-			//}
 		}
 	}
 
