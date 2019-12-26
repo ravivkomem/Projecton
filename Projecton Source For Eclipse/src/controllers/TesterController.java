@@ -9,43 +9,18 @@ import assets.SqlResult;
 import boundries.TesterBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
-import entities.CommitteeComment;
 import javafx.application.Platform;
 
+@SuppressWarnings("serial")
 public class TesterController extends BasicController {
-private TesterBoundary MyBoundary;
-
 	
+	private TesterBoundary myBoundary;
 
 	public TesterController(TesterBoundary myBoundary) {
-		
-		this.MyBoundary = myBoundary;
+		this.myBoundary = myBoundary;
 	}
 
-	@Override
-	public void getResultFromClient(SqlResult result) {
-		// TODO Auto-generated method stub
-		Platform.runLater(() -> {
-		switch (result.getActionType()) {
-		
-		case UPDATE_TESTER_STEP:
-			int affectedRows;
-			affectedRows = (Integer) (result.getResultData().get(0).get(0));
-			this.unsubscribeFromClientDeliveries();
-			MyBoundary.updateTesterPageToDBSuccessfully(affectedRows);
-			
-			break;
-		case SELECT_TESTER_STEP_START_DATE:
-			Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
-			MyBoundary.displayTimeRemaining(estimatedEndDate);
-			break;
-
-		default:
-			break;
-		}
-		});
-		return;
-	}
+	
 	public void getStartTimeFromTesterStep(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
@@ -76,8 +51,28 @@ private TesterBoundary MyBoundary;
 	}
 	
 
-	
+	@Override
+	public void getResultFromClient(SqlResult result) {
+		// TODO Auto-generated method stub
+		Platform.runLater(() -> {
+		switch (result.getActionType()) {
+		
+		case UPDATE_TESTER_STEP:
+			int affectedRows;
+			affectedRows = (Integer) (result.getResultData().get(0).get(0));
+			this.unsubscribeFromClientDeliveries();
+			myBoundary.updateTesterPageToDBSuccessfully(affectedRows);
+			
+			break;
+		case SELECT_TESTER_STEP_START_DATE:
+			Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
+			myBoundary.displayTimeRemaining(estimatedEndDate);
+			break;
 
-	
-
+		default:
+			break;
+		}
+		});
+		return;
+	}
 }

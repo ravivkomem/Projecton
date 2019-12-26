@@ -279,8 +279,8 @@ public class MysqlConnection {
     			+ "SET CurrentStep = ?, HandlerUserName = ? "
     			+ "WHERE ChangeRequestID = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_TESTER_STEP.getCode()] =
-    			"INSERT INTO icm.tester_step(ChangeRequestId,HandlerUserName,Status,StartDate) "
-    	    	+ "VALUES (?,?,'Active',?)";
+    			"INSERT INTO icm.tester_step(ChangeRequestId,HandlerUserName,Status,StartDate,EstimatedEndDate) "
+    	    	+ "VALUES (?,?,'Active',?,?)";
     	
     	/* ******************************************************
     	 * *************Execution Leader Queries****************

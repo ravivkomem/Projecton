@@ -83,6 +83,8 @@ public class AppointTesterController extends BasicController{
 		varArray.add(changeRequestID);
 		varArray.add(committeeMemberSelected);
 		varArray.add(TimeManager.getCurrentDate());
+		/* Story request for 7 days */
+		varArray.add(TimeManager.addDays(TimeManager.getCurrentDate(), 7));
 		
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_TESTER_STEP, varArray);
 		this.sendSqlActionToClient(sqlAction);

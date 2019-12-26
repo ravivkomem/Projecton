@@ -27,7 +27,7 @@ public class TimeManager {
 		return daysBetween;
 	}
 	
-	public static Date getBiggerDate (Date first, Date second)
+	public static Date getMaxDate (Date first, Date second)
 	{
 		long dayDiffrence = getDaysBetween(first, second);
 		if (dayDiffrence > 0)
@@ -39,4 +39,18 @@ public class TimeManager {
 			return first;
 		}
 	}
+	
+	public static Date addDays(Date date, int days) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, days);
+        return new Date(c.getTimeInMillis());
+    }
+
+    public static Date subtractDays(Date date, int days) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, -days);
+        return new Date(c.getTimeInMillis());
+    }
 }

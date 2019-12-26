@@ -56,7 +56,7 @@ public class TimeExtensionController extends BasicController {
 					break;
 				
 				case COUNT_TIME_EXTENSION_BY_STEP:
-					long timeExtensionCounter = (long) result.getResultData().get(0).get(0);
+					long timeExtensionCounter = (Long) result.getResultData().get(0).get(0);
 					myBoundary.recieveTimeExtensionCounter(timeExtensionCounter);
 					this.unsubscribeFromClientDeliveries();
 					break;
