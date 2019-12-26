@@ -114,21 +114,12 @@ public class CommitteDecisionController extends BasicController{
 					myBoundary.committeeCommentInsertToDBSuccessfully(affectedRows);
 					break;
 				case UPDATE_COMMITTEE_STEP:
-					/*TODO check if affected rows == 1*/
-//					int affectedRows2;
-//					affectedRows2 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
-					/*TODO check if affected rows == 1*/
-//					int affectedRows3;
-//					affectedRows3 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case INSERT_NEW_CLOSING_STEP:
-					/*TODO check if affected rows == 1*/
-//					int affectedRows4;
-//					affectedRows4 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case SELECT_ALL_INFROMATION_ENGINEERS:

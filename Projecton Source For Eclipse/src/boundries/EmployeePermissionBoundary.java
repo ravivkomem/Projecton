@@ -1,19 +1,11 @@
 package boundries;
 
-import java.awt.Window;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.ResourceBundle.Control;
 
-import javax.xml.transform.Source;
 
-import com.mysql.cj.jdbc.Driver;
-
-import assets.ProjectPages;
-import assets.Toast;
 import controllers.EmployeePermissionController;
 import entities.User;
 import javafx.fxml.FXML;
@@ -26,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 public class EmployeePermissionBoundary implements DataInitializable{
 
@@ -51,6 +42,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     void setNewEmployeePermission(MouseEvent event) {
     	if(newPremissionComboBox.getSelectionModel().isEmpty()) {
     		errorText.setText("Please select permission");
+    		errorText.setVisible(true);
 			return;
 		}
 		switch (newPremissionComboBox.getSelectionModel().getSelectedItem()) {
@@ -66,12 +58,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
 					handleSupervasior(u,employeeUser);
-					return;
+					((Node) event.getSource()).getScene().getWindow().hide();
 				}
 			}
+			//Check if this user is committee for give him SUPERVISOR_COMMITTEE permission
 			employeeUser.setPermission("SUPERVISOR");
 			employeeUser.setJobDescription("Supervisor");
 			myController.updateEmployeePermission("SUPERVISOR","Supervisor",employeeUser.getUserID());
+			techManagerBoundry.setEmployeeListChanges(employeeUser);
 			break;
 		case "COMMITTEE_MEMBER":
 			errorText.setVisible(false);
@@ -89,22 +83,27 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				employeeUser.setPermission("COMMITTEE_MEMBER");
 				employeeUser.setJobDescription("Committee member");
 				myController.updateEmployeePermission("COMMITTEE_MEMBER","Committee member",employeeUser.getUserID());
+				techManagerBoundry.setEmployeeListChanges(employeeUser);
 			}
 			break;
 		case "COMMITTEE_DIRECTOR":
-			
+			errorText.setVisible(false);
+			for(User u: users) {
+				if(u.getPermission().equals("COMMITTEE_DIRECTOR")) {
+					//handleSupervasior(u,employeeUser);
+					((Node) event.getSource()).getScene().getWindow().hide();
+				}
+			}
+			employeeUser.setPermission("COMMITTEE_DIRECTOR");
+			employeeUser.setJobDescription("Committee Director");
+			myController.updateEmployeePermission("COMMITTEE_DIRECTOR","Committee Director",employeeUser.getUserID());
+			techManagerBoundry.setEmployeeListChanges(employeeUser);
 			break;
 		default:
 			break;
 		}
-    }
-    
-    public void checkIfTableUpdateSuccess(int affectedRows) {
-    	if(affectedRows == 1) {
-    		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
-    		
-    		//((Node) event.getSource()).getScene().getWindow().hide();
-    	}
+		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+		((Node) event.getSource()).getScene().getWindow().hide();
     }
     
     /**
@@ -123,12 +122,31 @@ public class EmployeePermissionBoundary implements DataInitializable{
 //        	else if(newSupervasior.getPermission().equals("COMMITTEE_DIRECTOR")) {
 //        		
 //        	}
+        	//else{
+        	newSupervasior.setPermission("SUPERVISOR");
+        	newSupervasior.setJobDescription("Supervisor");
+        	oldSuperVaser.setPermission("INFORMATION_ENGINEER");
+        	oldSuperVaser.setJobDescription("Information Engineer");
         	myController.updateEmployeePermission("SUPERVISOR","Supervisor",newSupervasior.getUserID());
         	myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",oldSuperVaser.getUserID());
+        	techManagerBoundry.setEmployeeListChanges(newSupervasior);
+        	techManagerBoundry.setEmployeeListChanges(oldSuperVaser);
         }
         else if(result.get() == ButtonType.CANCEL||result.get() == ButtonType.CLOSE){
         	System.out.println("cancel");
         }
+    }
+    
+    /**
+     * this method handle with the problem that tech manager give permission that already exist
+     * to anther user
+     * @param newSupervasior
+     * @param oldSuperVaser
+     */
+    private void handleCommitteeDirector(User newSupervasior, User oldSuperVaser) {
+        Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
+        		+ "user with supervisor permission\nDo you want to replace?");
+        /*TODO the same like handleSupervisor*/
     }
 
 	@Override

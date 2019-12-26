@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import assets.Toast;
 import controllers.TechManagerController;
 import entities.ChangeRequest;
 import entities.User;
@@ -128,6 +129,24 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     void loadSpecificReport(MouseEvent event) {
     	/*TODO reports*/
+    	if (reportTypeComboBox.getSelectionModel().isEmpty()) {
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+			return;
+		} else {
+			switch (reportTypeComboBox.getSelectionModel().getSelectedItem()) {
+			case "Activity Report":
+				
+				break;
+			case "Performance Report":
+				
+				break;
+			case "Delay Report":
+				
+				break;
+			default:
+				break;
+			}
+		}
     }
 
     @FXML
@@ -164,6 +183,10 @@ public class TechManagerBoundary implements DataInitializable{
 		reportPageAnchorPane.setVisible(false);
 		requestListTable.setVisible(true);
 		
+		reportTypeComboBox.getItems().add("Activity Report");
+		reportTypeComboBox.getItems().add("Performance Report");
+		reportTypeComboBox.getItems().add("Delay Report");
+		
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("actualStep"));
 		descriptionColumn
@@ -187,7 +210,6 @@ public class TechManagerBoundary implements DataInitializable{
 		    });
 		    return row ;
 		});
-
 		myController.getAllTheActiveChangeRequest();
 	}
 
