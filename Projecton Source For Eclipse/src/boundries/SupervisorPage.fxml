@@ -24,7 +24,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <VBox alignment="TOP_CENTER" prefHeight="452.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="465.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>

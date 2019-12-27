@@ -32,6 +32,18 @@ public class TimeExtensionController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_TIME_EXTENSION, varArray);
 		this.sendSqlActionToClient(sqlAction);
 	}
+	
+	public void verifyNoPreviousExtensions(Step step)
+	{
+		/*Creating the SqlAction */
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add(step.getStepID());
+		varArray.add(step.getType().getStepName());
+		
+		SqlAction sqlAction = new SqlAction(SqlQueryType.COUNT_TIME_EXTENSION_BY_STEP, varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
+	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -43,6 +55,11 @@ public class TimeExtensionController extends BasicController {
 					this.unsubscribeFromClientDeliveries();
 					break;
 				
+				case COUNT_TIME_EXTENSION_BY_STEP:
+					long timeExtensionCounter = (Long) result.getResultData().get(0).get(0);
+					myBoundary.recieveTimeExtensionCounter(timeExtensionCounter);
+					this.unsubscribeFromClientDeliveries();
+					break;
 				default:
 					break;
 			}

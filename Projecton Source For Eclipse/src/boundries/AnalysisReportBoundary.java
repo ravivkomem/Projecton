@@ -6,10 +6,8 @@ import java.util.ResourceBundle;
 
 import assets.Toast;
 import controllers.AnalysisReportController;
-import controllers.CommitteDecisionController;
 import entities.ChangeRequest;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -18,34 +16,38 @@ import javafx.scene.text.Text;
 
 public class AnalysisReportBoundary implements DataInitializable{
 
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
+	
+	/*Text */
     @FXML
     private Text reportPageTitle;
-
     @FXML
     private TextArea descriptionTextArea;
-
     @FXML
     private TextArea advavtagesTextArea;
-
     @FXML
     private TextArea constraintsTextArea;
-
     @FXML
     private Text authorTxt;
-
     @FXML
     private Text durationTxt;
-
     @FXML
     private Text subsystemTxt;
-    
+    /*Button */
     @FXML
     private Button btnClosePage;
     
+    /* *************************************
+	 * ******* Private Objects *************
+	 * *************************************/
     private ChangeRequest currentChangeRequest;
-
     private AnalysisReportController myController = new AnalysisReportController(this);
 	
+    /* *************************************
+	 * ******* Public Methods *************
+	 * *************************************/
 	@Override
 	public void initData(Object data) {
 		this.currentChangeRequest = (ChangeRequest)data;
@@ -61,7 +63,8 @@ public class AnalysisReportBoundary implements DataInitializable{
     
     public void displayAnalysisReport(ArrayList<Object> resultList) {
     	if(resultList==null) {
-    		return;
+    		Toast.makeText(ProjectFX.mainStage, "Could not load analysis report", 1500, 500, 500);
+    		this.closingPage(null);
     	}
     	else {
     	reportPageTitle.setText("Report Of Request No."+currentChangeRequest.getChangeRequestID().toString());
@@ -74,6 +77,9 @@ public class AnalysisReportBoundary implements DataInitializable{
     	}
     }
     
+    /* *************************************
+	 * ******* FXML Methods *************
+	 * *************************************/
     @FXML
     void closingPage(MouseEvent event) {
     	((Node) event.getSource()).getScene().getWindow().hide();

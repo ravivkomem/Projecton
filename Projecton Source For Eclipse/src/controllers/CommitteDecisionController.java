@@ -7,12 +7,14 @@ import java.util.Random;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
+import assets.StepType;
 import assets.Toast;
 import boundries.CommitteeDecisionBoundary;
 import boundries.ProjectFX;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.Step;
 import javafx.application.Platform;
 
 /**
@@ -112,12 +114,13 @@ public class CommitteDecisionController extends BasicController{
 					myBoundary.committeeCommentInsertToDBSuccessfully(affectedRows);
 					break;
 				case UPDATE_COMMITTEE_STEP:
-					/*TODO check if affected rows == 1*/
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
-					/*TODO check if affected rows == 1*/
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case INSERT_NEW_CLOSING_STEP:
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case SELECT_ALL_INFROMATION_ENGINEERS:
 					this.unsubscribeFromClientDeliveries();
@@ -136,6 +139,13 @@ public class CommitteDecisionController extends BasicController{
 					Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
 					myBoundary.displayTimeRemaining(estimatedEndDate);
 					break;
+				case SELECT_COMMITTEE_STEP_DETAILS:
+					Step newStep =  new Step(StepType.COMMITTEE, (Integer)result.getResultData().get(0).get(0),
+							(Integer)result.getResultData().get(0).get(1),(String)result.getResultData().get(0).get(2),
+							(Date)result.getResultData().get(0).get(3),(String)result.getResultData().get(0).get(6),
+							(Date)result.getResultData().get(0).get(4),(Date)result.getResultData().get(0).get(5));
+					myBoundary.createCommitteStepDetails(newStep);
+					break;
 				default:
 					break;
 			}
@@ -151,17 +161,14 @@ public class CommitteDecisionController extends BasicController{
 					(String)a.get(3));
 			resultList.add(comment);
 		}
-		
 		return resultList;
 	}
 
 	/*execute the select all information engineers query */
-	public void chooseAutomaticallyAnalyzer()
-	{
+	public void chooseAutomaticallyAnalyzer(){
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
-
 	
 }

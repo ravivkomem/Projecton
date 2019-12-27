@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import assets.ProjectPages;
 import assets.Toast;
 import controllers.AppointTesterController;
 import entities.ChangeRequest;
@@ -73,6 +74,12 @@ public class AppointTesterBoundary implements DataInitializable{
     		alert.setContentText("Please select committee member");
     		alert.showAndWait();
     	}
+    	else
+    	{
+    		committeMembersComboBox.setEditable(false);
+    		myController.updateChangeRequestStepAndHandler(committeMembersComboBox.getValue(), myChangeRequest.getChangeRequestID());
+    		
+    	}
     }
 
     /* ****************************
@@ -128,6 +135,37 @@ public class AppointTesterBoundary implements DataInitializable{
 			changeRequestDetailsTableView.getItems().addAll(list);
 			changeRequestNumberTextField.setText("Change Request No." + myChangeRequest.getChangeRequestID());
 			
+		}
+		
+	}
+
+	public void recieveChangeRequestUpdateResult(int affectedRows) {
+		
+		if (affectedRows == 1)
+		{
+			/* Change request update success */
+			myController.createNewTesterStep(committeMembersComboBox.getValue(), myChangeRequest.getChangeRequestID());
+		}
+		else
+		{
+			Toast.makeText(ProjectFX.mainStage, "Error with connection to Database, please try again", 1500, 500, 500);
+			committeMembersComboBox.setEditable(true);
+		}
+		
+	}
+
+	public void recieveNewTesterStepResult(int affectedRows) {
+		if (affectedRows == 1)
+		{
+			Toast.makeText(ProjectFX.mainStage, "Tester was appointed successfully", 1500, 500, 500);
+			this.closeAppointTesterPage(new ActionEvent());
+			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
+		}
+		else
+		{
+			/*TODO: Delete the change request update... */
+			Toast.makeText(ProjectFX.mainStage, "Error with connection to Database, please try again", 1500, 500, 500);
+			committeMembersComboBox.setEditable(true);
 		}
 		
 	}

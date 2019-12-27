@@ -75,9 +75,10 @@ public class WorkStationBoundary implements Initializable{
      * ********** Private Variables ***********
      * ***************************************/
     private WorkStationController myController = new WorkStationController(this);
-	private ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
+	private ObservableList<ChangeRequest> changeRequestList = FXCollections.observableArrayList();
 	private ChangeRequest clickedChangeRequest;
-	Stage myTesterAppointStage = null;
+	private Stage myTesterAppointStage = null;
+	private WorkStationFilter currentFilter = WorkStationFilter.ALL_CHANGE_REQUEST;
 	
     /* ***************************************
      * ********** FXML Methods ***************
@@ -139,7 +140,7 @@ public class WorkStationBoundary implements Initializable{
     			case "EXECUTION_SET_TIME":
     			case "EXECUTION_APPROVE_TIME":
     			case "EXECUTION_WORK":
-    				//ProjectFX.pagingController.loadBoundary(ProjectPages.EXECUTION_LEADER_PAGE.getPath(), clickedChangeRequest);
+    				ProjectFX.pagingController.loadBoundary(ProjectPages.EXECUTION_LEADER_PAGE.getPath(), clickedChangeRequest);
     				break;
     			
     			/*Committee Director setting tester status */
@@ -177,30 +178,56 @@ public class WorkStationBoundary implements Initializable{
     @FXML
     void loadHomePage(ActionEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
+		closeMyStages();
     }
 
     @FXML
     void refreshStation(ActionEvent event) {
-    	Toast.makeText(ProjectFX.mainStage, refreshStationButton.getText() + " Button not implemented yet", 1500, 500, 500);
+    	switch (currentFilter)
+    	{
+			case ALL_CHANGE_REQUEST:
+				this.displayAllWorkChangeRequests(null);
+				break;
+			case ANALYSIS_STEP:
+				this.displayAnalysisStepChangeRequests(null);
+				break;
+			case COMMITTEE_STEP:
+				this.displayCommitteDecisionChangeRequests(null);
+				break;
+			case EXECUTION_STEP:
+				this.displayExecutionStepChangeRequests(null);
+				break;
+			case TESTER_APPOINT_STEP:
+				this.displayTesterAppointChangeRequest(null);
+				break;
+			case TESTING_STEP:
+				this.displayTesterStepChangeRequests(null);
+				break;
+			default:
+				System.out.println("Need to implement switch case for: "+currentFilter);
+				this.displayAllWorkChangeRequests(null);
+				break;
+    	}
     }
 
     @FXML
     void userLogout(MouseEvent event) {
     	ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
+		closeMyStages();
     }
 
     /* *****************************************
      * ********** Public Methods ***************
      * *****************************************/
     
-    public void loadTableView(List<ChangeRequest> changeRequestsList)
+    public void loadTableView(List<ChangeRequest> recievedChangeRequestList)
     {
-    	list.clear();
-    	list.addAll(changeRequestsList);
-    	changeRequestTableView.setItems(list);
+    	changeRequestList.clear();
+    	changeRequestList.addAll(recievedChangeRequestList);
+    	changeRequestTableView.setItems(changeRequestList);
     	
-    	if (!list.isEmpty())
+    	if (!changeRequestList.isEmpty())
     	{
     		changeRequestTableView.setVisible(true);
         	selectedChangeRequestIdTextArea.setVisible(true);
@@ -258,5 +285,37 @@ public class WorkStationBoundary implements Initializable{
 		/* Call the method to automatically display */
 		this.displayAllWorkChangeRequests(null);
 	}
+	
+	synchronized public void setFilterType (WorkStationFilter filter)
+	{
+		this.currentFilter = filter;
+	}
+	
+	/* ******************************
+	 * ******* Private Methods ******
+	 * ******************************/
+	private void closeMyStages()
+	{
+		if (myTesterAppointStage != null)
+		{
+			myTesterAppointStage.close();
+		}
+			
+	}
+	
+	/* ******************************
+	 * ********* Enumerators ********
+	 * ******************************/
+	public enum WorkStationFilter
+	{
+		ALL_CHANGE_REQUEST,
+		ANALYSIS_STEP,
+		COMMITTEE_STEP,
+		EXECUTION_STEP,
+		TESTER_APPOINT_STEP,
+		TESTING_STEP;
+	}
 
 }
+
+

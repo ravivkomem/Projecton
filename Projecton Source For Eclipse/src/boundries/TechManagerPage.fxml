@@ -106,7 +106,6 @@
       <AnchorPane fx:id="employeeAnchorPane" layoutX="138.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
          <children>
             <Text layoutX="231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
-            <TextField fx:id="searchEmployeeTextField" layoutY="1.0" onInputMethodTextChanged="#EmployeeListFiltering" prefHeight="26.0" prefWidth="200.0" promptText="Search Employee" />
             <TableView fx:id="employeeListTable" layoutY="26.0" prefHeight="311.0" prefWidth="200.0">
                <columns>
                   <TableColumn fx:id="clmEmployeId" prefWidth="75.0" text="ID" visible="false" />
@@ -128,12 +127,12 @@
             <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="View Permissions" />
          </children>
       </AnchorPane>
-      <TableView fx:id="requestListTable" layoutX="201.0" layoutY="149.0" prefHeight="218.0" prefWidth="425.0">
+      <TableView fx:id="requestListTable" layoutX="187.0" layoutY="149.0" prefHeight="277.0" prefWidth="493.0">
          <columns>
-            <TableColumn fx:id="requestIdColumn" prefWidth="92.0" text="Request ID" />
-            <TableColumn fx:id="stepColumn" prefWidth="71.33331298828125" text="Step" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="163.6666259765625" text="Description " />
-            <TableColumn fx:id="subsystemColumn" prefWidth="94.6666259765625" text="SubSystem" />
+            <TableColumn fx:id="requestIdColumn" prefWidth="69.33331298828125" text="Request ID" />
+            <TableColumn fx:id="stepColumn" prefWidth="81.0" text="Step" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="178.0" text="Description " />
+            <TableColumn fx:id="subsystemColumn" prefWidth="158.0" text="SubSystem" />
          </columns>
       </TableView>
       <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="455.0" prefWidth="603.0" visible="false">

@@ -8,6 +8,7 @@ import assets.SqlQueryType;
 import assets.SqlResult;
 import boundries.ProjectFX;
 import boundries.WorkStationBoundary;
+import boundries.WorkStationBoundary.WorkStationFilter;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import javafx.application.Platform;
@@ -98,27 +99,55 @@ public class WorkStationController extends BasicController{
 		
 		this.subscribeToClientDeliveries();
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+
 	}
 	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		
 		Platform.runLater(() -> {
+			ArrayList<ChangeRequest> resultChangeRequestList;
 			switch(result.getActionType())
 			{
 				case SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_NOT_COMMITTEE:
 				case SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_MEMBER:
 				case SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_DIRECTOR:
-				case SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME:
-				case SELECT_COMMITTEE_STEP_CHANGE_REQUESTS:
-				case SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME:
-				case SELECT_TESTER_APPOINT_CHANGE_REQUESTS:
-				case SELECT_TESTER_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME:
-					ArrayList<ChangeRequest> resultChangeRequestList = this.parseResultToChangeRequestList(result);
 					this.unsubscribeFromClientDeliveries();
+					resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					myBoundary.setFilterType(WorkStationFilter.ALL_CHANGE_REQUEST);
 					myBoundary.loadTableView(resultChangeRequestList);
 					break;
-				
+				case SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME:
+					this.unsubscribeFromClientDeliveries();
+					resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					myBoundary.setFilterType(WorkStationFilter.ANALYSIS_STEP);
+					myBoundary.loadTableView(resultChangeRequestList);
+					break;
+				case SELECT_COMMITTEE_STEP_CHANGE_REQUESTS:
+					this.unsubscribeFromClientDeliveries();
+					resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					myBoundary.setFilterType(WorkStationFilter.COMMITTEE_STEP);
+					myBoundary.loadTableView(resultChangeRequestList);
+					break;
+				case SELECT_EXECUTION_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME:
+					this.unsubscribeFromClientDeliveries();
+					resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					myBoundary.setFilterType(WorkStationFilter.EXECUTION_STEP);
+					myBoundary.loadTableView(resultChangeRequestList);
+					break;
+				case SELECT_TESTER_APPOINT_CHANGE_REQUESTS:
+					this.unsubscribeFromClientDeliveries();
+					resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					myBoundary.setFilterType(WorkStationFilter.TESTER_APPOINT_STEP);
+					myBoundary.loadTableView(resultChangeRequestList);
+					break;
+				case SELECT_TESTER_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME:
+					this.unsubscribeFromClientDeliveries();
+					resultChangeRequestList = this.parseResultToChangeRequestList(result);
+					myBoundary.setFilterType(WorkStationFilter.TESTING_STEP);
+					myBoundary.loadTableView(resultChangeRequestList);
+					break;
+
 				default:
 					break;
 			}

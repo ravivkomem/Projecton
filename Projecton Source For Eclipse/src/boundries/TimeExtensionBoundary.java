@@ -2,24 +2,22 @@ package boundries;
 
 import java.net.URL;
 import java.sql.Date;
-import java.util.Calendar;
 import java.util.ResourceBundle;
-
-import assets.StepType;
 import assets.Toast;
 import controllers.TimeExtensionController;
+import controllers.TimeManager;
 import entities.Step;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogEvent;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 public class TimeExtensionBoundary implements DataInitializable  {
@@ -30,7 +28,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
 	
 	/*Buttons*/
     @FXML
-    private Button subimitTimeExtensionButton;
+    private Button submitTimeExtensionButton;
     @FXML
     private Button closeTimeExtensionButton;
     /*Date Picker */
@@ -46,22 +44,23 @@ public class TimeExtensionBoundary implements DataInitializable  {
     private TextField currentStepTextField;
     @FXML
     private TextField currentEndDateTextField;
+    /*Image View */
+    @FXML
+    private ImageView loadingGif;
 
     /* *************************************
 	 * ******* Private Variables ***********
 	 * *************************************/
     private Alert alert = new Alert(AlertType.NONE);
-    //private Step myStep;
-    private Step myStep = new Step(StepType.COMMITTEE, 2, 78, new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+    private Step myStep;
     private TimeExtensionController myController = new TimeExtensionController(this);
-    private TimeExtensionBoundary myInstance = this;
     
 	/* *************************************
 	 * ********* FXML Methods **************
 	 * *************************************/
     @FXML
     void closeTimeExtensionPage(ActionEvent event) {
-    	((Node)event.getSource()).getScene().getWindow().hide();
+    	closeTimeExtensionButton.getScene().getWindow().hide();
     }
 
     @FXML
@@ -87,8 +86,11 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	else
     	{
     		Date selectedDate = Date.valueOf(datePicker.getValue());
+    		/* Decide which is bigger, current date or estimated end date */
+    		Date dayToCompare = TimeManager.getMaxDate(myStep.getEstimatedEndDate(), TimeManager.getCurrentDate());
         	/* Date is prior to the current date */
-        	if (selectedDate.toLocalDate().isBefore(myStep.getEstimatedEndDate().toLocalDate()))
+    		long daysBetween = TimeManager.getDaysBetween(dayToCompare, selectedDate);
+        	if (daysBetween <= 0)
         	{
         		alert.setAlertType(AlertType.ERROR);
         		alert.setTitle("ERROR");
@@ -113,7 +115,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     {
     	if (affectedRows == 1)
     	{
-    		alert.setAlertType(AlertType.CONFIRMATION);
+    		alert.setAlertType(AlertType.INFORMATION);
     		alert.setTitle("Success");
     		alert.setHeaderText("Your time extension request was submitted successfully");
     		alert.setContentText("The page will now close");
@@ -121,7 +123,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     		alert.setOnCloseRequest(new EventHandler <DialogEvent>() {
     			 @Override
 		        public void handle (DialogEvent dialogEvent) {
-    				 myInstance.closeTimeExtensionButton.getScene().getWindow().hide();
+    				 closeTimeExtensionButton.getScene().getWindow().hide();
 		        }
     		});
     	}
@@ -136,12 +138,51 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	
     }
     
+    public void recieveTimeExtensionCounter(long timeExtensionCounter)
+    {
+    	/* Story request - for every step you can submit only one time extension request */
+    	if (timeExtensionCounter >= 1)
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "You already requested time extension for this step", 1500, 500, 500);
+			closeTimeExtensionButton.getScene().getWindow().hide();
+    	}
+    	/* Load all page functions */
+    	else
+    	{
+    		/*Updating text*/
+			timeExtensionHeaderText.setText("Requesting Time Extension For Change Request No."+myStep.getChangeRequestID());
+			currentStepTextField.setText(myStep.getType().getStepName());
+			currentEndDateTextField.setText(myStep.getEstimatedEndDate().toString());
+			/*Visibility changes*/
+			submitTimeExtensionButton.setVisible(true);
+			closeTimeExtensionButton.setVisible(true);
+			datePicker.setVisible(true);
+			timeExtensionHeaderText.setVisible(true);
+			reasonTextField.setVisible(true);
+			currentStepTextField.setVisible(true);
+			currentEndDateTextField.setVisible(true);
+			
+			loadingGif.setVisible(false);
+    	}
+    }
+    
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		/* Setup assignments */
 		currentStepTextField.setEditable(false);
 		currentEndDateTextField.setEditable(false);
-		
 		reasonTextField.setAlignment(Pos.TOP_LEFT);
+		
+		/*Visibility changes */
+		submitTimeExtensionButton.setVisible(false);
+		closeTimeExtensionButton.setVisible(false);
+		datePicker.setVisible(false);
+		timeExtensionHeaderText.setVisible(false);
+		reasonTextField.setVisible(false);
+		currentStepTextField.setVisible(false);
+		currentEndDateTextField.setVisible(false);
+		
+		loadingGif.setVisible(true);
 	}
 
 	@Override
@@ -149,10 +190,20 @@ public class TimeExtensionBoundary implements DataInitializable  {
 		
 		try 
 		{
-			Step myStep = (Step) data;
-			timeExtensionHeaderText.setText("Requesting Time Extension For Change Request No."+myStep.getChangeRequestID());
-			currentStepTextField.setText(myStep.getType().getStepName());
-			currentEndDateTextField.setText(myStep.getEstimatedEndDate().toString());
+			myStep = (Step) data;
+			Date currentDate = TimeManager.getCurrentDate();
+			long daysBetween = TimeManager.getDaysBetween(currentDate, myStep.getEstimatedEndDate());
+			/* Story requirements - can only request time extension for less than 3 days */
+			if (daysBetween > 3)
+			{
+				long daysUntilRequest = daysBetween-3;
+				Toast.makeText(ProjectFX.mainStage, "You can request time extension in " + daysUntilRequest +" days", 1500, 500, 500);
+				closeTimeExtensionButton.getScene().getWindow().hide();
+			}
+			else
+			{
+				myController.verifyNoPreviousExtensions(myStep);
+			}
 		}
 		/* Either null pointer exception or class cast */
 		catch (Exception e)

@@ -6,19 +6,24 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.ExecutionLeaderController;
+import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.ExecutionAproves;
+import entities.Step;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -86,8 +91,17 @@ import javafx.stage.Stage;
  
 	    private ExecutionLeaderController myController = new ExecutionLeaderController(this);
 	    private ChangeRequest myChangerequest;
-	    private int flag=0;
+	    private int flag;
 	    java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		Stage myTimeExtensionStage = null;
+		Stage myAnalysisReportStage= null;
+		Step executionStep;
+		Step executionStepMain;
+	    
+	    public Date getDate()
+	    {
+	    	return updateStepDate;
+	    }
 	   
 	   
 	    
@@ -99,9 +113,9 @@ import javafx.stage.Stage;
 			myChangerequest = (ChangeRequest) data;
 			txtWorkingOnChangeRequestNumber.setText("Working On Change Request Nomber " + myChangerequest.getChangeRequestID());
 			txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
+			myController.GetStepDetails(myChangerequest.getChangeRequestID());
 			
-			
-			
+		
 		}
 	    
 		@Override
@@ -110,8 +124,15 @@ import javafx.stage.Stage;
 			//myChangerequest=new ChangeRequest(2,"lee", "Moodle", "Bad","good", "active", "itay");
 			txtWaitingForTomeApprovalPopUp.setVisible(false);
 			btnCommitExecution.setVisible(false);
+			btnRefresh.setVisible(false);
 			txtWorkingOnChangeRequestNumber.setVisible(true);
-			btnRefresh.setVisible(false);	
+			txtChangeRequestDetails.setEditable(false);
+			timeRemainingTextAria.setVisible(false);
+			delayTimeTxt.setVisible(false);
+			timeRemainingTxt.setVisible(false);
+			flag=0;
+			
+			
 			//txtChangeRequestDetails.setText(myChangerequest.getChangeRequestDescription());	
 		}
 		
@@ -121,12 +142,24 @@ import javafx.stage.Stage;
 		}
 	    
 		@FXML
-	    void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)  // submiting execution time
+	    public void SendTimeRequiredForExecutionToSupervisor(MouseEvent event)  // submit execution time
 	    {
+			long count=0;
 	    	
-	    	if (txtTimeForExecution.getValue().equals(null)) {
+	    	if (txtTimeForExecution.getValue()==null)
+	    	{
 				Toast.makeText(ProjectFX.mainStage, "Please add Time Execution first", 1500, 500, 500);
-			} else {
+			}
+	    	else if(txtTimeForExecution.getValue()!=null)
+	    	{
+	    		count = TimeManager.getDaysBetween(executionStep.getStartDate(),Date.valueOf(txtTimeForExecution.getValue()));
+	    	}
+	    	 if(count<0)
+	    	{
+	    		Toast.makeText(ProjectFX.mainStage, "Please choose other day", 1500, 500, 500);
+	    	}
+	    	else if(count>0)
+	    	{
 				txtWaitingForTomeApprovalPopUp.setVisible(true);
 				Date estimatedDateChoosen = Date.valueOf(txtTimeForExecution.getValue());
 				myController.insertNewEstimatedDateToExecutionStepAndChangeRequestIDStep(estimatedDateChoosen,myChangerequest.getChangeRequestID());
@@ -135,7 +168,7 @@ import javafx.stage.Stage;
 				txtBuildEnterTimeRequiredForExecution.setVisible(false);
 				txtTimeForExecution.setVisible(false);
 				btnSubmitForTimeRequiredForExecution.setVisible(false);
-				
+			
 			}
 	    }
 	    @FXML
@@ -150,10 +183,31 @@ import javafx.stage.Stage;
 		}
 	       
 	    @FXML
-	    void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event)  // when execution commit working
+	    public void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event)  // when execution commit working
 	    {
-	    	myController.UpdateExecutionLeaderDateAndStatus(myChangerequest.getChangeRequestID());
-	    	myController.UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(myChangerequest.getChangeRequestID()); 
+	    	 Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	         alert.getButtonTypes().remove(ButtonType.OK);
+	         alert.getButtonTypes().add(ButtonType.CANCEL);
+	         alert.getButtonTypes().add(ButtonType.YES);
+	         alert.setTitle("COMMIT PRESSED");
+	         alert.setContentText(String.format("Are you sure you want to commit?"));
+	         Optional<ButtonType> res = alert.showAndWait();
+
+	         if(res.isPresent()) 
+	         {
+	             if(res.get().equals(ButtonType.CANCEL))
+	             {
+	             	event.consume();
+	             }
+	             else
+	             {
+	            	 myController.UpdateExecutionLeaderDateAndStatus(myChangerequest.getChangeRequestID());
+	     	    	myController.UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(myChangerequest.getChangeRequestID());
+	     	    	ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
+	             }
+	         }
+	    	
+	    	
 	    	
 	    }
 
@@ -166,65 +220,82 @@ import javafx.stage.Stage;
 	    @FXML
 	    void LogOutFromExecutionLeaderPage(MouseEvent event)        // logout from execution page
 	    {
-	       	/*TODO: Remove user from connected list */
-	    	ProjectFX.currentUser = null;
-			//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	    	ProjectFX.pagingController.userLogout();
+			if (!(myTimeExtensionStage == null))
+				myTimeExtensionStage.close();
+			if (!(myAnalysisReportStage == null))
+				myAnalysisReportStage.close();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	    }
 
 	    @FXML
-	    void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event)    // opet time extension
+	    public void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event)    // opet time extension
 	    {
-	    	try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.TIME_EXTENSION_PAGE.getPath()));
-				Parent root;
-				root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.show();
-			} catch (IOException e) {
-				e.printStackTrace();
+	    	if (myTimeExtensionStage == null)
+			{
+				myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),executionStep);
+			}
+			else if (myTimeExtensionStage.isShowing())
+			{
+				Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
+			} 
+			else
+			{
+				myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),executionStep);
 			}
 
 	    }
 
 	    @FXML
-	    void ReturnToHomePageFromExecutionLeaderPage(MouseEvent event)     // return home page
+	    public void ReturnToHomePageFromExecutionLeaderPage(MouseEvent event)     // return home page
 	    {
 	     	//((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+	    	if(!(myTimeExtensionStage == null))
+				myTimeExtensionStage.close();
+			if(!(myAnalysisReportStage == null))
+				myAnalysisReportStage.close();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	    }
 
 	    @FXML
-	    void ShowAnalysisReportFromExecutionLeaderPage(MouseEvent event)   // show anaylisis report
+	    public void ShowAnalysisReportFromExecutionLeaderPage(MouseEvent event)   // show anaylisis report
 	    {
-	    	// give analysis report page the change request id to show the correct report
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ProjectPages.ANALISIS_REPORT_PAGE.getPath()));
-				Parent root;
-				root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setScene(new Scene(root));
-				stage.show();
-			} catch (IOException e) {
-				e.printStackTrace();
+	    	if (myAnalysisReportStage == null)
+			{
+				myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+						(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),myChangerequest);
+			}
+			else if (myAnalysisReportStage.isShowing())
+			{
+				Toast.makeText(ProjectFX.mainStage, "Analysis Report Window is already open", 1500, 500, 500);
+			} 
+			else
+			{
+				myAnalysisReportStage = ProjectFX.pagingController.loadAdditionalStage
+						(ProjectPages.ANALISIS_REPORT_PAGE.getPath(),myChangerequest);
 			}
 	    }
 	    
 	    @FXML
-	    void GetAgainTheChangeRequestToSeeStatus(MouseEvent event)  // Refresh button
+	    public void GetAgainTheChangeRequestToSeeStatus(MouseEvent event)  // Refresh button
 	    {
+	    	
+	    //	 myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+	    	 
 	    	if(flag==0)
-	    	myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+	    		myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
 	    	else
-	    	myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());	
+	    		myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());	
 	    }
 
 		public void ShowCommitButton()
 		{
 			
 			Toast.makeText(ProjectFX.mainStage, "Supervisor approved your estimated time", 1500, 500, 500);
+			timeRemainingTextAria.setEditable(false);
+			txtWaitingForTomeApprovalPopUp.setVisible(false);
 			btnCommitExecution.setVisible(true);
+			myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());
 		}
 
 		public void ShowEstimatedDateMinusStartDate(Date estimatedEndDate)
@@ -233,22 +304,63 @@ import javafx.stage.Stage;
 			long daysBetween;
 			if(estimatedEndDate.before(todayDate)) {
 				delayTimeTxt.setVisible(true);
+				timeRemainingTextAria.setVisible(true);
 				daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
 				timeRemainingTextAria.setText(""+(daysBetween-1)+" Days");
 			}
 			else {
 				timeRemainingTxt.setVisible(true);
+				timeRemainingTextAria.setVisible(true);
 				daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
 				timeRemainingTextAria.setText(""+(daysBetween+1)+" Days");
 			}
 			
 		}
 
-		public void ShowFinishToast()
+		public void ShowFinishToast(int affectedrows)
 		{
 			// TODO Auto-generated method stub
+			if(affectedrows==1)
 			Toast.makeText(ProjectFX.mainStage, "Execution Step is finished", 1500, 500, 500);
+			 
 			
+		}
+
+
+
+
+
+		public void SupervisorDidNotAproveYet()
+		{
+				
+				Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve yet", 1500, 500, 500);
+				txtWaitingForTomeApprovalPopUp.setVisible(true);
+		}
+
+
+
+
+
+		public void SetStep(Step executionStep2)
+		{
+			executionStep=executionStep2;
+			if(!(executionStep.getEstimatedEndDate()==null)) {
+				btnRefresh.setVisible(true);
+				txtBuildEnterTimeRequiredForExecution.setVisible(false);
+				txtTimeForExecution.setVisible(false);
+				btnSubmitForTimeRequiredForExecution.setVisible(false);
+				 myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
+			}
+		}
+
+
+
+
+
+		public void ErrorInLoadingExecutionPage()
+		{
+			Toast.makeText(ProjectFX.mainStage, "Problam in loading this changetequest", 1500, 500, 500);
+			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 		}
 
 	

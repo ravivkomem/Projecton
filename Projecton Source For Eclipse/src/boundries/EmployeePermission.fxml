@@ -25,5 +25,6 @@
       <Text layoutX="36.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Permission:" />
       <ComboBox fx:id="newPremissionComboBox" layoutX="102.0" layoutY="151.0" prefHeight="25.0" prefWidth="189.0" promptText="- select new permission -" />
       <Button fx:id="setNewPermissionTextField" layoutX="291.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#setNewEmployeePermission" text="Set" />
+      <Text fx:id="errorText" fill="#f60101" layoutX="97.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

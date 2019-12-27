@@ -216,6 +216,9 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
 				"INSERT INTO icm.time_extension(StepID,StepType,NewDate,Reason,Status) " + 
 				"VALUES (?,?,?,?,'NEW')";
+		sqlArray[SqlQueryType.COUNT_TIME_EXTENSION_BY_STEP.getCode()]=
+				"SELECT COUNT(*) FROM icm.time_extension "
+				+ "WHERE StepID = ? AND StepType = ?";
 		
 		/* *****************************************************
 		 * *************** Committee Queries **************
@@ -231,20 +234,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
-    	
-    	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
-    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
-    			" ORDER BY ExecutionStepID DESC LIMIT 1";
-    	
-    
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
-    	
-    	
-    	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
-    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
-    	
-    
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
@@ -259,6 +250,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
+    	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
+    			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
@@ -281,12 +274,42 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_COMMITTEE_MEMBERS.getCode()] =
     			"SELECT UserName FROM icm.user "
     			+ "WHERE Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AND_HANDLER.getCode()] =
+    			"UPDATE icm.change_request "
+    			+ "SET CurrentStep = ?, HandlerUserName = ? "
+    			+ "WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.INSERT_NEW_TESTER_STEP.getCode()] =
+    			"INSERT INTO icm.tester_step(ChangeRequestId,HandlerUserName,Status,StartDate,EstimatedEndDate) "
+    	    	+ "VALUES (?,?,'Active',?,?)";
+    	
+    	/* ******************************************************
+    	 * *************Execution Leader Queries****************
+    	 *******************************************************
+    	 *******************************************************/
+    	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
+    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestID = ?" + 
+    			" ORDER BY ExecutionStepID DESC LIMIT 1";
+    	
     	
     	sqlArray[SqlQueryType.SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK.getCode()] = 
-				"SELECT CurrentStep FROM icm.change_request WHERE ChangeRequestId = ?";
+				"SELECT CurrentStep FROM icm.change_request WHERE ChangeRequestID = ?";
+    	
     	
     	sqlArray[SqlQueryType.SELECT_ESTIMATED_DATE_MINUS_START_DATE.getCode()] = 
-				"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestId = ?";
+				"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestID = ?";
+    	
+     	sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_ESTIMATED_TIME.getCode()]=                   // update estimated end time in execution step
+    			"UPDATE icm.execution_step SET EstimatedEndDate = ? WHERE ChangeRequestID = ?";
+     	
+     	sqlArray[SqlQueryType.UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS.getCode()]=             // update change request status
+    			"UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestID = ?";
+     	
+     	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
+     	
+     	sqlArray[SqlQueryType.SELECT_EXECUTIOM_STEP_DETAILS.getCode()] = 
+				"SELECT * FROM icm.execution_step WHERE ChangeRequestID = ?"
+     			+ " ORDER BY ExecutionStepID DESC LIMIT 1";
     	
     }
     

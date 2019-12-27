@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import assets.Toast;
 import controllers.TechManagerController;
 import entities.ChangeRequest;
 import entities.User;
@@ -46,9 +47,6 @@ public class TechManagerBoundary implements DataInitializable{
     private AnchorPane employeeAnchorPane;
     @FXML
     private AnchorPane reportPageAnchorPane;
-
-    @FXML
-    private TextField searchEmployeeTextField;
 
     /*employee table*/
     @FXML
@@ -95,11 +93,6 @@ public class TechManagerBoundary implements DataInitializable{
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
 
     @FXML
-    void EmployeeListFiltering(InputMethodEvent event) {
-    	
-    }
-
-    @FXML
     void loadEmployeePage(MouseEvent event) {
 		reportPageAnchorPane.setVisible(false);
 		requestListTable.setVisible(false);
@@ -135,7 +128,25 @@ public class TechManagerBoundary implements DataInitializable{
 
     @FXML
     void loadSpecificReport(MouseEvent event) {
-
+    	/*TODO reports*/
+    	if (reportTypeComboBox.getSelectionModel().isEmpty()) {
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+			return;
+		} else {
+			switch (reportTypeComboBox.getSelectionModel().getSelectedItem()) {
+			case "Activity Report":
+				
+				break;
+			case "Performance Report":
+				
+				break;
+			case "Delay Report":
+				
+				break;
+			default:
+				break;
+			}
+		}
     }
 
     @FXML
@@ -143,8 +154,10 @@ public class TechManagerBoundary implements DataInitializable{
     	ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
     	dataList.add(new ArrayList<Object>());
     	dataList.add(new ArrayList<Object>());
+    	dataList.add(new ArrayList<Object>());
     	dataList.get(0).add(employeeUser);
     	dataList.get(1).addAll(users);
+    	dataList.get(2).add(this);
     	ProjectFX.pagingController.loadAdditionalStage(ProjectPages.EMPLOYEE_PERMISSION.getPath(), dataList);
     }
 
@@ -153,12 +166,26 @@ public class TechManagerBoundary implements DataInitializable{
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
+    
+    public void setEmployeeListChanges(User employeeNewUser) {
+    	employeeUser = employeeNewUser;
+    	for(int i=0;i<users.size();i++) {
+			if(users.get(i).getUserID() == employeeUser.getUserID()) {
+				users.set(i, employeeUser);
+				return;
+			}
+		}
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		employeeAnchorPane.setVisible(false);
 		reportPageAnchorPane.setVisible(false);
 		requestListTable.setVisible(true);
+		
+		reportTypeComboBox.getItems().add("Activity Report");
+		reportTypeComboBox.getItems().add("Performance Report");
+		reportTypeComboBox.getItems().add("Delay Report");
 		
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("actualStep"));
@@ -183,7 +210,6 @@ public class TechManagerBoundary implements DataInitializable{
 		    });
 		    return row ;
 		});
-
 		myController.getAllTheActiveChangeRequest();
 	}
 
