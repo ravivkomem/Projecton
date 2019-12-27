@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.SupervisorBoundary">
    <children>
       <ImageView fitHeight="568.0" fitWidth="758.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -31,7 +31,7 @@
                   <Image url="@icm%20icom%20til.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickHomePageFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -45,7 +45,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell11" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnRequestList" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickRequestListFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -59,7 +59,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell111" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Appointment" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnAppointment" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickAppointmentFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Appointment" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -73,7 +73,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell11111" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Approval" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnApproval" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickApprovalFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Approval" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +87,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell111111" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Closing step" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnClosingStep" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickClosingStepFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Closing step" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -112,7 +112,7 @@
          </columns>
       </TableView>
       <Button layoutX="358.0" layoutY="314.0" mnemonicParsing="false" text="View Extra Details" visible="false" />
-      <Button layoutX="665.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+      <Button fx:id="btnLogOut" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ClickLogOutFunction" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -124,7 +124,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="562.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#ClickBackFunction" text="Back" />
       <ComboBox layoutX="212.0" layoutY="339.0" prefHeight="25.0" prefWidth="181.0" promptText="- select execution lider - " visible="false" />
       <ComboBox layoutX="219.0" layoutY="339.0" prefWidth="150.0" promptText="- select -" visible="false" />
       <Button layoutX="394.0" layoutY="339.0" mnemonicParsing="false" text="Approve" visible="false" />
