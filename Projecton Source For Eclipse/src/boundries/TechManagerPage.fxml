@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -135,10 +137,37 @@
             <TableColumn fx:id="subsystemColumn" prefWidth="158.0" text="SubSystem" />
          </columns>
       </TableView>
-      <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="455.0" prefWidth="603.0" visible="false">
+      <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="504.0" prefWidth="603.0" visible="false">
          <children>
             <ComboBox fx:id="reportTypeComboBox" layoutX="85.0" layoutY="1.0" prefHeight="25.0" prefWidth="164.0" promptText="- select report type -" />
             <Button fx:id="viewReportButton" layoutX="249.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#loadSpecificReport" text="view" />
+            <AnchorPane fx:id="activityReportPane" layoutX="7.0" layoutY="26.0" prefHeight="459.0" prefWidth="586.0" visible="false">
+               <children>
+                  <Text layoutX="83.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" />
+                  <Text layoutX="324.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" />
+                  <Text layoutX="240.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Activity Report">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <DatePicker fx:id="startDatePicker" layoutX="128.0" layoutY="54.0" prefHeight="25.0" prefWidth="115.0" promptText="start date" />
+                  <DatePicker fx:id="endDatePicker" layoutX="355.0" layoutY="54.0" prefHeight="25.0" prefWidth="115.0" promptText="end date" />
+                  <Button fx:id="showDetailsButton" layoutX="491.0" layoutY="54.0" mnemonicParsing="false" onMouseClicked="#showActivityReportDetails" text="Show" />
+                  <AnchorPane fx:id="activityReportDetailsPane" layoutY="92.0" prefHeight="367.0" prefWidth="586.0" visible="false">
+                     <children>
+                        <PieChart fx:id="requestStatusPieChart" prefHeight="214.0" prefWidth="323.0" />
+                        <Text layoutX="378.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:" />
+                        <TextField fx:id="medianTextField" layoutX="472.0" layoutY="27.0" prefHeight="25.0" prefWidth="100.0" />
+                        <Text layoutX="378.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Std:" />
+                        <TextField fx:id="stdTextField" layoutX="472.0" layoutY="65.0" prefHeight="25.0" prefWidth="100.0" />
+                        <Text layoutX="378.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Distribution:" />
+                        <TextField fx:id="distributionTextField" layoutX="472.0" layoutY="101.0" prefHeight="25.0" prefWidth="100.0" />
+                        <Text layoutX="26.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number of days spent handling requests:" />
+                        <TextField fx:id="handleDaysTextField" layoutX="253.0" layoutY="273.0" prefHeight="25.0" prefWidth="100.0" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

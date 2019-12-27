@@ -1,19 +1,23 @@
 package boundries;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.TechManagerController;
+import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -28,6 +32,11 @@ import javafx.scene.layout.AnchorPane;
 
 public class TechManagerBoundary implements DataInitializable{
 
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
+	
+	/*button*/
     @FXML
     private Button btnBack;
     @FXML
@@ -86,12 +95,45 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     private ComboBox<String> reportTypeComboBox;
     
+    /*activity report*/
+    @FXML
+    private AnchorPane activityReportPane;
+    @FXML
+    private DatePicker startDatePicker;
+    @FXML
+    private DatePicker endDatePicker;
+    @FXML
+    private Button showDetailsButton;
+    @FXML
+    private AnchorPane activityReportDetailsPane;
+    @FXML
+    private PieChart requestStatusPieChart;
+    @FXML
+    private TextField medianTextField;
+    @FXML
+    private TextField stdTextField;
+    @FXML
+    private TextField distributionTextField;
+    @FXML
+    private TextField handleDaysTextField;
+    
+    /*performance report*/
+    
+    /*delay report*/
+    
+    /* *************************************
+	 * ******* Private Objects *************
+	 * *************************************/
 	private User employeeUser;
 	private ArrayList<User> users = new ArrayList<>(); 
 	TechManagerController myController = new TechManagerController(this);
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
 
+	/* *************************************
+	 * ******* FXML Methods *************
+	 * *************************************/
+	
     @FXML
     void loadEmployeePage(MouseEvent event) {
 		reportPageAnchorPane.setVisible(false);
@@ -130,12 +172,12 @@ public class TechManagerBoundary implements DataInitializable{
     void loadSpecificReport(MouseEvent event) {
     	/*TODO reports*/
     	if (reportTypeComboBox.getSelectionModel().isEmpty()) {
-			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+			Toast.makeText(ProjectFX.mainStage, "Please select report type", 1500, 500, 500);
 			return;
 		} else {
 			switch (reportTypeComboBox.getSelectionModel().getSelectedItem()) {
 			case "Activity Report":
-				
+				activityReportPane.setVisible(true);
 				break;
 			case "Performance Report":
 				
@@ -147,6 +189,25 @@ public class TechManagerBoundary implements DataInitializable{
 				break;
 			}
 		}
+    }
+    
+    @FXML
+    void showActivityReportDetails(MouseEvent event) {
+    	if(startDatePicker.getValue() == null || endDatePicker.getValue() == null) {
+    		Toast.makeText(ProjectFX.mainStage, "Please select start date and end date", 1500, 500, 500);
+    	}
+    	else {
+    		Date startDate = Date.valueOf(startDatePicker.getValue());
+    		Date endDate = Date.valueOf(endDatePicker.getValue());
+    		Date todayDate = TimeManager.getCurrentDate();
+    		long daysBetween = TimeManager.getDaysBetween(todayDate, startDate);
+    		if(daysBetween>0) {
+    			Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
+    		}
+    		/*TODO check for end date
+    		 * check for endDate>startDate*/
+    	}
+    	 
     }
 
     @FXML
@@ -166,6 +227,10 @@ public class TechManagerBoundary implements DataInitializable{
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
+    
+    /* *************************************
+	 * ******* Public Methods *************
+	 * *************************************/
     
     public void setEmployeeListChanges(User employeeNewUser) {
     	employeeUser = employeeNewUser;

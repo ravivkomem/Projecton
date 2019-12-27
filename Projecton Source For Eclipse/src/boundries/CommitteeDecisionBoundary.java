@@ -180,7 +180,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
-		// give time extension page change request and stuff
 		if (myTimeExtensionStage == null) {
 			myTimeExtensionStage = ProjectFX.pagingController
 					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),committeeStep);

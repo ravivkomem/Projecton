@@ -21,6 +21,10 @@ import javafx.scene.text.Text;
 
 public class EmployeePermissionBoundary implements DataInitializable{
 
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
+	
     @FXML
     private Text employeeNameText;
     @FXML
@@ -33,10 +37,17 @@ public class EmployeePermissionBoundary implements DataInitializable{
     @FXML
     private Button setNewPermissionTextField;
     
+    /* *************************************
+   	 * ******* Private Objects *************
+   	 * *************************************/
     private User employeeUser;
 	private ArrayList<User> users = new ArrayList<>(); 
 	private EmployeePermissionController myController = new EmployeePermissionController(this);
 	private TechManagerBoundary techManagerBoundry;
+	
+	/* *************************************
+	 * ******* FXML Methods *************
+	 * *************************************/
 	
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
@@ -106,13 +117,17 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		((Node) event.getSource()).getScene().getWindow().hide();
     }
     
+    /* *************************************
+	 * ******* Public Methods *************
+	 * *************************************/
+    
     /**
      * this method handle with the problem that tech manager give permission that already exist
      * to anther user
-     * @param newSupervasior
-     * @param oldSuperVaser
+     * @param newSupervisor
+     * @param oldSupervisor
      */
-    private void handleSupervasior(User newSupervasior, User oldSuperVaser) {
+    private void handleSupervasior(User newSupervisor, User oldSupervisor) {
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
         if(result.get() == ButtonType.OK) {
@@ -123,14 +138,17 @@ public class EmployeePermissionBoundary implements DataInitializable{
 //        		
 //        	}
         	//else{
-        	newSupervasior.setPermission("SUPERVISOR");
-        	newSupervasior.setJobDescription("Supervisor");
-        	oldSuperVaser.setPermission("INFORMATION_ENGINEER");
-        	oldSuperVaser.setJobDescription("Information Engineer");
-        	myController.updateEmployeePermission("SUPERVISOR","Supervisor",newSupervasior.getUserID());
-        	myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",oldSuperVaser.getUserID());
-        	techManagerBoundry.setEmployeeListChanges(newSupervasior);
-        	techManagerBoundry.setEmployeeListChanges(oldSuperVaser);
+        	newSupervisor.setPermission("SUPERVISOR");
+        	newSupervisor.setJobDescription("Supervisor");
+        	
+        	oldSupervisor.setPermission("INFORMATION_ENGINEER");
+        	oldSupervisor.setJobDescription("Information Engineer");
+        	
+        	myController.updateEmployeePermission("SUPERVISOR","Supervisor",newSupervisor.getUserID());
+        	myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",oldSupervisor.getUserID());
+        	
+        	techManagerBoundry.setEmployeeListChanges(newSupervisor);
+        	techManagerBoundry.setEmployeeListChanges(oldSupervisor);
         }
         else if(result.get() == ButtonType.CANCEL||result.get() == ButtonType.CLOSE){
         	System.out.println("cancel");
