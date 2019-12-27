@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -132,5 +133,7 @@
       <Button layoutX="445.0" layoutY="380.0" mnemonicParsing="false" text="send" />
       <TextField layoutX="251.0" layoutY="380.0" promptText="send message to initiator" />
       <Button layoutX="324.0" layoutY="439.0" mnemonicParsing="false" text="Close the request " />
+      <ScrollBar layoutX="194.0" layoutY="104.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="18.0" />
+      <ScrollBar layoutX="219.0" layoutY="308.0" prefHeight="18.0" prefWidth="401.0" />
    </children>
 </AnchorPane>
