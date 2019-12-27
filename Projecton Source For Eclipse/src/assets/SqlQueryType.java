@@ -21,14 +21,20 @@ public enum SqlQueryType {
 	SELECT_COMMITTEE_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_TESTER_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_COMMITTEE_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
-	/*Tech Manager Queries*/
+	/* *****************************************
+	 * ********Tech Manager Queries*************
+	 * *****************************************/
 	SELECT_ALL_ACTIVE_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_EMPLOYEE(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_EMPLOYEE_PERMISSION(SqlExecutionType.UPDATE_QUERY),
+	// Performance report
+	SELECT_ALL_APPROVED_TIME_EXTNESIONS(SqlExecutionType.EXECUTE_QUERY),
 	
 	UPDATE_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
 	SELECT_ALL_INFROMATION_ENGINEERS(SqlExecutionType.EXECUTE_QUERY),
-	/*Work Station Queries */
+	/* *****************************************
+	 * ********Work Station Queries*************
+	 * *****************************************/
 	SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_NOT_COMMITTEE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_MEMBER(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_DIRECTOR(SqlExecutionType.EXECUTE_QUERY),

@@ -214,8 +214,8 @@ public class MysqlConnection {
 		 * *************** Time Extension Queries **************
 		 * *****************************************************/
 		sqlArray[SqlQueryType.INSERT_NEW_TIME_EXTENSION.getCode()] =
-				"INSERT INTO icm.time_extension(StepID,StepType,NewDate,Reason,Status) " + 
-				"VALUES (?,?,?,?,'NEW')";
+				"INSERT INTO icm.time_extension(StepID,StepType,OldDate,NewDate,Reason) " + 
+				"VALUES (?,?,?,?,?)";
 		sqlArray[SqlQueryType.COUNT_TIME_EXTENSION_BY_STEP.getCode()]=
 				"SELECT COUNT(*) FROM icm.time_extension "
 				+ "WHERE StepID = ? AND StepType = ?";
@@ -252,6 +252,7 @@ public class MysqlConnection {
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";
     	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
     			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
+    	/* Performance report */
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
