@@ -253,6 +253,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
     			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
     	/* Performance report */
+    	sqlArray[SqlQueryType.SELECT_ALL_APPROVED_TIME_EXTNESIONS.getCode()]=
+    			"SELECT * FROM icm.time_extension "
+    			+ "WHERE Status = 'APPROVED'";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********

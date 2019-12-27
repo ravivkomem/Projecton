@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
--- Host: localhost    Database: icm
+-- Host: 127.0.0.1    Database: icm
 -- ------------------------------------------------------
 -- Server version	8.0.18
 
@@ -14,6 +14,33 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `analysis_report`
+--
+
+DROP TABLE IF EXISTS `analysis_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `analysis_report` (
+  `AnalysisReportID` int(11) NOT NULL,
+  `ChangeRequestID` varchar(45) NOT NULL,
+  `Header` varchar(45) NOT NULL,
+  `ChangeSpecifications` varchar(45) NOT NULL,
+  `Comments` varchar(45) NOT NULL,
+  PRIMARY KEY (`AnalysisReportID`,`ChangeRequestID`),
+  UNIQUE KEY `AnalysisReportID_UNIQUE` (`AnalysisReportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analysis_report`
+--
+
+LOCK TABLES `analysis_report` WRITE;
+/*!40000 ALTER TABLE `analysis_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `analysis_report` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `analysis_step`
@@ -291,12 +318,13 @@ DROP TABLE IF EXISTS `time_extension`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `time_extension` (
-  `TimeExtensionID` int(11) NOT NULL AUTO_INCREMENT,
-  `StepID` varchar(45) NOT NULL,
+  `TimeExtensionID` int(11) NOT NULL,
+  `StepID` int(11) NOT NULL,
   `StepType` varchar(45) NOT NULL,
-  `NewDate` varchar(45) NOT NULL,
+  `OldDate` date NOT NULL,
+  `NewDate` date NOT NULL,
   `Reason` varchar(45) DEFAULT NULL,
-  `Status` varchar(45) NOT NULL,
+  `Status` varchar(45) NOT NULL DEFAULT 'NEW' COMMENT 'ENUM',
   PRIMARY KEY (`TimeExtensionID`),
   UNIQUE KEY `TimeExtensionID_UNIQUE` (`TimeExtensionID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -308,6 +336,7 @@ CREATE TABLE `time_extension` (
 
 LOCK TABLES `time_extension` WRITE;
 /*!40000 ALTER TABLE `time_extension` DISABLE KEYS */;
+INSERT INTO `time_extension` VALUES (1,4,'Committee','2019-12-30','2020-01-11','I need more time','APPROVED'),(2,5,'Analysis','2019-12-30','2020-01-11','fgdfg','APPROVED');
 /*!40000 ALTER TABLE `time_extension` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,7 +371,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',1);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',1),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -355,4 +384,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-25 11:44:16
+-- Dump completed on 2019-12-27 23:52:52
