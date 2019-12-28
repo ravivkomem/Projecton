@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import assets.*;
-import assets.SqlQueryType.SqlExecutionType;
 
 public class MysqlConnection {
 	

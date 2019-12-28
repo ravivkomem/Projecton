@@ -86,6 +86,18 @@ public class PagingController extends BasicController {
 		return stage;
 	}
 	
+	public Pane loadBoundaryInPane(String path)
+	{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+		Pane root = null;
+		try {
+			root = loader.load();		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return root;
+	}
+	
 	public void userLogout()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();

@@ -14,6 +14,7 @@ import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -56,6 +57,8 @@ public class TechManagerBoundary implements DataInitializable{
     private AnchorPane employeeAnchorPane;
     @FXML
     private AnchorPane reportPageAnchorPane;
+    @FXML
+    private AnchorPane reportDisplayAnchorPane;
 
     /*employee table*/
     @FXML
@@ -155,7 +158,7 @@ public class TechManagerBoundary implements DataInitializable{
 				ProjectFX.pagingController.loadAdditionalStage(ProjectPages.ACTIVITY_REPORT_PAGE.getPath());
 				break;
 			case "Performance Report":
-				
+				reportDisplayAnchorPane.getChildren().setAll((AnchorPane) ProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PERFORMANCE_REPORT_PAGE.getPath()));
 				break;
 			case "Delay Report":
 				
