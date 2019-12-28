@@ -265,41 +265,21 @@ public class MysqlConnection {
     			"SELECT * FROM icm.time_extension "
     			+ "WHERE Status = 'APPROVED'";
     	sqlArray[SqlQueryType.SELECT_ALL_REPEATRING_STEPS.getCode()] =
-    			"(SELECT 'Analysis' AS 'StepType', A1.AnalysisStepID, A1.ChangeRequestID, A1.HandlerUserName, "
-    			+ "A1.StartDate, A1.Status, A1.EstimatedEndDate, A1.EndDate " + 
-    			"FROM icm.analysis_step A1 " + 
-    			"WHERE A1.AnalysisStepID != (Select MIN(AnalysisStepID) from icm.analysis_step) AND EXISTS  " + 
-    			"( SELECT A2.ChangeRequestID FROM icm.analysis_step A2 " + 
-    			"WHERE A2.ChangeRequestID = A1.ChangeRequestId " + 
-    			"GROUP BY A2.ChangeRequestID " + 
-    			"HAVING COUNT(A2.changeRequestID) >= 2 )) " + 
+    			"SELECT * FROM icm.repeating_committee RC " + 
+    			"WHERE RC.CommitteeStepID != (SELECT MIN(RC2.CommitteeStepID) FROM ICM.repeating_committee RC2 " + 
+    			"WHERE RC2.ChangeRequestID = RC.ChangeRequestID) " + 
     			"UNION " + 
-    			"(SELECT 'Committee' AS 'StepType', C1.CommitteeStepID, C1.ChangeRequestID, C1.HandlerUserName,"
-    			+ " C1.StartDate, C1.Status, C1.EstimatedEndDate, C1.EndDate " + 
-    			"FROM icm.committee_step C1 " + 
-    			"WHERE C1.CommitteeStepID != (Select MIN(CommitteeStepID) from icm.committee_step) AND EXISTS  " + 
-    			"( SELECT C2.ChangeRequestID FROM icm.committee_step C2 " + 
-    			"WHERE C2.ChangeRequestID = C1.ChangeRequestId " + 
-    			"GROUP BY C2.ChangeRequestID " + 
-    			"HAVING COUNT(C2.changeRequestID) >= 2 ))  " + 
+    			"SELECT * FROM icm.repeating_analysis RA " + 
+    			"WHERE RA.AnalysisStepID != (SELECT MIN(RA2.AnalysisStepID) FROM ICM.repeating_analysis RA2 " + 
+    			"WHERE RA2.ChangeRequestID = RA.ChangeRequestID) " + 
     			"UNION " + 
-    			"(SELECT 'Execution' AS 'StepType', E1.ExecutionStepID, E1.ChangeRequestID,"
-    			+ " E1.HandlerUserName, E1.StartDate, E1.Status, E1.EstimatedEndDate, E1.EndDate " + 
-    			"FROM icm.execution_step E1 " + 
-    			"WHERE E1.ExecutionStepID != (Select MIN(ExecutionStepID) from icm.execution_step) AND EXISTS  " + 
-    			"( SELECT E2.ChangeRequestID FROM icm.execution_step E2 " + 
-    			"WHERE E2.ChangeRequestID = E1.ChangeRequestId " + 
-    			"GROUP BY E2.ChangeRequestID " + 
-    			"HAVING COUNT(E2.changeRequestID) >= 2 )) " + 
+    			"SELECT * FROM icm.repeating_execution RE " + 
+    			"WHERE RE.ExecutionStepID != (SELECT MIN(RE2.ExecutionStepID) FROM ICM.repeating_execution RE2 " + 
+    			"WHERE RE2.ChangeRequestID = RE.ChangeRequestID) " + 
     			"UNION " + 
-    			"(SELECT 'Testing' AS 'StepType', T1.TesterStepId, T1.ChangeRequestID, "
-    			+ "T1.HandlerUserName, T1.StartDate, T1.Status, T1.EstimatedEndDate, T1.EndDate " + 
-    			"FROM icm.tester_step T1 " + 
-    			"WHERE T1.TesterStepId != (Select MIN(TesterStepId) from icm.tester_step) AND EXISTS  " + 
-    			"( SELECT T2.ChangeRequestID FROM icm.tester_step T2 " + 
-    			"WHERE T2.ChangeRequestID = T1.ChangeRequestId " + 
-    			"GROUP BY T2.ChangeRequestID " + 
-    			"HAVING COUNT(T2.changeRequestID) >= 2 ))";
+    			"SELECT * FROM icm.repeating_tester RT " + 
+    			"WHERE RT.TesterStepID != (SELECT MIN(RT2.TesterStepID) FROM ICM.repeating_tester RT2 " + 
+    			"WHERE RT2.ChangeRequestID = RT.ChangeRequestID)";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
