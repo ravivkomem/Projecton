@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import assets.*;
+import assets.SqlQueryType.SqlExecutionType;
 
 public class MysqlConnection {
 	
@@ -253,6 +254,8 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS.getCode()]=
     			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE StartDate > ? AND StartDate < ?";
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR'";

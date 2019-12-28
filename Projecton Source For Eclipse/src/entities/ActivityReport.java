@@ -13,10 +13,10 @@ public class ActivityReport {
 	private int closeChangeRequest;
 	private int suspendedChangeRequest;
 	private int deniedChangeRequest;
-	private int spentWorkDays;
+	private long spentWorkDays;
 	
 	public ActivityReport(int activeChageRequest, int closeChangeRequest, int suspendedChangeRequest,
-			int deniedChangeRequest, int spentWorkDays) {
+			int deniedChangeRequest, long spentWorkDays) {
 		super();
 		this.activeChageRequest = activeChageRequest;
 		this.closeChangeRequest = closeChangeRequest;
@@ -57,11 +57,11 @@ public class ActivityReport {
 		this.deniedChangeRequest = deniedChangeRequest;
 	}
 
-	public int getSpentWorkDays() {
+	public long getSpentWorkDays() {
 		return spentWorkDays;
 	}
 
-	public void setSpentWorkDays(int spentWorkDays) {
+	public void setSpentWorkDays(long spentWorkDays) {
 		this.spentWorkDays = spentWorkDays;
 	}
 	

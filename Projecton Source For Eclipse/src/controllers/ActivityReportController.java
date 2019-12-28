@@ -30,7 +30,7 @@ public class ActivityReportController extends BasicController{
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
-				case SELECT_ALL_CHANGE_REQUESTS:
+				case SELECT_ALL_CHANGE_REQUESTS_BY_DATE:
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.createActivityReportList(createChangeRequestList(result));
 					break;
