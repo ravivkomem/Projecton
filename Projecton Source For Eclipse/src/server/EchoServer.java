@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 import assets.SqlAction;
 import assets.SqlFileAction;
@@ -68,22 +69,37 @@ public class EchoServer extends AbstractServer
 	  {
 	
 		 SqlFileAction sqlFileAction = (SqlFileAction)msg;
-		 MyFile uploadedFile = sqlFileAction.getMyFile();
-		 int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
-		 String fileExtension = (String)sqlFileAction.getActionVars().get(1);
-		 String filePath = FILLE_DIRECTORY+fileIndex+"."+fileExtension;
-		 
-		 System.out.println("File path is: " + filePath);
-		 try (FileOutputStream fileOuputStream = new FileOutputStream(filePath))
+		 if (sqlFileAction.getUpload() == true)
 		 {
-			 fileOuputStream.write(uploadedFile.getMybytearray());
-		 } 
-		 catch (FileNotFoundException e) {
-			e.printStackTrace();
-		 } 
-		 catch (IOException e) {
-			e.printStackTrace();
+			 MyFile uploadedFile = sqlFileAction.getMyFile();
+			 int fileIndex = ((BigInteger) (sqlResult.getResultData().get(0).get(0))).intValue();
+			 String fileExtension = (String)sqlFileAction.getActionVars().get(1);
+			 String filePath = FILLE_DIRECTORY+fileIndex+"."+fileExtension;
+			 
+			 System.out.println("File path is: " + filePath);
+			 try (FileOutputStream fileOuputStream = new FileOutputStream(filePath))
+			 {
+				 fileOuputStream.write(uploadedFile.getMybytearray());
+			 } 
+			 catch (FileNotFoundException e) {
+				e.printStackTrace();
+			 } 
+			 catch (IOException e) {
+				e.printStackTrace();
+			 }
 		 }
+		 else
+		 {
+			 /* Create my file from path */
+			 String fileName = ((Integer)sqlResult.getResultData().get(0).get(0)).toString();
+			 String fileExtension = (String)sqlResult.getResultData().get(0).get(1);
+			 String path = FILLE_DIRECTORY+fileName+"."+fileExtension;
+			 MyFile myFile = MyFile.parseToMyFile(path);
+			 ArrayList<Object> newResultData = new ArrayList<Object>();
+			 newResultData.add(myFile);
+			 sqlResult.setResultData(newResultData);
+		 }
+		
 		 
 	  }
 	  	

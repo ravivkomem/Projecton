@@ -14,7 +14,10 @@ public enum SqlQueryType {
 	UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
 	
 	SELECT_ALL_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
-	/*Committee Queries*/
+	
+	/* *****************************************
+	 * ********** Committee Queries ****************
+	 * *****************************************/
 	SELECT_COMMENTS_BY_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	INSERT_NEW_COMMITTEE_COMMENT(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_COMMITTEE_STEP(SqlExecutionType.UPDATE_QUERY),
@@ -36,6 +39,7 @@ public enum SqlQueryType {
 	
 	UPDATE_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
 	SELECT_ALL_INFROMATION_ENGINEERS(SqlExecutionType.EXECUTE_QUERY),
+	
 	/* *****************************************
 	 * ********Work Station Queries*************
 	 * *****************************************/
@@ -53,10 +57,15 @@ public enum SqlQueryType {
 	UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP(SqlExecutionType.UPDATE_QUERY),
 	/*Analysis Report Queries */
 	SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
-	/*Upload Change Request Queries */
+	
+	/* *****************************************
+	 * ***** Upload Change Request Queries *****
+	 * *****************************************/
 	INSERT_NEW_FILE(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	INSERT_NEW_CHANGE_REQUEST(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
+	DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
+	
 	/*View Request List Queries*/
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER(SqlExecutionType.EXECUTE_QUERY),
 	

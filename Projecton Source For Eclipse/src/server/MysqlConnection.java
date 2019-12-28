@@ -309,7 +309,10 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
     			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
     			+ "VALUES (?,?)";
-    	
+    	sqlArray[SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID.getCode()]=
+    			"SELECT FileID, FileEnding FROM icm.file "
+    			+ "WHERE ChangeRequestID = ?";
+    
     	/* *****************************************************
 		 * ************* Appoint Tester Queries ****************
 		 * *****************************************************/

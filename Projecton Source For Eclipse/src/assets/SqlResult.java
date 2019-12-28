@@ -51,4 +51,10 @@ public class SqlResult implements Serializable{
 	{
 		return actionType;
 	}
+	
+	public void setResultData (ArrayList<Object> dataSet)
+	{
+		resultData.clear();
+		resultData.add(dataSet);
+	}
 }
