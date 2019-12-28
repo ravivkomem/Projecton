@@ -2,6 +2,7 @@ package assets;
 
 public enum StepType {
 
+	ERROR("ERROR"),
 	ANALYSIS("Analysis"),
 	COMMITTEE("Committee"),
 	EXECUTION("Execution"),

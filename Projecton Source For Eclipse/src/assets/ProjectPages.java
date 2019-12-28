@@ -19,6 +19,7 @@ public enum ProjectPages {
 	ANALYZER_PAGE("/boundries/AnalyzerPage.fxml"),
 	ANALISIS_REPORT_PAGE("/boundries/AnalysisReportPage.fxml"),
 	TESTER_PAGE("/boundries/TesterPage.fxml"),
+	PERFORMANCE_REPORT_PAGE("/boundries/PerformanceReportPage.fxml"),
 	APPOINT_TESTER("/boundries/AppointTesterPage.fxml");
 	
 	private String path;

@@ -21,22 +21,36 @@ import javafx.scene.text.Text;
 
 public class EmployeePermissionBoundary implements DataInitializable{
 
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
+	
     @FXML
     private Text employeeNameText;
     @FXML
     private Text errorText;
-    
+    @FXML
+    private ComboBox<String> committeeMemberComboBox;
     @FXML
     private TextField permossionTextField;
     @FXML
     private ComboBox<String> newPremissionComboBox;
     @FXML
     private Button setNewPermissionTextField;
+    @FXML
+    private Button replaceMemberButton;
     
+    /* *************************************
+   	 * ******* Private Objects *************
+   	 * *************************************/
     private User employeeUser;
 	private ArrayList<User> users = new ArrayList<>(); 
 	private EmployeePermissionController myController = new EmployeePermissionController(this);
 	private TechManagerBoundary techManagerBoundry;
+	
+	/* *************************************
+	 * ******* FXML Methods *************
+	 * *************************************/
 	
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
@@ -57,7 +71,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			errorText.setVisible(false);
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
-					handleSupervasior(u,employeeUser);
+					handleSupervasior(employeeUser,u);
 					((Node) event.getSource()).getScene().getWindow().hide();
 				}
 			}
@@ -72,12 +86,18 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			int cnt=0;
 			for(User u: users) {
 				if(u.getPermission().equals("COMMITTEE_MEMBER")) {
+					committeeMemberComboBox.getItems().add(u.getUserName());
 					cnt++;
 				}
 			}
 			if(cnt==2) {
-				errorText.setText("There are already 2 users with this permission");
-				errorText.setVisible(true);
+				Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
+		        		+ "2 users with committee member permission\nDo you want to replace?");
+		    	if (result.get() == ButtonType.OK) {
+		    		setNewPermissionTextField.setVisible(false);
+		    		committeeMemberComboBox.setVisible(true);
+		    		replaceMemberButton.setVisible(true);
+		    	}
 			}
 			else {
 				employeeUser.setPermission("COMMITTEE_MEMBER");
@@ -90,10 +110,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			errorText.setVisible(false);
 			for(User u: users) {
 				if(u.getPermission().equals("COMMITTEE_DIRECTOR")) {
-					//handleSupervasior(u,employeeUser);
+					handleCommitteeDirector(employeeUser,u);
 					((Node) event.getSource()).getScene().getWindow().hide();
 				}
 			}
+			//Check if this user is committee for give him SUPERVISOR_COMMITTEE permission
 			employeeUser.setPermission("COMMITTEE_DIRECTOR");
 			employeeUser.setJobDescription("Committee Director");
 			myController.updateEmployeePermission("COMMITTEE_DIRECTOR","Committee Director",employeeUser.getUserID());
@@ -106,35 +127,114 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		((Node) event.getSource()).getScene().getWindow().hide();
     }
     
+    @FXML
+    void replaceCommitteMember(MouseEvent event) {
+    	if(committeeMemberComboBox.getSelectionModel().isEmpty()) {
+    		errorText.setText("Please choose commitee member");
+    		return;
+    	}
+    	User oldMember = null;
+    	for(User u : users) {
+    		if(u.getUserName().equals(committeeMemberComboBox.getSelectionModel().getSelectedItem())) {
+    			oldMember = u;
+    		}
+    	}
+		handelCommitteeMember(employeeUser,oldMember);
+    }
+    
+    /* *************************************
+	 * ******* Public Methods *************
+	 * *************************************/
+    
+    /**
+     * this method gets to users and change there permission
+     * @param newUser
+     * @param oldUser
+     */
+    private void createPermissoinsToUsers(User newUser, User oldUser) {
+    	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
+    	myController.updateEmployeePermission(oldUser.getPermission(),oldUser.getJobDescription(),oldUser.getUserID());
+    	techManagerBoundry.setEmployeeListChanges(newUser);
+    	techManagerBoundry.setEmployeeListChanges(oldUser);
+    }
+    
+    /**
+     * this method handle with committee member permission
+     * @param newMember
+     * @param oldMember
+     */
+    private void handelCommitteeMember(User newMember,User oldMember) {
+    	int flag = 0;
+    	if(newMember.getPermission().equals("SUPERVISER")) {
+    		newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
+    		newMember.setJobDescription("Supervisor Committee Member");
+    	} else if(newMember.getPermission().equals("COMMITTEE_DIRECTOR")) {
+    		flag = 1;
+    		newMember.setPermission("COMMITTEE_MEMBER");
+    		newMember.setJobDescription("Committee Member");
+    	} else if(newMember.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
+    		flag = 1;
+    		newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
+    		newMember.setJobDescription("Supervisor Committee Member");
+    	}else {
+    		newMember.setPermission("COMMITTEE_MEMBER");
+    		newMember.setJobDescription("Committee Member");
+    	}
+    	if(oldMember.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
+    		if(flag==0) {
+    			oldMember.setPermission("SUPERVISOR");
+    			oldMember.setJobDescription("Supervisor");
+    		}
+    		else {
+    			oldMember.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+    			oldMember.setJobDescription("Supervisor Committee Director");
+    		}
+    	}
+    	else {
+    		if(flag==0) {
+    			oldMember.setPermission("INFORMATION_ENGINEER");
+    			oldMember.setJobDescription("Information Emgineer");
+    		}
+    		else {
+    			oldMember.setPermission("COMMITTEE_DIRECTOR");
+    			oldMember.setJobDescription("Committee Director");
+    		}
+    	}
+    	
+    }
+    
     /**
      * this method handle with the problem that tech manager give permission that already exist
      * to anther user
-     * @param newSupervasior
-     * @param oldSuperVaser
+     * @param newSupervisor
+     * @param oldSupervisor
      */
-    private void handleSupervasior(User newSupervasior, User oldSuperVaser) {
+    private void handleSupervasior(User newSupervisor, User oldSupervisor) {
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
-        if(result.get() == ButtonType.OK) {
-//        	if(newSupervasior.getPermission().equals("COMMITTEE_MEMBER")) {
-//        		
-//        	}
-//        	else if(newSupervasior.getPermission().equals("COMMITTEE_DIRECTOR")) {
-//        		
-//        	}
-        	//else{
-        	newSupervasior.setPermission("SUPERVISOR");
-        	newSupervasior.setJobDescription("Supervisor");
-        	oldSuperVaser.setPermission("INFORMATION_ENGINEER");
-        	oldSuperVaser.setJobDescription("Information Engineer");
-        	myController.updateEmployeePermission("SUPERVISOR","Supervisor",newSupervasior.getUserID());
-        	myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",oldSuperVaser.getUserID());
-        	techManagerBoundry.setEmployeeListChanges(newSupervasior);
-        	techManagerBoundry.setEmployeeListChanges(oldSuperVaser);
-        }
-        else if(result.get() == ButtonType.CANCEL||result.get() == ButtonType.CLOSE){
-        	System.out.println("cancel");
-        }
+		if (result.get() == ButtonType.OK) {
+			if (newSupervisor.getPermission().equals("COMMITTEE_MEMBER")) {
+				newSupervisor.setPermission("SUPERVISER_COMMITTEE_MEMBER");
+				newSupervisor.setJobDescription("Supervisor Committee Member");
+			} else if (newSupervisor.getPermission().equals("COMMITTEE_DIRECTOR")) {
+				newSupervisor.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+				newSupervisor.setJobDescription("Supervisor Committee Director");
+			} else {
+				newSupervisor.setPermission("SUPERVISOR");
+				newSupervisor.setJobDescription("Supervisor");
+			}
+			if (oldSupervisor.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
+				oldSupervisor.setPermission("COMMITTEE_MEMBER");
+				oldSupervisor.setJobDescription("Committee Member");
+			} else if (oldSupervisor.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
+				oldSupervisor.setPermission("COMMITTEE_DIRECTOR");
+				oldSupervisor.setJobDescription("Committee Director");
+			} else {
+				oldSupervisor.setPermission("INFORMATION_ENGINEER");
+				oldSupervisor.setJobDescription("Information Engineer");
+			}
+			this.createPermissoinsToUsers(newSupervisor, oldSupervisor);
+		}
     }
     
     /**
@@ -143,10 +243,37 @@ public class EmployeePermissionBoundary implements DataInitializable{
      * @param newSupervasior
      * @param oldSuperVaser
      */
-    private void handleCommitteeDirector(User newSupervasior, User oldSuperVaser) {
+    private void handleCommitteeDirector(User newDirector, User oldDirector) {
+    	int flag=0;
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
-        /*TODO the same like handleSupervisor*/
+        if (result.get() == ButtonType.OK) {
+			if (newDirector.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
+				newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Supervisor Committee Director");
+				flag=1;
+			} else if (newDirector.getPermission().equals("SUPERVISER")) {
+				newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Supervisor Committee Director");
+			}else {
+				if(newDirector.getPermission().equals("COMMITTEE_MEMBER"))
+					flag = 1;
+				newDirector.setPermission("COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Committee Director");
+			}
+			if (oldDirector.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
+				oldDirector.setPermission("SUPERVISER");
+				oldDirector.setJobDescription("Superviser");
+			} else if(flag == 1) {
+				oldDirector.setPermission("COMMITTEE_MEMBER");
+				oldDirector.setJobDescription("Committee Member");
+			}
+			else {
+				oldDirector.setPermission("INFORMATION_ENGINEER");
+				oldDirector.setJobDescription("Information Engineer");
+			}
+			this.createPermissoinsToUsers(newDirector, oldDirector);
+        }
     }
 
 	@Override
@@ -164,6 +291,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		techManagerBoundry = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
 		employeeNameText.setText("Permission: "+employeeUser.getFirstName()+" "+employeeUser.getLastName());
 		permossionTextField.setText(employeeUser.getPermission());
+		
+//		for(User u: users) {
+//			committeeMemberComboBox.getItems().add(u.getFirstName()+" "+ u.getLastName());
+//		}
 	}
 	
 	/* this method will show the window with the new change request id */

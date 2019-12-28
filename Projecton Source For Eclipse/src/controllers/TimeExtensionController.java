@@ -26,6 +26,7 @@ public class TimeExtensionController extends BasicController {
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		varArray.add(step.getStepID());
 		varArray.add(step.getType().getStepName());
+		varArray.add(step.getEstimatedEndDate());
 		varArray.add(newEstimatedEndDate);
 		varArray.add(timeExtensionReason);
 		
