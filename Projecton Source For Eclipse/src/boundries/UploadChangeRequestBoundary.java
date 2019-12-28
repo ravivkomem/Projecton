@@ -89,7 +89,10 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	FileChooser fileChooser = new FileChooser();
 	    	fileChooser.setTitle("Select Resource File");
 	    	File selectedFile = fileChooser.showOpenDialog(ProjectFX.mainStage);
-	    	uploadedFileNameField.setText(selectedFile.getPath());
+	    	if (selectedFile != null)
+	    	{
+	    		uploadedFileNameField.setText(selectedFile.getPath());
+	    	}
 	    }
 
 	    @FXML
