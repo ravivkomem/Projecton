@@ -1,5 +1,11 @@
 package entities;
 
+/**
+ * 
+ * @author Lee Hugi
+ *this class represents a comment
+ *includes all the fields as described in the committee_comment table
+ */
 public class CommitteeComment {
 	int commentId;
 	int requestId;
