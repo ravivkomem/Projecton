@@ -145,6 +145,12 @@ public class MysqlConnection {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	
     	/* *****************************************************
+		 * *************** General Queries ****************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
+    			"SELECT * FROM icm.change_request";
+    	
+    	/* *****************************************************
 		 * *************** Login Queries ****************
 		 * *****************************************************/
     	sqlArray[SqlQueryType.VERIFY_LOGIN.getCode()] = "SELECT * FROM icm.user "

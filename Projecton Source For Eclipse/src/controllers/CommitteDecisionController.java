@@ -136,10 +136,12 @@ public class CommitteDecisionController extends BasicController{
 					myBoundary.createObjectForUpdateChangeRequestDetails(handlerUserName);
 					break;
 				case SELECT_COMMITTEE_STEP_START_DATE:
+					this.unsubscribeFromClientDeliveries();
 					Date estimatedEndDate = (Date) (result.getResultData().get(0).get(0));
 					myBoundary.displayTimeRemaining(estimatedEndDate);
 					break;
 				case SELECT_COMMITTEE_STEP_DETAILS:
+					this.unsubscribeFromClientDeliveries();
 					Step newStep =  new Step(StepType.COMMITTEE, (Integer)result.getResultData().get(0).get(0),
 							(Integer)result.getResultData().get(0).get(1),(String)result.getResultData().get(0).get(2),
 							(Date)result.getResultData().get(0).get(3),(String)result.getResultData().get(0).get(6),
