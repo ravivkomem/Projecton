@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author Lee Hugi
@@ -13,10 +15,9 @@ public class ActivityReport {
 	private int closeChangeRequest;
 	private int suspendedChangeRequest;
 	private int deniedChangeRequest;
-	private long spentWorkDays;
-	
+	private ArrayList<Long> spentWorkDays;
 	public ActivityReport(int activeChageRequest, int closeChangeRequest, int suspendedChangeRequest,
-			int deniedChangeRequest, long spentWorkDays) {
+			int deniedChangeRequest, ArrayList<Long> spentWorkDays) {
 		super();
 		this.activeChageRequest = activeChageRequest;
 		this.closeChangeRequest = closeChangeRequest;
@@ -24,44 +25,34 @@ public class ActivityReport {
 		this.deniedChangeRequest = deniedChangeRequest;
 		this.spentWorkDays = spentWorkDays;
 	}
-
 	public int getActiveChageRequest() {
 		return activeChageRequest;
 	}
-
 	public void setActiveChageRequest(int activeChageRequest) {
 		this.activeChageRequest = activeChageRequest;
 	}
-
 	public int getCloseChangeRequest() {
 		return closeChangeRequest;
 	}
-
 	public void setCloseChangeRequest(int closeChangeRequest) {
 		this.closeChangeRequest = closeChangeRequest;
 	}
-
 	public int getSuspendedChangeRequest() {
 		return suspendedChangeRequest;
 	}
-
 	public void setSuspendedChangeRequest(int suspendedChangeRequest) {
 		this.suspendedChangeRequest = suspendedChangeRequest;
 	}
-
 	public int getDeniedChangeRequest() {
 		return deniedChangeRequest;
 	}
-
 	public void setDeniedChangeRequest(int deniedChangeRequest) {
 		this.deniedChangeRequest = deniedChangeRequest;
 	}
-
-	public long getSpentWorkDays() {
+	public ArrayList<Long> getSpentWorkDays() {
 		return spentWorkDays;
 	}
-
-	public void setSpentWorkDays(long spentWorkDays) {
+	public void setSpentWorkDays(ArrayList<Long> spentWorkDays) {
 		this.spentWorkDays = spentWorkDays;
 	}
 	
