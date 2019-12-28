@@ -99,11 +99,11 @@ public class PerformanceReportBoundary implements Initializable {
 		extensionDaysNumberAxis.setLabel("Days");
 		
 		/*Insert Graph Data*/
-	    XYChart.Series series1 = new XYChart.Series();   
-	    series1.getData().add(new XYChart.Data("analysis", analysisDaysCounter));
-        series1.getData().add(new XYChart.Data("committee", committeeDaysCounter));
-        series1.getData().add(new XYChart.Data("execution", executionDaysCounter));
-        series1.getData().add(new XYChart.Data("tester", testingDaysCounter));    
+	    XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>();   
+	    series1.getData().add(new XYChart.Data<String,Number>("analysis", analysisDaysCounter));
+        series1.getData().add(new XYChart.Data<String,Number>("committee", committeeDaysCounter));
+        series1.getData().add(new XYChart.Data<String,Number>("execution", executionDaysCounter));
+        series1.getData().add(new XYChart.Data<String,Number>("tester", testingDaysCounter));    
 
         extensionDaysBarChart.getData().addAll(series1);
 		

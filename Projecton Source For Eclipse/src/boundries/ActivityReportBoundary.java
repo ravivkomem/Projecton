@@ -1,8 +1,11 @@
 package boundries;
 
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import assets.Toast;
@@ -20,9 +23,9 @@ import javafx.scene.layout.AnchorPane;
 
 public class ActivityReportBoundary implements DataInitializable {
 
-	/*
-	 * ************************************* ********* FXML Objects **************
-	 *************************************/
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
 
 	@FXML
 	private DatePicker startDatePicker;
@@ -44,16 +47,16 @@ public class ActivityReportBoundary implements DataInitializable {
 	@FXML
 	private TextField handleDaysTextField;
 
-	/*
-	 * ************************************* ******* Private Objects *************
-	 *************************************/
+	 /* *************************************
+	  * ******* Private Objects *************
+	  * *************************************/
 	private ActivityReportController myController = new ActivityReportController(this);
 	private ActivityReport activityReport;
 	private ArrayList<ChangeRequest> changeRequestList;
 
-	/*
-	 * ************************************* ******* FXML Methods *************
-	 *************************************/
+	/* *************************************
+	 * ******* FXML Methods *************
+	 * *************************************/
 
 	@FXML
 	void showActivityReportDetails(MouseEvent event) {
@@ -79,13 +82,14 @@ public class ActivityReportBoundary implements DataInitializable {
 				Toast.makeText(ProjectFX.mainStage, "Please choose a valid date", 1500, 500, 500);
 				return;
 			}
-			myController.getAllChangeRequest();
+			myController.getAllChangeRequest(startDate,endDate);
 		}
 	}
 
 	/*
-	 * ************************************* ******* Public Methods *************
-	 *************************************/
+	 * ************************************* 
+	 * ******* Public Methods *************
+	 * ************************************/
 
 	/**
 	 * this method gets ChangeRequest list
@@ -128,19 +132,37 @@ public class ActivityReportBoundary implements DataInitializable {
 	 * @param report
 	 */
 	private void displayActivityReport(ActivityReport report) {
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(report.getActiveChageRequest());
+		list.add(report.getCloseChangeRequest());
+		list.add(report.getSuspendedChangeRequest());
+		list.add(report.getDeniedChangeRequest());
 		requestStatusPieChart.getData().add( new PieChart.Data("Active", report.getActiveChageRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Close", report.getCloseChangeRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Denied", report.getDeniedChangeRequest()));
 		handleDaysTextField.setText(""+report.getSpentWorkDays());
-		medianTextField.setText("");
+		medianTextField.setText(""+calcMedian(list));
 		stdTextField.setText("");
 		distributionTextField.setText("");
+		
+	}
+	
+	private double calcMedian(ArrayList<Integer> list) {
+		Collections.sort(list);
+		double median;
+		if (list.size() % 2 == 0)
+		    median = ((double)list.get(list.size()/2) + (double)list.get(list.size()/2 - 1))/2;
+		else
+		    median = (double) list.get(list.size()/2);
+		return median;	
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		activityReportDetailsPane.setVisible(false);
+		startDatePicker.setEditable(false);
+		endDatePicker.setEditable(false);
 	}
 
 	@Override

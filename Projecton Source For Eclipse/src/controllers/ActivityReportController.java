@@ -19,8 +19,11 @@ public class ActivityReportController extends BasicController{
 		this.myBoundary = myBoundary;
 	}
 
-	public void getAllChangeRequest() {
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS,new ArrayList<Object>());
+	public void getAllChangeRequest(Date start,Date end) {
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add(start);
+		varArray.add(end);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
