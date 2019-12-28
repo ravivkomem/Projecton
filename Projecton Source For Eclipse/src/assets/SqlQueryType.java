@@ -7,7 +7,9 @@ package assets;
  */
 public enum SqlQueryType {
 
-	/*Login Queries*/
+	/* *****************************************
+	 * ********** Login Queries ****************
+	 * *****************************************/
 	VERIFY_LOGIN(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
 	
@@ -21,6 +23,7 @@ public enum SqlQueryType {
 	SELECT_COMMITTEE_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_TESTER_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_COMMITTEE_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
+	
 	/* *****************************************
 	 * ********Tech Manager Queries*************
 	 * *****************************************/
@@ -29,6 +32,7 @@ public enum SqlQueryType {
 	UPDATE_EMPLOYEE_PERMISSION(SqlExecutionType.UPDATE_QUERY),
 	// Performance report
 	SELECT_ALL_APPROVED_TIME_EXTNESIONS(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_ALL_REPEATRING_STEPS(SqlExecutionType.EXECUTE_QUERY),
 	
 	UPDATE_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
 	SELECT_ALL_INFROMATION_ENGINEERS(SqlExecutionType.EXECUTE_QUERY),
