@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ResourceBundle;
@@ -11,10 +12,16 @@ import java.util.ResourceBundle;
 import assets.Toast;
 import controllers.ActivityReportController;
 import controllers.TimeManager;
+import controllers.Utilizer;
 import entities.ActivityReport;
 import entities.ChangeRequest;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -42,10 +49,12 @@ public class ActivityReportBoundary implements DataInitializable {
 	private TextField medianTextField;
 	@FXML
 	private TextField stdTextField;
-	@FXML
-	private TextField distributionTextField;
-	@FXML
-	private TextField handleDaysTextField;
+    @FXML
+    private BarChart<String, Number> workDaysBarChart;
+    @FXML
+    private CategoryAxis workDaysChartBarCategory;
+    @FXML
+    private NumberAxis DaysNumberBarChart;
 
 	 /* *************************************
 	  * ******* Private Objects *************
@@ -60,6 +69,8 @@ public class ActivityReportBoundary implements DataInitializable {
 
 	@FXML
 	void showActivityReportDetails(MouseEvent event) {
+		requestStatusPieChart.getData().clear();
+		workDaysBarChart.getData().clear();
 		if (startDatePicker.getValue() == null || endDatePicker.getValue() == null) {
 			Toast.makeText(ProjectFX.mainStage, "Please select start date and end date", 1500, 500, 500);
 		} else {
@@ -97,65 +108,80 @@ public class ActivityReportBoundary implements DataInitializable {
 	 * @param requestList
 	 */
 	public void createActivityReportList(ArrayList<ChangeRequest> requestList) {
+		if(requestList.isEmpty())
+			return;
 		changeRequestList = requestList;
 		int active = 0, close = 0, suspended = 0, denied = 0;
-		long workDays = 0;
+		ArrayList<Long> workDays = new ArrayList<>();
 		for (int i = 0; i < changeRequestList.size(); i++) {
 			if (changeRequestList.get(i).getStatus().equals("Active")) {
 				active++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
-				workDays += daysBetween;
+				workDays.add(daysBetween);
 			} else if (changeRequestList.get(i).getCurrentStep().equals("Denied")) {
 				denied++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
-				workDays += daysBetween;
+				workDays.add(daysBetween);
 			} else if (changeRequestList.get(i).getCurrentStep().equals("Suspended")) {
 				suspended++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
-				workDays += daysBetween;
+				workDays.add(daysBetween);
 			} else if(changeRequestList.get(i).getCurrentStep().equals("Close")) {
 				close++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
-				workDays += daysBetween;
+				workDays.add(daysBetween);
 			}
 		}
-		displayActivityReport(activityReport = new ActivityReport(active, close, suspended,denied, workDays));
+		displayActivityReport(activityReport = new ActivityReport(active, close, suspended,denied, workDays),workDays);
 		
 	}
 	
 	/**
 	 * this method display the report in the page
 	 * @param report
+	 * @param workDays 
 	 */
-	private void displayActivityReport(ActivityReport report) {
-		ArrayList<Integer> list = new ArrayList<>();
-		list.add(report.getActiveChageRequest());
-		list.add(report.getCloseChangeRequest());
-		list.add(report.getSuspendedChangeRequest());
-		list.add(report.getDeniedChangeRequest());
+	private void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
+		int[] workDaysArray;
 		requestStatusPieChart.getData().add( new PieChart.Data("Active", report.getActiveChageRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Close", report.getCloseChangeRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Denied", report.getDeniedChangeRequest()));
-		handleDaysTextField.setText(""+report.getSpentWorkDays());
-		medianTextField.setText(""+calcMedian(list));
-		stdTextField.setText("");
-		distributionTextField.setText("");
 		
+		workDaysArray = workDaysCalc(workDays);
+		workDaysBarChart.setTitle("");
+		workDaysChartBarCategory.setLabel("Work Days");
+		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
+                Arrays.asList("0-10", "10-20", "20-30", "30+")));
+		XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>(); 
+		series1.getData().add(new XYChart.Data<String,Number>("0-10", workDaysArray[0]));
+		series1.getData().add(new XYChart.Data<String,Number>("10-20", workDaysArray[1]));
+		series1.getData().add(new XYChart.Data<String,Number>("20-30", workDaysArray[2]));
+		series1.getData().add(new XYChart.Data<String,Number>("30+", workDaysArray[3]));
+		
+		workDaysBarChart.getData().addAll(series1);
+		
+		medianTextField.setText(""+ Utilizer.calcMedian(workDays));
+		stdTextField.setText(""+Utilizer.calcStd(workDays));
 	}
 	
-	private double calcMedian(ArrayList<Integer> list) {
-		Collections.sort(list);
-		double median;
-		if (list.size() % 2 == 0)
-		    median = ((double)list.get(list.size()/2) + (double)list.get(list.size()/2 - 1))/2;
-		else
-		    median = (double) list.get(list.size()/2);
-		return median;	
+	public int[] workDaysCalc(ArrayList<Long> workDays) {
+		int[] list = { 0, 0, 0, 0 };
+		for (int i = 0; i < workDays.size(); i++) {
+			if (workDays.get(i) <= 10)
+				list[0]++;
+			else if (workDays.get(i) <= 20)
+				list[1]++;
+			else if (workDays.get(i) <= 30)
+				list[2]++;
+			else if (workDays.get(i) > 30)
+				list[3]++;
+		}
+		return list;
 	}
 
 	@Override
