@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.Toast;
+import controllers.ActivityReportController;
 import controllers.TimeManager;
 import entities.ActivityReport;
 import entities.ChangeRequest;
@@ -46,8 +47,9 @@ public class ActivityReportBoundary implements DataInitializable{
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
+    private ActivityReportController myController = new ActivityReportController(this);
     private ActivityReport activityReport;
-    private ArrayList<ChangeRequest> changeRequestList = new ArrayList<>();
+    private ArrayList<ChangeRequest> changeRequestList;
 
     /* *************************************
 	 * ******* FXML Methods *************
@@ -76,14 +78,23 @@ public class ActivityReportBoundary implements DataInitializable{
 				Toast.makeText(ProjectFX.mainStage, "Please choose a valid date", 1500, 500, 500);
 				return;
 			}
-			
-			/*TODO create a controller and send query*/
+			myController.getAllChangeRequest();
 		}
 	}
 
     /* *************************************
 	 * ******* Public Methods *************
 	 * *************************************/
+    
+    public void createActivityReportList(ArrayList<ChangeRequest> requestList) {
+    	changeRequestList = requestList;
+    	int active = 0, close = 0, suspended = 0, denied = 0, workDatys = 0;
+    	for(int i=0;i<changeRequestList.size();i++) {
+    		if(changeRequestList.get(i).getCurrentStep().equals("ACTIVE")) {
+    			//TODO
+    		}
+    	}
+    }
     
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
