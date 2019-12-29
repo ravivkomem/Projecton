@@ -17,11 +17,11 @@ public class Utilizer {
 	
 	public static double calcStd(ArrayList<Long> list) {
 		double avg = calcAvg(list);
-		long sum=0;
+		double sum = 0;
 		for (int i = 0; i < list.size(); i++) {
-			sum += Math.pow(2, (list.get(i)-avg));
+			sum += (double)Math.pow(2, (list.get(i)-avg));
 		}
-		return Math.sqrt((1/list.size())*sum);
+		return (double)Math.sqrt((1.0/list.size())*sum);
 	}
 	
 	public static double calcAvg(ArrayList<Long> list) {
@@ -29,7 +29,7 @@ public class Utilizer {
 		for (int i = 0; i < list.size(); i++) {
 			sum += list.get(i);
 		}
-		return sum/list.size();
+		return (double)sum/list.size();
 	}
 	
 	

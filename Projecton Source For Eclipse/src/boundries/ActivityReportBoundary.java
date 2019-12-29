@@ -137,7 +137,6 @@ public class ActivityReportBoundary implements DataInitializable {
 			}
 		}
 		displayActivityReport(activityReport = new ActivityReport(active, close, suspended,denied, workDays),workDays);
-		
 	}
 	
 	/**
