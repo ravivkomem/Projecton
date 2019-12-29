@@ -1,5 +1,6 @@
 package boundries;
 
+import java.awt.Color;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.sql.Date;
@@ -16,6 +17,7 @@ import controllers.Utilizer;
 import entities.ActivityReport;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -83,15 +85,16 @@ public class ActivityReportBoundary implements DataInitializable {
 			Date endDate = Date.valueOf(endDatePicker.getValue());
 			Date todayDate = TimeManager.getCurrentDate();
 			long daysBetween = TimeManager.getDaysBetween(todayDate, startDate);
+			daysBetween--;
 			if (daysBetween > 0) {
 				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
 				return;
 			}
-			daysBetween = TimeManager.getDaysBetween(todayDate, endDate);
-			if (daysBetween > 0) {
-				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
-				return;
-			}
+//			daysBetween = TimeManager.getDaysBetween(todayDate, endDate);
+//			if (daysBetween > 0) {
+//				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
+//				return;
+//			}
 			daysBetween = TimeManager.getDaysBetween(startDate, endDate);
 			if (daysBetween < 0) {
 				Toast.makeText(ProjectFX.mainStage, "Please choose a valid date", 1500, 500, 500);
@@ -123,17 +126,17 @@ public class ActivityReportBoundary implements DataInitializable {
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
-			} else if (changeRequestList.get(i).getCurrentStep().equals("Denied")) {
+			} else if (changeRequestList.get(i).getStatus().equals("Denied")) {
 				denied++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
 				workDays.add(daysBetween);
-			} else if (changeRequestList.get(i).getCurrentStep().equals("Suspended")) {
+			} else if (changeRequestList.get(i).getStatus().equals("Suspended")) {
 				suspended++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
-			} else if(changeRequestList.get(i).getCurrentStep().equals("Close")) {
+			} else if(changeRequestList.get(i).getStatus().equals("Close")) {
 				close++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
@@ -150,10 +153,15 @@ public class ActivityReportBoundary implements DataInitializable {
 	 */
 	private void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
 		int[] workDaysArray;
-		requestStatusPieChart.getData().add( new PieChart.Data("Denied", report.getDeniedChangeRequest()));
-		requestStatusPieChart.getData().add( new PieChart.Data("Close", report.getCloseChangeRequest()));
-		requestStatusPieChart.getData().add( new PieChart.Data("Active", report.getActiveChageRequest()));
-		requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
+		requestStatusPieChart.setTitle("Change Request Status");
+		if(report.getDeniedChangeRequest()>0)
+			requestStatusPieChart.getData().add( new PieChart.Data("Denied", report.getDeniedChangeRequest()));
+		if(report.getCloseChangeRequest() > 0)
+			requestStatusPieChart.getData().add( new PieChart.Data("Close", report.getCloseChangeRequest()));
+		if(report.getActiveChageRequest() > 0)
+			requestStatusPieChart.getData().add( new PieChart.Data("Active", report.getActiveChageRequest()));
+		if(report.getSuspendedChangeRequest() > 0)
+			requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		
 		workDaysArray = workDaysCalc(workDays);
 		
@@ -166,7 +174,7 @@ public class ActivityReportBoundary implements DataInitializable {
 		workDaysBarChart.getData().addAll(series1);
 		
 		medianTextField.setText(""+ Utilizer.calcMedian(workDays));
-		stdTextField.setText(""+Utilizer.calcStd(workDays));
+		stdTextField.setText(String.format("%.2f", Utilizer.calcStd(workDays)));
 	}
 	
 	public int[] workDaysCalc(ArrayList<Long> workDays) {
