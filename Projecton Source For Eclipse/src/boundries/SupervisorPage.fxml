@@ -103,7 +103,7 @@
             </ImageView>
          </children>
       </VBox>
-      <Button layoutX="358.0" layoutY="314.0" mnemonicParsing="false" text="View Extra Details" visible="false" />
+      <Button fx:id="btnExstraDetails" layoutX="568.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" text="View Extra Details" />
       <Button fx:id="btnLogOut" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ClickLogOutFunction" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -117,24 +117,25 @@
          </font>
       </Button>
       <Button fx:id="btnBack" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#ClickBackFunction" text="Back" />
-      <ComboBox layoutX="212.0" layoutY="339.0" prefHeight="25.0" prefWidth="181.0" promptText="- select execution lider - " visible="false" />
-      <ComboBox layoutX="219.0" layoutY="339.0" prefWidth="150.0" promptText="- select -" visible="false" />
-      <Button layoutX="394.0" layoutY="339.0" mnemonicParsing="false" text="Approve" visible="false" />
-      <Button layoutX="468.0" layoutY="339.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="deny" visible="false" />
-      <Button layoutX="445.0" layoutY="380.0" mnemonicParsing="false" text="send" />
-      <TextField layoutX="251.0" layoutY="380.0" promptText="send message to initiator" />
-      <Button layoutX="324.0" layoutY="439.0" mnemonicParsing="false" text="Close the request " />
-      <AnchorPane layoutX="187.0" layoutY="84.0" prefHeight="419.0" prefWidth="531.0">
+      <ComboBox layoutX="212.0" layoutY="339.0" prefHeight="25.0" prefWidth="181.0" promptText="select execution leader " visible="false" />
+      <ComboBox layoutX="188.0" layoutY="299.0" prefHeight="31.0" prefWidth="161.0" promptText="select  analyizer" />
+      <Button layoutX="461.0" layoutY="299.0" mnemonicParsing="false" text="Approve" />
+      <Button layoutX="379.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="deny" />
+      <TableView fx:id="tableChangeRequest" layoutX="188.0" layoutY="68.0" prefHeight="200.0" prefWidth="478.0">
+         <columns>
+            <TableColumn fx:id="tableColumnRequestID" prefWidth="86.0" text="Request ID" />
+            <TableColumn fx:id="tableColumnStatus" prefWidth="87.0" text="Status" />
+            <TableColumn fx:id="tableColumnDescription" prefWidth="91.0" text="Description " />
+            <TableColumn fx:id="tableColumnSubSystem" prefWidth="85.0" text="SubSystem" />
+            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="128.0" text="CurrentStep" />
+         </columns>
+      </TableView>
+      <AnchorPane fx:id="AnchorPaneClosingStep" disable="true" layoutX="194.0" layoutY="387.0" prefHeight="200.0" prefWidth="478.0">
          <children>
-            <TableView layoutX="27.0" layoutY="22.0" prefHeight="200.0" prefWidth="478.0">
-               <columns>
-                  <TableColumn prefWidth="86.0" text="Request ID" />
-                  <TableColumn prefWidth="87.0" text="Status" />
-                  <TableColumn prefWidth="91.0" text="Description " />
-                  <TableColumn prefWidth="85.0" text="SubSystem" />
-                  <TableColumn prefWidth="128.0" text="CurrentStep" />
-               </columns>
-            </TableView>
-         </children></AnchorPane>
+            <Button layoutX="157.0" layoutY="107.0" mnemonicParsing="false" text="Close the request " />
+            <Button layoutX="308.0" layoutY="36.0" mnemonicParsing="false" text="send" />
+            <TextField layoutX="77.0" layoutY="36.0" promptText="send message to initiator" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
