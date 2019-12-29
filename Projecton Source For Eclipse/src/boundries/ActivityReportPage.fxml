@@ -24,12 +24,12 @@
             <TextField fx:id="medianTextField" layoutX="90.0" layoutY="268.0" prefHeight="25.0" prefWidth="100.0" />
             <Text layoutX="34.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Std:" />
             <TextField fx:id="stdTextField" layoutX="90.0" layoutY="306.0" prefHeight="25.0" prefWidth="100.0" />
-            <BarChart fx:id="workDaysBarChart" layoutY="2.0" prefHeight="231.0" prefWidth="312.0">
+            <BarChart fx:id="workDaysBarChart" layoutX="4.0" layoutY="7.0" prefHeight="220.0" prefWidth="285.0">
               <xAxis>
-                <CategoryAxis fx:id="workDaysChartBarCategory" label="Work Days" />
+                <CategoryAxis fx:id="workDaysChartBarCategory" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis fx:id="DaysNumberBarChart" prefHeight="152.0" prefWidth="39.0" side="LEFT" />
+                <NumberAxis fx:id="DaysNumberBarChart" side="LEFT" />
               </yAxis>
             </BarChart>
          </children>

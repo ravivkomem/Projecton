@@ -62,6 +62,10 @@ public class ActivityReportBoundary implements DataInitializable {
 	private ActivityReportController myController = new ActivityReportController(this);
 	private ActivityReport activityReport;
 	private ArrayList<ChangeRequest> changeRequestList;
+	private static final String FIRST_CATAGORY = "0-10";
+	private static final String SECOND_CATAGORY = "10-20";
+	private static final String THIRD_CATAGORY = "20-30";
+	private static final String FOURTH_CATAGORY = "30+";
 
 	/* *************************************
 	 * ******* FXML Methods *************
@@ -146,21 +150,18 @@ public class ActivityReportBoundary implements DataInitializable {
 	 */
 	private void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
 		int[] workDaysArray;
-		requestStatusPieChart.getData().add( new PieChart.Data("Active", report.getActiveChageRequest()));
-		requestStatusPieChart.getData().add( new PieChart.Data("Close", report.getCloseChangeRequest()));
-		requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		requestStatusPieChart.getData().add( new PieChart.Data("Denied", report.getDeniedChangeRequest()));
+		requestStatusPieChart.getData().add( new PieChart.Data("Close", report.getCloseChangeRequest()));
+		requestStatusPieChart.getData().add( new PieChart.Data("Active", report.getActiveChageRequest()));
+		requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		
 		workDaysArray = workDaysCalc(workDays);
-		workDaysBarChart.setTitle("");
-		workDaysChartBarCategory.setLabel("Work Days");
-		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
-                Arrays.asList("0-10", "10-20", "20-30", "30+")));
-		XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>(); 
-		series1.getData().add(new XYChart.Data<String,Number>("0-10", workDaysArray[0]));
-		series1.getData().add(new XYChart.Data<String,Number>("10-20", workDaysArray[1]));
-		series1.getData().add(new XYChart.Data<String,Number>("20-30", workDaysArray[2]));
-		series1.getData().add(new XYChart.Data<String,Number>("30+", workDaysArray[3]));
+		
+		XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>();
+		series1.getData().add(new XYChart.Data<String,Number>(FIRST_CATAGORY, workDaysArray[0]));
+		series1.getData().add(new XYChart.Data<String,Number>(SECOND_CATAGORY, workDaysArray[1]));
+		series1.getData().add(new XYChart.Data<String,Number>(THIRD_CATAGORY, workDaysArray[2]));
+		series1.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, workDaysArray[3]));
 		
 		workDaysBarChart.getData().addAll(series1);
 		
@@ -188,6 +189,10 @@ public class ActivityReportBoundary implements DataInitializable {
 		activityReportDetailsPane.setVisible(false);
 		startDatePicker.setEditable(false);
 		endDatePicker.setEditable(false);
+		workDaysBarChart.setTitle("Work Duration");
+		workDaysChartBarCategory.setLabel("Work Days");
+		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
+                Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
 	}
 
 	@Override
