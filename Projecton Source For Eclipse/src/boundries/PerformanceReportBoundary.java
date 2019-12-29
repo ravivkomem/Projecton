@@ -8,20 +8,18 @@ import java.util.ResourceBundle;
 import assets.ProjectPages;
 import controllers.PerformanceReportController;
 import controllers.TimeManager;
-import entities.ChangeRequest;
+import entities.Step;
 import entities.TimeExtension;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class PerformanceReportBoundary implements Initializable {
@@ -29,10 +27,6 @@ public class PerformanceReportBoundary implements Initializable {
 	/* *************************************
 	 * ********* FXML Objects **************
 	 * *************************************/
-    @FXML
-    private Button closePageButton;
-    @FXML
-    private Pane reportPane;
     @FXML
     private BarChart<String, Number> extensionDaysBarChart;
     @FXML
@@ -43,26 +37,36 @@ public class PerformanceReportBoundary implements Initializable {
     private Text reportHeader;
     @FXML
     private TextField totalDaysTextField;
-    @FXML
-    private Button displayButton;
     
     /* *************************************
 	 * ******** Private Objects ************
 	 * *************************************/
     private PerformanceReportController myController = new PerformanceReportController(this);
+    private static final String ANALYSIS = "Analysis";
+    private static final String COMMITTEE = "Committee";
+    private static final String EXECUTION = "Execution";
+    private static final String TESTING = "Testing";
     
     @FXML
     void closePage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
-
-    @FXML
-    void displayReport(ActionEvent event) {
-    	myController.getAllExtensionRequestsFromServer();
-    }
     
-    public void createReport(ArrayList<TimeExtension> timeExtensionList) {
-		/* Get graph data */
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		//totalDaysTextField.setVisible(false);
+		extensionDaysBarChart.setTitle("Performance Graph");
+		extensionDaysBarChart.setLegendSide(Side.RIGHT);
+		changeRequestStepCatagoryAxis.setLabel("Change Request Step");
+		changeRequestStepCatagoryAxis.setCategories(FXCollections.<String>observableArrayList(
+        Arrays.asList(ANALYSIS, COMMITTEE, EXECUTION, TESTING)));
+		extensionDaysNumberAxis.setLabel("Days");
+		
+		myController.getAllExtensionRequestsFromServer();
+    	myController.getAllRepeatingStepsFromServer();
+	}
+    
+    public void addExtensionDaysToReport(ArrayList<TimeExtension> timeExtensionList) {
     	long analysisDaysCounter = 0;
 		long committeeDaysCounter = 0;
 		long executionDaysCounter = 0;
@@ -90,31 +94,57 @@ public class PerformanceReportBoundary implements Initializable {
 					break;
 			}
 		}
-		
-		/*Set Graph Labels*/
-		extensionDaysBarChart.setTitle("Extension Days");
-		changeRequestStepCatagoryAxis.setLabel("Change Request Step");
-		changeRequestStepCatagoryAxis.setCategories(FXCollections.<String>observableArrayList(
-                Arrays.asList("analysis", "committee", "execution", "tester")));
-		extensionDaysNumberAxis.setLabel("Days");
-		
+				
 		/*Insert Graph Data*/
-	    XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>();   
-	    series1.getData().add(new XYChart.Data<String,Number>("analysis", analysisDaysCounter));
-        series1.getData().add(new XYChart.Data<String,Number>("committee", committeeDaysCounter));
-        series1.getData().add(new XYChart.Data<String,Number>("execution", executionDaysCounter));
-        series1.getData().add(new XYChart.Data<String,Number>("tester", testingDaysCounter));    
+	    XYChart.Series<String,Number> series = new XYChart.Series<String, Number>();
+	    series.setName("Extension Days");
+	    series.getData().add(new XYChart.Data<String,Number>(ANALYSIS, analysisDaysCounter));
+        series.getData().add(new XYChart.Data<String,Number>(COMMITTEE, committeeDaysCounter));
+        series.getData().add(new XYChart.Data<String,Number>(EXECUTION, executionDaysCounter));
+        series.getData().add(new XYChart.Data<String,Number>(TESTING, testingDaysCounter));    
 
-        extensionDaysBarChart.getData().addAll(series1);
-		
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		totalDaysTextField.setVisible(false);
-		
+        extensionDaysBarChart.getData().add(series);
 	}
 
 	
 
+	public void addRepeatingStepsToReport(ArrayList<Step> repeatingStepList) {
+		long analysisDaysCounter = 0;
+		long committeeDaysCounter = 0;
+		long executionDaysCounter = 0;
+		long testingDaysCounter = 0;
+		for (Step step : repeatingStepList)
+		{
+			long additionalDays = TimeManager.getDaysBetween(step.getStartDate(), step.getEndDate());
+			switch (step.getType())
+			{
+				case ANALYSIS:
+					analysisDaysCounter += additionalDays;
+					break;
+				case COMMITTEE:
+					committeeDaysCounter += additionalDays;
+					break;
+				case EXECUTION:
+					executionDaysCounter += additionalDays;
+					break;
+				case TESTEING:
+					testingDaysCounter += additionalDays;
+					break;
+				default:
+					System.out.println("ERROR - timeExtension ID " + step.getStepID() +" "
+							+ "has invalid step type");
+					break;
+			}
+		}
+		
+		/*Insert Graph Data*/
+		XYChart.Series<String,Number> series2 = new XYChart.Series<String, Number>();
+	    series2.setName("Repeating Steps");
+	    series2.getData().add(new XYChart.Data<String,Number>(ANALYSIS, analysisDaysCounter));
+	    series2.getData().add(new XYChart.Data<String,Number>(COMMITTEE, committeeDaysCounter));
+	    series2.getData().add(new XYChart.Data<String,Number>(EXECUTION, executionDaysCounter));
+	    series2.getData().add(new XYChart.Data<String,Number>(TESTING, testingDaysCounter));    
+	    
+        extensionDaysBarChart.getData().add(series2);
+	}
 }

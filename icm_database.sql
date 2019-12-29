@@ -183,7 +183,7 @@ CREATE TABLE `committee_step` (
   `Status` varchar(45) NOT NULL,
   PRIMARY KEY (`CommitteeStepId`),
   UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `committee_step` (
 
 LOCK TABLES `committee_step` WRITE;
 /*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
-INSERT INTO `committee_step` VALUES (1,2,'lee','2019-12-19',NULL,NULL,'deny'),(2,2,'lee','2019-12-19',NULL,'2019-12-20','active'),(3,3,'lee','2019-12-19',NULL,NULL,'deny'),(4,75,'itayz','2019-12-22','2019-12-30',NULL,'active');
+INSERT INTO `committee_step` VALUES (1,2,'lee','2019-12-19',NULL,NULL,'deny'),(2,2,'lee','2019-12-19',NULL,'2019-12-20','active'),(3,3,'lee','2019-12-19',NULL,NULL,'deny'),(4,75,'itayz','2019-12-22','2019-12-30',NULL,'active'),(5,75,'raviv','2019-12-22','2019-12-30','2019-12-30','deny');
 /*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -252,6 +252,82 @@ INSERT INTO `file` VALUES (1,'79','jpg'),(2,'80','png');
 UNLOCK TABLES;
 
 --
+-- Temporary view structure for view `repeating_analysis`
+--
+
+DROP TABLE IF EXISTS `repeating_analysis`;
+/*!50001 DROP VIEW IF EXISTS `repeating_analysis`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `repeating_analysis` AS SELECT 
+ 1 AS `StepType`,
+ 1 AS `AnalysisStepID`,
+ 1 AS `ChangeRequestID`,
+ 1 AS `HandlerUserName`,
+ 1 AS `StartDate`,
+ 1 AS `Status`,
+ 1 AS `EstimatedEndDate`,
+ 1 AS `EndDate`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `repeating_committee`
+--
+
+DROP TABLE IF EXISTS `repeating_committee`;
+/*!50001 DROP VIEW IF EXISTS `repeating_committee`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `repeating_committee` AS SELECT 
+ 1 AS `StepType`,
+ 1 AS `CommitteeStepID`,
+ 1 AS `ChangeRequestID`,
+ 1 AS `HandlerUserName`,
+ 1 AS `StartDate`,
+ 1 AS `Status`,
+ 1 AS `EstimatedEndDate`,
+ 1 AS `EndDate`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `repeating_execution`
+--
+
+DROP TABLE IF EXISTS `repeating_execution`;
+/*!50001 DROP VIEW IF EXISTS `repeating_execution`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `repeating_execution` AS SELECT 
+ 1 AS `StepType`,
+ 1 AS `ExecutionStepID`,
+ 1 AS `ChangeRequestID`,
+ 1 AS `HandlerUserName`,
+ 1 AS `StartDate`,
+ 1 AS `Status`,
+ 1 AS `EstimatedEndDate`,
+ 1 AS `EndDate`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `repeating_tester`
+--
+
+DROP TABLE IF EXISTS `repeating_tester`;
+/*!50001 DROP VIEW IF EXISTS `repeating_tester`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `repeating_tester` AS SELECT 
+ 1 AS `StepType`,
+ 1 AS `TesterStepId`,
+ 1 AS `ChangeRequestID`,
+ 1 AS `HandlerUserName`,
+ 1 AS `StartDate`,
+ 1 AS `Status`,
+ 1 AS `EstimatedEndDate`,
+ 1 AS `EndDate`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `requirements`
 --
 
@@ -298,7 +374,7 @@ CREATE TABLE `tester_step` (
   `EndDate` date DEFAULT NULL,
   PRIMARY KEY (`TesterStepId`),
   UNIQUE KEY `TesterStepId_UNIQUE` (`TesterStepId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -307,6 +383,7 @@ CREATE TABLE `tester_step` (
 
 LOCK TABLES `tester_step` WRITE;
 /*!40000 ALTER TABLE `tester_step` DISABLE KEYS */;
+INSERT INTO `tester_step` VALUES (1,2,'231','231','231','2020-03-19','2020-10-20','2020-10-20');
 /*!40000 ALTER TABLE `tester_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,9 +448,81 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',1),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',0);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',1),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `repeating_analysis`
+--
+
+/*!50001 DROP VIEW IF EXISTS `repeating_analysis`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `repeating_analysis` AS select 'Analysis' AS `StepType`,`a1`.`AnalysisStepID` AS `AnalysisStepID`,`a1`.`ChangeRequestID` AS `ChangeRequestID`,`a1`.`HandlerUserName` AS `HandlerUserName`,`a1`.`StartDate` AS `StartDate`,`a1`.`Status` AS `Status`,`a1`.`EstimatedEndDate` AS `EstimatedEndDate`,`a1`.`EndDate` AS `EndDate` from `analysis_step` `a1` where exists(select `a2`.`ChangeRequestID` from `analysis_step` `a2` where (`a2`.`ChangeRequestID` = `a1`.`ChangeRequestID`) group by `a2`.`ChangeRequestID` having (count(`a2`.`ChangeRequestID`) >= 2)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `repeating_committee`
+--
+
+/*!50001 DROP VIEW IF EXISTS `repeating_committee`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `repeating_committee` AS select 'Committee' AS `StepType`,`c1`.`CommitteeStepId` AS `CommitteeStepID`,`c1`.`ChangeRequestId` AS `ChangeRequestID`,`c1`.`HandlerUserName` AS `HandlerUserName`,`c1`.`StartDate` AS `StartDate`,`c1`.`Status` AS `Status`,`c1`.`EstimatedEndDate` AS `EstimatedEndDate`,`c1`.`EndDate` AS `EndDate` from `committee_step` `c1` where exists(select `c2`.`ChangeRequestId` from `committee_step` `c2` where (`c2`.`ChangeRequestId` = `c1`.`ChangeRequestId`) group by `c2`.`ChangeRequestId` having (count(`c2`.`ChangeRequestId`) >= 2)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `repeating_execution`
+--
+
+/*!50001 DROP VIEW IF EXISTS `repeating_execution`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `repeating_execution` AS select 'Execution' AS `StepType`,`e1`.`ExecutionStepID` AS `ExecutionStepID`,`e1`.`ChangeRequestID` AS `ChangeRequestID`,`e1`.`HandlerUserName` AS `HandlerUserName`,`e1`.`StartDate` AS `StartDate`,`e1`.`Status` AS `Status`,`e1`.`EstimatedEndDate` AS `EstimatedEndDate`,`e1`.`EndDate` AS `EndDate` from `execution_step` `e1` where exists(select `e2`.`ChangeRequestID` from `execution_step` `e2` where (`e2`.`ChangeRequestID` = `e1`.`ChangeRequestID`) group by `e2`.`ChangeRequestID` having (count(`e2`.`ChangeRequestID`) >= 2)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `repeating_tester`
+--
+
+/*!50001 DROP VIEW IF EXISTS `repeating_tester`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `repeating_tester` AS select 'Testing' AS `StepType`,`t1`.`TesterStepId` AS `TesterStepId`,`t1`.`ChangeRequestId` AS `ChangeRequestID`,`t1`.`HandlerUserName` AS `HandlerUserName`,`t1`.`StartDate` AS `StartDate`,`t1`.`Status` AS `Status`,`t1`.`EstimatedEndDate` AS `EstimatedEndDate`,`t1`.`EndDate` AS `EndDate` from `tester_step` `t1` where exists(select `t2`.`ChangeRequestId` from `tester_step` `t2` where (`t2`.`ChangeRequestId` = `t1`.`ChangeRequestId`) group by `t2`.`ChangeRequestId` having (count(`t2`.`ChangeRequestId`) >= 2)) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -384,4 +533,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-27 23:52:52
+-- Dump completed on 2019-12-29  0:07:25
