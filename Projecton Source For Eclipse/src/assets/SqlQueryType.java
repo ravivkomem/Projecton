@@ -88,6 +88,24 @@ public enum SqlQueryType {
 	SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ESTIMATED_DATE_MINUS_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_EXECUTIOM_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
+   
+	
+	
+	
+	
+	
+   /********************************************
+    * ******************************************
+    * *********Supervisor Queries***************
+    ********************************************/
+	
+	
+	
+	SELECT_ALL_CHANGE_REQUEST(SqlExecutionType.EXECUTE_QUERY),
+	
+	
+	
+	
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
 

@@ -341,6 +341,22 @@ public class MysqlConnection {
      	sqlArray[SqlQueryType.SELECT_EXECUTIOM_STEP_DETAILS.getCode()] = 
 				"SELECT * FROM icm.execution_step WHERE ChangeRequestID = ?"
      			+ " ORDER BY ExecutionStepID DESC LIMIT 1";
+     	
+     	
+     	
+     	
+     	
+     	
+     	/* ******************************************************
+    	 * *************Supervisor Queries ****************
+    	 *******************************************************
+    	 *******************************************************/
+     	
+     	
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 
+				"SELECT * FROM icm.change_request";
+     	
+     	
     	
     }
     
