@@ -103,14 +103,6 @@
             </ImageView>
          </children>
       </VBox>
-      <TableView layoutX="219.0" layoutY="104.0" prefHeight="200.0" prefWidth="401.0">
-         <columns>
-            <TableColumn prefWidth="86.0" text="Request ID" />
-            <TableColumn prefWidth="112.0" text="Status" />
-            <TableColumn prefWidth="101.0" text="Description " />
-            <TableColumn prefWidth="100.0" text="SubSystem" />
-         </columns>
-      </TableView>
       <Button layoutX="358.0" layoutY="314.0" mnemonicParsing="false" text="View Extra Details" visible="false" />
       <Button fx:id="btnLogOut" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ClickLogOutFunction" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
@@ -132,6 +124,17 @@
       <Button layoutX="445.0" layoutY="380.0" mnemonicParsing="false" text="send" />
       <TextField layoutX="251.0" layoutY="380.0" promptText="send message to initiator" />
       <Button layoutX="324.0" layoutY="439.0" mnemonicParsing="false" text="Close the request " />
-      <AnchorPane layoutX="151.0" layoutY="79.0" prefHeight="419.0" prefWidth="531.0" />
+      <AnchorPane layoutX="187.0" layoutY="84.0" prefHeight="419.0" prefWidth="531.0">
+         <children>
+            <TableView layoutX="27.0" layoutY="22.0" prefHeight="200.0" prefWidth="478.0">
+               <columns>
+                  <TableColumn prefWidth="86.0" text="Request ID" />
+                  <TableColumn prefWidth="87.0" text="Status" />
+                  <TableColumn prefWidth="91.0" text="Description " />
+                  <TableColumn prefWidth="85.0" text="SubSystem" />
+                  <TableColumn prefWidth="128.0" text="CurrentStep" />
+               </columns>
+            </TableView>
+         </children></AnchorPane>
    </children>
 </AnchorPane>
