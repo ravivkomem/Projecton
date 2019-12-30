@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.SupervisorBoundary">
    <children>
-      <ImageView fitHeight="568.0" fitWidth="758.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="568.0" fitWidth="758.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@background_image.jpg" />
          </image>
@@ -133,5 +133,7 @@
       <Button fx:id="btnCloseTheRequest" layoutX="309.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" text="Close the request " />
       <Button fx:id="btnSend" layoutX="435.0" layoutY="496.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" text="send" />
       <TextField fx:id="txtSendMessageToInitiator" layoutX="200.0" layoutY="496.0" promptText="send message to initiator" />
+      <Text fx:id="txtSystemAutoAppoint" layoutX="449.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="151.91162109375" />
+      <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="608.0" layoutY="347.0" prefHeight="31.0" prefWidth="115.0" />
    </children>
 </AnchorPane>
