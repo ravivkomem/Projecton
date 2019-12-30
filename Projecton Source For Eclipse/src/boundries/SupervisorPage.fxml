@@ -120,7 +120,7 @@
       <ComboBox fx:id="comboSelectExecutionLeader" layoutX="188.0" layoutY="347.0" onMouseClicked="#clickOnSelectExecutionLeader" prefHeight="31.0" prefWidth="213.0" promptText="select execution leader " />
       <ComboBox fx:id="comboSelectAnalyizer" layoutX="188.0" layoutY="299.0" onMouseClicked="#clickOnSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="select  analyizer" />
       <Button fx:id="btnApproveAppointment" layoutX="461.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" text="Approve" />
-      <Button fx:id="btnDenyAppointment" layoutX="379.0" layoutY="299.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" text="deny" />
+      <Button fx:id="btnDenyAppointment" layoutX="379.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="deny" />
       <TableView fx:id="tableChangeRequest" layoutX="188.0" layoutY="68.0" prefHeight="200.0" prefWidth="478.0">
          <columns>
             <TableColumn fx:id="tableColumnRequestID" prefWidth="86.0" text="Request ID" />
@@ -135,5 +135,6 @@
       <TextField fx:id="txtSendMessageToInitiator" layoutX="200.0" layoutY="496.0" promptText="send message to initiator" />
       <Text fx:id="txtSystemAutoAppoint" layoutX="449.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="151.91162109375" />
       <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="608.0" layoutY="347.0" prefHeight="31.0" prefWidth="115.0" />
+      <Button fx:id="btnSetAnalyzer" layoutX="442.0" layoutY="396.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
    </children>
 </AnchorPane>

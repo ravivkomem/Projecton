@@ -1,6 +1,5 @@
 package boundries;
 
-import java.awt.TextField;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,7 +9,6 @@ import assets.ProjectPages;
 import assets.Toast;
 import controllers.SupervisorController;
 import entities.ChangeRequest;
-import entities.CommitteeComment;
 import entities.Step;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -158,6 +157,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 txtHandlerNameAutoAppoint.setVisible(false);
 		 btnSetAnalyzer.setVisible(false);
 		 
+		 myController.SelectAllChangeRequest();
+		 
 		 
 		 comboSelectAnalyizer.getItems().add("itay");
 		 comboSelectAnalyizer.getItems().add("itayz");
@@ -173,7 +174,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
 			        {
 			        	myChangerequest = row.getItem();
-			        	if(myChangerequest.getCurrentStep().equals("ANALYZER_AUTO_APPOINT"))
+			        	if(myChangerequest.getCurrentStep().equals("ANALAYZER_AUTO_APPOINT"))
 			        	{
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveAppointment.setVisible(true);

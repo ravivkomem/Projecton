@@ -43,21 +43,25 @@ public class SupervisorController extends BasicController
 					resultList.addAll(this.changeResultToChangerequest(result));
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleChangerequestResultForTable(resultList);
+					break;
 				case SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS:
 					ArrayList<ChangeRequest> resultList2=new ArrayList<>();
 					resultList2.addAll(this.changeResultToChangerequest(result));
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleChangerequestResultForTable(resultList2);
+					break;
 				case SELECT_ALL_CHANGE_REQUEST_FOR_APPROVALS:
 					ArrayList<ChangeRequest> resultList3=new ArrayList<>();
 					resultList3.addAll(this.changeResultToChangerequest(result));
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleChangerequestResultForTable(resultList3);
+					break;
 				case SELECT_ALL_CHANGE_REQUEST_FOR_CLOSE:
 					ArrayList<ChangeRequest> resultList4=new ArrayList<>();
 					resultList4.addAll(this.changeResultToChangerequest(result));
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleChangerequestResultForTable(resultList4);
+					break;
 				case UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT:
 					int affectedRows;
 					affectedRows = (Integer) (result.getResultData().get(0).get(0));
@@ -75,6 +79,7 @@ public class SupervisorController extends BasicController
 					affectedRows3 = (Integer) (result.getResultData().get(0).get(0));
 					this.unsubscribeFromClientDeliveries();
 					//myBoundary.ShowSuccessAnalyzerAppoint(affectedRows2);
+					break;
 					
 				default:
 					break;
