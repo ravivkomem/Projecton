@@ -370,6 +370,13 @@ public class MysqlConnection {
 				"SELECT * FROM icm.change_request" +
 						"WHERE CurrentStep = 'CLOSING_STEP'";
     	
+    	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
+    			
+    	sqlArray[SqlQueryType.UPDATE_ANALYZER_BY_SUPERVISOR.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.INSERT_NEW_ANALYSIS_STEP.getCode()]=                  
+    			"INSERT INTO icm.analysis_step(ChangeRequestID,HandlerUserName,StartDay,Status) "
+    	    	+ "VALUES (?,?,?,?)";
     }
     
 }

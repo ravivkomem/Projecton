@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import assets.Toast;
 import controllers.SupervisorController;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
@@ -51,6 +52,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
     @FXML
     private Button btnExstraDetails;
+    
+    
+    @FXML
+    private Button btnSetAnalyzer;
     
     
     
@@ -143,6 +148,24 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 tableColumnDescription.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("currentStateDescription"));
 		 tableColumnStatus.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("status"));
 		 tableColumnSubSystem.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("selectedSubsystem"));
+		 
+		 comboSelectAnalyizer.setVisible(false);
+		 comboSelectExecutionLeader.setVisible(false);
+		 btnApproveAppointment.setVisible(false);
+		 btnDenyAppointment.setVisible(false);
+		 btnExstraDetails.setVisible(false);
+		 txtSystemAutoAppoint.setVisible(false);
+		 txtHandlerNameAutoAppoint.setVisible(false);
+		 btnSetAnalyzer.setVisible(false);
+		 
+		 
+		 comboSelectAnalyizer.getItems().add("itay");
+		 comboSelectAnalyizer.getItems().add("itayz");
+		 comboSelectAnalyizer.getItems().add("ido");
+		 comboSelectAnalyizer.getItems().add("raviv");
+		 comboSelectAnalyizer.getItems().add("lee");
+		 comboSelectAnalyizer.getItems().add("lior");
+		 
 		 
 		 tableChangeRequest.setRowFactory(tv -> {
 			    TableRow<ChangeRequest> row = new TableRow<>();
@@ -296,8 +319,28 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void clickOnDenyAppointment(MouseEvent event)
     {
-    	myController.Change
-    	
+    	myController.changeCurrentStepFromAnalyzerAutoAppoint(myChangerequest.getChangeRequestID());
+    	comboSelectAnalyizer.setVisible(true);
+    	btnSetAnalyzer.setVisible(true);    	
+    }
+    
+    
+    
+    
+    
+
+    @FXML
+    void clickOnSetAnalyzer(MouseEvent event)
+    {
+    	if (comboSelectAnalyizer.getSelectionModel().isEmpty()) 
+			Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+    	else
+    	{
+    		myController.UpdateNewAnalyzerBySupervisor(comboSelectAnalyizer.getSelectionModel().getSelectedItem()
+    				,myChangerequest.getChangeRequestID());
+    		myController.InsertNewAnalysisStep(myChangerequest.getChangeRequestID()
+    				,comboSelectAnalyizer.getSelectionModel().getSelectedItem(),updateStepDate,"ACTIVE");
+    	}
     	
     }
     
@@ -331,6 +374,29 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	
     	
     }
+
+
+
+	public void ShowAnalyzerSupervisorAppointToast(int affectedRows)
+	{
+		if(affectedRows==1)
+		Toast.makeText(ProjectFX.mainStage, "Please Set an Analyzer", 1500, 500, 500);
+		else
+			Toast.makeText(ProjectFX.mainStage, "Problam in update current step", 1500, 500, 500);
+	}
+
+
+
+	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
+	{
+		if(affectedRows2==2)
+			Toast.makeText(ProjectFX.mainStage, "Your Analyzer Appoint Approved", 1500, 500, 500);
+		else
+			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);
+			
+			
+		
+	}
 
 
 

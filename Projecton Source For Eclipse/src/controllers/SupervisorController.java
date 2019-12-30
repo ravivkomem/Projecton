@@ -58,9 +58,23 @@ public class SupervisorController extends BasicController
 					resultList4.addAll(this.changeResultToChangerequest(result));
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleChangerequestResultForTable(resultList4);
-					
+				case UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT:
+					int affectedRows;
+					affectedRows = (Integer) (result.getResultData().get(0).get(0));
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.ShowAnalyzerSupervisorAppointToast(affectedRows);
+					break;	
+				case UPDATE_ANALYZER_BY_SUPERVISOR:
+					int affectedRows2;
+					affectedRows2 = (Integer) (result.getResultData().get(0).get(0));
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.ShowSuccessAnalyzerAppoint(affectedRows2);
 					break;
-					
+				case INSERT_NEW_ANALYSIS_STEP:
+					int affectedRows3;
+					affectedRows3 = (Integer) (result.getResultData().get(0).get(0));
+					this.unsubscribeFromClientDeliveries();
+					//myBoundary.ShowSuccessAnalyzerAppoint(affectedRows2);
 					
 				default:
 					break;
@@ -127,6 +141,49 @@ public class SupervisorController extends BasicController
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 		
+	}
+
+
+
+	public void changeCurrentStepFromAnalyzerAutoAppoint(int changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add("ANALYZER_SUPERVISOR_APPOINT");
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
+
+
+
+	public void UpdateNewAnalyzerBySupervisor(String newAnalyzerBySupervisorAppoint, Integer changeRequestID)
+	{
+		
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add("ANALYSIS_SET_TIME");
+		varArray.add(newAnalyzerBySupervisorAppoint);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYZER_BY_SUPERVISOR, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void InsertNewAnalysisStep(Integer changeRequestID, String selectedItem, Date updateStepDate,
+			String status)
+	{
+	
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		varArray.add(selectedItem);
+		varArray.add(updateStepDate);
+		varArray.add(status);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_ANALYSIS_STEP, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
 	
