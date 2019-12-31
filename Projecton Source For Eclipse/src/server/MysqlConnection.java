@@ -280,6 +280,34 @@ public class MysqlConnection {
     			"SELECT * FROM icm.repeating_tester RT " + 
     			"WHERE RT.TesterStepID != (SELECT MIN(RT2.TesterStepID) FROM ICM.repeating_tester RT2 " + 
     			"WHERE RT2.ChangeRequestID = RT.ChangeRequestID)";
+    	sqlArray[SqlQueryType.SELECT_DATES_FROM_ALL_STEPS.getCode()]= 
+    			"SELECT icm.change_request.SelectedSubsystem , icm.committee_step.EstimatedEndDate ," + 
+    			"icm.committee_step.EndDate " + 
+    			"FROM icm.committee_step " + 
+    			"INNER JOIN icm.change_request " + 
+    			"ON icm.committee_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
+    			"WHERE icm.committee_step.Status = 'CLOSE' " + 
+    			"UNION " + 
+    			"SELECT icm.change_request.SelectedSubsystem , icm.analysis_step.EstimatedEndDate ," + 
+    			"icm.analysis_step.EndDate " + 
+    			"FROM icm.analysis_step " + 
+    			"INNER JOIN icm.change_request " + 
+    			"ON icm.analysis_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
+    			"WHERE icm.analysis_step.Status = 'CLOSE' " + 
+    			"UNION " + 
+    			"SELECT icm.change_request.SelectedSubsystem , icm.execution_step.EstimatedEndDate ," + 
+    			"icm.execution_step.EndDate " + 
+    			"FROM icm.execution_step " + 
+    			"INNER JOIN icm.change_request " + 
+    			"ON icm.execution_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
+    			"WHERE icm.execution_step.Status = 'CLOSE' " + 
+    			"UNION " + 
+    			"SELECT icm.change_request.SelectedSubsystem , icm.tester_step.EstimatedEndDate ," + 
+    			"icm.tester_step.EndDate " + 
+    			"FROM icm.tester_step " + 
+    			"INNER JOIN icm.change_request " + 
+    			"ON icm.tester_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
+    			"WHERE icm.tester_step.Status = 'CLOSE'";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
