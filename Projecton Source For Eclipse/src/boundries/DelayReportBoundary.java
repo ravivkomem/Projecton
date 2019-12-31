@@ -71,16 +71,17 @@ public class DelayReportBoundary implements Initializable{
 		ArrayList<Long> delayDays = new ArrayList<>();
 		int[] delayDaysCntArray;
 		delayDays.addAll(createDelayDaysList(delayReportList));
-		
+		//delayDaysCntArray = createDelayDaysCntArray(delayReportList);
 	}
 	
 	private ArrayList<Long> createDelayDaysList(ArrayList<DelayReport> delayReportList) {
 		ArrayList<Long> list = new ArrayList<>();
 		for(int i = 0 ; i < delayReportList.size() ; i++) {
-			if(true) {
-				//long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), changeRequestList.get(i).get)
-			}
-			//long daysBetween		
+			long daysBetween = TimeManager.getDaysBetween(delayReportList.get(i).getEstimateDate(),
+					delayReportList.get(i).getEndDate());
+			if(daysBetween<0) {
+				list.add(daysBetween);
+			}	
 		}
 		return list;
 	}
