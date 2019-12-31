@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import controllers.DelayReportController;
 import controllers.TimeManager;
 import entities.ChangeRequest;
+import entities.DelayReport;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,11 +43,16 @@ public class DelayReportBoundary implements Initializable{
 	 * *************************************/
     
     private DelayReportController myController = new DelayReportController(this);
-	private static final String FIRST_CATAGORY = "0-5";
-	private static final String SECOND_CATAGORY = "5-10";
-	private static final String THIRD_CATAGORY = "10-15";
-	private static final String FOURTH_CATAGORY = "15+";
-    
+	private static final String FIRST_CATAGORY = "Lecturer Station";
+	private static final String SECOND_CATAGORY = "Student Station";
+	private static final String THIRD_CATAGORY = "Employee Station";
+	private static final String FOURTH_CATAGORY = "Moodle";
+	private static final String FIFTH_CATAGORY = "Library";
+	private static final String SIXTH_CATAGORY = "Class Rooms";
+	private static final String SEVENTH_CATAGORY = "Laboratory";
+	private static final String EIGHTH_CATAGORY = "Computer Farm";
+	private static final String NINTH_CATAGORY = "College Website";
+	
     /* ************************************ 
 	 * ******* Public Methods *************
 	 * ************************************/
@@ -56,21 +62,22 @@ public class DelayReportBoundary implements Initializable{
 		dealyBarChart.setTitle("");
 		delayCategoryBarChart.setLabel("Delay Days");
 		delayCategoryBarChart.setCategories(FXCollections.<String>observableArrayList(
-                Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
-		myController.getAllChangeRequest();
+                Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY,FIFTH_CATAGORY
+                		,SIXTH_CATAGORY,SEVENTH_CATAGORY,EIGHTH_CATAGORY,NINTH_CATAGORY)));
+		myController.getAllStepsDate();
 	}
 
-	public void displayDealyReport(ArrayList<ChangeRequest> changeRequestList) {
+	public void displayDealyReport(ArrayList<DelayReport> delayReportList) {
 		ArrayList<Long> delayDays = new ArrayList<>();
 		int[] delayDaysCntArray;
-		delayDays.addAll(createDelayDaysList(changeRequestList));
+		delayDays.addAll(createDelayDaysList(delayReportList));
 		
 	}
 	
-	private ArrayList<Long> createDelayDaysList(ArrayList<ChangeRequest> changeRequestList) {
+	private ArrayList<Long> createDelayDaysList(ArrayList<DelayReport> delayReportList) {
 		ArrayList<Long> list = new ArrayList<>();
-		for(int i = 0 ; i < changeRequestList.size() ; i++) {
-			if(changeRequestList.get(i).getStatus().equals("Active")) {
+		for(int i = 0 ; i < delayReportList.size() ; i++) {
+			if(true) {
 				//long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), changeRequestList.get(i).get)
 			}
 			//long daysBetween		

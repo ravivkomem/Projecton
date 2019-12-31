@@ -9,6 +9,7 @@ import assets.SqlResult;
 import boundries.DelayReportBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
+import entities.DelayReport;
 import javafx.application.Platform;
 
 public class DelayReportController extends BasicController{
@@ -19,8 +20,8 @@ public class DelayReportController extends BasicController{
 		this.myBoundary = myBoundary;
 	}
 
-	public void getAllChangeRequest() {
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS,new ArrayList<Object>());
+	public void getAllStepsDate() {
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_DATES_FROM_ALL_STEPS,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
@@ -30,9 +31,9 @@ public class DelayReportController extends BasicController{
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
-				case SELECT_ALL_CHANGE_REQUESTS:
+				case SELECT_DATES_FROM_ALL_STEPS:
 					this.unsubscribeFromClientDeliveries();
-					myBoundary.displayDealyReport(createChangeRequestList(result));
+					myBoundary.displayDealyReport(createDelayReportList(result));
 					break;
 				default:
 					break;
@@ -42,13 +43,11 @@ public class DelayReportController extends BasicController{
 		
 	}
 	
-	private ArrayList<ChangeRequest> createChangeRequestList(SqlResult result){
-		ArrayList<ChangeRequest> resultList=new ArrayList<>();
+	private ArrayList<DelayReport> createDelayReportList(SqlResult result){
+		ArrayList<DelayReport> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
-			ChangeRequest changeRequest=new ChangeRequest((Integer)a.get(0), (String)a.get(1), (Date)a.get(2), (String)a.get(3),
-					(String)a.get(4), (String)a.get(5), (String)a.get(6),(String)a.get(7), (String)a.get(8),
-					(String)a.get(9), (String)a.get(10), (Date)a.get(11));
-			resultList.add(changeRequest);
+			DelayReport delayReport=new DelayReport((Integer)a.get(0), (Date)a.get(1), (Date)a.get(2));
+			resultList.add(delayReport);
 		}
 		return resultList;
 	}
