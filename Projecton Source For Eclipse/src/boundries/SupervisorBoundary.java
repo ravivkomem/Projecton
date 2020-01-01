@@ -312,7 +312,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void clickOnApproveAppointment(MouseEvent event)
     {
-
+    	myController.changeCurrentStepToAnalysisSetTime(myChangerequest.getChangeRequestID());
+    	myController.InsertNewAnalysisStepAfterApprove(myChangerequest.getChangeRequestID(),myChangerequest.getHandlerUserName(),updateStepDate,"ACTIVE");
     	
     }
 
@@ -390,12 +391,20 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
 	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
 	{
-		if(affectedRows2==2)
+		if(affectedRows2==1)
 			Toast.makeText(ProjectFX.mainStage, "Your Analyzer Appoint Approved", 1500, 500, 500);
 		else
 			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);
 			
 			
+		
+	}
+
+
+
+	public void ShowSuccessAproveAppoint()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Approving Analyzer successfuly", 1500, 500, 500);
 		
 	}
 

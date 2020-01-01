@@ -403,7 +403,14 @@ public class MysqlConnection {
     			
     	sqlArray[SqlQueryType.UPDATE_ANALYZER_BY_SUPERVISOR.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
     	
+    	
     	sqlArray[SqlQueryType.INSERT_NEW_ANALYSIS_STEP.getCode()]=                  
+    			"INSERT INTO icm.analysis_step(ChangeRequestID,HandlerUserName,StartDate,Status) "
+    	    	+ "VALUES (?,?,?,?)";
+    	
+    	sqlArray[SqlQueryType.UPDATE_STEP_TO_ANALYSIS_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.INSERT_NEW_ANALYSIS_STEP_AFTER_APPROVE.getCode()]=                  
     			"INSERT INTO icm.analysis_step(ChangeRequestID,HandlerUserName,StartDate,Status) "
     	    	+ "VALUES (?,?,?,?)";
     }

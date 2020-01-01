@@ -80,6 +80,10 @@ public class SupervisorController extends BasicController
 					this.unsubscribeFromClientDeliveries();
 					//myBoundary.ShowSuccessAnalyzerAppoint(affectedRows2);
 					break;
+				case UPDATE_STEP_TO_ANALYSIS_SET_TIME:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.ShowSuccessAproveAppoint();
+					
 					
 				default:
 					break;
@@ -189,6 +193,34 @@ public class SupervisorController extends BasicController
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_ANALYSIS_STEP, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void changeCurrentStepToAnalysisSetTime(Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add("ANALYSIS_SET_TIME");
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STEP_TO_ANALYSIS_SET_TIME, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void InsertNewAnalysisStepAfterApprove(Integer changeRequestID, String handlerUserName, Date updateStepDate,
+			String status)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		varArray.add(handlerUserName);
+		varArray.add(updateStepDate);
+		varArray.add(status);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_ANALYSIS_STEP_AFTER_APPROVE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
 	}
 	
 	
