@@ -1,13 +1,10 @@
 package boundries;
 
-import java.awt.Color;
-import java.lang.reflect.Array;
+
 import java.net.URL;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.ResourceBundle;
 
 import assets.Toast;
@@ -17,7 +14,6 @@ import controllers.Utilizer;
 import entities.ActivityReport;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -172,9 +168,13 @@ public class ActivityReportBoundary implements DataInitializable {
 		series1.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, workDaysArray[3]));
 		
 		workDaysBarChart.getData().addAll(series1);
-		
-		medianTextField.setText(""+ Utilizer.calcMedian(workDays));
-		stdTextField.setText(String.format("%.2f", Utilizer.calcStd(workDays)));
+		if(!workDays.isEmpty()) {
+			medianTextField.setText(""+ Utilizer.calcMedian(workDays));
+			stdTextField.setText(String.format("%.2f", Utilizer.calcStd(workDays)));
+		}
+		else {
+			Toast.makeText(ProjectFX.mainStage, "there is not change request in sql table", 1500, 500, 500);
+		}
 	}
 	
 	public int[] workDaysCalc(ArrayList<Long> workDays) {

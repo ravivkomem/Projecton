@@ -46,7 +46,7 @@ public class DelayReportController extends BasicController{
 	private ArrayList<DelayReport> createDelayReportList(SqlResult result){
 		ArrayList<DelayReport> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
-			DelayReport delayReport=new DelayReport((Integer)a.get(0), (Date)a.get(1), (Date)a.get(2));
+			DelayReport delayReport=new DelayReport((String)a.get(0), (Date)a.get(1), (Date)a.get(2));
 			resultList.add(delayReport);
 		}
 		return resultList;

@@ -3,29 +3,27 @@ package entities;
 import java.sql.Date;
 
 public class DelayReport {
-	private int changeRequestId;
+	private String subsystem;
 	private Date estimateDate;
 	private Date endDate;
 	
-	public DelayReport(int changeRequestId, Date estimateDate, Date endDate) {
+	public DelayReport(String subsystem, Date estimateDate, Date endDate) {
 		super();
-		this.changeRequestId = changeRequestId;
+		this.subsystem = subsystem;
 		this.estimateDate = estimateDate;
 		this.endDate = endDate;
 	}
 
-	public int getChangeRequestId() {
-		return changeRequestId;
+	public String getSubsystem() {
+		return subsystem;
 	}
-
-	public void setChangeRequestId(int changeRequestId) {
-		this.changeRequestId = changeRequestId;
+	public void setSubsystem(String subsystem) {
+		this.subsystem = subsystem;
 	}
 
 	public Date getEstimateDate() {
 		return estimateDate;
 	}
-
 	public void setEstimateDate(Date estimateDate) {
 		this.estimateDate = estimateDate;
 	}
@@ -33,7 +31,6 @@ public class DelayReport {
 	public Date getEndDate() {
 		return endDate;
 	}
-
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}

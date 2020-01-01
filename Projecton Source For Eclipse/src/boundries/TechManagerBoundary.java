@@ -159,7 +159,7 @@ public class TechManagerBoundary implements DataInitializable{
 				reportDisplayAnchorPane.getChildren().setAll((AnchorPane) ProjectFX.pagingController.loadBoundaryInPane(ProjectPages.PERFORMANCE_REPORT_PAGE.getPath()));
 				break;
 			case "Delay Report":
-				
+				reportDisplayAnchorPane.getChildren().setAll((AnchorPane) ProjectFX.pagingController.loadBoundaryInPane(ProjectPages.DELAY_REPORT_PAGE.getPath()));
 				break;
 			default:
 				break;
