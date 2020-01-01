@@ -413,6 +413,20 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_ANALYSIS_STEP_AFTER_APPROVE.getCode()]=                  
     			"INSERT INTO icm.analysis_step(ChangeRequestID,HandlerUserName,StartDate,Status) "
     	    	+ "VALUES (?,?,?,?)";
+    	
+    	sqlArray[SqlQueryType.UPDATE_NEW_EXECUTION_LEADER.getCode()] = "UPDATE icm.change_request SET HandlerUserName = ?, CurrentStep  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_STEP.getCode()]=                  
+    			"INSERT INTO icm.execution_step(ChangeRequestID,HandlerUserName,StartDate,Status) "
+    	    	+ "VALUES (?,?,?,?)";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_ANALYSIS_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_ANALYSIS_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_EXECUTION_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_EXECUTION_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
     }
     
 }

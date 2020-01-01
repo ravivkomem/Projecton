@@ -57,6 +57,13 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     private Button btnSetAnalyzer;
     
     
+    @FXML
+    private Button btnApproveAnalysisTime;
+    
+
+    @FXML
+    private Button btnDenyAnalysisTime;
+    
     
     
     
@@ -67,7 +74,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     private ComboBox<String> comboSelectExecutionLeader;
     
     
-    
+    @FXML
+    private Button btnSetExecutionLeader;
 
     @FXML
     private Button btnApproveAppointment;
@@ -89,6 +97,12 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
     @FXML
     private TextField txtHandlerNameAutoAppoint;
+    
+    @FXML
+    private Button btnDenyExecutionTime;
+
+    @FXML
+    private Button btnApproveExecutionTime;
     
     
     
@@ -148,14 +162,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 tableColumnStatus.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("status"));
 		 tableColumnSubSystem.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("selectedSubsystem"));
 		 
-		 comboSelectAnalyizer.setVisible(false);
-		 comboSelectExecutionLeader.setVisible(false);
-		 btnApproveAppointment.setVisible(false);
-		 btnDenyAppointment.setVisible(false);
-		 btnExstraDetails.setVisible(false);
-		 txtSystemAutoAppoint.setVisible(false);
-		 txtHandlerNameAutoAppoint.setVisible(false);
-		 btnSetAnalyzer.setVisible(false);
+		 setVisabilityValse();
 		 
 		 myController.SelectAllChangeRequest();
 		 
@@ -166,6 +173,13 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 comboSelectAnalyizer.getItems().add("raviv");
 		 comboSelectAnalyizer.getItems().add("lee");
 		 comboSelectAnalyizer.getItems().add("lior");
+		 
+		 comboSelectExecutionLeader.getItems().add("itay");
+		 comboSelectExecutionLeader.getItems().add("itayz");
+		 comboSelectExecutionLeader.getItems().add("ido");
+		 comboSelectExecutionLeader.getItems().add("raviv");
+		 comboSelectExecutionLeader.getItems().add("lee");
+		 comboSelectExecutionLeader.getItems().add("lior");
 		 
 		 
 		 tableChangeRequest.setRowFactory(tv -> {
@@ -182,6 +196,24 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		txtSystemAutoAppoint.setVisible(true);
 			        		txtHandlerNameAutoAppoint.setVisible(true);
 			        		txtHandlerNameAutoAppoint.setText(myChangerequest.getHandlerUserName());
+			        	}
+			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_LEADEAR_SUPERVISOR_APPOINT"))
+			        	{
+			        		btnExstraDetails.setVisible(true);
+			        		comboSelectExecutionLeader.setVisible(true);
+			        		btnSetExecutionLeader.setVisible(true);	
+			        	}
+			        	else if(myChangerequest.getCurrentStep().equals("ANALYSIS_APPROVE_TIME"))
+			        	{
+			        		btnExstraDetails.setVisible(true);
+			        		btnApproveAnalysisTime.setVisible(true);
+			        		btnDenyAnalysisTime.setVisible(true);
+			        	}
+			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_APPROVE_TIME"))
+			        	{
+			        		btnExstraDetails.setVisible(true);
+			        		btnApproveExecutionTime.setVisible(true);
+			        		btnDenyExecutionTime.setVisible(true);
 			        	}
 			        	
 			        	
@@ -407,6 +439,124 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		Toast.makeText(ProjectFX.mainStage, "Approving Analyzer successfuly", 1500, 500, 500);
 		
 	}
+	
+	
+	  @FXML
+	void clickOnSetExecutionLeader(MouseEvent event)
+	{
+		  if (comboSelectExecutionLeader.getSelectionModel().isEmpty()) 
+				Toast.makeText(ProjectFX.mainStage, "Please select your decision", 1500, 500, 500);
+		  else
+		  { 
+			  myController.UpdateExecutionLeaderBySupervisor(comboSelectExecutionLeader.getSelectionModel().getSelectedItem()
+  				,"EXECUTION_SET_TIME",myChangerequest.getChangeRequestID());
+			  myController.InsertNewExecutionLeaderStep(myChangerequest.getChangeRequestID()
+				,comboSelectExecutionLeader.getSelectionModel().getSelectedItem(),updateStepDate,"ACTIVE");
+		  }
+		  
+	}
+
+
+
+	public void ShowAppointExecutionLeaderSuccess()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Execution Leader Appointment success", 1500, 500, 500);
+	}
+	
+	
+
+    @FXML
+    void clickOnDenyAnalysisTime(MouseEvent event)
+    {
+    	myController.denyAnalysisTime("ANALYSIS_SET_TIME",myChangerequest.getChangeRequestID());
+    	
+    }
+    
+    
+    @FXML
+    void clickOnApproveAnalysisTime(MouseEvent event)
+    {
+    	myController.approvedAnalysisTime("ANALYSIS_WORK",myChangerequest.getChangeRequestID());
+    }
+	
+	
+    public void showDenyAnalysisTime()
+    {
+    	Toast.makeText(ProjectFX.mainStage, "Deny Analysis time approved", 1500, 500, 500);
+		
+	}
+    
+    public void showApproveAnalysisTime()
+    {
+    	
+    	Toast.makeText(ProjectFX.mainStage, "Analysis time approved", 1500, 500, 500);
+		
+	}
+    
+    @FXML
+    void clickOnApproveExecutionTime(MouseEvent event)
+    {
+    	myController.approvedExecutionTime("EXECUTION_WORK",myChangerequest.getChangeRequestID());
+    	
+    }
+    
+    @FXML
+    void clickOnDenyExecutionTime(MouseEvent event)
+    {
+    	myController.denyExecutionTime("EXECUTION_SET_TIME",myChangerequest.getChangeRequestID());
+    	
+    }
+    
+    public void showApproveExecutionTime()
+	{
+    	Toast.makeText(ProjectFX.mainStage,"Execution time approved", 1500, 500, 500);
+		
+	}
+    
+    public void showDenyExecutionTime()
+	{
+    	Toast.makeText(ProjectFX.mainStage,"Execution time Deny", 1500, 500, 500);
+		
+	}
+	
+	
+	
+	
+	public void setVisabilityValse()
+	{
+		 comboSelectAnalyizer.setVisible(false);
+		 comboSelectExecutionLeader.setVisible(false);
+		 btnApproveAppointment.setVisible(false);
+		 btnDenyAppointment.setVisible(false);
+		 btnExstraDetails.setVisible(false);
+		 txtSystemAutoAppoint.setVisible(false);
+		 txtHandlerNameAutoAppoint.setVisible(false);
+		 btnSetAnalyzer.setVisible(false);
+		 btnSetExecutionLeader.setVisible(false);
+		 btnSend.setVisible(false);
+		 txtSendMessageToInitiator.setVisible(false);
+		 btnCloseTheRequest.setVisible(false);
+		 btnApproveAnalysisTime.setVisible(false);
+		 btnDenyAnalysisTime.setVisible(false);
+		 btnApproveExecutionTime.setVisible(false);
+		 btnDenyExecutionTime.setVisible(false);
+	}
+
+
+
+	
+
+
+
+	
+
+
+
+	
+
+
+
+	
 
 
 
