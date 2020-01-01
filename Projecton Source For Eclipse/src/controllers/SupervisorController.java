@@ -83,7 +83,30 @@ public class SupervisorController extends BasicController
 				case UPDATE_STEP_TO_ANALYSIS_SET_TIME:
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.ShowSuccessAproveAppoint();
-					
+					break;
+				case UPDATE_NEW_EXECUTION_LEADER:	
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.ShowAppointExecutionLeaderSuccess();
+					break;
+				case INSERT_NEW_EXECUTION_STEP:
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_ANALYSIS_SET_TIME:
+					myBoundary.showDenyAnalysisTime();
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_ANALYSIS_SET_TIME:	
+					myBoundary.showApproveAnalysisTime();
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_EXECUTION_SET_TIME:
+					myBoundary.showApproveExecutionTime();
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_EXECUTION_SET_TIME:
+					myBoundary.showDenyExecutionTime();
+					this.unsubscribeFromClientDeliveries();
+					break;
 					
 				default:
 					break;
@@ -221,6 +244,89 @@ public class SupervisorController extends BasicController
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 		
+	}
+
+
+
+	public void UpdateExecutionLeaderBySupervisor(String executionLeader,String nextStep, Integer changeRequestID)
+	{
+		
+		ArrayList<Object> varArray = new ArrayList<>();
+		
+		varArray.add(executionLeader);
+		varArray.add(nextStep);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_NEW_EXECUTION_LEADER, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void InsertNewExecutionLeaderStep(Integer changeRequestID, String handlerUserName, Date updateStepDate,
+			String status)
+	{
+		
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		varArray.add(handlerUserName);
+		varArray.add(updateStepDate);
+		varArray.add(status);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_EXECUTION_STEP, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void denyAnalysisTime(String lastStep, Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(lastStep);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_ANALYSIS_SET_TIME, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+		
+	}
+
+
+
+	public void approvedAnalysisTime(String nextStep, Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(nextStep);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_ANALYSIS_SET_TIME, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
+
+
+
+	public void approvedExecutionTime(String nextStep, Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(nextStep);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_EXECUTION_SET_TIME, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void denyExecutionTime(String lastStep, Integer changeRequestID)
+	{
+
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(lastStep);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_EXECUTION_SET_TIME, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
 	

@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.SupervisorBoundary">
    <children>
-      <ImageView fitHeight="568.0" fitWidth="758.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="568.0" fitWidth="873.0" layoutX="1.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@background_image.jpg" />
          </image>
@@ -136,5 +136,10 @@
       <Text fx:id="txtSystemAutoAppoint" layoutX="449.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="151.91162109375" />
       <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="608.0" layoutY="347.0" prefHeight="31.0" prefWidth="115.0" />
       <Button fx:id="btnSetAnalyzer" layoutX="442.0" layoutY="396.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
+      <Button fx:id="btnSetExecutionLeader" layoutX="550.0" layoutY="465.0" mnemonicParsing="false" onMouseClicked="#clickOnSetExecutionLeader" prefHeight="31.0" prefWidth="172.0" text="Set Execution Leader" />
+      <Button fx:id="btnApproveAnalysisTime" layoutX="284.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Analysis Time" />
+      <Button fx:id="btnDenyAnalysisTime" layoutX="219.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" text="Deny Analysis Time" />
+      <Button fx:id="btnDenyExecutionTime" layoutX="557.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" text="Deny Execution Time" />
+      <Button fx:id="btnApproveExecutionTime" layoutX="557.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" text="Approve Execution Time" />
    </children>
 </AnchorPane>
