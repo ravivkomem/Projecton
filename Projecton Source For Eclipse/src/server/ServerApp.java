@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.net.URL;
+
 import assets.ProjectPages;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -35,9 +36,9 @@ public static String[] newargs;
 
 	}
 
-	public static void main(String[] args) {	
-		//( new MysqlConnection()).openConnection();
+	public static void main(String[] args) {
 		newargs=args;
 		launch(args);
+		
 	}
 }
