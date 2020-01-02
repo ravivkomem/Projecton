@@ -190,6 +190,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	myChangerequest = row.getItem();
 			        	if(myChangerequest.getCurrentStep().equals("ANALAYZER_AUTO_APPOINT"))
 			        	{
+			        		setVisabilityValse();
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveAppointment.setVisible(true);
 			        		btnDenyAppointment.setVisible(true);
@@ -199,21 +200,37 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_LEADEAR_SUPERVISOR_APPOINT"))
 			        	{
+			        		setVisabilityValse();
 			        		btnExstraDetails.setVisible(true);
 			        		comboSelectExecutionLeader.setVisible(true);
 			        		btnSetExecutionLeader.setVisible(true);	
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("ANALYSIS_APPROVE_TIME"))
 			        	{
+			        		setVisabilityValse();
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveAnalysisTime.setVisible(true);
 			        		btnDenyAnalysisTime.setVisible(true);
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_APPROVE_TIME"))
 			        	{
+			        		setVisabilityValse();
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveExecutionTime.setVisible(true);
 			        		btnDenyExecutionTime.setVisible(true);
+			        	}
+			        	else if(myChangerequest.getCurrentStep().equals("CLOSING_STEP"))
+			        	{
+			        		setVisabilityValse();
+			        		btnExstraDetails.setVisible(true);
+			        		btnSend.setVisible(true);
+			        		txtSendMessageToInitiator.setVisible(true);
+			        		btnCloseTheRequest.setVisible(true);
+			        	}
+			        	else
+			        	{
+			        		setVisabilityValse();
+			        		btnExstraDetails.setVisible(true);
 			        	}
 			        	
 			        	
@@ -234,6 +251,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickAppointmentFunction(MouseEvent event) 
     {
+    	setVisabilityValse();
     	myController.SelectChangeRequestForAppointments();
     		
     }
@@ -243,7 +261,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickApprovalFunction(MouseEvent event)
     {
-
+    	setVisabilityValse();
     	myController.SelectAllChangeRequestForApprovals();
     	
     }
@@ -262,6 +280,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickClosingStepFunction(MouseEvent event)
     {
+    	setVisabilityValse();
     	myController.SelectAllChangeRequestForClose();
     	
     }
@@ -271,7 +290,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickHomePageFunction(MouseEvent event)       // Return to home page
     {
-    	
+    	setVisabilityValse();
     	if(!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if(!(myAnalysisReportStage == null))
@@ -299,6 +318,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickRequestListFunction(MouseEvent event)
     {
+    	setVisabilityValse();
     	myController.SelectAllChangeRequest();
     		
     }
