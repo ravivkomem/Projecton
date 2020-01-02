@@ -64,8 +64,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			errorText.setVisible(false);
 			employeeUser.setPermission("INFORMATION_ENGINEER");
 			employeeUser.setJobDescription("Information Engineer");
-			myController.updateEmployeePermission("INFORMATION_ENGINEER","Information Engineer",employeeUser.getUserID());
-			techManagerBoundry.setEmployeeListChanges(employeeUser);
+			createPermissionToOneUser(employeeUser);
 			break;
 		case "SUPERVISOR":
 			errorText.setVisible(false);
@@ -75,11 +74,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 					((Node) event.getSource()).getScene().getWindow().hide();
 				}
 			}
-			//Check if this user is committee for give him SUPERVISOR_COMMITTEE permission
-			employeeUser.setPermission("SUPERVISOR");
-			employeeUser.setJobDescription("Supervisor");
-			myController.updateEmployeePermission("SUPERVISOR","Supervisor",employeeUser.getUserID());
-			techManagerBoundry.setEmployeeListChanges(employeeUser);
+			handleSupervisorOneUser(employeeUser);
 			break;
 		case "COMMITTEE_MEMBER":
 			errorText.setVisible(false);
@@ -100,10 +95,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		    	}
 			}
 			else {
-				employeeUser.setPermission("COMMITTEE_MEMBER");
-				employeeUser.setJobDescription("Committee member");
-				myController.updateEmployeePermission("COMMITTEE_MEMBER","Committee member",employeeUser.getUserID());
-				techManagerBoundry.setEmployeeListChanges(employeeUser);
+				handleCommitteeMemberOneUser(employeeUser);
 			}
 			break;
 		case "COMMITTEE_DIRECTOR":
@@ -114,11 +106,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 					((Node) event.getSource()).getScene().getWindow().hide();
 				}
 			}
-			//Check if this user is committee for give him SUPERVISOR_COMMITTEE permission
-			employeeUser.setPermission("COMMITTEE_DIRECTOR");
-			employeeUser.setJobDescription("Committee Director");
-			myController.updateEmployeePermission("COMMITTEE_DIRECTOR","Committee Director",employeeUser.getUserID());
-			techManagerBoundry.setEmployeeListChanges(employeeUser);
+			handleCommitteeDirectorOneUser(employeeUser);
 			break;
 		default:
 			break;
@@ -139,12 +127,17 @@ public class EmployeePermissionBoundary implements DataInitializable{
     			oldMember = u;
     		}
     	}
-		handelCommitteeMember(employeeUser,oldMember);
+		handleCommitteeMember(employeeUser,oldMember);
     }
     
     /* *************************************
 	 * ******* Public Methods *************
 	 * *************************************/
+    
+    private void createPermissionToOneUser(User newUser) {
+    	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
+    	techManagerBoundry.setEmployeeListChanges(newUser);
+    }
     
     /**
      * this method gets to users and change there permission
@@ -158,49 +151,120 @@ public class EmployeePermissionBoundary implements DataInitializable{
     	techManagerBoundry.setEmployeeListChanges(oldUser);
     }
     
+    private void handleCommitteeDirectorOneUser(User newDirector) {
+    	switch (newDirector.getPermission()) {
+    	case "COMMITTEE_MEMBER":
+    		newDirector.setPermission("COMMITTEE_DIRECTOR");
+    		newDirector.setJobDescription("Committee Director");
+			createPermissionToOneUser(newDirector);
+			break;
+    	case "SUPERVISOR":
+    		newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
+    		newDirector.setJobDescription("Supervisor Committee Director");
+        	createPermissionToOneUser(newDirector);
+        	break;
+    	case "SUPERVISOR_COMNITTEE_MEMBER":
+    		newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
+    		newDirector.setJobDescription("Supervisor Committee Director");
+        	createPermissionToOneUser(newDirector);
+        	break;
+    	case "INFORMATION_ENGINEER":
+    		newDirector.setPermission("COMMITTEE_DIRECTOR");
+    		newDirector.setJobDescription("Committee Director");
+			createPermissionToOneUser(newDirector);
+    		break;
+    		
+    	default:
+    		break;
+    	}
+    }
+    
+    /**
+     * this method gives to one user committee member permission
+     * @param newMember
+     */
+    private void handleCommitteeMemberOneUser(User newMember) {
+    	switch (newMember.getPermission()) {
+    	case "COMNITTEE_DIRECTOR":
+    		newMember.setPermission("COMMITTEE_MEMBER");
+        	newMember.setJobDescription("Committee Member");
+        	createPermissionToOneUser(newMember);
+        	break;
+    	case "SUPERVISOR":
+    		newMember.setPermission("SUPERVISOR_COMMITTEE_MEMBER");
+        	newMember.setJobDescription("Supervisor Committee Member");
+        	createPermissionToOneUser(newMember);
+        	break;
+    	case "SUPERVISOR_COMNITTEE_DIRECTOR":
+    		newMember.setPermission("SUPERVISOR_COMMITTEE_MEMBER");
+        	newMember.setJobDescription("Supervisor Committee Member");
+        	createPermissionToOneUser(newMember);
+    		break;
+    	case "INFORMATION_ENGINEER":
+    		newMember.setPermission("COMMITTEE_MEMBER");
+        	newMember.setJobDescription("Committee Member");
+        	createPermissionToOneUser(newMember);
+    		break;
+    	default:
+    		break;
+    	}
+    }
+    
+    /**
+     * this method gives to one user supervisor permission
+     * @param newSupervisor
+     */
+    private void handleSupervisorOneUser(User newSupervisor) {
+    	switch (newSupervisor.getPermission()) {
+    	case "COMNITTEE_DIRECTOR":
+    		newSupervisor.setPermission("SUPERVISOR_COMNITTEE_DIRECTOR");
+    		newSupervisor.setJobDescription("Supervisor Committee Director");
+			createPermissionToOneUser(newSupervisor);
+    		break;
+    	case "COMMITTEE_MEMBER":
+    		newSupervisor.setPermission("SUPERVISOR_COMNITTEE_MEMBER");
+    		newSupervisor.setJobDescription("Supervisor Committee Member");
+			createPermissionToOneUser(newSupervisor);
+			break;
+    	case "INFORMATION_ENGINEER":
+    		newSupervisor.setPermission("INFORMATION_ENGINEER");
+    		newSupervisor.setJobDescription("Information Engineer");
+    		createPermissionToOneUser(newSupervisor);
+    	default:
+    		break;
+    	}	
+    }
+    
     /**
      * this method handle with committee member permission
      * @param newMember
      * @param oldMember
      */
-    private void handelCommitteeMember(User newMember,User oldMember) {
-    	int flag = 0;
+    private void handleCommitteeMember(User newMember,User oldMember) {
+    	//handle newMember
     	if(newMember.getPermission().equals("SUPERVISER")) {
     		newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
     		newMember.setJobDescription("Supervisor Committee Member");
     	} else if(newMember.getPermission().equals("COMMITTEE_DIRECTOR")) {
-    		flag = 1;
     		newMember.setPermission("COMMITTEE_MEMBER");
     		newMember.setJobDescription("Committee Member");
     	} else if(newMember.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
-    		flag = 1;
     		newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
     		newMember.setJobDescription("Supervisor Committee Member");
     	}else {
     		newMember.setPermission("COMMITTEE_MEMBER");
     		newMember.setJobDescription("Committee Member");
     	}
+    	//handle oldMember
     	if(oldMember.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
-    		if(flag==0) {
     			oldMember.setPermission("SUPERVISOR");
     			oldMember.setJobDescription("Supervisor");
-    		}
-    		else {
-    			oldMember.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
-    			oldMember.setJobDescription("Supervisor Committee Director");
-    		}
     	}
     	else {
-    		if(flag==0) {
     			oldMember.setPermission("INFORMATION_ENGINEER");
     			oldMember.setJobDescription("Information Emgineer");
-    		}
-    		else {
-    			oldMember.setPermission("COMMITTEE_DIRECTOR");
-    			oldMember.setJobDescription("Committee Director");
-    		}
     	}
-    	
+    	this.createPermissoinsToUsers(newMember, oldMember);
     }
     
     /**
@@ -244,29 +308,25 @@ public class EmployeePermissionBoundary implements DataInitializable{
      * @param oldSuperVaser
      */
     private void handleCommitteeDirector(User newDirector, User oldDirector) {
-    	int flag=0;
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
         if (result.get() == ButtonType.OK) {
+        	//handle newDirector
 			if (newDirector.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
 				newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
 				newDirector.setJobDescription("Supervisor Committee Director");
-				flag=1;
 			} else if (newDirector.getPermission().equals("SUPERVISER")) {
 				newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
 				newDirector.setJobDescription("Supervisor Committee Director");
 			}else {
 				if(newDirector.getPermission().equals("COMMITTEE_MEMBER"))
-					flag = 1;
 				newDirector.setPermission("COMMITTEE_DIRECTOR");
 				newDirector.setJobDescription("Committee Director");
 			}
+			//handle oldDirector
 			if (oldDirector.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
 				oldDirector.setPermission("SUPERVISER");
 				oldDirector.setJobDescription("Superviser");
-			} else if(flag == 1) {
-				oldDirector.setPermission("COMMITTEE_MEMBER");
-				oldDirector.setJobDescription("Committee Member");
 			}
 			else {
 				oldDirector.setPermission("INFORMATION_ENGINEER");
@@ -291,10 +351,6 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		techManagerBoundry = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
 		employeeNameText.setText("Permission: "+employeeUser.getFirstName()+" "+employeeUser.getLastName());
 		permossionTextField.setText(employeeUser.getPermission());
-		
-//		for(User u: users) {
-//			committeeMemberComboBox.getItems().add(u.getFirstName()+" "+ u.getLastName());
-//		}
 	}
 	
 	/* this method will show the window with the new change request id */
