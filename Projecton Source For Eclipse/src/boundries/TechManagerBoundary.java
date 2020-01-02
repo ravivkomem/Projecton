@@ -194,6 +194,11 @@ public class TechManagerBoundary implements DataInitializable{
     	for(int i=0;i<users.size();i++) {
 			if(users.get(i).getUserID() == employeeUser.getUserID()) {
 				users.set(i, employeeUser);
+				userNameTextField.setText("");
+	            emailTextField.setText("");
+	            positionTextField.setText("");
+	            numberTextField.setText("");
+	            departmentTextField.setText("");
 				return;
 			}
 		}
@@ -215,7 +220,7 @@ public class TechManagerBoundary implements DataInitializable{
 		.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("desiredChangeDescription"));
 		subsystemColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
 		
-		EmployeeNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("userName"));
+		EmployeeNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fullName"));
 		
 		employeeListTable.setRowFactory(tv -> {
 		    TableRow<User> row = new TableRow<>();

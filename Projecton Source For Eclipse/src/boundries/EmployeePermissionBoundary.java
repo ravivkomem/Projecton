@@ -337,6 +337,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		permossionTextField.setEditable(false);
 		newPremissionComboBox.getItems().add("INFORMATION_ENGINEER");
 		newPremissionComboBox.getItems().add("SUPERVISOR");
 		newPremissionComboBox.getItems().add("COMMITTEE_MEMBER");

@@ -124,7 +124,7 @@
             <TextField fx:id="numberTextField" layoutX="305.0" layoutY="241.0" />
             <TextField fx:id="departmentTextField" layoutX="305.0" layoutY="279.0" />
             <Text layoutX="228.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
-            <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="View Permissions" />
+            <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="Edit Permissions" />
          </children>
       </AnchorPane>
       <TableView fx:id="requestListTable" layoutX="187.0" layoutY="149.0" prefHeight="277.0" prefWidth="493.0">
