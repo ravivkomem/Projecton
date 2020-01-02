@@ -320,7 +320,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
-    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
+    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'"
+    			+ "OR JobDescription = 'Supervisor Committee Director' Or JobDescription = 'Supervisor Committee Member'";
     	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
     			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
     			+ "VALUES (?,?)";
