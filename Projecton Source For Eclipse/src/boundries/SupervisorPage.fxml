@@ -121,13 +121,13 @@
       <ComboBox fx:id="comboSelectAnalyizer" layoutX="188.0" layoutY="299.0" onMouseClicked="#clickOnSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="select  analyizer" />
       <Button fx:id="btnApproveAppointment" layoutX="461.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" text="Approve" />
       <Button fx:id="btnDenyAppointment" layoutX="379.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="deny" />
-      <TableView fx:id="tableChangeRequest" layoutX="188.0" layoutY="68.0" prefHeight="200.0" prefWidth="478.0">
+      <TableView fx:id="tableChangeRequest" layoutX="177.0" layoutY="68.0" prefHeight="200.0" prefWidth="545.0">
          <columns>
-            <TableColumn fx:id="tableColumnRequestID" prefWidth="86.0" text="Request ID" />
-            <TableColumn fx:id="tableColumnStatus" prefWidth="87.0" text="Status" />
-            <TableColumn fx:id="tableColumnDescription" prefWidth="91.0" text="Description " />
-            <TableColumn fx:id="tableColumnSubSystem" prefWidth="85.0" text="SubSystem" />
-            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="128.0" text="CurrentStep" />
+            <TableColumn fx:id="tableColumnRequestID" prefWidth="100.0" text="Request ID" />
+            <TableColumn fx:id="tableColumnStatus" prefWidth="96.0" text="Status" />
+            <TableColumn fx:id="tableColumnDescription" prefWidth="115.00006103515625" text="Description " />
+            <TableColumn fx:id="tableColumnSubSystem" prefWidth="91.0" text="SubSystem" />
+            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="162.0" text="CurrentStep" />
          </columns>
       </TableView>
       <Button fx:id="btnCloseTheRequest" layoutX="309.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" text="Close the request " />
@@ -141,5 +141,7 @@
       <Button fx:id="btnDenyAnalysisTime" layoutX="219.0" layoutY="403.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" text="Deny Analysis Time" />
       <Button fx:id="btnDenyExecutionTime" layoutX="557.0" layoutY="512.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" text="Deny Execution Time" />
       <Button fx:id="btnApproveExecutionTime" layoutX="557.0" layoutY="547.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" text="Approve Execution Time" />
+      <Button fx:id="btnSuspend" layoutX="69.0" layoutY="497.0" mnemonicParsing="false" onMouseClicked="#clickOnSuspend" text="Suspend" />
+      <Button fx:id="btnUnsuspend" layoutX="75.0" layoutY="532.0" mnemonicParsing="false" onMouseClicked="#clickOnUnsuspend" text="Unsuspend" />
    </children>
 </AnchorPane>
