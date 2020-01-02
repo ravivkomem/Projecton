@@ -320,7 +320,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
-    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'";
+    			+ "OR JobDescription = 'Committee member' OR JobDescription = 'Committee Director'"
+    			+ "OR JobDescription = 'Supervisor Committee Director' Or JobDescription = 'Supervisor Committee Member'";
     	sqlArray[SqlQueryType.INSERT_NEW_FILE.getCode()] =
     			"INSERT INTO icm.file(ChangeRequestID,FileEnding) "
     			+ "VALUES (?,?)";
@@ -428,6 +429,12 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_APPROVE_EXECUTION_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
     	
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_EXECUTION_SET_TIME.getCode()] = "UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_SUSPENDED.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     }
     
 }

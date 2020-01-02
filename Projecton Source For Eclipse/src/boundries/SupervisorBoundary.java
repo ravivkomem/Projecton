@@ -105,6 +105,15 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     private Button btnApproveExecutionTime;
     
     
+    @FXML
+    private Button btnSuspend;
+    
+
+    @FXML
+    private Button btnUnsuspend;
+
+    
+    
     
     
     @FXML
@@ -166,21 +175,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 
 		 myController.SelectAllChangeRequest();
 		 
-		 
-		 comboSelectAnalyizer.getItems().add("itay");
-		 comboSelectAnalyizer.getItems().add("itayz");
-		 comboSelectAnalyizer.getItems().add("ido");
-		 comboSelectAnalyizer.getItems().add("raviv");
-		 comboSelectAnalyizer.getItems().add("lee");
-		 comboSelectAnalyizer.getItems().add("lior");
-		 
-		 comboSelectExecutionLeader.getItems().add("itay");
-		 comboSelectExecutionLeader.getItems().add("itayz");
-		 comboSelectExecutionLeader.getItems().add("ido");
-		 comboSelectExecutionLeader.getItems().add("raviv");
-		 comboSelectExecutionLeader.getItems().add("lee");
-		 comboSelectExecutionLeader.getItems().add("lior");
-		 
+		 setComboBoxUsers1();
 		 
 		 tableChangeRequest.setRowFactory(tv -> {
 			    TableRow<ChangeRequest> row = new TableRow<>();
@@ -190,30 +185,123 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	myChangerequest = row.getItem();
 			        	if(myChangerequest.getCurrentStep().equals("ANALAYZER_AUTO_APPOINT"))
 			        	{
+			        		if(myChangerequest.getStatus().equals("Active"))
+			        		{	
+			        		setVisabilityValse();
+			        		btnSuspend.setVisible(true);
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveAppointment.setVisible(true);
 			        		btnDenyAppointment.setVisible(true);
 			        		txtSystemAutoAppoint.setVisible(true);
 			        		txtHandlerNameAutoAppoint.setVisible(true);
 			        		txtHandlerNameAutoAppoint.setText(myChangerequest.getHandlerUserName());
+			        		}
+			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		{
+			        		setVisabilityValse();
+			        		btnExstraDetails.setVisible(true);
+			        		btnUnsuspend.setVisible(true);
+			        		}
+			        		else
+			        		{
+			        			setVisabilityValse();
+			        			btnExstraDetails.setVisible(true);
+			        		}
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_LEADEAR_SUPERVISOR_APPOINT"))
 			        	{
+			        		if(myChangerequest.getStatus().equals("Active"))
+			        		{	
+			        		setVisabilityValse();
+			        		btnSuspend.setVisible(true);
 			        		btnExstraDetails.setVisible(true);
 			        		comboSelectExecutionLeader.setVisible(true);
 			        		btnSetExecutionLeader.setVisible(true);	
+			        		}
+			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		{
+			        			setVisabilityValse();
+			        			btnExstraDetails.setVisible(true);
+			        			btnUnsuspend.setVisible(true);
+			        		}
+			        		else
+			        		{
+			        			setVisabilityValse();
+			        			btnExstraDetails.setVisible(true);
+			        		}
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("ANALYSIS_APPROVE_TIME"))
 			        	{
+			        		if(myChangerequest.getStatus().equals("Active"))
+			        		{	
+			        		setVisabilityValse();
 			        		btnExstraDetails.setVisible(true);
+			        		btnSuspend.setVisible(true);
 			        		btnApproveAnalysisTime.setVisible(true);
 			        		btnDenyAnalysisTime.setVisible(true);
+			        		}
+			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		{
+			        			setVisabilityValse();
+				        		btnExstraDetails.setVisible(true);
+				        		btnUnsuspend.setVisible(true);
+			        		}
+			        		else
+			        		{
+			        			setVisabilityValse();
+				        		btnExstraDetails.setVisible(true);
+			        		}
+			        		
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_APPROVE_TIME"))
 			        	{
+			        		if(myChangerequest.getStatus().equals("Active"))
+			        		{	
+			        		setVisabilityValse();
+			        		btnSuspend.setVisible(true);
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveExecutionTime.setVisible(true);
 			        		btnDenyExecutionTime.setVisible(true);
+			        		}
+			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
+			        		{
+			        			setVisabilityValse();
+				        		btnUnsuspend.setVisible(true);
+				        		btnExstraDetails.setVisible(true);
+			        		}
+			        		else
+			        		{
+			        			setVisabilityValse();
+			        			btnExstraDetails.setVisible(true);
+			        		}
+			        	}
+			        	else if(myChangerequest.getCurrentStep().equals("CLOSING_STEP"))
+			        	{
+			        		setVisabilityValse();
+			        		btnExstraDetails.setVisible(true);
+			        		btnSend.setVisible(true);
+			        		txtSendMessageToInitiator.setVisible(true);
+			        		btnCloseTheRequest.setVisible(true);
+			        	}
+			        	else
+			        	{
+			        		if(myChangerequest.getStatus().equals("Active"))
+			        		{	
+			        		setVisabilityValse();
+			        		btnSuspend.setVisible(true);
+			        		btnExstraDetails.setVisible(true);
+			        		}
+			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
+			        		{
+			        			setVisabilityValse();
+			        			btnExstraDetails.setVisible(true);
+			        			btnUnsuspend.setVisible(true);
+			        		}
+			        		else
+			        		{
+			        			setVisabilityValse();
+			        			btnExstraDetails.setVisible(true);
+			        		}
 			        	}
 			        	
 			        	
@@ -228,12 +316,25 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 
 		
 	}
+	
+	
+	
+	public void SetComboBox2(ArrayList<String> employees)
+	{
+		for(int i=0;i<employees.size();i++)
+		{
+			comboSelectAnalyizer.getItems().add(employees.get(i));
+			comboSelectExecutionLeader.getItems().add(employees.get(i));
+		}
+			
+	}
 
 	
 	
     @FXML
     void ClickAppointmentFunction(MouseEvent event) 
     {
+    	setVisabilityValse();
     	myController.SelectChangeRequestForAppointments();
     		
     }
@@ -243,7 +344,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickApprovalFunction(MouseEvent event)
     {
-
+    	setVisabilityValse();
     	myController.SelectAllChangeRequestForApprovals();
     	
     }
@@ -253,15 +354,27 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickBackFunction(MouseEvent event)
     {
-
+    	
+    	if(!(myTimeExtensionStage == null))
+			myTimeExtensionStage.close();
+		if(!(myAnalysisReportStage == null))
+			myAnalysisReportStage.close();
+		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     	
     }
+    
+    void setComboBoxUsers1()
+    {
+    	myController.setComboBox();
+    }
+    
 
     
     
     @FXML
     void ClickClosingStepFunction(MouseEvent event)
     {
+    	setVisabilityValse();
     	myController.SelectAllChangeRequestForClose();
     	
     }
@@ -271,7 +384,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickHomePageFunction(MouseEvent event)       // Return to home page
     {
-    	
+    	setVisabilityValse();
     	if(!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if(!(myAnalysisReportStage == null))
@@ -299,6 +412,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     @FXML
     void ClickRequestListFunction(MouseEvent event)
     {
+    	setVisabilityValse();
     	myController.SelectAllChangeRequest();
     		
     }
@@ -395,7 +509,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void clickOnCloseRequest(MouseEvent event)
     {
 
-    	
+    	myController.setStatusToClosed("CLOSED",myChangerequest.getChangeRequestID());
     	
     }
     
@@ -411,34 +525,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
 
 
-	public void ShowAnalyzerSupervisorAppointToast(int affectedRows)
-	{
-		if(affectedRows==1)
-		Toast.makeText(ProjectFX.mainStage, "Please Set an Analyzer", 1500, 500, 500);
-		else
-			Toast.makeText(ProjectFX.mainStage, "Problam in update current step", 1500, 500, 500);
-	}
 
 
 
-	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
-	{
-		if(affectedRows2==1)
-			Toast.makeText(ProjectFX.mainStage, "Your Analyzer Appoint Approved", 1500, 500, 500);
-		else
-			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);
-			
-			
-		
-	}
 
-
-
-	public void ShowSuccessAproveAppoint()
-	{
-		Toast.makeText(ProjectFX.mainStage, "Approving Analyzer successfuly", 1500, 500, 500);
-		
-	}
 	
 	
 	  @FXML
@@ -458,11 +548,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
 
 
-	public void ShowAppointExecutionLeaderSuccess()
-	{
-		Toast.makeText(ProjectFX.mainStage, "Execution Leader Appointment success", 1500, 500, 500);
-	}
-	
+
 	
 
     @FXML
@@ -480,19 +566,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }
 	
 	
-    public void showDenyAnalysisTime()
-    {
-    	Toast.makeText(ProjectFX.mainStage, "Deny Analysis time approved", 1500, 500, 500);
-		
-	}
-    
-    public void showApproveAnalysisTime()
-    {
-    	
-    	Toast.makeText(ProjectFX.mainStage, "Analysis time approved", 1500, 500, 500);
-		
-	}
-    
+
     @FXML
     void clickOnApproveExecutionTime(MouseEvent event)
     {
@@ -505,25 +579,19 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     {
     	myController.denyExecutionTime("EXECUTION_SET_TIME",myChangerequest.getChangeRequestID());
     	
-    }
+    }  
     
-    public void showApproveExecutionTime()
-	{
-    	Toast.makeText(ProjectFX.mainStage,"Execution time approved", 1500, 500, 500);
-		
-	}
     
-    public void showDenyExecutionTime()
+    
+    
+    
+    
+    
+    
+    public void setVisabilityValse()
 	{
-    	Toast.makeText(ProjectFX.mainStage,"Execution time Deny", 1500, 500, 500);
-		
-	}
-	
-	
-	
-	
-	public void setVisabilityValse()
-	{
+		 btnSuspend.setVisible(false);
+		 btnUnsuspend.setVisible(false);
 		 comboSelectAnalyizer.setVisible(false);
 		 comboSelectExecutionLeader.setVisible(false);
 		 btnApproveAppointment.setVisible(false);
@@ -541,6 +609,121 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 btnApproveExecutionTime.setVisible(false);
 		 btnDenyExecutionTime.setVisible(false);
 	}
+    
+    //**********************************TOASTS*************************************************//
+    
+    
+    
+	public void ShowAppointExecutionLeaderSuccess()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Execution Leader Appointment success", 1500, 500, 500);
+	}
+	
+    
+	
+	public void ShowSuccessAproveAppoint()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Approving Analyzer successfuly", 1500, 500, 500);
+		
+	}
+    
+    public void showDenyAnalysisTime()
+    {
+    	Toast.makeText(ProjectFX.mainStage, "Deny Analysis time approved", 1500, 500, 500);
+		
+	}
+    
+    public void showApproveAnalysisTime()
+    {
+    	
+    	Toast.makeText(ProjectFX.mainStage, "Analysis time approved", 1500, 500, 500);
+		
+	}
+    
+    public void showApproveExecutionTime()
+	{
+    	Toast.makeText(ProjectFX.mainStage,"Execution time approved", 1500, 500, 500);
+		
+	}
+    
+    public void showDenyExecutionTime()
+	{
+    	Toast.makeText(ProjectFX.mainStage,"Execution time Deny", 1500, 500, 500);
+		
+	}
+    
+    
+    @FXML
+    void clickOnSuspend(MouseEvent event)
+    {
+    	myController.suspendChangeRequest("SUSPENDED",myChangerequest.getChangeRequestID());
+    	
+    }
+    
+    
+
+    @FXML
+    void clickOnUnsuspend(MouseEvent event)
+    {
+
+    	myController.unsuspendChangeRequest("Active",myChangerequest.getChangeRequestID());
+    }
+    
+    
+	public void showChangeRequestSuspended()
+	{
+		Toast.makeText(ProjectFX.mainStage,"Change Request is Suspended", 1500, 500, 500);
+		
+	}
+
+
+
+	public void showChangeRequestUnsuspended()
+	{
+		Toast.makeText(ProjectFX.mainStage,"Change Request is Active", 1500, 500, 500);
+		
+	}
+	
+	
+	
+	public void showChangeRequestClosed()
+	{
+
+		Toast.makeText(ProjectFX.mainStage,"Change Request is Closed", 1500, 500, 500);
+		
+	}
+
+	
+	
+	public void ShowAnalyzerSupervisorAppointToast(int affectedRows)
+	{
+		if(affectedRows==1)
+		Toast.makeText(ProjectFX.mainStage, "Please Set an Analyzer", 1500, 500, 500);
+		else
+			Toast.makeText(ProjectFX.mainStage, "Problam in update current step", 1500, 500, 500);
+	}
+
+
+
+	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
+	{
+		if(affectedRows2==1)
+			Toast.makeText(ProjectFX.mainStage, "Your Analyzer Appoint Approved", 1500, 500, 500);
+		else
+			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);	
+	}
+
+	
+	
+	
+	
+
+
+
+
+
+
+
 
 
 

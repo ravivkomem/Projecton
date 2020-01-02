@@ -1,7 +1,10 @@
 package boundries;
 
 import java.awt.Desktop;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -105,10 +108,18 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	public void displayFile(MyFile downloadedFile) {
 		
 		System.out.println(downloadedFile.getFileName());
+		
+		byte [] mybytearray  = new byte [(int)downloadedFile.getFileName().length()];
+		downloadedFile.initArray(mybytearray.length);
+		downloadedFile.setSize(mybytearray.length);
+	      
 		try (FileOutputStream fileOuputStream = new FileOutputStream("R:\\temp.jpg"))
 		 {
 			 fileOuputStream.write(downloadedFile.getMybytearray());
 			 uploadedFile = new File("R:\\temp.jpg");
+			 
+			 FileOutputStream fos = new FileOutputStream (uploadedFile);
+			 BufferedOutputStream bos = new BufferedOutputStream (fos);
 			 
 			 if(!Desktop.isDesktopSupported()){
 		            System.out.println("Desktop is not supported");

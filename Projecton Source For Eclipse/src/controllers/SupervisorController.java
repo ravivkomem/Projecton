@@ -107,6 +107,24 @@ public class SupervisorController extends BasicController
 					myBoundary.showDenyExecutionTime();
 					this.unsubscribeFromClientDeliveries();
 					break;
+				case UPDATE_CHANGE_REQUEST_STATUS_TO_SUSPENDED:
+					myBoundary.showChangeRequestSuspended();
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE:
+					myBoundary.showChangeRequestUnsuspended();
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case SELECT_ALL_EMPLOYEE:
+					ArrayList<String> employees;
+					employees = this.createArrayListOfUserName(result);
+					myBoundary.SetComboBox2(employees);
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED:
+					myBoundary.showChangeRequestClosed();
+					this.unsubscribeFromClientDeliveries();
+					break;
 					
 				default:
 					break;
@@ -116,6 +134,19 @@ public class SupervisorController extends BasicController
 		return;
 		
 	}
+
+
+	private ArrayList<String> createArrayListOfUserName(SqlResult result)
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		for(ArrayList<Object> user : result.getResultData())
+		{
+			res.add((String)user.get(1));
+		}
+		return res;
+		
+	}
+
 
 
 	private ArrayList<ChangeRequest> changeResultToChangerequest(SqlResult result)     // method that filter result into change requests
@@ -327,6 +358,56 @@ public class SupervisorController extends BasicController
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STEP_AFTER_DENY_EXECUTION_SET_TIME, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void suspendChangeRequest(String newStatus,Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newStatus);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_SUSPENDED, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+		
+	}
+
+
+
+	public void unsuspendChangeRequest(String newStatus, Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newStatus);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
+
+
+
+	public void setComboBox()
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+
+
+	public void setStatusToClosed(String newStatus, Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newStatus);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
 	}
 	
 	
