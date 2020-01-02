@@ -119,7 +119,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private Text changeRequestNoText;
 
-	private AnalysisReportBoundary analysisReportBoundary = new AnalysisReportBoundary();
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
 	private Step committeeStep;

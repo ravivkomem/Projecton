@@ -173,7 +173,6 @@ public class EmployeePermissionBoundary implements DataInitializable{
     		newDirector.setJobDescription("Committee Director");
 			createPermissionToOneUser(newDirector);
     		break;
-    		
     	default:
     		break;
     	}
