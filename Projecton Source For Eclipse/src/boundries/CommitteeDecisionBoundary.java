@@ -340,6 +340,14 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		switch (ProjectFX.currentUser.getPermission()) {
 		case "COMMITTEE_MEMBER":
 			break;
+		case "SUPERVISER_COMMITTEE_MEMBER":
+			break;
+		case "SUPERVISER_COMMITTEE_DIRECTOR":
+			btnCommitteeDirector.setVisible(true);
+			btnTimeExtension.setVisible(true);
+			image3point1.setVisible(true);
+			image3point2.setVisible(true);
+			break;
 		case "COMMITTEE_DIRECTOR":
 			btnCommitteeDirector.setVisible(true);
 			btnTimeExtension.setVisible(true);
