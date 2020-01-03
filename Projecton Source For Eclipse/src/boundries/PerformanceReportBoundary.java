@@ -85,7 +85,7 @@ public class PerformanceReportBoundary implements Initializable {
 				case EXECUTION:
 					executionDaysCounter += extensionDays;
 					break;
-				case TESTEING:
+				case TESTING:
 					testingDaysCounter += extensionDays;
 					break;
 				default:
@@ -127,7 +127,7 @@ public class PerformanceReportBoundary implements Initializable {
 				case EXECUTION:
 					executionDaysCounter += additionalDays;
 					break;
-				case TESTEING:
+				case TESTING:
 					testingDaysCounter += additionalDays;
 					break;
 				default:

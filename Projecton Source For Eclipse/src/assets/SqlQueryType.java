@@ -8,12 +8,15 @@ package assets;
 public enum SqlQueryType {
 
 	/* *****************************************
+	 * ********** Common Queries ****************
+	 * *****************************************/
+	UPDATE_CHANGE_REQUEST_CURRENT_STEP(SqlExecutionType.UPDATE_QUERY),
+	
+	/* *****************************************
 	 * ********** Login Queries ****************
 	 * *****************************************/
 	VERIFY_LOGIN(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_USER_LOGIN_STATUS(SqlExecutionType.UPDATE_QUERY),
-	
-	SELECT_ALL_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********** Analyzer Queries ****************
@@ -29,11 +32,16 @@ public enum SqlQueryType {
 	SELECT_COMMENTS_BY_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	INSERT_NEW_COMMITTEE_COMMENT(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_COMMITTEE_STEP(SqlExecutionType.UPDATE_QUERY),
-	UPDATE_CHANGE_REQUEST_CURRENT_STEP(SqlExecutionType.UPDATE_QUERY),
 	INSERT_NEW_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
 	SELECT_COMMITTEE_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
-	SELECT_TESTER_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_COMMITTEE_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
+	
+	/* *****************************************
+	 * ********** Tester Queries ****************
+	 * *****************************************/
+	UPDATE_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
+	SELECT_TESTER_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********Tech Manager Queries*************
@@ -49,7 +57,7 @@ public enum SqlQueryType {
 	//Delay Report
 	SELECT_DATES_FROM_ALL_STEPS(SqlExecutionType.EXECUTE_QUERY),
 	
-	UPDATE_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
+	
 	SELECT_ALL_INFROMATION_ENGINEERS(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************

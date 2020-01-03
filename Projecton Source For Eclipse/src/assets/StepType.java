@@ -6,7 +6,7 @@ public enum StepType {
 	ANALYSIS("Analysis"),
 	COMMITTEE("Committee"),
 	EXECUTION("Execution"),
-	TESTEING("Testing"),
+	TESTING("Testing"),
 	CLOSING("Closing");
 	
 	private String name;

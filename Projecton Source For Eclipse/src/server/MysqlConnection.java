@@ -145,10 +145,10 @@ public class MysqlConnection {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	
     	/* *****************************************************
-		 * *************** General Queries ****************
+		 * *************** Common Queries ****************
 		 * *****************************************************/
-    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
-    			"SELECT * FROM icm.change_request";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
+    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     	
     	/* *****************************************************
 		 * *************** Login Queries ****************
@@ -162,13 +162,10 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP.getCode()]=
                 "UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestID = ?";
-
         sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME.getCode()]=
                 "UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
-
         sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE.getCode()]=
                 "UPDATE icm.analysis_step SET EstimatedEndDate = ? WHERE ChangeRequestID = ?";
-
         sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE.getCode()]=
                 "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
  
@@ -217,7 +214,6 @@ public class MysqlConnection {
     	/* *****************************************************
 		 * *************** Tester Queries **************
 		 * *****************************************************/
-    	
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
     			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
@@ -228,6 +224,10 @@ public class MysqlConnection {
 		sqlArray[SqlQueryType.SELECT_TESTER_STEP_START_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY TesterStepId DESC LIMIT 1";
+		sqlArray[SqlQueryType.SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID.getCode()] = 
+				"SELECT TesterStepID, ChangeRequestID, HanlderUserName, StartDate, Status, EstimatedEndDate, EndDate"
+				+ " FROM icm.tester_step WHERE ChangeRequestID = ?"
+		     	+ " ORDER BY TesterStepID DESC LIMIT 1";
 		
 		
 		/* *****************************************************
@@ -254,8 +254,6 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
-    			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
