@@ -1,6 +1,7 @@
 package boundries;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -111,6 +112,15 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
     @FXML
     private Button btnUnsuspend;
+    
+    @FXML
+    private TextField txtFieldEstimatedTime;
+
+    @FXML
+    private Text txtExecutionEstimatedTime;
+
+    @FXML
+    private Text txtAnalysisEstimatedTime;
 
     
     
@@ -239,6 +249,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		btnSuspend.setVisible(true);
 			        		btnApproveAnalysisTime.setVisible(true);
 			        		btnDenyAnalysisTime.setVisible(true);
+			        		txtAnalysisEstimatedTime.setVisible(true);
+			        		txtFieldEstimatedTime.setVisible(true);
+			        		myController.getAnalysisEstimatedDate(myChangerequest.getChangeRequestID());
+			        		
+			        		
 			        		}
 			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
 			        		{
@@ -255,6 +270,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_APPROVE_TIME"))
 			        	{
+			        		
+			   
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{	
 			        		setVisabilityValse();
@@ -262,6 +279,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		btnExstraDetails.setVisible(true);
 			        		btnApproveExecutionTime.setVisible(true);
 			        		btnDenyExecutionTime.setVisible(true);
+			        		txtExecutionEstimatedTime.setVisible(true);
+			        		txtFieldEstimatedTime.setVisible(true);
+			        		myController.getExecutionEstimatedDate(myChangerequest.getChangeRequestID());
+			        		
+			        		
 			        		}
 			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
 			        		{
@@ -583,13 +605,30 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
     
     
-    
+	public void getExecutionEndDate(Date res)
+	{
+		
+		txtFieldEstimatedTime.setText(res.toString());
+		
+	}
+
+
+
+	public void getAnalysisEndDate(Date res2)
+	{
+		
+		txtFieldEstimatedTime.setText(res2.toString());
+		
+	}
     
     
     
     
     public void setVisabilityValse()
 	{
+    	 txtAnalysisEstimatedTime.setVisible(false);
+    	 txtExecutionEstimatedTime.setVisible(false);
+    	 txtFieldEstimatedTime.setVisible(false);
 		 btnSuspend.setVisible(false);
 		 btnUnsuspend.setVisible(false);
 		 comboSelectAnalyizer.setVisible(false);
@@ -712,6 +751,14 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		else
 			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);	
 	}
+
+
+
+
+
+
+
+
 
 	
 	

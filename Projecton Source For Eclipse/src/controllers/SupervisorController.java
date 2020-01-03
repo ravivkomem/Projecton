@@ -125,6 +125,16 @@ public class SupervisorController extends BasicController
 					myBoundary.showChangeRequestClosed();
 					this.unsubscribeFromClientDeliveries();
 					break;
+				case SELECT_EXECUTION_ESTIMATED_DATE:
+					Date res = (Date)result.getResultData().get(0).get(0);
+					myBoundary.getExecutionEndDate(res);
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case SELECT_ANALYSIS_ESTIMATED_DATE:
+					Date res2 = (Date)result.getResultData().get(0).get(0);
+					myBoundary.getAnalysisEndDate(res2);
+					this.unsubscribeFromClientDeliveries();
+					break;
 					
 				default:
 					break;
@@ -405,6 +415,31 @@ public class SupervisorController extends BasicController
 		varArray.add(newStatus);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
+
+
+
+	public void getExecutionEstimatedDate(Integer changeRequestID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_EXECUTION_ESTIMATED_DATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
+
+
+
+	public void getAnalysisEstimatedDate(Integer changeRequestID)
+	{
+	
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 		
