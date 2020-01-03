@@ -124,6 +124,13 @@ public enum SqlQueryType {
 	SELECT_EXECUTION_ESTIMATED_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ANALYSIS_ESTIMATED_DATE(SqlExecutionType.EXECUTE_QUERY),
 	
+	/* *****************************************
+	 * ********Time Watcher Queries*************
+	 * *****************************************/
+	GET_ALL_STEPS_ONE_DAY_REMAINING(SqlExecutionType.EXECUTE_QUERY),
+	GET_ALL_STEPS_TIME_PASSED_TODAY(SqlExecutionType.EXECUTE_QUERY),
+	GET_HIGH_MANGEMENT_MAILS(SqlExecutionType.EXECUTE_QUERY),
+	GET_USER_EMAIL(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */

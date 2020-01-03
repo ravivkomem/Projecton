@@ -38,7 +38,14 @@ public static String[] newargs;
 
 	public static void main(String[] args) {
 		newargs=args;
+		initTimeWatcher();
 		launch(args);
-		
 	}
+
+	private static void initTimeWatcher() {
+		Thread t = new Thread(new TimeWatcher());
+		t.start();
+	}
+	
+	
 }

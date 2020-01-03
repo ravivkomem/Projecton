@@ -443,6 +443,24 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.analysis_step" +
 						" WHERE ChangeRequestID = ?";
+    	
+    	/* *****************************************************
+		 * ************* Time Watcher Queries ****************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.GET_ALL_STEPS_ONE_DAY_REMAINING.getCode()] =
+    			"SELECT * FROM icm.mergred_steps "
+    			+ "WHERE datediff(EstimatedEndDate, now()) = 1 AND "
+    			+ "STATUS = 'Active';";
+    	sqlArray[SqlQueryType.GET_USER_EMAIL.getCode()] =
+    			"SELECT Email FROM icm.user "
+    			+ "WHERE UserName = ?";
+    	sqlArray[SqlQueryType.GET_ALL_STEPS_TIME_PASSED_TODAY.getCode()] =
+    			"SELECT * FROM icm.mergred_steps "
+    			+ "WHERE datediff(EstimatedEndDate, now()) = 0 AND "
+    			+ "STATUS = 'Active';";
+    	sqlArray[SqlQueryType.GET_HIGH_MANGEMENT_MAILS.getCode()] =
+    			"SELECT Email From icm.user "
+    			+ "WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD';";
     }
     
 }

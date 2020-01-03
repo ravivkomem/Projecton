@@ -1,7 +1,10 @@
 package entities;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
+import assets.SqlResult;
 import assets.StepType;
 
 /** 
@@ -108,5 +111,39 @@ public class Step {
 	}
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+	
+	public static Collection<Step> parseSqlResultToStepCollection(SqlResult sqlResult) {
+		ArrayList<Step> stepList = new ArrayList<Step>();
+		try
+		{
+			for (ArrayList<Object> resultRow : sqlResult.getResultData())
+			{
+				String stepType = (String) resultRow.get(0);
+				int stepID = (int) resultRow.get(1);
+				int changeRequestID = (int) resultRow.get(2);
+				String handlerUserName = (String) resultRow.get(3);
+				Date startDate = (Date) resultRow.get(4);
+				String status = (String) resultRow.get(5);
+				Date estimatedEndDate = (Date) resultRow.get(6);
+				Date endDate = (Date) resultRow.get(7);
+				
+				StepType currentType = StepType.ERROR;
+				for (StepType type : StepType.values())
+				{
+					if (type.getStepName().equals(stepType))
+						currentType = type;
+				}
+				
+				Step currentStep = new Step(currentType, stepID, changeRequestID, handlerUserName,
+						startDate, status, estimatedEndDate, endDate);
+				stepList.add(currentStep);
+			}
+			return stepList;
+		}
+		catch (Exception e)
+		{
+			return new ArrayList<Step>();
+		}
 	}
 }

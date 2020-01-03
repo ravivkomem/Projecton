@@ -14,6 +14,12 @@ public class SqlAction implements Serializable
 		this.actionVars = actionVars;
 	}
 	
+	public SqlAction(SqlQueryType actionType)
+	{
+		this.actionType = actionType;
+		actionVars = new ArrayList<Object>();
+	}
+	
 	public SqlQueryType getActionType() {
 		return actionType;
 	}

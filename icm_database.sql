@@ -64,7 +64,7 @@ CREATE TABLE `analysis_step` (
   `AnalysisReportConstraints` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,6 +73,7 @@ CREATE TABLE `analysis_step` (
 
 LOCK TABLES `analysis_step` WRITE;
 /*!40000 ALTER TABLE `analysis_step` DISABLE KEYS */;
+INSERT INTO `analysis_step` VALUES (1,2,'Lior','2019-09-17','ACTIVE','2020-01-03',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `analysis_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -99,7 +100,7 @@ CREATE TABLE `change_request` (
   PRIMARY KEY (`ChangeRequestID`),
   UNIQUE KEY `ChangeRequestID_UNIQUE` (`ChangeRequestID`),
   KEY `UserName_idx` (`InitiatorUserName`,`HandlerUserName`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +109,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Active','ANALYSIS_WORK','lior',NULL),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Active','TESTING_WORK','lior',NULL),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','Active','ANALAYZER_AUTO_APPOINT','itayz',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','lior',NULL);
+INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Denied','ANALYSIS_WORK','lior','2021-12-19'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Close','TESTING_WORK','lior','2021-12-19'),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','Active','ANALAYZER_AUTO_APPOINT','itayz',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','lior',NULL),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','Active','ANALAYZER_AUTO_APPOINT','itay',NULL);
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +154,7 @@ CREATE TABLE `committee_comment` (
   `comment` varchar(45) NOT NULL,
   PRIMARY KEY (`commentId`),
   UNIQUE KEY `commentId_UNIQUE` (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +163,7 @@ CREATE TABLE `committee_comment` (
 
 LOCK TABLES `committee_comment` WRITE;
 /*!40000 ALTER TABLE `committee_comment` DISABLE KEYS */;
-INSERT INTO `committee_comment` VALUES (1,75,'itayz','blabla');
+INSERT INTO `committee_comment` VALUES (1,75,'itayz','blabla'),(2,75,'ido','fsddsfdsf');
 /*!40000 ALTER TABLE `committee_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,7 +239,7 @@ CREATE TABLE `file` (
   `FileEnding` varchar(45) NOT NULL,
   PRIMARY KEY (`FileID`),
   UNIQUE KEY `FileID_UNIQUE` (`FileID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,9 +248,28 @@ CREATE TABLE `file` (
 
 LOCK TABLES `file` WRITE;
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
-INSERT INTO `file` VALUES (1,'79','jpg'),(2,'80','png');
+INSERT INTO `file` VALUES (1,'79','jpg'),(2,'80','png'),(3,'81','jpg');
 /*!40000 ALTER TABLE `file` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary view structure for view `mergred_steps`
+--
+
+DROP TABLE IF EXISTS `mergred_steps`;
+/*!50001 DROP VIEW IF EXISTS `mergred_steps`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `mergred_steps` AS SELECT 
+ 1 AS `StepType`,
+ 1 AS `AnalysisStepID`,
+ 1 AS `ChangeRequestID`,
+ 1 AS `HandlerUserName`,
+ 1 AS `StartDate`,
+ 1 AS `Status`,
+ 1 AS `EstimatedEndDate`,
+ 1 AS `EndDate`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Temporary view structure for view `repeating_analysis`
@@ -448,9 +468,27 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','liorkauffman@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',1),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',0);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','ravivravivraviv@gmail.com','Software Engineering','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid22@gmail.com','Industrial Engineering','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi93@gmail.com','Mathmatics','MATAM','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Electricity','Committee member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Electricity','Committee director','COMMITTEE_DIRECTOR','3333333333',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `mergred_steps`
+--
+
+/*!50001 DROP VIEW IF EXISTS `mergred_steps`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `mergred_steps` AS select 'Analysis' AS `StepType`,`a`.`AnalysisStepID` AS `AnalysisStepID`,`a`.`ChangeRequestID` AS `ChangeRequestID`,`a`.`HandlerUserName` AS `HandlerUserName`,`a`.`StartDate` AS `StartDate`,`a`.`Status` AS `Status`,`a`.`EstimatedEndDate` AS `EstimatedEndDate`,`a`.`EndDate` AS `EndDate` from `analysis_step` `a` union select 'Committee' AS `StepType`,`c`.`CommitteeStepId` AS `CommitteeStepID`,`c`.`ChangeRequestId` AS `ChangeRequestID`,`c`.`HandlerUserName` AS `HandlerUserName`,`c`.`StartDate` AS `StartDate`,`c`.`Status` AS `Status`,`c`.`EstimatedEndDate` AS `EstimatedEndDate`,`c`.`EndDate` AS `EndDate` from `committee_step` `c` union select 'Execution' AS `StepType`,`e`.`ExecutionStepID` AS `ExecutionStepID`,`e`.`ChangeRequestID` AS `ChangeRequestID`,`e`.`HandlerUserName` AS `HandlerUserName`,`e`.`StartDate` AS `StartDate`,`e`.`Status` AS `Status`,`e`.`EstimatedEndDate` AS `EstimatedEndDate`,`e`.`EndDate` AS `EndDate` from `execution_step` `e` union select 'Tester' AS `StepType`,`t`.`TesterStepId` AS `TesterStepId`,`t`.`ChangeRequestId` AS `ChangeRequestID`,`t`.`HandlerUserName` AS `HandlerUserName`,`t`.`StartDate` AS `StartDate`,`t`.`Status` AS `Status`,`t`.`EstimatedEndDate` AS `EstimatedEndDate`,`t`.`EndDate` AS `EndDate` from `tester_step` `t` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
 -- Final view structure for view `repeating_analysis`
@@ -533,4 +571,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-29  0:07:25
+-- Dump completed on 2020-01-03 11:09:14
