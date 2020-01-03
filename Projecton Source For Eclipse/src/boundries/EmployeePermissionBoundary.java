@@ -152,6 +152,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     private void handleCommitteeDirectorOneUser(User newDirector) {
+    	Optional<ButtonType> result;
     	switch (newDirector.getPermission()) {
     	case "COMMITTEE_MEMBER":
     		newDirector.setPermission("COMMITTEE_DIRECTOR");
@@ -159,13 +160,27 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			createPermissionToOneUser(newDirector);
 			break;
     	case "SUPERVISOR":
-    		newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
-    		newDirector.setJobDescription("Supervisor Committee Director");
+    		result=popUpWindowMessage(AlertType.CONFIRMATION, "The user is supervisor", 
+    				"Do you want to add the permission?");
+			if (result.get() == ButtonType.OK) {
+				newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Supervisor Committee Director");
+			} else {
+				newDirector.setPermission("COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Committee Director");
+			}
         	createPermissionToOneUser(newDirector);
         	break;
     	case "SUPERVISOR_COMNITTEE_MEMBER":
-    		newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
-    		newDirector.setJobDescription("Supervisor Committee Director");
+    		result=popUpWindowMessage(AlertType.CONFIRMATION, "The user is supervisor Committee Member", 
+    				"Do you want to add the permission?");
+			if (result.get() == ButtonType.OK) {
+				newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Supervisor Committee Director");
+			} else {
+				newDirector.setPermission("COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Committee Director");
+			}
         	createPermissionToOneUser(newDirector);
         	break;
     	case "INFORMATION_ENGINEER":
@@ -183,6 +198,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
      * @param newMember
      */
     private void handleCommitteeMemberOneUser(User newMember) {
+    	Optional<ButtonType> result;
     	switch (newMember.getPermission()) {
     	case "COMNITTEE_DIRECTOR":
     		newMember.setPermission("COMMITTEE_MEMBER");
@@ -190,13 +206,27 @@ public class EmployeePermissionBoundary implements DataInitializable{
         	createPermissionToOneUser(newMember);
         	break;
     	case "SUPERVISOR":
-    		newMember.setPermission("SUPERVISOR_COMMITTEE_MEMBER");
-        	newMember.setJobDescription("Supervisor Committee Member");
+    		result=popUpWindowMessage(AlertType.CONFIRMATION, "The user is supervisor", 
+    				"Do you want to add the permission?");
+    		if (result.get() == ButtonType.OK) {
+    			newMember.setPermission("SUPERVISOR_COMMITTEE_MEMBER");
+    			newMember.setJobDescription("Supervisor Committee Member");
+    		} else {
+    			newMember.setPermission("COMMITTEE_MEMBER");
+            	newMember.setJobDescription("Committee Member");
+    		}
         	createPermissionToOneUser(newMember);
         	break;
     	case "SUPERVISOR_COMNITTEE_DIRECTOR":
-    		newMember.setPermission("SUPERVISOR_COMMITTEE_MEMBER");
-        	newMember.setJobDescription("Supervisor Committee Member");
+    		result=popUpWindowMessage(AlertType.CONFIRMATION, "The user is supervisor Committee Director", 
+    				"Do you want to add the permission?");
+    		if (result.get() == ButtonType.OK) {
+    			newMember.setPermission("SUPERVISOR_COMMITTEE_MEMBER");
+    			newMember.setJobDescription("Supervisor Committee Member");
+    		} else {
+    			newMember.setPermission("COMMITTEE_MEMBER");
+            	newMember.setJobDescription("Committee Member");
+    		}
         	createPermissionToOneUser(newMember);
     		break;
     	case "INFORMATION_ENGINEER":
@@ -214,24 +244,39 @@ public class EmployeePermissionBoundary implements DataInitializable{
      * @param newSupervisor
      */
     private void handleSupervisorOneUser(User newSupervisor) {
-    	switch (newSupervisor.getPermission()) {
-    	case "COMNITTEE_DIRECTOR":
-    		newSupervisor.setPermission("SUPERVISOR_COMNITTEE_DIRECTOR");
-    		newSupervisor.setJobDescription("Supervisor Committee Director");
-			createPermissionToOneUser(newSupervisor);
-    		break;
-    	case "COMMITTEE_MEMBER":
-    		newSupervisor.setPermission("SUPERVISOR_COMNITTEE_MEMBER");
-    		newSupervisor.setJobDescription("Supervisor Committee Member");
+    	Optional<ButtonType> result;
+		switch (newSupervisor.getPermission()) {
+		case "COMNITTEE_DIRECTOR":
+			result = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Committee Director",
+					"Do you want to add the permission?");
+			if (result.get() == ButtonType.OK) {
+				newSupervisor.setPermission("SUPERVISOR_COMNITTEE_DIRECTOR");
+				newSupervisor.setJobDescription("Supervisor Committee Director");
+			} else {
+				newSupervisor.setPermission("SUPERVISOR");
+				newSupervisor.setJobDescription("Supervisor Engineer");
+			}
 			createPermissionToOneUser(newSupervisor);
 			break;
-    	case "INFORMATION_ENGINEER":
-    		newSupervisor.setPermission("INFORMATION_ENGINEER");
-    		newSupervisor.setJobDescription("Information Engineer");
-    		createPermissionToOneUser(newSupervisor);
-    	default:
-    		break;
-    	}	
+		case "COMMITTEE_MEMBER":
+			result = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Committee Member",
+					"Do you want to add the permission?");
+			if (result.get() == ButtonType.OK) {
+				newSupervisor.setPermission("SUPERVISOR_COMNITTEE_MEMBER");
+				newSupervisor.setJobDescription("Supervisor Committee Member");
+			} else {
+				newSupervisor.setPermission("SUPERVISOR");
+				newSupervisor.setJobDescription("Supervisor Engineer");
+			}
+			createPermissionToOneUser(newSupervisor);
+			break;
+		case "INFORMATION_ENGINEER":
+			newSupervisor.setPermission("SUPERVISOR");
+			newSupervisor.setJobDescription("Supervisor Engineer");
+			createPermissionToOneUser(newSupervisor);
+		default:
+			break;
+		}	
     }
     
     /**
@@ -241,19 +286,41 @@ public class EmployeePermissionBoundary implements DataInitializable{
      */
     private void handleCommitteeMember(User newMember,User oldMember) {
     	//handle newMember
-    	if(newMember.getPermission().equals("SUPERVISER")) {
-    		newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
-    		newMember.setJobDescription("Supervisor Committee Member");
-    	} else if(newMember.getPermission().equals("COMMITTEE_DIRECTOR")) {
+    	Optional<ButtonType> result;
+    	switch (newMember.getPermission()) {
+    	case "SUPERVISER":
+    		result = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Supervisor", 
+    				"Do you want to add the permission?");
+    		if (result.get() == ButtonType.OK) {
+    			newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
+        		newMember.setJobDescription("Supervisor Committee Member");
+    		} else {
+    			newMember.setPermission("COMMITTEE_MEMBER");
+        		newMember.setJobDescription("Committee Member");
+    		}
+    		break;
+    	case "COMMITTEE_DIRECTOR":
     		newMember.setPermission("COMMITTEE_MEMBER");
     		newMember.setJobDescription("Committee Member");
-    	} else if(newMember.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
-    		newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
-    		newMember.setJobDescription("Supervisor Committee Member");
-    	}else {
+    		break;
+    	case "SUPERVISER_COMMITTEE_DIRECTOR":
+    		result = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Supervisor Committee Director", 
+    				"Do you want to add the permission?");
+    		if (result.get() == ButtonType.OK) {
+    			newMember.setPermission("SUPERVISER_COMMITTEE_MEMBER");
+        		newMember.setJobDescription("Supervisor Committee Member");
+    		} else {
+    			newMember.setPermission("COMMITTEE_MEMBER");
+        		newMember.setJobDescription("Committee Member");
+    		}
+    	case "INFORMATION_ENGINEER":
     		newMember.setPermission("COMMITTEE_MEMBER");
     		newMember.setJobDescription("Committee Member");
+    		break;
+    	default:
+    		break;
     	}
+    	
     	//handle oldMember
     	if(oldMember.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
     			oldMember.setPermission("SUPERVISOR");
@@ -276,16 +343,40 @@ public class EmployeePermissionBoundary implements DataInitializable{
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
 		if (result.get() == ButtonType.OK) {
-			if (newSupervisor.getPermission().equals("COMMITTEE_MEMBER")) {
-				newSupervisor.setPermission("SUPERVISER_COMMITTEE_MEMBER");
-				newSupervisor.setJobDescription("Supervisor Committee Member");
-			} else if (newSupervisor.getPermission().equals("COMMITTEE_DIRECTOR")) {
-				newSupervisor.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
-				newSupervisor.setJobDescription("Supervisor Committee Director");
-			} else {
+			Optional<ButtonType> rs;
+			
+			//handle newSupervisor
+			switch (newSupervisor.getPermission()) {
+			case "COMMITTEE_MEMBER":
+				rs = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Committee Member", 
+	    				"Do you want to add the permission?");
+	    		if (result.get() == ButtonType.OK) {
+	    			newSupervisor.setPermission("SUPERVISER_COMMITTEE_MEMBER");
+					newSupervisor.setJobDescription("Supervisor Committee Member");
+	    		} else {
+	    			newSupervisor.setPermission("SUPERVISOR");
+					newSupervisor.setJobDescription("Supervisor");
+	    		}
+			case "COMMITTEE_DIRECTOR":
+				rs = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Committee Director", 
+	    				"Do you want to add the permission?");
+	    		if (result.get() == ButtonType.OK) {
+	    			newSupervisor.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+					newSupervisor.setJobDescription("Supervisor Committee Director");
+	    		} else {
+	    			newSupervisor.setPermission("SUPERVISOR");
+					newSupervisor.setJobDescription("Supervisor");
+	    		}
+				break;
+			case "INFORMATION_ENGINEER":
 				newSupervisor.setPermission("SUPERVISOR");
 				newSupervisor.setJobDescription("Supervisor");
+				break;
+			default:
+				break;
 			}
+
+			//handle oldSupervisor
 			if (oldSupervisor.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
 				oldSupervisor.setPermission("COMMITTEE_MEMBER");
 				oldSupervisor.setJobDescription("Committee Member");
@@ -310,18 +401,43 @@ public class EmployeePermissionBoundary implements DataInitializable{
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
         		+ "user with supervisor permission\nDo you want to replace?");
         if (result.get() == ButtonType.OK) {
+        	Optional<ButtonType> rs;
+        	
         	//handle newDirector
-			if (newDirector.getPermission().equals("SUPERVISER_COMMITTEE_MEMBER")) {
-				newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
-				newDirector.setJobDescription("Supervisor Committee Director");
-			} else if (newDirector.getPermission().equals("SUPERVISER")) {
-				newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
-				newDirector.setJobDescription("Supervisor Committee Director");
-			}else {
-				if(newDirector.getPermission().equals("COMMITTEE_MEMBER"))
+			switch (newDirector.getPermission()) {
+			case "SUPERVISER":
+				rs = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Supervisor",
+						"Do you want to add the permission?");
+				if (result.get() == ButtonType.OK) {
+					newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+					newDirector.setJobDescription("Supervisor Committee Director");
+				} else {
+					newDirector.setPermission("COMMITTEE_DIRECTOR");
+					newDirector.setJobDescription("Committee Director");
+				}
+				break;
+			case "SUPERVISER_COMMITTEE_MEMBER":
+				rs = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Supervisor Committee Member",
+						"Do you want to add the permission?");
+				if (result.get() == ButtonType.OK) {
+					newDirector.setPermission("SUPERVISER_COMMITTEE_DIRECTOR");
+					newDirector.setJobDescription("Supervisor Committee Director");
+				} else {
+					newDirector.setPermission("COMMITTEE_DIRECTOR");
+					newDirector.setJobDescription("Committee Director");
+				}
+				break;
+			case "COMMITTEE_MEMBER":
 				newDirector.setPermission("COMMITTEE_DIRECTOR");
 				newDirector.setJobDescription("Committee Director");
+				break;
+			case "INFORMATION_ENGINEER":
+				newDirector.setPermission("COMMITTEE_DIRECTOR");
+				newDirector.setJobDescription("Committee Director");
+			default:
+				break;
 			}
+			
 			//handle oldDirector
 			if (oldDirector.getPermission().equals("SUPERVISER_COMMITTEE_DIRECTOR")) {
 				oldDirector.setPermission("SUPERVISER");

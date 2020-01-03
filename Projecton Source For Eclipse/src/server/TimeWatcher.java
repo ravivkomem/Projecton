@@ -2,9 +2,11 @@ package server;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 
 import assets.EmailTLS;
+import assets.MessagesCreator;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
@@ -20,6 +22,8 @@ public class TimeWatcher implements Runnable {
 	private Collection<Step> timePassedSteps;
 	private Collection<String> highMangementMails;
 	
+	private static final long MILLIES_DELAY_TIME_BETWEEN_EMAILS = 7000;
+	
 	@Override
 	public void run() {
 		/* Initialize all the private objects */
@@ -32,25 +36,56 @@ public class TimeWatcher implements Runnable {
 		lastDayWatch = TimeManager.getCurrentDate();
 		
 		/* Start work horse */
-		//for(;;)
-		//{
+		for(;;)
+		{
 			sleepUntilNextDay();
 			getStepsWithOneDayRemaining();
 			getStepsWithTimeException();
 			getHighMangementMails();
-			sendMails();
-		//}
+			//sendMails();
+		}
 	}
 	
 	private void sleepUntilNextDay() {
-		// TODO Auto-generated method stub
-//		Calendar c = Calendar.getInstance();
-//        c.add(Calendar.DAY_OF_MONTH, 1);
-//        c.set(Calendar.HOUR_OF_DAY, 0);
-//        c.set(Calendar.MINUTE, 0);
-//        c.set(Calendar.SECOND, 0);
-//        c.set(Calendar.MILLISECOND, 0);
-//        long howMany = (c.getTimeInMillis()-System.currentTimeMillis());
+		
+		Calendar c = Calendar.getInstance();
+        c.add(Calendar.DAY_OF_MONTH, 1);
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        long milliesUntilMidnight = (c.getTimeInMillis()-System.currentTimeMillis());
+        System.out.println("Time Watcher - Going to sleep " + milliesUntilMidnight + " millisecond until midnight");
+        
+        /*Check */
+        try
+        {
+        	Thread.sleep(MILLIES_DELAY_TIME_BETWEEN_EMAILS);
+        }
+        catch (Exception e)
+        {}
+        System.out.println("The compare to value is: "+ lastDayWatch.compareTo(TimeManager.getCurrentDate()));
+        
+        try
+        {
+        	Thread.sleep(milliesUntilMidnight);
+        	/* Sleep was successful */
+        	lastDayWatch = TimeManager.getCurrentDate();
+        	System.out.println("Time Watcher - I just woke up, starting to check time deviations");
+        }
+        catch (Exception e)
+        {
+        	if (lastDayWatch.compareTo(TimeManager.getCurrentDate()) == 0)
+        	{
+        		/* Exception was caught and the date did not change */
+        		sleepUntilNextDay();
+        	}
+        	else
+        	{
+        		lastDayWatch = TimeManager.getCurrentDate();
+            	System.out.println("Time Watcher - I just woke up, starting to check time deviations");
+        	}
+        }
 		
 	}
 
@@ -99,11 +134,13 @@ public class TimeWatcher implements Runnable {
 		for (Step s : oneDayRemainingSteps)
 		{
 			String emailAddress = getEmailAddressOfUser(s.getHandlerUserName());
-			emailTLS.sendMessage(emailAddress, "Notification - One day remainin", "Dear " + s.getHandlerUserName()+"\n your work is due in one day");
+			String fullName = getFullNameOfUser(s.getHandlerUserName());
+			String message = MessagesCreator.lastDayMsg(s, fullName);
+			emailTLS.sendMessage(emailAddress, "Notification - One day remainin", message);
 			/* Gmail emails are limited to 10 per minute */
 			try 
 			{
-				Thread.sleep(700);
+				Thread.sleep(MILLIES_DELAY_TIME_BETWEEN_EMAILS);
 			}
 			catch (Exception e)
 			{
@@ -116,11 +153,13 @@ public class TimeWatcher implements Runnable {
 		for (Step s : timePassedSteps)
 		{
 			String emailAddress = getEmailAddressOfUser(s.getHandlerUserName());
-			emailTLS.sendMessage(emailAddress, highMangementMails, "Notification - TimePassed", "Dear " + s.getHandlerUserName()+"\n Your work time has passed!!!\n All supervisors will be notified");
+			String fullName = getFullNameOfUser(s.getHandlerUserName());
+			String message = MessagesCreator.lastDayMsg(s, fullName);
+			emailTLS.sendMessage(emailAddress, highMangementMails, "Notification - TimePassed", message);
 			/* Gmail emails are limited to 10 per minute */
 			try 
 			{
-				Thread.sleep(700);
+				Thread.sleep(MILLIES_DELAY_TIME_BETWEEN_EMAILS);
 			}
 			catch (Exception e)
 			{
@@ -130,14 +169,27 @@ public class TimeWatcher implements Runnable {
 		
 	}
 
-	private String getEmailAddressOfUser(String handlerUserName) {
+	private String getEmailAddressOfUser(String userName) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
-		varArray.add(handlerUserName);
+		varArray.add(userName);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_USER_EMAIL, varArray);
 		SqlResult sqlResult = sqlConnection.getResult(sqlAction);
 		
 		return (String)sqlResult.getResultData().get(0).get(0);
 	}
 	
+	private String getFullNameOfUser(String userName)
+	{
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add(userName);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_USER_FULL_NAME, varArray);
+		SqlResult sqlResult = sqlConnection.getResult(sqlAction);
+		
+		String firstName = (String)sqlResult.getResultData().get(0).get(0);
+		String lastName = (String)sqlResult.getResultData().get(0).get(1);
+		String fullName = firstName + " " + lastName;
+		
+		return fullName;
+	}
 
 }

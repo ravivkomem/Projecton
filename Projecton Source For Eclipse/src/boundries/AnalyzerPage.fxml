@@ -25,7 +25,7 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <Button layoutX="665.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: #2196F3;" text="log out">
+      <Button fx:id="logoutButton" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#LogOut" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,7 +37,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button layoutX="31.0" layoutY="558.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="backButton" layoutX="31.0" layoutY="558.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
       <VBox alignment="TOP_CENTER" prefHeight="425.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +45,7 @@
                   <Image url="@icm%20icom%20til.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSell1" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSellOnClick" prefHeight="79.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="homepageButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="79.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -59,7 +59,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnStore" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnStoreOnClick" prefHeight="76.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request Details" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="requestdetailsButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadRequestDetails" prefHeight="76.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request Details" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -73,7 +73,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnEmplopye" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnEmplopyeOnClick" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Create a Report">
+            <Button fx:id="createreportButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadCreateReport" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Create a Report">
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +87,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSettings" contentDisplay="TOP" mnemonicParsing="false" onAction="#btnSettingsOnClick" prefHeight="87.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+            <Button fx:id="timeextensionButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadTimeExtensionPage" prefHeight="87.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -103,23 +103,43 @@
             </ImageView>
          </children>
       </VBox>
-      <TableView layoutX="191.0" layoutY="95.0" prefHeight="270.0" prefWidth="429.0" visible="false">
+      <TableView fx:id="tableView" layoutX="194.0" layoutY="157.0" prefHeight="69.0" prefWidth="429.0">
          <columns>
-            <TableColumn text="Request ID" />
-            <TableColumn prefWidth="96.0" text="Status" />
-            <TableColumn prefWidth="136.0" text="Description " />
-            <TableColumn prefWidth="116.0" text="SubSystem" />
+            <TableColumn fx:id="requestIdColumn" text="Request ID" />
+            <TableColumn fx:id="stepColumn" prefWidth="96.0" text="Step" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="136.0" text="Description " />
+            <TableColumn fx:id="subsystemColumn" prefWidth="116.0" text="SubSystem" />
          </columns>
       </TableView>
-      <Text layoutX="155.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
-      <Text layoutX="155.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advantages:" />
-      <Text layoutX="155.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constraints:" />
-      <TextField alignment="TOP_LEFT" layoutX="259.0" layoutY="180.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
-      <TextField alignment="TOP_LEFT" layoutX="259.0" layoutY="304.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
-      <TextField alignment="TOP_LEFT" layoutX="259.0" layoutY="423.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
-      <Text layoutX="450.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set time duration:" />
-      <DatePicker layoutX="555.0" layoutY="119.0" promptText="dd/mm/yyyy" />
-      <ComboBox layoutX="259.0" layoutY="119.0" prefHeight="25.0" prefWidth="168.0" promptText="- select subsystem - " />
-      <Text layoutX="155.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub System:" />
+      <AnchorPane fx:id="createReportPane" layoutX="143.0" layoutY="89.0" prefHeight="509.0" prefWidth="603.0" visible="false">
+         <children>
+            <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
+            <TextField fx:id="descriptiontextField" alignment="TOP_LEFT" layoutX="116.0" layoutY="95.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
+            <Text layoutX="14.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constraints:" />
+            <TextField fx:id="advantagestextField" alignment="TOP_LEFT" layoutX="116.0" layoutY="211.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
+            <Text layoutX="13.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advantages:" />
+            <TextField fx:id="constraintstextField" alignment="TOP_LEFT" layoutX="116.0" layoutY="341.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
+            <Text layoutX="310.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set time duration:" />
+            <ComboBox fx:id="subsystemComboBox" layoutX="116.0" layoutY="25.0" prefHeight="25.0" prefWidth="168.0" promptText="- select subsystem - " />
+            <Text layoutX="13.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sub System:" />
+            <Button fx:id="submitButton" layoutX="498.0" layoutY="429.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
+         </children>
+      </AnchorPane>
+      <Text fx:id="pageHeaderText" layoutX="275.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on change request No. XX" wrappingWidth="332.00000508129597">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <AnchorPane fx:id="datePane" layoutX="316.0" layoutY="244.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <DatePicker fx:id="timedurationPicker" layoutX="13.0" layoutY="14.0" promptText="dd/mm/yyyy" />
+            <Button fx:id="dateButton" layoutX="69.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#setDate" text="Approve" />
+         </children>
+      </AnchorPane>
+      <Text fx:id="notificationText" layoutX="188.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The requested date is examined by the supervisor..." wrappingWidth="455.13671875">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

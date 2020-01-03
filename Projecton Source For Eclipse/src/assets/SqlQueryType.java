@@ -16,6 +16,14 @@ public enum SqlQueryType {
 	SELECT_ALL_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
+	 * ********** Analyzer Queries ****************
+	 * *****************************************/
+	UPDATE_ANALYSIS_STEP_CLOSE(SqlExecutionType.UPDATE_QUERY),
+	UPDATE_ANALYSIS_STEP_ESTIMATED_DATE(SqlExecutionType.UPDATE_QUERY),
+	UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME(SqlExecutionType.UPDATE_QUERY),
+	UPDATE_CHANGE_REQUEST_CURRENTSTEP(SqlExecutionType.UPDATE_QUERY),
+	
+	/* *****************************************
 	 * ********** Committee Queries ****************
 	 * *****************************************/
 	SELECT_COMMENTS_BY_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
@@ -131,6 +139,7 @@ public enum SqlQueryType {
 	GET_ALL_STEPS_TIME_PASSED_TODAY(SqlExecutionType.EXECUTE_QUERY),
 	GET_HIGH_MANGEMENT_MAILS(SqlExecutionType.EXECUTE_QUERY),
 	GET_USER_EMAIL(SqlExecutionType.EXECUTE_QUERY),
+	GET_USER_FULL_NAME(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
