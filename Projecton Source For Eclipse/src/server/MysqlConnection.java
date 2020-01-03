@@ -157,6 +157,20 @@ public class MysqlConnection {
     			+ "WHERE UserName = ? AND Password = ?";
     	sqlArray[SqlQueryType.UPDATE_USER_LOGIN_STATUS.getCode()] = "UPDATE icm.user "
     			+ "SET isLogged = ? WHERE UserID = ?";
+    	/* *****************************************************
+		 * ***************Analyzer Queries ****************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP.getCode()]=
+                "UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestID = ?";
+
+        sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME.getCode()]=
+                "UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
+
+        sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE.getCode()]=
+                "UPDATE icm.analysis_step SET EstimatedEndDate = ? WHERE ChangeRequestID = ?";
+
+        sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE.getCode()]=
+                "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
  
     	/* *****************************************************
 		 * *************** Work Station Queries ****************

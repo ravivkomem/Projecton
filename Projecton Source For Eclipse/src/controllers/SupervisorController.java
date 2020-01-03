@@ -132,7 +132,7 @@ public class SupervisorController extends BasicController
 					break;
 				case SELECT_ANALYSIS_ESTIMATED_DATE:
 					Date res2 = (Date)result.getResultData().get(0).get(0);
-					myBoundary.getAnalysisEndDate(res2);
+					myBoundary.getExecutionEndDate(res2);
 					this.unsubscribeFromClientDeliveries();
 					break;
 					

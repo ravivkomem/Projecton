@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.SupervisorController;
+import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.Step;
 import javafx.collections.FXCollections;
@@ -607,7 +608,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
 	public void getExecutionEndDate(Date res)
 	{
-		
+		res = TimeManager.addDays(res, 1);
 		txtFieldEstimatedTime.setText(res.toString());
 		
 	}
@@ -616,7 +617,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
 	public void getAnalysisEndDate(Date res2)
 	{
-		
+		res2 = TimeManager.addDays(res2, 1);
 		txtFieldEstimatedTime.setText(res2.toString());
 		
 	}

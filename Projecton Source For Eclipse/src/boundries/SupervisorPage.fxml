@@ -130,9 +130,9 @@
             <TableColumn fx:id="tableColumnCurrentStep" prefWidth="162.0" text="CurrentStep" />
          </columns>
       </TableView>
-      <Button fx:id="btnCloseTheRequest" layoutX="374.0" layoutY="537.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" text="Close the request " />
-      <Button fx:id="btnSend" layoutX="488.0" layoutY="487.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" text="send" />
-      <TextField fx:id="txtSendMessageToInitiator" layoutX="256.0" layoutY="487.0" promptText="send message to initiator" />
+      <Button fx:id="btnCloseTheRequest" layoutX="377.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" text="Close the request " />
+      <Button fx:id="btnSend" layoutX="488.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" text="send" />
+      <TextField fx:id="txtSendMessageToInitiator" layoutX="260.0" layoutY="337.0" prefHeight="83.0" prefWidth="187.0" promptText="send message to initiator" />
       <Text fx:id="txtSystemAutoAppoint" layoutX="514.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="86.91162109375" />
       <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="608.0" layoutY="342.0" prefHeight="31.0" prefWidth="115.0" />
       <Button fx:id="btnSetAnalyzer" layoutX="386.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
