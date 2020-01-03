@@ -131,6 +131,7 @@ public enum SqlQueryType {
 	GET_ALL_STEPS_TIME_PASSED_TODAY(SqlExecutionType.EXECUTE_QUERY),
 	GET_HIGH_MANGEMENT_MAILS(SqlExecutionType.EXECUTE_QUERY),
 	GET_USER_EMAIL(SqlExecutionType.EXECUTE_QUERY),
+	GET_USER_FULL_NAME(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
