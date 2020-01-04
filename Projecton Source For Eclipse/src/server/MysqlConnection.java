@@ -221,11 +221,8 @@ public class MysqlConnection {
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
 		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
 				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
-		sqlArray[SqlQueryType.SELECT_TESTER_STEP_START_DATE.getCode()] = 
-				"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestId = ?"
-				+ " ORDER BY TesterStepId DESC LIMIT 1";
 		sqlArray[SqlQueryType.SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID.getCode()] = 
-				"SELECT TesterStepID, ChangeRequestID, HanlderUserName, StartDate, Status, EstimatedEndDate, EndDate"
+				"SELECT TesterStepID, ChangeRequestID, HandlerUserName, StartDate, Status, EstimatedEndDate, EndDate"
 				+ " FROM icm.tester_step WHERE ChangeRequestID = ?"
 		     	+ " ORDER BY TesterStepID DESC LIMIT 1";
 		

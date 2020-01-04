@@ -15,11 +15,6 @@
             <Image url="@background_image.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="reportPageTitle" layoutX="185.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="30.66668701171875">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Text>
       <Text layoutX="42.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
       <Text layoutX="42.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subsystem:" />
       <Text layoutX="42.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
@@ -38,5 +33,10 @@
       <Text fx:id="durationTxt" layoutX="109.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text fx:id="subsystemTxt" layoutX="120.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Button fx:id="btnClosePage" layoutX="583.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#closingPage" text="close" />
+      <Text fx:id="reportPageTitle" layoutX="101.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Page Title">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

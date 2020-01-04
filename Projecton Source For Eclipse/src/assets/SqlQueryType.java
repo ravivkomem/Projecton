@@ -40,7 +40,6 @@ public enum SqlQueryType {
 	 * ********** Tester Queries ****************
 	 * *****************************************/
 	UPDATE_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
-	SELECT_TESTER_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************

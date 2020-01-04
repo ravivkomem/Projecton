@@ -24,7 +24,6 @@
          </font>
       </Text>
       <Button fx:id="backButton" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
-      <Button fx:id="setButton" layoutX="358.0" layoutY="207.0" mnemonicParsing="false" onMouseClicked="#setTest" text="set" />
       <Button fx:id="logoutButton" layoutX="651.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#LogOut" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -37,8 +36,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Text layoutX="334.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test Results" wrappingWidth="91.33593446016312" />
-      <Text fx:id="timeDisplayText" layoutX="557.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
       <VBox alignment="TOP_CENTER" prefHeight="332.0" prefWidth="127.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
@@ -74,7 +71,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="timeextensionButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadTimeExtensionPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="timeExtensionButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadTimeExtensionPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -90,8 +87,6 @@
             </ImageView>
          </children>
       </VBox>
-      <TextArea fx:id="timeremainingField" layoutX="563.0" layoutY="141.0" prefHeight="43.0" prefWidth="79.0" />
-      <ComboBox fx:id="testapprovalComboBox" layoutX="278.0" layoutY="172.0" prefHeight="25.0" prefWidth="176.0" promptText="- select your decision -" />
       <AnchorPane fx:id="FailDetailsPane" layoutX="244.0" layoutY="232.0" prefHeight="200.0" prefWidth="270.0">
          <children>
             <Text layoutX="83.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Failure details:" wrappingWidth="148.9999933987856" />
@@ -104,5 +99,14 @@
             <Font size="19.0" />
          </font>
       </Text>
+      <AnchorPane fx:id="testWorkPane" layoutX="76.0" layoutY="117.0" prefHeight="200.0" prefWidth="654.0">
+         <children>
+            <ComboBox fx:id="testapprovalComboBox" layoutX="205.0" layoutY="47.0" prefHeight="25.0" prefWidth="176.0" promptText="- select your decision -" />
+            <Text layoutX="261.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Test Results" wrappingWidth="91.33593446016312" />
+            <Button fx:id="setButton" layoutX="277.0" layoutY="88.0" mnemonicParsing="false" onMouseClicked="#setTest" text="set" />
+            <Text fx:id="timeDisplayText" layoutX="545.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
+            <TextArea fx:id="timeremainingField" layoutX="551.0" layoutY="38.0" prefHeight="43.0" prefWidth="79.0" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

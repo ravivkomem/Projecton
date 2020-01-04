@@ -64,7 +64,7 @@ CREATE TABLE `analysis_step` (
   `AnalysisReportConstraints` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `analysis_step` (
 
 LOCK TABLES `analysis_step` WRITE;
 /*!40000 ALTER TABLE `analysis_step` DISABLE KEYS */;
-INSERT INTO `analysis_step` VALUES (1,2,'Lior','2019-09-17','ACTIVE','2020-01-03',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `analysis_step` VALUES (1,2,'Lior','2019-09-17','ACTIVE','2020-01-03',NULL,NULL,NULL,NULL,NULL,NULL),(2,71,'Ido','2019-09-17','ACTIVE','2020-01-01','2020-01-01','Good','You need to change function X','It will decrease the run time','20 days','Make sure to do impact analysis');
 /*!40000 ALTER TABLE `analysis_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -394,7 +394,7 @@ CREATE TABLE `tester_step` (
   `EndDate` date DEFAULT NULL,
   PRIMARY KEY (`TesterStepId`),
   UNIQUE KEY `TesterStepId_UNIQUE` (`TesterStepId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -403,7 +403,7 @@ CREATE TABLE `tester_step` (
 
 LOCK TABLES `tester_step` WRITE;
 /*!40000 ALTER TABLE `tester_step` DISABLE KEYS */;
-INSERT INTO `tester_step` VALUES (1,2,'231','231','231','2020-03-19','2020-10-20','2020-10-20');
+INSERT INTO `tester_step` VALUES (1,2,'231','231','231','2020-03-19','2020-10-20','2020-10-20'),(2,71,'Lior','CLOSED','-','2020-01-01','2020-01-05','2020-01-04');
 /*!40000 ALTER TABLE `tester_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,7 +415,7 @@ DROP TABLE IF EXISTS `time_extension`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `time_extension` (
-  `TimeExtensionID` int(11) NOT NULL,
+  `TimeExtensionID` int(11) NOT NULL AUTO_INCREMENT,
   `StepID` int(11) NOT NULL,
   `StepType` varchar(45) NOT NULL,
   `OldDate` date NOT NULL,
@@ -424,7 +424,7 @@ CREATE TABLE `time_extension` (
   `Status` varchar(45) NOT NULL DEFAULT 'NEW' COMMENT 'ENUM',
   PRIMARY KEY (`TimeExtensionID`),
   UNIQUE KEY `TimeExtensionID_UNIQUE` (`TimeExtensionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -571,4 +571,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-03 11:09:14
+-- Dump completed on 2020-01-04 14:00:58
