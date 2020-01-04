@@ -18,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -64,6 +65,10 @@ public class AnalyzerBoundary implements DataInitializable {
 	private TextField advantagestextField;
 	@FXML
 	private TextField constraintstextField;
+    @FXML
+    private Text timeDisplayText;
+    @FXML
+    private TextArea timeRemainingField;
 	@FXML
 	private DatePicker timedurationPicker;
 	@FXML
@@ -213,6 +218,7 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Change Texts */
 		pageHeaderText.setText("Loading change request information");
+		timeRemainingField.setEditable(false);
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
@@ -257,7 +263,6 @@ public class AnalyzerBoundary implements DataInitializable {
 				timeextensionButton.setDisable(false);
 				
 				createReportPane.setVisible(true);
-				tableView.setVisible(false);
 				datePane.setVisible(false);
 				notificationText.setVisible(false);
 				break;

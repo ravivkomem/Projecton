@@ -41,6 +41,10 @@ public class TesterBoundary implements DataInitializable {
     @FXML
     private TextField failuredetailsField;
     @FXML
+    private TextField durationtextField;
+    @FXML
+    private TextField headertextField;
+    @FXML
     private Button logoutButton;
     @FXML
     private Button homepageButton;
