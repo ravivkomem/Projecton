@@ -21,6 +21,7 @@ public enum SqlQueryType {
 	/* *****************************************
 	 * ********** Analyzer Queries ****************
 	 * *****************************************/
+	SELECT_ANALYSIS_STEP_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_ANALYSIS_STEP_CLOSE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_ANALYSIS_STEP_ESTIMATED_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME(SqlExecutionType.UPDATE_QUERY),

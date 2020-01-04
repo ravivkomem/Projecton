@@ -6,36 +6,51 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
+import assets.StepType;
 import boundries.AnalyzerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
+import entities.Step;
 import javafx.application.Platform;
 
+@SuppressWarnings("serial")
 public class AnalyzerController extends BasicController {
+	
 	private AnalyzerBoundary myBoundary;
+	
 	public AnalyzerController(AnalyzerBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
-	/*sqlArray[SqlQueryType.INSERT_NEW_REPORT.getCode()]=
-			"INSERT INTO icm.analysis_step(ChangeRequestID,Status,AnalysisReportDescription,AnalysisReportAdvantages,AnalysisReportConstraints,EndDate)"
-			+ " VALUES (?,?,?,?,?,?)";*/
 
-	public void updateChangeRequestCurrentStep(ChangeRequest changerequest, String currentstep) {
+	/* **************************************
+	 * ************ Public Methods **********
+	 * **************************************/
+	public void getCurrentStep(Integer changeRequestID) {
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_STEP_BY_CHANGE_REQUEST_ID, varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
+	
+	public void updateAnalysisStepEstimatedEndDate(Integer analysisStepId,Date estimatedDate) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(estimatedDate);
+		varArray.add(analysisStepId);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE,varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
+	
+	public void updateChangeRequestCurrentStep(String currentstep, String handlerUserName, Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(currentstep);
-		varArray.add(changerequest.getChangeRequestID());
-		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP,varArray);
-		this.subscribeToClientDeliveries();		//subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		varArray.add(handlerUserName);
+		varArray.add(changeRequestId);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP,varArray);
+		this.sendSqlActionToClient(sqlAction);
 	}
-	public void updateAnalysisStepEstimatedEndDate(ChangeRequest changerequest,Date date) {
-		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(date);
-		varArray.add(changerequest.getChangeRequestID());
-		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE,varArray);
-		this.subscribeToClientDeliveries();		//subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	}
+	
+	
+	
 	public void updateChangeRequestCurrentStepAndHandlerName(ChangeRequest changerequest,String currentstep,String handlerusername) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(currentstep);
@@ -45,6 +60,7 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	//"UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 	public void updateAnalysisStepClose(ChangeRequest changerequest,Date date,String Status,String AnalysisReportDescription,String AnalysisReportAdvantages,String AnalysisReportConstraints) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -67,23 +83,41 @@ public class AnalyzerController extends BasicController {
 		Platform.runLater(() -> {
 		switch (result.getActionType()) {
 		
-		case UPDATE_CHANGE_REQUEST_CURRENTSTEP:
-		case UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME:
-		case UPDATE_ANALYSIS_STEP_ESTIMATED_DATE:
-		case UPDATE_ANALYSIS_STEP_CLOSE:
-			int affectedRows;
-			affectedRows = (Integer) (result.getResultData().get(0).get(0));
-			this.unsubscribeFromClientDeliveries();
-			myBoundary.updateTesterPageToDBSuccessfully(affectedRows);
-			
-			break;
+			case UPDATE_CHANGE_REQUEST_CURRENTSTEP:
+			case UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME:
+			case UPDATE_ANALYSIS_STEP_ESTIMATED_DATE:
+			case UPDATE_ANALYSIS_STEP_CLOSE:
+				int affectedRows;
+				affectedRows = (Integer) (result.getResultData().get(0).get(0));
+				this.unsubscribeFromClientDeliveries();
+				myBoundary.updateTesterPageToDBSuccessfully(affectedRows);
+				break;
 		
-
-		default:
-			break;
+			case SELECT_ANALYSIS_STEP_BY_CHANGE_REQUEST_ID:
+				this.unsubscribeFromClientDeliveries();
+				Step recievedStep = this.parseSqlResultToAnalysisStep(result);
+				myBoundary.recieveCurrentStep(recievedStep);
+			default:
+				break;
 		}
 		});
 		return;
+	}
+	
+	private Step parseSqlResultToAnalysisStep(SqlResult result) {
+		
+		StepType testerType = StepType.ANALYSIS;
+		int testerStepId = (int) result.getResultData().get(0).get(0);
+		int changeRequestId = (int) result.getResultData().get(0).get(1);
+		String handlerUserName = (String) result.getResultData().get(0).get(2);
+		Date startDate = (Date) result.getResultData().get(0).get(3);
+		String status = (String) result.getResultData().get(0).get(4);
+		Date estimatedEndDate = (Date) result.getResultData().get(0).get(5);
+		Date endDate = (Date) result.getResultData().get(0).get(6);
+		
+		Step step = new Step(testerType, testerStepId, changeRequestId, handlerUserName, startDate, status,
+				estimatedEndDate, endDate);
+		return step;
 	}
 
 }

@@ -163,12 +163,22 @@ public class TesterBoundary implements DataInitializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		/* Set Text*/
 		pageHeaderText.setText("Loading Change Request Information");
+		
+		/* Change visibilities */
 		testWorkPane.setVisible(false);
 		FailDetailsPane.setVisible(false);
-		timeremainingField.setEditable(false);
+		
+		/* Init combo box */
 		testapprovalComboBox.getItems().add(DENY_STRING);
 		testapprovalComboBox.getItems().add(APROVE_STRING);
+		
+		/* Change editiable */
+		timeremainingField.setEditable(false);
+		
+		/* Disable buttons */
 		analysisreportButton.setDisable(true);
 		timeExtensionButton.setDisable(true);
 	}
@@ -176,11 +186,10 @@ public class TesterBoundary implements DataInitializable {
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
-		//myController.getStartTimeFromTesterStep(currentChangeRequest.getChangeRequestID());
 		myController.getCurrentStep(currentChangeRequest.getChangeRequestID());
 	}
 
-	public void getCurrentStep(Step recievedStep) {
+	public void recieveCurrentStep(Step recievedStep) {
 		testerStep = recievedStep;
 		pageHeaderText.setText("Working on change request No."+ currentChangeRequest.getChangeRequestID());
 		testWorkPane.setVisible(true);

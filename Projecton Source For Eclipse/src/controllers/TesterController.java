@@ -70,7 +70,7 @@ public class TesterController extends BasicController {
 			case SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID:
 				this.unsubscribeFromClientDeliveries();
 				Step recievedStep = this.parseSqlResultToTesterStep(result);
-				myBoundary.getCurrentStep(recievedStep);
+				myBoundary.recieveCurrentStep(recievedStep);
 				break;
 			default:
 				break;

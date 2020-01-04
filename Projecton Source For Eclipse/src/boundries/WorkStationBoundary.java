@@ -128,7 +128,7 @@ public class WorkStationBoundary implements Initializable{
     			case "ANALYSIS_SET_TIME":
     			case "ANALYSIS_APPROVE_TIME":
     			case "ANALYSIS_WORK":
-    				//ProjectFX.pagingController.loadBoundary(ProjectPages.ANALYZER_PAGE.getPath(), clickedChangeRequest);
+    				ProjectFX.pagingController.loadBoundary(ProjectPages.ANALYZER_PAGE.getPath(), clickedChangeRequest);
     				break;
     				
     			/*Committee Step Statuses */
