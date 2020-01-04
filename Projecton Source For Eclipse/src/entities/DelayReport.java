@@ -2,6 +2,13 @@ package entities;
 
 import java.sql.Date;
 
+/**
+ * 
+ * @author Lee Hugi
+ * this class represents a delay report
+ * includes all the fields as described in the delay report page
+ *
+ */
 public class DelayReport {
 	private String subsystem;
 	private Date estimateDate;

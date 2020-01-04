@@ -11,6 +11,12 @@ import client.ClientConsole;
 import entities.ChangeRequest;
 import javafx.application.Platform;
 
+/**
+ * 
+ * @author Lee Hugi
+ *This controller handle with the activity report page
+ *
+ */
 public class ActivityReportController extends BasicController{
 
 	ActivityReportBoundary myBoundary;

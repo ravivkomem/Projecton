@@ -12,7 +12,7 @@ import javafx.application.Platform;
 
 /**
  * 
- * @author leehu
+ * @author Lee Hugi
  *This controller handle with the analysis report page
  *
  */

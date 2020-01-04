@@ -3,6 +3,12 @@ package controllers;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * 
+ * @author Lee Hugi
+ * this class provides mathematical calculations for report pages
+ *
+ */
 public class Utilizer {
 	
 	public static double calcMedian(ArrayList<Long> list) {

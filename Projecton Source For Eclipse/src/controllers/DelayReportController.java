@@ -12,6 +12,12 @@ import entities.ChangeRequest;
 import entities.DelayReport;
 import javafx.application.Platform;
 
+/**
+ * 
+ * @author Lee Hugi
+ * This controller handle with the delay report page
+ *
+ */
 public class DelayReportController extends BasicController{
 
 	private DelayReportBoundary myBoundary;

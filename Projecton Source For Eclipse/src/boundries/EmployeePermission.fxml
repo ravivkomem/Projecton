@@ -16,7 +16,7 @@
             <Image url="@background_image.jpg" />
          </image>
       </ImageView>
-      <Text fx:id="employeeNameText" layoutX="134.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="employeeNameText" layoutX="101.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0">
          <font>
             <Font size="18.0" />
          </font>
