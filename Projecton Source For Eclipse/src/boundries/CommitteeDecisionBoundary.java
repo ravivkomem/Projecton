@@ -276,6 +276,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	public void committeeCommentInsertToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
+			myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 		} else {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}

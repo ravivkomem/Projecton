@@ -52,7 +52,11 @@ public class TechManagerBoundary implements DataInitializable{
     private Button btnReportPage;
     @FXML
     private Button viewReportButton;
+    @FXML
+    private Button viewRequestDetailsButton;
 
+    @FXML
+    private AnchorPane requestListPane;
     @FXML
     private AnchorPane employeeAnchorPane;
     @FXML
@@ -102,6 +106,7 @@ public class TechManagerBoundary implements DataInitializable{
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
+    private ChangeRequest currentChangeRequest;
 	private User employeeUser;
 	private ArrayList<User> users = new ArrayList<>(); 
 	TechManagerController myController = new TechManagerController(this);
@@ -113,9 +118,18 @@ public class TechManagerBoundary implements DataInitializable{
 	 * *************************************/
 	
     @FXML
+    void loadExtraDetailsPage(MouseEvent event) {
+    	/*TODO check move to extra details page*/
+    	ArrayList<Object> dataList = new ArrayList<>();
+    	dataList.add(currentChangeRequest);
+    	dataList.add(ProjectPages.TECH_MANAGER_PAGE);
+    	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
+    }
+	
+    @FXML
     void loadEmployeePage(MouseEvent event) {
 		reportPageAnchorPane.setVisible(false);
-		requestListTable.setVisible(false);
+		requestListPane.setVisible(false);
 		employeeAnchorPane.setVisible(true);
 		myController.getAllTheEmployee();
     }
@@ -133,7 +147,7 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     void loadReportPage(MouseEvent event) {
     	employeeAnchorPane.setVisible(false);
-		requestListTable.setVisible(false);
+    	requestListPane.setVisible(false);
 		reportPageAnchorPane.setVisible(true);
     }
 
@@ -141,7 +155,7 @@ public class TechManagerBoundary implements DataInitializable{
     void loadRequestListPage(MouseEvent event) {
     	employeeAnchorPane.setVisible(false);
     	reportPageAnchorPane.setVisible(false);
-		requestListTable.setVisible(true);
+    	requestListPane.setVisible(true);
 		myController.getAllTheActiveChangeRequest();
     }
 
@@ -170,13 +184,17 @@ public class TechManagerBoundary implements DataInitializable{
     @FXML
     void loagViewPermissionsPage(MouseEvent event) {
     	ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
-    	dataList.add(new ArrayList<Object>());
-    	dataList.add(new ArrayList<Object>());
-    	dataList.add(new ArrayList<Object>());
-    	dataList.get(0).add(employeeUser);
-    	dataList.get(1).addAll(users);
-    	dataList.get(2).add(this);
-    	ProjectFX.pagingController.loadAdditionalStage(ProjectPages.EMPLOYEE_PERMISSION.getPath(), dataList);
+    	if(employeeUser.getPermission().equals("INFORMATION_ENGINEERING_DEPARTMENT_HEAD")) {
+    		Toast.makeText(ProjectFX.mainStage, "You can NOT edit this user permission", 1500, 500, 500);
+		} else {
+			dataList.add(new ArrayList<Object>());
+			dataList.add(new ArrayList<Object>());
+			dataList.add(new ArrayList<Object>());
+			dataList.get(0).add(employeeUser);
+			dataList.get(1).addAll(users);
+			dataList.get(2).add(this);
+			ProjectFX.pagingController.loadAdditionalStage(ProjectPages.EMPLOYEE_PERMISSION.getPath(), dataList);
+		}
     }
 
     @FXML
@@ -208,7 +226,13 @@ public class TechManagerBoundary implements DataInitializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		employeeAnchorPane.setVisible(false);
 		reportPageAnchorPane.setVisible(false);
-		requestListTable.setVisible(true);
+		requestListPane.setVisible(true);
+		
+		userNameTextField.setEditable(false);
+		emailTextField.setEditable(false);
+		positionTextField.setEditable(false);
+		numberTextField.setEditable(false);
+		departmentTextField.setEditable(false);
 		
 		reportTypeComboBox.getItems().add("Activity Report");
 		reportTypeComboBox.getItems().add("Performance Report");
@@ -233,6 +257,17 @@ public class TechManagerBoundary implements DataInitializable{
 		            positionTextField.setText(employeeUser.getJobDescription());
 		            numberTextField.setText(employeeUser.getPhoneNumber());
 		            departmentTextField.setText(employeeUser.getDepartment());
+		        }
+		    });
+		    return row ;
+		});
+		
+		requestListTable.setRowFactory(tv -> {
+		    TableRow<ChangeRequest> row = new TableRow<>();
+		    row.setOnMouseClicked(event -> {
+		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
+		        {
+		        	currentChangeRequest = row.getItem();
 		        }
 		    });
 		    return row ;

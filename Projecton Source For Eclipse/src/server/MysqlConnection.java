@@ -271,7 +271,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR' "
-    			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR'";
+    			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR' "
+    			+ "OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD'";
     	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
     			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
     	/* Performance report */

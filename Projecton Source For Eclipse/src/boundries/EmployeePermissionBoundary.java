@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class EmployeePermissionBoundary implements DataInitializable{
 
@@ -60,13 +61,13 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			return;
 		}
 		switch (newPremissionComboBox.getSelectionModel().getSelectedItem()) {
-		case "INFORMATION_ENGINEER":
+		case "Information Engineer":
 			errorText.setVisible(false);
 			employeeUser.setPermission("INFORMATION_ENGINEER");
 			employeeUser.setJobDescription("Information Engineer");
 			createPermissionToOneUser(employeeUser);
 			break;
-		case "SUPERVISOR":
+		case "Supervisor":
 			errorText.setVisible(false);
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
@@ -76,7 +77,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			}
 			handleSupervisorOneUser(employeeUser);
 			break;
-		case "COMMITTEE_MEMBER":
+		case "Committee Member":
 			errorText.setVisible(false);
 			int cnt=0;
 			for(User u: users) {
@@ -98,7 +99,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				handleCommitteeMemberOneUser(employeeUser);
 			}
 			break;
-		case "COMMITTEE_DIRECTOR":
+		case "Committee Director":
 			errorText.setVisible(false);
 			for(User u: users) {
 				if(u.getPermission().equals("COMMITTEE_DIRECTOR")) {
@@ -111,14 +112,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		default:
 			break;
 		}
-		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
-		((Node) event.getSource()).getScene().getWindow().hide();
+//		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+//		((Node) event.getSource()).getScene().getWindow().hide();
     }
     
     @FXML
     void replaceCommitteMember(MouseEvent event) {
     	if(committeeMemberComboBox.getSelectionModel().isEmpty()) {
-    		errorText.setText("Please choose commitee member");
+    		errorText.setText("Please choose committee member");
     		return;
     	}
     	User oldMember = null;
@@ -191,6 +192,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     	default:
     		break;
     	}
+		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+		Stage stage = (Stage) errorText.getScene().getWindow();
+		stage.close();
     }
     
     /**
@@ -237,6 +241,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     	default:
     		break;
     	}
+    	popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+		Stage stage = (Stage) errorText.getScene().getWindow();
+		stage.close();
     }
     
     /**
@@ -254,7 +261,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				newSupervisor.setJobDescription("Supervisor Committee Director");
 			} else {
 				newSupervisor.setPermission("SUPERVISOR");
-				newSupervisor.setJobDescription("Supervisor Engineer");
+				newSupervisor.setJobDescription("Supervisor");
 			}
 			createPermissionToOneUser(newSupervisor);
 			break;
@@ -266,17 +273,20 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				newSupervisor.setJobDescription("Supervisor Committee Member");
 			} else {
 				newSupervisor.setPermission("SUPERVISOR");
-				newSupervisor.setJobDescription("Supervisor Engineer");
+				newSupervisor.setJobDescription("Supervisor");
 			}
 			createPermissionToOneUser(newSupervisor);
 			break;
 		case "INFORMATION_ENGINEER":
 			newSupervisor.setPermission("SUPERVISOR");
-			newSupervisor.setJobDescription("Supervisor Engineer");
+			newSupervisor.setJobDescription("Supervisor");
 			createPermissionToOneUser(newSupervisor);
 		default:
 			break;
 		}	
+		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+		Stage stage = (Stage) errorText.getScene().getWindow();
+		stage.close();
     }
     
     /**
@@ -331,6 +341,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     			oldMember.setJobDescription("Information Emgineer");
     	}
     	this.createPermissoinsToUsers(newMember, oldMember);
+    	popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+		Stage stage = (Stage) errorText.getScene().getWindow();
+		stage.close();
     }
     
     /**
@@ -388,6 +401,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				oldSupervisor.setJobDescription("Information Engineer");
 			}
 			this.createPermissoinsToUsers(newSupervisor, oldSupervisor);
+			popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+			Stage stage = (Stage) errorText.getScene().getWindow();
+			stage.close();
 		}
     }
     
@@ -448,16 +464,19 @@ public class EmployeePermissionBoundary implements DataInitializable{
 				oldDirector.setJobDescription("Information Engineer");
 			}
 			this.createPermissoinsToUsers(newDirector, oldDirector);
+			popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+			Stage stage = (Stage) errorText.getScene().getWindow();
+			stage.close();
         }
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		permossionTextField.setEditable(false);
-		newPremissionComboBox.getItems().add("INFORMATION_ENGINEER");
-		newPremissionComboBox.getItems().add("SUPERVISOR");
-		newPremissionComboBox.getItems().add("COMMITTEE_MEMBER");
-		newPremissionComboBox.getItems().add("COMMITTEE_DIRECTOR");
+		newPremissionComboBox.getItems().add("Information Engineer");
+		newPremissionComboBox.getItems().add("Supervisor");
+		newPremissionComboBox.getItems().add("Committee Member");
+		newPremissionComboBox.getItems().add("Committee Director");
 	}
 
 	@Override
@@ -466,7 +485,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		users.addAll(((ArrayList<ArrayList<User>>) data).get(1));
 		techManagerBoundry = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
 		employeeNameText.setText("Permission: "+employeeUser.getFirstName()+" "+employeeUser.getLastName());
-		permossionTextField.setText(employeeUser.getPermission());
+		permossionTextField.setText(employeeUser.getJobDescription());
 	}
 	
 	/* this method will show the window with the new change request id */
