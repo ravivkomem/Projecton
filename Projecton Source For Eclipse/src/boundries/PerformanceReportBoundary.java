@@ -36,7 +36,9 @@ public class PerformanceReportBoundary implements Initializable {
     @FXML
     private Text reportHeader;
     @FXML
-    private TextField totalDaysTextField;
+    private TextField totalExtensionDaysTextField;
+    @FXML
+    private TextField totalRepeatingDaysTextField;
     
     /* *************************************
 	 * ******** Private Objects ************
@@ -47,6 +49,9 @@ public class PerformanceReportBoundary implements Initializable {
     private static final String EXECUTION = "Execution";
     private static final String TESTING = "Testing";
     
+    /* *************************************
+	 * ********* FXML Methods **************
+	 * *************************************/
     @FXML
     void closePage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
@@ -54,7 +59,9 @@ public class PerformanceReportBoundary implements Initializable {
     
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//totalDaysTextField.setVisible(false);
+    	totalExtensionDaysTextField.setEditable(false);
+    	totalRepeatingDaysTextField.setEditable(false);
+    	
 		extensionDaysBarChart.setTitle("Performance Graph");
 		extensionDaysBarChart.setLegendSide(Side.RIGHT);
 		changeRequestStepCatagoryAxis.setLabel("Change Request Step");
@@ -66,6 +73,9 @@ public class PerformanceReportBoundary implements Initializable {
     	myController.getAllRepeatingStepsFromServer();
 	}
     
+    /* *************************************
+   	 * ********* Public Methods ************
+   	 * *************************************/
     public void addExtensionDaysToReport(ArrayList<TimeExtension> timeExtensionList) {
     	long analysisDaysCounter = 0;
 		long committeeDaysCounter = 0;
@@ -104,9 +114,8 @@ public class PerformanceReportBoundary implements Initializable {
         series.getData().add(new XYChart.Data<String,Number>(TESTING, testingDaysCounter));    
 
         extensionDaysBarChart.getData().add(series);
+        totalExtensionDaysTextField.setText(Long.toString(analysisDaysCounter+committeeDaysCounter+executionDaysCounter+testingDaysCounter));
 	}
-
-	
 
 	public void addRepeatingStepsToReport(ArrayList<Step> repeatingStepList) {
 		long analysisDaysCounter = 0;
@@ -146,5 +155,6 @@ public class PerformanceReportBoundary implements Initializable {
 	    series2.getData().add(new XYChart.Data<String,Number>(TESTING, testingDaysCounter));    
 	    
         extensionDaysBarChart.getData().add(series2);
+        totalRepeatingDaysTextField.setText(Long.toString(analysisDaysCounter+committeeDaysCounter+executionDaysCounter+testingDaysCounter));
 	}
 }

@@ -4,11 +4,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
-import assets.Toast;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,7 +15,9 @@ import javafx.scene.text.Text;
 
 public class MenuBoundary implements Initializable {
 
-	/* FXML Objects */
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
     @FXML
     private Text helloUserTextField;
     @FXML
@@ -45,7 +45,9 @@ public class MenuBoundary implements Initializable {
     @FXML
     private ImageView supervisorImageBreak;
     
-    /*Boundary Methods*/
+    /* *************************************
+	 * ********* FXML Methods **************
+	 * *************************************/
     @FXML
     void loadMyRequestsPage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
@@ -63,7 +65,6 @@ public class MenuBoundary implements Initializable {
 
     @FXML
     void loadDepartmentHeadPage(ActionEvent event) {
-    	//Toast.makeText(ProjectFX.mainStage, departmentHeadButton.getText() + " Button not implemented yet", 1500, 500, 500);
     	ProjectFX.pagingController.loadBoundary(ProjectPages.TECH_MANAGER_PAGE.getPath());
     }
     
@@ -148,8 +149,5 @@ public class MenuBoundary implements Initializable {
 		default:
 			break;
 		}
-		
-		
 	}
-
 }

@@ -129,11 +129,13 @@ public class WorkStationBoundary implements Initializable{
     			case "ANALYSIS_APPROVE_TIME":
     			case "ANALYSIS_WORK":
     				ProjectFX.pagingController.loadBoundary(ProjectPages.ANALYZER_PAGE.getPath(), clickedChangeRequest);
+    				closeMyStages();
     				break;
     				
     			/*Committee Step Statuses */
     			case "COMMITTEE_WORK":
     				ProjectFX.pagingController.loadBoundary(ProjectPages.COMMITTEE_PAGE.getPath(), clickedChangeRequest);
+    				closeMyStages();
     				break;
     				
     			/*Execution Step Statuses */
@@ -141,6 +143,7 @@ public class WorkStationBoundary implements Initializable{
     			case "EXECUTION_APPROVE_TIME":
     			case "EXECUTION_WORK":
     				ProjectFX.pagingController.loadBoundary(ProjectPages.EXECUTION_LEADER_PAGE.getPath(), clickedChangeRequest);
+    				closeMyStages();
     				break;
     			
     			/*Committee Director setting tester status */
@@ -163,6 +166,7 @@ public class WorkStationBoundary implements Initializable{
     			/*Tester Step Statuses */
     			case "TESTING_WORK":
     				ProjectFX.pagingController.loadBoundary(ProjectPages.TESTER_PAGE.getPath(), clickedChangeRequest);
+    				closeMyStages();
     				break;
     				
     			/*Default -- Do nothing */
@@ -226,15 +230,7 @@ public class WorkStationBoundary implements Initializable{
     	changeRequestList.clear();
     	changeRequestList.addAll(recievedChangeRequestList);
     	changeRequestTableView.setItems(changeRequestList);
-    	
-    	if (!changeRequestList.isEmpty())
-    	{
-    		changeRequestTableView.setVisible(true);
-        	selectedChangeRequestIdTextArea.setVisible(true);
-    		changeRequestTableView.setVisible(true);
-    		refreshStationButton.setVisible(true);
-    		startChangeRequestWorkButton.setVisible(true);
-    	}
+  
     }
     
 	@Override
@@ -261,10 +257,6 @@ public class WorkStationBoundary implements Initializable{
 		clickedChangeRequest = null;
 		/* Hide displays */
 		selectedChangeRequestIdTextArea.setEditable(false);
-		selectedChangeRequestIdTextArea.setVisible(false);
-		changeRequestTableView.setVisible(false);
-		refreshStationButton.setVisible(false);
-		startChangeRequestWorkButton.setVisible(false);
 		viewCommitteStepButton.setVisible(false);
 		viewTesterAppointButton.setVisible(false);
 		committeeButtonBreakImage.setVisible(false);
