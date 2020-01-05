@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.UploadChangeRequestBoundary">
    <children>
-      <ImageView fitHeight="601.0" fitWidth="758.0">
+      <ImageView fx:id="reasonField" fitHeight="601.0" fitWidth="758.0">
          <image>
             <Image url="@background_image.jpg" />
          </image>
@@ -42,10 +43,6 @@
       </Button>
       <ComboBox fx:id="subSystemComboBox" layoutX="218.0" layoutY="111.0" prefWidth="150.0" promptText="- sub system-" />
       <Button fx:id="submitBtn" layoutX="438.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#uploadNewChangeRequest" prefHeight="31.0" prefWidth="209.0" text="Submit" />
-      <TextField fx:id="currentStateDescriptionField" alignment="TOP_LEFT" layoutX="219.0" layoutY="187.0" prefHeight="80.0" prefWidth="149.0" />
-      <TextField fx:id="changeRequestDescriptionField" alignment="TOP_LEFT" layoutX="219.0" layoutY="306.0" prefHeight="80.0" prefWidth="149.0" />
-      <TextField fx:id="reasonField" alignment="TOP_LEFT" layoutX="219.0" layoutY="409.0" prefHeight="80.0" prefWidth="149.0" />
-      <TextField fx:id="commentField" alignment="TOP_LEFT" layoutX="518.0" layoutY="111.0" prefHeight="80.0" prefWidth="149.0" />
       <Text layoutX="433.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload File:" />
       <TextField fx:id="uploadedFileNameField" alignment="TOP_LEFT" layoutX="518.0" layoutY="226.0" prefHeight="17.0" prefWidth="149.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
@@ -56,5 +53,9 @@
       <Text fill="RED" layoutX="28.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" wrappingWidth="6.254876554012299" />
       <Text fill="RED" layoutX="115.0" layoutY="583.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
       <Text fill="RED" layoutX="130.0" layoutY="582.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Field" />
+      <TextArea fx:id="currentStateDescriptionField" layoutX="218.0" layoutY="176.0" prefHeight="90.0" prefWidth="150.0" />
+      <TextArea fx:id="changeRequestDescriptionField" layoutX="219.0" layoutY="291.0" prefHeight="90.0" prefWidth="150.0" />
+      <TextArea fx:id="reasonTA" layoutX="219.0" layoutY="390.0" prefHeight="90.0" prefWidth="149.0" />
+      <TextArea fx:id="commentField" layoutX="522.0" layoutY="111.0" prefHeight="90.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

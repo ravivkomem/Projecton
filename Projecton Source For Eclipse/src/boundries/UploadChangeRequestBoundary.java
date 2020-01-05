@@ -35,6 +35,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -61,16 +62,16 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    private Button submitBtn;
 
 	    @FXML
-	    private TextField currentStateDescriptionField;
+	    private TextArea currentStateDescriptionField;
 
 	    @FXML
-	    private TextField changeRequestDescriptionField;
+	    private TextArea changeRequestDescriptionField;
 
 	    @FXML
-	    private TextField reasonField;
-	   
+	    private TextArea reasonTA;
+	    
 	    @FXML
-	    private TextField commentField;
+	    private TextArea commentField;
 
 	    @FXML
 	    private TextField uploadedFileNameField;
@@ -118,7 +119,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newChangeRequestDescription = changeRequestDescriptionField.getText();
 	    	String newInitiator = ProjectFX.currentUser.getUserName();
 	    	String newChangeRequestComment = commentField.getText();
-	    	String newChangeRequestExplanation =  reasonField.getText();
+	    	String newChangeRequestExplanation =  reasonTA.getText();
 	    	Date newChangeRequestDate = uploadChangeRequestDate;
 	    	String newChangeRequestStatus= "Active";
 	    	String HandlerUserName="XXXX";//will be random in the controller 
@@ -151,7 +152,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    		myController.sendFilesToServer(uploadedFileNameField.getText(), changeRequestId);
 	    		
 	    		commentField.setText("");
-	    		reasonField.setText("");
+	    		reasonTA.setText("");
 	    		changeRequestDescriptionField.setText("");
 	    		currentStateDescriptionField.setText("");
 	    		uploadedFileNameField.setText("");
@@ -195,6 +196,11 @@ public class UploadChangeRequestBoundary implements Initializable {
 			subSystemComboBox.getItems().add("Laboratory");
 			subSystemComboBox.getItems().add("Computer Farm");
 			subSystemComboBox.getItems().add("College Website");
+			commentField.setWrapText(true);
+			reasonTA.setWrapText(true);
+			changeRequestDescriptionField.setWrapText(true);
+			currentStateDescriptionField.setWrapText(true);
+			
 		}
 	}
 

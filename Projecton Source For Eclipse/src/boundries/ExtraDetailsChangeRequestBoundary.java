@@ -36,7 +36,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     private TextField subSystemTF;
 
     @FXML
-    private TextField currentStateDescTF;
+    private TextArea currentStateDescTA;
 
     @FXML
     private TextArea RequestedChangeDescTF;
@@ -86,7 +86,6 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		initiatorNameTF.setEditable(false);
 		subSystemTF.setEditable(false);
-		currentStateDescTF.setEditable(false);
 		RequestedChangeDescTF.setEditable(false);
 		reasonTF.setEditable(false);
 		commentTF.setEditable(false);
@@ -98,11 +97,16 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		currentChangeRequest = (ChangeRequest) data;
 		initiatorNameTF.setText(currentChangeRequest.getInitiatorUserName());
 		subSystemTF.setText(currentChangeRequest.getSelectedSubsystem());
-		currentStateDescTF.setText(currentChangeRequest.getCurrentStateDescription());
+		currentStateDescTA.setText(currentChangeRequest.getCurrentStateDescription());
 		RequestedChangeDescTF.setText(currentChangeRequest.getDesiredChangeDescription());
 		reasonTF.setText(currentChangeRequest.getDesiredChangeExplanation());
 		commentTF.setText(currentChangeRequest.getDesiredChangeComments());
 		StatusTF.setText(currentChangeRequest.getStatus());
+		reasonTF.setWrapText(true);
+		commentTF.setWrapText(true);
+		RequestedChangeDescTF.setWrapText(true);
+		currentStateDescTA.setWrapText(true);
+		
 	}
 
 	public void displayFile(MyFile downloadedFile) {
