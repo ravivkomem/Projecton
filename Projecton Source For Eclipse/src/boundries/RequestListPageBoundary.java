@@ -42,9 +42,11 @@ public class RequestListPageBoundary implements Initializable {
 
     @FXML
     private TableColumn<ChangeRequest, String> subSystemClm;
-    /*FXML TextField*/
+    /*FXML Text*/
     @FXML
     private Text noSubmitingRequest;
+    @FXML
+    private Text selectedChangeRequestIdText;
 
     /*Button FXML*/
     @FXML
@@ -89,6 +91,7 @@ public class RequestListPageBoundary implements Initializable {
 		subSystemClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
 		noSubmitingRequest.setVisible(false);
 		displaySpecificID.setEditable(false);
+		selectedChangeRequestIdText.setVisible(true);
 		myController.fillNecessaryFieldsInTable();
 		basicDetailsTbl.setRowFactory(tv -> {
 		    TableRow<ChangeRequest> row = new TableRow<>();
@@ -116,6 +119,7 @@ public class RequestListPageBoundary implements Initializable {
 			noSubmitingRequest.setVisible(true);
 			viewExtraDetailsBtn.setVisible(false);
 			displaySpecificID.setVisible(false);
+			selectedChangeRequestIdText.setVisible(false);
 		}
 		
 	}
