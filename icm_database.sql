@@ -16,33 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `analysis_report`
---
-
-DROP TABLE IF EXISTS `analysis_report`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `analysis_report` (
-  `AnalysisReportID` int(11) NOT NULL,
-  `ChangeRequestID` varchar(45) NOT NULL,
-  `Header` varchar(45) NOT NULL,
-  `ChangeSpecifications` varchar(45) NOT NULL,
-  `Comments` varchar(45) NOT NULL,
-  PRIMARY KEY (`AnalysisReportID`,`ChangeRequestID`),
-  UNIQUE KEY `AnalysisReportID_UNIQUE` (`AnalysisReportID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `analysis_report`
---
-
-LOCK TABLES `analysis_report` WRITE;
-/*!40000 ALTER TABLE `analysis_report` DISABLE KEYS */;
-/*!40000 ALTER TABLE `analysis_report` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `analysis_step`
 --
 
@@ -73,7 +46,7 @@ CREATE TABLE `analysis_step` (
 
 LOCK TABLES `analysis_step` WRITE;
 /*!40000 ALTER TABLE `analysis_step` DISABLE KEYS */;
-INSERT INTO `analysis_step` VALUES (1,2,'Lior','2019-09-17','ACTIVE','2020-01-03',NULL,NULL,NULL,NULL,NULL,NULL),(2,71,'Ido','2019-09-17','ACTIVE','2020-01-01','2020-01-01','Good','You need to change function X','It will decrease the run time','20 days','Make sure to do impact analysis');
+INSERT INTO `analysis_step` VALUES (1,2,'Lior','2019-09-17','ACTIVE','2020-01-04',NULL,NULL,NULL,NULL,NULL,NULL),(2,71,'Ido','2019-09-17','ACTIVE','2020-01-01','2020-01-01','Good','You need to change function X','It will decrease the run time','20 days','Make sure to do impact analysis');
 /*!40000 ALTER TABLE `analysis_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,7 +82,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_APPROVE_TIME','lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Denied','ANALYSIS_WORK','lior','2021-12-19'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Close','TESTING_WORK','lior','2021-12-19'),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALAYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','Active','ANALAYZER_AUTO_APPOINT','itayz',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','Active','ANALAYZER_AUTO_APPOINT','lior',NULL),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','Active','ANALAYZER_AUTO_APPOINT','itay',NULL);
+INSERT INTO `change_request` VALUES (1,'raviv','2017-12-19','Moodle','Bad','Make it good','it is not working properly','make the color red','Active','ANALYSIS_SET_TIME','lior','2020-12-19'),(2,'lee','2016-12-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','Active','ANALYSIS_WORK','Lior','2021-12-19'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','Denied','ANALYSIS_WORK','lior','2021-12-19'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','Active','EXECUTION_SET_TIME','lior',NULL),(69,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','Active','EXECUTION_APPROVE_TIME','lior',NULL),(70,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','Active','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-19','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','Active','TESTING_WORK','lior',NULL),(72,'raviv','2019-12-19','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','Close','TESTING_WORK','lior','2021-12-19'),(73,'raviv','2019-12-19','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','Active','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-19','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','Active','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(75,'raviv','2019-12-19','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','Active','COMMITTEE_WORK','IDO',NULL),(76,'raviv','2019-12-19','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','Active','ANALYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-19','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','Active','ANALYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-19','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','Active','ANALYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','Active','ANALYZER_AUTO_APPOINT','itayz',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','Active','ANALYZER_AUTO_APPOINT','lior',NULL),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','Active','ANALYZER_AUTO_APPOINT','itay',NULL);
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -348,35 +321,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
--- Table structure for table `requirements`
---
-
-DROP TABLE IF EXISTS `requirements`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `requirements` (
-  `ChangeRequestID` int(11) NOT NULL,
-  `InitaitorName` varchar(45) DEFAULT NULL,
-  `Subsystem` varchar(45) DEFAULT NULL,
-  `CurrentState` varchar(45) DEFAULT NULL,
-  `ChangeDescription` varchar(45) DEFAULT NULL,
-  `Status` varchar(45) DEFAULT NULL,
-  `HandlerName` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`ChangeRequestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `requirements`
---
-
-LOCK TABLES `requirements` WRITE;
-/*!40000 ALTER TABLE `requirements` DISABLE KEYS */;
-INSERT INTO `requirements` VALUES (1,'Raviv','Moodle','Bad','Make it Good','Active','Lee'),(2,'Ido','ClassBoost','Delays with video','Add loading buffer','Suspended','Lior');
-/*!40000 ALTER TABLE `requirements` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `tester_step`
 --
 
@@ -571,4 +515,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-04 14:00:58
+-- Dump completed on 2020-01-05 23:08:31
