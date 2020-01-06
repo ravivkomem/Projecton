@@ -96,8 +96,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableColumn<CommitteeComment, String> commentDirectorColumn;
 
-	@FXML
-	private TextField addComentTextField;
+    @FXML
+    private TextArea addCommentTextField;
 
 	@FXML
 	private TextArea timeRemainingTextAria;
@@ -245,11 +245,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void submitComment(MouseEvent event) {
-		if (addComentTextField.getText().equals("")) {
+		if (addCommentTextField.getText().equals("")) {
 			Toast.makeText(ProjectFX.mainStage, "Please add comment first", 1500, 500, 500);
 		} else {
 			CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
-					ProjectFX.currentUser.getUserName(), addComentTextField.getText());
+					ProjectFX.currentUser.getUserName(), addCommentTextField.getText());
 			myController.insertNewCommentToDB(newComment);
 		}
 	}
@@ -329,6 +329,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("More information");
 
 		timeRemainingTextAria.setEditable(false);
+		addCommentTextField.setWrapText(true);
 
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
