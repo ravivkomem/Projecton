@@ -13,8 +13,10 @@ import entities.Step;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -58,10 +60,49 @@ public class TesterBoundary implements DataInitializable {
     private AnchorPane testWorkPane;
     @FXML
     private ComboBox<String> testapprovalComboBox;
+    
+    /* Test texts */
+    @FXML
+    private Text test1Text;
+    @FXML
+    private Text test2Text;
+    @FXML
+    private Text test3Text;
+    @FXML
+    private Text test4Text;
+    @FXML
+    private Text test5Text;
+
+    /* Radio Buttons */
+    @FXML
+    private RadioButton test1PassRadioButton;
+    @FXML
+    private RadioButton test1FailRadioButton;
+    @FXML
+    private RadioButton test2PassRadioButton;
+    @FXML
+    private RadioButton test2FailRadioButton;
+    @FXML
+    private RadioButton test3PassRadioButton;
+    @FXML
+    private RadioButton test3FailRadioButton;
+    @FXML
+    private RadioButton test4PassRadioButton;
+    @FXML
+    private RadioButton test4FailRadioButton;
+    @FXML
+    private RadioButton test5PassRadioButton;
+    @FXML
+    private RadioButton test5FailRadioButton;
 
     /* ****************************************
      * ********** Private Variables ***********
      * ***************************************/
+    private final ToggleGroup test1Group = new ToggleGroup();
+    private final ToggleGroup test2Group = new ToggleGroup();
+    private final ToggleGroup test3Group = new ToggleGroup();
+    private final ToggleGroup test4Group = new ToggleGroup();
+    private final ToggleGroup test5Group = new ToggleGroup();
     private TesterController myController = new TesterController(this);
     private static final String APROVE_STRING = "Approval";
     private static final String DENY_STRING = "Deny";
@@ -178,6 +219,22 @@ public class TesterBoundary implements DataInitializable {
 		/* Init combo box */
 		testapprovalComboBox.getItems().add(DENY_STRING);
 		testapprovalComboBox.getItems().add(APROVE_STRING);
+		
+		/* Init radio button */
+		test1PassRadioButton.setToggleGroup(test1Group);
+		test1FailRadioButton.setToggleGroup(test1Group);
+		
+		test2PassRadioButton.setToggleGroup(test2Group);
+		test2FailRadioButton.setToggleGroup(test2Group);
+		
+		test3PassRadioButton.setToggleGroup(test3Group);
+		test3FailRadioButton.setToggleGroup(test3Group);
+		
+		test4PassRadioButton.setToggleGroup(test4Group);
+		test4FailRadioButton.setToggleGroup(test4Group);
+		
+		test5PassRadioButton.setToggleGroup(test5Group);
+		test5FailRadioButton.setToggleGroup(test5Group);
 		
 		/* Change editiable */
 		timeremainingField.setEditable(false);

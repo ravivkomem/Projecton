@@ -20,7 +20,9 @@ import javafx.scene.input.MouseEvent;
 
 public class LoginPageBoundary implements Initializable{
 
-	/* FXML Elements */
+	/* *******************************
+	 * ****** FXML Objects ***********
+	 * ******************************/
     @FXML
     private TextField userNameTextField;
     @FXML
@@ -30,11 +32,15 @@ public class LoginPageBoundary implements Initializable{
     @FXML
     private ImageView loginLoadingImageView;
     
-    /* Private variables */
+    /* ***************************************
+     * ********** Private Objects ************
+     * ***************************************/
     private LoginController myController = new LoginController(this);
     private int loginAttempts = 0;
     
-    /* Methods */
+    /* ***************************************
+     * ********** FXML Methods ***************
+     * ***************************************/
     @FXML
     void signInButtonPressed(MouseEvent event) {
     	String userName = userNameTextField.getText();
