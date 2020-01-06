@@ -119,10 +119,14 @@ public class TechManagerBoundary implements DataInitializable{
 	
     @FXML
     void loadExtraDetailsPage(MouseEvent event) {
-    	ArrayList<Object> dataList = new ArrayList<>();
-    	dataList.add(currentChangeRequest);
-    	dataList.add(ProjectPages.TECH_MANAGER_PAGE.getPath());
-    	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
+    	if(currentChangeRequest == null) {
+    		Toast.makeText(ProjectFX.mainStage, "Please select request from the table", 1500, 500, 500);
+    	} else {
+    		ArrayList<Object> dataList = new ArrayList<>();
+        	dataList.add(currentChangeRequest);
+        	dataList.add(ProjectPages.TECH_MANAGER_PAGE.getPath());
+        	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
+    	}
     }
 	
     @FXML
@@ -248,8 +252,7 @@ public class TechManagerBoundary implements DataInitializable{
 		employeeListTable.setRowFactory(tv -> {
 		    TableRow<User> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
-		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
-		        {
+		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY){
 		        	employeeUser = row.getItem();
 		            userNameTextField.setText(employeeUser.getUserName());
 		            emailTextField.setText(employeeUser.getEmail());
@@ -264,8 +267,7 @@ public class TechManagerBoundary implements DataInitializable{
 		requestListTable.setRowFactory(tv -> {
 		    TableRow<ChangeRequest> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
-		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
-		        {
+		        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY){
 		        	currentChangeRequest = row.getItem();
 		        }
 		    });
