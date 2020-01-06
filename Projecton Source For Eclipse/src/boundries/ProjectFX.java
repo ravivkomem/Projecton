@@ -28,7 +28,6 @@ public class ProjectFX extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		Pane pane;
-		/* DemoLandingBoundry controller; */
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource(ProjectPages.CONNECT_TO_SERVER_PAGE.getPath()));
@@ -51,7 +50,6 @@ public class ProjectFX extends Application {
 	}
 	
 	private void closeWindowEvent(WindowEvent event) {
-        System.out.println("Window close request ...");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.getButtonTypes().remove(ButtonType.OK);
         alert.getButtonTypes().add(ButtonType.CANCEL);
