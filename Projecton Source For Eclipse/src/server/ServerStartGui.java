@@ -1,48 +1,33 @@
 package server;
 
 import java.io.IOException;
-
-import assets.ServerEvent;
-import client.ChatClient;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-
-public class ServerStartGui extends ServerEvent {
+public class ServerStartGui {
 
     @FXML
     private Button ConnectButton;
-
     @FXML
     private Button DissconnectButton;
 
-    private static int flag=0;
-    
-    private MysqlConnection mysql;
+    private static boolean isConnected = false;
+    private MysqlConnection sqlConnection = new MysqlConnection();
     
     @FXML
     void DissconnectServer(ActionEvent event) throws IOException {
     	
-    	if (flag==1) {
-    		flag=0;
-    		//mysql = new MysqlConnection();
-    		//mysql.exitAllClients();
+    	if (isConnected == true) {
+    		isConnected = false;
+    		sqlConnection.disconnectAllLoggedUsers();
     		EchoServer.temp.close();
-    	//	ChatClient.AddExitAlllistener(this);
-    	//	UserController.exitAllClients();
     	}
     }
 
     @FXML
     void connectServer(ActionEvent event) {
     	EchoServer.startServer(ServerApp.newargs); 
-    	flag=1;
-    }
-
-
-    public void closeServer() throws IOException {
-    
+    	isConnected = true;
     }
 }

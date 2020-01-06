@@ -140,6 +140,24 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
+    public void disconnectAllLoggedUsers()
+    {
+    	this.connect();
+    	try {
+			Statement statement = connection.createStatement();
+			statement.execute("UPDATE icm.user SET IsLogged = '0'");
+		} 
+    	catch (SQLException e) 
+    	{
+    		
+		}
+    	finally
+    	{
+    		this.disconnect();
+    	}
+
+    }
+    
     public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];

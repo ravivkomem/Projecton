@@ -6,6 +6,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class SqlResult implements Serializable{ 
 	
 	private ArrayList<ArrayList<Object>> resultData;
