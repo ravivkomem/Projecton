@@ -14,12 +14,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.SupervisorBoundary">
    <children>
-      <ImageView fitHeight="568.0" fitWidth="873.0" layoutX="1.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="611.0" fitWidth="767.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true">
          <image>
             <Image url="@background_image.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="302.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="supervisor managment" wrappingWidth="317.5343017578125">
+      <Text layoutX="302.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supervisor Page" wrappingWidth="317.5343017578125">
          <font>
             <Font size="28.0" />
          </font>
@@ -103,7 +103,7 @@
             </ImageView>
          </children>
       </VBox>
-      <Button fx:id="btnExstraDetails" layoutX="586.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="137.0" text="View Extra Details" />
+      <Button fx:id="btnExstraDetails" layoutX="533.0" layoutY="474.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="40.0" prefWidth="221.0" text="View Change Request Details" />
       <Button fx:id="btnLogOut" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ClickLogOutFunction" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -117,10 +117,10 @@
          </font>
       </Button>
       <Button fx:id="btnBack" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#ClickBackFunction" text="Back" />
-      <ComboBox fx:id="comboSelectExecutionLeader" layoutX="164.0" layoutY="285.0" onMouseClicked="#clickOnSelectExecutionLeader" prefHeight="31.0" prefWidth="209.0" promptText="select execution leader " />
-      <ComboBox fx:id="comboSelectAnalyizer" layoutX="164.0" layoutY="285.0" onMouseClicked="#clickOnSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="select  analyizer" />
-      <Button fx:id="btnApproveAppointment" layoutX="486.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" text="Approve" />
-      <Button fx:id="btnDenyAppointment" layoutX="404.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="Deny" />
+      <ComboBox fx:id="comboSelectExecutionLeader" layoutX="159.0" layoutY="287.0" onMouseClicked="#clickOnSelectExecutionLeader" prefHeight="31.0" prefWidth="209.0" promptText="select execution leader " />
+      <ComboBox fx:id="comboSelectAnalyizer" layoutX="451.0" layoutY="518.0" onMouseClicked="#clickOnSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="select  analyizer" />
+      <Button fx:id="btnApproveAppointment" layoutX="471.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" text="Approve" />
+      <Button fx:id="btnDenyAppointment" layoutX="392.0" layoutY="285.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="Deny" />
       <TableView fx:id="tableChangeRequest" layoutX="164.0" layoutY="68.0" prefHeight="200.0" prefWidth="558.0">
          <columns>
             <TableColumn fx:id="tableColumnRequestID" prefWidth="100.0" text="Request ID" />
@@ -130,21 +130,21 @@
             <TableColumn fx:id="tableColumnCurrentStep" prefWidth="162.0" text="CurrentStep" />
          </columns>
       </TableView>
-      <Button fx:id="btnCloseTheRequest" layoutX="377.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" text="Close the request " />
-      <Button fx:id="btnSend" layoutX="488.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" text="send" />
-      <TextField fx:id="txtSendMessageToInitiator" layoutX="260.0" layoutY="337.0" prefHeight="83.0" prefWidth="187.0" promptText="send message to initiator" />
-      <Text fx:id="txtSystemAutoAppoint" layoutX="514.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="86.91162109375" />
-      <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="608.0" layoutY="342.0" prefHeight="31.0" prefWidth="115.0" />
-      <Button fx:id="btnSetAnalyzer" layoutX="386.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
-      <Button fx:id="btnSetExecutionLeader" layoutX="389.0" layoutY="388.0" mnemonicParsing="false" onMouseClicked="#clickOnSetExecutionLeader" prefHeight="31.0" prefWidth="172.0" text="Set Execution Leader" />
-      <Button fx:id="btnApproveAnalysisTime" layoutX="416.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Analysis Time" />
-      <Button fx:id="btnDenyAnalysisTime" layoutX="228.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" text="Deny Analysis Time" />
-      <Button fx:id="btnDenyExecutionTime" layoutX="230.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" text="Deny Execution Time" />
-      <Button fx:id="btnApproveExecutionTime" layoutX="416.0" layoutY="336.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" text="Approve Execution Time" />
-      <Button fx:id="btnSuspend" layoutX="608.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#clickOnSuspend" text="Suspend" />
-      <Button fx:id="btnUnsuspend" layoutX="608.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#clickOnUnsuspend" text="Unsuspend" />
-      <TextField fx:id="txtFieldEstimatedTime" layoutX="400.0" layoutY="285.0" prefHeight="31.0" prefWidth="172.0" />
-      <Text fx:id="txtExecutionEstimatedTime" layoutX="183.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution estimated time:" wrappingWidth="171.9999975635269" />
-      <Text fx:id="txtAnalysisEstimatedTime" layoutX="183.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis estimated time:" wrappingWidth="170.00000225641224" />
+      <Button fx:id="btnCloseTheRequest" layoutX="391.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" text="Close the request " />
+      <Button fx:id="btnSend" layoutX="14.0" layoutY="525.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" text="send" />
+      <TextField fx:id="txtSendMessageToInitiator" layoutX="151.0" layoutY="373.0" prefHeight="83.0" prefWidth="187.0" promptText="send message to initiator" />
+      <Text fx:id="txtSystemAutoAppoint" layoutX="529.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="86.91162109375" />
+      <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="620.0" layoutY="342.0" prefHeight="31.0" prefWidth="115.0" />
+      <Button fx:id="btnSetAnalyzer" layoutX="80.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
+      <Button fx:id="btnSetExecutionLeader" layoutX="207.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#clickOnSetExecutionLeader" prefHeight="31.0" prefWidth="172.0" text="Set Execution Leader" />
+      <Button fx:id="btnApproveAnalysisTime" layoutX="179.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Analysis Time" />
+      <Button fx:id="btnDenyAnalysisTime" layoutX="90.0" layoutY="518.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" text="Deny Analysis Time" />
+      <Button fx:id="btnDenyExecutionTime" layoutX="14.0" layoutY="478.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" text="Deny Execution Time" />
+      <Button fx:id="btnApproveExecutionTime" layoutX="256.0" layoutY="518.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" prefHeight="31.0" prefWidth="187.0" text="Approve Execution Time" />
+      <Button fx:id="btnSuspend" layoutX="660.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#clickOnSuspend" text="Suspend" />
+      <Button fx:id="btnUnsuspend" layoutX="549.0" layoutY="556.0" mnemonicParsing="false" onMouseClicked="#clickOnUnsuspend" text="Unsuspend" />
+      <TextField fx:id="txtFieldEstimatedTime" layoutX="375.0" layoutY="384.0" prefHeight="31.0" prefWidth="172.0" />
+      <Text fx:id="txtExecutionEstimatedTime" layoutX="337.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution estimated time:" wrappingWidth="171.9999975635269" />
+      <Text fx:id="txtAnalysisEstimatedTime" layoutX="159.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis estimated time:" wrappingWidth="170.00000225641224" />
    </children>
 </AnchorPane>
