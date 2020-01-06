@@ -75,7 +75,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			for(User u: users) {
 				if(u.getPermission().equals("SUPERVISOR")) {
 					handleSupervasior(employeeUser,u);
-					((Node) event.getSource()).getScene().getWindow().hide();
+					return;
 				}
 			}
 			handleSupervisorOneUser(employeeUser);
