@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -59,6 +60,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     /* ***************************************
      * ********** Private Objects ***********
      * ***************************************/
+    private String previousPagePath;
     private File uploadedFile;
     private ChangeRequest currentChangeRequest;
     private ExtraDetailsChangeRequestController myController = new ExtraDetailsChangeRequestController(this);
@@ -68,7 +70,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
      * ***************************************/
     @FXML
     void backBtn(MouseEvent event) {
-    	ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
+    	ProjectFX.pagingController.loadBoundary(previousPagePath);
     }
 
     @FXML
@@ -94,7 +96,8 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	
 	@Override
 	public void initData(Object data) {
-		currentChangeRequest = (ChangeRequest) data;
+		currentChangeRequest = (ChangeRequest)((ArrayList<Object>) data).get(0);
+		previousPagePath = (String)((ArrayList<Object>) data).get(1);
 		initiatorNameTF.setText(currentChangeRequest.getInitiatorUserName());
 		subSystemTF.setText(currentChangeRequest.getSelectedSubsystem());
 		currentStateDescTA.setText(currentChangeRequest.getCurrentStateDescription());
