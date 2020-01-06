@@ -159,7 +159,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if (!(myAnalysisReportStage == null))
@@ -169,7 +168,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if (!(myAnalysisReportStage == null))

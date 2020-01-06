@@ -86,11 +86,6 @@ public class ActivityReportBoundary implements DataInitializable {
 				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
 				return;
 			}
-//			daysBetween = TimeManager.getDaysBetween(todayDate, endDate);
-//			if (daysBetween > 0) {
-//				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
-//				return;
-//			}
 			daysBetween = TimeManager.getDaysBetween(startDate, endDate);
 			if (daysBetween < 0) {
 				Toast.makeText(ProjectFX.mainStage, "Please choose a valid date", 1500, 500, 500);
