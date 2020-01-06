@@ -20,7 +20,7 @@
             <Image url="@background_image.jpg" />
          </image>
       </ImageView>
-      <Text layoutX="327.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tech Manager">
+      <Text layoutX="304.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tech Manager">
          <font>
             <Font size="24.0" />
          </font>
@@ -38,7 +38,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <VBox alignment="TOP_CENTER" prefHeight="374.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="387.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -103,10 +103,10 @@
             </ImageView>
          </children>
       </VBox>
-      <AnchorPane fx:id="employeeAnchorPane" layoutX="138.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
+      <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
          <children>
             <Text layoutX="231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
-            <TableView fx:id="employeeListTable" layoutY="26.0" prefHeight="311.0" prefWidth="200.0">
+            <TableView fx:id="employeeListTable" layoutY="26.0" prefHeight="277.0" prefWidth="200.0">
                <columns>
                   <TableColumn fx:id="clmEmployeId" prefWidth="75.0" text="ID" visible="false" />
                   <TableColumn fx:id="EmployeeNameColumn" prefWidth="138.0" text="Employee List" />
@@ -115,31 +115,43 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <TextField fx:id="userNameTextField" layoutX="305.0" layoutY="134.0" />
+            <TextField fx:id="userNameTextField" layoutX="305.0" layoutY="134.0" prefHeight="25.0" prefWidth="200.0" />
             <Text layoutX="231.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email:" />
-            <TextField fx:id="emailTextField" layoutX="305.0" layoutY="168.0" />
+            <TextField fx:id="emailTextField" layoutX="305.0" layoutY="168.0" prefHeight="25.0" prefWidth="200.0" />
             <Text layoutX="231.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Position:" />
-            <TextField fx:id="positionTextField" layoutX="305.0" layoutY="203.0" />
+            <TextField fx:id="positionTextField" layoutX="305.0" layoutY="203.0" prefHeight="25.0" prefWidth="200.0" />
             <Text layoutX="230.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Number:" />
-            <TextField fx:id="numberTextField" layoutX="305.0" layoutY="241.0" />
-            <TextField fx:id="departmentTextField" layoutX="305.0" layoutY="279.0" />
+            <TextField fx:id="numberTextField" layoutX="305.0" layoutY="241.0" prefHeight="25.0" prefWidth="200.0" />
+            <TextField fx:id="departmentTextField" layoutX="305.0" layoutY="279.0" prefHeight="25.0" prefWidth="200.0" />
             <Text layoutX="228.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
             <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="Edit Permissions" />
+            <Text layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press on a row in the table to see employee details" wrappingWidth="199.99999972432852" />
+            <ImageView fitHeight="109.0" fitWidth="127.0" layoutX="342.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@employee_photo.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <TableView fx:id="requestListTable" layoutX="187.0" layoutY="149.0" prefHeight="277.0" prefWidth="493.0">
-         <columns>
-            <TableColumn fx:id="requestIdColumn" prefWidth="69.33331298828125" text="Request ID" />
-            <TableColumn fx:id="stepColumn" prefWidth="81.0" text="Step" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="178.0" text="Description " />
-            <TableColumn fx:id="subsystemColumn" prefWidth="158.0" text="SubSystem" />
-         </columns>
-      </TableView>
       <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="504.0" prefWidth="603.0" visible="false">
          <children>
             <ComboBox fx:id="reportTypeComboBox" layoutX="85.0" layoutY="1.0" prefHeight="25.0" prefWidth="164.0" promptText="- select report type -" />
             <Button fx:id="viewReportButton" layoutX="249.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#loadSpecificReport" text="view" />
             <AnchorPane fx:id="reportDisplayAnchorPane" layoutY="52.0" prefHeight="452.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="requestListPane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0">
+         <children>
+            <TableView fx:id="requestListTable" layoutX="17.0" prefHeight="277.0" prefWidth="493.0">
+               <columns>
+                  <TableColumn fx:id="requestIdColumn" prefWidth="69.33331298828125" text="Request ID" />
+                  <TableColumn fx:id="stepColumn" prefWidth="81.0" text="Step" />
+                  <TableColumn fx:id="descriptionColumn" prefWidth="178.0" text="Description " />
+                  <TableColumn fx:id="subsystemColumn" prefWidth="158.0" text="SubSystem" />
+               </columns>
+            </TableView>
+            <Button fx:id="viewRequestDetailsButton" layoutX="383.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#loadExtraDetailsPage" text="View Request Details" />
+            <Text layoutX="19.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press on a row in the table to view change request extra details" />
          </children>
       </AnchorPane>
    </children>

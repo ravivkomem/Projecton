@@ -24,11 +24,23 @@ public class ChangeRequest {
 		switch(currentStep)
 		{
 		
-			case "AUTO_ANALYZER_APPOINT":
+			case "ANALYZER_AUTO_APPOINT":
+			case "ANALYZER_SUPERVISOR_APPOINT":
+				actualStep = "Appoint analyzer";
+				break;
+				
 			case "ANALYSIS_SET_TIME":
 			case "ANALYSIS_APPROVE_TIME":
 			case "ANALYSIS_WORK":
 				actualStep = "Analysis";
+				break;
+				
+			case "COMMITTEE_WORK":
+				actualStep = "Committee";
+				break;
+				
+			case "EXECUTION_LEADEAR_SUPERVISOR_APPOINT":
+				actualStep = "Appoint execution leader";
 				break;
 				
 			case "EXECUTION_SET_TIME":
@@ -37,18 +49,22 @@ public class ChangeRequest {
 				actualStep = "Execution";
 				break;
 			
+			case "TESTER_APPOINT":
+				actualStep = "Appoint Tester";
+				break;
+				
 			case "TESTING_WORK":
 				actualStep = "Testing";
 				break;
 			
-			case "COMMITTEE_WORK":
-				actualStep = "Committee";
-				break;
-				
-			case "TESTER_APPOINT":
-				actualStep = "Appoint Tester";
+			case "CLOSING_STEP":
+				actualStep = "Closing Step";
 				break;
 			
+			case "DENY_STEP":
+				actualStep = "Deny Step";
+				break;
+				
 			default:
 				actualStep = currentStep;
 				break;
