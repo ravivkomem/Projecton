@@ -22,17 +22,18 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView fx:id="basicDetailsTbl" layoutX="46.0" layoutY="183.0" prefHeight="200.0" prefWidth="666.0">
+      <TableView fx:id="basicDetailsTbl" layoutX="13.0" layoutY="144.0" prefHeight="241.0" prefWidth="728.0">
         <columns>
           <TableColumn fx:id="requstIdClm" prefWidth="90.0" text="Request ID" />
-            <TableColumn fx:id="statusClm" prefWidth="171.0" text="Status" />
-            <TableColumn fx:id="descClm" prefWidth="178.0" text="Description " />
-            <TableColumn fx:id="subSystemClm" prefWidth="226.0" text="SubSystem" />
+            <TableColumn fx:id="statusClm" prefWidth="84.0" text="Status" />
+            <TableColumn fx:id="descClm" prefWidth="189.0" text="Description " />
+            <TableColumn fx:id="subSystemClm" prefWidth="238.0" text="SubSystem" />
+            <TableColumn fx:id="startDateClm" prefWidth="126.0" text="Start Date" />
         </columns>
       </TableView>
       <Button fx:id="viewExtraDetailsBtn" layoutX="415.0" layoutY="393.0" mnemonicParsing="false" onMouseClicked="#extraDetailsShows" text="View request details" />
       <Button fx:id="backBtn" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#backToPrevPage" text="Back" />
-      <Text fx:id="noSubmitingRequest" fill="#eb0000" layoutX="205.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are no Change Request submitted" textAlignment="JUSTIFY">
+      <Text fx:id="noSubmitingRequest" fill="#eb0000" layoutX="204.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="There are no Change Request submitted" textAlignment="JUSTIFY">
          <font>
             <Font size="18.0" />
          </font>

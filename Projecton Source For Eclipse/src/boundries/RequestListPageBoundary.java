@@ -1,6 +1,7 @@
 package boundries;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -42,6 +43,9 @@ public class RequestListPageBoundary implements Initializable {
 
     @FXML
     private TableColumn<ChangeRequest, String> subSystemClm;
+    
+    @FXML
+    private TableColumn<ChangeRequest, Date> startDateClm;
     /*FXML Text*/
     @FXML
     private Text noSubmitingRequest;
@@ -73,7 +77,10 @@ public class RequestListPageBoundary implements Initializable {
 
     @FXML
     void extraDetailsShows(MouseEvent event) {
-    	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),currentChangeRequest);
+    	ArrayList<Object> dataList = new ArrayList<>();
+    	dataList.add(currentChangeRequest);
+    	dataList.add(ProjectPages.REQUEST_LIST_PAGE.getPath());
+    	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
     	
     }
 
@@ -89,6 +96,7 @@ public class RequestListPageBoundary implements Initializable {
 		statusClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("status"));
 		descClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("currentStateDescription"));
 		subSystemClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
+		startDateClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest,Date>("StartDate"));
 		noSubmitingRequest.setVisible(false);
 		displaySpecificID.setEditable(false);
 		selectedChangeRequestIdText.setVisible(true);
