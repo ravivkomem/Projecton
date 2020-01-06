@@ -119,7 +119,6 @@ public class TechManagerBoundary implements DataInitializable{
 	
     @FXML
     void loadExtraDetailsPage(MouseEvent event) {
-    	/*TODO check move to extra details page*/
     	ArrayList<Object> dataList = new ArrayList<>();
     	dataList.add(currentChangeRequest);
     	dataList.add(ProjectPages.TECH_MANAGER_PAGE.getPath());
