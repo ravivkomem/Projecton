@@ -66,6 +66,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			employeeUser.setPermission("INFORMATION_ENGINEER");
 			employeeUser.setJobDescription("Information Engineer");
 			createPermissionToOneUser(employeeUser);
+			popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+			Stage stage = (Stage) errorText.getScene().getWindow();
+			stage.close();
 			break;
 		case "Supervisor":
 			errorText.setVisible(false);
@@ -104,7 +107,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			for(User u: users) {
 				if(u.getPermission().equals("COMMITTEE_DIRECTOR")) {
 					handleCommitteeDirector(employeeUser,u);
-					((Node) event.getSource()).getScene().getWindow().hide();
+					return;
 				}
 			}
 			handleCommitteeDirectorOneUser(employeeUser);
