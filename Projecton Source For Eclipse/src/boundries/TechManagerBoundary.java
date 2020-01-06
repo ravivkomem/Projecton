@@ -122,7 +122,7 @@ public class TechManagerBoundary implements DataInitializable{
     	/*TODO check move to extra details page*/
     	ArrayList<Object> dataList = new ArrayList<>();
     	dataList.add(currentChangeRequest);
-    	dataList.add(ProjectPages.TECH_MANAGER_PAGE);
+    	dataList.add(ProjectPages.TECH_MANAGER_PAGE.getPath());
     	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
     }
 	
