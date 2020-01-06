@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -51,8 +52,20 @@ public class RequestListPageBoundary implements Initializable {
     private Text noSubmitingRequest;
     @FXML
     private Text selectedChangeRequestIdText;
+    
+    /*FXML DatePickers*/
+    
+    @FXML
+    private DatePicker fromDatePicker;
+
+    @FXML
+    private DatePicker toDatePicker;
 
     /*Button FXML*/
+    
+    @FXML
+    private Button searchByDateBtn;
+    
     @FXML
     private Button viewExtraDetailsBtn;
 
@@ -69,6 +82,17 @@ public class RequestListPageBoundary implements Initializable {
     ChangeRequest currentChangeRequest;
     
     /*FXML Methods*/
+    void searchByDateBtn(MouseEvent event)
+    {
+    	Date from,to;
+    	from=Date.valueOf(fromDatePicker.getValue());
+    	to=Date.valueOf(toDatePicker.getValue());
+    	if (from==null&&to==null)
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "Please pick a date", 1500, 500, 500);
+    	}
+    	
+    }
 
     @FXML
     void backToPrevPage(MouseEvent event) {
@@ -100,6 +124,8 @@ public class RequestListPageBoundary implements Initializable {
 		noSubmitingRequest.setVisible(false);
 		displaySpecificID.setEditable(false);
 		selectedChangeRequestIdText.setVisible(true);
+		fromDatePicker.setEditable(false);
+		toDatePicker.setEditable(false);
 		myController.fillNecessaryFieldsInTable();
 		basicDetailsTbl.setRowFactory(tv -> {
 		    TableRow<ChangeRequest> row = new TableRow<>();
