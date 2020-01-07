@@ -112,7 +112,7 @@ public class ActivityReportBoundary implements DataInitializable {
 		int active = 0, close = 0, suspended = 0, denied = 0;
 		ArrayList<Long> workDays = new ArrayList<>();
 		for (int i = 0; i < changeRequestList.size(); i++) {
-			if (changeRequestList.get(i).getStatus().equals("ACTIVE")) {
+			if (changeRequestList.get(i).getStatus().equals("Active")) {
 				active++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
