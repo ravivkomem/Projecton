@@ -142,16 +142,16 @@
             <Button fx:id="searchByDateBtn" layoutX="497.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#searchByDate" prefHeight="31.0" prefWidth="89.0" text="Search" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="searchByIdPane" layoutX="143.0" layoutY="93.0" prefHeight="73.0" prefWidth="577.0">
+      <AnchorPane fx:id="searchByIdPane" layoutX="143.0" layoutY="93.0" prefHeight="73.0" prefWidth="577.0" visible="false">
          <children>
             <TextField fx:id="enterIdTextField" layoutX="29.0" layoutY="21.0" promptText="Please enter request ID" />
-            <Button fx:id="searchByIdBtn" layoutX="248.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#loadsearchByIdPage" text="Search" />
+            <Button fx:id="searchByIdBtn" layoutX="248.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#searchById" text="Search" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="searchByStatusPane" layoutX="164.0" layoutY="96.0" prefHeight="68.0" prefWidth="545.0" visible="false">
          <children>
             <ComboBox fx:id="selectStatusComboBox" layoutX="14.0" layoutY="19.0" prefHeight="31.0" prefWidth="199.0" promptText="-Please select status-" />
-            <Button fx:id="searchByStatusBtn" layoutX="240.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#loadSearchByStatusPage" prefHeight="31.0" prefWidth="79.0" text="Search" />
+            <Button fx:id="searchByStatusBtn" layoutX="240.0" layoutY="19.0" mnemonicParsing="false" onMouseClicked="#searchByStatus" prefHeight="31.0" prefWidth="79.0" text="Search" />
          </children>
       </AnchorPane>
    </children>

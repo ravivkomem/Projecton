@@ -25,7 +25,7 @@ public class Utilizer {
 		double avg = calcAvg(list);
 		double sum = 0;
 		for (int i = 0; i < list.size(); i++) {
-			sum += (double)Math.pow(2, (list.get(i)-avg));
+			sum += (double)Math.pow((list.get(i)-avg), 2);
 		}
 		return (double)Math.sqrt((1.0/list.size())*sum);
 	}

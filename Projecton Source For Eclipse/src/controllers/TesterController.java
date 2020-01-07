@@ -8,8 +8,6 @@ import assets.SqlQueryType;
 import assets.SqlResult;
 import assets.StepType;
 import boundries.TesterBoundary;
-import client.ClientConsole;
-import entities.ChangeRequest;
 import entities.Step;
 import javafx.application.Platform;
 
@@ -34,26 +32,23 @@ public class TesterController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
-	public void updateChangeRequestStep(ChangeRequest changerequest, String failReport,String Status ,Date date) {
+	public void closeChangeRequestStep(Integer testerStepId, String failReport) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(failReport);
-		varArray.add(Status);
-		varArray.add(date);
-		varArray.add(changerequest.getChangeRequestID());
+		varArray.add("CLOSED");
+		varArray.add(TimeManager.getCurrentDate());
+		varArray.add(testerStepId);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TESTER_STEP,varArray);
-		
-		this.subscribeToClientDeliveries();		//subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		this.sendSqlActionToClient(sqlAction);
 	}
 	
-	public void updateChangeRequestCurrentStep(String currentStep, String HamdlerUserName, Integer changeRequestID) {
+	public void advanceChangeRequestStep(String nextStep, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(currentStep);
-		varArray.add(HamdlerUserName);
+		varArray.add(nextStep);
+		varArray.add("");
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP,varArray);
-		this.subscribeToClientDeliveries();		//subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		this.sendSqlActionToClient(sqlAction);
 	}
 	
 

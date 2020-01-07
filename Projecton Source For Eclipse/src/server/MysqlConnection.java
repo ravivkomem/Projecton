@@ -140,6 +140,24 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
+    public void disconnectAllLoggedUsers()
+    {
+    	this.connect();
+    	try {
+			Statement statement = connection.createStatement();
+			statement.execute("UPDATE icm.user SET IsLogged = '0'");
+		} 
+    	catch (SQLException e) 
+    	{
+    		
+		}
+    	finally
+    	{
+    		this.disconnect();
+    	}
+
+    }
+    
     public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
@@ -219,12 +237,10 @@ public class MysqlConnection {
 		 * *************** Tester Queries **************
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
-    			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
+    			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE TesterStepId = ?";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
-		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
-				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		sqlArray[SqlQueryType.SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT TesterStepID, ChangeRequestID, HandlerUserName, StartDate, Status, EstimatedEndDate, EndDate"
 				+ " FROM icm.tester_step WHERE ChangeRequestID = ?"
@@ -478,6 +494,17 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.GET_USER_FULL_NAME.getCode()] =
     			"SELECT FirstName, LastName From icm.user "
     			+ "WHERE UserName = ?";
+    	/* *****************************************************
+		 * ************* Request List Page Queries ****************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
+				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_DATE_FILTER.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND StartDate BETWEEN ? AND ?";
+    	sqlArray[SqlQueryType.SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND ChangeRequestID=?";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND Status=?";
     }
     
 }

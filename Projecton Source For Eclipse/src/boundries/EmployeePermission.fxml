@@ -29,5 +29,7 @@
       <ComboBox fx:id="committeeMemberComboBox" layoutX="101.0" layoutY="209.0" prefHeight="25.0" prefWidth="198.0" promptText="- select committee membor -" visible="false" />
       <Button fx:id="replaceMemberButton" layoutX="298.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#replaceCommitteMember" text="Replace" visible="false" />
       <Text layoutX="11.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Permission:" />
+      <ComboBox fx:id="subsystemComboBox" layoutX="114.0" layoutY="209.0" prefHeight="25.0" prefWidth="189.0" promptText="- select subsystem -" visible="false" />
+      <Button fx:id="setSubsystemButton" layoutX="303.0" layoutY="209.0" mnemonicParsing="false" onMouseClicked="#updateSupportSubsystem" text="Set" visible="false" />
    </children>
 </AnchorPane>

@@ -33,8 +33,22 @@ public class RequestListPageController extends BasicController {
 					ArrayList<ChangeRequest> resultList = this.parseSqlResultToChangeRequestArrayList(result);
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.displayAllChangeRequestsForSpecifcUser(resultList);
-				
-				
+					break;
+				case SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_DATE_FILTER:
+					ArrayList<ChangeRequest> resultListByDate = this.parseSqlResultToChangeRequestArrayList(result);
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.displayChangeRequestsByFilter(resultListByDate);
+					break;
+				case SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER:
+					ArrayList<ChangeRequest> resultListById = this.parseSqlResultToChangeRequestArrayList(result);
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.displayChangeRequestsByFilter(resultListById);
+					break;
+				case SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER:
+					ArrayList<ChangeRequest> resultListByStatus = this.parseSqlResultToChangeRequestArrayList(result);
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.displayChangeRequestsByFilter(resultListByStatus);
+					break;
 			default:
 				break;
 				
@@ -86,6 +100,35 @@ public class RequestListPageController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
+	}
+	public void getChangeRequestsByDateSearch(Date from,Date to)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(ProjectFX.currentUser.getUserName());
+		varArray.add(from);
+		varArray.add(to);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_DATE_FILTER,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	public void getChangeRequestsByIdSearch(Integer idNum)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(ProjectFX.currentUser.getUserName());
+		varArray.add(idNum);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	public void getChangeRequestByStatus(String status)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(ProjectFX.currentUser.getUserName());
+		varArray.add(status);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
 	}
 
 }
