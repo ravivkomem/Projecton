@@ -15,6 +15,7 @@ import entities.ActivityReport;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -26,7 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class ActivityReportBoundary implements DataInitializable {
+public class ActivityReportBoundary implements Initializable {
 
 	/* *************************************
 	 * ********* FXML Objects **************
@@ -196,11 +197,6 @@ public class ActivityReportBoundary implements DataInitializable {
 		workDaysChartBarCategory.setLabel("Work Days");
 		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
-	}
-
-	@Override
-	public void initData(Object data) {
-
 	}
 
 }

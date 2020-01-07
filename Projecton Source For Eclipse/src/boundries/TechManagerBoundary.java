@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -31,7 +32,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class TechManagerBoundary implements DataInitializable{
+public class TechManagerBoundary implements Initializable{
 
 	/* *************************************
 	 * ********* FXML Objects **************
@@ -274,11 +275,6 @@ public class TechManagerBoundary implements DataInitializable{
 		    return row ;
 		});
 		myController.getAllTheActiveChangeRequest();
-	}
-
-	@Override
-	public void initData(Object data) {
-		
 	}
 	
 	public void displayChangeRequestTable(ArrayList<ChangeRequest> resultList) {

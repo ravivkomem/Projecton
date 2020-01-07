@@ -40,6 +40,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
     private Button setNewPermissionTextField;
     @FXML
     private Button replaceMemberButton;
+
+    @FXML
+    private ComboBox<String> subsystemComboBox;
+    @FXML
+    private Button setSubsystemButton;
     
     /* *************************************
    	 * ******* Private Objects *************
@@ -52,6 +57,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	/* *************************************
 	 * ******* FXML Methods *************
 	 * *************************************/
+	
+    @FXML
+    void updateSupportSubsystem(MouseEvent event) {
+    	/*TODO: quarry to insert table*/
+    }
 	
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
@@ -112,11 +122,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			}
 			handleCommitteeDirectorOneUser(employeeUser);
 			break;
+		case "":
+			/*TODO: support to subsystem*/
+		    subsystemComboBox.setVisible(true);
+		    setSubsystemButton.setVisible(true);
+		    break;
 		default:
 			break;
 		}
-//		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
-//		((Node) event.getSource()).getScene().getWindow().hide();
     }
     
     @FXML
@@ -476,10 +489,13 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		permossionTextField.setEditable(false);
+		subsystemComboBox.setVisible(false);
+	    setSubsystemButton.setVisible(false);
 		newPremissionComboBox.getItems().add("Information Engineer");
 		newPremissionComboBox.getItems().add("Supervisor");
 		newPremissionComboBox.getItems().add("Committee Member");
 		newPremissionComboBox.getItems().add("Committee Director");
+		/*TODO: initialize subsystemComboBox*/
 	}
 
 	@Override
