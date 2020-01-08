@@ -48,6 +48,7 @@ public enum SqlQueryType {
 	 * *****************************************/
 	SELECT_ALL_ACTIVE_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_EMPLOYEE(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_SUBSYSTEM_BY_USER_NAME(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_EMPLOYEE_PERMISSION(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_SUBSYSTEM_SUPPORTER(SqlExecutionType.UPDATE_QUERY),
 	// Performance report

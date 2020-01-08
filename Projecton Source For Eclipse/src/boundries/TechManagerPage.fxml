@@ -103,7 +103,7 @@
             </ImageView>
          </children>
       </VBox>
-      <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
+      <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0">
          <children>
             <Text layoutX="231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
             <TableView fx:id="employeeListTable" layoutY="26.0" prefHeight="277.0" prefWidth="200.0">
@@ -124,13 +124,18 @@
             <TextField fx:id="numberTextField" layoutX="305.0" layoutY="241.0" prefHeight="25.0" prefWidth="200.0" />
             <TextField fx:id="departmentTextField" layoutX="305.0" layoutY="279.0" prefHeight="25.0" prefWidth="200.0" />
             <Text layoutX="228.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Department:" />
-            <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="363.0" onMouseClicked="#loagViewPermissionsPage" text="Edit Permissions" />
+            <Hyperlink fx:id="hlViewPermission" layoutX="472.0" layoutY="403.0" onMouseClicked="#loagViewPermissionsPage" text="Edit Permissions" />
             <Text layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press on a row in the table to see employee details" wrappingWidth="199.99999972432852" />
             <ImageView fitHeight="109.0" fitWidth="127.0" layoutX="342.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@employee_photo.png" />
                </image>
             </ImageView>
+            <TableView fx:id="subsystemSupporterTable" layoutX="305.0" layoutY="313.0" prefHeight="67.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="subsystemSupporterColumn" prefWidth="199.0" text="Subsystem Supporter" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="reportPageAnchorPane" layoutX="137.0" layoutY="94.0" prefHeight="504.0" prefWidth="603.0" visible="false">
@@ -140,7 +145,7 @@
             <AnchorPane fx:id="reportDisplayAnchorPane" layoutY="52.0" prefHeight="452.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="requestListPane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0">
+      <AnchorPane fx:id="requestListPane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0" visible="false">
          <children>
             <TableView fx:id="requestListTable" layoutX="17.0" prefHeight="277.0" prefWidth="493.0">
                <columns>

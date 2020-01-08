@@ -10,6 +10,7 @@ import assets.Toast;
 import controllers.TechManagerController;
 import controllers.TimeManager;
 import entities.ChangeRequest;
+import entities.SubsystemSupporter;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,6 +104,10 @@ public class TechManagerBoundary implements Initializable{
     @FXML
     private ComboBox<String> reportTypeComboBox;
     
+    @FXML
+    private TableView<SubsystemSupporter> subsystemSupporterTable;
+    @FXML
+    private TableColumn<SubsystemSupporter, String> subsystemSupporterColumn;
     
     /* *************************************
 	 * ******* Private Objects *************
@@ -113,6 +118,7 @@ public class TechManagerBoundary implements Initializable{
 	TechManagerController myController = new TechManagerController(this);
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
+	ObservableList<SubsystemSupporter> subsystemList = FXCollections.observableArrayList();
 
 	/* *************************************
 	 * ******* FXML Methods *************
@@ -250,6 +256,8 @@ public class TechManagerBoundary implements Initializable{
 		
 		EmployeeNameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fullName"));
 		
+	    subsystemSupporterColumn.setCellValueFactory(new PropertyValueFactory<SubsystemSupporter, String>("subsystem"));;
+		
 		employeeListTable.setRowFactory(tv -> {
 		    TableRow<User> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
@@ -260,6 +268,7 @@ public class TechManagerBoundary implements Initializable{
 		            positionTextField.setText(employeeUser.getJobDescription());
 		            numberTextField.setText(employeeUser.getPhoneNumber());
 		            departmentTextField.setText(employeeUser.getDepartment());
+		            myController.getSubsystemSupporterByUserName(employeeUser.getUserName());
 		        }
 		    });
 		    return row ;
@@ -291,6 +300,14 @@ public class TechManagerBoundary implements Initializable{
 			users.addAll(resultList);
 			employeeList.addAll(resultList);
 			employeeListTable.setItems(employeeList);
+		}
+	}
+
+	public void displaySubsystemTable(ArrayList<SubsystemSupporter> resultList) {
+		subsystemList.clear();
+		if (!resultList.isEmpty()) {
+			subsystemList.addAll(resultList);
+			subsystemSupporterTable.setItems(subsystemList);
 		}
 	}
 

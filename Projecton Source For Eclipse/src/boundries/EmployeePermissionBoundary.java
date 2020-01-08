@@ -60,12 +60,19 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	
     @FXML
     void updateSupportSubsystem(MouseEvent event) {
-    	/*TODO: quarry to insert table*/
-    	Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "Are sure you"
-    			+ " want to appoint this user?");
-    	if (result.get() == ButtonType.OK) {
-    		
+    	if(subsystemComboBox.getSelectionModel().isEmpty()) {
+    		popUpWindowMessage(AlertType.INFORMATION, "", "Please choose subsystem first");
+    	} else {
+    		Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "Are sure you"
+        			+ " want to appoint this user?");
+        	if (result.get() == ButtonType.OK) {
+        		myController.updateSubsystemSupporter(subsystemComboBox.getSelectionModel().getSelectedItem(),
+        				employeeUser.getUserName());
+        		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+        		((Node) event.getSource()).getScene().getWindow().hide();
+        	}
     	}
+    	
     }
 	
     @FXML
