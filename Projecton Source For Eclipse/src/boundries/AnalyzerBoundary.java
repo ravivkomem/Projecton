@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -283,7 +284,25 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
+		advantagestextArea.setWrapText(true);
+		constraintstextArea.setWrapText(true);
+		descriptiontextArea.setWrapText(true);
+		durationtextArea.setWrapText(true);
+		headertextArea.setWrapText(true);
+		
 		timeextensionButton.setDisable(true);
+		advantagestextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		constraintstextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		descriptiontextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		durationtextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		headertextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		
+		
 	}
 
 	@Override
