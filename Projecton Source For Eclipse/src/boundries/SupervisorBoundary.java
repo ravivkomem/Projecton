@@ -554,6 +554,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	myController.changeCurrentStepFromAnalyzerAutoAppoint(myChangerequest.getChangeRequestID());
     	txtTextExplantion.setVisible(true);
     	txtTextExplantion.setText("Please select an analyzer for the request");
+    	btnApproveAppointment.setVisible(false);
+    	btnDenyAppointment.setVisible(false);
+    	txtSystemAutoAppoint.setVisible(false);
+    	txtHandlerNameAutoAppoint.setVisible(false);
     	comboSelectAnalyizer.setVisible(true);
     	btnSetAnalyzer.setVisible(true);   
     	myController.SelectChangeRequestForAppointments();
