@@ -62,13 +62,14 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	//"UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
-	public void updateAnalysisStepClose(ChangeRequest changerequest,Date date,String Status,String AnalysisReportDescription,String AnalysisReportAdvantages,String AnalysisReportConstraints) {
+	public void updateAnalysisStepClose(ChangeRequest changerequest,Date date,String Status,String AnalysisReportHeader, String AnalysisReportDescription,String AnalysisReportAdvantages,String AnalysisReportDuration,String AnalysisReportConstraints) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(date);
 		varArray.add(Status);
+		varArray.add(AnalysisReportHeader);
 		varArray.add(AnalysisReportDescription);
 		varArray.add(AnalysisReportAdvantages);
-		
+		varArray.add(AnalysisReportDuration);
 		varArray.add(AnalysisReportConstraints);
 		varArray.add(changerequest.getChangeRequestID());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE,varArray);

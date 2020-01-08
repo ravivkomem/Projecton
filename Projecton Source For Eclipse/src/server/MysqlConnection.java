@@ -189,7 +189,7 @@ public class MysqlConnection {
                 "UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
         
         sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE.getCode()]=
-                "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
+                "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
  
     	/* *****************************************************
 		 * *************** Work Station Queries ****************
@@ -423,7 +423,7 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
-						" WHERE CurrentStep = 'ANALAYZER_AUTO_APPOINT' OR CurrentStep = 'EXECUTION_LEADEAR_SUPERVISOR_APPOINT'";
+						" WHERE CurrentStep = 'ANALYZER_AUTO_APPOINT' OR CurrentStep = 'EXECUTION_LEADEAR_SUPERVISOR_APPOINT' OR CurrentStep = 'ANALYZER_SUPERVISOR_APPOINT' ";
     	
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPROVALS.getCode()] = 
@@ -468,7 +468,7 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     	
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ?, CurrentStep  = ?  WHERE ChangeRequestID = ?";
     	
     	sqlArray[SqlQueryType.SELECT_EXECUTION_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step" +
@@ -477,6 +477,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.analysis_step" +
 						" WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_END_DATE_IN_CLOSING_STEP.getCode()] = "UPDATE icm.closing_step SET EndDate = ?, Status  = ? WHERE ChangeRequestID = ?";
     	
     	/* *****************************************************
 		 * ************* Time Watcher Queries ****************

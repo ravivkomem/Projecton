@@ -2,10 +2,10 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -111,20 +111,25 @@
             <TableColumn fx:id="subsystemColumn" prefWidth="116.0" text="SubSystem" />
          </columns>
       </TableView>
-      <AnchorPane fx:id="createReportPane" layoutX="143.0" layoutY="78.0" prefHeight="520.0" prefWidth="603.0">
+      <AnchorPane fx:id="createReportPane" layoutX="143.0" layoutY="84.0" prefHeight="520.0" prefWidth="603.0">
          <children>
             <Text layoutX="13.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
-            <TextField fx:id="headertextField" alignment="TOP_LEFT" layoutX="88.0" layoutY="95.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
+            <Label fx:id="headerCharcterCounterLabel" layoutX="262.0" layoutY="80.0" text="0/100" />
+            <TextArea fx:id="headertextArea" layoutX="88.0" layoutY="85.0" onKeyTyped="#updateHeaderCharcterCounter" prefHeight="98.0" prefWidth="168.0" />
+            <TextArea fx:id="descriptiontextArea" layoutX="88.0" layoutY="200.0" onKeyTyped="#updateDescriptionCharcterCounter" prefHeight="109.0" prefWidth="168.0" />
+            <Label fx:id="descriptionCharcterCounterLabel" layoutX="256.0" layoutY="197.0" text="0/100" />
+            <Label fx:id="advantagesCharcterCounterLabel" layoutX="262.0" layoutY="332.0" text="0/100" />
             <Text layoutX="302.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constraints:" />
-            <TextField fx:id="descriptiontextField" alignment="TOP_LEFT" layoutX="88.0" layoutY="211.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
             <Text layoutX="12.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advantages:" />
-            <TextField fx:id="advantagestextField" alignment="TOP_LEFT" layoutX="88.0" layoutY="324.0" prefHeight="88.0" prefWidth="168.0" promptText="*" />
+            <TextArea fx:id="advantagestextArea" layoutX="88.0" layoutY="323.0" onKeyTyped="#updateAdvantagesCharcterCounter" prefHeight="125.0" prefWidth="168.0" />
+            <Label fx:id="constraintsCharcterCounterLabel" layoutX="570.0" layoutY="80.0" text="0/100" />
             <Text layoutX="276.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set time duration:" />
             <Button fx:id="submitButton" layoutX="498.0" layoutY="429.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
-            <TextField fx:id="constraintstextField" layoutX="391.0" layoutY="96.0" prefHeight="87.0" prefWidth="168.0" />
+            <TextArea fx:id="constraintstextArea" layoutX="390.0" layoutY="88.0" onKeyTyped="#updateConstraintsCharcterCounter" prefHeight="117.0" prefWidth="168.0" />
             <Text layoutX="23.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Header:" />
-            <TextField fx:id="durationtextField" layoutX="391.0" layoutY="211.0" prefHeight="98.0" prefWidth="168.0" />
+            <TextArea fx:id="durationtextArea" layoutX="395.0" layoutY="205.0" onKeyTyped="#updateDurationCharcterCounter" prefHeight="141.0" prefWidth="168.0" />
             <Text fx:id="timeDisplayText" layoutX="479.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
+            <Label fx:id="durationCharcterCounterLabel" layoutX="570.0" layoutY="206.0" text="0/100" />
             <TextArea fx:id="timeRemainingField" layoutX="479.0" layoutY="28.0" prefHeight="43.0" prefWidth="79.0" />
          </children>
       </AnchorPane>

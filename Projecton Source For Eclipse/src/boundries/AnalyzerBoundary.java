@@ -16,11 +16,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -60,15 +62,19 @@ public class AnalyzerBoundary implements DataInitializable {
 	@FXML
 	private AnchorPane createReportPane;
 	@FXML
-	private TextField descriptiontextField;
+	private TextArea descriptiontextArea;
 	@FXML
-	private TextField advantagestextField;
+	private TextArea advantagestextArea;
 	@FXML
-	private TextField constraintstextField;
+	private TextArea constraintstextArea;
+	@FXML
+    private TextArea headertextArea;
+	@FXML
+	private TextArea durationtextArea;
     @FXML
     private Text timeDisplayText;
     @FXML
-    private TextArea timeRemainingField;
+    private TextArea timeRemainingArea;
 	@FXML
 	private DatePicker timedurationPicker;
 	@FXML
@@ -79,6 +85,17 @@ public class AnalyzerBoundary implements DataInitializable {
 	private Text pageHeaderText;
 	@FXML
 	private Text notificationText;
+    @FXML
+    private Label headerCharcterCounterLabel;
+    @FXML
+    private Label descriptionCharcterCounterLabel;
+    @FXML
+    private Label advantagesCharcterCounterLabel;
+    @FXML
+    private Label constraintsCharcterCounterLabel;
+    @FXML
+    private Label durationCharcterCounterLabel;
+
 	
 	/* ****************************************
      * ********** Private Variables ***********
@@ -87,6 +104,7 @@ public class AnalyzerBoundary implements DataInitializable {
 	public static final String ANALYSIS_SET_TIME = "ANALYSIS_SET_TIME";
 	public static final String ANALYSIS_APPROVE_TIME = "ANALYSIS_APPROVE_TIME";
 	public static final String ANALYSIS_WORK = "ANALYSIS_WORK";
+	public static final int MAX_CHARS = 100;
 	private ChangeRequest currentChangeRequest;
 	private Step analyzerStep;
 	private Stage myTimeExtensionStage;
@@ -137,6 +155,21 @@ public class AnalyzerBoundary implements DataInitializable {
 	void loadCreateReport(MouseEvent event) {
 
 	}
+	private void displayTimeRemaining(Date estimatedEndDate) {
+		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
+		if(daysBetween < 0) {
+			timeDisplayText.setText("Time Delay");
+			timeRemainingArea.setText(Math.abs(daysBetween) + " Days");
+		}
+		else if(daysBetween == 0) {
+			timeDisplayText.setText("Time Remaining");
+			timeRemainingArea.setText("Last Day");
+		}
+		else {
+			timeDisplayText.setText("Time Remaining");
+			timeRemainingArea.setText(daysBetween + " Days");
+		}
+	}
 
 	@FXML
 	void submit(MouseEvent event) {
@@ -158,8 +191,8 @@ public class AnalyzerBoundary implements DataInitializable {
 		// ?,AnalysisReportDescription = ?,AnalysisReportAdvantages =
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 		myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
-		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",
-				descriptiontextField.getText(), advantagestextField.getText(), constraintstextField.getText());
+		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextArea.getText(),
+				descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -200,6 +233,34 @@ public class AnalyzerBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "Updated failed", 1500, 500, 500);
 		}
 	}
+	 @FXML
+	    void updateAdvantagesCharcterCounter(KeyEvent event) {
+		 advantagesCharcterCounterLabel.setText(advantagestextArea.getText().length() + "/ " + MAX_CHARS);
+
+	    }
+
+	    @FXML
+	    void updateConstraintsCharcterCounter(KeyEvent event) {
+	    	constraintsCharcterCounterLabel.setText(constraintstextArea.getText().length() + "/" + MAX_CHARS);
+	    }
+
+	    @FXML
+	    void updateDescriptionCharcterCounter(KeyEvent event) {
+	    	descriptionCharcterCounterLabel.setText(descriptiontextArea.getText().length() + "/" + MAX_CHARS);
+
+	    }
+
+	    @FXML
+	    void updateDurationCharcterCounter(KeyEvent event) {
+	    	durationCharcterCounterLabel.setText(durationtextArea.getText().length() + "/" + MAX_CHARS);
+
+	    }
+
+	    @FXML
+	    void updateHeaderCharcterCounter(KeyEvent event) {
+	    	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
+
+	    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -218,7 +279,7 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Change Texts */
 		pageHeaderText.setText("Loading change request information");
-		timeRemainingField.setEditable(false);
+		timeRemainingArea.setEditable(false);
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
@@ -265,6 +326,7 @@ public class AnalyzerBoundary implements DataInitializable {
 				createReportPane.setVisible(true);
 				datePane.setVisible(false);
 				notificationText.setVisible(false);
+				displayTimeRemaining(analyzerStep.getEstimatedEndDate());
 				break;
 		}
 	}
