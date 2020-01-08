@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -60,19 +61,19 @@ public class AnalyzerBoundary implements DataInitializable {
 	@FXML
 	private AnchorPane createReportPane;
 	@FXML
-	private TextField descriptiontextField;
+	private TextArea descriptiontextArea;
 	@FXML
-	private TextField advantagestextField;
+	private TextArea advantagestextArea;
 	@FXML
-	private TextField constraintstextField;
+	private TextArea constraintstextArea;
 	@FXML
-    private TextField headertextField;
+    private TextArea headertextArea;
 	@FXML
-	private TextField durationtextField;
+	private TextArea durationtextArea;
     @FXML
     private Text timeDisplayText;
     @FXML
-    private TextArea timeRemainingField;
+    private TextArea timeRemainingArea;
 	@FXML
 	private DatePicker timedurationPicker;
 	@FXML
@@ -83,6 +84,17 @@ public class AnalyzerBoundary implements DataInitializable {
 	private Text pageHeaderText;
 	@FXML
 	private Text notificationText;
+    @FXML
+    private Label headerCharcterCounterLabel;
+    @FXML
+    private Label descriptionCharcterCounterLabel;
+    @FXML
+    private Label advantagesCharcterCounterLabel;
+    @FXML
+    private Label constraintsCharcterCounterLabel;
+    @FXML
+    private Label durationCharcterCounterLabel;
+
 	
 	/* ****************************************
      * ********** Private Variables ***********
@@ -145,15 +157,15 @@ public class AnalyzerBoundary implements DataInitializable {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
 		if(daysBetween < 0) {
 			timeDisplayText.setText("Time Delay");
-			timeRemainingField.setText(Math.abs(daysBetween) + " Days");
+			timeRemainingArea.setText(Math.abs(daysBetween) + " Days");
 		}
 		else if(daysBetween == 0) {
 			timeDisplayText.setText("Time Remaining");
-			timeRemainingField.setText("Last Day");
+			timeRemainingArea.setText("Last Day");
 		}
 		else {
 			timeDisplayText.setText("Time Remaining");
-			timeRemainingField.setText(daysBetween + " Days");
+			timeRemainingArea.setText(daysBetween + " Days");
 		}
 	}
 
@@ -177,8 +189,8 @@ public class AnalyzerBoundary implements DataInitializable {
 		// ?,AnalysisReportDescription = ?,AnalysisReportAdvantages =
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 		myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
-		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextField.getText(),
-				descriptiontextField.getText(), advantagestextField.getText(),durationtextField.getText(), constraintstextField.getText());
+		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextArea.getText(),
+				descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -237,7 +249,7 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Change Texts */
 		pageHeaderText.setText("Loading change request information");
-		timeRemainingField.setEditable(false);
+		timeRemainingArea.setEditable(false);
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
