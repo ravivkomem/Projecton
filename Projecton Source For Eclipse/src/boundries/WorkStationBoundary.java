@@ -230,7 +230,8 @@ public class WorkStationBoundary implements Initializable{
     	changeRequestList.clear();
     	changeRequestList.addAll(recievedChangeRequestList);
     	changeRequestTableView.setItems(changeRequestList);
-  
+    	clickedChangeRequest = null;
+    	selectedChangeRequestIdTextArea.setText("");
     }
     
 	@Override

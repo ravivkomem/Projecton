@@ -130,7 +130,7 @@
             <TextArea fx:id="durationtextArea" layoutX="395.0" layoutY="205.0" onKeyTyped="#updateDurationCharcterCounter" prefHeight="141.0" prefWidth="168.0" />
             <Text fx:id="timeDisplayText" layoutX="479.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
             <Label fx:id="durationCharcterCounterLabel" layoutX="570.0" layoutY="206.0" text="0/100" />
-            <TextArea fx:id="timeRemainingField" layoutX="479.0" layoutY="28.0" prefHeight="43.0" prefWidth="79.0" />
+            <TextArea fx:id="timeRemainingTextArea" layoutX="479.0" layoutY="28.0" prefHeight="43.0" prefWidth="79.0" />
          </children>
       </AnchorPane>
       <Text fx:id="pageHeaderText" layoutX="278.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on change request No. XX" wrappingWidth="332.00000508129597">
