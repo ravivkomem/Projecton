@@ -289,8 +289,12 @@ public class MysqlConnection {
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR' "
     			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR' "
     			+ "OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD'";
+    	sqlArray[SqlQueryType.SELECT_SUBSYSTEM_BY_USER_NAME.getCode()] =
+    			"SELECT *  FROM icm.subsystem_support WHERE ResponsibleUserName = ?";
     	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
     			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
+    	sqlArray[SqlQueryType.UPDATE_SUBSYSTEM_SUPPORTER.getCode()] =
+    			"UPDATE icm.subsystem_support SET ResponsibleUserName = ? WHERE Subsystem = ?";
     	/* Performance report */
     	sqlArray[SqlQueryType.SELECT_ALL_APPROVED_TIME_EXTNESIONS.getCode()]=
     			"SELECT * FROM icm.time_extension "
