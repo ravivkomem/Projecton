@@ -46,6 +46,10 @@ import javafx.stage.Stage;
 
 public class CommitteeDecisionBoundary implements DataInitializable {
 
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
+	
 	@FXML
 	private AnchorPane addCommentPane;
 	@FXML
@@ -118,7 +122,16 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	private Text delayTimeTxt;
 	@FXML
 	private Text changeRequestNoText;
+	
+    @FXML
+    private TextArea denyCommentTextArea;//need to handle
+    @FXML
+    private Button sendDenyCommentBtn;
 
+     /* *************************************
+	  * ******* Private Objects *************
+	  * *************************************/
+    
 	private CommitteDecisionController myController = new CommitteDecisionController(this);
 	private ChangeRequest currentChangeRequest;
 	private Step committeeStep;
@@ -129,6 +142,24 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	Stage myTimeExtensionStage = null;
 	Stage myAnalysisReportStage = null;
 
+	/* *************************************
+	 * ******* FXML Methods *************
+	 * *************************************/
+	
+    @FXML
+    void sendDenyDecisionAndComment(MouseEvent event) {
+    	
+    	if(denyCommentTextArea.getText().equals("")) {
+    		Toast.makeText(ProjectFX.mainStage, "Please write your comment", 1500, 500, 500);
+    	}else {
+    		myController.updateCommitteeStepDB("CLOSED", updateStepDate, denyCommentTextArea.getText(),
+        			currentChangeRequest.getChangeRequestID());
+    		myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
+    				"ACTIVE");
+    		myController.updateChangeRequestCurrentStep("DENY_STEP", "", currentChangeRequest.getChangeRequestID());
+    	}
+    }
+	
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
@@ -207,7 +238,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 * update committee_step 
 				 * update changeRequest table
 				 */
-				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
+				myController.updateCommitteeStepDB("CLOSED", updateStepDate,"", currentChangeRequest.getChangeRequestID());
 				myController.updateChangeRequestCurrentStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT", "",
 						currentChangeRequest.getChangeRequestID());
 				break;
@@ -218,11 +249,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 * update close_step 
 				 * update changeRequest table
 				 */
-				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
-				myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
-						"ACTIVE");
-				myController.updateChangeRequestCurrentStep("DENY_STEP", "", currentChangeRequest.getChangeRequestID());
-				break;
+				sendDenyCommentBtn.setVisible(true);
+				denyCommentTextArea.setVisible(true);
+				decisionComboBox.setVisible(false);
+				btnSendDecision.setVisible(false);
+				return;
 			case "More information":
 				/*
 				 * move to analyzer step: 
@@ -230,7 +261,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 * choose analyzer update
 				 * changeRequest table
 				 */
-				myController.updateCommitteeStepDB("CLOSED", updateStepDate, currentChangeRequest.getChangeRequestID());
+				myController.updateCommitteeStepDB("CLOSED", updateStepDate,"", currentChangeRequest.getChangeRequestID());
 				myController.chooseAutomaticallyAnalyzer();
 				break;
 			default:
@@ -262,6 +293,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
 
+	/*
+	 * ************************************* 
+	 * ******* Public Methods *************
+	 * ************************************/
+	
 	public void handleCommitteeCommentResultForTable(ArrayList<CommitteeComment> resultList) {
 		commentList.clear();
 		if (!resultList.isEmpty()) {
@@ -329,6 +365,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		timeRemainingTextAria.setEditable(false);
 		addCommentTextField.setWrapText(true);
 
+		denyCommentTextArea.setWrapText(true);
+		
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
 		btnCommitteeDirector.setVisible(false);

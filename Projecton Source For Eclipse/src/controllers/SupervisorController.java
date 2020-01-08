@@ -115,7 +115,7 @@ public class SupervisorController extends BasicController
 					myBoundary.showChangeRequestUnsuspended();
 					this.unsubscribeFromClientDeliveries();
 					break;
-				case SELECT_ALL_EMPLOYEE:
+				case SELECT_ALL_ENGINEERS:
 					ArrayList<String> employees;
 					employees = this.createArrayListOfUserName(result);
 					myBoundary.SetComboBox2(employees);
@@ -402,7 +402,7 @@ public class SupervisorController extends BasicController
 	public void setComboBox()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, varArray);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_ENGINEERS, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}

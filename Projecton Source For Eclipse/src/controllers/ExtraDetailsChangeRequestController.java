@@ -38,7 +38,7 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 					MyFile downloadedFile = null;
 					this.unsubscribeFromClientDeliveries();
 					if(!result.getResultData().isEmpty()) {
-						downloadedFile = new MyFile("R:\\ServerFiles"+result.getResultData().get(0).get(0)
+						downloadedFile = new MyFile("R:\\ServerFiles\\"+result.getResultData().get(0).get(0)
 								+"."+result.getResultData().get(0).get(1));
 					}
 					//MyFile downloadedFile = (MyFile) result.getResultData().get(0).get(0);

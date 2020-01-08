@@ -194,6 +194,10 @@ public class TechManagerBoundary implements Initializable{
     @FXML
     void loagViewPermissionsPage(MouseEvent event) {
     	ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
+    	if(employeeUser == null) {
+    		Toast.makeText(ProjectFX.mainStage, "Please select employee from the table", 1500, 500, 500);
+    		return;
+    	}
     	if(employeeUser.getPermission().equals("INFORMATION_ENGINEERING_DEPARTMENT_HEAD")) {
     		Toast.makeText(ProjectFX.mainStage, "You can NOT edit this user permission", 1500, 500, 500);
 		} else {

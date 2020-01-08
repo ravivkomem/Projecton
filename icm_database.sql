@@ -156,6 +156,7 @@ CREATE TABLE `committee_step` (
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
   `Status` varchar(45) NOT NULL,
+  `DenyComment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`CommitteeStepId`),
   UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -167,7 +168,7 @@ CREATE TABLE `committee_step` (
 
 LOCK TABLES `committee_step` WRITE;
 /*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
-INSERT INTO `committee_step` VALUES (1,1,'itayz','2019-11-25','2019-11-30','2019-12-02','CLOSE'),(2,2,'gilad','2019-11-26','2019-11-30','2019-12-01','CLOSED'),(3,3,'zeev','2019-12-19','2019-12-26','2019-12-21','CLOSED'),(4,4,'lior','2019-12-19','2019-12-26','2019-12-20','CLOSED'),(5,5,'ido','2019-12-20','2019-12-27',NULL,'SUSPEND'),(6,6,'gilad','2019-12-22','2019-12-29','2019-12-25','CLOSED'),(7,71,'ido','2019-12-23','2019-12-25','2019-12-24','CLOSED'),(8,72,'itayz','2019-12-21','2019-12-28','2019-12-25','CLOSED'),(9,73,'gilad','2019-12-23','2019-12-30','2019-12-26','CLOSED'),(10,74,'zeev','2019-12-22','2019-12-29','2019-12-23','CLOSED'),(11,75,'ido','2019-12-23','2019-12-30',NULL,'ACTIVE'),(12,82,'itayz','2019-12-26','2020-01-02',NULL,'ACTIVE');
+INSERT INTO `committee_step` VALUES (1,1,'itayz','2019-11-25','2019-11-30','2019-12-02','CLOSE',NULL),(2,2,'gilad','2019-11-26','2019-11-30','2019-12-01','CLOSED',NULL),(3,3,'zeev','2019-12-19','2019-12-26','2019-12-21','CLOSED','not necessary'),(4,4,'lior','2019-12-19','2019-12-26','2019-12-20','CLOSED',NULL),(5,5,'ido','2019-12-20','2019-12-27',NULL,'SUSPEND',NULL),(6,6,'gilad','2019-12-22','2019-12-29','2019-12-25','CLOSED',NULL),(7,71,'ido','2019-12-23','2019-12-25','2019-12-24','CLOSED',NULL),(8,72,'itayz','2019-12-21','2019-12-28','2019-12-25','CLOSED',NULL),(9,73,'gilad','2019-12-23','2019-12-30','2019-12-26','CLOSED',NULL),(10,74,'zeev','2019-12-22','2019-12-29','2019-12-23','CLOSED','not important request'),(11,75,'ido','2019-12-23','2019-12-30',NULL,'ACTIVE',NULL),(12,82,'itayz','2019-12-26','2020-01-02',NULL,'ACTIVE',NULL);
 /*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -358,7 +359,7 @@ CREATE TABLE `tester_step` (
   `ChangeRequestId` int(11) NOT NULL,
   `HandlerUserName` varchar(45) NOT NULL,
   `Status` varchar(45) NOT NULL,
-  `TesterFailReport` varchar(45) DEFAULT NULL,
+  `TesterFailReport` varchar(600) DEFAULT NULL,
   `StartDate` date NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
@@ -438,7 +439,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','ravivravivraviv@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid22@gmail.com','Information Tech','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi93@gmail.com','Information Tech','Tech Manager','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Information Tech','Committee Director','COMMITTEE_DIRECTOR','3333333333',0),(7,'nir','1234','Nir','Asolin','nirasolin@gmail.com','Software Engineering','Lecturer','BASIC_USER','2222222222',0),(8,'gilad','1234','Gilad','Eviatar','giladeviatar@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','1111111111',0),(9,'shira','1234','Shira','Noah','shiranoah@gmail.com','Math','Student','BASIC_USER','1212121212',0),(10,'moti','1234','Moti','Ben Hamo','notiben@gmail.com','Math','Worker','BASIC_USER','2121212121',0),(11,'zeev','1234','Zeev','Imber','zeev2@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','3131313131',0);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','ravivravivraviv@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid22@gmail.com','Information Tech','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi93@gmail.com','Information Tech','Tech Manager','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',1),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Information Tech','Committee Director','COMMITTEE_DIRECTOR','3333333333',0),(7,'nir','1234','Nir','Asolin','nirasolin@gmail.com','Software Engineering','Lecturer','BASIC_USER','2222222222',0),(8,'gilad','1234','Gilad','Eviatar','giladeviatar@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','1111111111',0),(9,'shira','1234','Shira','Noah','shiranoah@gmail.com','Math','Student','BASIC_USER','1212121212',0),(10,'moti','1234','Moti','Ben Hamo','notiben@gmail.com','Math','Worker','BASIC_USER','2121212121',0),(11,'zeev','1234','Zeev','Imber','zeev2@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','3131313131',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -541,4 +542,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-08 15:40:33
+-- Dump completed on 2020-01-08 17:10:06

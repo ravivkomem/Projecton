@@ -269,7 +269,7 @@ public class MysqlConnection {
     			"INSERT INTO icm.committee_comment(requestId,userName,comment)"
     			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
-    			"UPDATE icm.committee_step SET Status = ?,EndDate = ? WHERE ChangeRequestId = ?" + 
+    			"UPDATE icm.committee_step SET Status = ?,EndDate = ?,DenyComment = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
@@ -477,6 +477,12 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.analysis_step" +
 						" WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.SELECT_ALL_ENGINEERS.getCode()] = 
+    			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
+    			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR' "
+    			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR' ";
+    			
     	
     	sqlArray[SqlQueryType.UPDATE_END_DATE_IN_CLOSING_STEP.getCode()] = "UPDATE icm.closing_step SET EndDate = ?, Status  = ? WHERE ChangeRequestID = ?";
     	

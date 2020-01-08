@@ -49,10 +49,11 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	public void updateCommitteeStepDB(String status,Date date,Integer changeRequestID) {
+	public void updateCommitteeStepDB(String status,Date date,String denyComment, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(status);
 		varArray.add(date);
+		varArray.add(denyComment);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COMMITTEE_STEP,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
