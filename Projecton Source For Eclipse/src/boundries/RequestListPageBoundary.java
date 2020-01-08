@@ -282,6 +282,7 @@ public class RequestListPageBoundary implements Initializable {
 			viewExtraDetailsBtn.setVisible(true);
 			requestList.addAll(resultList);
 			basicDetailsTbl.setItems(requestList);
+			selectedChangeRequestIdText.setVisible(true);
 		} else {
 			noSubmitingRequest.setText("There are no matching change requests");
 			noSubmitingRequest.setVisible(true);
