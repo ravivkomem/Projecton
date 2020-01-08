@@ -495,6 +495,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	setVisabilityValse();
     	txtTextChange.setVisible(true);
     	txtTextChange.setText("All change requests are up to date and ready to use");
+    	txtTextExplantion.setVisible(true);
+    	txtTextExplantion.setText("Please select a request to work on, you can also use specific filters: Appointment,Approval or Closing Step");
     	myController.SelectAllChangeRequest();
     		
     }
