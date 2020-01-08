@@ -136,6 +136,8 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			break;
 		case "Subsystem Supporter":
 			/*TODO: support to subsystem*/
+			setNewPermissionTextField.setVisible(false);
+			
 		    subsystemComboBox.setVisible(true);
 		    setSubsystemButton.setVisible(true);
 		    break;

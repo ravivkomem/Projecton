@@ -103,7 +103,7 @@
             </ImageView>
          </children>
       </VBox>
-      <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0">
+      <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
          <children>
             <Text layoutX="231.0" layoutY="151.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name:" />
             <TableView fx:id="employeeListTable" layoutY="26.0" prefHeight="277.0" prefWidth="200.0">
@@ -131,9 +131,9 @@
                   <Image url="@employee_photo.png" />
                </image>
             </ImageView>
-            <TableView fx:id="subsystemSupporterTable" layoutX="305.0" layoutY="313.0" prefHeight="67.0" prefWidth="200.0">
+            <TableView fx:id="subsystemSupporterTable" layoutX="305.0" layoutY="313.0" prefHeight="71.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="subsystemSupporterColumn" prefWidth="199.0" text="Subsystem Supporter" />
+                <TableColumn fx:id="subsystemSupporterColumn" prefWidth="189.0" text="Subsystem Supporter" />
               </columns>
             </TableView>
          </children>
@@ -145,7 +145,7 @@
             <AnchorPane fx:id="reportDisplayAnchorPane" layoutY="52.0" prefHeight="452.0" prefWidth="603.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="52.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="requestListPane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0" visible="false">
+      <AnchorPane fx:id="requestListPane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0">
          <children>
             <TableView fx:id="requestListTable" layoutX="17.0" prefHeight="277.0" prefWidth="493.0">
                <columns>
