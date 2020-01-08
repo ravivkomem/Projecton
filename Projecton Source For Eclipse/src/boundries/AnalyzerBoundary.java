@@ -22,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -103,6 +104,7 @@ public class AnalyzerBoundary implements DataInitializable {
 	public static final String ANALYSIS_SET_TIME = "ANALYSIS_SET_TIME";
 	public static final String ANALYSIS_APPROVE_TIME = "ANALYSIS_APPROVE_TIME";
 	public static final String ANALYSIS_WORK = "ANALYSIS_WORK";
+	public static final int MAX_CHARS = 100;
 	private ChangeRequest currentChangeRequest;
 	private Step analyzerStep;
 	private Stage myTimeExtensionStage;
@@ -231,6 +233,34 @@ public class AnalyzerBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "Updated failed", 1500, 500, 500);
 		}
 	}
+	 @FXML
+	    void updateAdvantagesCharcterCounter(KeyEvent event) {
+		 advantagesCharcterCounterLabel.setText(advantagestextArea.getText().length() + "/ " + MAX_CHARS);
+
+	    }
+
+	    @FXML
+	    void updateConstraintsCharcterCounter(KeyEvent event) {
+	    	constraintsCharcterCounterLabel.setText(constraintstextArea.getText().length() + "/" + MAX_CHARS);
+	    }
+
+	    @FXML
+	    void updateDescriptionCharcterCounter(KeyEvent event) {
+	    	descriptionCharcterCounterLabel.setText(descriptiontextArea.getText().length() + "/" + MAX_CHARS);
+
+	    }
+
+	    @FXML
+	    void updateDurationCharcterCounter(KeyEvent event) {
+	    	durationCharcterCounterLabel.setText(durationtextArea.getText().length() + "/" + MAX_CHARS);
+
+	    }
+
+	    @FXML
+	    void updateHeaderCharcterCounter(KeyEvent event) {
+	    	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
+
+	    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
