@@ -42,7 +42,7 @@ public class TimeWatcher implements Runnable {
 			getStepsWithOneDayRemaining();
 			getStepsWithTimeException();
 			getHighMangementMails();
-			//sendMails();
+			sendMails();
 		}
 	}
 	
@@ -56,15 +56,6 @@ public class TimeWatcher implements Runnable {
         c.set(Calendar.MILLISECOND, 0);
         long milliesUntilMidnight = (c.getTimeInMillis()-System.currentTimeMillis());
         System.out.println("Time Watcher - Going to sleep " + milliesUntilMidnight + " millisecond until midnight");
-        
-        /*Check */
-        try
-        {
-        	Thread.sleep(MILLIES_DELAY_TIME_BETWEEN_EMAILS);
-        }
-        catch (Exception e)
-        {}
-        System.out.println("The compare to value is: "+ lastDayWatch.compareTo(TimeManager.getCurrentDate()));
         
         try
         {

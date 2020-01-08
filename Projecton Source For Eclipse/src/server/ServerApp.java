@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 
 import assets.ProjectPages;
 import javafx.application.Application;
@@ -9,11 +10,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class ServerApp extends Application {
-public static String[] newargs;
+	public static String[] newargs;
+	private MysqlConnection sqlConnection = new MysqlConnection();
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -28,8 +33,25 @@ public static String[] newargs;
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			@Override
 			public void handle(WindowEvent e) {
-				//MysqlConnection mysql = new MysqlConnection();
-				//mysql.exitAllClients();
+				Alert alert = new Alert(Alert.AlertType.INFORMATION);
+		        alert.getButtonTypes().remove(ButtonType.OK);
+		        alert.getButtonTypes().add(ButtonType.CANCEL);
+		        alert.getButtonTypes().add(ButtonType.YES);
+		        alert.setTitle("Quit application");
+		        alert.setContentText(String.format("Are you sure you want to quit?"));
+		        Optional<ButtonType> res = alert.showAndWait();
+
+		        if(res.isPresent()) 
+		        {
+		            if(res.get().equals(ButtonType.CANCEL))
+		            {
+		            	e.consume();
+		            }
+		            else 
+		            {
+		            	sqlConnection.disconnectAllLoggedUsers();
+		            }
+		        }
 				System.exit(0);
 			}
 		});

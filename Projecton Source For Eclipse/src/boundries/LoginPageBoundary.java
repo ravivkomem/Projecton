@@ -7,17 +7,22 @@ import assets.ProjectPages;
 import assets.Toast;
 import controllers.LoginController;
 import entities.User;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class LoginPageBoundary implements Initializable{
 
-	/* FXML Elements */
+	/* *******************************
+	 * ****** FXML Objects ***********
+	 * ******************************/
     @FXML
     private TextField userNameTextField;
     @FXML
@@ -27,11 +32,15 @@ public class LoginPageBoundary implements Initializable{
     @FXML
     private ImageView loginLoadingImageView;
     
-    /* Private variables */
+    /* ***************************************
+     * ********** Private Objects ************
+     * ***************************************/
     private LoginController myController = new LoginController(this);
     private int loginAttempts = 0;
     
-    /* Methods */
+    /* ***************************************
+     * ********** FXML Methods ***************
+     * ***************************************/
     @FXML
     void signInButtonPressed(MouseEvent event) {
     	String userName = userNameTextField.getText();
@@ -79,6 +88,19 @@ public class LoginPageBoundary implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		loginLoadingImageView.setVisible(false);
+		userPasswordField.setOnKeyPressed(new EventHandler<KeyEvent>()
+				{
+
+					@Override
+					public void handle(KeyEvent ke) {
+						if (ke.getCode().equals(KeyCode.ENTER))
+			            {
+							signInButtonPressed(null);
+			            }
+						
+					}
+			
+				});
 	}
 
 }

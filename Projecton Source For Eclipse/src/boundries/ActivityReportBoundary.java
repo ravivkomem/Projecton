@@ -14,7 +14,9 @@ import controllers.Utilizer;
 import entities.ActivityReport;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -22,11 +24,12 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-public class ActivityReportBoundary implements DataInitializable {
+public class ActivityReportBoundary implements Initializable {
 
 	/* *************************************
 	 * ********* FXML Objects **************
@@ -86,11 +89,6 @@ public class ActivityReportBoundary implements DataInitializable {
 				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
 				return;
 			}
-//			daysBetween = TimeManager.getDaysBetween(todayDate, endDate);
-//			if (daysBetween > 0) {
-//				Toast.makeText(ProjectFX.mainStage, "You can not select a date before today date", 1500, 500, 500);
-//				return;
-//			}
 			daysBetween = TimeManager.getDaysBetween(startDate, endDate);
 			if (daysBetween < 0) {
 				Toast.makeText(ProjectFX.mainStage, "Please choose a valid date", 1500, 500, 500);
@@ -122,17 +120,17 @@ public class ActivityReportBoundary implements DataInitializable {
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
-			} else if (changeRequestList.get(i).getStatus().equals("Denied")) {
+			} else if (changeRequestList.get(i).getStatus().equals("DENIED")) {
 				denied++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
 				workDays.add(daysBetween);
-			} else if (changeRequestList.get(i).getStatus().equals("Suspended")) {
+			} else if (changeRequestList.get(i).getStatus().equals("SUSPENDED")) {
 				suspended++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
-			} else if(changeRequestList.get(i).getStatus().equals("Close")) {
+			} else if(changeRequestList.get(i).getStatus().equals("CLOSE")) {
 				close++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
@@ -201,11 +199,6 @@ public class ActivityReportBoundary implements DataInitializable {
 		workDaysChartBarCategory.setLabel("Work Days");
 		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
-	}
-
-	@Override
-	public void initData(Object data) {
-
 	}
 
 }

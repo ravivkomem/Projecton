@@ -48,13 +48,15 @@ public enum SqlQueryType {
 	 * *****************************************/
 	SELECT_ALL_ACTIVE_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_EMPLOYEE(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_SUBSYSTEM_BY_USER_NAME(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_EMPLOYEE_PERMISSION(SqlExecutionType.UPDATE_QUERY),
+	UPDATE_SUBSYSTEM_SUPPORTER(SqlExecutionType.UPDATE_QUERY),
 	// Performance report
 	SELECT_ALL_APPROVED_TIME_EXTNESIONS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_REPEATRING_STEPS(SqlExecutionType.EXECUTE_QUERY),
-	//Activity report
+	// Activity report
 	SELECT_ALL_CHANGE_REQUESTS_BY_DATE(SqlExecutionType.EXECUTE_QUERY),
-	//Delay Report
+	// Delay Report
 	SELECT_DATES_FROM_ALL_STEPS(SqlExecutionType.EXECUTE_QUERY),
 	
 	
@@ -86,8 +88,13 @@ public enum SqlQueryType {
 	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	
-	/*View Request List Queries*/
+	/* *****************************************
+	 * ***** Request List Queries *****
+	 * *****************************************/
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_DATE_FILTER(SqlExecutionType.EXECUTE_QUERY),
+	SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Extension Queries***********

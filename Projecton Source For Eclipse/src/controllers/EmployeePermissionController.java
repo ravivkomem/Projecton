@@ -32,6 +32,15 @@ public class EmployeePermissionController extends BasicController{
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	public void updateSubsystemSupporter(String subsystem,String userName) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(userName);
+		varArray.add(subsystem);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_SUBSYSTEM_SUPPORTER, varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {

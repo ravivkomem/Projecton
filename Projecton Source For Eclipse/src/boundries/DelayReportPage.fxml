@@ -18,8 +18,8 @@
         </yAxis>
       </BarChart>
       <Text layoutX="66.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:" />
-      <TextField fx:id="medianTextField" layoutX="112.0" layoutY="303.0" prefHeight="25.0" prefWidth="59.0" />
-      <Text layoutX="66.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sdt:" />
-      <TextField fx:id="stdTextField" layoutX="112.0" layoutY="347.0" prefHeight="25.0" prefWidth="59.0" />
+      <TextField fx:id="medianTextField" layoutX="177.0" layoutY="303.0" prefHeight="25.0" prefWidth="59.0" />
+      <Text layoutX="66.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Standart Deviation:" />
+      <TextField fx:id="stdTextField" layoutX="177.0" layoutY="347.0" prefHeight="25.0" prefWidth="59.0" />
    </children>
 </AnchorPane>

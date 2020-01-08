@@ -140,6 +140,24 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
+    public void disconnectAllLoggedUsers()
+    {
+    	this.connect();
+    	try {
+			Statement statement = connection.createStatement();
+			statement.execute("UPDATE icm.user SET IsLogged = '0'");
+		} 
+    	catch (SQLException e) 
+    	{
+    		
+		}
+    	finally
+    	{
+    		this.disconnect();
+    	}
+
+    }
+    
     public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
@@ -219,12 +237,10 @@ public class MysqlConnection {
 		 * *************** Tester Queries **************
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_TESTER_STEP.getCode()] = "UPDATE icm.tester_step "
-    			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE ChangeRequestID = ? ORDER BY TesterStepId DESC LIMIT 1";
+    			+ "SET TesterFailReport = ?, Status = ?,EndDate = ? WHERE TesterStepId = ?";
 		sqlArray[SqlQueryType.SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT * FROM icm.analysis_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY AnalysisStepID DESC LIMIT 1";
-		sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
-				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
 		sqlArray[SqlQueryType.SELECT_TESTER_STEP_BY_CHANGE_REQUEST_ID.getCode()] = 
 				"SELECT TesterStepID, ChangeRequestID, HandlerUserName, StartDate, Status, EstimatedEndDate, EndDate"
 				+ " FROM icm.tester_step WHERE ChangeRequestID = ?"
@@ -271,9 +287,14 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR' "
-    			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR'";
+    			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR' "
+    			+ "OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD'";
+    	sqlArray[SqlQueryType.SELECT_SUBSYSTEM_BY_USER_NAME.getCode()] =
+    			"SELECT *  FROM icm.subsystem_support WHERE ResponsibleUserName = ?";
     	sqlArray[SqlQueryType.UPDATE_EMPLOYEE_PERMISSION.getCode()] = 
     			"UPDATE icm.user SET Permission = ?, JobDescription = ? WHERE UserID = ?";
+    	sqlArray[SqlQueryType.UPDATE_SUBSYSTEM_SUPPORTER.getCode()] =
+    			"UPDATE icm.subsystem_support SET ResponsibleUserName = ? WHERE Subsystem = ?";
     	/* Performance report */
     	sqlArray[SqlQueryType.SELECT_ALL_APPROVED_TIME_EXTNESIONS.getCode()]=
     			"SELECT * FROM icm.time_extension "
@@ -477,6 +498,17 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.GET_USER_FULL_NAME.getCode()] =
     			"SELECT FirstName, LastName From icm.user "
     			+ "WHERE UserName = ?";
+    	/* *****************************************************
+		 * ************* Request List Page Queries ****************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER.getCode()]=
+				"SELECT * FROM icm.change_request WHERE InitiatorUserName=?";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_DATE_FILTER.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND StartDate BETWEEN ? AND ?";
+    	sqlArray[SqlQueryType.SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND ChangeRequestID=?";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER.getCode()]=
+    			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND Status=?";
     }
     
 }

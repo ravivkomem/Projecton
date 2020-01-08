@@ -96,8 +96,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableColumn<CommitteeComment, String> commentDirectorColumn;
 
-	@FXML
-	private TextField addComentTextField;
+    @FXML
+    private TextArea addCommentTextField;
 
 	@FXML
 	private TextArea timeRemainingTextAria;
@@ -159,7 +159,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadHomePage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if (!(myAnalysisReportStage == null))
@@ -169,7 +168,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
-		// ((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if (!(myAnalysisReportStage == null))
@@ -245,11 +243,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void submitComment(MouseEvent event) {
-		if (addComentTextField.getText().equals("")) {
+		if (addCommentTextField.getText().equals("")) {
 			Toast.makeText(ProjectFX.mainStage, "Please add comment first", 1500, 500, 500);
 		} else {
 			CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
-					ProjectFX.currentUser.getUserName(), addComentTextField.getText());
+					ProjectFX.currentUser.getUserName(), addCommentTextField.getText());
 			myController.insertNewCommentToDB(newComment);
 		}
 	}
@@ -276,6 +274,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	public void committeeCommentInsertToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
+			myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
 		} else {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}
@@ -328,6 +327,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		decisionComboBox.getItems().add("More information");
 
 		timeRemainingTextAria.setEditable(false);
+		addCommentTextField.setWrapText(true);
 
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
