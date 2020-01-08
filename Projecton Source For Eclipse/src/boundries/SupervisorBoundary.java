@@ -108,13 +108,6 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
     
     @FXML
-    private Button btnSuspend;
-    
-
-    @FXML
-    private Button btnUnsuspend;
-    
-    @FXML
     private TextField txtFieldEstimatedTime;
 
     @FXML
@@ -122,6 +115,12 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
     @FXML
     private Text txtAnalysisEstimatedTime;
+    
+    @FXML
+    private Text txtTextChange;
+
+    @FXML
+    private Text txtTextExplantion;
 
     
     
@@ -183,6 +182,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 tableColumnSubSystem.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("selectedSubsystem"));
 		 
 		 setVisabilityValse();
+		 txtTextChange.setVisible(true);
+		 txtTextChange.setText("Hello and have a nice working day");
 		 
 		 myController.SelectAllChangeRequest();
 		 
@@ -199,7 +200,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{	
 			        		setVisabilityValse();
-			        		btnSuspend.setVisible(true);
+			        		txtTextChange.setVisible(true);
+			            	txtTextChange.setText("Employee appointment table is ready to use");
+			            	txtTextExplantion.setVisible(true);
+			            	txtTextExplantion.setText("Please confirm or decline the auto-analyzer appointment");
 			        		btnExstraDetails.setDisable(false);
 			        		btnApproveAppointment.setVisible(true);
 			        		btnDenyAppointment.setVisible(true);
@@ -211,7 +215,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		{
 			        		setVisabilityValse();
 			        		btnExstraDetails.setDisable(false);
-			        		btnUnsuspend.setVisible(true);
+			        		
 			        		}
 			        		else
 			        		{
@@ -224,6 +228,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{
 			        			setVisabilityValse();
+			        			txtTextChange.setVisible(true);
+				            	txtTextChange.setText("Employee appointment table is ready to use");
+				            	txtTextExplantion.setVisible(true);
+				            	txtTextExplantion.setText("Please select an analyzer for the request");
 			        			btnExstraDetails.setDisable(false);
 			        			comboSelectAnalyizer.setVisible(true);
 			        			btnSetAnalyzer.setVisible(true);
@@ -232,7 +240,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		{
 			        		setVisabilityValse();
 			        		btnExstraDetails.setDisable(false);
-			        		btnUnsuspend.setVisible(true);
+			        		
 			        		}
 			        		else
 			        		{
@@ -246,7 +254,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{	
 			        		setVisabilityValse();
-			        		btnSuspend.setVisible(true);
+			        		txtTextChange.setVisible(true);
+			            	txtTextChange.setText("Employee appointment table is ready to use");
+			            	txtTextExplantion.setVisible(true);
+			            	txtTextExplantion.setText("Please select execution leader for the request");
 			        		btnExstraDetails.setDisable(false);
 			        		comboSelectExecutionLeader.setVisible(true);
 			        		btnSetExecutionLeader.setVisible(true);	
@@ -255,7 +266,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);
-			        			btnUnsuspend.setVisible(true);
+			        			
 			        		}
 			        		else
 			        		{
@@ -268,8 +279,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{	
 			        		setVisabilityValse();
+			        		txtTextChange.setVisible(true);
+			            	txtTextChange.setText("Approval and Rejection Table is ready to use");
+			            	txtTextExplantion.setVisible(true);
+			            	txtTextExplantion.setText("Please confirm or reject the time set by the analyzer");
 			        		btnExstraDetails.setDisable(false);
-			        		btnSuspend.setVisible(true);
 			        		btnApproveAnalysisTime.setVisible(true);
 			        		btnDenyAnalysisTime.setVisible(true);
 			        		txtAnalysisEstimatedTime.setVisible(true);
@@ -282,7 +296,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);
-				        		btnUnsuspend.setVisible(true);
+				        
 			        		}
 			        		else
 			        		{
@@ -298,7 +312,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{	
 			        		setVisabilityValse();
-			        		btnSuspend.setVisible(true);
+			        		txtTextChange.setVisible(true);
+			            	txtTextChange.setText("Approval and Rejection Table is ready to use");
+			            	txtTextExplantion.setVisible(true);
+			            	txtTextExplantion.setText("Please confirm or reject the time set by the execution leader");
 			        		btnExstraDetails.setDisable(false);
 			        		btnApproveExecutionTime.setVisible(true);
 			        		btnDenyExecutionTime.setVisible(true);
@@ -311,7 +328,6 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
 			        		{
 			        			setVisabilityValse();
-				        		btnUnsuspend.setVisible(true);
 				        		btnExstraDetails.setDisable(false);
 			        		}
 			        		else
@@ -323,6 +339,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	else if(myChangerequest.getCurrentStep().equals("CLOSING_STEP"))
 			        	{
 			        		setVisabilityValse();
+			        		txtTextChange.setVisible(true);
+			            	txtTextChange.setText("Request closing table is ready to use");
+			            	txtTextExplantion.setVisible(true);
+			            	txtTextExplantion.setText("Please close the request");
 			        		btnExstraDetails.setDisable(false);
 			        		btnSend.setVisible(true);
 			        		txtSendMessageToInitiator.setVisible(true);
@@ -330,9 +350,13 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	}
 			        	else
 			        	{
+			        	
 			        		if(myChangerequest.getStatus().equals("Active"))
 			        		{	
 			        		setVisabilityValse();
+			        		txtTextChange.setVisible(false);
+			            	txtTextExplantion.setVisible(true);
+			            	txtTextExplantion.setText("Request in one of the promotions process, you can view more details at this time");
 			        		btnExstraDetails.setDisable(false);
 			        		btnExstraDetails.setVisible(true);
 			        		}
@@ -340,7 +364,6 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);
-			        			btnUnsuspend.setVisible(true);
 			        		}
 			        		else
 			        		{
@@ -380,6 +403,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void ClickAppointmentFunction(MouseEvent event) 
     {
     	setVisabilityValse();
+    	txtTextChange.setVisible(true);
+    	txtTextChange.setText("Employee appointment table is ready to use");
+    	txtTextExplantion.setVisible(true);
+    	txtTextExplantion.setText("Please select a request you would like to process");
     	myController.SelectChangeRequestForAppointments();
     		
     }
@@ -390,6 +417,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void ClickApprovalFunction(MouseEvent event)
     {
     	setVisabilityValse();
+    	txtTextChange.setVisible(true);
+    	txtTextChange.setText("Approval and Rejection Table is ready to use");
+    	txtTextExplantion.setVisible(true);
+    	txtTextExplantion.setText("Please select a request you would like to process");
     	myController.SelectAllChangeRequestForApprovals();
     	
     }
@@ -420,6 +451,10 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void ClickClosingStepFunction(MouseEvent event)
     {
     	setVisabilityValse();
+    	txtTextChange.setVisible(true);
+    	txtTextChange.setText("Request closing table is ready to use");
+    	txtTextExplantion.setVisible(true);
+    	txtTextExplantion.setText("Please select a request you would like to process");
     	myController.SelectAllChangeRequestForClose();
     	
     }
@@ -458,6 +493,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void ClickRequestListFunction(MouseEvent event)
     {
     	setVisabilityValse();
+    	txtTextChange.setVisible(true);
+    	txtTextChange.setText("All change requests are up to date and ready to use");
     	myController.SelectAllChangeRequest();
     		
     }
@@ -506,6 +543,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	myController.changeCurrentStepToAnalysisSetTime(myChangerequest.getChangeRequestID());
     	myController.InsertNewAnalysisStepAfterApprove(myChangerequest.getChangeRequestID(),myChangerequest.getHandlerUserName(),updateStepDate,"ACTIVE");
     	myController.SelectChangeRequestForAppointments();
+    	txtTextExplantion.setVisible(false);
     	
     }
 
@@ -514,6 +552,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void clickOnDenyAppointment(MouseEvent event)
     {
     	myController.changeCurrentStepFromAnalyzerAutoAppoint(myChangerequest.getChangeRequestID());
+    	txtTextExplantion.setVisible(true);
+    	txtTextExplantion.setText("Please select an analyzer for the request");
     	comboSelectAnalyizer.setVisible(true);
     	btnSetAnalyzer.setVisible(true);   
     	myController.SelectChangeRequestForAppointments();
@@ -536,6 +576,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     		myController.InsertNewAnalysisStep(myChangerequest.getChangeRequestID()
     				,comboSelectAnalyizer.getSelectionModel().getSelectedItem(),updateStepDate,"ACTIVE");
     		myController.SelectChangeRequestForAppointments();
+    		txtTextExplantion.setVisible(false);
+    	
     	}
     	
     }
@@ -560,6 +602,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	myController.setStatusToClosed("CLOSED","FINISH",myChangerequest.getChangeRequestID());
     	myController.setEndDate(updateStepDate,"CLOSED",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForClose();
+    	txtTextExplantion.setVisible(false);
+    	
     	
     }
     
@@ -593,6 +637,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			  myController.InsertNewExecutionLeaderStep(myChangerequest.getChangeRequestID()
 				,comboSelectExecutionLeader.getSelectionModel().getSelectedItem(),updateStepDate,"ACTIVE");
 			  myController.SelectChangeRequestForAppointments();
+				txtTextExplantion.setVisible(false);
 		  }
 		  
 	}
@@ -607,6 +652,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     {
     	myController.denyAnalysisTime("ANALYSIS_SET_TIME",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForApprovals();
+    	txtTextExplantion.setVisible(false);
     	
     }
     
@@ -616,6 +662,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     {
     	myController.approvedAnalysisTime("ANALYSIS_WORK",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForApprovals();
+    	txtTextExplantion.setVisible(false);
     }
 	
 	
@@ -625,6 +672,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     {
     	myController.approvedExecutionTime("EXECUTION_WORK",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForApprovals();
+    	txtTextExplantion.setVisible(false);
     	
     }
     
@@ -633,6 +681,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     {
     	myController.denyExecutionTime("EXECUTION_SET_TIME",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForApprovals();
+    	txtTextExplantion.setVisible(false);
     	
     }  
     
@@ -662,8 +711,6 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	 txtAnalysisEstimatedTime.setVisible(false);
     	 txtExecutionEstimatedTime.setVisible(false);
     	 txtFieldEstimatedTime.setVisible(false);
-		 btnSuspend.setVisible(false);
-		 btnUnsuspend.setVisible(false);
 		 comboSelectAnalyizer.setVisible(false);
 		 comboSelectExecutionLeader.setVisible(false);
 		 btnApproveAppointment.setVisible(false);
@@ -681,6 +728,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 btnDenyAnalysisTime.setVisible(false);
 		 btnApproveExecutionTime.setVisible(false);
 		 btnDenyExecutionTime.setVisible(false);
+		 txtTextChange.setVisible(false);
+		 txtTextExplantion.setVisible(false);
 	}
     
     //**********************************TOASTS*************************************************//
@@ -724,23 +773,6 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	Toast.makeText(ProjectFX.mainStage,"Execution time Deny", 1500, 500, 500);
 		
 	}
-    
-    
-    @FXML
-    void clickOnSuspend(MouseEvent event)
-    {
-    	myController.suspendChangeRequest("SUSPENDED",myChangerequest.getChangeRequestID());
-    	
-    }
-    
-    
-
-    @FXML
-    void clickOnUnsuspend(MouseEvent event)
-    {
-
-    	myController.unsuspendChangeRequest("Active",myChangerequest.getChangeRequestID());
-    }
     
     
 	public void showChangeRequestSuspended()
