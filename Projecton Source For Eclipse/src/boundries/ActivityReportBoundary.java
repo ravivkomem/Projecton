@@ -109,19 +109,23 @@ public class ActivityReportBoundary implements Initializable {
 	 * @param requestList
 	 */
 	public void createActivityReportList(ArrayList<ChangeRequest> requestList) {
+		Date endDate = Date.valueOf(endDatePicker.getValue());
 		if(requestList.isEmpty())
 			return;
 		changeRequestList = requestList;
 		int active = 0, close = 0, suspended = 0, denied = 0;
 		ArrayList<Long> workDays = new ArrayList<>();
-		for (int i = 0; i < changeRequestList.size(); i++) {
+		for (int i = 0; i < changeRequestList.size(); i++) {	
 			if (changeRequestList.get(i).getStatus().equals("ACTIVE")) {
 				active++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
 			} else if (changeRequestList.get(i).getStatus().equals("DENIED")) {
-				denied++;
+				if(TimeManager.getDaysBetween(changeRequestList.get(i).getEndDate(), endDate) < 0) {
+					active++;
+				} else {
+					denied++; }
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
 				workDays.add(daysBetween);
@@ -131,7 +135,11 @@ public class ActivityReportBoundary implements Initializable {
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
 			} else if(changeRequestList.get(i).getStatus().equals("CLOSED")) {
-				close++;
+				if(TimeManager.getDaysBetween(changeRequestList.get(i).getEndDate(), endDate) < 0) {
+					active++;
+				} else {
+					close++;
+				}
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
 				workDays.add(daysBetween);
