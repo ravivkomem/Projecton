@@ -464,7 +464,7 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     	
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ?, CurrentStep  = ?  WHERE ChangeRequestID = ?";
     	
     	sqlArray[SqlQueryType.SELECT_EXECUTION_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step" +
@@ -473,6 +473,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.analysis_step" +
 						" WHERE ChangeRequestID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_END_DATE_IN_CLOSING_STEP.getCode()] = "UPDATE icm.closing_step SET EndDate = ?, Status  = ? WHERE ChangeRequestID = ?";
     	
     	/* *****************************************************
 		 * ************* Time Watcher Queries ****************

@@ -409,10 +409,11 @@ public class SupervisorController extends BasicController
 
 
 
-	public void setStatusToClosed(String newStatus, Integer changeRequestID)
+	public void setStatusToClosed(String newStatus,String newStep, Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(newStatus);
+		varArray.add(newStep);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
@@ -440,6 +441,21 @@ public class SupervisorController extends BasicController
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
+
+
+
+	public void setEndDate(Date updateStepDate,String newStatus, Integer changeRequestID)
+	{
+		
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(updateStepDate);
+		varArray.add(newStatus);
+		varArray.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_END_DATE_IN_CLOSING_STEP, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 		

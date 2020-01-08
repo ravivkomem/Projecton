@@ -144,6 +144,7 @@ public enum SqlQueryType {
 	UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED(SqlExecutionType.UPDATE_QUERY),
 	SELECT_EXECUTION_ESTIMATED_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ANALYSIS_ESTIMATED_DATE(SqlExecutionType.EXECUTE_QUERY),
+	UPDATE_END_DATE_IN_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Watcher Queries*************
