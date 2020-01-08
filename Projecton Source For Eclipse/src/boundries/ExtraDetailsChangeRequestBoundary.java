@@ -104,6 +104,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		reasonTF.setEditable(false);
 		commentTF.setEditable(false);
 		StatusTF.setEditable(false);
+		currentStateDescTA.setEditable(false);
 	}
 	
 	@Override

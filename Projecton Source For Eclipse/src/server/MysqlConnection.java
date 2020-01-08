@@ -189,7 +189,7 @@ public class MysqlConnection {
                 "UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
         
         sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE.getCode()]=
-                "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
+                "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
  
     	/* *****************************************************
 		 * *************** Work Station Queries ****************
