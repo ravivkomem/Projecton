@@ -51,6 +51,8 @@
             <ComboBox fx:id="decisionComboBox" layoutX="77.0" layoutY="293.0" prefHeight="25.0" prefWidth="166.0" promptText="Choose Your Decision" />
             <Button fx:id="btnSendDecision" layoutX="253.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#sendDirectorDecision" text="Send" />
             <Text layoutX="64.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please approve, deny or ask for more information to this change request" />
+            <TextArea fx:id="denyCommentTextArea" layoutX="77.0" layoutY="293.0" prefHeight="92.0" prefWidth="200.0" promptText="Please write your deny decision" visible="false" />
+            <Button fx:id="sendDenyCommentBtn" layoutX="277.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#sendDenyDecisionAndComment" text="Send" visible="false" />
          </children>
       </AnchorPane>
       <VBox alignment="TOP_CENTER" prefHeight="458.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
