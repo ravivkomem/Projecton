@@ -60,7 +60,19 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	
     @FXML
     void updateSupportSubsystem(MouseEvent event) {
-    	/*TODO: quarry to insert table*/
+    	if(subsystemComboBox.getSelectionModel().isEmpty()) {
+    		popUpWindowMessage(AlertType.INFORMATION, "", "Please choose subsystem first");
+    	} else {
+    		Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "Are sure you"
+        			+ " want to appoint this user?");
+        	if (result.get() == ButtonType.OK) {
+        		myController.updateSubsystemSupporter(subsystemComboBox.getSelectionModel().getSelectedItem(),
+        				employeeUser.getUserName());
+        		popUpWindowMessage(AlertType.INFORMATION, "", "The Permission Update successfully");
+        		((Node) event.getSource()).getScene().getWindow().hide();
+        	}
+    	}
+    	
     }
 	
     @FXML
@@ -122,8 +134,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			}
 			handleCommitteeDirectorOneUser(employeeUser);
 			break;
-		case "":
+		case "Subsystem Supporter":
 			/*TODO: support to subsystem*/
+			setNewPermissionTextField.setVisible(false);
+			
 		    subsystemComboBox.setVisible(true);
 		    setSubsystemButton.setVisible(true);
 		    break;
@@ -491,11 +505,22 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		permossionTextField.setEditable(false);
 		subsystemComboBox.setVisible(false);
 	    setSubsystemButton.setVisible(false);
+	    
 		newPremissionComboBox.getItems().add("Information Engineer");
 		newPremissionComboBox.getItems().add("Supervisor");
 		newPremissionComboBox.getItems().add("Committee Member");
 		newPremissionComboBox.getItems().add("Committee Director");
-		/*TODO: initialize subsystemComboBox*/
+		newPremissionComboBox.getItems().add("Subsystem Supporter");
+		
+		subsystemComboBox.getItems().add("Lecturer Information Station");
+		subsystemComboBox.getItems().add("Student Information Station");
+		subsystemComboBox.getItems().add("Employee Information Station");
+		subsystemComboBox.getItems().add("Moodle System");
+		subsystemComboBox.getItems().add("Library System");
+		subsystemComboBox.getItems().add("Class Rooms With Computers");
+		subsystemComboBox.getItems().add("Laboratory");
+		subsystemComboBox.getItems().add("Computer Farm");
+		subsystemComboBox.getItems().add("College Website");
 	}
 
 	@Override

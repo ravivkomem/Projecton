@@ -10,6 +10,7 @@ import boundries.TechManagerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
+import entities.SubsystemSupporter;
 import entities.User;
 import javafx.application.Platform;
 
@@ -20,10 +21,10 @@ import javafx.application.Platform;
  */
 
 public class TechManagerController extends BasicController {
-	private TechManagerBoundary myBoundry;
+	private TechManagerBoundary myBoundary;
 
-	public TechManagerController(TechManagerBoundary myBoundry) {
-		this.myBoundry = myBoundry;
+	public TechManagerController(TechManagerBoundary myBoundary) {
+		this.myBoundary = myBoundary;
 	}
 
 	public void getAllTheActiveChangeRequest() {
@@ -38,17 +39,28 @@ public class TechManagerController extends BasicController {
 				ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	public void getSubsystemSupporterByUserName(String userName) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(userName);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_SUBSYSTEM_BY_USER_NAME, varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
 			switch (result.getActionType()) {
 			case SELECT_ALL_ACTIVE_CHANGE_REQUESTS:
 				ArrayList<ChangeRequest> changeRequestList = createChangeRequestFromResult(result);
-				myBoundry.displayChangeRequestTable(changeRequestList);
+				myBoundary.displayChangeRequestTable(changeRequestList);
 				break;
 			case SELECT_ALL_EMPLOYEE:
 				ArrayList<User> userList = createUserListFromResult(result);
-				myBoundry.displayAllTheEmployeesTable(userList);
+				myBoundary.displayAllTheEmployeesTable(userList);
+				break;
+			case SELECT_SUBSYSTEM_BY_USER_NAME:
+				myBoundary.displaySubsystemTable(createSubsystemSupporter(result));
 				break;
 			default:
 				break;
@@ -56,6 +68,15 @@ public class TechManagerController extends BasicController {
 
 		});
 		return;
+	}
+	
+	private ArrayList<SubsystemSupporter> createSubsystemSupporter(SqlResult result){
+		ArrayList<SubsystemSupporter> list = new ArrayList<>();
+		for(ArrayList<Object> s: result.getResultData()) {
+			SubsystemSupporter subsystem = new SubsystemSupporter((String)s.get(0),(String)s.get(1));
+			list.add(subsystem);
+		}
+		return list;
 	}
 	
 	/**
