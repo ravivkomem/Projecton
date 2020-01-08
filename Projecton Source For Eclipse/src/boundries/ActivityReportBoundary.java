@@ -115,7 +115,7 @@ public class ActivityReportBoundary implements Initializable {
 		int active = 0, close = 0, suspended = 0, denied = 0;
 		ArrayList<Long> workDays = new ArrayList<>();
 		for (int i = 0; i < changeRequestList.size(); i++) {
-			if (changeRequestList.get(i).getStatus().equals("Active")) {
+			if (changeRequestList.get(i).getStatus().equals("ACTIVE")) {
 				active++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
@@ -125,12 +125,12 @@ public class ActivityReportBoundary implements Initializable {
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
 				workDays.add(daysBetween);
-			} else if (changeRequestList.get(i).getStatus().equals("SUSPENDED")) {
+			} else if (changeRequestList.get(i).getStatus().equals("SUSPEND")) {
 				suspended++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						TimeManager.getCurrentDate());
 				workDays.add(daysBetween);
-			} else if(changeRequestList.get(i).getStatus().equals("CLOSE")) {
+			} else if(changeRequestList.get(i).getStatus().equals("CLOSED")) {
 				close++;
 				long daysBetween = TimeManager.getDaysBetween(changeRequestList.get(i).getStartDate(),
 						changeRequestList.get(i).getEndDate());
