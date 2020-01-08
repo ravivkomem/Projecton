@@ -65,6 +65,10 @@ public class AnalyzerBoundary implements DataInitializable {
 	private TextField advantagestextField;
 	@FXML
 	private TextField constraintstextField;
+	@FXML
+    private TextField headertextField;
+	@FXML
+	private TextField durationtextField;
     @FXML
     private Text timeDisplayText;
     @FXML
@@ -137,6 +141,21 @@ public class AnalyzerBoundary implements DataInitializable {
 	void loadCreateReport(MouseEvent event) {
 
 	}
+	private void displayTimeRemaining(Date estimatedEndDate) {
+		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
+		if(daysBetween < 0) {
+			timeDisplayText.setText("Time Delay");
+			timeRemainingField.setText(Math.abs(daysBetween) + " Days");
+		}
+		else if(daysBetween == 0) {
+			timeDisplayText.setText("Time Remaining");
+			timeRemainingField.setText("Last Day");
+		}
+		else {
+			timeDisplayText.setText("Time Remaining");
+			timeRemainingField.setText(daysBetween + " Days");
+		}
+	}
 
 	@FXML
 	void submit(MouseEvent event) {
@@ -158,8 +177,8 @@ public class AnalyzerBoundary implements DataInitializable {
 		// ?,AnalysisReportDescription = ?,AnalysisReportAdvantages =
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 		myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
-		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",
-				descriptiontextField.getText(), advantagestextField.getText(), constraintstextField.getText());
+		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextField.getText(),
+				descriptiontextField.getText(), advantagestextField.getText(),durationtextField.getText(), constraintstextField.getText());
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -265,6 +284,7 @@ public class AnalyzerBoundary implements DataInitializable {
 				createReportPane.setVisible(true);
 				datePane.setVisible(false);
 				notificationText.setVisible(false);
+				displayTimeRemaining(analyzerStep.getEstimatedEndDate());
 				break;
 		}
 	}
