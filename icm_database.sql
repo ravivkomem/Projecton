@@ -30,11 +30,11 @@ CREATE TABLE `analysis_step` (
   `Status` varchar(45) NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
-  `AnalysisReportHeader` varchar(45) DEFAULT NULL,
-  `AnalysisReportDescription` varchar(45) DEFAULT NULL,
-  `AnalysisReportAdvantages` varchar(45) DEFAULT NULL,
-  `AnalysisReportDuration` varchar(45) DEFAULT NULL,
-  `AnalysisReportConstraints` varchar(45) DEFAULT NULL,
+  `AnalysisReportHeader` varchar(100) DEFAULT NULL,
+  `AnalysisReportDescription` varchar(100) DEFAULT NULL,
+  `AnalysisReportAdvantages` varchar(100) DEFAULT NULL,
+  `AnalysisReportDuration` varchar(100) DEFAULT NULL,
+  `AnalysisReportConstraints` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -125,7 +125,7 @@ CREATE TABLE `committee_comment` (
   `commentId` int(11) NOT NULL AUTO_INCREMENT,
   `requestId` int(11) NOT NULL,
   `userName` varchar(45) NOT NULL,
-  `comment` varchar(45) NOT NULL,
+  `comment` varchar(200) NOT NULL,
   PRIMARY KEY (`commentId`),
   UNIQUE KEY `commentId_UNIQUE` (`commentId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -541,4 +541,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-08 15:36:02
+-- Dump completed on 2020-01-08 15:40:33
