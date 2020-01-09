@@ -10,14 +10,17 @@ import entities.Step;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
 public class TimeExtensionBoundary implements DataInitializable  {
@@ -37,9 +40,11 @@ public class TimeExtensionBoundary implements DataInitializable  {
     /*Text*/
     @FXML
     private Text timeExtensionHeaderText;
+    @FXML
+    private Label reasonCharsLabel;
     /*Text Fields*/
     @FXML
-    private TextField reasonTextField;
+    private TextArea reasonTextArea;
     @FXML
     private TextField currentStepTextField;
     @FXML
@@ -54,6 +59,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     private Alert alert = new Alert(AlertType.NONE);
     private Step myStep;
     private TimeExtensionController myController = new TimeExtensionController(this);
+    private static final int MAX_CHARS = 140; 
     
 	/* *************************************
 	 * ********* FXML Methods **************
@@ -63,6 +69,11 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	closeTimeExtensionButton.getScene().getWindow().hide();
     }
 
+    @FXML
+    void updateReasonCharsLabel(KeyEvent event) {
+    	reasonCharsLabel.setText(reasonTextArea.getText().length()+"/"+MAX_CHARS);
+    }
+    
     @FXML
     void submitTimeExtensionRequest(ActionEvent event) {
     	
@@ -75,7 +86,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
     		alert.setContentText("Date field is empty");
     		alert.show();
     	}
-    	else if (reasonTextField.getText().equals(""))
+    	else if (reasonTextArea.getText().equals(""))
     	{
     		alert.setAlertType(AlertType.ERROR);
     		alert.setTitle("ERROR");
@@ -101,7 +112,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
         	/* Both fields are full and valid */
         	else
         	{
-        		String timeExtensionReason = reasonTextField.getText();
+        		String timeExtensionReason = reasonTextArea.getText();
         		myController.submitTimeExtensionRequest(myStep, selectedDate, timeExtensionReason);
         	}
     	}
@@ -158,7 +169,7 @@ public class TimeExtensionBoundary implements DataInitializable  {
 			closeTimeExtensionButton.setVisible(true);
 			datePicker.setVisible(true);
 			timeExtensionHeaderText.setVisible(true);
-			reasonTextField.setVisible(true);
+			reasonTextArea.setVisible(true);
 			currentStepTextField.setVisible(true);
 			currentEndDateTextField.setVisible(true);
 			
@@ -171,14 +182,20 @@ public class TimeExtensionBoundary implements DataInitializable  {
 		/* Setup assignments */
 		currentStepTextField.setEditable(false);
 		currentEndDateTextField.setEditable(false);
-		reasonTextField.setAlignment(Pos.TOP_LEFT);
+		reasonTextArea.setWrapText(true);
+		datePicker.setEditable(false);
+		reasonCharsLabel.setText("0/"+MAX_CHARS);
+		
+		reasonTextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		
 		
 		/*Visibility changes */
 		submitTimeExtensionButton.setVisible(false);
 		closeTimeExtensionButton.setVisible(false);
 		datePicker.setVisible(false);
 		timeExtensionHeaderText.setVisible(false);
-		reasonTextField.setVisible(false);
+		reasonTextArea.setVisible(false);
 		currentStepTextField.setVisible(false);
 		currentEndDateTextField.setVisible(false);
 		
