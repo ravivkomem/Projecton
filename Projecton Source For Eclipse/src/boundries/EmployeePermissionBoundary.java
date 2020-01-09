@@ -214,6 +214,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			}
         	createPermissionToOneUser(newDirector);
         	break;
+        	/*TODO add case for committee director supervisor*/
     	case "INFORMATION_ENGINEER":
     		newDirector.setPermission("COMMITTEE_DIRECTOR");
     		newDirector.setJobDescription("Committee Director");
