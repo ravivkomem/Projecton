@@ -20,7 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
@@ -75,7 +74,7 @@ public class AnalyzerBoundary implements DataInitializable {
     @FXML
     private Text timeDisplayText;
     @FXML
-    private TextArea timeRemainingArea;
+    private TextArea timeRemainingTextArea;
 	@FXML
 	private DatePicker timedurationPicker;
 	@FXML
@@ -160,15 +159,15 @@ public class AnalyzerBoundary implements DataInitializable {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
 		if(daysBetween < 0) {
 			timeDisplayText.setText("Time Delay");
-			timeRemainingArea.setText(Math.abs(daysBetween) + " Days");
+			timeRemainingTextArea.setText(Math.abs(daysBetween) + " Days");
 		}
 		else if(daysBetween == 0) {
 			timeDisplayText.setText("Time Remaining");
-			timeRemainingArea.setText("Last Day");
+			timeRemainingTextArea.setText("Last Day");
 		}
 		else {
 			timeDisplayText.setText("Time Remaining");
-			timeRemainingArea.setText(daysBetween + " Days");
+			timeRemainingTextArea.setText(daysBetween + " Days");
 		}
 	}
 
@@ -240,28 +239,28 @@ public class AnalyzerBoundary implements DataInitializable {
 
 	    }
 
-	    @FXML
-	    void updateConstraintsCharcterCounter(KeyEvent event) {
-	    	constraintsCharcterCounterLabel.setText(constraintstextArea.getText().length() + "/" + MAX_CHARS);
-	    }
+    @FXML
+    void updateConstraintsCharcterCounter(KeyEvent event) {
+    	constraintsCharcterCounterLabel.setText(constraintstextArea.getText().length() + "/" + MAX_CHARS);
+    }
 
-	    @FXML
-	    void updateDescriptionCharcterCounter(KeyEvent event) {
-	    	descriptionCharcterCounterLabel.setText(descriptiontextArea.getText().length() + "/" + MAX_CHARS);
+    @FXML
+    void updateDescriptionCharcterCounter(KeyEvent event) {
+    	descriptionCharcterCounterLabel.setText(descriptiontextArea.getText().length() + "/" + MAX_CHARS);
 
-	    }
+    }
 
-	    @FXML
-	    void updateDurationCharcterCounter(KeyEvent event) {
-	    	durationCharcterCounterLabel.setText(durationtextArea.getText().length() + "/" + MAX_CHARS);
+    @FXML
+    void updateDurationCharcterCounter(KeyEvent event) {
+    	durationCharcterCounterLabel.setText(durationtextArea.getText().length() + "/" + MAX_CHARS);
 
-	    }
+    }
 
-	    @FXML
-	    void updateHeaderCharcterCounter(KeyEvent event) {
-	    	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
+    @FXML
+    void updateHeaderCharcterCounter(KeyEvent event) {
+    	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
 
-	    }
+    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -280,7 +279,7 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Change Texts */
 		pageHeaderText.setText("Loading change request information");
-		timeRemainingArea.setEditable(false);
+		timeRemainingTextArea.setEditable(false);
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
@@ -304,8 +303,6 @@ public class AnalyzerBoundary implements DataInitializable {
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		headertextArea.setTextFormatter(new TextFormatter<String>(change -> 
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		
-		
 	}
 
 	@Override

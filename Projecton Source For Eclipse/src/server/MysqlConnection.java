@@ -321,28 +321,28 @@ public class MysqlConnection {
     			"FROM icm.committee_step " + 
     			"INNER JOIN icm.change_request " + 
     			"ON icm.committee_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
-    			"WHERE icm.committee_step.Status = 'CLOSE' " + 
+    			"WHERE icm.committee_step.Status = 'CLOSED' " + 
     			"UNION " + 
     			"SELECT icm.change_request.SelectedSubsystem , icm.analysis_step.EstimatedEndDate ," + 
     			"icm.analysis_step.EndDate " + 
     			"FROM icm.analysis_step " + 
     			"INNER JOIN icm.change_request " + 
     			"ON icm.analysis_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
-    			"WHERE icm.analysis_step.Status = 'CLOSE' " + 
+    			"WHERE icm.analysis_step.Status = 'CLOSED' " + 
     			"UNION " + 
     			"SELECT icm.change_request.SelectedSubsystem , icm.execution_step.EstimatedEndDate ," + 
     			"icm.execution_step.EndDate " + 
     			"FROM icm.execution_step " + 
     			"INNER JOIN icm.change_request " + 
     			"ON icm.execution_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
-    			"WHERE icm.execution_step.Status = 'CLOSE' " + 
+    			"WHERE icm.execution_step.Status = 'CLOSED' " + 
     			"UNION " + 
     			"SELECT icm.change_request.SelectedSubsystem , icm.tester_step.EstimatedEndDate ," + 
     			"icm.tester_step.EndDate " + 
     			"FROM icm.tester_step " + 
     			"INNER JOIN icm.change_request " + 
     			"ON icm.tester_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
-    			"WHERE icm.tester_step.Status = 'CLOSE'";
+    			"WHERE icm.tester_step.Status = 'CLOSED'";
     	
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
@@ -382,7 +382,7 @@ public class MysqlConnection {
     	 *******************************************************
     	 *******************************************************/
     	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
-    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestID = ?" + 
+    			"UPDATE icm.execution_step SET Status = ?,EndDate = ?,ExecutionComment = ? WHERE ChangeRequestID = ?" + 
     			" ORDER BY ExecutionStepID DESC LIMIT 1";
     	
     	
