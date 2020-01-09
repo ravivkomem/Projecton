@@ -382,7 +382,7 @@ public class MysqlConnection {
     	 *******************************************************
     	 *******************************************************/
     	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
-    			"UPDATE icm.execution_step SET Status = ?,EndDate = ? WHERE ChangeRequestID = ?" + 
+    			"UPDATE icm.execution_step SET Status = ?,EndDate = ?,ExecutionComment = ? WHERE ChangeRequestID = ?" + 
     			" ORDER BY ExecutionStepID DESC LIMIT 1";
     	
     	

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -114,5 +115,7 @@
       <Text fx:id="timeRemainingTxt" layoutX="622.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time left" wrappingWidth="69.99999792687595" />
       <TextArea fx:id="txtChangeRequestDetails" layoutX="275.0" layoutY="170.0" prefHeight="160.0" prefWidth="264.0" />
       <Text fx:id="txtRefresh" layoutX="362.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refresh" />
+      <Text fx:id="txtDetailsWorkedOn" layoutX="151.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please enter the details you worked on in this request" wrappingWidth="97.00000256299973" />
+      <TextField fx:id="txtFieldForDetailsWorkedOn" alignment="TOP_LEFT" layoutX="275.0" layoutY="363.0" prefHeight="100.0" prefWidth="264.0" />
    </children>
 </AnchorPane>

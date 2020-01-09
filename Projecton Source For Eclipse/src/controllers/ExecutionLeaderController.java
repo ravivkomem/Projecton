@@ -126,12 +126,13 @@ public class ExecutionLeaderController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
 
-	public void UpdateExecutionLeaderDateAndStatus(Integer changeRequestID)
+	public void UpdateExecutionLeaderDateAndStatus(Integer changeRequestID,String comment)
 	{
 		// TODO Auto-generated method stub
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add("CLOSE");
 		varArray.add(myBoundry.getDate());
+		varArray.add(comment);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
