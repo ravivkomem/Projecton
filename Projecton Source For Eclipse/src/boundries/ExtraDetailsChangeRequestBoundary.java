@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import assets.Toast;
 import controllers.ExtraDetailsChangeRequestController;
 import entities.ChangeRequest;
 import entities.MyFile;
@@ -155,6 +156,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 				 bos.write(myFile.getMybytearray(),0,myFile.getSize());
 				 bos.flush();
 				 fos.flush();
+				 Toast.makeText(ProjectFX.mainStage, "File downloaded successfully to the selected location ", 1500, 500, 500);
 			 }
 			 catch (IOException e) {
 				}
