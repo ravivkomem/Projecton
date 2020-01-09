@@ -41,6 +41,9 @@ import javafx.stage.Stage;
 		
 	    @FXML
 	    private Text delayTimeTxt;
+	    
+	    @FXML
+	    private Text txtRefresh;
 		
 		@FXML
 		private Text txtBuildChangeRequestDetails;
@@ -111,7 +114,7 @@ import javafx.stage.Stage;
 		public void initData(Object data) {
 			// TODO Auto-generated method stub
 			myChangerequest = (ChangeRequest) data;
-			txtWorkingOnChangeRequestNumber.setText("Working On Change Request Nomber " + myChangerequest.getChangeRequestID());
+			txtWorkingOnChangeRequestNumber.setText("Working On Change Request NO. " + myChangerequest.getChangeRequestID());
 			txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
 			myController.GetStepDetails(myChangerequest.getChangeRequestID());
 			
@@ -130,6 +133,8 @@ import javafx.stage.Stage;
 			timeRemainingTextAria.setVisible(false);
 			delayTimeTxt.setVisible(false);
 			timeRemainingTxt.setVisible(false);
+			txtRefresh.setVisible(false);
+			txtTimeForExecution.setEditable(false);
 			flag=0;
 			
 			
@@ -161,6 +166,7 @@ import javafx.stage.Stage;
 	    	else if(count>0)
 	    	{
 				txtWaitingForTomeApprovalPopUp.setVisible(true);
+				txtRefresh.setVisible(true);
 				Date estimatedDateChoosen = Date.valueOf(txtTimeForExecution.getValue());
 				myController.insertNewEstimatedDateToExecutionStepAndChangeRequestIDStep(estimatedDateChoosen,myChangerequest.getChangeRequestID());
 				myController.updateNewChangeRequestIdStepToExecutionApprovedTime(myChangerequest.getChangeRequestID());
@@ -231,17 +237,14 @@ import javafx.stage.Stage;
 	    @FXML
 	    public void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event)    // opet time extension
 	    {
-	    	if (myTimeExtensionStage == null)
-			{
-				myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),executionStep);
-			}
-			else if (myTimeExtensionStage.isShowing())
-			{
+	    	if (myTimeExtensionStage == null) {
+				myTimeExtensionStage = ProjectFX.pagingController
+						.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),executionStep);
+			} else if (myTimeExtensionStage.isShowing()) {
 				Toast.makeText(ProjectFX.mainStage, "Time Extension Window is already open", 1500, 500, 500);
-			} 
-			else
-			{
-				myTimeExtensionStage = ProjectFX.pagingController.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),executionStep);
+			} else {
+				myTimeExtensionStage = ProjectFX.pagingController
+						.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),executionStep);
 			}
 
 	    }

@@ -23,13 +23,13 @@
          </font>
       </Text>
       <Text fx:id="txtBuildChangeRequestDetails" layoutX="158.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Details" wrappingWidth="127.00000661611557" />
-      <Button fx:id="btnBack" layoutX="14.0" layoutY="549.0" mnemonicParsing="false" onMouseClicked="#BackToLastPageFromExecutionPage" text="Back" />
-      <Button fx:id="btnCommitExecution" layoutX="649.0" layoutY="533.0" mnemonicParsing="false" onMouseClicked="#UpdateChangeRequestStepAndExecutionLeaderStatus" text="Commit" />
-      <Text fx:id="txtBuildEnterTimeRequiredForExecution" layoutX="158.0" layoutY="309.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter time required for execution" wrappingWidth="120.51171651482582" />
-      <Button fx:id="btnSubmitForTimeRequiredForExecution" layoutX="566.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#SendTimeRequiredForExecutionToSupervisor" text="Submit" />
-      <Text fx:id="txtWaitingForTomeApprovalPopUp" fill="#cfbb38" layoutX="337.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting For Time Approval" wrappingWidth="149.00000469386578">
+      <Button fx:id="btnBack" layoutX="21.0" layoutY="550.0" mnemonicParsing="false" onMouseClicked="#BackToLastPageFromExecutionPage" text="Back" />
+      <Button fx:id="btnCommitExecution" layoutX="620.0" layoutY="534.0" mnemonicParsing="false" onMouseClicked="#UpdateChangeRequestStepAndExecutionLeaderStatus" text="Commit" />
+      <Text fx:id="txtBuildEnterTimeRequiredForExecution" layoutX="158.0" layoutY="356.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter time required for execution" wrappingWidth="120.51171651482582" />
+      <Button fx:id="btnSubmitForTimeRequiredForExecution" layoutX="575.0" layoutY="356.0" mnemonicParsing="false" onMouseClicked="#SendTimeRequiredForExecutionToSupervisor" text="Submit" />
+      <Text fx:id="txtWaitingForTomeApprovalPopUp" fill="#cfbb38" layoutX="229.0" layoutY="467.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting For Time Approval" wrappingWidth="356.0000046938658">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
       <Button fx:id="btnLogOut" layoutX="633.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#LogOutFromExecutionLeaderPage" style="-fx-background-color: #2196F3;" text="log out">
@@ -49,7 +49,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <TextArea fx:id="timeRemainingTextAria" layoutX="637.0" layoutY="170.0" prefHeight="53.0" prefWidth="97.0" />
+      <TextArea fx:id="timeRemainingTextAria" layoutX="608.0" layoutY="224.0" prefHeight="53.0" prefWidth="97.0" />
       <VBox alignment="TOP_CENTER" prefHeight="282.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ReturnToHomePageFromExecutionLeaderPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
@@ -96,15 +96,23 @@
             </ImageView>
          </children>
       </VBox>
-      <Text fx:id="txtWorkingOnChangeRequestNumber" layoutX="228.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working On Change Request No.XX" wrappingWidth="420.6708984375">
+      <Text fx:id="txtWorkingOnChangeRequestNumber" layoutX="200.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working On Change Request No.XX" wrappingWidth="519.6708984375">
          <font>
-            <Font size="21.0" />
+            <Font size="25.0" />
          </font>
       </Text>
-      <DatePicker fx:id="txtTimeForExecution" layoutX="337.0" layoutY="309.0" prefHeight="31.0" prefWidth="171.0" />
-      <Button fx:id="btnRefresh" layoutX="363.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#GetAgainTheChangeRequestToSeeStatus" text="Refresh" />
-      <Text fx:id="delayTimeTxt" layoutX="652.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time is in delay" wrappingWidth="66.99999850988388" />
-      <Text fx:id="timeRemainingTxt" layoutX="550.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time left" wrappingWidth="69.99999792687595" />
-      <TextArea fx:id="txtChangeRequestDetails" layoutX="337.0" layoutY="170.0" prefHeight="112.0" prefWidth="171.0" />
+      <DatePicker fx:id="txtTimeForExecution" layoutX="303.0" layoutY="356.0" prefHeight="31.0" prefWidth="197.0" />
+      <Button fx:id="btnRefresh" layoutX="358.0" layoutY="530.0" mnemonicParsing="false" onMouseClicked="#GetAgainTheChangeRequestToSeeStatus" prefHeight="35.0" prefWidth="57.0">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="37.0">
+               <image>
+                  <Image url="@refresh_symbol.jpg" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Text fx:id="delayTimeTxt" layoutX="623.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time is in delay" wrappingWidth="66.99999850988388" />
+      <Text fx:id="timeRemainingTxt" layoutX="622.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution time left" wrappingWidth="69.99999792687595" />
+      <TextArea fx:id="txtChangeRequestDetails" layoutX="275.0" layoutY="170.0" prefHeight="160.0" prefWidth="264.0" />
+      <Text fx:id="txtRefresh" layoutX="362.0" layoutY="519.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Refresh" />
    </children>
 </AnchorPane>
