@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `analysis_report`
+--
+
+DROP TABLE IF EXISTS `analysis_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `analysis_report` (
+  `AnalysisReportID` int(11) NOT NULL,
+  `ChangeRequestID` varchar(45) NOT NULL,
+  `Header` varchar(45) NOT NULL,
+  `ChangeSpecifications` varchar(45) NOT NULL,
+  `Comments` varchar(45) NOT NULL,
+  PRIMARY KEY (`AnalysisReportID`,`ChangeRequestID`),
+  UNIQUE KEY `AnalysisReportID_UNIQUE` (`AnalysisReportID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `analysis_report`
+--
+
+LOCK TABLES `analysis_report` WRITE;
+/*!40000 ALTER TABLE `analysis_report` DISABLE KEYS */;
+/*!40000 ALTER TABLE `analysis_report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `analysis_step`
 --
 
@@ -30,11 +57,11 @@ CREATE TABLE `analysis_step` (
   `Status` varchar(45) NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
-  `AnalysisReportHeader` varchar(45) DEFAULT NULL,
-  `AnalysisReportDescription` varchar(45) DEFAULT NULL,
-  `AnalysisReportAdvantages` varchar(45) DEFAULT NULL,
-  `AnalysisReportDuration` varchar(45) DEFAULT NULL,
-  `AnalysisReportConstraints` varchar(45) DEFAULT NULL,
+  `AnalysisReportHeader` varchar(100) DEFAULT NULL,
+  `AnalysisReportDescription` varchar(100) DEFAULT NULL,
+  `AnalysisReportAdvantages` varchar(100) DEFAULT NULL,
+  `AnalysisReportDuration` varchar(100) DEFAULT NULL,
+  `AnalysisReportConstraints` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -82,7 +109,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2019-11-19','Moodle','Bad','Make it good','it is not working properly','make the color red','CLOSED','CLOSING_STEP','lior','2019-12-07'),(2,'lee','2019-11-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','CLOSED','CLOSING_STEP','-','2019-01-02'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','DENIED','DENY_STEP','lior','2019-12-22'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','ACTIVE','TESTING_WORK','ido',NULL),(5,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','SUSPEND','COMMITTEE_WORK','lior',NULL),(6,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','ACTIVE','EXECUTION_WORK','ido',NULL),(71,'raviv','2019-12-20','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','ACTIVE','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(72,'raviv','2019-12-20','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','CLOSED','CLOSING_STEP','lior','2019-12-30'),(73,'raviv','2019-12-20','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','ACTIVE','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-21','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','DENIED','Deny_Step','itay','2019-12-23'),(75,'raviv','2019-12-22','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','ACTIVE','COMMITTEE_WORK','ido',NULL),(76,'raviv','2019-12-23','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','ACTIVE','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-23','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','ACTIVE','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-23','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','ACTIVE','ANALAYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','ACTIVE','ANALAYZER_AUTO_APPOINT','itayz',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','ACTIVE','ANALAYZER_AUTO_APPOINT','lior',NULL),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','ACTIVE','ANALAYZER_AUTO_APPOINT','itay',NULL),(82,'itayz','2019-12-24','Moodle System','aaa','aaa\naaa\naaa','aaa','','ACTIVE','COMMITTEE_WORK','itayz',NULL);
+INSERT INTO `change_request` VALUES (1,'raviv','2019-11-19','Moodle','Bad','Make it good','it is not working properly','make the color red','CLOSED','CLOSING_STEP','lior','2019-12-07'),(2,'lee','2019-11-19','Website','Very Bad','Make it better','loading is very slow','make the loading faster','CLOSED','CLOSING_STEP','-','2019-01-02'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','DENIED','DENY_STEP','lior','2019-12-22'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','ACTIVE','TESTING_WORK','ido',NULL),(5,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','SUSPEND','COMMITTEE_WORK','lior',NULL),(6,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','ACTIVE','TESTER_COMMITTEE_DIRECTOR_APPOINT','',NULL),(71,'raviv','2019-12-20','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','ACTIVE','EXECUTION_LEADEAR_SUPERVISOR_APPOINT','',NULL),(72,'raviv','2019-12-20','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','CLOSED','CLOSING_STEP','lior','2019-12-30'),(73,'raviv','2019-12-20','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','ACTIVE','TESTING_WORK','lior',NULL),(74,'raviv','2019-12-21','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','DENIED','Deny_Step','itay','2019-12-23'),(75,'raviv','2019-12-22','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','ACTIVE','COMMITTEE_WORK','ido',NULL),(76,'raviv','2019-12-23','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','ACTIVE','ANALAYZER_AUTO_APPOINT','itay',NULL),(77,'raviv','2019-12-23','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','ACTIVE','ANALAYZER_AUTO_APPOINT','itay',NULL),(78,'raviv','2019-12-23','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','ACTIVE','ANALAYZER_AUTO_APPOINT','lior',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','ACTIVE','ANALAYZER_AUTO_APPOINT','itayz',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','ACTIVE','ANALAYZER_AUTO_APPOINT','lior',NULL),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','ACTIVE','ANALAYZER_AUTO_APPOINT','itay',NULL),(82,'itayz','2019-12-24','Moodle System','aaa','aaa\naaa\naaa','aaa','','ACTIVE','COMMITTEE_WORK','itayz',NULL);
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -125,7 +152,7 @@ CREATE TABLE `committee_comment` (
   `commentId` int(11) NOT NULL AUTO_INCREMENT,
   `requestId` int(11) NOT NULL,
   `userName` varchar(45) NOT NULL,
-  `comment` varchar(45) NOT NULL,
+  `comment` varchar(200) NOT NULL,
   PRIMARY KEY (`commentId`),
   UNIQUE KEY `commentId_UNIQUE` (`commentId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -156,6 +183,7 @@ CREATE TABLE `committee_step` (
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
   `Status` varchar(45) NOT NULL,
+  `DenyComment` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`CommitteeStepId`),
   UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -167,7 +195,7 @@ CREATE TABLE `committee_step` (
 
 LOCK TABLES `committee_step` WRITE;
 /*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
-INSERT INTO `committee_step` VALUES (1,1,'itayz','2019-11-25','2019-11-30','2019-12-02','CLOSE'),(2,2,'gilad','2019-11-26','2019-11-30','2019-12-01','CLOSED'),(3,3,'zeev','2019-12-19','2019-12-26','2019-12-21','CLOSED'),(4,4,'lior','2019-12-19','2019-12-26','2019-12-20','CLOSED'),(5,5,'ido','2019-12-20','2019-12-27',NULL,'SUSPEND'),(6,6,'gilad','2019-12-22','2019-12-29','2019-12-25','CLOSED'),(7,71,'ido','2019-12-23','2019-12-25','2019-12-24','CLOSED'),(8,72,'itayz','2019-12-21','2019-12-28','2019-12-25','CLOSED'),(9,73,'gilad','2019-12-23','2019-12-30','2019-12-26','CLOSED'),(10,74,'zeev','2019-12-22','2019-12-29','2019-12-23','CLOSED'),(11,75,'ido','2019-12-23','2019-12-30',NULL,'ACTIVE'),(12,82,'itayz','2019-12-26','2020-01-02',NULL,'ACTIVE');
+INSERT INTO `committee_step` VALUES (1,1,'itayz','2019-11-25','2019-11-30','2019-12-02','CLOSE',NULL),(2,2,'gilad','2019-11-26','2019-11-30','2019-12-01','CLOSED',NULL),(3,3,'zeev','2019-12-19','2019-12-26','2019-12-21','CLOSED','not necessary'),(4,4,'lior','2019-12-19','2019-12-26','2019-12-20','CLOSED',NULL),(5,5,'ido','2019-12-20','2019-12-27',NULL,'SUSPEND',NULL),(6,6,'gilad','2019-12-22','2019-12-29','2019-12-25','CLOSED',NULL),(7,71,'ido','2019-12-23','2019-12-25','2019-12-24','CLOSED',NULL),(8,72,'itayz','2019-12-21','2019-12-28','2019-12-25','CLOSED',NULL),(9,73,'gilad','2019-12-23','2019-12-30','2019-12-26','CLOSED',NULL),(10,74,'zeev','2019-12-22','2019-12-29','2019-12-23','CLOSED','not important request'),(11,75,'ido','2019-12-23','2019-12-30',NULL,'ACTIVE',NULL),(12,82,'itayz','2019-12-26','2020-01-02',NULL,'ACTIVE',NULL);
 /*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,6 +214,7 @@ CREATE TABLE `execution_step` (
   `StartDate` date NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
+  `ExecutionComment` varchar(600) DEFAULT NULL,
   PRIMARY KEY (`ExecutionStepID`),
   UNIQUE KEY `ExecutionStepID_UNIQUE` (`ExecutionStepID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -197,7 +226,7 @@ CREATE TABLE `execution_step` (
 
 LOCK TABLES `execution_step` WRITE;
 /*!40000 ALTER TABLE `execution_step` DISABLE KEYS */;
-INSERT INTO `execution_step` VALUES (1,2,'itay','CLOSED','2019-12-01','2019-12-31','2019-12-31'),(2,1,'lior','CLOSED','2019-12-02','2019-12-04','2019-12-05'),(3,4,'ido','CLOSED','2019-12-20','2019-12-25','2019-12-24'),(4,6,'gilad','ACTIVE','2019-12-25','2019-01-01',NULL),(5,73,'gilad','CLOSED','2019-12-26','2020-01-01','2020-01-01'),(6,71,'lior','ACTIVE','2019-12-24','2019-12-30',NULL),(7,72,'zeev','CLOSED','2019-12-25','2019-12-28','2019-12-27');
+INSERT INTO `execution_step` VALUES (1,2,'itay','CLOSED','2019-12-01','2019-12-31','2019-12-31',NULL),(2,1,'lior','CLOSED','2019-12-02','2019-12-04','2019-12-05',NULL),(3,4,'ido','CLOSED','2019-12-20','2019-12-25','2019-12-24',NULL),(5,73,'gilad','CLOSED','2019-12-26','2020-01-01','2020-01-01',NULL),(6,71,'lior','ACTIVE','2019-12-24','2019-12-30',NULL,NULL),(7,72,'zeev','CLOSED','2019-12-25','2019-12-28','2019-12-27',NULL),(8,6,'gilad','CLOSE','2019-12-12','2020-01-16','2020-01-09','finish lee hugi');
 /*!40000 ALTER TABLE `execution_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -323,6 +352,35 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Table structure for table `requirements`
+--
+
+DROP TABLE IF EXISTS `requirements`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `requirements` (
+  `ChangeRequestID` int(11) NOT NULL,
+  `InitaitorName` varchar(45) DEFAULT NULL,
+  `Subsystem` varchar(45) DEFAULT NULL,
+  `CurrentState` varchar(45) DEFAULT NULL,
+  `ChangeDescription` varchar(45) DEFAULT NULL,
+  `Status` varchar(45) DEFAULT NULL,
+  `HandlerName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`ChangeRequestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `requirements`
+--
+
+LOCK TABLES `requirements` WRITE;
+/*!40000 ALTER TABLE `requirements` DISABLE KEYS */;
+INSERT INTO `requirements` VALUES (1,'Raviv','Moodle','Bad','Make it Good','Active','Lee'),(2,'Ido','ClassBoost','Delays with video','Add loading buffer','Suspended','Lior');
+/*!40000 ALTER TABLE `requirements` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `subsystem_support`
 --
 
@@ -358,7 +416,7 @@ CREATE TABLE `tester_step` (
   `ChangeRequestId` int(11) NOT NULL,
   `HandlerUserName` varchar(45) NOT NULL,
   `Status` varchar(45) NOT NULL,
-  `TesterFailReport` varchar(45) DEFAULT NULL,
+  `TesterFailReport` varchar(600) DEFAULT NULL,
   `StartDate` date NOT NULL,
   `EstimatedEndDate` date DEFAULT NULL,
   `EndDate` date DEFAULT NULL,
@@ -440,6 +498,34 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','ravivravivraviv@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid22@gmail.com','Information Tech','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi93@gmail.com','Information Tech','Tech Manager','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Information Tech','Committee Director','COMMITTEE_DIRECTOR','3333333333',0),(7,'nir','1234','Nir','Asolin','nirasolin@gmail.com','Software Engineering','Lecturer','BASIC_USER','2222222222',0),(8,'gilad','1234','Gilad','Eviatar','giladeviatar@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','1111111111',0),(9,'shira','1234','Shira','Noah','shiranoah@gmail.com','Math','Student','BASIC_USER','1212121212',0),(10,'moti','1234','Moti','Ben Hamo','notiben@gmail.com','Math','Worker','BASIC_USER','2121212121',0),(11,'zeev','1234','Zeev','Imber','zeev2@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','3131313131',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `userName` varchar(45) NOT NULL,
+  `userPassword` varchar(45) NOT NULL,
+  `userPermission` varchar(45) NOT NULL,
+  `userEmail` varchar(45) NOT NULL,
+  `loggedToSystem` tinyint(4) NOT NULL,
+  PRIMARY KEY (`userName`),
+  UNIQUE KEY `userName_UNIQUE` (`userName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('lior','lk1234','INFORMATION_ENGINEER','liorkauffman@gmail.com',0),('raviv','1234','BASIC_USER','ravivkomem@gmail.com',0);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -541,4 +627,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-08 15:29:44
+-- Dump completed on 2020-01-09 12:43:30
