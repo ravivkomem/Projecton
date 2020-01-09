@@ -95,8 +95,15 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		case "Supervisor":
 			errorText.setVisible(false);
 			for(User u: users) {
-				if(u.getPermission().equals("SUPERVISOR")) {
-					handleSupervasior(employeeUser,u);
+				if(u.getPermission().equals("SUPERVISOR")||
+						u.getPermission().equals("SUPERVISOR_COMMITTEE_MEMBER")||
+						u.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR")) {
+					if(u.getUserName().equals(employeeUser.getUserName())) {
+						handleSupervisorOneUser(employeeUser);
+						techManagerBoundry.setEmployeeListChanges(employeeUser);
+					}
+					else
+						handleSupervasior(employeeUser,u);
 					return;
 				}
 			}
@@ -106,7 +113,8 @@ public class EmployeePermissionBoundary implements DataInitializable{
 			errorText.setVisible(false);
 			int cnt=0;
 			for(User u: users) {
-				if(u.getPermission().equals("COMMITTEE_MEMBER")) {
+				if(u.getPermission().equals("COMMITTEE_MEMBER")||
+						u.getPermission().equals("SUPERVISOR_COMMITTEE_MEMBER")) {
 					committeeMemberComboBox.getItems().add(u.getUserName());
 					cnt++;
 				}
@@ -127,8 +135,14 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		case "Committee Director":
 			errorText.setVisible(false);
 			for(User u: users) {
-				if(u.getPermission().equals("COMMITTEE_DIRECTOR")) {
-					handleCommitteeDirector(employeeUser,u);
+				if(u.getPermission().equals("COMMITTEE_DIRECTOR")||
+						u.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR")) {
+					if(u.getUserName().equals(employeeUser.getUserName())) {
+						handleCommitteeDirectorOneUser(employeeUser);
+						techManagerBoundry.setEmployeeListChanges(employeeUser);
+					}
+					else
+						handleCommitteeDirector(employeeUser,u);
 					return;
 				}
 			}

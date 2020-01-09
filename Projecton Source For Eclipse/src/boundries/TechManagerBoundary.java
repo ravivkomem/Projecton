@@ -231,6 +231,8 @@ public class TechManagerBoundary implements Initializable{
 	            positionTextField.setText("");
 	            numberTextField.setText("");
 	            departmentTextField.setText("");
+	            subsystemList.clear();
+	            subsystemSupporterTable.setItems(subsystemList);
 				return;
 			}
 		}
