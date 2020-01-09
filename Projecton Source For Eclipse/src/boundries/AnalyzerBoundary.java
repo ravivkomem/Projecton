@@ -284,6 +284,9 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
+		
+		
+		
 		advantagestextArea.setWrapText(true);
 		constraintstextArea.setWrapText(true);
 		descriptiontextArea.setWrapText(true);
