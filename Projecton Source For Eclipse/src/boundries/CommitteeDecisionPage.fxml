@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -21,14 +22,14 @@
       </ImageView>
       <AnchorPane fx:id="addCommentPane" layoutX="146.0" layoutY="183.0" prefHeight="316.0" prefWidth="565.0" visible="false">
          <children>
-            <TableView fx:id="commentTable_addComment" layoutX="270.0" layoutY="36.0" prefHeight="180.0" prefWidth="273.0">
+            <TableView fx:id="commentTable_addComment" layoutX="277.0" layoutY="36.0" prefHeight="180.0" prefWidth="273.0">
               <columns>
                 <TableColumn fx:id="employeeIdAddColumn" prefWidth="95.0" text="User Name" />
                 <TableColumn fx:id="commentAddColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
               </columns>
             </TableView>
-            <Button fx:id="btnSubmitComment" layoutX="114.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#submitComment" text="Submit" />
-            <Button fx:id="btnRefreshTable" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="377.0" layoutY="221.0" mnemonicParsing="false" onMouseClicked="#refreshTableDetails" prefHeight="49.0" prefWidth="59.0" text="Refresh">
+            <Button fx:id="btnSubmitComment" layoutX="104.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#submitComment" text="Submit" />
+            <Button fx:id="btnRefreshTable" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="384.0" layoutY="221.0" mnemonicParsing="false" onMouseClicked="#refreshTableDetails" prefHeight="49.0" prefWidth="59.0" text="Refresh">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -37,7 +38,8 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextArea fx:id="addCommentTextField" layoutX="41.0" layoutY="36.0" prefHeight="180.0" prefWidth="200.0" promptText="Write your comment" />
+            <TextArea fx:id="addCommentTextField" layoutX="31.0" layoutY="36.0" onKeyTyped="#updateCharcterCounterCommitteeComment" prefHeight="180.0" prefWidth="200.0" promptText="Write your comment" />
+            <Label fx:id="committeeCommentLabel" layoutX="237.0" layoutY="36.0" text="0/200" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="committeeDirectorPane" layoutX="142.0" layoutY="189.0" prefHeight="398.0" prefWidth="592.0" visible="false">
@@ -51,8 +53,9 @@
             <ComboBox fx:id="decisionComboBox" layoutX="77.0" layoutY="293.0" prefHeight="25.0" prefWidth="166.0" promptText="Choose Your Decision" />
             <Button fx:id="btnSendDecision" layoutX="253.0" layoutY="293.0" mnemonicParsing="false" onMouseClicked="#sendDirectorDecision" text="Send" />
             <Text layoutX="64.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please approve, deny or ask for more information to this change request" />
-            <TextArea fx:id="denyCommentTextArea" layoutX="77.0" layoutY="293.0" prefHeight="92.0" prefWidth="200.0" promptText="Please write your deny decision" visible="false" />
+            <TextArea fx:id="denyCommentTextArea" layoutX="77.0" layoutY="293.0" onKeyTyped="#updateCharcterCounterDenyComment" prefHeight="92.0" prefWidth="200.0" promptText="Please write your deny decision" visible="false" />
             <Button fx:id="sendDenyCommentBtn" layoutX="277.0" layoutY="359.0" mnemonicParsing="false" onMouseClicked="#sendDenyDecisionAndComment" text="Send" visible="false" />
+            <Label fx:id="denyCommentLabel" layoutX="281.0" layoutY="297.0" text="0/100" visible="false" />
          </children>
       </AnchorPane>
       <VBox alignment="TOP_CENTER" prefHeight="458.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
