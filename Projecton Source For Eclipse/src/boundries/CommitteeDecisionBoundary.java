@@ -32,13 +32,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -127,6 +130,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     private TextArea denyCommentTextArea;//need to handle
     @FXML
     private Button sendDenyCommentBtn;
+    @FXML
+    private Label committeeCommentLabel;
+    @FXML
+    private Label denyCommentLabel;
 
      /* *************************************
 	  * ******* Private Objects *************
@@ -138,6 +145,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ObservableList<CommitteeComment> commentList = FXCollections.observableArrayList();
 	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+	 private static final int MAX_DENY_CHARS = 100;
+	 private static final int MAX_COMMITTEE_CHARS = 200;
 
 	Stage myTimeExtensionStage = null;
 	Stage myAnalysisReportStage = null;
@@ -145,6 +154,16 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	/* *************************************
 	 * ******* FXML Methods *************
 	 * *************************************/
+	
+    @FXML
+    void updateCharcterCounterCommitteeComment(KeyEvent event) {
+    	committeeCommentLabel.setText(addCommentTextField.getText().length() + "/ " + MAX_COMMITTEE_CHARS);
+    }
+    
+    @FXML
+    void updateCharcterCounterDenyComment(KeyEvent event) {
+    	denyCommentLabel.setText(denyCommentTextArea.getText().length() + "/ " + MAX_DENY_CHARS);
+    }
 	
     @FXML
     void sendDenyDecisionAndComment(MouseEvent event) {
@@ -249,6 +268,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 * update close_step 
 				 * update changeRequest table
 				 */
+				denyCommentLabel.setVisible(true);
 				sendDenyCommentBtn.setVisible(true);
 				denyCommentTextArea.setVisible(true);
 				decisionComboBox.setVisible(false);
@@ -311,13 +331,15 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
 			myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
+			addCommentTextField.setText("");
+			committeeCommentLabel.setText("0/ " + MAX_COMMITTEE_CHARS);
 		} else {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}
 	}
 
 	public void createObjectForUpdateChangeRequestDetails(String handlerUserName) {
-		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT", handlerUserName,
+		myController.updateChangeRequestCurrentStep("ANALYZER_AUTO_APPOINT", handlerUserName,
 				currentChangeRequest.getChangeRequestID());
 	}
 
@@ -364,7 +386,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 		timeRemainingTextAria.setEditable(false);
 		addCommentTextField.setWrapText(true);
-
 		denyCommentTextArea.setWrapText(true);
 		
 		addCommentPane.setVisible(false);
@@ -374,12 +395,17 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		image3point1.setVisible(false);
 		image3point2.setVisible(false);
 
+		addCommentTextField.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_COMMITTEE_CHARS ? change : null));
+		denyCommentTextArea.setTextFormatter(new TextFormatter<String>(change -> 
+        change.getControlNewText().length() <= MAX_DENY_CHARS ? change : null));
+		
 		switch (ProjectFX.currentUser.getPermission()) {
 		case "COMMITTEE_MEMBER":
 			break;
-		case "SUPERVISER_COMMITTEE_MEMBER":
+		case "SUPERVISOR_COMMITTEE_MEMBER":
 			break;
-		case "SUPERVISER_COMMITTEE_DIRECTOR":
+		case "SUPERVISOR_COMMITTEE_DIRECTOR":
 			btnCommitteeDirector.setVisible(true);
 			btnTimeExtension.setVisible(true);
 			image3point1.setVisible(true);

@@ -197,7 +197,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	myChangerequest = row.getItem();
 			        	if(myChangerequest.getCurrentStep().equals("ANALYZER_AUTO_APPOINT"))
 			        	{
-			        		if(myChangerequest.getStatus().equals("Active"))
+			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{	
 			        		setVisabilityValse();
 			        		txtTextChange.setVisible(true);
@@ -225,7 +225,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("ANALYZER_SUPERVISOR_APPOINT"))
 			        	{
-			        		if(myChangerequest.getStatus().equals("Active"))
+			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{
 			        			setVisabilityValse();
 			        			txtTextChange.setVisible(true);
@@ -236,7 +236,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        			comboSelectAnalyizer.setVisible(true);
 			        			btnSetAnalyzer.setVisible(true);
 			        		}
-			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if(myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        		setVisabilityValse();
 			        		btnExstraDetails.setDisable(false);
@@ -251,7 +251,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_LEADEAR_SUPERVISOR_APPOINT"))
 			        	{
-			        		if(myChangerequest.getStatus().equals("Active"))
+			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{	
 			        		setVisabilityValse();
 			        		txtTextChange.setVisible(true);
@@ -262,7 +262,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		comboSelectExecutionLeader.setVisible(true);
 			        		btnSetExecutionLeader.setVisible(true);	
 			        		}
-			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if(myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);
@@ -276,7 +276,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	}
 			        	else if(myChangerequest.getCurrentStep().equals("ANALYSIS_APPROVE_TIME"))
 			        	{
-			        		if(myChangerequest.getStatus().equals("Active"))
+			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{	
 			        		setVisabilityValse();
 			        		txtTextChange.setVisible(true);
@@ -292,7 +292,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		
 			        		
 			        		}
-			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if(myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);
@@ -309,7 +309,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	{
 			        		
 			   
-			        		if(myChangerequest.getStatus().equals("Active"))
+			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{	
 			        		setVisabilityValse();
 			        		txtTextChange.setVisible(true);
@@ -325,7 +325,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		
 			        		
 			        		}
-			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if (myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        			setVisabilityValse();
 				        		btnExstraDetails.setDisable(false);
@@ -351,7 +351,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        	else
 			        	{
 			        	
-			        		if(myChangerequest.getStatus().equals("Active"))
+			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{	
 			        		setVisabilityValse();
 			        		txtTextChange.setVisible(false);
@@ -360,7 +360,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		btnExstraDetails.setDisable(false);
 			        		btnExstraDetails.setVisible(true);
 			        		}
-			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if (myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);

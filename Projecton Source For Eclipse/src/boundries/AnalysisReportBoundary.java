@@ -60,6 +60,9 @@ public class AnalysisReportBoundary implements DataInitializable{
 		descriptionTextArea.setEditable(false);
 		advavtagesTextArea.setEditable(false);
 		constraintsTextArea.setEditable(false);
+		descriptionTextArea.setWrapText(true);
+		advavtagesTextArea.setWrapText(true);
+		constraintsTextArea.setWrapText(true);;
 	}
     
     public void displayAnalysisReport(ArrayList<Object> resultList) {
