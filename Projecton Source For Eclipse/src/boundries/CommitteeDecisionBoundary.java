@@ -317,7 +317,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	public void createObjectForUpdateChangeRequestDetails(String handlerUserName) {
-		myController.updateChangeRequestCurrentStep("ANALAYZER_AUTO_APPOINT", handlerUserName,
+		myController.updateChangeRequestCurrentStep("ANALYZER_AUTO_APPOINT", handlerUserName,
 				currentChangeRequest.getChangeRequestID());
 	}
 
