@@ -20,16 +20,16 @@
             <Image url="@background_image.jpg" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="addCommentPane" layoutX="146.0" layoutY="183.0" prefHeight="316.0" prefWidth="565.0" visible="false">
+      <AnchorPane fx:id="addCommentPane" layoutX="146.0" layoutY="183.0" prefHeight="316.0" prefWidth="565.0">
          <children>
-            <TableView fx:id="commentTable_addComment" layoutX="277.0" layoutY="36.0" prefHeight="180.0" prefWidth="273.0">
+            <TableView fx:id="commentTable_addComment" layoutX="281.0" layoutY="36.0" prefHeight="180.0" prefWidth="273.0">
               <columns>
                 <TableColumn fx:id="employeeIdAddColumn" prefWidth="95.0" text="User Name" />
                 <TableColumn fx:id="commentAddColumn" minWidth="0.0" prefWidth="177.0" text="Comment" />
               </columns>
             </TableView>
-            <Button fx:id="btnSubmitComment" layoutX="104.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#submitComment" text="Submit" />
-            <Button fx:id="btnRefreshTable" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="384.0" layoutY="221.0" mnemonicParsing="false" onMouseClicked="#refreshTableDetails" prefHeight="49.0" prefWidth="59.0" text="Refresh">
+            <Button fx:id="btnSubmitComment" layoutX="96.0" layoutY="233.0" mnemonicParsing="false" onMouseClicked="#submitComment" text="Submit" />
+            <Button fx:id="btnRefreshTable" alignment="TOP_CENTER" contentDisplay="TOP" layoutX="388.0" layoutY="221.0" mnemonicParsing="false" onMouseClicked="#refreshTableDetails" prefHeight="49.0" prefWidth="59.0" text="Refresh">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -38,8 +38,8 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextArea fx:id="addCommentTextField" layoutX="31.0" layoutY="36.0" onKeyTyped="#updateCharcterCounterCommitteeComment" prefHeight="180.0" prefWidth="200.0" promptText="Write your comment" />
-            <Label fx:id="committeeCommentLabel" layoutX="237.0" layoutY="36.0" text="0/200" />
+            <TextArea fx:id="addCommentTextField" layoutX="23.0" layoutY="36.0" onKeyTyped="#updateCharcterCounterCommitteeComment" prefHeight="180.0" prefWidth="200.0" promptText="Write your comment" />
+            <Label fx:id="committeeCommentLabel" layoutX="229.0" layoutY="36.0" text="0/200" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="committeeDirectorPane" layoutX="142.0" layoutY="189.0" prefHeight="398.0" prefWidth="592.0" visible="false">

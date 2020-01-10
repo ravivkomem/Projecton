@@ -331,6 +331,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
 			myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
+			addCommentTextField.setText("");
+			committeeCommentLabel.setText("0/ " + MAX_COMMITTEE_CHARS);
 		} else {
 			Toast.makeText(ProjectFX.mainStage, "The comment upload failed", 1500, 500, 500);
 		}
