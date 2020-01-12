@@ -49,7 +49,7 @@ public class ChangeRequest {
 				actualStep = "Execution";
 				break;
 			
-			case "TESTER_APPOINT":
+			case "TESTER_COMMITTEE_DIRECTOR_APPOINT":
 				actualStep = "Appoint Tester";
 				break;
 				

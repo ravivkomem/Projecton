@@ -113,7 +113,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    	String newChangeRequestComment = commentField.getText();
 	    	String newChangeRequestExplanation =  reasonTA.getText();
 	    	Date newChangeRequestDate = uploadChangeRequestDate;
-	    	String newChangeRequestStatus= "Active";
+	    	String newChangeRequestStatus= "ACTIVE";
 	    	String HandlerUserName="XXXX";//will be random in the controller 
 	    	String newCurrentStep= CURRENT_STEP;
 	    	/*in case the user didn't fill all the required fields*/

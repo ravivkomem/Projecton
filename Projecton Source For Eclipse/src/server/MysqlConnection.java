@@ -218,7 +218,7 @@ public class MysqlConnection {
     			+ "OR CurrentStep = 'EXECUTION_SET_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME' OR CurrentStep = 'EXECUTION_WORK' " /*Execution Step*/
     			+ "OR CurrentStep = 'TESTING_WORK')) " /*Tester Step*/
     			+ "OR CurrentStep = 'COMMITTEE_WORK' " /* Committee Step */
-    			+ "OR CurrentStep = 'TESTER_APPOINT')"; /* Committee director */
+    			+ "OR CurrentStep = 'TESTER_COMMITTEE_DIRECTOR_APPOINT')"; /* Committee director */
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME.getCode()] =
     			"SELECT * FROM icm.change_request "
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? "

@@ -147,7 +147,7 @@ public class WorkStationBoundary implements Initializable{
     				break;
     			
     			/*Committee Director setting tester status */
-    			case "TESTER_APPOINT": 
+    			case "TESTER_COMMITTEE_DIRECTOR_APPOINT": 
     				if (myTesterAppointStage == null)
     				{
     					myTesterAppointStage = ProjectFX.pagingController.loadAdditionalStage
