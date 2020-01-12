@@ -26,6 +26,8 @@ public enum SqlQueryType {
 	UPDATE_ANALYSIS_STEP_ESTIMATED_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_CHANGE_REQUEST_CURRENTSTEP(SqlExecutionType.UPDATE_QUERY),
+	GET_COMMITTEE_DIRECTOR(SqlExecutionType.EXECUTE_QUERY),
+	INSERT_NEW_COMMITTEE_STEP_FROM_ANALYZER(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********** Committee Queries ****************
