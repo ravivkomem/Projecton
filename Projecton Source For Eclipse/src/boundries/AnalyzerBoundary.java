@@ -199,7 +199,8 @@ public class AnalyzerBoundary implements DataInitializable {
 		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextArea.getText(),
 				
 				descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
-		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
+		myController.getCommitteeDirector();
+		//ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
 	@FXML
@@ -270,7 +271,7 @@ public class AnalyzerBoundary implements DataInitializable {
     public void getCommitteeDirectorUserName(String name) {
     	myController.insertNewCommitteeStep(currentChangeRequest.getChangeRequestID(), name, TimeManager.getCurrentDate(), "Active", 
     			TimeManager.addDays(TimeManager.getCurrentDate(), 7));
-    	
+    	ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
 
 	@Override

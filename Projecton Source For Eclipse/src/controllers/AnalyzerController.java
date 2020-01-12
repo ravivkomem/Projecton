@@ -88,6 +88,12 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	public void getCommitteeDirector() {
+		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_COMMITTEE_DIRECTOR,new ArrayList<Object>());
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -115,6 +121,10 @@ public class AnalyzerController extends BasicController {
 				this.unsubscribeFromClientDeliveries();
 				String UserName =(String) (result.getResultData().get(0).get(0));
 				myBoundary.getCommitteeDirectorUserName(UserName);
+				break;
+			case INSERT_NEW_COMMITTEE_STEP_FROM_ANALYZER:
+				this.unsubscribeFromClientDeliveries();
+				break;
 			default:
 				break;
 		}
