@@ -190,7 +190,11 @@ public class MysqlConnection {
         
         sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE.getCode()]=
                 "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
- 
+        
+        sqlArray[SqlQueryType.GET_COMMITTEE_DIRECTOR.getCode()]=
+        		"SELECT HandlerUserName FROM icm.user WHERE Permission = 'COMMITTEE_DIRECTOR' OR Permission = 'SUPERVISOR_COMMITTEE_DIRECTOR'";
+        sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_STEP_FROM_ANALYZER.getCode()]=
+       " INSERT INTO icm.committee_step(ChangeRequestId,HandlerUserName,StartDate,Status,EstimatedEndDate) VALUES (?,?,?,?,?)";
     	/* *****************************************************
 		 * *************** Work Station Queries ****************
 		 * *****************************************************/

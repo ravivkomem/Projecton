@@ -11,6 +11,7 @@ import boundries.AnalyzerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.Step;
+import entities.User;
 import javafx.application.Platform;
 
 @SuppressWarnings("serial")
@@ -76,6 +77,17 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	public void insertNewCommitteeStep(Integer ChangeRequestId, String UserName,Date StartDate,String Status,Date estimatedDate) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(ChangeRequestId);
+		varArray.add(UserName);
+		varArray.add(StartDate);
+		varArray.add(Status);
+		varArray.add(estimatedDate);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COMMITTEE_STEP_FROM_ANALYZER,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -98,6 +110,11 @@ public class AnalyzerController extends BasicController {
 				this.unsubscribeFromClientDeliveries();
 				Step recievedStep = this.parseSqlResultToAnalysisStep(result);
 				myBoundary.recieveCurrentStep(recievedStep);
+				break;
+			case GET_COMMITTEE_DIRECTOR:
+				this.unsubscribeFromClientDeliveries();
+				String UserName =(String) (result.getResultData().get(0).get(0));
+				myBoundary.getCommitteeDirectorUserName(UserName);
 			default:
 				break;
 		}

@@ -2,6 +2,7 @@ package boundries;
 
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -135,7 +136,11 @@ public class AnalyzerBoundary implements DataInitializable {
 	@FXML
 	void loadRequestDetails(MouseEvent event) {
 		//closeMyStages();
-		ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath());
+		ArrayList<Object> dataList = new ArrayList<>();
+    	dataList.add(currentChangeRequest);
+    	dataList.add(ProjectPages.ANALYZER_PAGE.getPath());
+    	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
+		
 	}
 
 	@FXML
@@ -192,6 +197,7 @@ public class AnalyzerBoundary implements DataInitializable {
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 		myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
 		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextArea.getText(),
+				
 				descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
@@ -260,6 +266,11 @@ public class AnalyzerBoundary implements DataInitializable {
     void updateHeaderCharcterCounter(KeyEvent event) {
     	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
 
+    }
+    public void getCommitteeDirectorUserName(String name) {
+    	myController.insertNewCommitteeStep(currentChangeRequest.getChangeRequestID(), name, TimeManager.getCurrentDate(), "Active", 
+    			TimeManager.addDays(TimeManager.getCurrentDate(), 7));
+    	
     }
 
 	@Override
