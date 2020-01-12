@@ -17,13 +17,27 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 public class UploadChangeRequestBoundary implements Initializable {
 	/*FXML ELEMENTS*/
+		@FXML
+		private Label currentStateDescriptionLbl;
+	
+    	@FXML
+    	private Label changeRequestDescLbl;
+
+    	@FXML
+    	private Label reasonLbl;
+
+    	@FXML
+    	private Label commentLbl;
+		
 	    @FXML
 	    private Button backBtn;
 
@@ -56,7 +70,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    
 	    
 	    
-	    
+	    private static final int MAX_CHAR=100;
 	    private UploadChangeRequestController myController= new UploadChangeRequestController(this);////connection to my controller 
 	    private ChangeRequest newChangeRequest;
 	    private final String CURRENT_STEP = "ANALAYZER_AUTO_APPOINT";
@@ -180,6 +194,26 @@ public class UploadChangeRequestBoundary implements Initializable {
 			currentStateDescriptionField.setWrapText(true);
 			
 		}
+
+	    @FXML
+	    void updateCountChangeRequestDesc(KeyEvent event) {
+	    	changeRequestDescLbl.setText(changeRequestDescriptionField.getText().length()+"/" +MAX_CHAR);
+	    }
+
+	    @FXML
+	    void updateCountComment(KeyEvent event) {
+	    	commentLbl.setText(commentField.getText().length()+"/" +MAX_CHAR);
+	    }
+
+	    @FXML
+	    void updateCountCurrentStateDesc(KeyEvent event) {
+	    	currentStateDescriptionLbl.setText(currentStateDescriptionField.getText().length()+"/" +MAX_CHAR);
+	    }
+
+	    @FXML
+	    void updateCountReason(KeyEvent event) {
+	    	reasonLbl.setText(reasonTA.getText().length()+"/" +MAX_CHAR);
+	    }
 	}
 
 	
