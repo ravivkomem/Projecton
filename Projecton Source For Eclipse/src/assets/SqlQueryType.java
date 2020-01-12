@@ -161,6 +161,9 @@ public enum SqlQueryType {
 	GET_USER_FULL_NAME(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
+	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
+	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
+	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	MAX_SQL_QUERY(SqlExecutionType.NOT_QUERY);  /* Number of queries */
 
 	private SqlExecutionType executionType;
