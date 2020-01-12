@@ -235,7 +235,7 @@ public class MysqlConnection {
     			+ "WHERE Status = 'Active' AND HandlerUserName = ? AND CurrentStep = 'TESTING_WORK'";
     	sqlArray[SqlQueryType.SELECT_TESTER_APPOINT_CHANGE_REQUESTS.getCode()] =
     			"SELECT * FROM icm.change_request "
-    			+ "WHERE Status = 'Active' AND CurrentStep = 'TESTER_APPOINT'";
+    			+ "WHERE Status = 'Active' AND CurrentStep = 'TESTER_COMMITTEE_DIRECTOR_APPOINT'";//changed from TESTER_APPOINT to TESTER_COMMITTEE_DIRECTOR_APPOINT
     	
     	/* *****************************************************
 		 * *************** Tester Queries **************
