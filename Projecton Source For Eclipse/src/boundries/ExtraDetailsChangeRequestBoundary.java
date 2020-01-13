@@ -132,17 +132,17 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		RequestedChangeDescTF.setWrapText(true);
 		currentStateDescTA.setWrapText(true);
 		myController.getChangeRequestFile(currentChangeRequest.getChangeRequestID());
+		viewUploadFileBtn.setVisible(false);
 	}
 
 	public void displayFile(MyFile downloadedFile) {
 		if (downloadedFile!=null)
 		{
-			currentFile = MyFile.parseToMyFile(downloadedFile.getFileName());
+			//currentFile = MyFile.parseToMyFile(downloadedFile.getFileName());
+			currentFile = downloadedFile;
+			viewUploadFileBtn.setVisible(true);
 		}
-		else 
-		{
-			viewUploadFileBtn.setVisible(false);
-		}
+	
 		//downloadFile(myFile);
 		
 	}
@@ -156,7 +156,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		
 		File file = new File(path+"."+extension);
 		System.out.println(myFile.getFileName());
-		 FileOutputStream fos;
+		FileOutputStream fos;
 		try {
 			fos = new FileOutputStream (file);
 			 BufferedOutputStream bos = new BufferedOutputStream (fos);

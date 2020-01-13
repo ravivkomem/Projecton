@@ -16,7 +16,7 @@
          </image>
       </ImageView>
       <Text layoutX="42.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Author:" />
-      <Text layoutX="42.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subsystem:" />
+      <Text layoutX="325.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Subsystem:" />
       <Text layoutX="42.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
       <TextArea fx:id="descriptionTextArea" layoutX="110.0" layoutY="115.0" prefHeight="118.0" prefWidth="149.0" />
       <Text layoutX="42.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advantages:" />
@@ -24,19 +24,20 @@
       <Text layoutX="42.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Constraints:" />
       <TextArea fx:id="constraintsTextArea" layoutX="110.0" layoutY="337.0" prefHeight="65.0" prefWidth="149.0" />
       <Text layoutX="42.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration:" />
-      <ImageView fitHeight="255.0" fitWidth="243.0" layoutX="346.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="182.0" fitWidth="171.0" layoutX="346.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@report_image.jpg" />
          </image>
       </ImageView>
       <Text fx:id="authorTxt" layoutX="120.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Text fx:id="durationTxt" layoutX="109.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="subsystemTxt" layoutX="120.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Text fx:id="subsystemTxt" layoutX="403.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" />
       <Button fx:id="btnClosePage" layoutX="583.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#closingPage" text="close" />
       <Text fx:id="reportPageTitle" layoutX="101.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Report Page Title">
          <font>
             <Font size="28.0" />
          </font>
       </Text>
+      <Text fx:id="headerText" layoutX="42.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Header:" />
    </children>
 </AnchorPane>

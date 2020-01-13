@@ -185,7 +185,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
 		addCommentPane.setVisible(true);
-		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 	}
 
 	@FXML
@@ -206,7 +206,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	void loadCommitteeDirectorPage(MouseEvent event) {
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(true);
-		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 	}
 
 	@FXML
@@ -243,7 +243,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	void refreshTableDetails(MouseEvent event) {
-		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
+		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 	}
 
 	@FXML
@@ -301,7 +301,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		} else {
 			CommitteeComment newComment = new CommitteeComment(currentChangeRequest.getChangeRequestID(),
 					ProjectFX.currentUser.getUserName(), addCommentTextField.getText());
-			myController.insertNewCommentToDB(newComment);
+			myController.insertNewCommentToDB(newComment,committeeStep.getStepID());
 		}
 	}
 
@@ -332,7 +332,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	public void committeeCommentInsertToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
-			myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID());
+			myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 			addCommentTextField.setText("");
 			committeeCommentLabel.setText("0/ " + MAX_COMMITTEE_CHARS);
 		} else {
@@ -351,7 +351,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * @param estimatedEndDate
 	 */
 	public void displayTimeRemaining(Date estimatedEndDate) {
-		Date todayDate = updateStepDate;
+		//Date todayDate = updateStepDate;
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
 		if(daysBetween < 0) {
 			delayTimeTxt.setVisible(true);

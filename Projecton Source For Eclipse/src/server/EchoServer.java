@@ -34,7 +34,7 @@ public class EchoServer extends AbstractServer
    * The default port to listen on.
    */
   final public static int DEFAULT_PORT = 5555;
-  final public static String FILLE_DIRECTORY ="R:\\ServerFiles\\";
+  final public static String FILLE_DIRECTORY ="C:\\ServerFiles\\";
   
   //Constructors ****************************************************
   
@@ -90,14 +90,18 @@ public class EchoServer extends AbstractServer
 		 }
 		 else
 		 {
-			 /* Create my file from path */
-			 String fileName = ((Integer)sqlResult.getResultData().get(0).get(0)).toString();
-			 String fileExtension = (String)sqlResult.getResultData().get(0).get(1);
-			 String path = FILLE_DIRECTORY+fileName+"."+fileExtension;
-			 MyFile myFile = MyFile.parseToMyFile(path);
 			 ArrayList<Object> newResultData = new ArrayList<Object>();
-			 newResultData.add(myFile);
+			 /* Create my file from path */
+			 if (!sqlResult.getResultData().isEmpty())
+			 {
+				 String fileName = ((Integer)sqlResult.getResultData().get(0).get(0)).toString();
+				 String fileExtension = (String)sqlResult.getResultData().get(0).get(1);
+				 String path = FILLE_DIRECTORY+fileName+"."+fileExtension;
+				 MyFile myFile = MyFile.parseToMyFile(path);
+				 newResultData.add(myFile);
+			 }
 			 sqlResult.setResultData(newResultData);
+			
 		 }
 		
 		 

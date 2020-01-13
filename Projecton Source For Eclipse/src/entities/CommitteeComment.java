@@ -9,10 +9,20 @@ package entities;
 public class CommitteeComment {
 	int commentId;
 	int requestId;
+	int committeeStepId;
 	String employeeUserName;
 	String comment;
 	
-	
+	public CommitteeComment(int commentId, int requestId, int committeeStepId, String employeeUserName,
+			String comment) {
+		super();
+		this.commentId = commentId;
+		this.requestId = requestId;
+		this.committeeStepId = committeeStepId;
+		this.employeeUserName = employeeUserName;
+		this.comment = comment;
+	}
+
 	public CommitteeComment(int requestId, String userName, String comment) {
 		super();
 		this.requestId = requestId;
