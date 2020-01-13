@@ -43,7 +43,7 @@
          </font>
       </Button>
       <ComboBox fx:id="subSystemComboBox" layoutX="218.0" layoutY="111.0" prefWidth="150.0" promptText="- sub system-" />
-      <Button fx:id="submitBtn" layoutX="438.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#uploadNewChangeRequest" prefHeight="31.0" prefWidth="209.0" text="Submit" />
+      <Button fx:id="submitBtn" layoutX="500.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#uploadNewChangeRequest" prefHeight="31.0" prefWidth="209.0" text="Submit" />
       <Text layoutX="428.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Upload File:" />
       <TextField fx:id="uploadedFileNameField" alignment="TOP_LEFT" layoutX="511.0" layoutY="226.0" prefHeight="17.0" prefWidth="149.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />

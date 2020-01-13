@@ -156,10 +156,6 @@ public class AnalyzerBoundary implements DataInitializable {
 		}
 	}
 
-	@FXML
-	void loadCreateReport(MouseEvent event) {
-
-	}
 	private void displayTimeRemaining(Date estimatedEndDate) {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
 		if(daysBetween < 0) {
@@ -195,11 +191,20 @@ public class AnalyzerBoundary implements DataInitializable {
 		// "UPDATE icm.analysis_step SET EndDate = ?,Status =
 		// ?,AnalysisReportDescription = ?,AnalysisReportAdvantages =
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
-		myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
-		myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "Close",headertextArea.getText(),
-				
-				descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
-		myController.getCommitteeDirector();
+		
+		if (headertextArea.getText().equals("")||descriptiontextArea.getText().equals("")||advantagestextArea.getText().equals("")
+				||constraintstextArea.getText().equals("")||durationtextArea.getText().equals(""))
+		{
+			Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
+		}
+		else
+		{
+			myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
+			myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "CLOSED",headertextArea.getText(),
+			descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
+			myController.getCommitteeDirector();
+		}
+		
 		//ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
@@ -269,7 +274,7 @@ public class AnalyzerBoundary implements DataInitializable {
 
     }
     public void getCommitteeDirectorUserName(String name) {
-    	myController.insertNewCommitteeStep(currentChangeRequest.getChangeRequestID(), name, TimeManager.getCurrentDate(), "Active", 
+    	myController.insertNewCommitteeStep(currentChangeRequest.getChangeRequestID(), name, TimeManager.getCurrentDate(), "ACTIVE", 
     			TimeManager.addDays(TimeManager.getCurrentDate(), 7));
     	ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
@@ -315,6 +320,7 @@ public class AnalyzerBoundary implements DataInitializable {
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		headertextArea.setTextFormatter(new TextFormatter<String>(change -> 
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		timedurationPicker.setEditable(false);
 	}
 
 	@Override
