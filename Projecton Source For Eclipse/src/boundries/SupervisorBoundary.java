@@ -211,7 +211,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		txtHandlerNameAutoAppoint.setVisible(true);
 			        		txtHandlerNameAutoAppoint.setText(myChangerequest.getHandlerUserName());
 			        		}
-			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if(myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        		setVisabilityValse();
 			        		btnExstraDetails.setDisable(false);
@@ -325,7 +325,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		
 			        		
 			        		}
-			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if (myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        			setVisabilityValse();
 				        		btnExstraDetails.setDisable(false);
@@ -360,7 +360,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		btnExstraDetails.setDisable(false);
 			        		btnExstraDetails.setVisible(true);
 			        		}
-			        		else if (myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if (myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        			setVisabilityValse();
 			        			btnExstraDetails.setDisable(false);
