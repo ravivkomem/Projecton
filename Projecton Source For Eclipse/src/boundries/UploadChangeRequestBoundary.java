@@ -73,7 +73,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	    private static final int MAX_CHAR=100;
 	    private UploadChangeRequestController myController= new UploadChangeRequestController(this);////connection to my controller 
 	    private ChangeRequest newChangeRequest;
-	    private final String CURRENT_STEP = "ANALAYZER_AUTO_APPOINT";
+	    private final String CURRENT_STEP = "ANALYZER_AUTO_APPOINT";
 	    java.sql.Date uploadChangeRequestDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 	    
 	    /*FXML METHODES*/
