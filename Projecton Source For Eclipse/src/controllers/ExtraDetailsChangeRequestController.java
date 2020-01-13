@@ -23,8 +23,8 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		/* Create sql action */
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		varArray.add(changeRequestID);
-		SqlAction sqlFileAction = new SqlAction(SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID, varArray);
-		//SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID, varArray);
+		//SqlAction sqlFileAction = new SqlAction(SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID, varArray);
+		SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID, varArray);
 		this.sendSqlActionToClient(sqlFileAction);
 	}
 	
@@ -34,15 +34,25 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
+//				case DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID:
+//					MyFile downloadedFile = null;
+//					this.unsubscribeFromClientDeliveries();
+//					if(!result.getResultData().isEmpty()) {
+//						downloadedFile = new MyFile("C:\\ServerFiles\\"+result.getResultData().get(0).get(0)
+//								+"."+result.getResultData().get(0).get(1));
+//					}
+//					//MyFile downloadedFile = (MyFile) result.getResultData().get(0).get(0);
+//					myBoundary.displayFile(downloadedFile);
 				case DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID:
-					MyFile downloadedFile = null;
 					this.unsubscribeFromClientDeliveries();
-					if(!result.getResultData().isEmpty()) {
-						downloadedFile = new MyFile("R:\\ServerFiles\\"+result.getResultData().get(0).get(0)
-								+"."+result.getResultData().get(0).get(1));
+					if (result.getResultData().get(0).isEmpty())
+					{
+						myBoundary.displayFile(null);
 					}
-					//MyFile downloadedFile = (MyFile) result.getResultData().get(0).get(0);
-					myBoundary.displayFile(downloadedFile);
+					else
+					{
+						myBoundary.displayFile((MyFile)result.getResultData().get(0).get(0));
+					}
 				default:
 					break;
 			}
