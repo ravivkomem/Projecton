@@ -31,19 +31,21 @@ public class CommitteDecisionController extends BasicController{
 		this.myBoundary=myBoundary;
 	}
 	
-	public void getCommentsByChangeRequestId(int id) {
+	public void getCommentsByChangeRequestId(int id, int stepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(id);
+		varArray.add(stepId);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID, varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	public void insertNewCommentToDB(CommitteeComment newComment) {
+	public void insertNewCommentToDB(CommitteeComment newComment, Integer stepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(newComment.getRequestId());
 		varArray.add(newComment.getEmployeeUserName());
 		varArray.add(newComment.getComment());
+		varArray.add(stepId);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
@@ -160,8 +162,8 @@ public class CommitteDecisionController extends BasicController{
 	private ArrayList<CommitteeComment> changeResultToCommitteeComment(SqlResult result){
 		ArrayList<CommitteeComment> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
-			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(1),(String)a.get(2),
-					(String)a.get(3));
+			CommitteeComment comment=new CommitteeComment((int)a.get(0), (int)a.get(2),(String)a.get(3),
+					(String)a.get(4));
 			resultList.add(comment);
 		}
 		return resultList;

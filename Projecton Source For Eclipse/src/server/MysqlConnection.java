@@ -268,10 +268,10 @@ public class MysqlConnection {
 				"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestId = ?"
 				+ " ORDER BY CommitteeStepId DESC LIMIT 1";
 		sqlArray[SqlQueryType.SELECT_COMMENTS_BY_REQUEST_ID.getCode()]="SELECT * FROM icm.committee_comment"
-    			+ " WHERE requestId = ?";
+    			+ " WHERE requestId = ? AND committeeStepId = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_COMMITTEE_COMMENT.getCode()]=
-    			"INSERT INTO icm.committee_comment(requestId,userName,comment)"
-    			+ " VALUES (?,?,?)";
+    			"INSERT INTO icm.committee_comment(requestId,userName,comment,committeeStepId)"
+    			+ " VALUES (?,?,?,?)";
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ?,DenyComment = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
