@@ -161,10 +161,17 @@ public class TesterBoundary implements DataInitializable {
 
     @FXML
     void setReportFail(MouseEvent event) {
+    	if(failureReportTextArea.getText().equals(""))
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "Please fill the failure report before submitting ", 1500, 500, 500);
+    	}
+    	else 
+    	{
 		myController.closeChangeRequestStep(testerStep.getStepID(), failureReportTextArea.getText());
 		myController.advanceChangeRequestStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT", currentChangeRequest.getChangeRequestID());
 		closeMyStages();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
+    	}
     }
 
     @FXML
