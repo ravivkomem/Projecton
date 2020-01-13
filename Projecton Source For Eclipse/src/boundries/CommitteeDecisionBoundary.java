@@ -176,6 +176,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     		myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
     				"ACTIVE");
     		myController.updateChangeRequestCurrentStep("DENY_STEP", "", currentChangeRequest.getChangeRequestID());
+    		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     	}
     }
 	

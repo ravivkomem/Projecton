@@ -211,7 +211,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		txtHandlerNameAutoAppoint.setVisible(true);
 			        		txtHandlerNameAutoAppoint.setText(myChangerequest.getHandlerUserName());
 			        		}
-			        		else if(myChangerequest.getStatus().equals("SUSPENDED"))
+			        		else if(myChangerequest.getStatus().equals("SUSPEND"))
 			        		{
 			        		setVisabilityValse();
 			        		btnExstraDetails.setDisable(false);
