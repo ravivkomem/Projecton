@@ -52,6 +52,7 @@ public class AnalysisReportController extends BasicController {
 		ArrayList<Object> resultList = new ArrayList<>();
 		if(!result.getResultData().isEmpty()) {
 			resultList.add(result.getResultData().get(0).get(2));
+			resultList.add(result.getResultData().get(0).get(7));
 			resultList.add(result.getResultData().get(0).get(8));
 			resultList.add(result.getResultData().get(0).get(9));
 			resultList.add(result.getResultData().get(0).get(10));
