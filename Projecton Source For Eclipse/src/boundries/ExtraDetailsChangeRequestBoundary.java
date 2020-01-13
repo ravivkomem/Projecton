@@ -73,7 +73,15 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
      * ***************************************/
     @FXML
     void backBtn(MouseEvent event) {
-    	ProjectFX.pagingController.loadBoundary(previousPagePath);
+    	if (previousPagePath.equals(ProjectPages.ANALYZER_PAGE.getPath()))
+    	{
+    		ProjectFX.pagingController.loadBoundary(previousPagePath, currentChangeRequest);
+    	}
+    	else
+    	{
+    		ProjectFX.pagingController.loadBoundary(previousPagePath);
+    	}
+    		
     }
 
     @FXML

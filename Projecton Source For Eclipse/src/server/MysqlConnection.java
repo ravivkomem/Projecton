@@ -436,7 +436,7 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_CLOSE.getCode()] = 
 				"SELECT * FROM icm.change_request" +
-						" WHERE CurrentStep = 'CLOSING_STEP'";
+						" WHERE CurrentStep = 'CLOSING_STEP'";//add AND 'DENY_STEP'
     	
     	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT.getCode()] =
     			"UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
