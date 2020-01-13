@@ -36,6 +36,8 @@ public class AnalysisReportBoundary implements DataInitializable{
     private Text durationTxt;
     @FXML
     private Text subsystemTxt;
+    @FXML
+    private Text headerText;
     /*Button */
     @FXML
     private Button btnClosePage;
@@ -74,10 +76,11 @@ public class AnalysisReportBoundary implements DataInitializable{
 			reportPageTitle.setText("Report Of Request No." + currentChangeRequest.getChangeRequestID().toString());
 			subsystemTxt.setText(currentChangeRequest.getSelectedSubsystem());
 			authorTxt.setText((String) resultList.get(0));
-			descriptionTextArea.setText((String) resultList.get(1));
-			advavtagesTextArea.setText((String) resultList.get(2));
-			durationTxt.setText((String) resultList.get(3));
-			constraintsTextArea.setText((String) resultList.get(4));
+			headerText.setText("Header:		"+(String) resultList.get(1));
+			descriptionTextArea.setText((String) resultList.get(2));
+			advavtagesTextArea.setText((String) resultList.get(3));
+			durationTxt.setText((String) resultList.get(4));
+			constraintsTextArea.setText((String) resultList.get(5));
 		}
     }
     
