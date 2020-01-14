@@ -322,6 +322,9 @@ public class MysqlConnection {
     			"SELECT * FROM icm.repeating_tester RT " + 
     			"WHERE RT.TesterStepID != (SELECT MIN(RT2.TesterStepID) FROM ICM.repeating_tester RT2 " + 
     			"WHERE RT2.ChangeRequestID = RT.ChangeRequestID)";
+    	sqlArray[SqlQueryType.SELECT_ALL_DEVIATION_CHANGE_REQUEST.getCode()]=
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE CurrentStep = 'FINISH' AND EndDate>EstimatedDate";
     	sqlArray[SqlQueryType.SELECT_DATES_FROM_ALL_STEPS.getCode()]= 
     			"SELECT icm.change_request.SelectedSubsystem , icm.committee_step.EstimatedEndDate ," + 
     			"icm.committee_step.EndDate " + 

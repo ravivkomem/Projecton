@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import assets.ProjectPages;
 import controllers.PerformanceReportController;
 import controllers.TimeManager;
+import entities.ChangeRequest;
 import entities.Step;
 import entities.TimeExtension;
 import javafx.collections.FXCollections;
@@ -39,6 +40,8 @@ public class PerformanceReportBoundary implements Initializable {
     private TextField totalExtensionDaysTextField;
     @FXML
     private TextField totalRepeatingDaysTextField;
+    @FXML
+    private TextField totalDeviationDaysTextField;
     
     /* *************************************
 	 * ******** Private Objects ************
@@ -71,6 +74,7 @@ public class PerformanceReportBoundary implements Initializable {
 		
 		myController.getAllExtensionRequestsFromServer();
     	myController.getAllRepeatingStepsFromServer();
+    	myController.getAllChangeRequestsWithDeviations();
 	}
     
     /* *************************************
@@ -124,7 +128,15 @@ public class PerformanceReportBoundary implements Initializable {
 		long testingDaysCounter = 0;
 		for (Step step : repeatingStepList)
 		{
-			long additionalDays = TimeManager.getDaysBetween(step.getStartDate(), step.getEndDate());
+			long additionalDays = 0;
+			if (step.getEndDate() == null)
+			{
+				additionalDays = TimeManager.getDaysBetween(step.getStartDate(), TimeManager.getCurrentDate());
+			}
+			else
+			{
+				additionalDays = TimeManager.getDaysBetween(step.getStartDate(), step.getEndDate());
+			}
 			switch (step.getType())
 			{
 				case ANALYSIS:
@@ -156,5 +168,15 @@ public class PerformanceReportBoundary implements Initializable {
 	    
         extensionDaysBarChart.getData().add(series2);
         totalRepeatingDaysTextField.setText(Long.toString(analysisDaysCounter+committeeDaysCounter+executionDaysCounter+testingDaysCounter));
+	}
+
+	public void addDeviationChangeRequestsToReport(ArrayList<ChangeRequest> deviationChangeRequestList) {
+		long totalDeviationDays = 0;
+		for (ChangeRequest changeRequest : deviationChangeRequestList)
+		{
+			totalDeviationDays += TimeManager.getDaysBetween(changeRequest.getEstimatedEndDate(), changeRequest.getEndDate());
+		}
+		
+		totalDeviationDaysTextField.setText(Long.toString(totalDeviationDays));
 	}
 }
