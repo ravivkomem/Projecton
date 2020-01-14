@@ -1,6 +1,7 @@
 package controllers;
 
 import java.sql.Date;
+
 import java.util.ArrayList;
 
 import assets.SqlAction;
@@ -12,6 +13,11 @@ import client.ClientConsole;
 import entities.ExecutionAproves;
 import entities.Step;
 import javafx.application.Platform;
+/**
+ * 
+ * @author Itay David
+ *
+ */
 
 public class ExecutionLeaderController extends BasicController {
 	private ExecutionLeaderBoundry myBoundry;
@@ -95,7 +101,12 @@ public class ExecutionLeaderController extends BasicController {
 		return;
 		
 	}
-
+	/**
+	 * 
+	 * @param estimatedDateChoosen
+	 * @param changeRequestID
+	 * This method insert new estimated date to execution step and change request 
+	 */
 	public void insertNewEstimatedDateToExecutionStepAndChangeRequestIDStep(Date estimatedDateChoosen,Integer changeRequestID) {
 		// TODO Auto-generated method stub
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -105,7 +116,11 @@ public class ExecutionLeaderController extends BasicController {
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
-
+	/**
+	 * 
+	 * @param changeRequestID
+	 * This method update DB change request step to execution approve time
+	 */
 	public void updateNewChangeRequestIdStepToExecutionApprovedTime(Integer changeRequestID)
 	{
 		// TODO Auto-generated method stub
@@ -116,7 +131,11 @@ public class ExecutionLeaderController extends BasicController {
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
-
+	/**
+	 * 
+	 * @param changeRequestID
+	 * This method get current step to check if its execution work
+	 */
 	public void SelectCurrentStepIfItsExecutionWork(Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -125,7 +144,11 @@ public class ExecutionLeaderController extends BasicController {
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
-
+	/**
+	 * 
+	 * @param changeRequestID
+	 * This method get estimated date and check with start date 
+	 */
 	public void SelectEstimatedDateMinusStartDate(Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -134,7 +157,12 @@ public class ExecutionLeaderController extends BasicController {
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
-
+	/**
+	 * 
+	 * @param changeRequestID
+	 * @param comment
+	 * This method update DB execution step with the comment
+	 */
 	public void UpdateExecutionLeaderDateAndStatus(Integer changeRequestID,String comment)
 	{
 		// TODO Auto-generated method stub
@@ -148,7 +176,11 @@ public class ExecutionLeaderController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 		
 	}
-
+	/**
+	 * 
+	 * @param changeRequestID
+	 * This method update current step in DB to tester committee director appoint 
+	 */
 	public void UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -160,7 +192,10 @@ public class ExecutionLeaderController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 		
 	}
-
+	/**
+	 * @param changeRequestID
+	 *	This method initialize step 
+	 */
 	public void GetStepDetails(Integer changeRequestID)
 	{
 		// TODO Auto-generated method stub

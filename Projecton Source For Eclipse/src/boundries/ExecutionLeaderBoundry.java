@@ -31,7 +31,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Itay David
+ *
+ */
 public class ExecutionLeaderBoundry implements Initializable, DataInitializable {
 	@FXML
 	private Button btnRefresh;
@@ -143,7 +147,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	public void setflag() {
 		flag = 1;
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method send the time required for execution to the supervisor
+	 */
 	@FXML
 	public void SendTimeRequiredForExecutionToSupervisor(MouseEvent event) // submit execution time
 	{
@@ -181,7 +189,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		}
 		}
 	}
-
+	/**
+	 * 
+	 * @param affectedRows
+	 * This method make toast after upload time for execution
+	 */
 	@FXML
 	public void ExecutionAprovedtInsertToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
@@ -191,7 +203,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		}
 
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method update DB after click finish work
+	 */
 	@FXML
 	public void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event) // when execution commit working
 	{
@@ -221,13 +237,21 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		}
 
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method handle the click on back in menu
+	 */
 	@FXML
 	void BackToLastPageFromExecutionPage(MouseEvent event) // back to the work station page
 	{
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method handle the click on log out
+	 */
 	@FXML
 	void LogOutFromExecutionLeaderPage(MouseEvent event) // logout from execution page
 	{
@@ -238,7 +262,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method handle the click time extension in menu
+	 */
 	@FXML
 	public void OpenTimeExtensionPageFromExecutionLeaderPage(MouseEvent event) // opet time extension
 	{
@@ -257,7 +285,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 			}
 		}
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method handle the click on home page in menu
+	 */
 	@FXML
 	public void ReturnToHomePageFromExecutionLeaderPage(MouseEvent event) // return home page
 	{
@@ -269,7 +301,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method handle the click on analysis report in menu
+	 */
 	@FXML
 	public void ShowAnalysisReportFromExecutionLeaderPage(MouseEvent event) // show anaylisis report
 	{
@@ -283,7 +319,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 					.loadAdditionalStage(ProjectPages.ANALISIS_REPORT_PAGE.getPath(), myChangerequest);
 		}
 	}
-
+	/**
+	 * 
+	 * @param event
+	 * This method handle the click on refresh to check if supervisor approve estimated time 
+	 */
 	@FXML
 	public void GetAgainTheChangeRequestToSeeStatus(MouseEvent event) // Refresh button
 	{
@@ -295,7 +335,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		else
 			myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());
 	}
-
+	/**
+	 * This method update page after supervisor approve time
+	 */
 	public void ShowCommitButton() {
 
 		Toast.makeText(ProjectFX.mainStage, "Supervisor approved your estimated time", 1500, 500, 500);
@@ -308,6 +350,12 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		btnCommitExecution.setVisible(true);
 		myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());
 	}
+	
+	/**
+	 * 
+	 * @param estimatedEndDate
+	 * This method update the time left for execution
+	 */
 
 	public void ShowEstimatedDateMinusStartDate(Date estimatedEndDate) {
 		Date todayDate = updateStepDate;
@@ -325,20 +373,32 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		}
 
 	}
-
+	/**
+	 * 
+	 * @param affectedrows
+	 * Toast
+	 */
 	public void ShowFinishToast(int affectedrows) {
 		// TODO Auto-generated method stub
 		if (affectedrows == 1)
 			Toast.makeText(ProjectFX.mainStage, "Execution Step is finished", 1500, 500, 500);
 
 	}
-
+	/**
+	 * 
+	 * @param affectedrows
+	 * Toast
+	 */
 	public void SupervisorDidNotAproveYet() {
 
 		Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve yet", 1500, 500, 500);
 		txtWaitingForTomeApprovalPopUp.setVisible(true);
 	}
-
+	/**
+	 * 
+	 * @param executionStep2
+	 * This method set the step when enter the execution page
+	 */
 	public void SetStep(Step executionStep2) {
 		executionStep = executionStep2;
 		if (!(executionStep.getEstimatedEndDate() == null)) {
@@ -349,12 +409,19 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 			myController.SelectCurrentStepIfItsExecutionWork(myChangerequest.getChangeRequestID());
 		}
 	}
-
+	/**
+	 * 
+	 * 
+	 * Toast
+	 */
 	public void ErrorInLoadingExecutionPage() {
 		Toast.makeText(ProjectFX.mainStage, "Problam in loading this changetequest", 1500, 500, 500);
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
-	}
-
+		/**
+		 * 
+		 * 
+		 * Toast
+		 */
 	public void chooseAgainTimeForExecution()
 	{
 		Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve your estimated time, please choose another date", 1500, 500, 500);
