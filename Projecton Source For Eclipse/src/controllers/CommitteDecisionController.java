@@ -129,6 +129,20 @@ public class CommitteDecisionController extends BasicController{
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	/**
+	 * this method create sql query that update the time extension if necessary 
+	 * @param stepID
+	 * @param string
+	 */
+	public void updateTimeExtensionDB(int stepID, String stepType) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(stepID);
+		varArray.add(stepType);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -199,7 +213,7 @@ public class CommitteDecisionController extends BasicController{
 	}
 
 	/**
-	 * 
+	 * this method create sql query that ask for subsystem supporter user
 	 * @param subsystem
 	 */
 	public void chooseAutomaticallyAnalyzer(String subsystem){

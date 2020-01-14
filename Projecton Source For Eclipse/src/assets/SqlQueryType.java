@@ -11,6 +11,7 @@ public enum SqlQueryType {
 	 * ********** Common Queries ****************
 	 * *****************************************/
 	UPDATE_CHANGE_REQUEST_CURRENT_STEP(SqlExecutionType.UPDATE_QUERY),
+	AUTOMATIC_CLOSE_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********** Login Queries ****************

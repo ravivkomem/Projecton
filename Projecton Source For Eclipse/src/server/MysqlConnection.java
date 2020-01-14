@@ -167,6 +167,9 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestId = ?";
+    	sqlArray[SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION.getCode()]=
+    			"UPDATE icm.time_extension SET Status = 'CLOSED' "
+    			+ "WHERE StepID = ? AND StepType = ? AND Status = 'NEW'";
     	
     	/* *****************************************************
 		 * *************** Login Queries ****************

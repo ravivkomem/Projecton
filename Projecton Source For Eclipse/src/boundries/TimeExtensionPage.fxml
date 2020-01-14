@@ -71,8 +71,8 @@
             <Image url="@loginPendingGIF.gif" />
          </image>
       </ImageView>
-      <TextArea fx:id="reasonTextArea" layoutX="116.0" layoutY="300.0" onKeyTyped="#updateReasonCharsLabel" prefHeight="106.0" prefWidth="196.0" />
-      <Label fx:id="reasonCharsLabel" layoutX="316.0" layoutY="300.0" text="X/140" />
+      <TextArea fx:id="reasonTextArea" layoutX="116.0" layoutY="300.0" prefHeight="106.0" prefWidth="196.0" />
+      <Label fx:id="reasonCharsLabel" layoutX="316.0" layoutY="300.0" text="0/140" />
       <Text fill="RED" layoutX="54.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Required Fields">
          <font>
             <Font name="System Bold" size="12.0" />

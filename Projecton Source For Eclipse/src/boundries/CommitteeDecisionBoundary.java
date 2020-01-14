@@ -114,7 +114,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	@FXML
 	private ImageView image3point1;
-
 	@FXML
 	private ImageView image3point2;
 
@@ -279,6 +278,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			default:
 				break;
 			}
+			myController.updateTimeExtensionDB(committeeStep.getStepID(),"Committee");
 			popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 		}

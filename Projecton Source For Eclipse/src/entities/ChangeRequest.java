@@ -290,7 +290,8 @@ public class ChangeRequest {
 			case "FINISH":
 				actualStep = "Finish";
 				break;
-				
+			case "CLOSING_STEP":
+				actualStep = "Closing step";
 			case "DENY_STEP":
 				actualStep= "Deny Step";
 				break;

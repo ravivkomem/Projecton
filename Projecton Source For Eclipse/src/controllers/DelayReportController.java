@@ -32,6 +32,9 @@ public class DelayReportController extends BasicController{
 //		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 //	}
 	
+	/**
+	 * this method create sql query that ask for all the delay dates from the data base
+	 */
 	public void getAllStepsDate() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
@@ -60,6 +63,11 @@ public class DelayReportController extends BasicController{
 		
 	}
 	
+	/**
+	 * this method create delay report object from the data base result 
+	 * @param result
+	 * @return
+	 */
 	private ArrayList<DelayReport> createDelayReportList(SqlResult result){
 		ArrayList<DelayReport> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {

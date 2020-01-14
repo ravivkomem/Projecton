@@ -67,6 +67,8 @@ public class TesterController extends BasicController {
 				Step recievedStep = this.parseSqlResultToTesterStep(result);
 				myBoundary.recieveCurrentStep(recievedStep);
 				break;
+			case AUTOMATIC_CLOSE_NEW_TIME_EXTENSION:
+				this.unsubscribeFromClientDeliveries();
 			default:
 				break;
 			}
@@ -94,5 +96,14 @@ public class TesterController extends BasicController {
 		Step step = new Step(testerType, testerStepId, changeRequestId, handlerUserName, startDate, status,
 				estimatedEndDate, endDate);
 		return step;
+	}
+
+	public void automaticCloseNewTimeExtension(Step testerStep) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(testerStep.getStepID());
+		varArray.add(testerStep.getType().toString());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION,varArray);
+		this.sendSqlActionToClient(sqlAction);
+		
 	}
 }
