@@ -104,7 +104,7 @@
       </AnchorPane>
       <Text fx:id="pageHeaderText" layoutX="213.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on change request No. XX" wrappingWidth="332.00000508129597">
          <font>
-            <Font size="19.0" />
+            <Font size="20.0" />
          </font>
       </Text>
       <AnchorPane fx:id="testWorkPane" layoutX="101.0" layoutY="98.0" prefHeight="350.0" prefWidth="654.0">

@@ -55,13 +55,13 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	@FXML
 	private Text txtWaitingForTomeApprovalPopUp;
 	@FXML
-	private Button btnBack;
+	private Button backButton;
 	@FXML
 	private Text txtWorkingOnChangeRequestNumber;
 	@FXML
 	private Button btnCommitExcution;
 	@FXML
-	private TextArea timeRemainingTextAria;
+	private TextArea timeRemainingTextArea;
 	@FXML
 	private DatePicker txtTimeForExecution;
 	@FXML
@@ -92,44 +92,56 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	private Stage myTimeExtensionStage = null;
 	private Stage myAnalysisReportStage = null;
 	private Step executionStep;
-	private Step executionStepMain;
-
-	@Override
-	public void initData(Object data) {
-		// TODO Auto-generated method stub
-		myChangerequest = (ChangeRequest) data;
-		txtWorkingOnChangeRequestNumber
-				.setText("Working On Change Request NO. " + myChangerequest.getChangeRequestID());
-		txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
-		myController.GetStepDetails(myChangerequest.getChangeRequestID());
-
-	}
-
+	
+	/* ****************************************
+     * ********** Init Methods ** *************
+     * ****************************************/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
+		/* Change visibilities */
 		txtWaitingForTomeApprovalPopUp.setVisible(false);
 		btnCommitExecution.setVisible(false);
 		btnRefresh.setVisible(false);
-		txtWorkingOnChangeRequestNumber.setVisible(true);
-		txtChangeRequestDetails.setEditable(false);
-		timeRemainingTextAria.setVisible(false);
+		timeRemainingTextArea.setVisible(false);
 		delayTimeTxt.setVisible(false);
 		timeRemainingTxt.setVisible(false);
-		txtRefresh.setVisible(false);
-		txtTimeForExecution.setEditable(false);
 		txtFieldForDetailsWorkedOn.setVisible(false);
+		txtRefresh.setVisible(false);
 		txtDetailsWorkedOn.setVisible(false);
-		flag = 0;
-
+		txtWorkingOnChangeRequestNumber.setVisible(true);
 		
+		/* Change editable */
+		txtChangeRequestDetails.setEditable(false);
+		txtTimeForExecution.setEditable(false);
+		txtChangeRequestDetails.setWrapText(true);
+		flag = 0;
 	}
-
+	
+	@Override
+	public void initData(Object data) {
+		try
+		{
+			myChangerequest = (ChangeRequest) data;
+			txtWorkingOnChangeRequestNumber
+					.setText("Working On Change Request No. " + myChangerequest.getChangeRequestID());
+			txtChangeRequestDetails.setText(myChangerequest.getDesiredChangeDescription());
+			myController.getExecutionStepByChangeRequestId(myChangerequest.getChangeRequestID());
+		}
+		catch (Exception e)
+		{
+			System.out.println("Error loading the exeution page");
+			this.loadPreviousPage(null);
+		}
+	}
+	
 	public void setflag() {
 		flag = 1;
 	}
+	/* ****************************************
+     * ********** FXML Methods ** *************
+     * ****************************************/
 	/**
-	 * 
 	 * @param event
 	 * This method send the time required for execution to the supervisor
 	 */
@@ -224,7 +236,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	 * This method handle the click on back in menu
 	 */
 	@FXML
-	void BackToLastPageFromExecutionPage(MouseEvent event) // back to the work station page
+	void loadPreviousPage(MouseEvent event) // back to the work station page
 	{
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
@@ -326,7 +338,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		txtFieldForDetailsWorkedOn.setVisible(true);
 		txtDetailsWorkedOn.setVisible(true);
 		txtRefresh.setVisible(false);
-		timeRemainingTextAria.setEditable(false);
+		timeRemainingTextArea.setEditable(false);
 		txtWaitingForTomeApprovalPopUp.setVisible(false);
 		btnCommitExecution.setVisible(true);
 		myController.SelectEstimatedDateMinusStartDate(myChangerequest.getChangeRequestID());
@@ -343,14 +355,14 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		long daysBetween;
 		if (estimatedEndDate.before(todayDate)) {
 			delayTimeTxt.setVisible(true);
-			timeRemainingTextAria.setVisible(true);
+			timeRemainingTextArea.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(estimatedEndDate.toLocalDate(), todayDate.toLocalDate());
-			timeRemainingTextAria.setText("" + (daysBetween - 1) + " Days");
+			timeRemainingTextArea.setText("" + (daysBetween - 1) + " Days");
 		} else {
 			timeRemainingTxt.setVisible(true);
-			timeRemainingTextAria.setVisible(true);
+			timeRemainingTextArea.setVisible(true);
 			daysBetween = ChronoUnit.DAYS.between(todayDate.toLocalDate(), estimatedEndDate.toLocalDate());
-			timeRemainingTextAria.setText("" + (daysBetween + 1) + " Days");
+			timeRemainingTextArea.setText("" + (daysBetween + 1) + " Days");
 		}
 
 	}
@@ -375,13 +387,14 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve yet", 1500, 500, 500);
 		txtWaitingForTomeApprovalPopUp.setVisible(true);
 	}
+	
 	/**
-	 * 
-	 * @param executionStep2
-	 * This method set the step when enter the execution page
+	 * This method is in order to recieve the execution step from the controller
+	 * @param executionStep - the current execution step as recieved
+	 * Starts the page work progress
 	 */
-	public void SetStep(Step executionStep2) {
-		executionStep = executionStep2;
+	public void recieveExecutionStep(Step executionStep) {
+		this.executionStep = executionStep;
 		if (!(executionStep.getEstimatedEndDate() == null)) {
 			btnRefresh.setVisible(true);
 			txtBuildEnterTimeRequiredForExecution.setVisible(false);
@@ -395,8 +408,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	 * 
 	 * Toast
 	 */
-	public void ErrorInLoadingExecutionPage() {
-		Toast.makeText(ProjectFX.mainStage, "Problam in loading this changetequest", 1500, 500, 500);
+	public void handleDataBaseSelectionError() {
+		Toast.makeText(ProjectFX.mainStage, "Error - Could not load the page", 1500, 500, 500);
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 		/**

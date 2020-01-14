@@ -397,13 +397,14 @@ public class MysqlConnection {
     	
     	/* ******************************************************
     	 * *************Execution Leader Queries****************
-    	 *******************************************************
     	 *******************************************************/
+    	sqlArray[SqlQueryType.SELECT_EXECUTIOM_STEP_DETAILS.getCode()] = 
+				"SELECT * FROM icm.execution_step WHERE ChangeRequestID = ?"
+     			+ " ORDER BY ExecutionStepID DESC LIMIT 1";
+    	
     	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
     			"UPDATE icm.execution_step SET Status = ?,EndDate = ?,ExecutionComment = ? WHERE ChangeRequestID = ?" + 
     			" ORDER BY ExecutionStepID DESC LIMIT 1";
-    	
-    	
     	sqlArray[SqlQueryType.SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK.getCode()] = 
 				"SELECT CurrentStep FROM icm.change_request WHERE ChangeRequestID = ?";
     	
@@ -420,9 +421,7 @@ public class MysqlConnection {
      	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
      	
-     	sqlArray[SqlQueryType.SELECT_EXECUTIOM_STEP_DETAILS.getCode()] = 
-				"SELECT * FROM icm.execution_step WHERE ChangeRequestID = ?"
-     			+ " ORDER BY ExecutionStepID DESC LIMIT 1";
+     	
      	
      	
      	

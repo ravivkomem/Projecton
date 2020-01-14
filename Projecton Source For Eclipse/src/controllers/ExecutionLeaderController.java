@@ -81,16 +81,16 @@ public class ExecutionLeaderController extends BasicController {
 					this.unsubscribeFromClientDeliveries();
 				break;
 				case SELECT_EXECUTIOM_STEP_DETAILS:
-					if(result.getResultData().get(0)==null)
+					this.unsubscribeFromClientDeliveries();
+					if(result.getResultData().get(0).isEmpty())
 					{
-						myBoundry.ErrorInLoadingExecutionPage();
+						myBoundry.handleDataBaseSelectionError();
 						break;
 					}
-					Step executionStep=new Step(StepType.EXECUTION,(Integer)result.getResultData().get(0).get(0),(Integer) result.getResultData().get(0).get(1),(String) result.getResultData().get(0).get(2),
+					Step executionStep = new Step(StepType.EXECUTION,(Integer)result.getResultData().get(0).get(0),(Integer) result.getResultData().get(0).get(1),(String) result.getResultData().get(0).get(2),
 							(Date) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(3),
 							(Date) result.getResultData().get(0).get(5), (Date)result.getResultData().get(0).get(6));
-					myBoundry.SetStep(executionStep);
-					this.unsubscribeFromClientDeliveries();
+					myBoundry.recieveExecutionStep(executionStep);
 					break;
 					
 				default:
@@ -196,9 +196,8 @@ public class ExecutionLeaderController extends BasicController {
 	 * @param changeRequestID
 	 *	This method initialize step 
 	 */
-	public void GetStepDetails(Integer changeRequestID)
+	public void getExecutionStepByChangeRequestId(Integer changeRequestID)
 	{
-		// TODO Auto-generated method stub
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_EXECUTIOM_STEP_DETAILS, varArray);
