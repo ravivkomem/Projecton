@@ -11,13 +11,8 @@ import assets.SqlResult;
 import boundries.UploadChangeRequestBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
-import entities.ChangeRequest;
-import entities.CommitteeComment;
 import entities.MyFile;
 import javafx.application.Platform;
-import javafx.scene.control.Alert.AlertType;
-
-import java.io.File;
 import java.math.BigInteger; 
 /**
  * Upload Change Request Page (Controller)
@@ -73,7 +68,7 @@ public class UploadChangeRequestController extends BasicController {
 	 * @param filesToUploadList
 	 * @param chnageRequestId
 	 */
-	public void sendFilesToServer(List<File> filesToUploadList, Integer chnageRequestId)
+	public void sendFilesToServer(List<MyFile> filesToUploadList, Integer chnageRequestId)
 	{
 		if (filesToUploadList.isEmpty())
 		{
@@ -81,10 +76,9 @@ public class UploadChangeRequestController extends BasicController {
 		}
 		else
 		{
-			for (File file : filesToUploadList)
+			for (MyFile file : filesToUploadList)
 			{
-				String path = file.getPath();
-				MyFile newFile = MyFile.parseToMyFile(path);
+				String path = file.getFileName();
 				
 				String extension = "";
 
@@ -96,7 +90,7 @@ public class UploadChangeRequestController extends BasicController {
 				ArrayList<Object> varArray = new ArrayList<>();
 				varArray.add(chnageRequestId);
 				varArray.add(extension);
-				SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.INSERT_NEW_FILE, varArray, newFile);
+				SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.INSERT_NEW_FILE, varArray, file);
 				this.sendSqlActionToClient(sqlFileAction);
 			}
 		}
