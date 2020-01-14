@@ -274,7 +274,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 * changeRequest table
 				 */
 				myController.updateCommitteeStepDB("CLOSED", updateStepDate,"", currentChangeRequest.getChangeRequestID());
-				myController.chooseAutomaticallyAnalyzer();
+				myController.chooseAutomaticallyAnalyzer(currentChangeRequest.getSelectedSubsystem());
 				break;
 			default:
 				break;
