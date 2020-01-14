@@ -26,21 +26,32 @@ public class DelayReportController extends BasicController{
 		this.myBoundary = myBoundary;
 	}
 
+//	public void getAllStepsDate() {
+//		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_DATES_FROM_ALL_STEPS,new ArrayList<Object>());
+//		this.subscribeToClientDeliveries();		//subscribe to listener array
+//		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+//	}
+	
 	public void getAllStepsDate() {
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_DATES_FROM_ALL_STEPS,new ArrayList<Object>());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
 			switch(result.getActionType())
 			{
-				case SELECT_DATES_FROM_ALL_STEPS:
-					this.unsubscribeFromClientDeliveries();
-					myBoundary.displayDealyReport(createDelayReportList(result));
-					break;
+//				case SELECT_DATES_FROM_ALL_STEPS:
+//					this.unsubscribeFromClientDeliveries();
+//					myBoundary.displayDealyReport(createDelayReportList(result));
+//					break;
+			case SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST:
+				this.unsubscribeFromClientDeliveries();
+				myBoundary.displayDealyReport(createDelayReportList(result));
+				break;
 				default:
 					break;
 			}

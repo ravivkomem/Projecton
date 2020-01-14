@@ -63,7 +63,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	//"UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
-	public void updateAnalysisStepClose(ChangeRequest changerequest,Date date,String Status,String AnalysisReportHeader, String AnalysisReportDescription,String AnalysisReportAdvantages,String AnalysisReportDuration,String AnalysisReportConstraints) {
+	public void updateAnalysisStepClose(ChangeRequest changerequest,Date date,String Status,String AnalysisReportHeader, String AnalysisReportDescription,String AnalysisReportAdvantages,Date AnalysisReportDuration,String AnalysisReportConstraints) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(date);
 		varArray.add(Status);

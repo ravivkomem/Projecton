@@ -348,6 +348,9 @@ public class MysqlConnection {
     			"ON icm.tester_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
     			"WHERE icm.tester_step.Status = 'CLOSED'";
     	
+    	sqlArray[SqlQueryType.SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST.getCode()]=
+    			"SELECT SelectedSubsystem , EstimatedDate , EndDate FROM icm.change_request"
+    			+ " WHERE Status = 'CLOSED'";
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
 		 * *****************************************************/
