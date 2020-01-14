@@ -101,6 +101,11 @@ public enum SqlQueryType {
 	SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER(SqlExecutionType.EXECUTE_QUERY),
 	
+	/* *****************************************************
+	 * *************** Extra Details Queries ***************
+	 * *****************************************************/
+	UPDATE_STATUS_BY_SUPERVISOR(SqlExecutionType.UPDATE_QUERY),
+	
 	/* *****************************************
 	 * ********Time Extension Queries***********
 	 * *****************************************/

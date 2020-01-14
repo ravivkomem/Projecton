@@ -75,10 +75,14 @@ public class RequestListPageController extends BasicController {
 				String currentStep = (String)resultRow.get(9);
 				String handlerUserName = (String)resultRow.get(10);
 				Date endDate = (Date)resultRow.get(11);
+				String email= (String)resultRow.get(12);
+				String jobDescription= (String)resultRow.get(13);
+				String fullName =(String)resultRow.get(14);
+				Date estimatedDate=(Date)resultRow.get(15);
 				
 				ChangeRequest currentChangeRequest = new ChangeRequest(
 						changeRequestID, InitiatorUserName, startDate, selectedSubsystem, currentStateDescription, desiredChangeDescription,
-						desiredChangeExplanation, desiredChangeComments, status, currentStep, handlerUserName, endDate);
+						desiredChangeExplanation, desiredChangeComments, status, currentStep, handlerUserName, endDate,email,jobDescription,fullName,estimatedDate);
 				
 				resultList.add(currentChangeRequest);
 				

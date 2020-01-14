@@ -532,6 +532,11 @@ public class MysqlConnection {
     			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND ChangeRequestID=?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER.getCode()]=
     			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND Status=?";
+    	/* *****************************************************
+		 * *************** Extra Details Queries ***************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR.getCode()]=
+    			"UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     }
     
 }
