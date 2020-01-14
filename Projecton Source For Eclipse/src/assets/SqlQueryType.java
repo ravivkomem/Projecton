@@ -12,6 +12,7 @@ public enum SqlQueryType {
 	 * *****************************************/
 	UPDATE_CHANGE_REQUEST_CURRENT_STEP(SqlExecutionType.UPDATE_QUERY),
 	AUTOMATIC_CLOSE_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
+	INSERT_NEW_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********** Login Queries ****************
@@ -36,7 +37,6 @@ public enum SqlQueryType {
 	SELECT_COMMENTS_BY_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	INSERT_NEW_COMMITTEE_COMMENT(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_COMMITTEE_STEP(SqlExecutionType.UPDATE_QUERY),
-	INSERT_NEW_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
 	SELECT_COMMITTEE_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_COMMITTEE_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
 	

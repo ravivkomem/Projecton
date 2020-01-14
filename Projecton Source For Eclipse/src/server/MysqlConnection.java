@@ -170,6 +170,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION.getCode()]=
     			"UPDATE icm.time_extension SET Status = 'CLOSED' "
     			+ "WHERE StepID = ? AND StepType = ? AND Status = 'NEW'";
+    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]=
+    			"INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
+    			+ " VALUES (?,?,?)";
     	
     	/* *****************************************************
 		 * *************** Login Queries ****************
@@ -252,6 +255,7 @@ public class MysqlConnection {
 				"SELECT TesterStepID, ChangeRequestID, HandlerUserName, StartDate, Status, EstimatedEndDate, EndDate"
 				+ " FROM icm.tester_step WHERE ChangeRequestID = ?"
 		     	+ " ORDER BY TesterStepID DESC LIMIT 1";
+	
 		
 		
 		/* *****************************************************
@@ -278,8 +282,6 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ?,DenyComment = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
-    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
-    			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
     			"SELECT * FROM icm.committee_step WHERE ChangeRequestId = ? "
     			+ "ORDER BY CommitteeStepId DESC LIMIT 1";
