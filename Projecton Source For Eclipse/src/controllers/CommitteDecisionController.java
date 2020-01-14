@@ -139,7 +139,7 @@ public class CommitteDecisionController extends BasicController{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(stepID);
 		varArray.add(stepType);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS,varArray);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
