@@ -121,6 +121,9 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
     @FXML
     private Text txtTextExplantion;
+    
+    @FXML
+    private Text txtCloseTheRequest;
 
     
     
@@ -342,11 +345,13 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		txtTextChange.setVisible(true);
 			            	txtTextChange.setText("Request closing table is ready to use");
 			            	txtTextExplantion.setVisible(true);
-			            	txtTextExplantion.setText("Please close the request");
 			        		btnExstraDetails.setDisable(false);
 			        		btnSend.setVisible(true);
 			        		txtSendMessageToInitiator.setVisible(true);
 			        		btnCloseTheRequest.setVisible(true);
+			        		txtTextExplantion.setText("Before closing the change request you can send an email to the request initiator");
+			        		txtCloseTheRequest.setVisible(true);
+			        		
 			        		}
 			        	}
 			        	else if((myChangerequest.getCurrentStep().equals("DENY_STEP")))
@@ -362,6 +367,8 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		btnSend.setVisible(true);
 			        		txtSendMessageToInitiator.setVisible(true);
 			        		btnCloseTheRequest.setVisible(true);
+			        		txtTextExplantion.setText("Before closing the change request you can send an email to the request initiator");
+			        		txtCloseTheRequest.setVisible(true);
 			        		}
 			        		
 			        	}
@@ -474,6 +481,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	txtTextExplantion.setText("Please select a request you would like to process");
     	myController.SelectAllChangeRequestForClose();
     	
+    	
     }
     
     
@@ -581,6 +589,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	comboSelectExecutionLeader.setVisible(false);
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
+    	txtCloseTheRequest.setVisible(false);
     	
     	
     }
@@ -595,6 +604,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	btnApproveAppointment.setVisible(false);
     	btnDenyAppointment.setVisible(false);
     	txtSystemAutoAppoint.setVisible(false);
+    	 txtCloseTheRequest.setVisible(false);
     	txtHandlerNameAutoAppoint.setVisible(false);
     	comboSelectAnalyizer.setVisible(true);
     	btnSetAnalyzer.setVisible(true);   
@@ -634,6 +644,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
         	comboSelectExecutionLeader.setVisible(false);
         	txtExecutionEstimatedTime.setVisible(false);
         	txtFieldEstimatedTime.setVisible(false);
+        	 txtCloseTheRequest.setVisible(false);
         	
         	
     	
@@ -711,6 +722,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		    	comboSelectExecutionLeader.setVisible(false);
 		    	txtExecutionEstimatedTime.setVisible(false);
 		    	txtFieldEstimatedTime.setVisible(false);
+		    	 txtCloseTheRequest.setVisible(false);
 		    	
 		    	
 		  }
@@ -742,6 +754,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	comboSelectExecutionLeader.setVisible(false);
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
+    	 txtCloseTheRequest.setVisible(false);
     	
     	
     	
@@ -768,6 +781,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	comboSelectExecutionLeader.setVisible(false);
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
+    	txtCloseTheRequest.setVisible(false);
     	
     	
     }
@@ -794,6 +808,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	comboSelectExecutionLeader.setVisible(false);
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
+    	 txtCloseTheRequest.setVisible(false);
     	
     	
     	
@@ -819,6 +834,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	comboSelectExecutionLeader.setVisible(false);
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
+    	txtCloseTheRequest.setVisible(false);
     	;
     	
     }  
@@ -868,6 +884,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		 btnDenyExecutionTime.setVisible(false);
 		 txtTextChange.setVisible(false);
 		 txtTextExplantion.setVisible(false);
+		 txtCloseTheRequest.setVisible(false);
 	}
     
     //**********************************TOASTS*************************************************//
