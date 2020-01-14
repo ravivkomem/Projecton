@@ -111,6 +111,8 @@ public class MenuBoundary implements Initializable {
 		    break;
 		    
 		case "SUPERVISOR":
+		case "SUPERVISOR_COMMITTEE_DIRECTOR":
+		case "SUPERVISOR_COMMITTEE_MEMBER":
 			uploadRequestButton.setVisible(true);
 			uploadRequestImageBreak.setVisible(true);
 			
@@ -123,7 +125,6 @@ public class MenuBoundary implements Initializable {
 		    supervisorButton.setVisible(true);
 		    supervisorImageBreak.setVisible(true);
 		    break;
-		    
 		/*Same displays for committee members and information engineers*/
 		case "COMMITTEE_DIRECTOR":
 		case "COMMITTEE_MEMBER":
