@@ -21,7 +21,7 @@ public class MessagesCreator {
 	public static String lastDayMsg(Step step,String fullName) {
 		String msg="Dear "+fullName+",\nYou have ONE DAY left to finish"
 	+" your work on change request NO."+step.getChangeRequestID()+" which is in "+
-				step.getType()+ " step.\n"+"\n**DO NOT REPLY TO THIS MAIL**";
+				step.getType()+ " step.\n"+"\n**DO NOT REPLY TO THIS MAILL**";
 		return msg;
 	}
 	
@@ -33,9 +33,22 @@ public class MessagesCreator {
 	 * @return
 	 */
 	public static String delayWorkMsg(Step step,String fullName) {
-		String msg = "Dear " + fullName + "\nYour work on change request NO."+step.getChangeRequestID()
+		String msg = "Dear " + fullName + ",\nYour work on change request NO."+step.getChangeRequestID()
 		+" which is in " + step.getType() + " step, IS OVERDUE.\nPlease finish your work as fast as possible.\n"
-		+"\n**DO NOT REPLY TO THIS MAIL**";
+		+"\n**DO NOT REPLY TO THIS MAILL**";
+		return msg;
+	}
+	
+	/**
+	 * this method gets user full name and message from the supervisor
+	 * the method creates a message for the change request initiator 
+	 * @param fullName
+	 * @param supervisorMsg
+	 * @return
+	 */
+	public static String supervisorCloseChangeRequest(String fullName,String supervisorMsg) {
+		String msg ="Dear " + fullName+",\n"+supervisorMsg
+		+"\nHave A Nice Day,\nICM System\n"+"\n**DO NOT REPLY TO THIS MAILL**";
 		return msg;
 	}
 	
