@@ -70,8 +70,8 @@ public class AnalyzerBoundary implements DataInitializable {
 	private TextArea constraintstextArea;
 	@FXML
     private TextArea headertextArea;
-	@FXML
-	private TextArea durationtextArea;
+    @FXML
+    private DatePicker durationDatePicker;
     @FXML
     private Text timeDisplayText;
     @FXML
@@ -193,7 +193,7 @@ public class AnalyzerBoundary implements DataInitializable {
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 		
 		if (headertextArea.getText().equals("")||descriptiontextArea.getText().equals("")||advantagestextArea.getText().equals("")
-				||constraintstextArea.getText().equals("")||durationtextArea.getText().equals(""))
+				||constraintstextArea.getText().equals("")|| durationDatePicker.getValue()==null)
 		{
 			Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
 		}
@@ -201,13 +201,13 @@ public class AnalyzerBoundary implements DataInitializable {
 		{
 			myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
 			myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "CLOSED",headertextArea.getText(),
-			descriptiontextArea.getText(), advantagestextArea.getText(),durationtextArea.getText(), constraintstextArea.getText());
+			descriptiontextArea.getText(), advantagestextArea.getText(), Date.valueOf(durationDatePicker.getValue()), constraintstextArea.getText());
 			myController.getCommitteeDirector();
 		}
 		
 		//ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
-
+	
 	@FXML
 	void setDate(MouseEvent event) {
 		if (timedurationPicker.getValue() == null) {
@@ -262,12 +262,7 @@ public class AnalyzerBoundary implements DataInitializable {
 
     }
 
-    @FXML
-    void updateDurationCharcterCounter(KeyEvent event) {
-    	durationCharcterCounterLabel.setText(durationtextArea.getText().length() + "/" + MAX_CHARS);
-
-    }
-
+  
     @FXML
     void updateHeaderCharcterCounter(KeyEvent event) {
     	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
@@ -306,7 +301,6 @@ public class AnalyzerBoundary implements DataInitializable {
 		advantagestextArea.setWrapText(true);
 		constraintstextArea.setWrapText(true);
 		descriptiontextArea.setWrapText(true);
-		durationtextArea.setWrapText(true);
 		headertextArea.setWrapText(true);
 		
 		timeextensionButton.setDisable(true);
@@ -316,11 +310,10 @@ public class AnalyzerBoundary implements DataInitializable {
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		descriptiontextArea.setTextFormatter(new TextFormatter<String>(change -> 
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		durationtextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		headertextArea.setTextFormatter(new TextFormatter<String>(change -> 
         change.getControlNewText().length() <= MAX_CHARS ? change : null));
 		timedurationPicker.setEditable(false);
+		 durationDatePicker.setEditable(false);
 	}
 
 	@Override
