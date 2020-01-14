@@ -39,7 +39,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
-
+/**
+ * Upload Change Request Page (Boundary)
+ * @author Ido Kadosh
+ *
+ */
 public class UploadChangeRequestBoundary implements Initializable {
 	/* *******************************
 	 * ****** FXML Objects ***********
@@ -86,9 +90,13 @@ public class UploadChangeRequestBoundary implements Initializable {
     private final String CURRENT_STEP = "ANALYZER_AUTO_APPOINT";
     private ObservableList<File> listViewData = FXCollections.observableArrayList();
 	    
-    /* ***************************************
-     * ********** FXML Methods ***************
-     * ***************************************/
+    /* ************************************** *
+     * ********** FXML Methods Implementation *
+     * ************************************** */
+    /**
+     * in case pressed this button its open a fileChooser window for user to choose which files to upload  
+     * @param event
+     */
     @FXML
     void BrowseFileToUpload(MouseEvent event) {
     	FileChooser fileChooser = new FileChooser();
@@ -114,22 +122,32 @@ public class UploadChangeRequestBoundary implements Initializable {
     		uploadedFileNameField.setText(filesStr);
     	}
     }
-
+    /**
+     * move the user back to the home page 
+     * @param event
+     */
     @FXML
-    /*move the user back to the home page */
     void backToHomePage(MouseEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
-
+    /**
+     * disconnect the user from the system and update the data base. 
+     * @param event
+     */
     @FXML
-    /*Logout the user from the system*/
     void logoutUser(MouseEvent event) {
     	ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
+    /**
+     * this method called when pressed the submit button while user upload a new change request 
+     * here I am building the change request from the gui page and send it to the controller, in case the user 
+     * did not fill a necessary field it shows a message that alert the user to fill all the necessary fields 
+     * and just after all the fields are filled the user can submit the change request 
+     * @param event
+     */
     @FXML
-    /*Create new change request via boundray page */
     void uploadNewChangeRequest(MouseEvent event) {	
     	String newChangeRequestSelectedSystem= subSystemComboBox.getSelectionModel().getSelectedItem();
     	String newCurrentStateDescription= currentStateDescriptionField.getText();
@@ -157,6 +175,12 @@ public class UploadChangeRequestBoundary implements Initializable {
     			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
     		}
     }
+    /**
+     * This method gets a change request id and checks whether the change request uploaded successfully to the data base 
+     * if there was no problems it calls popUpWindowMessage function that inform the user with the new change request id, else
+     * shows an error message 
+     * @param changeRequestId
+     */
     /*incase the query succeeded display window with the new change request id */
     public void displayChangeRequestId(int changeRequestId){
     	/*incase there was a problem*/
@@ -169,8 +193,6 @@ public class UploadChangeRequestBoundary implements Initializable {
     	else
     	{
     		myController.sendFilesToServer(listViewData, changeRequestId);
-    		
-    		/* TODO: Consider what to do with successful upload */
     		commentField.setText("");
     		reasonTA.setText("");
     		changeRequestDescriptionField.setText("");
@@ -181,6 +203,11 @@ public class UploadChangeRequestBoundary implements Initializable {
     	}	
     }
     
+    /**
+     * This method gets the id of the uploaded file as an integer variable, in case the variable is equal to 1 it means that the upload 
+     * of the file passed successfully, else make a toast and alert the user that the upload failed 
+     * @param fileID
+     */
     public void recieveFileUploadId(int fileID)
     {
     	if(fileID == 1)
@@ -189,12 +216,16 @@ public class UploadChangeRequestBoundary implements Initializable {
     	}
     	else
     	{
-    		/*TODO: maybe delete the change request */
     		Toast.makeText(ProjectFX.mainStage, "File had problems with upload", 1500, 500, 500);
     	}
     }
-    
-    /*this method will show the window with the new change request id */
+    /**
+     * This method will shows a pop-up window with new change request id after the change request id submitted by user 
+     * @param alert
+     * @param msg
+     * @param mess
+     * @return
+     */
 	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 		Alert alert2 = new Alert(alert);
 		alert2.setTitle(msg);

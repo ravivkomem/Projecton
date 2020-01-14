@@ -19,7 +19,11 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.io.File;
 import java.math.BigInteger; 
-
+/**
+ * Upload Change Request Page (Controller)
+ * @author Ido Kadosh
+ *
+ */
 @SuppressWarnings("serial")
 public class UploadChangeRequestController extends BasicController {
 
@@ -29,14 +33,19 @@ public class UploadChangeRequestController extends BasicController {
 	public UploadChangeRequestController(UploadChangeRequestBoundary myBoundary){
 		this.myBoundary=myBoundary;//connection to my boundary  
 	}
-	/*building the querey and update the database */
+	/**
+	 * Building the change request with the data from the boundary 
+	 * @param newchangerequest
+	 */
 	public void buildChangeRequestBeforeSendToDataBase(ChangeRequest newchangerequest)
 	{
 		currentChangeRequest = newchangerequest;//get the information about the change request from boundary 
 		this.appointHandlerBySystemRequired();//pick the analyzer randomly 
 		
 	}
-	
+	/**
+	 * After all tests passed in the boundary and built the change request update the data base 
+	 */
 	private void uploadTheInsertedNewChangeRequestToDataBase()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -59,7 +68,11 @@ public class UploadChangeRequestController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
-	
+	/**
+	 * in case the user chose to upload file with the change request save the file on the server for reuse 
+	 * @param filesToUploadList
+	 * @param chnageRequestId
+	 */
 	public void sendFilesToServer(List<File> filesToUploadList, Integer chnageRequestId)
 	{
 		if (filesToUploadList.isEmpty())
@@ -88,7 +101,6 @@ public class UploadChangeRequestController extends BasicController {
 			}
 		}
 	}
-	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		
@@ -141,6 +153,9 @@ public class UploadChangeRequestController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}*/
+	/**
+	 * this method calls a querey to update change request with the necessary handler 
+	 */
 	public void appointHandlerBySystemRequired()
 	{
 		ArrayList<Object> data =new ArrayList<>();
