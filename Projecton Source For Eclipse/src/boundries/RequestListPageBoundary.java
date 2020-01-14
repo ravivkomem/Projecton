@@ -30,9 +30,15 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
-
+/**
+ * Request List Page (Boundary)
+ * @author user
+ *
+ */
 public class RequestListPageBoundary implements Initializable {
-
+	/* *******************************
+	 * ****** FXML Objects ***********
+	 * ******************************/
 	@FXML
 	private AnchorPane searchByDatePane;
 
@@ -47,7 +53,7 @@ public class RequestListPageBoundary implements Initializable {
 
 	@FXML
 	private ComboBox<String> selectStatusComboBox;
-	/* Table FXML */
+	
 	@FXML
 	private TableView<ChangeRequest> basicDetailsTbl;
 
@@ -62,21 +68,18 @@ public class RequestListPageBoundary implements Initializable {
 
 	@FXML
 	private TableColumn<ChangeRequest, Date> startDateClm;
-	/* FXML Text */
+	
 	@FXML
 	private Text noSubmitingRequest;
+	
 	@FXML
 	private Text selectedChangeRequestIdText;
-
-	/* FXML DatePickers */
 
 	@FXML
 	private DatePicker fromDatePicker;
 
 	@FXML
 	private DatePicker toDatePicker;
-
-	/* Button FXML */
 
 	@FXML
 	private Button btnHomePage;
@@ -103,18 +106,30 @@ public class RequestListPageBoundary implements Initializable {
 	private Button logoutUser;
 	@FXML
 	private TextField displaySpecificID;
+	
+    /* ****************************************
+     * ********** Private Object **************
+     * ****************************************/
 
 	private RequestListPageController myController = new RequestListPageController(this);
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
 	ChangeRequest currentChangeRequest;
 
-	/* FXML Methods */
-
+	 /* ***************************************
+     * ********** FXML Methods Implementation *
+     * ****************************************/
+	/**
+	 * move the user back to the previous page 
+	 * @param event
+	 */
 	@FXML
 	void backToPrevPage(MouseEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
-
+	/**
+	 * move to extra details page for specific request 
+	 * @param event
+	 */
 	@FXML
 	void extraDetailsShows(MouseEvent event) {
 		ArrayList<Object> dataList = new ArrayList<>();
@@ -128,6 +143,10 @@ public class RequestListPageBoundary implements Initializable {
 
 	}
 
+	/**
+	 * disconnect the user from the system 
+	 * @param event
+	 */
 	@FXML
 	void logout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();

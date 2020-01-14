@@ -1,43 +1,35 @@
 package boundries;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javax.swing.filechooser.FileSystemView;
+import assets.AttachmentListCell;
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.TimeManager;
 import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
+import entities.MyFile;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 /**
  * Upload Change Request Page (Boundary)
@@ -77,18 +69,27 @@ public class UploadChangeRequestBoundary implements Initializable {
     @FXML
     private TextField uploadedFileNameField;
     @FXML
-    private ListView<File> filesListView;
+    private ListView<MyFile> filesListView;
+    @FXML
+    private Label fileQuantityLabel;
+    @FXML
+    private Label fileSizeLabel;
+    /* ****************************************
+     * *********** Static Object **************
+     * ****************************************/
+    private static final int MAX_CHAR = 100;
+    private static final int LIST_ROW_HEIGHT = 24; // List element height is 24px
+    private static final int FILE_QUANTITY_LIMIT = 3;
+    private static final int FILE_SIZE_LIMIT_MB = 5;
     
     /* ****************************************
      * ********** Private Object **************
      * ****************************************/
-    private static final int MAX_CHAR = 100;
-    private static final int LIST_ROW_HEIGHT = 24; // List element hight is 24px
-    private static HashMap<String, Image> mapOfFileExtToSmallIcon = new HashMap<String, Image>();
     private UploadChangeRequestController myController= new UploadChangeRequestController(this);////connection to my controller 
     private ChangeRequest newChangeRequest;
     private final String CURRENT_STEP = "ANALYZER_AUTO_APPOINT";
-    private ObservableList<File> listViewData = FXCollections.observableArrayList();
+    private ObservableList<MyFile> listViewData = FXCollections.observableArrayList();
+    private boolean isOverQuantityLimit = false;
 	    
     /* ************************************** *
      * ********** FXML Methods Implementation *
@@ -102,10 +103,6 @@ public class UploadChangeRequestBoundary implements Initializable {
     	FileChooser fileChooser = new FileChooser();
     	fileChooser.setTitle("Select Resource File");
     	List<File> selectedFiles = fileChooser.showOpenMultipleDialog(ProjectFX.mainStage);
-    	/*TODO: add size limitations */
-//    	double bytes = file.length();
-//		double kilobytes = (bytes / 1024);
-//		double megabytes = (kilobytes / 1024);
     	if (selectedFiles != null && !selectedFiles.isEmpty())
     	{
     		String filesStr = "";
@@ -117,7 +114,17 @@ public class UploadChangeRequestBoundary implements Initializable {
     			{
     				filesStr += "; ";
     			}
-    			listViewData.add(file);
+    			if (listViewData.size() < FILE_QUANTITY_LIMIT)
+    			{
+    				listViewData.add(MyFile.parseToMyFile(file.getPath()));
+    			}
+    			else
+    			{
+    				Toast.makeText(ProjectFX.mainStage, "You can only upload up to " + FILE_QUANTITY_LIMIT +" files"
+    						, 1500, 500, 500);
+    				break;
+    			}
+    			
     		}
     		uploadedFileNameField.setText(filesStr);
     	}
@@ -167,13 +174,17 @@ public class UploadChangeRequestBoundary implements Initializable {
     		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
     	}
     	/*while the required fields are filled properly create a new change request and send to the controller*/
+    	else if (isOverQuantityLimit == true)
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "You exceeded the file size limit, please delete files", 1500, 500, 500);
+    	}
     	else
-    		{
-    			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
-    			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
-    			newChangeRequestExplanation,TimeManager.getCurrentDate() ,newChangeRequestStatus,HandlerUserName,newCurrentStep,newJobDescription,newEmail,newFullName);
-    			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
-    		}
+    	{
+			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
+			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
+			newChangeRequestExplanation,TimeManager.getCurrentDate() ,newChangeRequestStatus,HandlerUserName,newCurrentStep,newJobDescription,newEmail,newFullName);
+			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
+    	}
     }
     /**
      * This method gets a change request id and checks whether the change request uploaded successfully to the data base 
@@ -252,12 +263,42 @@ public class UploadChangeRequestBoundary implements Initializable {
 		changeRequestDescriptionField.setWrapText(true);
 		currentStateDescriptionField.setWrapText(true);
 		
+		fileQuantityLabel.setText("Files Quantity 0/"+FILE_QUANTITY_LIMIT);
+		fileQuantityLabel.setTextFill(Color.rgb(0, 0, 0));
+		fileSizeLabel.setText("File Size 0.0/" + FILE_SIZE_LIMIT_MB + " [MB]");
+		fileSizeLabel.setTextFill(Color.rgb(0, 0, 0));
+		
 		filesListView.setItems(listViewData);
-		
-		
 		filesListView.setCellFactory(param -> new AttachmentListCell() {});
-		
 		filesListView.prefHeightProperty().bind(Bindings.size(listViewData).add(listViewData.isEmpty() ? 1 : 0).multiply(LIST_ROW_HEIGHT+2));
+		
+		listViewData.addListener(new ListChangeListener<MyFile>()
+				{
+
+					@Override
+					public void onChanged(Change<? extends MyFile> change) {
+						fileQuantityLabel.setText("Files Quantity " + listViewData.size()+"/"+FILE_QUANTITY_LIMIT);
+				    	double bytes = 0;
+				    	for (MyFile file : listViewData)
+				    	{
+				    		bytes += file.getMybytearray().length;
+				    	}
+						double kilobytes = (bytes / 1024);
+						double megabytes = (kilobytes / 1024);
+						fileSizeLabel.setText("File Size " + String.format("%.1f", megabytes) +"/" + FILE_SIZE_LIMIT_MB + " [MB]");
+						if (megabytes > FILE_SIZE_LIMIT_MB)
+						{
+							fileSizeLabel.setTextFill(Color.rgb(255, 0, 0)); // Red Color
+							isOverQuantityLimit = true;
+						}
+						else
+						{
+							fileSizeLabel.setTextFill(Color.rgb(0, 0, 0)); // Black Color
+							isOverQuantityLimit = false;
+						}
+					}
+			
+				});
 
 		/* Set all the character limitations */
 		changeRequestDescriptionField.setTextFormatter(new TextFormatter<String>(change -> 
@@ -265,7 +306,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_CHAR)
 			{
-				changeRequestDescLbl.setText(Integer.toString(changeLength) + " / " + Integer.toString(MAX_CHAR));
+				changeRequestDescLbl.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHAR));
 				return change;
 			}
 			else
@@ -279,7 +320,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_CHAR)
 			{
-				commentLbl.setText(Integer.toString(changeLength) + " / " + Integer.toString(MAX_CHAR));
+				commentLbl.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHAR));
 				return change;
 			}
 			else
@@ -293,7 +334,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_CHAR)
 			{
-				currentStateDescriptionLbl.setText(Integer.toString(changeLength) + " / " + Integer.toString(MAX_CHAR));
+				currentStateDescriptionLbl.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHAR));
 				return change;
 			}
 			else
@@ -307,7 +348,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_CHAR)
 			{
-				reasonLbl.setText(Integer.toString(changeLength) + " / " + Integer.toString(MAX_CHAR));
+				reasonLbl.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHAR));
 				return change;
 			}
 			else
@@ -317,106 +358,6 @@ public class UploadChangeRequestBoundary implements Initializable {
 		}));
 		
 	}
-	
-	private static String getFileExt(String fname) {
-        String ext = ".";
-        int p = fname.lastIndexOf('.');
-        if (p >= 0) {
-            ext = fname.substring(p);
-        }
-        return ext.toLowerCase();
-    }
-	
-	private static javax.swing.Icon getJSwingIconFromFileSystem(File file) {
-		
-        FileSystemView view = FileSystemView.getFileSystemView();
-        javax.swing.Icon icon = view.getSystemIcon(file);
-
-        return icon;
-    }
-	
-	private static Image getFileIcon(String fname) {
-        final String ext = getFileExt(fname);
-
-        Image fileIcon = mapOfFileExtToSmallIcon.get(ext);
-        if (fileIcon == null) {
-
-            javax.swing.Icon jswingIcon = null; 
-
-            File file = new File(fname);
-            if (file.exists()) {
-                jswingIcon = getJSwingIconFromFileSystem(file);
-            }
-            else {
-                File tempFile = null;
-                try {
-                    tempFile = File.createTempFile("icon", ext);
-                    jswingIcon = getJSwingIconFromFileSystem(tempFile);
-                }
-                catch (IOException ignored) {
-                    // Cannot create temporary file. 
-                }
-                finally {
-                    if (tempFile != null) tempFile.delete();
-                }
-            }
-
-            if (jswingIcon != null) {
-                fileIcon = jswingIconToImage(jswingIcon);
-                mapOfFileExtToSmallIcon.put(ext, fileIcon);
-            }
-        }
-
-        return fileIcon;
-    }
-	
-	 private static Image jswingIconToImage(javax.swing.Icon jswingIcon) {
-	        BufferedImage bufferedImage = new BufferedImage(jswingIcon.getIconWidth(), jswingIcon.getIconHeight(),
-	                BufferedImage.TYPE_INT_ARGB);
-	        jswingIcon.paintIcon(null, bufferedImage.getGraphics(), 0, 0);
-	        return SwingFXUtils.toFXImage(bufferedImage, null);
-	 }
-	 
-	 private static class AttachmentListCell extends ListCell<File> {
-	    
-		private final Image buttonImage = new Image(getClass().getResourceAsStream("close_symbol.png"));
-		private HBox hbox = new HBox(5);
-        private Label label = new Label("");
-        private Pane pane = new Pane();
-        private ImageView imageView = new ImageView();
-        private Button button = new Button();
-		 
-		public AttachmentListCell() {
-			super();
-			
-			hbox.getChildren().addAll(button, label, pane);
-			
-            HBox.setHgrow(pane, Priority.ALWAYS);
-            ImageView buttomImageView = new ImageView(buttonImage);
-            buttomImageView.setFitHeight(LIST_ROW_HEIGHT);
-            buttomImageView.setPreserveRatio(true);
-            button.setGraphic(buttomImageView);
-            button.setPadding(Insets.EMPTY);
-
-            button.setOnAction(event -> getListView().getItems().remove(getItem()));
-			
-		}
-		
-		 @Override
-	     public void updateItem(File item, boolean empty) {
-	            super.updateItem(item, empty);
-	            if (empty || item == null || item.getName().equals("")) {
-	                setGraphic(null);
-	                setText(null);
-	            } else {
-	                Image fxImage = getFileIcon(item.getName());
-	                imageView = new ImageView(fxImage);
-	                label.setGraphic(imageView);
-	                label.setText(item.getName());
-	                setGraphic(hbox);
-	            }
-	        }
-	    }
 
 }
 
