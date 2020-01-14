@@ -104,6 +104,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		commentTF.setEditable(false);
 		StatusTF.setEditable(false);
 		currentStateDescTA.setEditable(false);
+		currentStepTF.setEditable(false);
+		estimatedTimeForStepTF.setEditable(false);
+		
 		
 		fileListView.setItems(fileList);
 		fileListView.setCellFactory(param -> {
@@ -148,6 +151,12 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			RequestedChangeDescTF.setWrapText(true);
 			currentStateDescTA.setWrapText(true);
 			filesErrorLabel.setVisible(false);
+			currentStepTF.setText(currentChangeRequest.getCurrentStep());
+			if (currentChangeRequest.getEstimatedEndDate()==null)
+				estimatedTimeForStepTF.setText("In Evaluation");
+			else
+				estimatedTimeForStepTF.setText(currentChangeRequest.getEstimatedEndDate().toString());
+			
 			
 			myController.getChangeRequestFiles(currentChangeRequest.getChangeRequestID());
 		}
