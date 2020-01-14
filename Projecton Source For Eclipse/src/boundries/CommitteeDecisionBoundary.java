@@ -156,16 +156,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * *************************************/
 	
     @FXML
-    void updateCharcterCounterCommitteeComment(KeyEvent event) {
-    	committeeCommentLabel.setText(addCommentTextField.getText().length() + "/ " + MAX_COMMITTEE_CHARS);
-    }
-    
-    @FXML
-    void updateCharcterCounterDenyComment(KeyEvent event) {
-    	denyCommentLabel.setText(denyCommentTextArea.getText().length() + "/ " + MAX_DENY_CHARS);
-    }
-	
-    @FXML
     void sendDenyDecisionAndComment(MouseEvent event) {
     	
     	if(denyCommentTextArea.getText().equals("")) {
@@ -396,11 +386,28 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		btnTimeExtension.setVisible(false);
 		image3point1.setVisible(false);
 		image3point2.setVisible(false);
-
-		addCommentTextField.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_COMMITTEE_CHARS ? change : null));
-		denyCommentTextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_DENY_CHARS ? change : null));
+		
+		addCommentTextField.setTextFormatter(new TextFormatter<String>(change -> {
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_COMMITTEE_CHARS){
+				committeeCommentLabel.setText(Integer.toString(changeLength) + "/ " + MAX_COMMITTEE_CHARS);
+				return change;
+			}
+			else{
+				return null;
+			}
+		}));
+				
+		denyCommentTextArea.setTextFormatter(new TextFormatter<String>(change -> {
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_DENY_CHARS){
+				denyCommentLabel.setText(Integer.toString(changeLength) + "/ " + MAX_DENY_CHARS);
+				return change;
+			}
+			else{
+				return null;
+			}
+		}));
 		
 		switch (ProjectFX.currentUser.getPermission()) {
 		case "COMMITTEE_MEMBER":

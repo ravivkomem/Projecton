@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import assets.SqlAction;
@@ -15,8 +16,11 @@ import entities.CommitteeComment;
 import entities.MyFile;
 import javafx.application.Platform;
 import javafx.scene.control.Alert.AlertType;
+
+import java.io.File;
 import java.math.BigInteger; 
 
+@SuppressWarnings("serial")
 public class UploadChangeRequestController extends BasicController {
 
 	private UploadChangeRequestBoundary myBoundary;
@@ -53,28 +57,32 @@ public class UploadChangeRequestController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	public void sendFilesToServer(String path, Integer chnageRequestId)
+	public void sendFilesToServer(List<File> filesToUploadList, Integer chnageRequestId)
 	{
-		if (path.equals(""))
+		if (filesToUploadList.isEmpty())
 		{
 			/*DO NOTHING */
 		}
 		else
 		{
-			MyFile newFile = MyFile.parseToMyFile(path);
-			
-			String extension = "";
+			for (File file : filesToUploadList)
+			{
+				String path = file.getPath();
+				MyFile newFile = MyFile.parseToMyFile(path);
+				
+				String extension = "";
 
-			int i = path.lastIndexOf('.');
-			if (i > 0) {
-			    extension = path.substring(i+1);
+				int i = path.lastIndexOf('.');
+				if (i > 0) {
+				    extension = path.substring(i+1);
+				}
+				
+				ArrayList<Object> varArray = new ArrayList<>();
+				varArray.add(chnageRequestId);
+				varArray.add(extension);
+				SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.INSERT_NEW_FILE, varArray, newFile);
+				this.sendSqlActionToClient(sqlFileAction);
 			}
-			
-			ArrayList<Object> varArray = new ArrayList<>();
-			varArray.add(chnageRequestId);
-			varArray.add(extension);
-			SqlFileAction sqlFileAction = new SqlFileAction(SqlQueryType.INSERT_NEW_FILE, varArray, newFile);
-			this.sendSqlActionToClient(sqlFileAction);
 		}
 	}
 	
