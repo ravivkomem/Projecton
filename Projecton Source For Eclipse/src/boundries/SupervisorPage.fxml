@@ -130,9 +130,9 @@
             <TableColumn fx:id="tableColumnCurrentStep" prefWidth="162.0" text="CurrentStep" />
          </columns>
       </TableView>
-      <Button fx:id="btnCloseTheRequest" layoutX="534.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" prefHeight="42.0" prefWidth="152.0" text="Close the request " />
-      <Button fx:id="btnSend" layoutX="195.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" prefHeight="42.0" prefWidth="115.0" text="send" />
-      <TextField fx:id="txtSendMessageToInitiator" alignment="TOP_LEFT" layoutX="172.0" layoutY="301.0" prefHeight="121.0" prefWidth="543.0" promptText="send message to initiator" />
+      <Button fx:id="btnCloseTheRequest" layoutX="534.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" prefHeight="42.0" prefWidth="152.0" text="Close The Request " />
+      <Button fx:id="btnSend" layoutX="195.0" layoutY="439.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" prefHeight="42.0" prefWidth="115.0" text="Send Mail" />
+      <TextField fx:id="txtSendMessageToInitiator" alignment="TOP_LEFT" layoutX="172.0" layoutY="301.0" prefHeight="123.0" prefWidth="347.0" promptText="send message to initiator" />
       <Text fx:id="txtSystemAutoAppoint" layoutX="159.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="86.91162109375" />
       <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="246.0" layoutY="303.0" prefHeight="31.0" prefWidth="115.0" />
       <Button fx:id="btnSetAnalyzer" layoutX="477.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
@@ -146,9 +146,10 @@
       <Text fx:id="txtAnalysisEstimatedTime" layoutX="161.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis estimated time:" wrappingWidth="170.00000225641224" />
       <Text fx:id="txtTextChange" layoutX="229.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options">
          <font>
-            <Font size="20.0" />
+            <Font size="19.0" />
          </font>
       </Text>
       <Text fx:id="txtTextExplantion" layoutX="164.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="558.0000140070915" />
+      <Text fx:id="txtCloseTheRequest" layoutX="562.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please close the request to finish" wrappingWidth="95.08642578125" />
    </children>
 </AnchorPane>
