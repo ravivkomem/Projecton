@@ -28,7 +28,7 @@ public class TechManagerController extends BasicController {
 	}
 
 	public void getAllTheActiveChangeRequest() {
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS, new ArrayList<Object>());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS, new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
@@ -51,7 +51,7 @@ public class TechManagerController extends BasicController {
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
 			switch (result.getActionType()) {
-			case SELECT_ALL_ACTIVE_CHANGE_REQUESTS:
+			case SELECT_ALL_CHANGE_REQUESTS:
 				ArrayList<ChangeRequest> changeRequestList = createChangeRequestFromResult(result);
 				myBoundary.displayChangeRequestTable(changeRequestList);
 				break;

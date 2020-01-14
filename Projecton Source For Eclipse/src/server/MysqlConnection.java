@@ -284,8 +284,8 @@ public class MysqlConnection {
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
 		 * *****************************************************/
-    	sqlArray[SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS.getCode()]=
-    			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
+    			"SELECT * FROM icm.change_request";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE.getCode()]=
     			"SELECT * FROM icm.change_request WHERE StartDate BETWEEN ? AND ?";
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
