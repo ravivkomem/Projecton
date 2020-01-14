@@ -145,13 +145,15 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			RequestedChangeDescTF.setText(currentChangeRequest.getDesiredChangeDescription());
 			reasonTF.setText(currentChangeRequest.getDesiredChangeExplanation());
 			commentTF.setText(currentChangeRequest.getDesiredChangeComments());
-			StatusTF.setText(currentChangeRequest.getStatus());
+			String userDisplayedStatus = currentChangeRequest.getStatus();
+			userDisplayedStatus = String.valueOf(userDisplayedStatus.charAt(0)).toUpperCase() + userDisplayedStatus.substring(1).toLowerCase();
+			StatusTF.setText(userDisplayedStatus);
 			reasonTF.setWrapText(true);
 			commentTF.setWrapText(true);
 			RequestedChangeDescTF.setWrapText(true);
 			currentStateDescTA.setWrapText(true);
 			filesErrorLabel.setVisible(false);
-			currentStepTF.setText(currentChangeRequest.getCurrentStep());
+			currentStepTF.setText(currentChangeRequest.getActualStep());
 			if (currentChangeRequest.getEstimatedEndDate()==null)
 				estimatedTimeForStepTF.setText("In Evaluation");
 			else
