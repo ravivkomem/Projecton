@@ -33,7 +33,7 @@ public class UploadChangeRequestController extends BasicController {
 	public void buildChangeRequestBeforeSendToDataBase(ChangeRequest newchangerequest)
 	{
 		currentChangeRequest = newchangerequest;//get the information about the change request from boundary 
-		this.chooseAutomaticallyAnalyzer();//pick the analyzer randomly 
+		this.appointHandlerBySystemRequired();//pick the analyzer randomly 
 		
 	}
 	
@@ -51,6 +51,9 @@ public class UploadChangeRequestController extends BasicController {
 		varArray.add(currentChangeRequest.getStatus());
 		varArray.add(currentChangeRequest.getCurrentStep());
 		varArray.add(currentChangeRequest.getHandlerUserName());
+		varArray.add(currentChangeRequest.getEmail());
+		varArray.add(currentChangeRequest.getJobDescription());
+		varArray.add(currentChangeRequest.getFullName());
 		/*execute the insert new change request query */
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_CHANGE_REQUEST,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
@@ -120,6 +123,11 @@ public class UploadChangeRequestController extends BasicController {
 					int fileID = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
 					
 					break;
+				case SELECT_HANDLER_USER_NAME_BY_SYSTEM:
+					this.unsubscribeFromClientDeliveries();
+					currentChangeRequest.setHandlerUserName(result.getResultData().get(0).get(0).toString());
+					uploadTheInsertedNewChangeRequestToDataBase();
+					break;
 				default:
 					break;
 			}
@@ -127,12 +135,19 @@ public class UploadChangeRequestController extends BasicController {
 		return;	
 	}
 	/*execute the select all information engineers query  */
-	public void chooseAutomaticallyAnalyzer()
+	/*public void chooseAutomaticallyAnalyzer()
 	{
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		
+	}*/
+	public void appointHandlerBySystemRequired()
+	{
+		ArrayList<Object> data =new ArrayList<>();
+		data.add(currentChangeRequest.getSelectedSubsystem());
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_HANDLER_USER_NAME_BY_SYSTEM,data);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
 }

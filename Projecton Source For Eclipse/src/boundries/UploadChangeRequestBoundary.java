@@ -140,8 +140,8 @@ public class UploadChangeRequestBoundary implements Initializable {
     	String newChangeRequestStatus= "ACTIVE";
     	String HandlerUserName="XXXX";//will be random in the controller 
     	String newCurrentStep= CURRENT_STEP;
-    	String newJobDescription = ProjectFX.currentUser.getJobDescription();
     	String newEmail = ProjectFX.currentUser.getEmail();
+    	String newJobDescription = ProjectFX.currentUser.getJobDescription();
     	String newFullName = ProjectFX.currentUser.getFullName();
     	/*in case the user didn't fill all the required fields*/
     	if (subSystemComboBox.getSelectionModel().isEmpty()|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))

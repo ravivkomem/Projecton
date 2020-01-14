@@ -89,6 +89,7 @@ public enum SqlQueryType {
 	INSERT_NEW_CHANGE_REQUEST(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_HANDLER_USER_NAME_BY_SYSTEM(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ***** Request List Queries *****

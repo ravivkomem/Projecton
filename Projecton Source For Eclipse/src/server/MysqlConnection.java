@@ -354,7 +354,7 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
-    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    			+ "Status,CurrentStep,HandlerUserName,Email,JobDescription,FullName) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";//Changed
     	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
@@ -366,6 +366,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID.getCode()]=
     			"SELECT FileID, FileEnding FROM icm.file "
     			+ "WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.SELECT_HANDLER_USER_NAME_BY_SYSTEM.getCode()]=
+    			"SELECT ResponsibleUserName FROM icm.subsystem_support "
+    			+ "WHERE Subsystem=?";
     
     	/* *****************************************************
 		 * ************* Appoint Tester Queries ****************
