@@ -264,7 +264,11 @@ public class ChangeRequest {
 			case "TESTER_APPOINT":
 				actualStep = "Appoint Tester";
 				break;
-			
+				
+			case "FINISH":
+				actualStep = "Finish";
+				break;
+				
 			default:
 				actualStep = currentStep;
 				break;
