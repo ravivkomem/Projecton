@@ -171,7 +171,12 @@ public class AnalyzerBoundary implements DataInitializable {
 			timeRemainingTextArea.setText(daysBetween + " Days");
 		}
 	}
-
+	
+	/**
+	 * 
+	 * 
+	 * This method check date propriety and update the current step and the EstimatedEndDate to DB
+	 */
 	@FXML
 	void submit(MouseEvent event) {
 		/*
@@ -207,6 +212,11 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		//ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
+	 /**
+	 * 
+	 * 
+	 * This method check date propriety and update the current step and the EstimatedEndDate to DB
+	 */
 	
 	@FXML
 	void setDate(MouseEvent event) {
@@ -245,11 +255,22 @@ public class AnalyzerBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "Updated failed", 1500, 500, 500);
 		}
 	}
+	 /**
+		 * 
+		 * 
+		 * This method count the length of advantagestextArea and display it
+		 */
+
 	 @FXML
 	    void updateAdvantagesCharcterCounter(KeyEvent event) {
 		 advantagesCharcterCounterLabel.setText(advantagestextArea.getText().length() + "/ " + MAX_CHARS);
 
 	    }
+	 /**
+		 * 
+		 * 
+		 * This method count the length of constraintstextArea and display it
+		 */
 
     @FXML
     void updateConstraintsCharcterCounter(KeyEvent event) {
@@ -261,6 +282,11 @@ public class AnalyzerBoundary implements DataInitializable {
     	descriptionCharcterCounterLabel.setText(descriptiontextArea.getText().length() + "/" + MAX_CHARS);
 
     }
+    /**
+	 * 
+	 * 
+	 * This method count the length of headertextArea and display it
+	 */
 
   
     @FXML
@@ -268,13 +294,18 @@ public class AnalyzerBoundary implements DataInitializable {
     	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
 
     }
+    /**
+   	 * 
+   	 * 
+   	 * This method insert new change request to Committee_Step table in the DB and load the work station page
+   	 */
+
     public void getCommitteeDirectorUserName(String name) {
     	myController.insertNewCommitteeStep(currentChangeRequest.getChangeRequestID(), name, TimeManager.getCurrentDate(), "ACTIVE", 
     			TimeManager.addDays(TimeManager.getCurrentDate(), 7));
     	ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
-
-	@Override
+   	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		/* Init table view */
