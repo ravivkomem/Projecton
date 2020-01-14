@@ -34,6 +34,10 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
+	@FXML
+	private TextField currentStepTF;
+	@FXML
+	private TextField estimatedTimeForStepTF;
     @FXML
     private Button backBtn;
     @FXML
