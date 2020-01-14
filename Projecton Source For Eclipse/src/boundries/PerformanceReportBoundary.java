@@ -124,7 +124,15 @@ public class PerformanceReportBoundary implements Initializable {
 		long testingDaysCounter = 0;
 		for (Step step : repeatingStepList)
 		{
-			long additionalDays = TimeManager.getDaysBetween(step.getStartDate(), step.getEndDate());
+			long additionalDays = 0;
+			if (step.getEndDate() == null)
+			{
+				additionalDays = TimeManager.getDaysBetween(step.getStartDate(), TimeManager.getCurrentDate());
+			}
+			else
+			{
+				additionalDays = TimeManager.getDaysBetween(step.getStartDate(), step.getEndDate());
+			}
 			switch (step.getType())
 			{
 				case ANALYSIS:

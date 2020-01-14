@@ -57,6 +57,7 @@ public enum SqlQueryType {
 	// Performance report
 	SELECT_ALL_APPROVED_TIME_EXTNESIONS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_REPEATRING_STEPS(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_ALL_DEVIATION_CHANGE_REQUEST(SqlExecutionType.EXECUTE_QUERY),
 	// Activity report
 	SELECT_ALL_CHANGE_REQUESTS_BY_DATE(SqlExecutionType.EXECUTE_QUERY),
 	// Delay Report
