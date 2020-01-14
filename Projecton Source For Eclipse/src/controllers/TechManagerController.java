@@ -27,18 +27,28 @@ public class TechManagerController extends BasicController {
 		this.myBoundary = myBoundary;
 	}
 
+	/**
+	 * this method create sql query that ask for all the change request in the data base
+	 */
 	public void getAllTheActiveChangeRequest() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS, new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method crate sql query that ask for all the information engineer from the data base
+	 */
 	public void getAllTheEmployee() {
 				SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, new ArrayList<Object>());
 				this.subscribeToClientDeliveries();		//subscribe to listener array
 				ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query that ask for all the subsystem for specific user
+	 * @param userName
+	 */
 	public void getSubsystemSupporterByUserName(String userName) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(userName);
@@ -70,6 +80,11 @@ public class TechManagerController extends BasicController {
 		return;
 	}
 	
+	/**
+	 * return array list of subsystem supporter from the data base result
+	 * @param result
+	 * @return
+	 */
 	private ArrayList<SubsystemSupporter> createSubsystemSupporter(SqlResult result){
 		ArrayList<SubsystemSupporter> list = new ArrayList<>();
 		for(ArrayList<Object> s: result.getResultData()) {

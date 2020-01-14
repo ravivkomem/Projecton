@@ -23,6 +23,12 @@ public class EmployeePermissionController extends BasicController{
 		this.myBoundary = myBoundary;
 	}
 
+	/**
+	 * this method create sql query that update employee permission in user table
+	 * @param permission
+	 * @param jobDescription
+	 * @param id
+	 */
 	public void updateEmployeePermission(String permission, String jobDescription, int id) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(permission);
@@ -33,6 +39,11 @@ public class EmployeePermissionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query that update subsystem supporter table
+	 * @param subsystem
+	 * @param userName
+	 */
 	public void updateSubsystemSupporter(String subsystem,String userName) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(userName);
