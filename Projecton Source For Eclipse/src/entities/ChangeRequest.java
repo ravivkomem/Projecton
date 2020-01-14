@@ -21,56 +21,29 @@ public class ChangeRequest {
 		this.handlerUserName = handlerUserName;
 		this.endDate = endDate;
 		
-		switch(currentStep)
-		{
+		actualStep=getActutalStepByCurrentStep(currentStep);
 		
-			case "ANALYZER_AUTO_APPOINT":
-			case "ANALYZER_SUPERVISOR_APPOINT":
-				actualStep = "Appoint analyzer";
-				break;
-				
-			case "ANALYSIS_SET_TIME":
-			case "ANALYSIS_APPROVE_TIME":
-			case "ANALYSIS_WORK":
-				actualStep = "Analysis";
-				break;
-				
-			case "COMMITTEE_WORK":
-				actualStep = "Committee";
-				break;
-				
-			case "EXECUTION_LEADEAR_SUPERVISOR_APPOINT":
-				actualStep = "Appoint execution leader";
-				break;
-				
-			case "EXECUTION_SET_TIME":
-			case "EXECUTION_APPROVE_TIME":
-			case "EXECUTION_WORK":
-				actualStep = "Execution";
-				break;
-			
-			case "TESTER_COMMITTEE_DIRECTOR_APPOINT":
-				actualStep = "Appoint Tester";
-				break;
-				
-			case "TESTING_WORK":
-				actualStep = "Testing";
-				break;
-			
-			case "CLOSING_STEP":
-				actualStep = "Closing Step";
-				break;
-			
-			case "DENY_STEP":
-				actualStep = "Deny Step";
-				break;
-				
-			default:
-				actualStep = currentStep;
-				break;
-		}
 	}
 	
+	public ChangeRequest(String InitiatorUserName,String selectedSubsystem,String currentStateDescription,String desiredChangeDescription,
+			String desiredChangeComments,String desiredChangeExplanation,Date startDate, String status,String handlerUserName,String currentStep,String jobDescription,String email,String fullName)
+	{
+		this.InitiatorUserName=InitiatorUserName;
+		this.selectedSubsystem=selectedSubsystem;
+		this.currentStateDescription=currentStateDescription;
+		this.desiredChangeDescription=desiredChangeDescription;
+		this.desiredChangeComments=desiredChangeComments;
+		this.desiredChangeExplanation=desiredChangeExplanation;
+		this.startDate=startDate;
+		this.status=status;
+		this.handlerUserName=handlerUserName;
+		this.currentStep=currentStep;
+		this.jobDescription=jobDescription;
+		this.email=email;
+		this.fullName=fullName;
+		
+		actualStep=getActutalStepByCurrentStep(currentStep);
+	}
 	public ChangeRequest(String InitiatorUserName,String selectedSubsystem,String currentStateDescription,String desiredChangeDescription,
 			String desiredChangeComments,String desiredChangeExplanation,Date startDate, String status,String handlerUserName,String currentStep)
 	{
@@ -84,39 +57,7 @@ public class ChangeRequest {
 		this.status=status;
 		this.handlerUserName=handlerUserName;
 		this.currentStep=currentStep;
-		
-		switch(currentStep)
-		{
-		
-			case "AUTO_ANALYZER_APPOINT":
-			case "ANALYSIS_SET_TIME":
-			case "ANALYSIS_APPROVE_TIME":
-			case "ANALYSIS_WORK":
-				actualStep = "Analysis";
-				break;
-				
-			case "EXECUTION_SET_TIME":
-			case "EXECUTION_APPROVE_TIME":
-			case "EXECUTION_WORK":
-				actualStep = "Execution";
-				break;
-			
-			case "TESTING_WORK":
-				actualStep = "Testing";
-				break;
-			
-			case "COMMITTEE_WORK":
-				actualStep = "Committee";
-				break;
-				
-			case "TESTER_APPOINT":
-				actualStep = "Appoint Tester";
-				break;
-			
-			default:
-				actualStep = currentStep;
-				break;
-		}
+		actualStep=getActutalStepByCurrentStep(currentStep);
 	}
 	
 	private Integer changeRequestID;
@@ -132,6 +73,9 @@ public class ChangeRequest {
 	private String handlerUserName;
 	private Date endDate;
 	private String actualStep;
+	private String jobDescription;
+	private String email;
+	private String fullName;
 	
 	public Integer getChangeRequestID() {
 		return changeRequestID;
@@ -212,6 +156,43 @@ public class ChangeRequest {
 
 	public void setActualStep(String actualStep) {
 		this.actualStep = actualStep;
+	}
+	private String getActutalStepByCurrentStep(String currentStep)
+	{
+		String actualStep;
+		switch(currentStep)
+		{
+		
+			case "AUTO_ANALYZER_APPOINT":
+			case "ANALYSIS_SET_TIME":
+			case "ANALYSIS_APPROVE_TIME":
+			case "ANALYSIS_WORK":
+				actualStep = "Analysis";
+				break;
+				
+			case "EXECUTION_SET_TIME":
+			case "EXECUTION_APPROVE_TIME":
+			case "EXECUTION_WORK":
+				actualStep = "Execution";
+				break;
+			
+			case "TESTING_WORK":
+				actualStep = "Testing";
+				break;
+			
+			case "COMMITTEE_WORK":
+				actualStep = "Committee";
+				break;
+				
+			case "TESTER_APPOINT":
+				actualStep = "Appoint Tester";
+				break;
+			
+			default:
+				actualStep = currentStep;
+				break;
+		}
+		return actualStep;
 	}
 	
 }

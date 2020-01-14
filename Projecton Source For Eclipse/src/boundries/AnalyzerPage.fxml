@@ -109,19 +109,18 @@
             <Text layoutX="12.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Advantages:" />
             <TextArea fx:id="advantagestextArea" layoutX="88.0" layoutY="323.0" onKeyTyped="#updateAdvantagesCharcterCounter" prefHeight="125.0" prefWidth="168.0" />
             <Label fx:id="constraintsCharcterCounterLabel" layoutX="570.0" layoutY="80.0" text="0/100" />
-            <Text layoutX="286.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set time duration:" />
+            <Text layoutX="286.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set time duration:" />
             <Button fx:id="submitButton" layoutX="498.0" layoutY="429.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
             <TextArea fx:id="constraintstextArea" layoutX="390.0" layoutY="88.0" onKeyTyped="#updateConstraintsCharcterCounter" prefHeight="117.0" prefWidth="168.0" />
             <Text layoutX="23.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Header:" />
-            <TextArea fx:id="durationtextArea" layoutX="390.0" layoutY="228.0" onKeyTyped="#updateDurationCharcterCounter" prefHeight="141.0" prefWidth="168.0" />
             <Text fx:id="timeDisplayText" layoutX="479.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
-            <Label fx:id="durationCharcterCounterLabel" layoutX="570.0" layoutY="206.0" text="0/100" />
+            <DatePicker fx:id="durationDatePicker" layoutX="386.0" layoutY="239.0" prefHeight="43.0" prefWidth="174.0" />
             <TextArea fx:id="timeRemainingTextArea" layoutX="479.0" layoutY="28.0" prefHeight="43.0" prefWidth="79.0" />
             <Text fill="RED" layoutX="14.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="4.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="4.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="289.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
-            <Text fill="RED" layoutX="280.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
+            <Text fill="RED" layoutX="275.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="23.0" layoutY="501.0" strokeType="OUTSIDE" strokeWidth="0.0" text="* Required Fields" />
          </children>
       </AnchorPane>
