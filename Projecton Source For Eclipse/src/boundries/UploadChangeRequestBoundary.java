@@ -2,6 +2,7 @@ package boundries;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -168,6 +169,7 @@ public class UploadChangeRequestBoundary implements Initializable {
     	String newEmail = ProjectFX.currentUser.getEmail();
     	String newJobDescription = ProjectFX.currentUser.getJobDescription();
     	String newFullName = ProjectFX.currentUser.getFullName();
+    	Date newEstimatedDate = null;
     	/*in case the user didn't fill all the required fields*/
     	if (subSystemComboBox.getSelectionModel().isEmpty()|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
     	{
@@ -182,7 +184,8 @@ public class UploadChangeRequestBoundary implements Initializable {
     	{
 			newChangeRequest = new ChangeRequest(newInitiator,newChangeRequestSelectedSystem,
 			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
-			newChangeRequestExplanation,TimeManager.getCurrentDate() ,newChangeRequestStatus,HandlerUserName,newCurrentStep,newJobDescription,newEmail,newFullName);
+			newChangeRequestExplanation,TimeManager.getCurrentDate() ,newChangeRequestStatus,HandlerUserName,newCurrentStep,
+			newJobDescription,newEmail,newFullName,newEstimatedDate);
 			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
     	}
     }

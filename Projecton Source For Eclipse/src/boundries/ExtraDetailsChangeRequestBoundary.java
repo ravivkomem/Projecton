@@ -27,6 +27,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
@@ -60,6 +61,10 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     private Button logoutUser;
     @FXML
     private ListView<MyFile> fileListView;
+    @FXML
+    private Button suspendButton;
+    @FXML
+    private Text pageTitle;
 
     /* ***************************************
      * ********** Private Objects ***********
@@ -97,6 +102,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* FXML Objects init */
+		
 		initiatorNameTF.setEditable(false);
 		subSystemTF.setEditable(false);
 		RequestedChangeDescTF.setEditable(false);
@@ -135,6 +141,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initData(Object data) {
+		
 		try 
 		{
 			currentChangeRequest = (ChangeRequest)((ArrayList<Object>) data).get(0);
@@ -154,11 +161,16 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			currentStateDescTA.setWrapText(true);
 			filesErrorLabel.setVisible(false);
 			currentStepTF.setText(currentChangeRequest.getActualStep());
+			pageTitle.setText("Change Request No. "+currentChangeRequest.getChangeRequestID()+" Details");
 			if (currentChangeRequest.getEstimatedEndDate()==null)
 				estimatedTimeForStepTF.setText("In Evaluation");
 			else
 				estimatedTimeForStepTF.setText(currentChangeRequest.getEstimatedEndDate().toString());
-			
+			if (currentChangeRequest.getStatus().equals("CLOSED")||currentChangeRequest.getStatus().equals("DENIED"))
+			{
+				estimatedTimeForStepTF.setText("");
+				estimatedTimeForStepTF.setDisable(true);
+			}
 			
 			myController.getChangeRequestFiles(currentChangeRequest.getChangeRequestID());
 		}
@@ -166,6 +178,12 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		{
 			System.out.println("Couldn't init data in Extra details page");
 			this.logoutUser(null);
+		}
+		if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR"))
+		{
+			suspendButton.setVisible(true);
+			if (currentChangeRequest.getStatus().equals("SUSPEND"))
+				suspendButton.setText("Un-Suspend");
 		}
 	}
 
@@ -212,5 +230,22 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		
 		
 	}
+    @FXML
+    void suspendChangeRequest(MouseEvent event) {
+    	String updateStatus = null;
+    	if (currentChangeRequest.getStatus().equals("ACTIVE"))
+    	{
+    		updateStatus="SUSPEND";
+    		currentChangeRequest.setStatus("SUSPEND");
+    		suspendButton.setText("Un-Suspend");
+    	}
+    	else if (currentChangeRequest.getStatus().equals("SUSPEND"))
+    	{
+    		updateStatus="ACTIVE";
+    		currentChangeRequest.setStatus("ACTIVE");
+    		suspendButton.setText("Suspend");
+    	}
+    	myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);
+    }
 
 }

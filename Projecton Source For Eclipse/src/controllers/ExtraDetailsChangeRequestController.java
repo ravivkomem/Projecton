@@ -5,9 +5,11 @@ import java.util.List;
 
 import entities.MyFile;
 import assets.SqlResult;
+import assets.SqlAction;
 import assets.SqlFileAction;
 import assets.SqlQueryType;
 import boundries.ExtraDetailsChangeRequestBoundary;
+import client.ClientConsole;
 import javafx.application.Platform;
 
 @SuppressWarnings("serial")
@@ -51,6 +53,9 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 						}
 						myBoundary.recieveFileList(myFileList);
 					}
+				case UPDATE_STATUS_BY_SUPERVISOR:
+					this.unsubscribeFromClientDeliveries();
+					break;
 				default:
 					break;
 			}
@@ -58,5 +63,15 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		return;
 		
 	}
+	public void updateStatusBySupervisor(int changeRequestId,String updatedStatus)
+	{
+		ArrayList<Object> data =new ArrayList<>();
+		data.add(updatedStatus);
+		data.add(changeRequestId);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR,data);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 
 }

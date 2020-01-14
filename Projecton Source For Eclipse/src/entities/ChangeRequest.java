@@ -72,7 +72,7 @@ public class ChangeRequest {
 
 
 	public ChangeRequest(String InitiatorUserName,String selectedSubsystem,String currentStateDescription,String desiredChangeDescription,
-			String desiredChangeComments,String desiredChangeExplanation,Date startDate, String status,String handlerUserName,String currentStep,String jobDescription,String email,String fullName)
+			String desiredChangeComments,String desiredChangeExplanation,Date startDate, String status,String handlerUserName,String currentStep,String jobDescription,String email,String fullName,Date estimatedEndDate)
 	{
 		this.InitiatorUserName=InitiatorUserName;
 		this.selectedSubsystem=selectedSubsystem;
@@ -87,6 +87,7 @@ public class ChangeRequest {
 		this.jobDescription=jobDescription;
 		this.email=email;
 		this.fullName=fullName;
+		this.estimatedEndDate=estimatedEndDate;
 		
 		actualStep=getActutalStepByCurrentStep(currentStep);
 	}
@@ -106,6 +107,31 @@ public class ChangeRequest {
 		actualStep=getActutalStepByCurrentStep(currentStep);
 	}
 	
+	public ChangeRequest(Integer changeRequestID2, String initiatorUserName2, Date startDate2,
+			String selectedSubsystem2, String currentStateDescription2, String desiredChangeDescription2,
+			String desiredChangeExplanation2, String desiredChangeComments2, String status2, String currentStep2,
+			String handlerUserName2, Date endDate2, String email2, String jobDescription2, String fullName2,
+			Date estimatedDate) 
+	{
+		changeRequestID=changeRequestID2;
+		InitiatorUserName=initiatorUserName2;
+		startDate=startDate2;
+		selectedSubsystem=selectedSubsystem2;
+		currentStateDescription=currentStateDescription2;
+		desiredChangeDescription=desiredChangeDescription2;
+		desiredChangeExplanation=desiredChangeExplanation2;
+		desiredChangeComments=desiredChangeComments2;
+		status=status2;
+		handlerUserName=handlerUserName2;
+		endDate=endDate2;
+		currentStep=currentStep2;
+		jobDescription=jobDescription2;
+		email=email2;
+		fullName=fullName2;
+		estimatedEndDate=estimatedDate;
+		actualStep=getActutalStepByCurrentStep(currentStep);
+	}
+
 	private Integer changeRequestID;
 	private String InitiatorUserName;
 	private Date startDate;
@@ -261,12 +287,20 @@ public class ChangeRequest {
 				actualStep = "Committee";
 				break;
 				
-			case "TESTER_APPOINT":
-				actualStep = "Appoint Tester";
-				break;
-				
 			case "FINISH":
 				actualStep = "Finish";
+				break;
+				
+			case "DENY_STEP":
+				actualStep= "Deny Step";
+				break;
+				
+			case "CLOSE_STEP":
+				actualStep="Close Step";
+				break;
+				
+			case "TESTER_COMMITTEE_DIRECTOR_APPOINT":
+				actualStep="Tester Appoint";
 				break;
 				
 			default:
