@@ -284,8 +284,8 @@ public class MysqlConnection {
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
 		 * *****************************************************/
-    	sqlArray[SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS.getCode()]=
-    			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
+    			"SELECT * FROM icm.change_request";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE.getCode()]=
     			"SELECT * FROM icm.change_request WHERE StartDate BETWEEN ? AND ?";
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
@@ -348,13 +348,16 @@ public class MysqlConnection {
     			"ON icm.tester_step.ChangeRequestID = icm.change_request.ChangeRequestID " + 
     			"WHERE icm.tester_step.Status = 'CLOSED'";
     	
+    	sqlArray[SqlQueryType.SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST.getCode()]=
+    			"SELECT SelectedSubsystem , EstimatedDate , EndDate FROM icm.change_request"
+    			+ " WHERE Status = 'CLOSED'";
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
 		 * *****************************************************/
     	sqlArray[SqlQueryType.INSERT_NEW_CHANGE_REQUEST.getCode()]= 
     			"INSERT INTO icm.change_request(InitiatorUserName,StartDate,"
     			+ "SelectedSubSystem,CurrentStateDescription,DesiredChangeDescription,DesiredChangeExplanation,DesiredChangeComments,"
-    			+ "Status,CurrentStep,HandlerUserName) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    			+ "Status,CurrentStep,HandlerUserName,Email,JobDescription,FullName) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";//Changed
     	sqlArray[SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS.getCode()]=
     			"SELECT UserName FROM icm.user "
     			+ "WHERE JobDescription = 'Information Engineer' OR JobDescription = 'Supervisor' "
@@ -366,6 +369,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID.getCode()]=
     			"SELECT FileID, FileEnding FROM icm.file "
     			+ "WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.SELECT_HANDLER_USER_NAME_BY_SYSTEM.getCode()]=
+    			"SELECT ResponsibleUserName FROM icm.subsystem_support "
+    			+ "WHERE Subsystem=?";
     
     	/* *****************************************************
 		 * ************* Appoint Tester Queries ****************
@@ -435,9 +441,8 @@ public class MysqlConnection {
 						" WHERE CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME'";
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_CLOSE.getCode()] = 
-				"SELECT * FROM icm.change_request" +
-						" WHERE CurrentStep = 'CLOSING_STEP' OR CurrentStep = 'DENY_STEP'";//add AND 'DENY_STEP'
-    	
+				"SELECT * FROM icm.change_request WHERE Status = 'ACTIVE' AND (CurrentStep = 'CLOSING_STEP' OR CurrentStep = 'DENY_STEP')";
+
     	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT.getCode()] =
     			"UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
     			
@@ -472,7 +477,7 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     	
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ?, CurrentStep  = ?  WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ?, CurrentStep  = ?, EndDate = ?  WHERE ChangeRequestID = ?";
     	
     	sqlArray[SqlQueryType.SELECT_EXECUTION_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step" +

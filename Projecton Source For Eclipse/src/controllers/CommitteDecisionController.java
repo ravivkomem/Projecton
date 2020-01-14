@@ -125,17 +125,18 @@ public class CommitteDecisionController extends BasicController{
 				case INSERT_NEW_CLOSING_STEP:
 					this.unsubscribeFromClientDeliveries();
 					break;
-				case SELECT_ALL_INFROMATION_ENGINEERS:
+				case SELECT_HANDLER_USER_NAME_BY_SYSTEM:
 					this.unsubscribeFromClientDeliveries();
-					ArrayList<String> informationEngineers = new ArrayList<String>();
-					for (ArrayList<Object> informationEngineerRow : result.getResultData())
-					{
-						String currEngineer = (String) informationEngineerRow.get(0);
-						informationEngineers.add(currEngineer);
-					}
-					Random rand = new Random();
-					int randEngineerIndex = rand.nextInt(informationEngineers.size());
-					String handlerUserName=informationEngineers.get(randEngineerIndex);
+//					ArrayList<String> informationEngineers = new ArrayList<String>();
+//					for (ArrayList<Object> informationEngineerRow : result.getResultData())
+//					{
+//						String currEngineer = (String) informationEngineerRow.get(0);
+//						informationEngineers.add(currEngineer);
+//					}
+//					Random rand = new Random();
+//					int randEngineerIndex = rand.nextInt(informationEngineers.size());
+//					String handlerUserName=informationEngineers.get(randEngineerIndex);
+					String handlerUserName=(String)result.getResultData().get(0).get(0);
 					myBoundary.createObjectForUpdateChangeRequestDetails(handlerUserName);
 					break;
 				case SELECT_COMMITTEE_STEP_START_DATE:
@@ -170,8 +171,10 @@ public class CommitteDecisionController extends BasicController{
 	}
 
 	/*execute the select all information engineers query */
-	public void chooseAutomaticallyAnalyzer(){
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
+	public void chooseAutomaticallyAnalyzer(String subsystem){
+		ArrayList<Object> dataList=new ArrayList<>();
+		dataList.add(subsystem);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_HANDLER_USER_NAME_BY_SYSTEM,dataList);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}

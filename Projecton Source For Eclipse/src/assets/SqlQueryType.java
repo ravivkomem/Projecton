@@ -48,7 +48,7 @@ public enum SqlQueryType {
 	/* *****************************************
 	 * ********Tech Manager Queries*************
 	 * *****************************************/
-	SELECT_ALL_ACTIVE_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_ALL_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_EMPLOYEE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_SUBSYSTEM_BY_USER_NAME(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_EMPLOYEE_PERMISSION(SqlExecutionType.UPDATE_QUERY),
@@ -60,7 +60,7 @@ public enum SqlQueryType {
 	SELECT_ALL_CHANGE_REQUESTS_BY_DATE(SqlExecutionType.EXECUTE_QUERY),
 	// Delay Report
 	SELECT_DATES_FROM_ALL_STEPS(SqlExecutionType.EXECUTE_QUERY),
-	
+	SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST(SqlExecutionType.EXECUTE_QUERY),
 	
 	SELECT_ALL_INFROMATION_ENGINEERS(SqlExecutionType.EXECUTE_QUERY),
 	
@@ -89,6 +89,7 @@ public enum SqlQueryType {
 	INSERT_NEW_CHANGE_REQUEST(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_HANDLER_USER_NAME_BY_SYSTEM(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ***** Request List Queries *****
