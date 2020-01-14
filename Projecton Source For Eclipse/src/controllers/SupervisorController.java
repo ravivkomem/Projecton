@@ -409,11 +409,12 @@ public class SupervisorController extends BasicController
 
 
 
-	public void setStatusToClosed(String newStatus,String newStep, Integer changeRequestID)
+	public void setStatusToClosed(Date updateStepDate,String newStatus,String newStep, Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(newStatus);
 		varArray.add(newStep);
+		varArray.add(updateStepDate);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array

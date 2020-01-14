@@ -669,7 +669,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     void clickOnCloseRequest(MouseEvent event)
     {
 
-    	myController.setStatusToClosed("CLOSED","FINISH",myChangerequest.getChangeRequestID());
+    	myController.setStatusToClosed(updateStepDate,"CLOSED","FINISH",myChangerequest.getChangeRequestID());
     	myController.setEndDate(updateStepDate,"CLOSED",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForClose();
     	txtTextExplantion.setVisible(false);
