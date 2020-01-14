@@ -268,7 +268,8 @@ public class ChangeRequest {
 			case "FINISH":
 				actualStep = "Finish";
 				break;
-				
+			case "CLOSING_STEP":
+				actualStep = "Closing step";
 			default:
 				actualStep = currentStep;
 				break;
