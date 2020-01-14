@@ -25,6 +25,50 @@ public class ChangeRequest {
 		
 	}
 	
+	public ChangeRequest(Integer changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
+			String currentStateDescription, String desiredChangeDescription, String desiredChangeExplanation,
+			String desiredChangeComments, String status, String currentStep, String handlerUserName, Date endDate,
+			String fullName, Date estimatedEndDate) {
+		super();
+		this.changeRequestID = changeRequestID;
+		InitiatorUserName = initiatorUserName;
+		this.startDate = startDate;
+		this.selectedSubsystem = selectedSubsystem;
+		this.currentStateDescription = currentStateDescription;
+		this.desiredChangeDescription = desiredChangeDescription;
+		this.desiredChangeExplanation = desiredChangeExplanation;
+		this.desiredChangeComments = desiredChangeComments;
+		this.status = status;
+		this.currentStep = currentStep;
+		this.handlerUserName = handlerUserName;
+		this.endDate = endDate;
+		this.fullName = fullName;
+		this.estimatedEndDate = estimatedEndDate;
+	}
+
+
+	public ChangeRequest(Integer changeRequestID, String initiatorUserName, Date startDate, String selectedSubsystem,
+			String currentStateDescription, String desiredChangeDescription, String desiredChangeExplanation,
+			String desiredChangeComments, String status, String currentStep, String handlerUserName, String fullName,
+			Date estimatedEndDate) {
+		super();
+		this.changeRequestID = changeRequestID;
+		InitiatorUserName = initiatorUserName;
+		this.startDate = startDate;
+		this.selectedSubsystem = selectedSubsystem;
+		this.currentStateDescription = currentStateDescription;
+		this.desiredChangeDescription = desiredChangeDescription;
+		this.desiredChangeExplanation = desiredChangeExplanation;
+		this.desiredChangeComments = desiredChangeComments;
+		this.status = status;
+		this.currentStep = currentStep;
+		this.handlerUserName = handlerUserName;
+		this.fullName = fullName;
+		this.estimatedEndDate = estimatedEndDate;
+	}
+
+
+
 	public ChangeRequest(String InitiatorUserName,String selectedSubsystem,String currentStateDescription,String desiredChangeDescription,
 			String desiredChangeComments,String desiredChangeExplanation,Date startDate, String status,String handlerUserName,String currentStep,String jobDescription,String email,String fullName)
 	{
@@ -76,7 +120,14 @@ public class ChangeRequest {
 	private String jobDescription;
 	private String email;
 	private String fullName;
+	private Date estimatedEndDate;
 	
+	public Date getEstimatedEndDate() {
+		return estimatedEndDate;
+	}
+	public void setEstimatedEndDate(Date estimatedEndDate) {
+		this.estimatedEndDate = estimatedEndDate;
+	}
 	public String getJobDescription() {
 		return jobDescription;
 	}

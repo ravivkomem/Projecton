@@ -179,6 +179,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	 * ******* Public Methods *************
 	 * *************************************/
     
+    /**
+     * this method gets user and update his new permission in data base
+     * @param newUser
+     */
     private void createPermissionToOneUser(User newUser) {
     	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
     	techManagerBoundry.setEmployeeListChanges(newUser);
@@ -196,6 +200,12 @@ public class EmployeePermissionBoundary implements DataInitializable{
     	techManagerBoundry.setEmployeeListChanges(oldUser);
     }
     
+    /**
+     * this method handle with permission to new committee director
+     * the method check what the current permission of the user and change the permission
+     * to committee director or to supervisor committee director if necessary
+     * @param newDirector
+     */
     private void handleCommitteeDirectorOneUser(User newDirector) {
     	Optional<ButtonType> result;
     	switch (newDirector.getPermission()) {
@@ -367,6 +377,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     
     /**
      * this method handle with committee member permission
+     * if there is already user with committee member permission
      * @param newMember
      * @param oldMember
      */
@@ -423,8 +434,8 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     /**
-     * this method handle with the problem that tech manager give permission that already exist
-     * to anther user
+     * this method handle with the problem that tech manager gives supervisor permission
+     * that already exist to anther user
      * @param newSupervisor
      * @param oldSupervisor
      */
@@ -484,8 +495,8 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     /**
-     * this method handle with the problem that tech manager give permission that already exist
-     * to anther user
+     * this method handle with the problem that tech manager gives committee director permission
+     * that already exist to anther user
      * @param newSupervasior
      * @param oldSuperVaser
      */
@@ -578,7 +589,13 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		permossionTextField.setText(employeeUser.getJobDescription());
 	}
 	
-	/* this method will show the window with the new change request id */
+	/**
+	 * this method will show up window with the msg that the method gets
+	 * @param alert
+	 * @param msg
+	 * @param mess
+	 * @return
+	 */
 	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 		Alert alert2 = new Alert(alert);
 		alert2.setTitle(msg);

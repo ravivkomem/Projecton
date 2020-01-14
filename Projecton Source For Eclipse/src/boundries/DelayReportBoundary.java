@@ -52,6 +52,7 @@ public class DelayReportBoundary implements Initializable{
 	private static final String EIGHTH_CATAGORY = "Computer\nFarm";
 	private static final String NINTH_CATAGORY = "College\nWebsite";
 	private static final int CATEGORY = 9;
+	
     /* ************************************ 
 	 * ******* Public Methods *************
 	 * ************************************/
@@ -68,6 +69,11 @@ public class DelayReportBoundary implements Initializable{
 		myController.getAllStepsDate();
 	}
 
+	/**
+	 * this method gets object with delay report details
+	 * the method display the details in the page
+	 * @param delayReportList
+	 */
 	public void displayDealyReport(ArrayList<DelayReport> delayReportList) {
 		ArrayList<Long> delayDays = new ArrayList<>();
 		int[] delayDaysCntArray;

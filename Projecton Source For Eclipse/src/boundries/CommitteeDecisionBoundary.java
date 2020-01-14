@@ -310,6 +310,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * ******* Public Methods *************
 	 * ************************************/
 	
+	/**
+	 * the method get ArrayList of comments
+	 * display the comment in comment table in the page
+	 * @param resultList
+	 */
 	public void handleCommitteeCommentResultForTable(ArrayList<CommitteeComment> resultList) {
 		commentList.clear();
 		if (!resultList.isEmpty()) {
@@ -319,6 +324,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		}
 	}
 
+	/**
+	 * this method gets int object
+	 * if the object equals to 1 the data base is update
+	 * @param affectedRows
+	 */
 	public void committeeCommentInsertToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "The comment uploaded successfully", 1500, 500, 500);
@@ -330,6 +340,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		}
 	}
 
+	/**
+	 * this method gets string
+	 * the method update the change_request table in the data base
+	 * @param handlerUserName
+	 */
 	public void createObjectForUpdateChangeRequestDetails(String handlerUserName) {
 		myController.updateChangeRequestCurrentStep("ANALYZER_AUTO_APPOINT", handlerUserName,
 				currentChangeRequest.getChangeRequestID());
@@ -337,7 +352,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	/**
 	 * this method display time remaining for the step or delay time
-	 * 
 	 * @param estimatedEndDate
 	 */
 	public void displayTimeRemaining(Date estimatedEndDate) {
@@ -442,7 +456,13 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		myController.getCommitteeStepDetails(currentChangeRequest.getChangeRequestID());
 	}
 
-	/* this method will show the window with the new change request id */
+	/**
+	 * this method will show up window with the msg that the method gets
+	 * @param alert
+	 * @param msg
+	 * @param mess
+	 * @return
+	 */
 	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 		Alert alert2 = new Alert(alert);
 		alert2.setTitle(msg);
