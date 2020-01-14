@@ -1,10 +1,7 @@
 package boundries;
 
-import java.awt.Desktop;
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -114,25 +111,34 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		commentTF.setEditable(false);
 		StatusTF.setEditable(false);
 		currentStateDescTA.setEditable(false);
+		viewUploadFileBtn.setDisable(false);
 	}
 	
 	@Override
 	public void initData(Object data) {
-		currentChangeRequest = (ChangeRequest)((ArrayList<Object>) data).get(0);
-		previousPagePath = (String)((ArrayList<Object>) data).get(1);
-		initiatorNameTF.setText(currentChangeRequest.getInitiatorUserName());
-		subSystemTF.setText(currentChangeRequest.getSelectedSubsystem());
-		currentStateDescTA.setText(currentChangeRequest.getCurrentStateDescription());
-		RequestedChangeDescTF.setText(currentChangeRequest.getDesiredChangeDescription());
-		reasonTF.setText(currentChangeRequest.getDesiredChangeExplanation());
-		commentTF.setText(currentChangeRequest.getDesiredChangeComments());
-		StatusTF.setText(currentChangeRequest.getStatus());
-		reasonTF.setWrapText(true);
-		commentTF.setWrapText(true);
-		RequestedChangeDescTF.setWrapText(true);
-		currentStateDescTA.setWrapText(true);
-		myController.getChangeRequestFile(currentChangeRequest.getChangeRequestID());
-		viewUploadFileBtn.setVisible(false);
+		try 
+		{
+			currentChangeRequest = (ChangeRequest)((ArrayList<Object>) data).get(0);
+			previousPagePath = (String)((ArrayList<Object>) data).get(1);
+			initiatorNameTF.setText(currentChangeRequest.getInitiatorUserName());
+			subSystemTF.setText(currentChangeRequest.getSelectedSubsystem());
+			currentStateDescTA.setText(currentChangeRequest.getCurrentStateDescription());
+			RequestedChangeDescTF.setText(currentChangeRequest.getDesiredChangeDescription());
+			reasonTF.setText(currentChangeRequest.getDesiredChangeExplanation());
+			commentTF.setText(currentChangeRequest.getDesiredChangeComments());
+			StatusTF.setText(currentChangeRequest.getStatus());
+			reasonTF.setWrapText(true);
+			commentTF.setWrapText(true);
+			RequestedChangeDescTF.setWrapText(true);
+			currentStateDescTA.setWrapText(true);
+			myController.getChangeRequestFile(currentChangeRequest.getChangeRequestID());
+		}
+		catch (Exception e)
+		{
+			System.out.println("Couldn't init data in Extra details page");
+		}
+		
+		
 	}
 
 	public void displayFile(MyFile downloadedFile) {
