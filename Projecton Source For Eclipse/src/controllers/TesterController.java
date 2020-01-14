@@ -51,6 +51,14 @@ public class TesterController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	public void createNewClosingStep(int changeRequestID) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestID);
+		varArray.add(TimeManager.getCurrentDate());
+		varArray.add("ACTIVE");
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_CLOSING_STEP,varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -69,6 +77,10 @@ public class TesterController extends BasicController {
 				break;
 			case AUTOMATIC_CLOSE_NEW_TIME_EXTENSION:
 				this.unsubscribeFromClientDeliveries();
+				break;
+			case INSERT_NEW_CLOSING_STEP:
+				this.unsubscribeFromClientDeliveries();
+				break;
 			default:
 				break;
 			}

@@ -37,81 +37,62 @@ import javafx.stage.Stage;
  *
  */
 public class ExecutionLeaderBoundry implements Initializable, DataInitializable {
+	/* *************************************
+	 * ********* FXML Objects **************
+	 * *************************************/
 	@FXML
 	private Button btnRefresh;
-
 	@FXML
 	private Text timeRemainingTxt;
-
 	@FXML
 	private Text delayTimeTxt;
-
 	@FXML
 	private Text txtRefresh;
-
 	@FXML
 	private Text txtBuildChangeRequestDetails;
-
 	@FXML
 	private Text txtBuildEnterTimeRequiredForExecution;
-
 	@FXML
 	private Text txtWaitingForTomeApprovalPopUp;
-
 	@FXML
 	private Button btnBack;
-
 	@FXML
 	private Text txtWorkingOnChangeRequestNumber;
-
 	@FXML
 	private Button btnCommitExcution;
-
 	@FXML
 	private TextArea timeRemainingTextAria;
-
 	@FXML
 	private DatePicker txtTimeForExecution;
-
 	@FXML
 	private Button btnSubmitForTimeRequiredForExecution;
-
 	@FXML
 	private Button btnLogOut;
-
 	@FXML
 	private Button btnCommitExecution;
-
 	@FXML
 	private TextArea txtChangeRequestDetails;
-
 	@FXML
 	private Button btnHomePage;
-
 	@FXML
 	private Button btnAnalysisReport;
-
 	@FXML
 	private Button btnTimeExtension;
-	
 	@FXML
 	private Text txtDetailsWorkedOn;
-
 	@FXML
 	private TextField txtFieldForDetailsWorkedOn;
 
+	/* ****************************************
+     * ********** Private Objects *************
+     * ****************************************/
 	private ExecutionLeaderController myController = new ExecutionLeaderController(this);
 	private ChangeRequest myChangerequest;
 	private int flag;
-	java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-	Stage myTimeExtensionStage = null;
-	Stage myAnalysisReportStage = null;
-	Step executionStep;
-	Step executionStepMain;
-
-	public Date getDate() {
-		return updateStepDate;
-	}
+	private Stage myTimeExtensionStage = null;
+	private Stage myAnalysisReportStage = null;
+	private Step executionStep;
+	private Step executionStepMain;
 
 	@Override
 	public void initData(Object data) {
@@ -358,7 +339,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	 */
 
 	public void ShowEstimatedDateMinusStartDate(Date estimatedEndDate) {
-		Date todayDate = updateStepDate;
+		Date todayDate = TimeManager.getCurrentDate();
 		long daysBetween;
 		if (estimatedEndDate.before(todayDate)) {
 			delayTimeTxt.setVisible(true);

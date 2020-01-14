@@ -502,15 +502,15 @@ public class EmployeePermissionBoundary implements DataInitializable{
      */
     private void handleCommitteeDirector(User newDirector, User oldDirector) {
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
-        		+ "user with supervisor permission\nDo you want to replace?");
+        		+ "user with committee director permission\nDo you want to replace?");
         if (result.get() == ButtonType.OK) {
         	Optional<ButtonType> rs;
         	
         	//handle newDirector
 			switch (newDirector.getPermission()) {
 			case "SUPERVISOR":
-				rs = popUpWindowMessage(AlertType.CONFIRMATION, "The user is Supervisor",
-						"Do you want to add the permission?");
+				rs = popUpWindowMessage(AlertType.CONFIRMATION, "Permission Conflict",
+						"The user is Supervisor,\nDo you want to add the permission?");
 				if (rs.get() == ButtonType.OK) {
 					newDirector.setPermission("SUPERVISOR_COMMITTEE_DIRECTOR");
 					newDirector.setJobDescription("Supervisor Committee Director");

@@ -69,8 +69,6 @@ public class WorkStationBoundary implements Initializable{
     @FXML
     private ImageView committeeButtonBreakImage;
     
-    
-    
     /* ***************************************
      * ********** Private Variables ***********
      * ***************************************/
@@ -264,11 +262,11 @@ public class WorkStationBoundary implements Initializable{
 		
 		/* Displays with preconditions */
 		String userPermission = ProjectFX.currentUser.getPermission(); 
-		if (userPermission.equals("COMMITTEE_MEMBER"))
+		if (userPermission.equals("COMMITTEE_MEMBER") || userPermission.equals("SUPERVISOR_COMMITTEE_MEMBER"))
 		{
 			viewCommitteStepButton.setVisible(true);
 		}
-		else if (userPermission.equals("COMMITTEE_DIRECTOR"))
+		else if (userPermission.equals("COMMITTEE_DIRECTOR") || userPermission.equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
 		{
 			viewCommitteStepButton.setVisible(true);
 			committeeButtonBreakImage.setVisible(true);

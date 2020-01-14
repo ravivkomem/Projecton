@@ -170,6 +170,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION.getCode()]=
     			"UPDATE icm.time_extension SET Status = 'CLOSED' "
     			+ "WHERE StepID = ? AND StepType = ? AND Status = 'NEW'";
+    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]=
+    			"INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
+    			+ " VALUES (?,?,?)";
     	
     	/* *****************************************************
 		 * *************** Login Queries ****************
@@ -252,6 +255,7 @@ public class MysqlConnection {
 				"SELECT TesterStepID, ChangeRequestID, HandlerUserName, StartDate, Status, EstimatedEndDate, EndDate"
 				+ " FROM icm.tester_step WHERE ChangeRequestID = ?"
 		     	+ " ORDER BY TesterStepID DESC LIMIT 1";
+	
 		
 		
 		/* *****************************************************
@@ -278,8 +282,6 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP.getCode()]=
     			"UPDATE icm.committee_step SET Status = ?,EndDate = ?,DenyComment = ? WHERE ChangeRequestId = ?" + 
     			" ORDER BY CommitteeStepId DESC LIMIT 1";
-    	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]="INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
-    			+ " VALUES (?,?,?)";
     	sqlArray[SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS.getCode()] = 
     			"SELECT * FROM icm.committee_step WHERE ChangeRequestId = ? "
     			+ "ORDER BY CommitteeStepId DESC LIMIT 1";
@@ -322,6 +324,9 @@ public class MysqlConnection {
     			"SELECT * FROM icm.repeating_tester RT " + 
     			"WHERE RT.TesterStepID != (SELECT MIN(RT2.TesterStepID) FROM ICM.repeating_tester RT2 " + 
     			"WHERE RT2.ChangeRequestID = RT.ChangeRequestID)";
+    	sqlArray[SqlQueryType.SELECT_ALL_DEVIATION_CHANGE_REQUEST.getCode()]=
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE CurrentStep = 'FINISH' AND EndDate>EstimatedDate";
     	sqlArray[SqlQueryType.SELECT_DATES_FROM_ALL_STEPS.getCode()]= 
     			"SELECT icm.change_request.SelectedSubsystem , icm.committee_step.EstimatedEndDate ," + 
     			"icm.committee_step.EndDate " + 
@@ -514,7 +519,8 @@ public class MysqlConnection {
     			+ "STATUS = 'Active';";
     	sqlArray[SqlQueryType.GET_HIGH_MANGEMENT_MAILS.getCode()] =
     			"SELECT Email From icm.user "
-    			+ "WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD';";
+    			+ "WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD' "
+    			+ "OR Permission = 'SUPERVISOR_COMMITTEE_DIRECTOR' OR Permission = 'SUPERVISOR_COMMITTEE_MEMBER';";
     	sqlArray[SqlQueryType.GET_USER_FULL_NAME.getCode()] =
     			"SELECT FirstName, LastName From icm.user "
     			+ "WHERE UserName = ?";
@@ -529,6 +535,11 @@ public class MysqlConnection {
     			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND ChangeRequestID=?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER.getCode()]=
     			"SELECT * FROM icm.change_request WHERE InitiatorUserName=? AND Status=?";
+    	/* *****************************************************
+		 * *************** Extra Details Queries ***************
+		 * *****************************************************/
+    	sqlArray[SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR.getCode()]=
+    			"UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     }
     
 }

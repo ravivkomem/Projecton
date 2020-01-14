@@ -8,6 +8,7 @@ import assets.SqlQueryType;
 import assets.SqlResult;
 import assets.StepType;
 import entities.Step;
+import entities.ChangeRequest;
 import entities.TimeExtension;
 import boundries.PerformanceReportBoundary;
 import javafx.application.Platform;
@@ -36,6 +37,12 @@ public class PerformanceReportController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	public void getAllChangeRequestsWithDeviations() {
+		/*Creating Sql Action*/
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_DEVIATION_CHANGE_REQUEST, varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
 	
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -52,11 +59,47 @@ public class PerformanceReportController extends BasicController {
 				ArrayList<Step> repeatingStepList = this.parseSqlResultToStepList(result);
 				myBoundary.addRepeatingStepsToReport(repeatingStepList);
 				break;
+			case SELECT_ALL_DEVIATION_CHANGE_REQUEST:
+				this.unsubscribeFromClientDeliveries();
+				ArrayList<ChangeRequest> deviationChangeRequestList = this.parseSqlResultToChangeRequestList(result);
+				myBoundary.addDeviationChangeRequestsToReport(deviationChangeRequestList);
+				break;
 			default:
 				break;
 			}
 		});
 		return;
+	}
+
+	private ArrayList<ChangeRequest> parseSqlResultToChangeRequestList(SqlResult result) {
+		ArrayList<ChangeRequest> changeRequestList = new ArrayList<ChangeRequest>();
+		for (ArrayList<Object> resultRow : result.getResultData())
+		{
+			int changeRequestId = (Integer)resultRow.get(0);
+			String initiatorUserName = (String)resultRow.get(1);
+			Date startDate = (Date)resultRow.get(2);
+			String selectedSubsystem = (String)resultRow.get(3);
+			String currentStateDescription = (String)resultRow.get(4);
+			String desiredChangeDescription = (String)resultRow.get(5);
+			String desiredChangeExplanation = (String)resultRow.get(6);
+			String desiredChangeComments = (String)resultRow.get(7);
+			String status = (String)resultRow.get(8);
+			String currentStep = (String)resultRow.get(9);
+			String handlerUserName = (String)resultRow.get(10);
+			Date endDate = (Date)resultRow.get(11);
+			String email = (String)resultRow.get(12);
+			String jobDescription = (String)resultRow.get(13);
+			String fullName = (String)resultRow.get(14);
+			Date estimatedDate = (Date)resultRow.get(15);
+			
+			ChangeRequest changeRequest = new ChangeRequest(
+					changeRequestId, initiatorUserName, startDate, selectedSubsystem,
+					currentStateDescription, desiredChangeDescription, desiredChangeExplanation, desiredChangeComments,
+					status, currentStep, handlerUserName, endDate, email, jobDescription, fullName, estimatedDate);
+			changeRequestList.add(changeRequest);
+			
+		}
+		return changeRequestList;
 	}
 
 	private ArrayList<Step> parseSqlResultToStepList(SqlResult result) {
@@ -103,4 +146,5 @@ public class PerformanceReportController extends BasicController {
 		}
 		return timeExtensionList;
 	}
+	
 }

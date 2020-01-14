@@ -32,7 +32,7 @@ import javafx.stage.Stage;
  * @author Itay David
  *
  */
-public class SupervisorBoundary implements Initializable,DataInitializable {
+public class SupervisorBoundary implements Initializable {
 
     @FXML
     private Button btnHomePage;
@@ -163,21 +163,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     private Step SupervisorStep;
     Stage myTimeExtensionStage = null;
 	Stage myAnalysisReportStage= null;
-    
-    
-    
-    
-    
-	
-	
-	@Override
-	public void initData(Object data)
-	{
-		
-		
-	}
-
-	
+    	
 	/**
 	 * This method initialize all GUI
 	 */
@@ -258,7 +244,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 			        		}
 			        		
 			        	}
-			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_LEADEAR_SUPERVISOR_APPOINT"))
+			        	else if(myChangerequest.getCurrentStep().equals("EXECUTION_LEADER_SUPERVISOR_APPOINT"))
 			        	{
 			        		if(myChangerequest.getStatus().equals("ACTIVE"))
 			        		{	
@@ -858,7 +844,7 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
     	txtCloseTheRequest.setVisible(false);
-    	
+    	txtAnalysisEstimatedTime.setVisible(false);
     	
     }
 	

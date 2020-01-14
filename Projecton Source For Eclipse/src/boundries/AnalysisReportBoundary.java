@@ -1,6 +1,7 @@
 package boundries;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -84,7 +85,7 @@ public class AnalysisReportBoundary implements DataInitializable{
 			headerText.setText("Header:		"+(String) resultList.get(1));
 			descriptionTextArea.setText((String) resultList.get(2));
 			advavtagesTextArea.setText((String) resultList.get(3));
-			durationTxt.setText((String) resultList.get(4));
+			durationTxt.setText(((Date) resultList.get(4)).toString());
 			constraintsTextArea.setText((String) resultList.get(5));
 		}
     }

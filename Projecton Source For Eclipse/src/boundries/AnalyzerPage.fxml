@@ -89,7 +89,7 @@
             </ImageView>
          </children>
       </VBox>
-      <TableView fx:id="tableView" layoutX="157.0" layoutY="83.0" prefHeight="69.0" prefWidth="429.0">
+      <TableView fx:id="tableView" layoutX="157.0" layoutY="83.0" prefHeight="69.0" prefWidth="444.0">
          <columns>
             <TableColumn fx:id="requestIdColumn" text="Request ID" />
             <TableColumn fx:id="stepColumn" prefWidth="96.0" text="Step" />
@@ -114,7 +114,7 @@
             <TextArea fx:id="constraintstextArea" layoutX="390.0" layoutY="88.0" onKeyTyped="#updateConstraintsCharcterCounter" prefHeight="117.0" prefWidth="168.0" />
             <Text layoutX="23.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Header:" />
             <Text fx:id="timeDisplayText" layoutX="479.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
-            <DatePicker fx:id="durationDatePicker" layoutX="386.0" layoutY="239.0" prefHeight="43.0" prefWidth="174.0" />
+            <DatePicker fx:id="durationDatePicker" layoutX="386.0" layoutY="248.0" prefHeight="26.0" prefWidth="174.0" />
             <TextArea fx:id="timeRemainingTextArea" layoutX="479.0" layoutY="28.0" prefHeight="43.0" prefWidth="79.0" />
             <Text fill="RED" layoutX="14.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="4.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />

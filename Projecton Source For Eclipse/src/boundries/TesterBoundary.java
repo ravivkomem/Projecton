@@ -207,6 +207,7 @@ public class TesterBoundary implements DataInitializable {
 			myController.advanceChangeRequestStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT",
 					currentChangeRequest.getChangeRequestID());
 			myController.automaticCloseNewTimeExtension(testerStep);
+			myController.createNewClosingStep(testerStep.getChangeRequestID());
 			closeMyStages();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     	}
@@ -281,6 +282,7 @@ public class TesterBoundary implements DataInitializable {
     			myController.closeChangeRequestStep(testerStep.getStepID(), "");
 				myController.advanceChangeRequestStep("CLOSING_STEP",currentChangeRequest.getChangeRequestID());
 				myController.automaticCloseNewTimeExtension(testerStep);
+				myController.createNewClosingStep(testerStep.getChangeRequestID());
 				closeMyStages();
 				ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     		}

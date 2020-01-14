@@ -12,6 +12,7 @@ public enum SqlQueryType {
 	 * *****************************************/
 	UPDATE_CHANGE_REQUEST_CURRENT_STEP(SqlExecutionType.UPDATE_QUERY),
 	AUTOMATIC_CLOSE_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
+	INSERT_NEW_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********** Login Queries ****************
@@ -36,7 +37,6 @@ public enum SqlQueryType {
 	SELECT_COMMENTS_BY_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	INSERT_NEW_COMMITTEE_COMMENT(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_COMMITTEE_STEP(SqlExecutionType.UPDATE_QUERY),
-	INSERT_NEW_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
 	SELECT_COMMITTEE_STEP_START_DATE(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_COMMITTEE_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
 	
@@ -57,6 +57,7 @@ public enum SqlQueryType {
 	// Performance report
 	SELECT_ALL_APPROVED_TIME_EXTNESIONS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_REPEATRING_STEPS(SqlExecutionType.EXECUTE_QUERY),
+	SELECT_ALL_DEVIATION_CHANGE_REQUEST(SqlExecutionType.EXECUTE_QUERY),
 	// Activity report
 	SELECT_ALL_CHANGE_REQUESTS_BY_DATE(SqlExecutionType.EXECUTE_QUERY),
 	// Delay Report
@@ -99,6 +100,11 @@ public enum SqlQueryType {
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_DATE_FILTER(SqlExecutionType.EXECUTE_QUERY),
 	SELECET_SPECIFIC_CHANGE_REQUEST_FOR_USER_WITH_ID_FILTER(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUESTS_FOR_SPECIFIC_USER_WITH_STATUS_FILTER(SqlExecutionType.EXECUTE_QUERY),
+	
+	/* *****************************************************
+	 * *************** Extra Details Queries ***************
+	 * *****************************************************/
+	UPDATE_STATUS_BY_SUPERVISOR(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Extension Queries***********
