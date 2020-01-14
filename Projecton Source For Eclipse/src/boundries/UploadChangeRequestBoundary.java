@@ -4,17 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import javax.swing.Icon;
 import javax.swing.filechooser.FileSystemView;
-
-import com.sun.javafx.scene.control.SelectedCellsMap;
-
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.TimeManager;
@@ -22,7 +16,6 @@ import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
@@ -41,18 +34,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
-import javafx.util.Callback;
 
 public class UploadChangeRequestBoundary implements Initializable {
 	/* *******************************
@@ -112,7 +98,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 //    	double bytes = file.length();
 //		double kilobytes = (bytes / 1024);
 //		double megabytes = (kilobytes / 1024);
-    	if (!selectedFiles.isEmpty())
+    	if (selectedFiles != null && !selectedFiles.isEmpty())
     	{
     		String filesStr = "";
     		for (int i = 0; i < selectedFiles.size(); i++)
