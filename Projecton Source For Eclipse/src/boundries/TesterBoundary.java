@@ -21,7 +21,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -224,7 +223,6 @@ public class TesterBoundary implements DataInitializable {
     			}
     			
     			failureReportTextArea.setText(failedTestsText);
-    			updateCharcterCounter(null);
     			FailDetailsPane.setVisible(true);
     			testWorkPane.setVisible(false);
     		}
@@ -238,12 +236,6 @@ public class TesterBoundary implements DataInitializable {
     		}
     		
     	}
-    }
-    
-    @FXML
-    void updateCharcterCounter(KeyEvent event) {
-    	System.out.println("Count is: " + failureReportTextArea.getText().length());
-    	charcterCounterLabel.setText(failureReportTextArea.getText().length() + "/ " + MAX_CHARS);
     }
 
 	/* *****************************************
@@ -293,7 +285,21 @@ public class TesterBoundary implements DataInitializable {
 	
 		/* Limit charcters in the failure report text area */
 		failureReportTextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		{
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_CHARS)
+			{
+				charcterCounterLabel.setText(Integer.toString(changeLength) + " / " + Integer.toString(MAX_CHARS));
+				return change;
+			}
+			else
+			{
+				return null;
+			}
+		}));
+       
+		
+
 	}
 
 	@Override

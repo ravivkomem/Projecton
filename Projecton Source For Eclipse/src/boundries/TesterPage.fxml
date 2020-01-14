@@ -98,7 +98,7 @@
                   <Font name="System Bold" size="20.0" />
                </font></Text>
             <Button fx:id="reportfailButton" layoutX="188.0" layoutY="255.0" mnemonicParsing="false" onMouseClicked="#setReportFail" text="Submit Failure Report" />
-            <TextArea fx:id="failureReportTextArea" layoutX="54.0" layoutY="41.0" onKeyTyped="#updateCharcterCounter" prefHeight="200.0" prefWidth="367.0" />
+            <TextArea fx:id="failureReportTextArea" layoutX="54.0" layoutY="41.0" prefHeight="200.0" prefWidth="367.0" />
             <Label fx:id="charcterCounterLabel" layoutX="431.0" layoutY="41.0" text="0 / 600" />
          </children>
       </AnchorPane>
