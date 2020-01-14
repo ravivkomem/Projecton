@@ -26,7 +26,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
+/**
+ * 
+ * @author raviv komem
+ * This class represents the tester boundary
+ * with all the methods and logic implementations
+ * This boundary is used for the tester stage in ICM system
+ */
 public class TesterBoundary implements DataInitializable {
 
 	/* *******************************
@@ -96,8 +102,13 @@ public class TesterBoundary implements DataInitializable {
     private RadioButton test5FailRadioButton;
 
     /* ****************************************
-     * ********** Private Variables ***********
-     * ***************************************/
+     * ********** Static Objects **************
+     * ****************************************/
+    private static final int MAX_CHARS = 600;
+    
+    /* ****************************************
+     * ********** Private Objects *************
+     * ****************************************/
     private TesterController myController = new TesterController(this);
     private final ToggleGroup test1Group = new ToggleGroup();
     private final ToggleGroup test2Group = new ToggleGroup();
@@ -108,11 +119,15 @@ public class TesterBoundary implements DataInitializable {
 	private Step testerStep;
 	private Stage myTimeExtensionStage;
 	private Stage myAnalysisReportStage;
-    private static final int MAX_CHARS = 600;
 	
     /* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
+	/**
+	 * This method is used to log out from the system
+	 * @param event - mouse click on "logout" button
+	 * Logout the user and moves to the login page
+	 */
     @FXML
     void LogOut(MouseEvent event) {
     	closeMyStages();
@@ -120,18 +135,33 @@ public class TesterBoundary implements DataInitializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
+    /**
+	 * This method is used to load the home page
+	 * @param event - mouse click on "Home" button
+	 * Moves the main stage to the login page
+	 */
 	@FXML
     void loadHomePage(MouseEvent event) {
 		closeMyStages();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
 
+	/**
+	 * This method is used to load the previous page
+	 * @param event - mouse click on "Back" button
+	 * Moves the main stage to the previous page
+	 */
     @FXML
     void loadPreviousPage(MouseEvent event) {
     	closeMyStages();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
 
+    /**
+	 * This method is used to open additional page for requesting time extension
+	 * @param event - mouse click on "Time Extension" button
+	 * Another stage is displayed
+	 */
     @FXML
     void loadTimeExtensionPage(MouseEvent event) {
     	if (myTimeExtensionStage == null) {
@@ -145,6 +175,11 @@ public class TesterBoundary implements DataInitializable {
 		}
     }
     
+    /**
+	 * This method is used to open additional page for displaying analysis report
+	 * @param event - mouse click on "Analysis report" button
+	 * Another stage is displayed
+	 */
     @FXML
     void loadAnalysisReport(MouseEvent event) {
     	if (myAnalysisReportStage == null) {
@@ -158,6 +193,11 @@ public class TesterBoundary implements DataInitializable {
 		}
     }
 
+    /**
+	 * This method is used to report the test fail
+	 * @param event - mouse click on "Submit Report Fail" button
+	 * Updates the database accordingly and moves back to the workstation page
+	 */
     @FXML
     void setReportFail(MouseEvent event) {
 		if (failureReportTextArea.getText().equals("")) {
@@ -171,6 +211,14 @@ public class TesterBoundary implements DataInitializable {
     	}
     }
 
+    /**
+	 * This method is used to submit the the test results
+	 * @param event - mouse click on "Submit Test Results" button
+	 * 1. Opens confirmation alert for the submission
+	 * 2. Checks if all fields are filled properly
+	 * 3. If all tests passed ---> Updates the database accordingly and moves back to the workstation page
+	 * else --> Display report fail pane 
+	 */
     @FXML
     void submitTestResults(MouseEvent event) {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -241,6 +289,11 @@ public class TesterBoundary implements DataInitializable {
 	/* *****************************************
      * ********** Public Methods ***************
      * *****************************************/
+    /**
+	 * This method is called by the controller after receiving database update results
+	 * @param affectedRows - number of rows in the database that were affected
+	 * According to the value will display proper message
+	 */
     public void updateTesterPageToDBSuccessfully(int affectedRows) {
     	if(affectedRows == 1) {
     		Toast.makeText(ProjectFX.mainStage, "Updated successfully", 1500, 500, 500);
@@ -249,6 +302,9 @@ public class TesterBoundary implements DataInitializable {
     	}
     }
 
+    /**
+     * Init all the FXML objects in the boundary
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -302,12 +358,22 @@ public class TesterBoundary implements DataInitializable {
 
 	}
 
+	/**
+	 * Expects to be called on the initialize of the boundary
+	 * will receive change request object
+	 */
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
 		myController.getCurrentStep(currentChangeRequest.getChangeRequestID());
 	}
 
+	/**
+	 * Called by the boundary controller,
+	 * After retrieving the proper step from the database of the current change request
+	 * @param recievedStep - Current tester step object
+	 * Allows the work on this page to start
+	 */
 	public void recieveCurrentStep(Step recievedStep) {
 		testerStep = recievedStep;
 		pageHeaderText.setText("Working on change request No."+ currentChangeRequest.getChangeRequestID());
@@ -322,7 +388,9 @@ public class TesterBoundary implements DataInitializable {
 	/* *****************************************
      * ********** Private Methods **************
      * *****************************************/
-	
+	/**
+	 * Method to close all the opened stages from this page
+	 */
 	private void closeMyStages() {
     	if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
@@ -330,6 +398,11 @@ public class TesterBoundary implements DataInitializable {
 			myAnalysisReportStage.close();
 	}
 	
+	/**
+	 * Method to display the time remaining from the estimated end date to current date
+	 * @param estimatedEndDate - Change request estimated end date
+	 * Will display proper text in the time remaining text field
+	 */
 	private void displayTimeRemaining(Date estimatedEndDate) {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
 		if(daysBetween < 0) {
@@ -346,6 +419,15 @@ public class TesterBoundary implements DataInitializable {
 		}
 	}
 	
+	/**
+	 * Method to check if all the tests were conducted
+	 * @param answer1 - Test1 answer
+	 * @param answer2 - Test2 answer
+	 * @param answer3 - Test3 answer
+	 * @param answer4 - Test4 answer
+	 * @param answer5 - Test5 answer
+	 * @return true if all are filled, else false
+	 */
     private boolean isFullyFilled(RadioButton answer1, RadioButton answer2, RadioButton answer3, RadioButton answer4,
 			RadioButton answer5) {
     	if (answer1 == null || answer2 == null || answer3 == null || answer4 == null || answer5 == null)

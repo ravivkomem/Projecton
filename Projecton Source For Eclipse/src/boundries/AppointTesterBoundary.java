@@ -22,6 +22,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author raviv komem
+ * This class represents the appoint tester boundary
+ * with all the methods and logic implementations
+ */
 public class AppointTesterBoundary implements DataInitializable{
 
 	/* **************************
@@ -58,12 +64,23 @@ public class AppointTesterBoundary implements DataInitializable{
     /* **************************
 	 * ****** FXML Methods ******
 	 * **************************/
+    
+    /**
+     * This method closes the appoint tester page
+     * @param event - mouse click on "close" button
+     */
     @FXML
     void closeAppointTesterPage(ActionEvent event) {
     	 Stage stage = (Stage) closeButton.getScene().getWindow();
     	 stage.close();
     }
 
+    /**
+     * Sets the committee member to test the change request
+     * @param event - mouse click on "set" button
+     * If a committee member is selected then he is set
+     * else an alert will be displayed
+     */
     @FXML
     void setCommitteMember(ActionEvent event) {
     	if (committeMembersComboBox.getValue() == null)
@@ -85,6 +102,9 @@ public class AppointTesterBoundary implements DataInitializable{
     /* ****************************
    	 * ****** Public Methods ******
    	 * ****************************/
+    /**
+     * Init all the FXML objects in the boundary
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* Set the table view */
@@ -99,6 +119,10 @@ public class AppointTesterBoundary implements DataInitializable{
 		setButton.setVisible(false);
 	}
 
+	/**
+	 * Expects to be called on the initialize of the boundary
+	 * will receive change request object
+	 */
 	@Override
 	public void initData(Object data) {
 		
@@ -139,6 +163,11 @@ public class AppointTesterBoundary implements DataInitializable{
 		
 	}
 
+	/**
+	 * This method is called by the controller after receiving change request update results
+	 * @param affectedRows - number of rows in the database that were affected
+	 * According to the value will display proper message
+	 */
 	public void recieveChangeRequestUpdateResult(int affectedRows) {
 		
 		if (affectedRows == 1)
@@ -154,6 +183,11 @@ public class AppointTesterBoundary implements DataInitializable{
 		
 	}
 
+	/**
+	 * This method is called by the controller after receiving new tester step update results
+	 * @param affectedRows - number of rows in the database that were affected
+	 * According to the value will display proper message
+	 */
 	public void recieveNewTesterStepResult(int affectedRows) {
 		if (affectedRows == 1)
 		{
@@ -163,7 +197,6 @@ public class AppointTesterBoundary implements DataInitializable{
 		}
 		else
 		{
-			/*TODO: Delete the change request update... */
 			Toast.makeText(ProjectFX.mainStage, "Error with connection to Database, please try again", 1500, 500, 500);
 			committeMembersComboBox.setEditable(true);
 		}
