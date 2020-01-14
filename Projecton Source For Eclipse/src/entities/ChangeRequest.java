@@ -266,13 +266,14 @@ public class ChangeRequest {
 		switch(currentStep)
 		{
 		
-			case "AUTO_ANALYZER_APPOINT":
+			case "ANALYZER_AUTO_APPOINT":
 			case "ANALYSIS_SET_TIME":
 			case "ANALYSIS_APPROVE_TIME":
 			case "ANALYSIS_WORK":
 				actualStep = "Analysis";
 				break;
-				
+			
+			case "EXECUTION_LEADER_SUPERVISOR_APPOINT":
 			case "EXECUTION_SET_TIME":
 			case "EXECUTION_APPROVE_TIME":
 			case "EXECUTION_WORK":
@@ -292,6 +293,7 @@ public class ChangeRequest {
 				break;
 			case "CLOSING_STEP":
 				actualStep = "Closing step";
+				break;
 			case "DENY_STEP":
 				actualStep= "Deny Step";
 				break;
