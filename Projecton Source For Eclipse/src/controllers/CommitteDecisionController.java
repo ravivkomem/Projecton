@@ -129,6 +129,20 @@ public class CommitteDecisionController extends BasicController{
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
+	/**
+	 * this method create sql query that update the time extension if necessary 
+	 * @param stepID
+	 * @param string
+	 */
+	public void updateTimeExtensionDB(int stepID, String stepType) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(stepID);
+		varArray.add(stepType);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_COMMITTEE_STEP_DETAILS,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
