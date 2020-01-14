@@ -127,15 +127,6 @@ public class CommitteDecisionController extends BasicController{
 					break;
 				case SELECT_HANDLER_USER_NAME_BY_SYSTEM:
 					this.unsubscribeFromClientDeliveries();
-//					ArrayList<String> informationEngineers = new ArrayList<String>();
-//					for (ArrayList<Object> informationEngineerRow : result.getResultData())
-//					{
-//						String currEngineer = (String) informationEngineerRow.get(0);
-//						informationEngineers.add(currEngineer);
-//					}
-//					Random rand = new Random();
-//					int randEngineerIndex = rand.nextInt(informationEngineers.size());
-//					String handlerUserName=informationEngineers.get(randEngineerIndex);
 					String handlerUserName=(String)result.getResultData().get(0).get(0);
 					myBoundary.createObjectForUpdateChangeRequestDetails(handlerUserName);
 					break;

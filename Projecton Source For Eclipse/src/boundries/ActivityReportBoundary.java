@@ -183,6 +183,12 @@ public class ActivityReportBoundary implements Initializable {
 		}
 	}
 	
+	/**
+	 * the method gets ArrayList of all the work days
+	 * sorting the days in 4 category 0-10,10-20,20-30,30+ days
+	 * @param workDays
+	 * @return
+	 */
 	public int[] workDaysCalc(ArrayList<Long> workDays) {
 		int[] list = { 0, 0, 0, 0 };
 		for (int i = 0; i < workDays.size(); i++) {
