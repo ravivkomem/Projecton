@@ -62,6 +62,8 @@ public class PerformanceReportController extends BasicController {
 			case SELECT_ALL_DEVIATION_CHANGE_REQUEST:
 				this.unsubscribeFromClientDeliveries();
 				ArrayList<ChangeRequest> deviationChangeRequestList = this.parseSqlResultToChangeRequestList(result);
+				myBoundary.addDeviationChangeRequestsToReport(deviationChangeRequestList);
+				break;
 			default:
 				break;
 			}
@@ -94,6 +96,7 @@ public class PerformanceReportController extends BasicController {
 					changeRequestId, initiatorUserName, startDate, selectedSubsystem,
 					currentStateDescription, desiredChangeDescription, desiredChangeExplanation, desiredChangeComments,
 					status, currentStep, handlerUserName, endDate, email, jobDescription, fullName, estimatedDate);
+			changeRequestList.add(changeRequest);
 			
 		}
 		return changeRequestList;
