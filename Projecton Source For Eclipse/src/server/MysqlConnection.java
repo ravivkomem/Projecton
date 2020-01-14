@@ -519,7 +519,8 @@ public class MysqlConnection {
     			+ "STATUS = 'Active';";
     	sqlArray[SqlQueryType.GET_HIGH_MANGEMENT_MAILS.getCode()] =
     			"SELECT Email From icm.user "
-    			+ "WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD';";
+    			+ "WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEERING_DEPARTMENT_HEAD' "
+    			+ "OR Permission = 'SUPERVISOR_COMMITTEE_DIRECTOR' OR Permission = 'SUPERVISOR_COMMITTEE_MEMBER';";
     	sqlArray[SqlQueryType.GET_USER_FULL_NAME.getCode()] =
     			"SELECT FirstName, LastName From icm.user "
     			+ "WHERE UserName = ?";
