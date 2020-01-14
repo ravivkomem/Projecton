@@ -24,6 +24,11 @@ public class AnalysisReportController extends BasicController {
 		this.myBoundary=myBoundary;
 	}
 	
+	/**
+	 * this method create sql query that ask for the analysis report
+	 * of specific change request
+	 * @param changeRequestId
+	 */
 	public void getAnalysisReportByChangeRequestId(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
@@ -48,6 +53,11 @@ public class AnalysisReportController extends BasicController {
 		return;
 	}
 	
+	/**
+	 * this method create array list of object from the data base result
+	 * @param result
+	 * @return
+	 */
 	private ArrayList<Object> createArrayListFromResult(SqlResult result){
 		ArrayList<Object> resultList = new ArrayList<>();
 		if(!result.getResultData().isEmpty()) {

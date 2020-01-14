@@ -124,6 +124,10 @@ public class TechManagerBoundary implements Initializable{
 	 * ******* FXML Methods *************
 	 * *************************************/
 	
+	/**
+	 * this method load in click on button extra details for the current change request
+	 * @param event
+	 */
     @FXML
     void loadExtraDetailsPage(MouseEvent event) {
     	if(currentChangeRequest == null) {
@@ -136,6 +140,10 @@ public class TechManagerBoundary implements Initializable{
     	}
     }
 	
+    /**
+     * the method load employee page when the user press on employee button
+     * @param event
+     */
     @FXML
     void loadEmployeePage(MouseEvent event) {
 		reportPageAnchorPane.setVisible(false);
@@ -144,16 +152,28 @@ public class TechManagerBoundary implements Initializable{
 		myController.getAllTheEmployee();
     }
 
+    /**
+     * the method will close this page and open the menu page if the user press on home page button
+     * @param event
+     */
     @FXML
     void loadHomePage(MouseEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
 
+    /**
+     * the method will close this page and open the previous page if the user press on back button
+     * @param event
+     */
     @FXML
     void loadPreviousPage(MouseEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
 
+    /**
+     * this method show the report page
+     * @param event
+     */
     @FXML
     void loadReportPage(MouseEvent event) {
     	employeeAnchorPane.setVisible(false);
@@ -161,6 +181,10 @@ public class TechManagerBoundary implements Initializable{
 		reportPageAnchorPane.setVisible(true);
     }
 
+    /**
+     * this method show request list page when the user click on request list button
+     * @param event
+     */
     @FXML
     void loadRequestListPage(MouseEvent event) {
     	employeeAnchorPane.setVisible(false);
@@ -169,6 +193,10 @@ public class TechManagerBoundary implements Initializable{
 		myController.getAllTheActiveChangeRequest();
     }
 
+    /**
+     * this method open the specific report that the user choose in the comboBox
+     * @param event
+     */
     @FXML
     void loadSpecificReport(MouseEvent event) {
     	if (reportTypeComboBox.getSelectionModel().isEmpty()) {
@@ -191,6 +219,10 @@ public class TechManagerBoundary implements Initializable{
 		}
     }
 
+    /**
+     * this method open new window for the employee permission page
+     * @param event
+     */
     @FXML
     void loagViewPermissionsPage(MouseEvent event) {
     	ArrayList<ArrayList<Object>> dataList = new ArrayList<ArrayList<Object>>();
@@ -221,6 +253,11 @@ public class TechManagerBoundary implements Initializable{
 	 * ******* Public Methods *************
 	 * *************************************/
     
+    /**
+     * the method gets new employee user and replace the user in the same old user
+     * the method search the new user in the user list as per user name
+     * @param employeeNewUser
+     */
     public void setEmployeeListChanges(User employeeNewUser) {
     	employeeUser = employeeNewUser;
     	for(int i=0;i<users.size();i++) {
@@ -292,6 +329,10 @@ public class TechManagerBoundary implements Initializable{
 		myController.getAllTheActiveChangeRequest();
 	}
 	
+	/**
+	 * the method gets change request list and display the list in the change request table
+	 * @param resultList
+	 */
 	public void displayChangeRequestTable(ArrayList<ChangeRequest> resultList) {
 		requestList.clear();
 		if (!resultList.isEmpty()) {
@@ -300,6 +341,10 @@ public class TechManagerBoundary implements Initializable{
 		}
 	}
 	
+	/**
+	 * the method gets users list and display the list in the employee table
+	 * @param resultList
+	 */
 	public void displayAllTheEmployeesTable(ArrayList<User> resultList) {
 		employeeList.clear();
 		if (!resultList.isEmpty()) {
@@ -309,6 +354,10 @@ public class TechManagerBoundary implements Initializable{
 		}
 	}
 
+	/**
+	 * this method gets subsystem supporter list and display the list in the subsystem table
+	 * @param resultList
+	 */
 	public void displaySubsystemTable(ArrayList<SubsystemSupporter> resultList) {
 		subsystemList.clear();
 		if (!resultList.isEmpty()) {

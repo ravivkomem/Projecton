@@ -30,7 +30,11 @@ public class CommitteDecisionController extends BasicController{
 	public CommitteDecisionController(CommitteeDecisionBoundary myBoundary){
 		this.myBoundary=myBoundary;
 	}
-	
+	/**
+	 * this method create sql query that ask from the data base committee comments
+	 * @param id
+	 * @param stepId
+	 */
 	public void getCommentsByChangeRequestId(int id, int stepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(id);
@@ -40,6 +44,11 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query that insert to the data base comment
+	 * @param newComment
+	 * @param stepId
+	 */
 	public void insertNewCommentToDB(CommitteeComment newComment, Integer stepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(newComment.getRequestId());
@@ -127,15 +136,6 @@ public class CommitteDecisionController extends BasicController{
 					break;
 				case SELECT_HANDLER_USER_NAME_BY_SYSTEM:
 					this.unsubscribeFromClientDeliveries();
-//					ArrayList<String> informationEngineers = new ArrayList<String>();
-//					for (ArrayList<Object> informationEngineerRow : result.getResultData())
-//					{
-//						String currEngineer = (String) informationEngineerRow.get(0);
-//						informationEngineers.add(currEngineer);
-//					}
-//					Random rand = new Random();
-//					int randEngineerIndex = rand.nextInt(informationEngineers.size());
-//					String handlerUserName=informationEngineers.get(randEngineerIndex);
 					String handlerUserName=(String)result.getResultData().get(0).get(0);
 					myBoundary.createObjectForUpdateChangeRequestDetails(handlerUserName);
 					break;

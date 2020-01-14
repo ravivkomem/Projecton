@@ -25,6 +25,12 @@ public class ActivityReportController extends BasicController{
 		this.myBoundary = myBoundary;
 	}
 
+	/**
+	 * the method create sql query with the start and end date and
+	 * gets from the data base all the change request between those dates
+	 * @param start
+	 * @param end
+	 */
 	public void getAllChangeRequest(Date start,Date end) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		varArray.add(start);
@@ -50,6 +56,11 @@ public class ActivityReportController extends BasicController{
 		return;
 	}
 	
+	/**
+	 * this method gets the result from the data base and create array list of change request
+	 * @param result
+	 * @return
+	 */
 	private ArrayList<ChangeRequest> createChangeRequestList(SqlResult result){
 		ArrayList<ChangeRequest> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {

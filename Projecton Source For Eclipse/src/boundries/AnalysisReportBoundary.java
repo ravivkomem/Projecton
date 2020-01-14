@@ -67,6 +67,11 @@ public class AnalysisReportBoundary implements DataInitializable{
 		constraintsTextArea.setWrapText(true);;
 	}
     
+	/**
+	 * this method gets array list with all the report details
+	 * the method display the report on the page
+	 * @param resultList
+	 */
     public void displayAnalysisReport(ArrayList<Object> resultList) {
     	if(resultList==null) {
     		Toast.makeText(ProjectFX.mainStage, "Could not load analysis report", 1500, 500, 500);
