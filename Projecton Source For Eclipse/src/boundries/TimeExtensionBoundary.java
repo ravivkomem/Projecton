@@ -20,9 +20,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 
+/**
+ * 
+ * @author raviv komem
+ * This class represents the time extension boundary
+ * with all the methods and logic implementations
+ * can be opened from all the change request steps
+ */
 public class TimeExtensionBoundary implements DataInitializable  {
 
 	/* *************************************
@@ -52,28 +58,39 @@ public class TimeExtensionBoundary implements DataInitializable  {
     /*Image View */
     @FXML
     private ImageView loadingGif;
-
     /* *************************************
-	 * ******* Private Variables ***********
+	 * ******** Static Objects *************
+	 * *************************************/
+    private static final int MAX_CHARS = 140; 
+    
+    /* *************************************
+	 * ******* Private Objects *************
 	 * *************************************/
     private Alert alert = new Alert(AlertType.NONE);
     private Step myStep;
     private TimeExtensionController myController = new TimeExtensionController(this);
-    private static final int MAX_CHARS = 140; 
     
 	/* *************************************
 	 * ********* FXML Methods **************
 	 * *************************************/
+    /**
+     * This method is used to close the page
+     * @param event - mouse click on "Close" button
+     * Result = the page is closed
+     */
     @FXML
     void closeTimeExtensionPage(ActionEvent event) {
     	closeTimeExtensionButton.getScene().getWindow().hide();
     }
-
-    @FXML
-    void updateReasonCharsLabel(KeyEvent event) {
-    	reasonCharsLabel.setText(reasonTextArea.getText().length()+"/"+MAX_CHARS);
-    }
     
+    /**
+     * This method is used to submit the time extension request
+     * @param event - mouse click on "Submit Form" button
+     * Result:
+     * 1. Checks if all the fields are filled properly
+     * If not display proper error message
+     * 2. Updates the database accordingly and close the page
+     */
     @FXML
     void submitTimeExtensionRequest(ActionEvent event) {
     	
@@ -121,7 +138,12 @@ public class TimeExtensionBoundary implements DataInitializable  {
     /* *************************************
 	 * ********* Public Methods ************
 	 * *************************************/
-    
+    /**
+     * Get the number of affected rows from the controller
+     * @param affectedRows - database rows affected by the update
+     * If it is 1 ---> correct behaviour, display success
+     * else ---> display fail
+     */
     public void recieveSubmissionAnswer(int affectedRows)
     {
     	if (affectedRows == 1)
@@ -149,6 +171,12 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	
     }
     
+    /**
+     * Checks if there is already an open time extension
+     * @param timeExtensionCounter - How many are time extension were requested for this step
+     * If the value is greater than a hard coded value than close the page and display proper error
+     * else allow the page to be displayed
+     */
     public void recieveTimeExtensionCounter(long timeExtensionCounter)
     {
     	/* Story request - for every step you can submit only one time extension request */
@@ -177,6 +205,9 @@ public class TimeExtensionBoundary implements DataInitializable  {
     	}
     }
     
+    /**
+     * Initialize all the fxml objects
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* Setup assignments */
@@ -185,10 +216,6 @@ public class TimeExtensionBoundary implements DataInitializable  {
 		reasonTextArea.setWrapText(true);
 		datePicker.setEditable(false);
 		reasonCharsLabel.setText("0/"+MAX_CHARS);
-		
-		reasonTextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		
 		
 		/*Visibility changes */
 		submitTimeExtensionButton.setVisible(false);
@@ -200,8 +227,29 @@ public class TimeExtensionBoundary implements DataInitializable  {
 		currentEndDateTextField.setVisible(false);
 		
 		loadingGif.setVisible(true);
+		
+		reasonTextArea.setTextFormatter(new TextFormatter<String>(change -> 
+		{
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_CHARS)
+			{
+				reasonCharsLabel.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHARS));
+				return change;
+			}
+			else
+			{
+				return null;
+			}
+		}));
 	}
 
+	/**
+	 * Receive object for the page initialize
+	 * Expects to be called once while loading the page
+	 * @param data = Step type object
+	 * Tries to cast the object and start all the page work
+	 * else - closes the page
+	 */
 	@Override
 	public void initData(Object data) {
 		
