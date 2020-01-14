@@ -206,6 +206,7 @@ public class TesterBoundary implements DataInitializable {
 			myController.closeChangeRequestStep(testerStep.getStepID(), failureReportTextArea.getText());
 			myController.advanceChangeRequestStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT",
 					currentChangeRequest.getChangeRequestID());
+			myController.automaticCloseNewTimeExtension(testerStep);
 			closeMyStages();
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     	}
@@ -279,6 +280,7 @@ public class TesterBoundary implements DataInitializable {
     		{
     			myController.closeChangeRequestStep(testerStep.getStepID(), "");
 				myController.advanceChangeRequestStep("CLOSING_STEP",currentChangeRequest.getChangeRequestID());
+				myController.automaticCloseNewTimeExtension(testerStep);
 				closeMyStages();
 				ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     		}
@@ -331,7 +333,7 @@ public class TesterBoundary implements DataInitializable {
 		test5PassRadioButton.setToggleGroup(test5Group);
 		test5FailRadioButton.setToggleGroup(test5Group);
 		
-		/* Change editiable */
+		/* Change editable */
 		timeremainingField.setEditable(false);
 		failureReportTextArea.setWrapText(true);
 		
@@ -339,13 +341,13 @@ public class TesterBoundary implements DataInitializable {
 		analysisreportButton.setDisable(true);
 		timeExtensionButton.setDisable(true);
 	
-		/* Limit charcters in the failure report text area */
+		/* Limit characters in the failure report text area */
 		failureReportTextArea.setTextFormatter(new TextFormatter<String>(change -> 
 		{
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_CHARS)
 			{
-				charcterCounterLabel.setText(Integer.toString(changeLength) + " / " + Integer.toString(MAX_CHARS));
+				charcterCounterLabel.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHARS));
 				return change;
 			}
 			else

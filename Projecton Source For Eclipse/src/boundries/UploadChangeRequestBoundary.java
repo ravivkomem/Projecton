@@ -26,7 +26,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -67,8 +66,6 @@ public class UploadChangeRequestBoundary implements Initializable {
     @FXML
     private TextArea commentField;
     @FXML
-    private TextField uploadedFileNameField;
-    @FXML
     private ListView<MyFile> filesListView;
     @FXML
     private Label fileQuantityLabel;
@@ -105,15 +102,9 @@ public class UploadChangeRequestBoundary implements Initializable {
     	List<File> selectedFiles = fileChooser.showOpenMultipleDialog(ProjectFX.mainStage);
     	if (selectedFiles != null && !selectedFiles.isEmpty())
     	{
-    		String filesStr = "";
     		for (int i = 0; i < selectedFiles.size(); i++)
     		{
     			File file = selectedFiles.get(i);
-    			filesStr += file.getPath();
-    			if (i != (selectedFiles.size() -1))
-    			{
-    				filesStr += "; ";
-    			}
     			if (listViewData.size() < FILE_QUANTITY_LIMIT)
     			{
     				listViewData.add(MyFile.parseToMyFile(file.getPath()));
@@ -126,7 +117,6 @@ public class UploadChangeRequestBoundary implements Initializable {
     			}
     			
     		}
-    		uploadedFileNameField.setText(filesStr);
     	}
     }
     /**
@@ -208,7 +198,6 @@ public class UploadChangeRequestBoundary implements Initializable {
     		reasonTA.setText("");
     		changeRequestDescriptionField.setText("");
     		currentStateDescriptionField.setText("");
-    		uploadedFileNameField.setText("");
     		subSystemComboBox.setPromptText("-sub systems-");
     		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
     	}	
@@ -247,8 +236,6 @@ public class UploadChangeRequestBoundary implements Initializable {
 	@Override
 	/*initialize the combo box in this gui page  */
 	public void initialize(URL location, ResourceBundle resources) {
-		uploadedFileNameField.setEditable(false);
-		
 		subSystemComboBox.getItems().add("Lecturer Information Station");
 		subSystemComboBox.getItems().add("Student Information Station");
 		subSystemComboBox.getItems().add("Employee Information Station");
