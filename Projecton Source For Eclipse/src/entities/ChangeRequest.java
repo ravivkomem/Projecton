@@ -44,6 +44,7 @@ public class ChangeRequest {
 		this.endDate = endDate;
 		this.fullName = fullName;
 		this.estimatedEndDate = estimatedEndDate;
+		actualStep=getActutalStepByCurrentStep(currentStep);
 	}
 
 
@@ -65,6 +66,7 @@ public class ChangeRequest {
 		this.handlerUserName = handlerUserName;
 		this.fullName = fullName;
 		this.estimatedEndDate = estimatedEndDate;
+		actualStep=getActutalStepByCurrentStep(currentStep);
 	}
 
 

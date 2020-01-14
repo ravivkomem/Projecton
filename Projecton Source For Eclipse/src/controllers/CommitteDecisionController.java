@@ -60,6 +60,13 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query and update the committee step table in the data base
+	 * @param status
+	 * @param date
+	 * @param denyComment
+	 * @param changeRequestID
+	 */
 	public void updateCommitteeStepDB(String status,Date date,String denyComment, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(status);
@@ -71,6 +78,12 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query and update the change request table in the data base
+	 * @param currentStep
+	 * @param HamdlerUserName
+	 * @param changeRequestID
+	 */
 	public void updateChangeRequestCurrentStep(String currentStep, String HamdlerUserName, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(currentStep);
@@ -81,6 +94,12 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query that insert new row in the closing step data base table
+	 * @param changeRequestID
+	 * @param StartStepDate
+	 * @param Status
+	 */
 	public void insertToClosingStepDbTable(Integer changeRequestID, Date StartStepDate, String Status) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestID);
@@ -99,6 +118,10 @@ public class CommitteDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 *  this method create query that ask for committee step from the data base
+	 * @param changeRequestId
+	 */
 	public void getCommitteeStepDetails(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
@@ -160,6 +183,11 @@ public class CommitteDecisionController extends BasicController{
 		
 	}
 	
+	/**
+	 * this method create array list of committee comment object from the data base result
+	 * @param result
+	 * @return
+	 */
 	private ArrayList<CommitteeComment> changeResultToCommitteeComment(SqlResult result){
 		ArrayList<CommitteeComment> resultList=new ArrayList<>();
 		for(ArrayList<Object> a: result.getResultData()) {
@@ -170,7 +198,10 @@ public class CommitteDecisionController extends BasicController{
 		return resultList;
 	}
 
-	/*execute the select all information engineers query */
+	/**
+	 * 
+	 * @param subsystem
+	 */
 	public void chooseAutomaticallyAnalyzer(String subsystem){
 		ArrayList<Object> dataList=new ArrayList<>();
 		dataList.add(subsystem);
