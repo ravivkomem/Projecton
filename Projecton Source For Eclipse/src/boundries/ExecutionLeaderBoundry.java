@@ -122,8 +122,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// myChangerequest=new ChangeRequest(2,"lee", "Moodle", "Bad","good", "active",
-		// "itay");
+	
 		txtWaitingForTomeApprovalPopUp.setVisible(false);
 		btnCommitExecution.setVisible(false);
 		btnRefresh.setVisible(false);
@@ -138,7 +137,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		txtDetailsWorkedOn.setVisible(false);
 		flag = 0;
 
-		// txtChangeRequestDetails.setText(myChangerequest.getChangeRequestDescription());
+		
 	}
 
 	public void setflag() {
@@ -154,7 +153,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		{
 		Date date = Date.valueOf(txtTimeForExecution.getValue());
 		if (TimeManager.getDaysBetween(date, TimeManager.getCurrentDate()) > 0) {
-			Toast.makeText(ProjectFX.mainStage, "Not Good date", 1500, 500, 500);
+			Toast.makeText(ProjectFX.mainStage, "Invalid date, please select a date again", 1500, 500, 500);
 		} else {
 			long count = 0;
 
@@ -354,6 +353,20 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	public void ErrorInLoadingExecutionPage() {
 		Toast.makeText(ProjectFX.mainStage, "Problam in loading this changetequest", 1500, 500, 500);
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
+	}
+
+	public void chooseAgainTimeForExecution()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve your estimated time, please choose another date", 1500, 500, 500);
+		txtTimeForExecution.setVisible(true);
+		txtBuildEnterTimeRequiredForExecution.setVisible(true);
+		btnSubmitForTimeRequiredForExecution.setVisible(true);
+		txtWaitingForTomeApprovalPopUp.setVisible(false);
+		txtTimeForExecution.setValue(null);
+		txtRefresh.setVisible(false);
+		btnRefresh.setVisible(false);
+		
+		
 	}
 
 }

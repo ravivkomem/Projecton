@@ -47,12 +47,19 @@ public class ExecutionLeaderController extends BasicController {
 					myBoundry.ShowCommitButton();
 					myBoundry.setflag();
 					this.unsubscribeFromClientDeliveries();
+					break;
+					}
+					else if(currentStep.equals("EXECUTION_SET_TIME"))
+					{
+						myBoundry.chooseAgainTimeForExecution();
+						break;
+						
 					}
 					else
 					{
 						myBoundry.SupervisorDidNotAproveYet();
+						break;
 					}
-					break;
 				case SELECT_ESTIMATED_DATE_MINUS_START_DATE:
 					Date estimatedDate = (Date)(result.getResultData().get(0).get(0));
 					myBoundry.ShowEstimatedDateMinusStartDate(estimatedDate);
@@ -71,12 +78,14 @@ public class ExecutionLeaderController extends BasicController {
 					if(result.getResultData().get(0)==null)
 					{
 						myBoundry.ErrorInLoadingExecutionPage();
+						break;
 					}
 					Step executionStep=new Step(StepType.EXECUTION,(Integer)result.getResultData().get(0).get(0),(Integer) result.getResultData().get(0).get(1),(String) result.getResultData().get(0).get(2),
 							(Date) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(3),
 							(Date) result.getResultData().get(0).get(5), (Date)result.getResultData().get(0).get(6));
 					myBoundry.SetStep(executionStep);
 					this.unsubscribeFromClientDeliveries();
+					break;
 					
 				default:
 					break;
