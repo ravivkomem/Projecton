@@ -27,7 +27,11 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * 
+ * @author Itay David
+ *
+ */
 public class SupervisorBoundary implements Initializable,DataInitializable {
 
     @FXML
@@ -174,7 +178,9 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 	}
 
 	
-	
+	/**
+	 * This method initialize all GUI
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
@@ -410,7 +416,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param employees
+	 * This method set the employees into the combo box
+	 */
 	public void SetComboBox2(ArrayList<String> employees)
 	{
 		for(int i=0;i<employees.size();i++)
@@ -422,7 +432,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 	}
 
 	
-	
+	/**
+	 * 
+	 * @param event
+	 * This method handle click on appointment in menu
+	 */
     @FXML
     void ClickAppointmentFunction(MouseEvent event) 
     {
@@ -436,7 +450,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }
 
     
-    
+    /**
+	 * 
+	 * @param event
+	 * This method handle click on approval in menu
+	 */
     @FXML
     void ClickApprovalFunction(MouseEvent event)
     {
@@ -450,7 +468,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }
 
     
-    
+    /**
+	 * 
+	 * @param event
+	 * This method handle click on back in menu
+	 */
     @FXML
     void ClickBackFunction(MouseEvent event)
     {
@@ -462,7 +484,9 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     	
     }
-    
+    /**
+     * This method set combo box 
+     */
     void setComboBoxUsers1()
     {
     	myController.setComboBox();
@@ -470,7 +494,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
 
     
-    
+    /**
+	 * 
+	 * @param event
+	 * This method handle click on closing step in menu
+	 */
     @FXML
     void ClickClosingStepFunction(MouseEvent event)
     {
@@ -485,7 +513,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }
     
     
-
+    /**
+   	 * 
+   	 * @param event
+   	 * This method handle click on home page in menu
+   	 */
     @FXML
     void ClickHomePageFunction(MouseEvent event)       // Return to home page
     {
@@ -498,7 +530,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }
     
     
-
+    /**
+   	 * 
+   	 * @param event
+   	 * This method handle click on log out 
+   	 */
     @FXML
     void ClickLogOutFunction(MouseEvent event)    // Log Out from supervisor page
     {
@@ -513,7 +549,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
 
     
-    
+    /**
+   	 * 
+   	 * @param event
+   	 * This method handle click on request list in menu
+   	 */
     @FXML
     void ClickRequestListFunction(MouseEvent event)
     {
@@ -529,7 +569,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
     
     
-
+/**
+ * 
+ * @param resultList
+ * This method insert all change request into the table 
+ */
 	public void handleChangerequestResultForTable(ArrayList<ChangeRequest> resultList)     // set all change requests in the table
 	{
 		
@@ -543,7 +587,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 	}
 	
 	
-
+	 /**
+		 * 
+		 * @param event
+		 * This method handle click on extra details
+		 */
     @FXML
     void clickOnExstraDetails(MouseEvent event)
     {
@@ -567,7 +615,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	
     }
     
-    
+    /**
+     * 
+     * @param event
+     * This method update DB when click on approve appointment of analyzer
+     */
     @FXML
     void clickOnApproveAppointment(MouseEvent event)
     {
@@ -594,7 +646,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	
     }
 
-    
+    /**
+     * 
+     * @param event
+     * This method update DB when click on deny appointment of analyzer
+     */
     @FXML
     void clickOnDenyAppointment(MouseEvent event)
     {
@@ -616,7 +672,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
     
     
-
+    /**
+     * 
+     * @param event
+     * This method update DB when click on set analyzer
+     */
     @FXML
     void clickOnSetAnalyzer(MouseEvent event)
     {
@@ -664,12 +724,16 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
     
     
-
+    /**
+     * 
+     * @param event
+     * This method update DB when click on close request
+     */
     @FXML
     void clickOnCloseRequest(MouseEvent event)
     {
 
-    	myController.setStatusToClosed("CLOSED","FINISH",myChangerequest.getChangeRequestID());
+    	myController.setStatusToClosed(updateStepDate,"CLOSED","FINISH",myChangerequest.getChangeRequestID());
     	myController.setEndDate(updateStepDate,"CLOSED",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForClose();
     	txtTextExplantion.setVisible(false);
@@ -694,7 +758,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
 
 	
-	
+    /**
+     * 
+     * @param event
+     * This method update DB when click on set execution leader
+     */
 	  @FXML
 	void clickOnSetExecutionLeader(MouseEvent event)
 	{
@@ -733,7 +801,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 
 
 	
-
+	/**
+	* 
+	* @param event
+	* This method update DB when click on deny execution leader
+	*/
     @FXML
     void clickOnDenyAnalysisTime(MouseEvent event)
     {
@@ -760,7 +832,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	
     }
     
-    
+    /**
+     * 
+     * @param event
+     * This method update DB when click on approve analysis time
+     */
     @FXML
     void clickOnApproveAnalysisTime(MouseEvent event)
     {
@@ -787,7 +863,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }
 	
 	
-
+    /**
+     * 
+     * @param event
+     * This method update DB when click on approve execution time
+     */
     @FXML
     void clickOnApproveExecutionTime(MouseEvent event)
     {
@@ -814,6 +894,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     	
     }
     
+    /**
+     * 
+     * @param event
+     * This method update DB when click on deny execution time
+     */
     @FXML
     void clickOnDenyExecutionTime(MouseEvent event)
     {
@@ -840,7 +925,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     }  
     
     
-    
+    /**
+     * 
+     * @param res
+     * This method get execution end date
+     */
 	public void getExecutionEndDate(Date res)
 	{
 		res = TimeManager.addDays(res, 1);
@@ -849,7 +938,11 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
 	}
 
 
-
+	/**
+	 * 
+	 * @param res2
+	 * This method get analysis end date
+	 */
 	public void getAnalysisEndDate(Date res2)
 	{
 		res2 = TimeManager.addDays(res2, 1);
@@ -859,7 +952,9 @@ public class SupervisorBoundary implements Initializable,DataInitializable {
     
     
     
-    
+    /**
+     * This method set all gui into invisible
+     */
     public void setVisabilityValse()
 	{
     	 txtAnalysisEstimatedTime.setVisible(false);

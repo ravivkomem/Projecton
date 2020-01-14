@@ -94,11 +94,15 @@ public class EchoServer extends AbstractServer
 			 /* Create my file from path */
 			 if (!sqlResult.getResultData().isEmpty())
 			 {
-				 String fileName = ((Integer)sqlResult.getResultData().get(0).get(0)).toString();
-				 String fileExtension = (String)sqlResult.getResultData().get(0).get(1);
-				 String path = FILLE_DIRECTORY+fileName+"."+fileExtension;
-				 MyFile myFile = MyFile.parseToMyFile(path);
-				 newResultData.add(myFile);
+				 for(ArrayList<Object> resultRow : sqlResult.getResultData())
+				 {
+					 String fileName = ((Integer)resultRow.get(0)).toString();
+					 String fileExtension = (String)resultRow.get(1);
+					 String path = FILLE_DIRECTORY+fileName+"."+fileExtension;
+					 MyFile myFile = MyFile.parseToMyFile(path);
+					 newResultData.add(myFile);
+				 }
+				 
 			 }
 			 sqlResult.setResultData(newResultData);
 			

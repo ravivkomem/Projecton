@@ -16,11 +16,7 @@ public class MyFile implements Serializable {
 	public void initArray(int size) {
 		mybytearray = new byte[size];
 	}
-
-	public MyFile(String fileName) {
-		this.fileName = fileName;
-	}
-
+	
 	public String getFileName() {
 		return fileName;
 	}
@@ -60,12 +56,13 @@ public class MyFile implements Serializable {
 	}
 
 	public static MyFile parseToMyFile(String path) {
-		MyFile myFile = new MyFile(path);
+		MyFile myFile = new MyFile();
 		String LocalfilePath = path;
 		try {
 
 			File newFile = new File(LocalfilePath);
-
+			myFile.setFileName(newFile.getName());
+			
 			byte[] mybytearray = new byte[(int) newFile.length()];
 			FileInputStream fis = new FileInputStream(newFile);
 			BufferedInputStream bis = new BufferedInputStream(fis);
@@ -74,7 +71,10 @@ public class MyFile implements Serializable {
 			myFile.setSize(mybytearray.length);
 
 			bis.read(myFile.getMybytearray(), 0, mybytearray.length);
-			//sendToServer(msg);
+			
+			bis.close();
+			fis.close();
+			
 		} catch (Exception e) {
 			System.out.println("Error send (Files)msg) to Server");
 		}

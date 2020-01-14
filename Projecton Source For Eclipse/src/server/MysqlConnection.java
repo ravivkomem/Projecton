@@ -477,7 +477,7 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE.getCode()] = "UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
     	
-    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ?, CurrentStep  = ?  WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED.getCode()] = "UPDATE icm.change_request SET Status  = ?, CurrentStep  = ?, EndDate = ?  WHERE ChangeRequestID = ?";
     	
     	sqlArray[SqlQueryType.SELECT_EXECUTION_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step" +
