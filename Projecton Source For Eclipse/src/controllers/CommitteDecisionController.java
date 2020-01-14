@@ -199,7 +199,7 @@ public class CommitteDecisionController extends BasicController{
 	}
 
 	/**
-	 * 
+	 * this method create sql query that ask for subsystem supporter user
 	 * @param subsystem
 	 */
 	public void chooseAutomaticallyAnalyzer(String subsystem){

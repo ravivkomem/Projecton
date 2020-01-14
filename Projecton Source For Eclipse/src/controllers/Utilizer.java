@@ -11,6 +11,11 @@ import java.util.Collections;
  */
 public class Utilizer {
 	
+	/**
+	 * this method calculate the median
+	 * @param list
+	 * @return
+	 */
 	public static double calcMedian(ArrayList<Long> list) {
 		Collections.sort(list);
 		double median;
@@ -21,6 +26,11 @@ public class Utilizer {
 		return median;	
 	}
 	
+	/**
+	 * this method calculate the standard deviation
+	 * @param list
+	 * @return
+	 */
 	public static double calcStd(ArrayList<Long> list) {
 		double avg = calcAvg(list);
 		double sum = 0;
@@ -30,6 +40,11 @@ public class Utilizer {
 		return (double)Math.sqrt((1.0/list.size())*sum);
 	}
 	
+	/**
+	 * this method calculate the average
+	 * @param list
+	 * @return
+	 */
 	public static double calcAvg(ArrayList<Long> list) {
 		long sum=0;
 		for (int i = 0; i < list.size(); i++) {
