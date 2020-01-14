@@ -104,7 +104,7 @@ public class TechManagerController extends BasicController {
 		for(ArrayList<Object> a: result.getResultData()) {
 			ChangeRequest changeRequest=new ChangeRequest((Integer)a.get(0), (String)a.get(1), (Date)a.get(2), (String)a.get(3),
 					(String)a.get(4), (String)a.get(5), (String)a.get(6),(String)a.get(7), (String)a.get(8),
-					(String)a.get(9), (String)a.get(10), (Date)a.get(11),(String)a.get(15),(Date)a.get(16));
+					(String)a.get(9), (String)a.get(10), (Date)a.get(11),(String)a.get(14),(Date)a.get(15));
 			resultList.add(changeRequest);
 		}
 		return resultList;
