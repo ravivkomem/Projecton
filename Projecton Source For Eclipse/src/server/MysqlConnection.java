@@ -284,8 +284,8 @@ public class MysqlConnection {
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
 		 * *****************************************************/
-    	sqlArray[SqlQueryType.SELECT_ALL_ACTIVE_CHANGE_REQUESTS.getCode()]=
-    			"SELECT * FROM icm.change_request WHERE Status = 'Active'";
+    	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
+    			"SELECT * FROM icm.change_request";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE.getCode()]=
     			"SELECT * FROM icm.change_request WHERE StartDate BETWEEN ? AND ?";
     	sqlArray[SqlQueryType.SELECT_ALL_EMPLOYEE.getCode()] = 
@@ -435,9 +435,8 @@ public class MysqlConnection {
 						" WHERE CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME'";
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_CLOSE.getCode()] = 
-				"SELECT * FROM icm.change_request" +
-						" WHERE CurrentStep = 'CLOSING_STEP' OR CurrentStep = 'DENY_STEP'";//add AND 'DENY_STEP'
-    	
+				"SELECT * FROM icm.change_request WHERE Status = 'ACTIVE' AND (CurrentStep = 'CLOSING_STEP' OR CurrentStep = 'DENY_STEP')";
+
     	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT.getCode()] =
     			"UPDATE icm.change_request SET CurrentStep  = ? WHERE ChangeRequestID = ?";
     			
