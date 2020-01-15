@@ -15,10 +15,22 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServerApp.
+ */
 public class ServerApp extends Application {
+	
+	/** The newargs. */
 	public static String[] newargs;
+	
+	/** The sql connection. */
 	private MysqlConnection sqlConnection = new MysqlConnection();
 
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -58,12 +70,20 @@ public class ServerApp extends Application {
 
 	}
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		newargs=args;
 		initTimeWatcher();
 		launch(args);
 	}
 
+	/**
+	 * Inits the time watcher.
+	 */
 	private static void initTimeWatcher() {
 		Thread t = new Thread(new TimeWatcher());
 		t.start();

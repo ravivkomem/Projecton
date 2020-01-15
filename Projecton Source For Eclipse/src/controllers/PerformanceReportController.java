@@ -13,15 +13,31 @@ import entities.TimeExtension;
 import boundries.PerformanceReportBoundary;
 import javafx.application.Platform;
 
+/**
+ * The Class PerformanceReportController.
+ *
+ * @author Raviv Komem
+ */
 @SuppressWarnings("serial")
 public class PerformanceReportController extends BasicController {
 
+	/** The my boundary. */
 	private PerformanceReportBoundary myBoundary;
 	
+	/**
+	 * Instantiates a new performance report controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public PerformanceReportController(PerformanceReportBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
 	
+	/**
+	 * Gets the all extension requests from server.
+	 *
+	 * @return the all extension requests from server
+	 */
 	public void getAllExtensionRequestsFromServer()
 	{
 		/*Creating Sql Action*/
@@ -30,6 +46,11 @@ public class PerformanceReportController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Gets the all repeating steps from server.
+	 *
+	 * @return the all repeating steps from server
+	 */
 	public void getAllRepeatingStepsFromServer() {
 		/*Creating Sql Action*/
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -37,6 +58,11 @@ public class PerformanceReportController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Gets the all change requests with deviations.
+	 *
+	 * @return the all change requests with deviations
+	 */
 	public void getAllChangeRequestsWithDeviations() {
 		/*Creating Sql Action*/
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -44,6 +70,9 @@ public class PerformanceReportController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -71,6 +100,12 @@ public class PerformanceReportController extends BasicController {
 		return;
 	}
 
+	/**
+	 * Parses the sql result to change request list.
+	 *
+	 * @param result the result
+	 * @return the array list
+	 */
 	private ArrayList<ChangeRequest> parseSqlResultToChangeRequestList(SqlResult result) {
 		ArrayList<ChangeRequest> changeRequestList = new ArrayList<ChangeRequest>();
 		for (ArrayList<Object> resultRow : result.getResultData())
@@ -102,6 +137,12 @@ public class PerformanceReportController extends BasicController {
 		return changeRequestList;
 	}
 
+	/**
+	 * Parses the sql result to step list.
+	 *
+	 * @param result the result
+	 * @return the array list
+	 */
 	private ArrayList<Step> parseSqlResultToStepList(SqlResult result) {
 		ArrayList<Step> stepList = new ArrayList<Step>();
 		for (ArrayList<Object> resultRow : result.getResultData())
@@ -129,6 +170,12 @@ public class PerformanceReportController extends BasicController {
 		return stepList;
 	}
 
+	/**
+	 * Parses the sql result to time extension list.
+	 *
+	 * @param result the result
+	 * @return the array list
+	 */
 	private ArrayList<TimeExtension> parseSqlResultToTimeExtensionList(SqlResult result) {
 		ArrayList<TimeExtension> timeExtensionList = new ArrayList<TimeExtension>();
 		for (ArrayList<Object> resultRow : result.getResultData())

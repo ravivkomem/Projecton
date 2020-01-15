@@ -16,9 +16,20 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
+/**
+ * The Class PagingController.
+ *
+ * @author Raviv Komem
+ */
 @SuppressWarnings("serial")
 public class PagingController extends BasicController {
 	
+	/**
+	 * Load boundary.
+	 *
+	 * @param path the path
+	 */
+	@SuppressWarnings("static-access")
 	public void loadBoundary (String path)
 	{
 		FXMLLoader loader = new FXMLLoader();
@@ -29,12 +40,16 @@ public class PagingController extends BasicController {
 			ProjectFX.mainStage.setScene(scene);		
 			ProjectFX.mainStage.show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	/*TODO: Check if the boundary is indeed DataInitializable */
+	/**
+	 * Load boundary.
+	 *
+	 * @param path the path
+	 * @param obj the obj
+	 */
 	public void loadBoundary (String path, Object obj)
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -52,6 +67,12 @@ public class PagingController extends BasicController {
 		}
 	}
 	
+	/**
+	 * Load additional stage.
+	 *
+	 * @param path the path
+	 * @return the stage
+	 */
 	public Stage loadAdditionalStage(String path)
 	{
 		Stage stage = null;
@@ -68,6 +89,13 @@ public class PagingController extends BasicController {
 		return stage;
 	}
 	
+	/**
+	 * Load additional stage.
+	 *
+	 * @param path the path
+	 * @param data the data
+	 * @return the stage
+	 */
 	public Stage loadAdditionalStage(String path, Object data)
 	{
 		Stage stage = null;
@@ -86,6 +114,12 @@ public class PagingController extends BasicController {
 		return stage;
 	}
 	
+	/**
+	 * Load boundary in pane.
+	 *
+	 * @param path the path
+	 * @return the pane
+	 */
 	public Pane loadBoundaryInPane(String path)
 	{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
@@ -98,6 +132,9 @@ public class PagingController extends BasicController {
 		return root;
 	}
 	
+	/**
+	 * User logout.
+	 */
 	public void userLogout()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -108,6 +145,9 @@ public class PagingController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {

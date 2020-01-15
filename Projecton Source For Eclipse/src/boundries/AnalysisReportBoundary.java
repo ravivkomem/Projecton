@@ -16,10 +16,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+// TODO: Auto-generated Javadoc
 /**
- * This class control the analysis report page
- * @author Lee Hugi
+ * This class control the analysis report page.
  *
+ * @author Lee Hugi
  */
 public class AnalysisReportBoundary implements DataInitializable{
 
@@ -27,33 +28,56 @@ public class AnalysisReportBoundary implements DataInitializable{
 	 * ********* FXML Objects **************
 	 * *************************************/
 	
+	/** The report page title. */
 	/*Text */
     @FXML
     private Text reportPageTitle;
+    
+    /** The description text area. */
     @FXML
     private TextArea descriptionTextArea;
+    
+    /** The advavtages text area. */
     @FXML
     private TextArea advavtagesTextArea;
+    
+    /** The constraints text area. */
     @FXML
     private TextArea constraintsTextArea;
+    
+    /** The author txt. */
     @FXML
     private Text authorTxt;
+    
+    /** The duration txt. */
     @FXML
     private Text durationTxt;
+    
+    /** The subsystem txt. */
     @FXML
     private Text subsystemTxt;
+    
+    /** The header text. */
     @FXML
     private Text headerText;
+    
+    /** The btn close page. */
     /*Button */
     @FXML
     private Button btnClosePage;
     
+    /** The current change request. */
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
     private ChangeRequest currentChangeRequest;
+    
+    /** The my controller. */
     private AnalysisReportController myController = new AnalysisReportController(this);
 	
+    /* (non-Javadoc)
+     * @see boundries.DataInitializable#initData(java.lang.Object)
+     */
     /* *************************************
 	 * ******* Public Methods *************
 	 * *************************************/
@@ -63,6 +87,9 @@ public class AnalysisReportBoundary implements DataInitializable{
 		myController.getAnalysisReportByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		descriptionTextArea.setEditable(false);
@@ -75,8 +102,9 @@ public class AnalysisReportBoundary implements DataInitializable{
     
 	/**
 	 * this method gets array list with all the report details
-	 * the method display the report on the page
-	 * @param resultList
+	 * the method display the report on the page.
+	 *
+	 * @param resultList the result list
 	 */
     public void displayAnalysisReport(ArrayList<Object> resultList) {
     	if(resultList==null) {
@@ -99,6 +127,11 @@ public class AnalysisReportBoundary implements DataInitializable{
 	 * ******* FXML Methods *************
 	 * *************************************/
     
+    /**
+     * Closing page.
+     *
+     * @param event the event
+     */
     @FXML
     void closingPage(MouseEvent event) {
     	((Node) event.getSource()).getScene().getWindow().hide();

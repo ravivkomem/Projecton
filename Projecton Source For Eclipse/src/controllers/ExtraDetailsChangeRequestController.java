@@ -11,23 +11,33 @@ import assets.SqlQueryType;
 import boundries.ExtraDetailsChangeRequestBoundary;
 import client.ClientConsole;
 import javafx.application.Platform;
+
+
 /**
- * extra details page for a specific change request (Controller)
- * @author Ido Kadosh
+ * extra details page for a specific change request (Controller).
  *
+ * @author Ido Kadosh
  */
 @SuppressWarnings("serial")
 public class ExtraDetailsChangeRequestController extends BasicController {
 
+	/** The my boundary. */
 	private ExtraDetailsChangeRequestBoundary myBoundary;
 	
+	/**
+	 * Instantiates a new extra details change request controller.
+	 *
+	 * @param extraDetailsChangeRequestBoundary the extra details change request boundary
+	 */
 	public ExtraDetailsChangeRequestController(ExtraDetailsChangeRequestBoundary extraDetailsChangeRequestBoundary) {
 		this.myBoundary = extraDetailsChangeRequestBoundary;
 	}
 
 	/**
-	 * execute querey in case the user attached a file to specific change request 
-	 * @param changeRequestID
+	 * execute querey in case the user attached a file to specific change request .
+	 *
+	 * @param changeRequestID the change request ID
+	 * @return the change request files
 	 */
 	public void getChangeRequestFiles(Integer changeRequestID) {
 
@@ -39,6 +49,9 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		this.sendSqlActionToClient(sqlFileAction);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -70,11 +83,13 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		return;
 		
 	}
+	
 	/**
 	 * this method belongs only to user with a supervisor permission and allows this user to 
-	 * suspend or unsuspend each specific request  
-	 * @param changeRequestId
-	 * @param updatedStatus
+	 * suspend or unsuspend each specific request  .
+	 *
+	 * @param changeRequestId the change request id
+	 * @param updatedStatus the updated status
 	 */
 	public void updateStatusBySupervisor(int changeRequestId,String updatedStatus)
 	{

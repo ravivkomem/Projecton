@@ -25,82 +25,138 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+// TODO: Auto-generated Javadoc
+
 /**
- * 
- * @author Itay David
+ * The Class ExecutionLeaderBoundry.
  *
+ * @author Itay David
  */
 public class ExecutionLeaderBoundry implements Initializable, DataInitializable {
 	
+	/** The btn home page. */
 	/* *************************************
 	 * ********* FXML Objects **************
 	 * *************************************/
 	@FXML
 	private Button btnHomePage;
+	
+	/** The btn analysis report. */
 	@FXML
 	private Button btnAnalysisReport;
+	
+	/** The btn time extension. */
 	@FXML
 	private Button btnTimeExtension;
+	
+	/** The back button. */
 	@FXML
 	private Button backButton;
+	
+	/** The btn log out. */
 	@FXML
 	private Button btnLogOut;
+	
+	/** The txt working on change request number. */
 	@FXML
 	private Text txtWorkingOnChangeRequestNumber;
+	
+	/** The txt change request details. */
 	@FXML
 	private TextArea txtChangeRequestDetails;
+	
+	/** The loading gif. */
 	@FXML
     private ImageView loadingGif;
 	
-	 /* Execution set time fxml objects */
+	 /** The set time pane. */
+ 	/* Execution set time fxml objects */
     @FXML
     private GridPane setTimePane;
+    
+    /** The execution time date picker. */
     @FXML
 	private DatePicker executionTimeDatePicker;
+    
+    /** The btn submit for time required for execution. */
     @FXML
 	private Button btnSubmitForTimeRequiredForExecution;
     
+    /** The wait approve time pane. */
     /* Execution pending approval fxml objects */
     @FXML
     private GridPane waitApproveTimePane;
+    
+    /** The time requested label. */
     @FXML
     private Label timeRequestedLabel;
+    
+    /** The btn refresh. */
     @FXML
 	private Button btnRefresh;
     
+    /** The execution work pane. */
     /* Execution work fxml objects */
     @FXML
     private GridPane executionWorkPane;
+    
+    /** The execution summary text area. */
     @FXML
     private TextArea executionSummaryTextArea;
+    
+    /** The btn commit execution. */
     @FXML
 	private Button btnCommitExecution;
+    
+    /** The execution summary characters label. */
     @FXML
     private Label executionSummaryCharactersLabel;
     
+    /** The time remaining txt. */
     /* Time Remaining Area */
 	@FXML
 	private Text timeRemainingTxt;
+	
+	/** The time remaining text area. */
 	@FXML
 	private TextArea timeRemainingTextArea;
 
+    /** The Constant EXECUTION_SET_TIME. */
     /* ****************************************
      * ********** Static Objects *************
      * ****************************************/
     private static final String EXECUTION_SET_TIME = "EXECUTION_SET_TIME";
+    
+    /** The Constant EXECUTION_APPROVE_TIME. */
     private static final String EXECUTION_APPROVE_TIME = "EXECUTION_APPROVE_TIME";
+    
+    /** The Constant EXECUTION_WORK. */
     private static final String EXECUTION_WORK = "EXECUTION_WORK";
+    
+    /** The Constant MAX_CHARS. */
     private static final int MAX_CHARS = 100;
     
+	/** The my controller. */
 	/* ****************************************
      * ********** Private Objects *************
      * ****************************************/
 	private ExecutionLeaderController myController = new ExecutionLeaderController(this);
+	
+	/** The my change request. */
 	private ChangeRequest myChangeRequest;
+	
+	/** The my time extension stage. */
 	private Stage myTimeExtensionStage = null;
+	
+	/** The my analysis report stage. */
 	private Stage myAnalysisReportStage = null;
+	
+	/** The execution step. */
 	private Step executionStep;
 	
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	/* ****************************************
      * ********** Init Methods ** *************
      * ****************************************/
@@ -140,6 +196,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		}));
 	}
 	
+	/* (non-Javadoc)
+	 * @see boundries.DataInitializable#initData(java.lang.Object)
+	 */
 	@Override
 	public void initData(Object data) {
 		try
@@ -161,7 +220,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ********** FXML Methods ** *************
      * ****************************************/
 	/**
-	 * loading the project home page
+	 * loading the project home page.
+	 *
 	 * @param event - mouse click on the "Home" button
 	 */
 	@FXML
@@ -177,9 +237,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * 
-	 * @param event
-	 * This method handle the click on analysis report in menu
+	 * Display analysis report.
+	 *
+	 * @param event This method handle the click on analysis report in menu
 	 */
 	@FXML
 	public void displayAnalysisReport(MouseEvent event) // show anaylisis report
@@ -196,9 +256,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * 
-	 * @param event
-	 * This method handle the click time extension in menu
+	 * Display time extension.
+	 *
+	 * @param event This method handle the click time extension in menu
 	 */
 	@FXML
 	public void displayTimeExtension(MouseEvent event) // opet time extension
@@ -215,9 +275,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * 
-	 * @param event
-	 * This method handle the click on back in menu
+	 * Load previous page.
+	 *
+	 * @param event This method handle the click on back in menu
 	 */
 	@FXML
 	void loadPreviousPage(MouseEvent event) // back to the work station page
@@ -226,8 +286,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * @param event
-	 * This method handle the click on log out
+	 * Log out user.
+	 *
+	 * @param event This method handle the click on log out
 	 */
 	@FXML
 	void logOutUser(MouseEvent event) // logout from execution page
@@ -241,8 +302,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * @param event
-	 * This method send the time required for execution to the supervisor
+	 * Submit execution time.
+	 *
+	 * @param event This method send the time required for execution to the supervisor
 	 */
 	@FXML
 	public void submitExecutionTime(MouseEvent event) // submit execution time
@@ -271,7 +333,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * This methods refreshed the execution page
+	 * This methods refreshed the execution page.
+	 *
 	 * @param event - mouse click on "Refresh button"
 	 * Page refreshed and display may change accordingly
 	 */
@@ -284,9 +347,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	
 	/**
-	 * 
-	 * @param event
-	 * This method update DB after click finish work
+	 * Finish execution work.
+	 *
+	 * @param event This method update DB after click finish work
 	 */
 	@FXML
 	public void finishExecutionWork(MouseEvent event) // when execution commit working
@@ -332,7 +395,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ********** Public Methods **************
      * ****************************************/
 	/**
-	 * Will be called by the controller after he select the change request again
+	 * Will be called by the controller after he select the change request again.
+	 *
 	 * @param changeRequest - updated change request
 	 */
 	public void updateChangeRequest(ChangeRequest changeRequest) {
@@ -341,7 +405,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * This method is in order to recieve the execution step from the controller
+	 * This method is in order to recieve the execution step from the controller.
+	 *
 	 * @param executionStep - the current execution step as recieved
 	 * Starts the page work progress
 	 */
@@ -371,7 +436,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * this method is used to recieve the estimated end date updated status from the controller
+	 * this method is used to recieve the estimated end date updated status from the controller.
+	 *
 	 * @param affectedRows - number of database rows affected
 	 * the correct behaviour should be one row affected
 	 */
@@ -396,7 +462,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ****************************************/
 	/**
 	 * method in order to set the page display for change requests in the 
-	 * "EXECUTION_SET_TIME" current step
+	 * "EXECUTION_SET_TIME" current step.
 	 */
 	private void loadExecutionSetTimeDisplay()
 	{
@@ -419,7 +485,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	/**
 	 * method in order to set the page display for change requests in the 
-	 * "EXECUTION_APPROVE_TIME" current step
+	 * "EXECUTION_APPROVE_TIME" current step.
 	 */
 	private void loadExecutionApproveTimeDisplay()
 	{
@@ -438,7 +504,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	/**
 	 * method in order to set the page display for change requests in the 
-	 * "EXECUTION_WORK" current step
+	 * "EXECUTION_WORK" current step.
 	 */
 	private void loadExecutionWorkDisplay()
 	{
@@ -454,8 +520,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * @param estimatedEndDate
-	 * This method update the time left for execution
+	 * Display time remaining.
+	 *
+	 * @param estimatedEndDate This method update the time left for execution
 	 */
 	private void displayTimeRemaining(Date estimatedEndDate) {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);

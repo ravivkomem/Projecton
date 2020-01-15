@@ -11,24 +11,35 @@ import client.ClientConsole;
 import javafx.application.Platform;
 
 /**
- * 
+ * The Class LoginController.
+ *
  * @author Raviv Komem
  * This controller handles all communication between the OFSF client and the Login page
  */
 @SuppressWarnings("serial")
 public class LoginController extends BasicController{
 
+	/** The my boundary. */
 	private LoginPageBoundary myBoundary;
 
+	/**
+	 * Instantiates a new login controller.
+	 *
+	 * @param loginPageboundary the login pageboundary
+	 */
 	public LoginController (LoginPageBoundary loginPageboundary)
 	{
 		this.myBoundary = loginPageboundary;
 	}
 	
+	/**
+	 * Verify login credtinals.
+	 *
+	 * @param userName the user name
+	 * @param password the password
+	 */
 	public void verifyLoginCredtinals (String userName, String password)
 	{
-		/*TODO: Check if userName already exists in logged users list */
-		
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(userName);
 		varArray.add(password);
@@ -38,6 +49,12 @@ public class LoginController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * Change user login status.
+	 *
+	 * @param user the user
+	 * @param loginStatus the login status
+	 */
 	public void changeUserLoginStatus(User user, boolean loginStatus)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -48,6 +65,9 @@ public class LoginController extends BasicController{
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	public void getResultFromClient(SqlResult result)
 	{
 		Platform.runLater(() -> {
@@ -76,6 +96,12 @@ public class LoginController extends BasicController{
 		
 	}
 	
+	/**
+	 * Parses the result to user.
+	 *
+	 * @param result the result
+	 * @return the user
+	 */
 	private User parseResultToUser(SqlResult result)
 	{
 		User resultUser = null;

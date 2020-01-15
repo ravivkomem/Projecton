@@ -13,40 +13,66 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+// TODO: Auto-generated Javadoc
 /**
- * This is the menu boundary
- * @author Raviv Komem
+ * This is the menu boundary.
  *
+ * @author Raviv Komem
  */
 public class MenuBoundary implements Initializable {
 
+	/** The hello user text field. */
 	/* *************************************
 	 * ********* FXML Objects **************
 	 * *************************************/
     @FXML
     private Text helloUserTextField;
+    
+    /** The logout button. */
     @FXML
     private Button logoutButton;
+    
+    /** The ac dash bord. */
     @FXML
     private AnchorPane acDashBord;
+    
+    /** The upload request button. */
     @FXML
     private Button uploadRequestButton;
+    
+    /** The view my requests button. */
     @FXML
     private Button viewMyRequestsButton;
+    
+    /** The work station button. */
     @FXML
     private Button workStationButton;
+    
+    /** The supervisor button. */
     @FXML
     private Button supervisorButton;
+    
+    /** The department head button. */
     @FXML
     private Button departmentHeadButton;
+    
+    /** The menu image break. */
     @FXML
     private ImageView menuImageBreak;
+    
+    /** The upload request image break. */
     @FXML
     private ImageView uploadRequestImageBreak;
+    
+    /** The my requests image break. */
     @FXML
     private ImageView myRequestsImageBreak;
+    
+    /** The work station department head image break. */
     @FXML
     private ImageView workStation_DepartmentHeadImageBreak;
+    
+    /** The supervisor image break. */
     @FXML
     private ImageView supervisorImageBreak;
     
@@ -54,7 +80,8 @@ public class MenuBoundary implements Initializable {
 	 * ********* FXML Methods **************
 	 * *************************************/
     /**
-     * This method is used to display the current user requests
+     * This method is used to display the current user requests.
+     *
      * @param event - mouse click on "my requests" button
      */
     @FXML
@@ -63,7 +90,8 @@ public class MenuBoundary implements Initializable {
     }
 
     /**
-     * This method is used to display the supervisor page
+     * This method is used to display the supervisor page.
+     *
      * @param event - mouse click on "supervisor" button
      */
     @FXML
@@ -72,7 +100,8 @@ public class MenuBoundary implements Initializable {
     }
 
     /**
-     * This method is used to display the upload request page
+     * This method is used to display the upload request page.
+     *
      * @param event - mouse click on "upload request" button
      */
     @FXML
@@ -81,7 +110,8 @@ public class MenuBoundary implements Initializable {
     }
 
     /**
-     * This method is used to display the tech manager page
+     * This method is used to display the tech manager page.
+     *
      * @param event - mouse click on "tech manager" button
      */
     @FXML
@@ -90,7 +120,8 @@ public class MenuBoundary implements Initializable {
     }
     
     /**
-     * This method is used to display the work station page
+     * This method is used to display the work station page.
+     *
      * @param event - mouse click on "workstation" button
      */
     @FXML
@@ -99,7 +130,8 @@ public class MenuBoundary implements Initializable {
     }
 
     /**
-     * This method is used for user logout
+     * This method is used for user logout.
+     *
      * @param event - mouse click on "Logout" button
      */
     @FXML
@@ -109,7 +141,7 @@ public class MenuBoundary implements Initializable {
     }
 
     /**
-     * Sets the initial page display according to the user viewing it
+     * Sets the initial page display according to the user viewing it.
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

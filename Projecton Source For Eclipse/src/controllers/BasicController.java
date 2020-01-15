@@ -7,41 +7,63 @@ import assets.SqlResult;
 import client.ChatClient;
 import client.ClientConsole;
 
+/**
+ * The Class BasicController.
+ */
+@SuppressWarnings("serial")
 public abstract class BasicController implements Serializable {
 	
-	private Integer subscribtionCounter = 0;
+	/** The subscription counter. */
+	private Integer subscriptionCounter = 0;
 	
+	/**
+	 * Gets the result from client.
+	 *
+	 * @param result the result
+	 * @return the result from client
+	 */
 	public abstract void getResultFromClient(SqlResult result);
 	
+	/**
+	 * Subscribe to client deliveries.
+	 */
 	protected void subscribeToClientDeliveries() {
 		
-		synchronized(subscribtionCounter) 
+		synchronized(subscriptionCounter) 
 		{
-			if (0 == subscribtionCounter)
+			if (0 == subscriptionCounter)
 			{
 				ChatClient.joinSubscription(this);
 			}
-			subscribtionCounter++;
+			subscriptionCounter++;
 		}
 	}
 	
+	/**
+	 * Unsubscribe from client deliveries.
+	 */
 	protected void unsubscribeFromClientDeliveries() {
 		
-		synchronized(subscribtionCounter) 
+		synchronized(subscriptionCounter) 
 		{
-			if (1 == subscribtionCounter)
+			if (1 == subscriptionCounter)
 			{
 				ChatClient.unSubscribe(this);
 			}
 			
-			if (subscribtionCounter != 0)
+			if (subscriptionCounter != 0)
 			{
-				subscribtionCounter--;
+				subscriptionCounter--;
 			}
 			
 		}
 	}
 	
+	/**
+	 * Send sql action to client.
+	 *
+	 * @param sqlAction the sql action
+	 */
 	protected void sendSqlActionToClient(SqlAction sqlAction)
 	{
 		this.subscribeToClientDeliveries();

@@ -7,13 +7,9 @@ import java.util.ResourceBundle;
 
 import assets.ProjectPages;
 import assets.Toast;
-import controllers.PagingController;
 import controllers.RequestListPageController;
 import controllers.TimeManager;
-import controllers.UploadChangeRequestController;
 import entities.ChangeRequest;
-import entities.CommitteeComment;
-import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,81 +26,107 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+// TODO: Auto-generated Javadoc
+
 /**
- * Request List Page (Boundary)
- * @author Ido Kadosh
+ * Request List Page (Boundary).
  *
+ * @author Ido Kadosh
  */
 public class RequestListPageBoundary implements Initializable {
+	
+	/** The search by date pane. */
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
 	@FXML
 	private AnchorPane searchByDatePane;
 
+	/** The search by id pane. */
 	@FXML
 	private AnchorPane searchByIdPane;
 
+	/** The enter id text field. */
 	@FXML
 	private TextField enterIdTextField;
 
+	/** The search by status pane. */
 	@FXML
 	private AnchorPane searchByStatusPane;
 
+	/** The select status combo box. */
 	@FXML
 	private ComboBox<String> selectStatusComboBox;
 	
+	/** The basic details tbl. */
 	@FXML
 	private TableView<ChangeRequest> basicDetailsTbl;
 
+	/** The requst id clm. */
 	@FXML
 	private TableColumn<ChangeRequest, Integer> requstIdClm;
 
+	/** The status clm. */
 	@FXML
 	private TableColumn<ChangeRequest, String> statusClm;
 
+	/** The sub system clm. */
 	@FXML
 	private TableColumn<ChangeRequest, String> subSystemClm;
 
+	/** The start date clm. */
 	@FXML
 	private TableColumn<ChangeRequest, Date> startDateClm;
 	
+	/** The no submiting request. */
 	@FXML
 	private Text noSubmitingRequest;
 	
+	/** The selected change request id text. */
 	@FXML
 	private Text selectedChangeRequestIdText;
 
+	/** The from date picker. */
 	@FXML
 	private DatePicker fromDatePicker;
 
+	/** The to date picker. */
 	@FXML
 	private DatePicker toDatePicker;
 
+	/** The btn home page. */
 	@FXML
 	private Button btnHomePage;
 
+	/** The view my requests button. */
 	@FXML
 	private Button viewMyRequestsButton;
 
+	/** The search by id btn. */
 	@FXML
 	private Button searchByIdBtn;
 
+	/** The search by status btn. */
 	@FXML
 	private Button searchByStatusBtn;
 
+	/** The search by date btn. */
 	@FXML
 	private Button searchByDateBtn;
 
+	/** The view extra details btn. */
 	@FXML
 	private Button viewExtraDetailsBtn;
 
+	/** The back btn. */
 	@FXML
 	private Button backBtn;
 
+	/** The logout user. */
 	@FXML
 	private Button logoutUser;
 	
+	/** The display specific ID. */
 	@FXML
 	private TextField displaySpecificID;
 	
@@ -112,8 +134,13 @@ public class RequestListPageBoundary implements Initializable {
      * ********** Private Object **************
      * ****************************************/
 
-	private RequestListPageController myController = new RequestListPageController(this);
+	/** The my controller. */
+    private RequestListPageController myController = new RequestListPageController(this);
+	
+	/** The request list. */
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
+	
+	/** The current change request. */
 	ChangeRequest currentChangeRequest;
 
 	 /* ***************************************
@@ -121,16 +148,19 @@ public class RequestListPageBoundary implements Initializable {
      * ****************************************/
 	
 	/**
-	 * move the user back to the previous page 
-	 * @param event
-	 */
+ 	 * move the user back to the previous page .
+ 	 *
+ 	 * @param event the event
+ 	 */
 	@FXML
 	void backToPrevPage(MouseEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
+	
 	/**
-	 * move to extra details page for specific request 
-	 * @param event
+	 * move to extra details page for specific request .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void extraDetailsShows(MouseEvent event) {
@@ -146,8 +176,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * disconnect the user from the system and update the data base 
-	 * @param event
+	 * disconnect the user from the system and update the data base .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void logout(MouseEvent event) {
@@ -156,8 +187,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 	
 	/**
-	 * in case the user pressed on this button, the user move to the home page 
-	 * @param event
+	 * in case the user pressed on this button, the user move to the home page .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void loadHomePage(MouseEvent event) {
@@ -165,8 +197,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by pressing this button the user shows all his requests 
-	 * @param event
+	 * by pressing this button the user shows all his requests .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void loadMyRequestsPage(MouseEvent event) {
@@ -174,8 +207,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by pressing this button its open an option to search change requests by specific dates 
-	 * @param event
+	 * by pressing this button its open an option to search change requests by specific dates .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void loadPageSearchByDate(MouseEvent event) {
@@ -186,8 +220,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by using this button the system opens an option to search change request by its ID 
-	 * @param event
+	 * by using this button the system opens an option to search change request by its ID .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void loadSearchByIdPage(MouseEvent event) {
@@ -199,8 +234,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 	
 	/**
-	 * by using this button the system opens an option to search change request by its status 
-	 * @param event
+	 * by using this button the system opens an option to search change request by its status .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void loadSearchByStatusPage(MouseEvent event) {
@@ -211,8 +247,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by using this button the user can search change requests by its ID 
-	 * @param event
+	 * by using this button the user can search change requests by its ID .
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void searchById(MouseEvent event) {
@@ -238,8 +275,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by using this button the user can search change requests by specific dates 
-	 * @param event
+	 * by using this button the user can search change requests by specific dates .
+	 *
+	 * @param event the event
 	 */
 	@FXML
     void searchByDate(MouseEvent event) {
@@ -268,8 +306,9 @@ public class RequestListPageBoundary implements Initializable {
     }
 
 	/**
-	 * by using this button the user can search change requests by specific status
-	 * @param event
+	 * by using this button the user can search change requests by specific status.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void searchByStatus(MouseEvent event) {
@@ -284,6 +323,9 @@ public class RequestListPageBoundary implements Initializable {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		selectStatusComboBox.getItems().add("ACTIVE");
@@ -313,8 +355,9 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * this method display all change requests for a specific user in a table 
-	 * @param resultList
+	 * this method display all change requests for a specific user in a table .
+	 *
+	 * @param resultList the result list
 	 */
 	public void displayAllChangeRequestsForSpecifcUser(ArrayList<ChangeRequest> resultList) {
 
@@ -332,9 +375,11 @@ public class RequestListPageBoundary implements Initializable {
 		}
 
 	}
+	
 	/**
-	 * this method dispaly all change requests for specific user with the requested filter 
-	 * @param resultList
+	 * this method dispaly all change requests for specific user with the requested filter .
+	 *
+	 * @param resultList the result list
 	 */
 	public void displayChangeRequestsByFilter(ArrayList<ChangeRequest> resultList)
 	{

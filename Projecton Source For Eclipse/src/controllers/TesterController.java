@@ -11,19 +11,32 @@ import boundries.TesterBoundary;
 import entities.Step;
 import javafx.application.Platform;
 
+/**
+ * The Class TesterController.
+ *
+ * @author Raviv Komem
+ */
 @SuppressWarnings("serial")
 public class TesterController extends BasicController {
 	
+	/** The my boundary. */
 	private TesterBoundary myBoundary;
 
+	/**
+	 * Instantiates a new tester controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public TesterController(TesterBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
 	
 	/**
 	 * This method get change request id
-	 * and set in motion sql action to get the most recent tester step for that change request
-	 * @param changeRequestID
+	 * and set in motion sql action to get the most recent tester step for that change request.
+	 *
+	 * @param changeRequestID the change request ID
+	 * @return the current step
 	 */
 	public void getCurrentStep(Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -32,6 +45,12 @@ public class TesterController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Close change request step.
+	 *
+	 * @param testerStepId the tester step id
+	 * @param failReport the fail report
+	 */
 	public void closeChangeRequestStep(Integer testerStepId, String failReport) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(failReport);
@@ -42,6 +61,12 @@ public class TesterController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Advance change request step.
+	 *
+	 * @param nextStep the next step
+	 * @param changeRequestID the change request ID
+	 */
 	public void advanceChangeRequestStep(String nextStep, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(nextStep);
@@ -51,6 +76,11 @@ public class TesterController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Creates the new closing step.
+	 *
+	 * @param changeRequestID the change request ID
+	 */
 	public void createNewClosingStep(int changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestID);
@@ -60,6 +90,9 @@ public class TesterController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -90,8 +123,9 @@ public class TesterController extends BasicController {
 
 	/**
 	 * This method receives SqlResult and parse it to Step
-	 * Be careful as this method expect the fields to be presented in a specific order
-	 * @param result
+	 * Be careful as this method expect the fields to be presented in a specific order.
+	 *
+	 * @param result the result
 	 * @return Step
 	 */
 	private Step parseSqlResultToTesterStep(SqlResult result) {
@@ -110,6 +144,11 @@ public class TesterController extends BasicController {
 		return step;
 	}
 
+	/**
+	 * Automatic close new time extension.
+	 *
+	 * @param testerStep the tester step
+	 */
 	public void automaticCloseNewTimeExtension(Step testerStep) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(testerStep.getStepID());

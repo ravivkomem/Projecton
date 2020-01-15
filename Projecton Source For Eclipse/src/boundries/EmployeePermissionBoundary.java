@@ -20,38 +20,66 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmployeePermissionBoundary.
+ */
 public class EmployeePermissionBoundary implements DataInitializable{
 
 	/* *************************************
 	 * ********* FXML Objects **************
 	 * *************************************/
 	
-    @FXML
+    /** The employee name text. */
+	@FXML
     private Text employeeNameText;
+    
+    /** The error text. */
     @FXML
     private Text errorText;
+    
+    /** The committee member combo box. */
     @FXML
     private ComboBox<String> committeeMemberComboBox;
+    
+    /** The permossion text field. */
     @FXML
     private TextField permossionTextField;
+    
+    /** The new premission combo box. */
     @FXML
     private ComboBox<String> newPremissionComboBox;
+    
+    /** The set new permission text field. */
     @FXML
     private Button setNewPermissionTextField;
+    
+    /** The replace member button. */
     @FXML
     private Button replaceMemberButton;
 
+    /** The subsystem combo box. */
     @FXML
     private ComboBox<String> subsystemComboBox;
+    
+    /** The set subsystem button. */
     @FXML
     private Button setSubsystemButton;
     
+    /** The employee user. */
     /* *************************************
    	 * ******* Private Objects *************
    	 * *************************************/
     private User employeeUser;
+	
+	/** The users. */
 	private ArrayList<User> users = new ArrayList<>(); 
+	
+	/** The my controller. */
 	private EmployeePermissionController myController = new EmployeePermissionController(this);
+	
+	/** The tech manager boundry. */
 	private TechManagerBoundary techManagerBoundry;
 	
 	/* *************************************
@@ -59,8 +87,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	 * *************************************/
 	
 	/**
-	 * this method update subsystem supporter
-	 * @param event
+	 * this method update subsystem supporter.
+	 *
+	 * @param event the event
 	 */
     @FXML
     void updateSupportSubsystem(MouseEvent event) {
@@ -80,8 +109,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
 	
     /**
-     * this method update to users there permission
-     * @param event
+     * this method update to users there permission.
+     *
+     * @param event the new new employee permission
      */
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
@@ -168,6 +198,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		}
     }
     
+    /**
+     * Replace committe member.
+     *
+     * @param event the event
+     */
     @FXML
     void replaceCommitteMember(MouseEvent event) {
     	if(committeeMemberComboBox.getSelectionModel().isEmpty()) {
@@ -188,8 +223,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	 * *************************************/
     
     /**
-     * this method gets user and update his new permission in data base
-     * @param newUser
+     * this method gets user and update his new permission in data base.
+     *
+     * @param newUser the new user
      */
     private void createPermissionToOneUser(User newUser) {
     	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
@@ -197,9 +233,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     /**
-     * this method gets to users and change there permission
-     * @param newUser
-     * @param oldUser
+     * this method gets to users and change there permission.
+     *
+     * @param newUser the new user
+     * @param oldUser the old user
      */
     private void createPermissoinsToUsers(User newUser, User oldUser) {
     	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
@@ -211,8 +248,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     /**
      * this method handle with permission to new committee director
      * the method check what the current permission of the user and change the permission
-     * to committee director or to supervisor committee director if necessary
-     * @param newDirector
+     * to committee director or to supervisor committee director if necessary.
+     *
+     * @param newDirector the new director
      */
     private void handleCommitteeDirectorOneUser(User newDirector) {
     	Optional<ButtonType> result;
@@ -268,8 +306,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     /**
-     * this method gives to one user committee member permission
-     * @param newMember
+     * this method gives to one user committee member permission.
+     *
+     * @param newMember the new member
      */
     private void handleCommitteeMemberOneUser(User newMember) {
     	Optional<ButtonType> result;
@@ -325,8 +364,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     /**
-     * this method gives to one user supervisor permission
-     * @param newSupervisor
+     * this method gives to one user supervisor permission.
+     *
+     * @param newSupervisor the new supervisor
      */
     private void handleSupervisorOneUser(User newSupervisor) {
     	Optional<ButtonType> result;
@@ -385,9 +425,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
     
     /**
      * this method handle with committee member permission
-     * if there is already user with committee member permission
-     * @param newMember
-     * @param oldMember
+     * if there is already user with committee member permission.
+     *
+     * @param newMember the new member
+     * @param oldMember the old member
      */
     private void handleCommitteeMember(User newMember,User oldMember) {
     	//handle newMember
@@ -443,9 +484,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
     
     /**
      * this method handle with the problem that tech manager gives supervisor permission
-     * that already exist to anther user
-     * @param newSupervisor
-     * @param oldSupervisor
+     * that already exist to anther user.
+     *
+     * @param newSupervisor the new supervisor
+     * @param oldSupervisor the old supervisor
      */
     private void handleSupervasior(User newSupervisor, User oldSupervisor) {
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
@@ -504,9 +546,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
     
     /**
      * this method handle with the problem that tech manager gives committee director permission
-     * that already exist to anther user
-     * @param newSupervasior
-     * @param oldSuperVaser
+     * that already exist to anther user.
+     *
+     * @param newDirector the new director
+     * @param oldDirector the old director
      */
     private void handleCommitteeDirector(User newDirector, User oldDirector) {
         Optional<ButtonType> result = popUpWindowMessage(AlertType.CONFIRMATION, "", "There is already "
@@ -565,6 +608,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
         }
     }
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		permossionTextField.setEditable(false);
@@ -588,6 +634,9 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		subsystemComboBox.getItems().add("College Website");
 	}
 
+	/* (non-Javadoc)
+	 * @see boundries.DataInitializable#initData(java.lang.Object)
+	 */
 	@Override
 	public void initData(Object data) {
 		employeeUser = (User)(((ArrayList<ArrayList<Object>>) data).get(0).get(0));
@@ -598,11 +647,12 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	}
 	
 	/**
-	 * this method will show up window with the msg that the method gets
-	 * @param alert
-	 * @param msg
-	 * @param mess
-	 * @return
+	 * this method will show up window with the msg that the method gets.
+	 *
+	 * @param alert the alert
+	 * @param msg the msg
+	 * @param mess the mess
+	 * @return the optional
 	 */
 	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 		Alert alert2 = new Alert(alert);

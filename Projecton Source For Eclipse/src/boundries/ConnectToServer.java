@@ -16,21 +16,27 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+// TODO: Auto-generated Javadoc
 /**
  * This boundary is the first display on the client side,
- * allows us to pick the IP where the server is running
- * @author Raviv Komem
+ * allows us to pick the IP where the server is running.
  *
+ * @author Raviv Komem
  */
 public class ConnectToServer implements Initializable {
 
+	/** The First pane. */
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
     @FXML
     private Pane FirstPane;
+    
+    /** The Server I ptext. */
     @FXML
     private TextField ServerIPtext;
+    
+    /** The Connectbtn. */
     @FXML
     private Button Connectbtn;
 
@@ -41,8 +47,9 @@ public class ConnectToServer implements Initializable {
     /**
      * Method is called when the connection button is pressed
      * Checks if the server ip field is filled, and if it is starts the connection sequence
-     * and moves us to the login page
-     * @param event
+     * and moves us to the login page.
+     *
+     * @param event the event
      */
     @FXML
     void connectionToServer(MouseEvent event) {
@@ -62,7 +69,10 @@ public class ConnectToServer implements Initializable {
 
     /**
      * Sets key pressed handler on the text field, that enter will also 
-     * be considered as click on the connection button
+     * be considered as click on the connection button.
+     *
+     * @param location the location
+     * @param resources the resources
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

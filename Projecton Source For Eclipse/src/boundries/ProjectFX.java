@@ -15,23 +15,36 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is the main project application
- * Used in order to start the client side and also to contain the following information:
- * 
- * @author Raviv Komem
+ * Used in order to start the client side and also to contain the following information:.
  *
+ * @author Raviv Komem
  */
 public class ProjectFX extends Application {
 
+	/** The main stage. */
 	public static Stage mainStage;
+	
+	/** The current user. */
 	public static User currentUser;
+	
+	/** The paging controller. */
 	public static PagingController pagingController;
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javafx.application.Application#start(javafx.stage.Stage)
+	 */
 	@Override
 	public void start(Stage stage) throws Exception {
 		Pane pane;
@@ -56,6 +69,11 @@ public class ProjectFX extends Application {
 		
 	}
 	
+	/**
+	 * Close window event.
+	 *
+	 * @param event the event
+	 */
 	private void closeWindowEvent(WindowEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.getButtonTypes().remove(ButtonType.OK);

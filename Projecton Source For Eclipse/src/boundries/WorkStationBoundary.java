@@ -24,60 +24,112 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WorkStationBoundary.
+ */
 public class WorkStationBoundary implements Initializable{
 
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
 	
+	/** The selected change request id text area. */
 	/*Text Field*/
     @FXML
     private TextArea selectedChangeRequestIdTextArea;
+	
+	/** The change request table view. */
 	/* TableView */
     @FXML
     private TableView<ChangeRequest> changeRequestTableView;
+    
+    /** The request id column. */
     @FXML
     private TableColumn<ChangeRequest, Integer> requestIdColumn;
+    
+    /** The step column. */
     @FXML
     private TableColumn<ChangeRequest, String> stepColumn;
+    
+    /** The description column. */
     @FXML
     private TableColumn<ChangeRequest, String> descriptionColumn;
+    
+    /** The subsystem column. */
     @FXML
     private TableColumn<ChangeRequest, String> subsystemColumn;
+    
+    /** The refresh station button. */
     /*Buttons*/
     @FXML
     private Button refreshStationButton;
+    
+    /** The home page button. */
     @FXML
     private Button homePageButton;
+    
+    /** The logout button. */
     @FXML
     private Button logoutButton;
+    
+    /** The view all work button. */
     @FXML
     private Button viewAllWorkButton;
+    
+    /** The view analysis step work button. */
     @FXML
     private Button viewAnalysisStepWorkButton;
+    
+    /** The view execution step button. */
     @FXML
     private Button viewExecutionStepButton;
+    
+    /** The view tester step button. */
     @FXML
     private Button viewTesterStepButton;
+    
+    /** The view committe step button. */
     @FXML
     private Button viewCommitteStepButton;
+    
+    /** The view tester appoint button. */
     @FXML
     private Button viewTesterAppointButton;
+    
+    /** The start change request work button. */
     @FXML
     private Button startChangeRequestWorkButton;
+    
+    /** The committee button break image. */
     /*Image Views*/
     @FXML
     private ImageView committeeButtonBreakImage;
     
+    /** The my controller. */
     /* ***************************************
      * ********** Private Variables ***********
      * ***************************************/
     private WorkStationController myController = new WorkStationController(this);
+	
+	/** The change request list. */
 	private ObservableList<ChangeRequest> changeRequestList = FXCollections.observableArrayList();
+	
+	/** The clicked change request. */
 	private ChangeRequest clickedChangeRequest;
+	
+	/** The my tester appoint stage. */
 	private Stage myTesterAppointStage = null;
+	
+	/** The current filter. */
 	private WorkStationFilter currentFilter = WorkStationFilter.ALL_CHANGE_REQUEST;
 	
+    /**
+     * Display all work change requests.
+     *
+     * @param event the event
+     */
     /* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
@@ -86,34 +138,63 @@ public class WorkStationBoundary implements Initializable{
     	myController.selectAllChangeRequest();
     }
 
+    /**
+     * Display analysis step change requests.
+     *
+     * @param event the event
+     */
     @FXML
     void displayAnalysisStepChangeRequests(MouseEvent event) {
     	myController.selectAnalysisStepChangeRequest();
     }
 
+    /**
+     * Display committe decision change requests.
+     *
+     * @param event the event
+     */
     @FXML
     void displayCommitteDecisionChangeRequests(MouseEvent event) {
     	myController.selectCommitteeStepChangeRequest();
     }
 
+    /**
+     * Display execution step change requests.
+     *
+     * @param event the event
+     */
     @FXML
     void displayExecutionStepChangeRequests(MouseEvent event) {
     	myController.selectExecutionStepChangeRequest();
     }
 
+    /**
+     * Display tester step change requests.
+     *
+     * @param event the event
+     */
     @FXML
     void displayTesterStepChangeRequests(MouseEvent event) {
     	myController.selectTesterStepChangeRequest();
     }
     
+    /**
+     * Display tester appoint change request.
+     *
+     * @param event the event
+     */
     @FXML
     void displayTesterAppointChangeRequest(MouseEvent event) {
     	myController.selectTesterAppointStepChangeRequest();
     }
 
+    /**
+     * Load change request work page.
+     *
+     * @param event the event
+     */
     @FXML
     void loadChangeRequestWorkPage(MouseEvent event) {
-    	/*TODO: Add big switch case */
     	if(clickedChangeRequest == null)
     	{
     		Toast.makeText(ProjectFX.mainStage, "Please select a change request to work on", 1500, 500, 500);
@@ -177,12 +258,22 @@ public class WorkStationBoundary implements Initializable{
     	
     }
 
+    /**
+     * Load home page.
+     *
+     * @param event the event
+     */
     @FXML
     void loadHomePage(ActionEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 		closeMyStages();
     }
 
+    /**
+     * Refresh station.
+     *
+     * @param event the event
+     */
     @FXML
     void refreshStation(ActionEvent event) {
     	switch (currentFilter)
@@ -212,6 +303,11 @@ public class WorkStationBoundary implements Initializable{
     	}
     }
 
+    /**
+     * User logout.
+     *
+     * @param event the event
+     */
     @FXML
     void userLogout(MouseEvent event) {
     	ProjectFX.pagingController.userLogout();
@@ -223,6 +319,11 @@ public class WorkStationBoundary implements Initializable{
      * ********** Public Methods ***************
      * *****************************************/
     
+    /**
+     * Load table view.
+     *
+     * @param recievedChangeRequestList the recieved change request list
+     */
     public void loadTableView(List<ChangeRequest> recievedChangeRequestList)
     {
     	changeRequestList.clear();
@@ -232,6 +333,9 @@ public class WorkStationBoundary implements Initializable{
     	selectedChangeRequestIdTextArea.setText("");
     }
     
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* Set the table view */
@@ -277,11 +381,19 @@ public class WorkStationBoundary implements Initializable{
 		this.displayAllWorkChangeRequests(null);
 	}
 	
+	/**
+	 * Sets the filter type.
+	 *
+	 * @param filter the new filter type
+	 */
 	synchronized public void setFilterType (WorkStationFilter filter)
 	{
 		this.currentFilter = filter;
 	}
 	
+	/**
+	 * Close my stages.
+	 */
 	/* ******************************
 	 * ******* Private Methods ******
 	 * ******************************/
@@ -294,16 +406,31 @@ public class WorkStationBoundary implements Initializable{
 			
 	}
 	
+	/**
+	 * The Enum WorkStationFilter.
+	 */
 	/* ******************************
 	 * ********* Enumerators ********
 	 * ******************************/
 	public enum WorkStationFilter
 	{
+		
+		/** The all change request. */
 		ALL_CHANGE_REQUEST,
+		
+		/** The analysis step. */
 		ANALYSIS_STEP,
+		
+		/** The committee step. */
 		COMMITTEE_STEP,
+		
+		/** The execution step. */
 		EXECUTION_STEP,
+		
+		/** The tester appoint step. */
 		TESTER_APPOINT_STEP,
+		
+		/** The testing step. */
 		TESTING_STEP;
 	}
 

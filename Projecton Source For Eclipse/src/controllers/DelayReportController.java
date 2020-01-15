@@ -8,7 +8,6 @@ import assets.SqlQueryType;
 import assets.SqlResult;
 import boundries.DelayReportBoundary;
 import client.ClientConsole;
-import entities.ChangeRequest;
 import entities.DelayReport;
 import javafx.application.Platform;
 
@@ -18,6 +17,7 @@ import javafx.application.Platform;
  * This controller handle with the delay report page
  *
  */
+@SuppressWarnings("serial")
 public class DelayReportController extends BasicController{
 
 	private DelayReportBoundary myBoundary;

@@ -8,16 +8,28 @@ import assets.SqlResult;
 import boundries.AppointTesterBoundary;
 import javafx.application.Platform;
 
+/**
+ * The Class AppointTesterController.
+ */
 @SuppressWarnings("serial")
 public class AppointTesterController extends BasicController{
 
+	/** The my boundary. */
 	private AppointTesterBoundary myBoundary;
 	
+	/**
+	 * Instantiates a new appoint tester controller.
+	 *
+	 * @param appointTesterBoundary the appoint tester boundary
+	 */
 	public AppointTesterController(AppointTesterBoundary appointTesterBoundary)
 	{
 		this.myBoundary = appointTesterBoundary;
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -45,7 +57,12 @@ public class AppointTesterController extends BasicController{
 		
 	}
 
-	public void getAllCommitteMembers() {
+	/**
+	 * Gets the all committee members.
+	 *
+	 * @return the all committee members
+	 */
+	public void getAllCommitteeMembers() {
 		/* Create sql action */
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_COMMITTEE_MEMBERS , varArray);
@@ -53,6 +70,12 @@ public class AppointTesterController extends BasicController{
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Parses the sql result to array list string.
+	 *
+	 * @param result the result
+	 * @return the array list
+	 */
 	private ArrayList<String> parseSqlResultToArrayListString (SqlResult result)
 	{
 		ArrayList<String> committeeMembersList = new ArrayList<String>();
@@ -66,6 +89,12 @@ public class AppointTesterController extends BasicController{
 		return committeeMembersList;
 	}
 
+	/**
+	 * Update change request step and handler.
+	 *
+	 * @param committeeMemberSelected the committee member selected
+	 * @param changeRequestId the change request id
+	 */
 	public void updateChangeRequestStepAndHandler(String committeeMemberSelected, int changeRequestId) {
 		
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -77,6 +106,12 @@ public class AppointTesterController extends BasicController{
 		this.sendSqlActionToClient(sqlAction);
 	}
 
+	/**
+	 * Creates the new tester step.
+	 *
+	 * @param committeeMemberSelected the committee member selected
+	 * @param changeRequestID the change request ID
+	 */
 	public void createNewTesterStep(String committeeMemberSelected, int changeRequestID) {
 		
 		ArrayList<Object> varArray = new ArrayList<Object>();

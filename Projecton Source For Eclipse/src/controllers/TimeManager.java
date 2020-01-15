@@ -4,8 +4,18 @@ import java.sql.Date;
 import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 
+/**
+ * The Class TimeManager.
+ *
+ * @author Raviv Komem
+ */
 public class TimeManager {
 
+	/**
+	 * Gets the current date.
+	 *
+	 * @return the current date
+	 */
 	public static Date getCurrentDate()
 	{
 		return new Date(Calendar.getInstance().getTime().getTime());
@@ -13,10 +23,11 @@ public class TimeManager {
 	
 	/**
 	 * Get the time difference in days between start date and end date
-	 * If it is negative it means the end date is before the start date
+	 * If it is negative it means the end date is before the start date.
+	 *
 	 * @param startDate - the start date
 	 * @param endDate - the end date
-	 * @return
+	 * @return the days between
 	 */
 	public static long getDaysBetween(Date startDate, Date endDate) {
 		
@@ -28,6 +39,13 @@ public class TimeManager {
 		return daysBetween;
 	}
 	
+	/**
+	 * Gets the max date.
+	 *
+	 * @param first the first
+	 * @param second the second
+	 * @return the max date
+	 */
 	public static Date getMaxDate (Date first, Date second)
 	{
 		long dayDiffrence = getDaysBetween(first, second);
@@ -41,6 +59,13 @@ public class TimeManager {
 		}
 	}
 	
+	/**
+	 * Adds the days.
+	 *
+	 * @param date the date
+	 * @param days the days
+	 * @return the date
+	 */
 	public static Date addDays(Date date, int days) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
@@ -48,6 +73,13 @@ public class TimeManager {
         return new Date(c.getTimeInMillis());
     }
 
+    /**
+     * Subtract days.
+     *
+     * @param date the date
+     * @param days the days
+     * @return the date
+     */
     public static Date subtractDays(Date date, int days) {
         Calendar c = Calendar.getInstance();
         c.setTime(date);

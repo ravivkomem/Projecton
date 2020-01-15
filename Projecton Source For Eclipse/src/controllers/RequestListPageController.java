@@ -12,21 +12,32 @@ import boundries.ProjectFX;
 import boundries.RequestListPageBoundary;
 import client.ClientConsole;
 import javafx.application.Platform;
+
+
 /**
- * request list page for specific user (Controller)
- * @author Ido Kadosh
+ * request list page for specific user (Controller).
  *
+ * @author Ido Kadosh
  */
 @SuppressWarnings("serial")
 public class RequestListPageController extends BasicController {
 	
+	/** The my boundary. */
 	private RequestListPageBoundary myBoundary;
 
+	/**
+	 * Instantiates a new request list page controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public RequestListPageController(RequestListPageBoundary myBoundary)
 	{
 		this.myBoundary=myBoundary;
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> 
@@ -60,10 +71,12 @@ public class RequestListPageController extends BasicController {
 		});
 		
 	}
+	
 	/**
-	 * this method parse all the change requests for a specific user 
-	 * @param result
-	 * @return
+	 * this method parse all the change requests for a specific user .
+	 *
+	 * @param result the result
+	 * @return the array list
 	 */
 	public ArrayList<ChangeRequest> parseSqlResultToChangeRequestArrayList(SqlResult result)
 	{
@@ -106,8 +119,9 @@ public class RequestListPageController extends BasicController {
 		
 		
 	}
+	
 	/**
-	 * this method fills the table with all the change requests for a specific user 
+	 * this method fills the table with all the change requests for a specific user.
 	 */
 	public void fillNecessaryFieldsInTable()
 	{
@@ -117,10 +131,13 @@ public class RequestListPageController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
+	
 	/**
-	 * this method executes a querey to get all the change requests for specific user with a requested date
-	 * @param from
-	 * @param to
+	 * this method executes a query to get all the change requests for specific user with a requested date.
+	 *
+	 * @param from the from
+	 * @param to the to
+	 * @return the change requests by date search
 	 */
 	public void getChangeRequestsByDateSearch(Date from,Date to)
 	{
@@ -132,9 +149,12 @@ public class RequestListPageController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	/**
-	 * this method executes a querey to get change request for specific user with a specific ID 
-	 * @param idNum
+	 * this method executes a querey to get change request for specific user with a specific ID .
+	 *
+	 * @param idNum the id num
+	 * @return the change requests by id search
 	 */
 	public void getChangeRequestsByIdSearch(Integer idNum)
 	{
@@ -145,9 +165,12 @@ public class RequestListPageController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	/**
-	 * this method executes a querey to get all the change requests for specific user with a requested status 
-	 * @param status
+	 * this method executes a query to get all the change requests for specific user with a requested status .
+	 *
+	 * @param status the status
+	 * @return the change request by status
 	 */
 	public void getChangeRequestByStatus(String status)
 	{

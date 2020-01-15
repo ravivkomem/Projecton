@@ -22,8 +22,10 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class TimeExtensionBoundary.
+ *
  * @author raviv komem
  * This class represents the time extension boundary
  * with all the methods and logic implementations
@@ -35,56 +37,82 @@ public class TimeExtensionBoundary implements DataInitializable  {
 	 * ********* FXML Objects **************
 	 * *************************************/
 	
+	/** The submit time extension button. */
 	/*Buttons*/
     @FXML
     private Button submitTimeExtensionButton;
+    
+    /** The close time extension button. */
     @FXML
     private Button closeTimeExtensionButton;
+    
+    /** The date picker. */
     /*Date Picker */
     @FXML
     private DatePicker datePicker;
+    
+    /** The time extension header text. */
     /*Text*/
     @FXML
     private Text timeExtensionHeaderText;
+    
+    /** The reason chars label. */
     @FXML
     private Label reasonCharsLabel;
+    
+    /** The reason text area. */
     /*Text Fields*/
     @FXML
     private TextArea reasonTextArea;
+    
+    /** The current step text field. */
     @FXML
     private TextField currentStepTextField;
+    
+    /** The current end date text field. */
     @FXML
     private TextField currentEndDateTextField;
+    
+    /** The loading gif. */
     /*Image View */
     @FXML
     private ImageView loadingGif;
+    
+    /** The Constant MAX_CHARS. */
     /* *************************************
 	 * ******** Static Objects *************
 	 * *************************************/
     private static final int MAX_CHARS = 140; 
     
+    /** The alert. */
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
     private Alert alert = new Alert(AlertType.NONE);
+    
+    /** The my step. */
     private Step myStep;
+    
+    /** The my controller. */
     private TimeExtensionController myController = new TimeExtensionController(this);
     
 	/* *************************************
 	 * ********* FXML Methods **************
 	 * *************************************/
     /**
-     * This method is used to close the page
-     * @param event - mouse click on "Close" button
-     * Result = the page is closed
-     */
+	 * This method is used to close the page.
+	 *
+	 * @param event - mouse click on "Close" button
+	 * Result = the page is closed
+	 */
     @FXML
     void closeTimeExtensionPage(ActionEvent event) {
     	closeTimeExtensionButton.getScene().getWindow().hide();
     }
     
     /**
-     * This method is used to submit the time extension request
+     * This method is used to submit the time extension request.
+     *
      * @param event - mouse click on "Submit Form" button
      * Result:
      * 1. Checks if all the fields are filled properly
@@ -139,7 +167,8 @@ public class TimeExtensionBoundary implements DataInitializable  {
 	 * ********* Public Methods ************
 	 * *************************************/
     /**
-     * Get the number of affected rows from the controller
+     * Get the number of affected rows from the controller.
+     *
      * @param affectedRows - database rows affected by the update
      * If it is 1 ---> correct behaviour, display success
      * else ---> display fail
@@ -172,7 +201,8 @@ public class TimeExtensionBoundary implements DataInitializable  {
     }
     
     /**
-     * Checks if there is already an open time extension
+     * Checks if there is already an open time extension.
+     *
      * @param timeExtensionCounter - How many are time extension were requested for this step
      * If the value is greater than a hard coded value than close the page and display proper error
      * else allow the page to be displayed
@@ -206,7 +236,10 @@ public class TimeExtensionBoundary implements DataInitializable  {
     }
     
     /**
-     * Initialize all the fxml objects
+     * Initialize all the fxml objects.
+     *
+     * @param arg0 the arg 0
+     * @param arg1 the arg 1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -245,7 +278,8 @@ public class TimeExtensionBoundary implements DataInitializable  {
 
 	/**
 	 * Receive object for the page initialize
-	 * Expects to be called once while loading the page
+	 * Expects to be called once while loading the page.
+	 *
 	 * @param data = Step type object
 	 * Tries to cast the object and start all the page work
 	 * else - closes the page

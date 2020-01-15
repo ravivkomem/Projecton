@@ -1,123 +1,183 @@
 package boundries;
 
 import java.net.URL;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import assets.ProjectPages;
 import assets.Toast;
 import controllers.TechManagerController;
-import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.SubsystemSupporter;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TechManagerBoundary.
+ */
 public class TechManagerBoundary implements Initializable{
 
 	/* *************************************
 	 * ********* FXML Objects **************
 	 * *************************************/
 	
+	/** The btn back. */
 	/*button*/
     @FXML
     private Button btnBack;
+    
+    /** The btn log out. */
     @FXML
     private Button btnLogOut;
+    
+    /** The btn home page. */
     @FXML
     private Button btnHomePage;
+    
+    /** The btn request list. */
     @FXML
     private Button btnRequestList;
+    
+    /** The btn employee. */
     @FXML
     private Button btnEmployee;
+    
+    /** The btn report page. */
     @FXML
     private Button btnReportPage;
+    
+    /** The view report button. */
     @FXML
     private Button viewReportButton;
+    
+    /** The view request details button. */
     @FXML
     private Button viewRequestDetailsButton;
 
+    /** The request list pane. */
     @FXML
     private AnchorPane requestListPane;
+    
+    /** The employee anchor pane. */
     @FXML
     private AnchorPane employeeAnchorPane;
+    
+    /** The report page anchor pane. */
     @FXML
     private AnchorPane reportPageAnchorPane;
+    
+    /** The report display anchor pane. */
     @FXML
     private AnchorPane reportDisplayAnchorPane;
 
+    /** The employee list table. */
     /*employee table*/
     @FXML
     private TableView<User> employeeListTable;
+    
+    /** The clm employe id. */
     @FXML
     private TableColumn<User, Integer> clmEmployeId;
+    
+    /** The Employee name column. */
     @FXML
     private TableColumn<User, String> EmployeeNameColumn;
 
+    /** The user name text field. */
     /*employee details*/
     @FXML
     private TextField userNameTextField;
+    
+    /** The email text field. */
     @FXML
     private TextField emailTextField;
+    
+    /** The position text field. */
     @FXML
     private TextField positionTextField;
+    
+    /** The number text field. */
     @FXML
     private TextField numberTextField;
+    
+    /** The department text field. */
     @FXML
     private TextField departmentTextField;
 
+    /** The hl view permission. */
     @FXML
     private Hyperlink hlViewPermission;
 
+    /** The request list table. */
     /*request list table*/
     @FXML
     private TableView<ChangeRequest> requestListTable;
+    
+    /** The request id column. */
     @FXML
     private TableColumn<ChangeRequest, Integer> requestIdColumn;
+    
+    /** The step column. */
     @FXML
     private TableColumn<ChangeRequest, String> stepColumn;
+    
+    /** The description column. */
     @FXML
     private TableColumn<ChangeRequest, String> descriptionColumn;
+    
+    /** The subsystem column. */
     @FXML
     private TableColumn<ChangeRequest, String> subsystemColumn;
 
+    /** The report type combo box. */
     @FXML
     private ComboBox<String> reportTypeComboBox;
     
+    /** The subsystem supporter table. */
     @FXML
     private TableView<SubsystemSupporter> subsystemSupporterTable;
+    
+    /** The subsystem supporter column. */
     @FXML
     private TableColumn<SubsystemSupporter, String> subsystemSupporterColumn;
     
+    /** The current change request. */
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
     private ChangeRequest currentChangeRequest;
+	
+	/** The employee user. */
 	private User employeeUser;
+	
+	/** The users. */
 	private ArrayList<User> users = new ArrayList<>(); 
+	
+	/** The my controller. */
 	TechManagerController myController = new TechManagerController(this);
+	
+	/** The request list. */
 	ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
+	
+	/** The employee list. */
 	ObservableList<User> employeeList = FXCollections.observableArrayList();
+	
+	/** The subsystem list. */
 	ObservableList<SubsystemSupporter> subsystemList = FXCollections.observableArrayList();
 
 	/* *************************************
@@ -125,8 +185,9 @@ public class TechManagerBoundary implements Initializable{
 	 * *************************************/
 	
 	/**
-	 * this method load in click on button extra details for the current change request
-	 * @param event
+	 * this method load in click on button extra details for the current change request.
+	 *
+	 * @param event the event
 	 */
     @FXML
     void loadExtraDetailsPage(MouseEvent event) {
@@ -141,8 +202,9 @@ public class TechManagerBoundary implements Initializable{
     }
 	
     /**
-     * the method load employee page when the user press on employee button
-     * @param event
+     * the method load employee page when the user press on employee button.
+     *
+     * @param event the event
      */
     @FXML
     void loadEmployeePage(MouseEvent event) {
@@ -153,8 +215,9 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * the method will close this page and open the menu page if the user press on home page button
-     * @param event
+     * the method will close this page and open the menu page if the user press on home page button.
+     *
+     * @param event the event
      */
     @FXML
     void loadHomePage(MouseEvent event) {
@@ -162,8 +225,9 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * the method will close this page and open the previous page if the user press on back button
-     * @param event
+     * the method will close this page and open the previous page if the user press on back button.
+     *
+     * @param event the event
      */
     @FXML
     void loadPreviousPage(MouseEvent event) {
@@ -171,8 +235,9 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method show the report page
-     * @param event
+     * this method show the report page.
+     *
+     * @param event the event
      */
     @FXML
     void loadReportPage(MouseEvent event) {
@@ -182,8 +247,9 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method show request list page when the user click on request list button
-     * @param event
+     * this method show request list page when the user click on request list button.
+     *
+     * @param event the event
      */
     @FXML
     void loadRequestListPage(MouseEvent event) {
@@ -194,8 +260,9 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method open the specific report that the user choose in the comboBox
-     * @param event
+     * this method open the specific report that the user choose in the comboBox.
+     *
+     * @param event the event
      */
     @FXML
     void loadSpecificReport(MouseEvent event) {
@@ -220,8 +287,9 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method open new window for the employee permission page
-     * @param event
+     * this method open new window for the employee permission page.
+     *
+     * @param event the event
      */
     @FXML
     void loagViewPermissionsPage(MouseEvent event) {
@@ -243,6 +311,11 @@ public class TechManagerBoundary implements Initializable{
 		}
     }
 
+    /**
+     * Log out user.
+     *
+     * @param event the event
+     */
     @FXML
     void logOutUser(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
@@ -255,8 +328,9 @@ public class TechManagerBoundary implements Initializable{
     
     /**
      * the method gets new employee user and replace the user in the same old user
-     * the method search the new user in the user list as per user name
-     * @param employeeNewUser
+     * the method search the new user in the user list as per user name.
+     *
+     * @param employeeNewUser the new employee list changes
      */
     public void setEmployeeListChanges(User employeeNewUser) {
     	employeeUser = employeeNewUser;
@@ -275,6 +349,9 @@ public class TechManagerBoundary implements Initializable{
 		}
     }
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		employeeAnchorPane.setVisible(false);
@@ -330,8 +407,9 @@ public class TechManagerBoundary implements Initializable{
 	}
 	
 	/**
-	 * the method gets change request list and display the list in the change request table
-	 * @param resultList
+	 * the method gets change request list and display the list in the change request table.
+	 *
+	 * @param resultList the result list
 	 */
 	public void displayChangeRequestTable(ArrayList<ChangeRequest> resultList) {
 		requestList.clear();
@@ -342,8 +420,9 @@ public class TechManagerBoundary implements Initializable{
 	}
 	
 	/**
-	 * the method gets users list and display the list in the employee table
-	 * @param resultList
+	 * the method gets users list and display the list in the employee table.
+	 *
+	 * @param resultList the result list
 	 */
 	public void displayAllTheEmployeesTable(ArrayList<User> resultList) {
 		employeeList.clear();
@@ -355,8 +434,9 @@ public class TechManagerBoundary implements Initializable{
 	}
 
 	/**
-	 * this method gets subsystem supporter list and display the list in the subsystem table
-	 * @param resultList
+	 * this method gets subsystem supporter list and display the list in the subsystem table.
+	 *
+	 * @param resultList the result list
 	 */
 	public void displaySubsystemTable(ArrayList<SubsystemSupporter> resultList) {
 		subsystemList.clear();

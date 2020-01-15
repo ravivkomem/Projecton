@@ -29,10 +29,12 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+// TODO: Auto-generated Javadoc
+
 /**
- * extra details for specific change request page (Boundary)
- * @author Ido Kadosh
+ * extra details for specific change request page (Boundary).
  *
+ * @author Ido Kadosh
  */
 public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 
@@ -40,48 +42,63 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	 * ****** FXML Objects ***********
 	 * ******************************/
 	
+	/** The current step TF. */
 	@FXML
 	private TextField currentStepTF;
 	
+	/** The estimated time for step TF. */
 	@FXML
 	private TextField estimatedTimeForStepTF;
 	
+    /** The back btn. */
     @FXML
     private Button backBtn;
     
+    /** The initiator name TF. */
     @FXML
     private TextField initiatorNameTF;
     
+    /** The sub system TF. */
     @FXML
     private TextField subSystemTF;
     
+    /** The current state desc TA. */
     @FXML
     private TextArea currentStateDescTA;
     
+    /** The Requested change desc TF. */
     @FXML
     private TextArea RequestedChangeDescTF;
     
+    /** The reason TF. */
     @FXML
     private TextArea reasonTF;
     
+    /** The comment TF. */
     @FXML
     private TextArea commentTF;
     
+    /** The Status TF. */
     @FXML
     private TextField StatusTF;
     
+    /** The files error label. */
     @FXML
     private Label filesErrorLabel;
     
+    /** The logout user. */
     @FXML
     private Button logoutUser;
     
+    /** The file list view. */
     @FXML
     private ListView<MyFile> fileListView;
     
+    /** The suspend button. */
     @FXML
     private Button suspendButton;
     
+    /** The page title. */
     @FXML
     private Text pageTitle;
 
@@ -89,12 +106,21 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
      * ********** Private Objects ***********
      * ***************************************/
     
+    /** The Constant LIST_ROW_HEIGHT. */
     private static final int LIST_ROW_HEIGHT = 24;
+    
+    /** The previous page path. */
     //private MyFile currentFile;
     private String previousPagePath;
+    
+    /** The current change request. */
     //private File downloadedFile;
     private ChangeRequest currentChangeRequest;
+    
+    /** The my controller. */
     private ExtraDetailsChangeRequestController myController = new ExtraDetailsChangeRequestController(this);
+    
+    /** The file list. */
     private ObservableList<MyFile> fileList = FXCollections.observableArrayList();
     
     /* ***************************************
@@ -102,8 +128,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
      * ***************************************/
     
     /**
-     * by pressing this button the user goes back to the prevoius page 
-     * @param event
+     * by pressing this button the user goes back to the prevoius page .
+     *
+     * @param event the event
      */
     @FXML
     void backBtn(MouseEvent event) {
@@ -119,8 +146,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     }
 
     /**
-     * by pressing this button the user disconnects from the system 
-     * @param event
+     * by pressing this button the user disconnects from the system .
+     *
+     * @param event the event
      */
     @FXML
     void logoutUser(MouseEvent event) {
@@ -128,6 +156,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		/* FXML Objects init */
@@ -167,6 +198,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see boundries.DataInitializable#initData(java.lang.Object)
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initData(Object data) {
@@ -215,9 +249,11 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 				suspendButton.setText("Un-Suspend");
 		}
 	}
+	
 	/**
-	 * this method shows all the files that uploaded for this specific request 
-	 * @param downloadedFiles
+	 * this method shows all the files that uploaded for this specific request .
+	 *
+	 * @param downloadedFiles the downloaded files
 	 */
 	public void recieveFileList(List<MyFile> downloadedFiles) {
 		if (downloadedFiles!=null && !downloadedFiles.isEmpty())
@@ -230,10 +266,12 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			filesErrorLabel.setVisible(true);
 		}
 	}
+	
 	/**
-	 * this method allows to the user to download the files if necessary 
-	 * @param myFile
-	 * @param path
+	 * this method allows to the user to download the files if necessary .
+	 *
+	 * @param myFile the my file
+	 * @param path the path
 	 */
 	private void downloadFile(MyFile myFile,String path) {
 		int i = myFile.getFileName().lastIndexOf('.');
@@ -266,10 +304,12 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		
 		
 	}
+	
 	/**
 	 * in case the user have a supervisor permission, this button allows to the supervisor to 
-	 * suspend or unsuspend a specific request 
-	 * @param event
+	 * suspend or unsuspend a specific request .
+	 *
+	 * @param event the event
 	 */
     @FXML
     void suspendChangeRequest(MouseEvent event) {

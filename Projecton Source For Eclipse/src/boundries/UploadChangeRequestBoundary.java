@@ -31,60 +31,79 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+// TODO: Auto-generated Javadoc
+
 /**
- * Upload Change Request Page (Boundary)
- * @author Ido Kadosh
+ * Upload Change Request Page (Boundary).
  *
+ * @author Ido Kadosh
  */
 public class UploadChangeRequestBoundary implements Initializable {
+	
+	/** The current state description lbl. */
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
 	@FXML
 	private Label currentStateDescriptionLbl;
 	
+	/** The change request desc lbl. */
 	@FXML
 	private Label changeRequestDescLbl;
 	
+	/** The reason lbl. */
 	@FXML
 	private Label reasonLbl;
 	
+	/** The comment lbl. */
 	@FXML
 	private Label commentLbl;
 	
+    /** The back btn. */
     @FXML
     private Button backBtn;
     
+    /** The browse btn. */
     @FXML
     private Button browseBtn;
     
+    /** The logout btn. */
     @FXML
     private Button logoutBtn;
     
+    /** The sub system combo box. */
     @FXML
     private ComboBox<String> subSystemComboBox;
     
+    /** The submit btn. */
     @FXML
     private Button submitBtn;
     
+    /** The current state description field. */
     @FXML
     private TextArea currentStateDescriptionField;
     
+    /** The change request description field. */
     @FXML
     private TextArea changeRequestDescriptionField;
     
+    /** The reason TA. */
     @FXML
     private TextArea reasonTA;
     
+    /** The comment field. */
     @FXML
     private TextArea commentField;
     
+    /** The files list view. */
     @FXML
     private ListView<MyFile> filesListView;
     
+    /** The file quantity label. */
     @FXML
     private Label fileQuantityLabel;
     
+    /** The file size label. */
     @FXML
     private Label fileSizeLabel;
     
@@ -92,27 +111,44 @@ public class UploadChangeRequestBoundary implements Initializable {
      * *********** Static Object **************
      * ****************************************/
     
+    /** The Constant MAX_CHAR. */
     private static final int MAX_CHAR = 100;
+    
+    /** The Constant LIST_ROW_HEIGHT. */
     private static final int LIST_ROW_HEIGHT = 24; // List element height is 24px
+    
+    /** The Constant FILE_QUANTITY_LIMIT. */
     private static final int FILE_QUANTITY_LIMIT = 3;
+    
+    /** The Constant FILE_SIZE_LIMIT_MB. */
     private static final int FILE_SIZE_LIMIT_MB = 5;
     
     /* ****************************************
      * ********** Private Object **************
      * ****************************************/
     
+    /** The my controller. */
     private UploadChangeRequestController myController= new UploadChangeRequestController(this);////connection to my controller 
+    
+    /** The new change request. */
     private ChangeRequest newChangeRequest;
+    
+    /** The current step. */
     private final String CURRENT_STEP = "ANALYZER_AUTO_APPOINT";
+    
+    /** The list view data. */
     private ObservableList<MyFile> listViewData = FXCollections.observableArrayList();
+    
+    /** The is over quantity limit. */
     private boolean isOverQuantityLimit = false;
 	    
     /* ************************************** *
      * ********** FXML Methods Implementation *
      * ************************************** */
     /**
-     * in case this button pressed its open a fileChooser window for user to choose which files to upload  
-     * @param event
+     * in case this button pressed its open a fileChooser window for user to choose which files to upload  .
+     *
+     * @param event the event
      */
     @FXML
     void BrowseFileToUpload(MouseEvent event) {
@@ -138,17 +174,21 @@ public class UploadChangeRequestBoundary implements Initializable {
     		}
     	}
     }
+    
     /**
-     * move the user back to the home page 
-     * @param event
+     * move the user back to the home page .
+     *
+     * @param event the event
      */
     @FXML
     void backToHomePage(MouseEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
+    
     /**
      * disconnect the user from the system and update the data base. 
-     * @param event
+     *
+     * @param event the event
      */
     @FXML
     void logoutUser(MouseEvent event) {
@@ -160,8 +200,9 @@ public class UploadChangeRequestBoundary implements Initializable {
      * this method called when pressed the submit button while user upload a new change request 
      * here I am building the change request from the gui page and send it to the controller, in case the user 
      * did not fill a necessary field it shows a message that alert the user to fill all the necessary fields 
-     * and just after all the fields are filled the user can submit the change request 
-     * @param event
+     * and just after all the fields are filled the user can submit the change request .
+     *
+     * @param event the event
      */
     @FXML
     void uploadNewChangeRequest(MouseEvent event) {	
@@ -197,11 +238,13 @@ public class UploadChangeRequestBoundary implements Initializable {
 			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
     	}
     }
+    
     /**
      * This method gets a change request id and checks whether the change request uploaded successfully to the data base 
      * if there was no problems it calls popUpWindowMessage function that inform the user with the new change request id, else
-     * shows an error message 
-     * @param changeRequestId
+     * shows an error message .
+     *
+     * @param changeRequestId the change request id
      */
     /*incase the query succeeded display window with the new change request id */
     public void displayChangeRequestId(int changeRequestId){
@@ -227,8 +270,9 @@ public class UploadChangeRequestBoundary implements Initializable {
     
     /**
      * This method gets the id of the uploaded file as an integer variable, in case the variable is equal to 1 it means that the upload 
-     * of the file passed successfully, else make a toast and alert the user that the upload failed 
-     * @param fileID
+     * of the file passed successfully, else make a toast and alert the user that the upload failed .
+     *
+     * @param fileID the file ID
      */
     public void recieveFileUploadId(int fileID)
     {
@@ -241,12 +285,14 @@ public class UploadChangeRequestBoundary implements Initializable {
     		Toast.makeText(ProjectFX.mainStage, "File had problems with upload", 1500, 500, 500);
     	}
     }
+    
     /**
-     * This method will shows a pop-up window with new change request id after the change request id submitted by user 
-     * @param alert
-     * @param msg
-     * @param mess
-     * @return
+     * This method will shows a pop-up window with new change request id after the change request id submitted by user .
+     *
+     * @param alert the alert
+     * @param msg the msg
+     * @param mess the mess
+     * @return the optional
      */
 	public static Optional<ButtonType> popUpWindowMessage(AlertType alert, String msg, String mess) {
 		Alert alert2 = new Alert(alert);
@@ -254,6 +300,10 @@ public class UploadChangeRequestBoundary implements Initializable {
 		alert2.setHeaderText(mess);
 		return alert2.showAndWait();
 	}
+	
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	/*initialize the combo box in this gui page  */
 	public void initialize(URL location, ResourceBundle resources) {

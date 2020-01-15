@@ -26,8 +26,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class TesterBoundary.
+ *
  * @author raviv komem
  * This class represents the tester boundary
  * with all the methods and logic implementations
@@ -35,99 +37,175 @@ import javafx.stage.Stage;
  */
 public class TesterBoundary implements DataInitializable {
 
+	/** The Fail details pane. */
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
     @FXML
     private AnchorPane FailDetailsPane;
+    
+    /** The charcter counter label. */
     @FXML
     private Label charcterCounterLabel;
+    
+    /** The time display text. */
     @FXML
     private Text timeDisplayText;
+    
+    /** The timeremaining field. */
     @FXML
     private TextArea timeremainingField;
+    
+    /** The back button. */
     @FXML
     private Button backButton;
+    
+    /** The submit test results button. */
     @FXML
     private Button submitTestResultsButton;
+    
+    /** The reportfail button. */
     @FXML
     private Button reportfailButton;
+    
+    /** The failure report text area. */
     @FXML
     private TextArea failureReportTextArea;
+    
+    /** The logout button. */
     @FXML
     private Button logoutButton;
+    
+    /** The homepage button. */
     @FXML
     private Button homepageButton;
+    
+    /** The analysisreport button. */
     @FXML
     private Button analysisreportButton;
+    
+    /** The time extension button. */
     @FXML
     private Button timeExtensionButton;
+    
+    /** The page header text. */
     @FXML
     private Text pageHeaderText;
+    
+    /** The test work pane. */
     @FXML
     private AnchorPane testWorkPane;
     
+    /** The test 1 text. */
     /* Test texts */
     @FXML
     private Text test1Text;
+    
+    /** The test 2 text. */
     @FXML
     private Text test2Text;
+    
+    /** The test 3 text. */
     @FXML
     private Text test3Text;
+    
+    /** The test 4 text. */
     @FXML
     private Text test4Text;
+    
+    /** The test 5 text. */
     @FXML
     private Text test5Text;
 
+    /** The test 1 pass radio button. */
     /* Radio Buttons */
     @FXML
     private RadioButton test1PassRadioButton;
+    
+    /** The test 1 fail radio button. */
     @FXML
     private RadioButton test1FailRadioButton;
+    
+    /** The test 2 pass radio button. */
     @FXML
     private RadioButton test2PassRadioButton;
+    
+    /** The test 2 fail radio button. */
     @FXML
     private RadioButton test2FailRadioButton;
+    
+    /** The test 3 pass radio button. */
     @FXML
     private RadioButton test3PassRadioButton;
+    
+    /** The test 3 fail radio button. */
     @FXML
     private RadioButton test3FailRadioButton;
+    
+    /** The test 4 pass radio button. */
     @FXML
     private RadioButton test4PassRadioButton;
+    
+    /** The test 4 fail radio button. */
     @FXML
     private RadioButton test4FailRadioButton;
+    
+    /** The test 5 pass radio button. */
     @FXML
     private RadioButton test5PassRadioButton;
+    
+    /** The test 5 fail radio button. */
     @FXML
     private RadioButton test5FailRadioButton;
 
+    /** The Constant MAX_CHARS. */
     /* ****************************************
      * ********** Static Objects **************
      * ****************************************/
     private static final int MAX_CHARS = 600;
     
+    /** The my controller. */
     /* ****************************************
      * ********** Private Objects *************
      * ****************************************/
     private TesterController myController = new TesterController(this);
+    
+    /** The test 1 group. */
     private final ToggleGroup test1Group = new ToggleGroup();
+    
+    /** The test 2 group. */
     private final ToggleGroup test2Group = new ToggleGroup();
+    
+    /** The test 3 group. */
     private final ToggleGroup test3Group = new ToggleGroup();
+    
+    /** The test 4 group. */
     private final ToggleGroup test4Group = new ToggleGroup();
+    
+    /** The test 5 group. */
     private final ToggleGroup test5Group = new ToggleGroup();
+    
+    /** The current change request. */
     private ChangeRequest currentChangeRequest;
+	
+	/** The tester step. */
 	private Step testerStep;
+	
+	/** The my time extension stage. */
 	private Stage myTimeExtensionStage;
+	
+	/** The my analysis report stage. */
 	private Stage myAnalysisReportStage;
 	
     /* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
 	/**
-	 * This method is used to log out from the system
-	 * @param event - mouse click on "logout" button
-	 * Logout the user and moves to the login page
-	 */
+     * This method is used to log out from the system.
+     *
+     * @param event - mouse click on "logout" button
+     * Logout the user and moves to the login page
+     */
     @FXML
     void LogOut(MouseEvent event) {
     	closeMyStages();
@@ -136,10 +214,11 @@ public class TesterBoundary implements DataInitializable {
     }
 
     /**
-	 * This method is used to load the home page
-	 * @param event - mouse click on "Home" button
-	 * Moves the main stage to the login page
-	 */
+     * This method is used to load the home page.
+     *
+     * @param event - mouse click on "Home" button
+     * Moves the main stage to the login page
+     */
 	@FXML
     void loadHomePage(MouseEvent event) {
 		closeMyStages();
@@ -147,7 +226,8 @@ public class TesterBoundary implements DataInitializable {
     }
 
 	/**
-	 * This method is used to load the previous page
+	 * This method is used to load the previous page.
+	 *
 	 * @param event - mouse click on "Back" button
 	 * Moves the main stage to the previous page
 	 */
@@ -158,10 +238,11 @@ public class TesterBoundary implements DataInitializable {
     }
 
     /**
-	 * This method is used to open additional page for requesting time extension
-	 * @param event - mouse click on "Time Extension" button
-	 * Another stage is displayed
-	 */
+     * This method is used to open additional page for requesting time extension.
+     *
+     * @param event - mouse click on "Time Extension" button
+     * Another stage is displayed
+     */
     @FXML
     void loadTimeExtensionPage(MouseEvent event) {
     	if (myTimeExtensionStage == null) {
@@ -176,10 +257,11 @@ public class TesterBoundary implements DataInitializable {
     }
     
     /**
-	 * This method is used to open additional page for displaying analysis report
-	 * @param event - mouse click on "Analysis report" button
-	 * Another stage is displayed
-	 */
+     * This method is used to open additional page for displaying analysis report.
+     *
+     * @param event - mouse click on "Analysis report" button
+     * Another stage is displayed
+     */
     @FXML
     void loadAnalysisReport(MouseEvent event) {
     	if (myAnalysisReportStage == null) {
@@ -194,10 +276,11 @@ public class TesterBoundary implements DataInitializable {
     }
 
     /**
-	 * This method is used to report the test fail
-	 * @param event - mouse click on "Submit Report Fail" button
-	 * Updates the database accordingly and moves back to the workstation page
-	 */
+     * This method is used to report the test fail.
+     *
+     * @param event - mouse click on "Submit Report Fail" button
+     * Updates the database accordingly and moves back to the workstation page
+     */
     @FXML
     void setReportFail(MouseEvent event) {
 		if (failureReportTextArea.getText().equals("")) {
@@ -214,13 +297,14 @@ public class TesterBoundary implements DataInitializable {
     }
 
     /**
-	 * This method is used to submit the the test results
-	 * @param event - mouse click on "Submit Test Results" button
-	 * 1. Opens confirmation alert for the submission
-	 * 2. Checks if all fields are filled properly
-	 * 3. If all tests passed ---> Updates the database accordingly and moves back to the workstation page
-	 * else --> Display report fail pane 
-	 */
+     * This method is used to submit the the test results.
+     *
+     * @param event - mouse click on "Submit Test Results" button
+     * 1. Opens confirmation alert for the submission
+     * 2. Checks if all fields are filled properly
+     * 3. If all tests passed ---> Updates the database accordingly and moves back to the workstation page
+     * else --> Display report fail pane
+     */
     @FXML
     void submitTestResults(MouseEvent event) {
     	Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -294,7 +378,8 @@ public class TesterBoundary implements DataInitializable {
      * ********** Public Methods ***************
      * *****************************************/
     /**
-	 * This method is called by the controller after receiving database update results
+	 * This method is called by the controller after receiving database update results.
+	 *
 	 * @param affectedRows - number of rows in the database that were affected
 	 * According to the value will display proper message
 	 */
@@ -307,7 +392,10 @@ public class TesterBoundary implements DataInitializable {
     }
 
     /**
-     * Init all the FXML objects in the boundary
+     * Init all the FXML objects in the boundary.
+     *
+     * @param location the location
+     * @param resources the resources
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -364,7 +452,9 @@ public class TesterBoundary implements DataInitializable {
 
 	/**
 	 * Expects to be called on the initialize of the boundary
-	 * will receive change request object
+	 * will receive change request object.
+	 *
+	 * @param data the data
 	 */
 	@Override
 	public void initData(Object data) {
@@ -374,7 +464,8 @@ public class TesterBoundary implements DataInitializable {
 
 	/**
 	 * Called by the boundary controller,
-	 * After retrieving the proper step from the database of the current change request
+	 * After retrieving the proper step from the database of the current change request.
+	 *
 	 * @param recievedStep - Current tester step object
 	 * Allows the work on this page to start
 	 */
@@ -393,7 +484,7 @@ public class TesterBoundary implements DataInitializable {
      * ********** Private Methods **************
      * *****************************************/
 	/**
-	 * Method to close all the opened stages from this page
+	 * Method to close all the opened stages from this page.
 	 */
 	private void closeMyStages() {
     	if (!(myTimeExtensionStage == null))
@@ -403,7 +494,8 @@ public class TesterBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * Method to display the time remaining from the estimated end date to current date
+	 * Method to display the time remaining from the estimated end date to current date.
+	 *
 	 * @param estimatedEndDate - Change request estimated end date
 	 * Will display proper text in the time remaining text field
 	 */
@@ -424,7 +516,8 @@ public class TesterBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * Method to check if all the tests were conducted
+	 * Method to check if all the tests were conducted.
+	 *
 	 * @param answer1 - Test1 answer
 	 * @param answer2 - Test2 answer
 	 * @param answer3 - Test3 answer

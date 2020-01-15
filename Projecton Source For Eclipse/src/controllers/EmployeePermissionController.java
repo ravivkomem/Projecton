@@ -10,24 +10,33 @@ import client.ClientConsole;
 import javafx.application.Platform;
 
 /**
- * 
+ * The Class EmployeePermissionController.
+ *
  * @author Lee Hugi
  * This controller handle with the employee permission page
- *
  */
+@SuppressWarnings("serial")
 public class EmployeePermissionController extends BasicController{
 
+	/** My employeePermission boundary */
+	@SuppressWarnings("unused")
 	private EmployeePermissionBoundary myBoundary;
 	
+	/**
+	 * Instantiates a new employee permission controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public EmployeePermissionController(EmployeePermissionBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
 
 	/**
-	 * this method create sql query that update employee permission in user table
-	 * @param permission
-	 * @param jobDescription
-	 * @param id
+	 * this method create sql query that update employee permission in user table.
+	 *
+	 * @param permission the permission
+	 * @param jobDescription the job description
+	 * @param id the id
 	 */
 	public void updateEmployeePermission(String permission, String jobDescription, int id) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -40,9 +49,10 @@ public class EmployeePermissionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query that update subsystem supporter table
-	 * @param subsystem
-	 * @param userName
+	 * this method create sql query that update subsystem supporter table.
+	 *
+	 * @param subsystem the subsystem
+	 * @param userName the user name
 	 */
 	public void updateSubsystemSupporter(String subsystem,String userName) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -53,6 +63,9 @@ public class EmployeePermissionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {

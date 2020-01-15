@@ -18,36 +18,48 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+// TODO: Auto-generated Javadoc
 /**
- * This is the login page boundary
- * @author Raviv Komem
+ * This is the login page boundary.
  *
+ * @author Raviv Komem
  */
 public class LoginPageBoundary implements Initializable{
 
+	/** The user name text field. */
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
     @FXML
     private TextField userNameTextField;
+    
+    /** The user password field. */
     @FXML
     private PasswordField userPasswordField;
+    
+    /** The sign in button. */
     @FXML
     private Button signInButton;
+    
+    /** The login loading image view. */
     @FXML
     private ImageView loginLoadingImageView;
     
+    /** The my controller. */
     /* ***************************************
      * ********** Private Objects ************
      * ***************************************/
     private LoginController myController = new LoginController(this);
+    
+    /** The login attempts. */
     private int loginAttempts = 0;
     
     /* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
     /**
-     * This method is used in order to attem user sign in
+     * This method is used in order to attem user sign in.
+     *
      * @param event - Mouse click on "sign in" button
      */
     @FXML
@@ -67,7 +79,8 @@ public class LoginPageBoundary implements Initializable{
     }
     
     /**
-     * This method is used to handle user attepmpt information from the controller
+     * This method is used to handle user attepmpt information from the controller.
+     *
      * @param resultUser - the user with the password and username entered by user
      */
     public void handleUserAttempInformation(User resultUser)
@@ -98,6 +111,9 @@ public class LoginPageBoundary implements Initializable{
     	}
     }
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		loginLoadingImageView.setVisible(false);

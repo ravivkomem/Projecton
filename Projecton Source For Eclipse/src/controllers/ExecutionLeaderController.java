@@ -24,12 +24,13 @@ public class ExecutionLeaderController extends BasicController {
 	
 	public ExecutionLeaderController(ExecutionLeaderBoundry myBoundry) {
 		this.myBoundry = myBoundry;
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
-	 * @param changeRequestID
-	 *	This method initialize step 
+	 * Gets the execution step by change request id.
+	 *
+	 * @param changeRequestID 	This method initialize step
+	 * @return the execution step by change request id
 	 */
 	public void getExecutionStepByChangeRequestId(Integer changeRequestID)
 	{
@@ -41,9 +42,11 @@ public class ExecutionLeaderController extends BasicController {
 	}
 	
 	/**
-	 * 
-	 * @param changeRequestID
-	 * This method update DB change request step to execution approve time
+	 * Update chnage request current step.
+	 *
+	 * @param newStep the new step
+	 * @param handlerUserName the handler user name
+	 * @param changeRequestID This method update DB change request step to execution approve time
 	 */
 	public void updateChnageRequestCurrentStep(String newStep ,String handlerUserName, Integer changeRequestID)
 	{

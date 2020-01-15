@@ -14,7 +14,6 @@ import controllers.Utilizer;
 import entities.ActivityReport;
 import entities.ChangeRequest;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -24,15 +23,16 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class ActivityReportBoundary.
+ *
  * @author Lee Hugi
  * This class control the activity report page
- *
  */
 public class ActivityReportBoundary implements Initializable {
 
@@ -40,37 +40,68 @@ public class ActivityReportBoundary implements Initializable {
 	 * ********* FXML Objects **************
 	 * *************************************/
 
+	/** The start date picker. */
 	@FXML
 	private DatePicker startDatePicker;
+	
+	/** The end date picker. */
 	@FXML
 	private DatePicker endDatePicker;
+	
+	/** The show details button. */
 	@FXML
 	private Button showDetailsButton;
 
+	/** The activity report details pane. */
 	@FXML
 	private AnchorPane activityReportDetailsPane;
+	
+	/** The request status pie chart. */
 	@FXML
 	private PieChart requestStatusPieChart;
+	
+	/** The median text field. */
 	@FXML
 	private TextField medianTextField;
+	
+	/** The std text field. */
 	@FXML
 	private TextField stdTextField;
+    
+    /** The work days bar chart. */
     @FXML
     private BarChart<String, Number> workDaysBarChart;
+    
+    /** The work days chart bar category. */
     @FXML
     private CategoryAxis workDaysChartBarCategory;
+    
+    /** The Days number bar chart. */
     @FXML
     private NumberAxis DaysNumberBarChart;
 
-	 /* *************************************
+	 /** The my controller. */
+ 	/* *************************************
 	  * ******* Private Objects *************
 	  * *************************************/
 	private ActivityReportController myController = new ActivityReportController(this);
+	
+	/** The activity report. */
 	private ActivityReport activityReport;
+	
+	/** The change request list. */
 	private ArrayList<ChangeRequest> changeRequestList;
+	
+	/** The Constant FIRST_CATAGORY. */
 	private static final String FIRST_CATAGORY = "0-10";
+	
+	/** The Constant SECOND_CATAGORY. */
 	private static final String SECOND_CATAGORY = "10-20";
+	
+	/** The Constant THIRD_CATAGORY. */
 	private static final String THIRD_CATAGORY = "20-30";
+	
+	/** The Constant FOURTH_CATAGORY. */
 	private static final String FOURTH_CATAGORY = "30+";
 
 	/* *************************************
@@ -78,8 +109,9 @@ public class ActivityReportBoundary implements Initializable {
 	 * *************************************/
 
 	/**
-	 * This method display in the diagrams the report details
-	 * @param event
+	 * This method display in the diagrams the report details.
+	 *
+	 * @param event the event
 	 */
 	@FXML
 	void showActivityReportDetails(MouseEvent event) {
@@ -114,8 +146,9 @@ public class ActivityReportBoundary implements Initializable {
 
 	/**
 	 * this method gets ChangeRequest list
-	 * and create an ActivityReport
-	 * @param requestList
+	 * and create an ActivityReport.
+	 *
+	 * @param requestList the request list
 	 */
 	public void createActivityReportList(ArrayList<ChangeRequest> requestList) {
 		Date endDate = Date.valueOf(endDatePicker.getValue());
@@ -161,9 +194,10 @@ public class ActivityReportBoundary implements Initializable {
 	}
 	
 	/**
-	 * this method display the report in the page
-	 * @param report
-	 * @param workDays 
+	 * this method display the report in the page.
+	 *
+	 * @param report the report
+	 * @param workDays the work days
 	 */
 	private void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
 		int[] workDaysArray;
@@ -197,9 +231,10 @@ public class ActivityReportBoundary implements Initializable {
 	
 	/**
 	 * the method gets ArrayList of all the work days
-	 * sorting the days in 4 category 0-10,10-20,20-30,30+ days
-	 * @param workDays
-	 * @return
+	 * sorting the days in 4 category 0-10,10-20,20-30,30+ days.
+	 *
+	 * @param workDays the work days
+	 * @return the int[]
 	 */
 	public int[] workDaysCalc(ArrayList<Long> workDays) {
 		int[] list = { 0, 0, 0, 0 };
@@ -216,6 +251,9 @@ public class ActivityReportBoundary implements Initializable {
 		return list;
 	}
 
+	/* (non-Javadoc)
+	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		activityReportDetailsPane.setVisible(false);

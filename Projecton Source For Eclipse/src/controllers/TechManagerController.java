@@ -9,26 +9,36 @@ import assets.SqlResult;
 import boundries.TechManagerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
-import entities.CommitteeComment;
 import entities.SubsystemSupporter;
 import entities.User;
 import javafx.application.Platform;
 
 /**
- * 
+ * The Class TechManagerController.
+ *
  * @author Lee Hugi
- *This controller handle with the Tech Manager page
+ * This controller handle with the Tech Manager page
  */
 
+@SuppressWarnings("serial")
 public class TechManagerController extends BasicController {
+	
+	/** The my boundary. */
 	private TechManagerBoundary myBoundary;
 
+	/**
+	 * Instantiates a new tech manager controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public TechManagerController(TechManagerBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
 
 	/**
-	 * this method create sql query that ask for all the change request in the data base
+	 * this method create sql query that ask for all the change request in the data base.
+	 *
+	 * @return the all the active change request
 	 */
 	public void getAllTheActiveChangeRequest() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS, new ArrayList<Object>());
@@ -37,7 +47,9 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * this method crate sql query that ask for all the information engineer from the data base
+	 * this method crate sql query that ask for all the information engineer from the data base.
+	 *
+	 * @return the all the employee
 	 */
 	public void getAllTheEmployee() {
 				SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, new ArrayList<Object>());
@@ -46,8 +58,10 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that ask for all the subsystem for specific user
-	 * @param userName
+	 * this method create sql query that ask for all the subsystem for specific user.
+	 *
+	 * @param userName the user name
+	 * @return the subsystem supporter by user name
 	 */
 	public void getSubsystemSupporterByUserName(String userName) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -57,6 +71,9 @@ public class TechManagerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -81,9 +98,10 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * return array list of subsystem supporter from the data base result
-	 * @param result
-	 * @return
+	 * return array list of subsystem supporter from the data base result.
+	 *
+	 * @param result the result
+	 * @return the array list
 	 */
 	private ArrayList<SubsystemSupporter> createSubsystemSupporter(SqlResult result){
 		ArrayList<SubsystemSupporter> list = new ArrayList<>();
@@ -95,8 +113,9 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * The method create from result ChangeRequest list
-	 * @param result
+	 * The method create from result ChangeRequest list.
+	 *
+	 * @param result the result
 	 * @return change request list
 	 */
 	private ArrayList<ChangeRequest> createChangeRequestFromResult(SqlResult result){
@@ -111,8 +130,9 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * The method create from result User list
-	 * @param result
+	 * The method create from result User list.
+	 *
+	 * @param result the result
 	 * @return user list
 	 */
 	private ArrayList<User> createUserListFromResult(SqlResult result){

@@ -13,16 +13,30 @@ import client.ClientConsole;
 import entities.ChangeRequest;
 import javafx.application.Platform;
 
+/**
+ * The Class WorkStationController.
+ *
+ * @author Raviv Komem
+ */
 @SuppressWarnings("serial")
 public class WorkStationController extends BasicController{
 
+	/** The my boundary. */
 	private WorkStationBoundary myBoundary;
 
+	/**
+	 * Instantiates a new work station controller.
+	 *
+	 * @param workStationBoundary the work station boundary
+	 */
 	public WorkStationController (WorkStationBoundary workStationBoundary)
 	{
 		this.myBoundary = workStationBoundary;
 	}
 	
+	/**
+	 * Select all change request.
+	 */
 	public void selectAllChangeRequest()
 	{
 		SqlQueryType requiredSqlQueryType;
@@ -52,6 +66,9 @@ public class WorkStationController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * Select analysis step change request.
+	 */
 	public void selectAnalysisStepChangeRequest()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -62,6 +79,9 @@ public class WorkStationController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * Select committee step change request.
+	 */
 	public void selectCommitteeStepChangeRequest()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -71,6 +91,9 @@ public class WorkStationController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * Select execution step change request.
+	 */
 	public void selectExecutionStepChangeRequest()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -82,6 +105,9 @@ public class WorkStationController extends BasicController{
 	}
 	
 	
+	/**
+	 * Select tester appoint step change request.
+	 */
 	public void selectTesterAppointStepChangeRequest()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -91,6 +117,9 @@ public class WorkStationController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * Select tester step change request.
+	 */
 	public void selectTesterStepChangeRequest()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -102,6 +131,9 @@ public class WorkStationController extends BasicController{
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		
@@ -155,6 +187,12 @@ public class WorkStationController extends BasicController{
 		return;
 	}
 	
+	/**
+	 * Parses the result to change request list.
+	 *
+	 * @param result the result
+	 * @return the array list
+	 */
 	private ArrayList<ChangeRequest> parseResultToChangeRequestList (SqlResult result)
 	{
 		ArrayList<ChangeRequest> changeRequestList = new ArrayList<ChangeRequest>();

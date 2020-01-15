@@ -14,23 +14,35 @@ import entities.ChangeRequest;
 import entities.MyFile;
 import javafx.application.Platform;
 import java.math.BigInteger; 
+
+
 /**
- * Upload Change Request Page (Controller)
- * @author Ido Kadosh
+ * Upload Change Request Page (Controller).
  *
+ * @author Ido Kadosh
  */
 @SuppressWarnings("serial")
 public class UploadChangeRequestController extends BasicController {
 
+	/** The my boundary. */
 	private UploadChangeRequestBoundary myBoundary;
+	
+	/** The current change request. */
 	private ChangeRequest currentChangeRequest;
 	
+	/**
+	 * Instantiates a new upload change request controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public UploadChangeRequestController(UploadChangeRequestBoundary myBoundary){
 		this.myBoundary=myBoundary;//connection to my boundary  
 	}
+	
 	/**
-	 * Building the change request with the data from the boundary 
-	 * @param newchangerequest
+	 * Building the change request with the data from the boundary .
+	 *
+	 * @param newchangerequest the newchangerequest
 	 */
 	public void buildChangeRequestBeforeSendToDataBase(ChangeRequest newchangerequest)
 	{
@@ -38,8 +50,9 @@ public class UploadChangeRequestController extends BasicController {
 		this.appointHandlerBySystemRequired();//pick the analyzer randomly 
 		
 	}
+	
 	/**
-	 * After all tests passed in the boundary and built the change request update the data base 
+	 * After all tests passed in the boundary and built the change request update the data base.
 	 */
 	private void uploadTheInsertedNewChangeRequestToDataBase()
 	{
@@ -63,10 +76,12 @@ public class UploadChangeRequestController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	/**
-	 * in case the user chose to upload file with the change request save the file on the server for reuse 
-	 * @param filesToUploadList
-	 * @param chnageRequestId
+	 * in case the user chose to upload file with the change request save the file on the server for reuse .
+	 *
+	 * @param filesToUploadList the files to upload list
+	 * @param chnageRequestId the chnage request id
 	 */
 	public void sendFilesToServer(List<MyFile> filesToUploadList, Integer chnageRequestId)
 	{
@@ -95,6 +110,10 @@ public class UploadChangeRequestController extends BasicController {
 			}
 		}
 	}
+	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		
@@ -148,7 +167,7 @@ public class UploadChangeRequestController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}*/
 	/**
-	 * this method calls a querey to update change request with the necessary handler 
+	 * this method calls a querey to update change request with the necessary handler.
 	 */
 	public void appointHandlerBySystemRequired()
 	{

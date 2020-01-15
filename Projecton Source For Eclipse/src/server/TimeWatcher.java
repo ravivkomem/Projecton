@@ -13,17 +13,36 @@ import assets.SqlResult;
 import entities.Step;
 import controllers.TimeManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TimeWatcher.
+ */
 public class TimeWatcher implements Runnable {
 
+	/** The email TLS. */
 	EmailTLS emailTLS;
+	
+	/** The sql connection. */
 	private MysqlConnection sqlConnection;
+	
+	/** The last day watch. */
 	private Date lastDayWatch;
+	
+	/** The one day remaining steps. */
 	private Collection<Step> oneDayRemainingSteps;
+	
+	/** The time passed steps. */
 	private Collection<Step> timePassedSteps;
+	
+	/** The high mangement mails. */
 	private Collection<String> highMangementMails;
 	
+	/** The Constant MILLIES_DELAY_TIME_BETWEEN_EMAILS. */
 	private static final long MILLIES_DELAY_TIME_BETWEEN_EMAILS = 7000;
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		/* Initialize all the private objects */
@@ -46,6 +65,9 @@ public class TimeWatcher implements Runnable {
 		}
 	}
 	
+	/**
+	 * Sleep until next day.
+	 */
 	private void sleepUntilNextDay() {
 		
 		Calendar c = Calendar.getInstance();
@@ -80,6 +102,11 @@ public class TimeWatcher implements Runnable {
 		
 	}
 
+	/**
+	 * Gets the steps with one day remaining.
+	 *
+	 * @return the steps with one day remaining
+	 */
 	private void getStepsWithOneDayRemaining() 
 	{
 		oneDayRemainingSteps.clear();
@@ -92,6 +119,11 @@ public class TimeWatcher implements Runnable {
 		
 	}
 	
+	/**
+	 * Gets the steps with time exception.
+	 *
+	 * @return the steps with time exception
+	 */
 	private void getStepsWithTimeException() {
 		timePassedSteps.clear();
 		
@@ -102,6 +134,11 @@ public class TimeWatcher implements Runnable {
 		timePassedSteps.addAll(stepCollection);
 	}
 	
+	/**
+	 * Gets the high mangement mails.
+	 *
+	 * @return the high mangement mails
+	 */
 	private void getHighMangementMails() {
 		highMangementMails.clear();
 		
@@ -115,11 +152,17 @@ public class TimeWatcher implements Runnable {
 		}
 	}
 	
+	/**
+	 * Send mails.
+	 */
 	private void sendMails() {
 		sendOneDayRemainingMails();
 		sendTimePassedMails();
 	}
 
+	/**
+	 * Send one day remaining mails.
+	 */
 	private void sendOneDayRemainingMails()
 	{
 		for (Step s : oneDayRemainingSteps)
@@ -140,6 +183,9 @@ public class TimeWatcher implements Runnable {
 		}
 	}
 	
+	/**
+	 * Send time passed mails.
+	 */
 	private void sendTimePassedMails() {
 		for (Step s : timePassedSteps)
 		{
@@ -160,6 +206,12 @@ public class TimeWatcher implements Runnable {
 		
 	}
 
+	/**
+	 * Gets the email address of user.
+	 *
+	 * @param userName the user name
+	 * @return the email address of user
+	 */
 	private String getEmailAddressOfUser(String userName) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		varArray.add(userName);
@@ -169,6 +221,12 @@ public class TimeWatcher implements Runnable {
 		return (String)sqlResult.getResultData().get(0).get(0);
 	}
 	
+	/**
+	 * Gets the full name of user.
+	 *
+	 * @param userName the user name
+	 * @return the full name of user
+	 */
 	private String getFullNameOfUser(String userName)
 	{
 		ArrayList<Object> varArray = new ArrayList<Object>();

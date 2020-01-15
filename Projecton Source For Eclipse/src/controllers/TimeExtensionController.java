@@ -10,16 +10,34 @@ import boundries.TimeExtensionBoundary;
 import entities.Step;
 import javafx.application.Platform;
 
+/**
+ * The Class TimeExtensionController.
+ *
+ * @author Raviv Komem
+ */
 @SuppressWarnings("serial")
 public class TimeExtensionController extends BasicController {
 
+	/** The my boundary. */
 	private TimeExtensionBoundary myBoundary;
 	
+	/**
+	 * Instantiates a new time extension controller.
+	 *
+	 * @param timeExtensionBoundary the time extension boundary
+	 */
 	public TimeExtensionController (TimeExtensionBoundary timeExtensionBoundary)
 	{
 		this.myBoundary = timeExtensionBoundary;
 	}
 	
+	/**
+	 * Submit time extension request.
+	 *
+	 * @param step the step
+	 * @param newEstimatedEndDate the new estimated end date
+	 * @param timeExtensionReason the time extension reason
+	 */
 	public void submitTimeExtensionRequest(Step step, Date newEstimatedEndDate, String timeExtensionReason)
 	{
 		/*Creating the SqlAction */
@@ -34,6 +52,11 @@ public class TimeExtensionController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Verify no previous extensions.
+	 *
+	 * @param step the step
+	 */
 	public void verifyNoPreviousExtensions(Step step)
 	{
 		/*Creating the SqlAction */
@@ -45,6 +68,9 @@ public class TimeExtensionController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {

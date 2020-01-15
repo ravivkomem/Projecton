@@ -20,38 +20,61 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+// TODO: Auto-generated Javadoc
 /**
- * This is the boundary for the performance report displayed on the tech manager page
- * @author Raviv Komem
+ * This is the boundary for the performance report displayed on the tech manager page.
  *
+ * @author Raviv Komem
  */
 public class PerformanceReportBoundary implements Initializable {
 
+	/** The extension days bar chart. */
 	/* *************************************
 	 * ********* FXML Objects **************
 	 * *************************************/
     @FXML
     private BarChart<String, Number> extensionDaysBarChart;
+    
+    /** The change request step catagory axis. */
     @FXML
     private CategoryAxis changeRequestStepCatagoryAxis;
+    
+    /** The extension days number axis. */
     @FXML
     private NumberAxis extensionDaysNumberAxis;
+    
+    /** The report header. */
     @FXML
     private Text reportHeader;
+    
+    /** The total extension days text field. */
     @FXML
     private TextField totalExtensionDaysTextField;
+    
+    /** The total repeating days text field. */
     @FXML
     private TextField totalRepeatingDaysTextField;
+    
+    /** The total deviation days text field. */
     @FXML
     private TextField totalDeviationDaysTextField;
     
+    /** The my controller. */
     /* *************************************
 	 * ******** Private Objects ************
 	 * *************************************/
     private PerformanceReportController myController = new PerformanceReportController(this);
+    
+    /** The Constant ANALYSIS. */
     private static final String ANALYSIS = "Analysis";
+    
+    /** The Constant COMMITTEE. */
     private static final String COMMITTEE = "Committee";
+    
+    /** The Constant EXECUTION. */
     private static final String EXECUTION = "Execution";
+    
+    /** The Constant TESTING. */
     private static final String TESTING = "Testing";
     
     /* *************************************
@@ -59,7 +82,10 @@ public class PerformanceReportBoundary implements Initializable {
 	 * *************************************/
 
     /**
-     * Asks the controller for all relevant data
+     * Asks the controller for all relevant data.
+     *
+     * @param arg0 the arg 0
+     * @param arg1 the arg 1
      */
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -82,7 +108,8 @@ public class PerformanceReportBoundary implements Initializable {
    	 * ********* Public Methods ************
    	 * *************************************/
     /**
-     * Adding the extension days to the report
+     * Adding the extension days to the report.
+     *
      * @param timeExtensionList - all the approved time extensions
      * Dividing all the time extensions to the different steps and counting it
      */
@@ -128,7 +155,8 @@ public class PerformanceReportBoundary implements Initializable {
 	}
 
     /**
-     * Adding the repeating steps to the report
+     * Adding the repeating steps to the report.
+     *
      * @param repeatingStepList - All the steps that were repeating (not included first time conducting the step)
      */
 	public void addRepeatingStepsToReport(ArrayList<Step> repeatingStepList) {
@@ -181,8 +209,9 @@ public class PerformanceReportBoundary implements Initializable {
 	}
 
 	/**
-	 * All the change requests that had deviation from their original analysis
-	 * @param deviationChangeRequestList
+	 * All the change requests that had deviation from their original analysis.
+	 *
+	 * @param deviationChangeRequestList the deviation change request list
 	 */
 	public void addDeviationChangeRequestsToReport(ArrayList<ChangeRequest> deviationChangeRequestList) {
 		long totalDeviationDays = 0;

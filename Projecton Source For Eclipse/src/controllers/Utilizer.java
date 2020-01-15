@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * 
+ * The Class Utilizer.
+ *
  * @author Lee Hugi
  * this class provides mathematical calculations for report pages
- *
  */
 public class Utilizer {
 	
 	/**
-	 * this method calculate the median
-	 * @param list
-	 * @return
+	 * this method calculate the median.
+	 *
+	 * @param list the list
+	 * @return the double
 	 */
 	public static double calcMedian(ArrayList<Long> list) {
 		Collections.sort(list);
@@ -27,9 +28,10 @@ public class Utilizer {
 	}
 	
 	/**
-	 * this method calculate the standard deviation
-	 * @param list
-	 * @return
+	 * this method calculate the standard deviation.
+	 *
+	 * @param list the list
+	 * @return the double
 	 */
 	public static double calcStd(ArrayList<Long> list) {
 		double avg = calcAvg(list);
@@ -41,9 +43,10 @@ public class Utilizer {
 	}
 	
 	/**
-	 * this method calculate the average
-	 * @param list
-	 * @return
+	 * this method calculate the average.
+	 *
+	 * @param list the list
+	 * @return the double
 	 */
 	public static double calcAvg(ArrayList<Long> list) {
 		long sum=0;

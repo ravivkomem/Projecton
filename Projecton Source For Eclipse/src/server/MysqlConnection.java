@@ -9,19 +9,38 @@ import java.sql.Statement;
 
 import assets.*;
 
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MysqlConnection.
+ */
 public class MysqlConnection {
 	
 	/* Initialize database constants */
-	/*TODO: Update constants name to suit the project */
+	/** The Constant DATABASE_DRIVER. */
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
+    
+    /** The Constant DATABASE_URL. */
     private static final String DATABASE_URL = "jdbc:mysql://localhost/icm?serverTimezone=IST"; // URL requires Update
+    
+    /** The Constant USERNAME. */
     private static final String USERNAME = "root";  // UserName requires update
+    
+    /** The Constant PASSWORD. */
     private static final String PASSWORD = "Aa123456";		// Password requires update
+    
+    /** The sql array. */
     private static String[] sqlArray;
     
+    /** The connection. */
     /* Private variables declaration */
     private Connection connection;
 
+    /**
+     * Connect.
+     *
+     * @return the connection
+     */
     /* Public methods */
     public Connection connect() 
     {
@@ -54,6 +73,9 @@ public class MysqlConnection {
         return connection;
     }
     
+    /**
+     * Disconnect.
+     */
     public void disconnect() {
         if (connection != null) {
             try {
@@ -65,6 +87,12 @@ public class MysqlConnection {
         }
     }
     
+    /**
+     * Gets the result.
+     *
+     * @param sqlAction the sql action
+     * @return the result
+     */
     public SqlResult getResult(SqlAction sqlAction)
     {
     	SqlResult sqlResult = null;
@@ -140,6 +168,9 @@ public class MysqlConnection {
     	return sqlResult;
     }
     
+    /**
+     * Disconnect all logged users.
+     */
     public void disconnectAllLoggedUsers()
     {
     	this.connect();
@@ -158,6 +189,9 @@ public class MysqlConnection {
 
     }
     
+    /**
+     * Inits the sql array.
+     */
     public static void initSqlArray()  
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];

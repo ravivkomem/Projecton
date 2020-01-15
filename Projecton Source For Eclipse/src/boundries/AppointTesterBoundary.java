@@ -22,8 +22,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
+ * The Class AppointTesterBoundary.
+ *
  * @author raviv komem
  * This class represents the appoint tester boundary
  * with all the methods and logic implementations
@@ -34,31 +36,51 @@ public class AppointTesterBoundary implements DataInitializable{
 	 * ****** FXML Objects ******
 	 * **************************/
 	
+	/** The committe members combo box. */
 	/*ComboBox*/
     @FXML
     private ComboBox<String> committeMembersComboBox;
+    
+    /** The change request number text field. */
     /*Text*/
     @FXML
     private Text changeRequestNumberTextField;
+    
+    /** The change request details table view. */
     /*Table View*/
     @FXML
     private TableView<ChangeRequest> changeRequestDetailsTableView;
+    
+    /** The system column. */
     @FXML
     private TableColumn<ChangeRequest, String> systemColumn;
+    
+    /** The change description column. */
     @FXML
     private TableColumn<ChangeRequest, String> changeDescriptionColumn;
+    
+    /** The set button. */
     /*Button*/
     @FXML
     private Button setButton;
+    
+    /** The close button. */
     @FXML
     private Button closeButton;
     
+    /** The my change request. */
     /* **************************
 	 * **** Private Objects *****
 	 * **************************/
     private ChangeRequest myChangeRequest;
+    
+    /** The list. */
     private ObservableList<ChangeRequest> list = FXCollections.observableArrayList();
+    
+    /** The my controller. */
     private AppointTesterController myController = new AppointTesterController(this);
+    
+    /** The alert. */
     private Alert alert = new Alert (AlertType.NONE);
 
     /* **************************
@@ -66,7 +88,8 @@ public class AppointTesterBoundary implements DataInitializable{
 	 * **************************/
     
     /**
-     * This method closes the appoint tester page
+     * This method closes the appoint tester page.
+     *
      * @param event - mouse click on "close" button
      */
     @FXML
@@ -76,7 +99,8 @@ public class AppointTesterBoundary implements DataInitializable{
     }
 
     /**
-     * Sets the committee member to test the change request
+     * Sets the committee member to test the change request.
+     *
      * @param event - mouse click on "set" button
      * If a committee member is selected then he is set
      * else an alert will be displayed
@@ -103,7 +127,10 @@ public class AppointTesterBoundary implements DataInitializable{
    	 * ****** Public Methods ******
    	 * ****************************/
     /**
-     * Init all the FXML objects in the boundary
+     * Init all the FXML objects in the boundary.
+     *
+     * @param arg0 the arg 0
+     * @param arg1 the arg 1
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -121,7 +148,9 @@ public class AppointTesterBoundary implements DataInitializable{
 
 	/**
 	 * Expects to be called on the initialize of the boundary
-	 * will receive change request object
+	 * will receive change request object.
+	 *
+	 * @param data the data
 	 */
 	@Override
 	public void initData(Object data) {
@@ -131,17 +160,19 @@ public class AppointTesterBoundary implements DataInitializable{
 		{
 			ChangeRequest changeRequest = (ChangeRequest)data;
 			myChangeRequest = changeRequest;
-			myController.getAllCommitteMembers();
+			myController.getAllCommitteeMembers();
 			list.add(myChangeRequest);
 			
 		}
 		
 	}
 
-	/** 
+	/**
+	 *  
 	 * This method is for getting all the committeeMembers 
-	 * Once the boundary receive it it will initialize the combobox and all the displays
-	 * @param committeeMembersList
+	 * Once the boundary receive it it will initialize the combobox and all the displays.
+	 *
+	 * @param committeeMembersList the committee members list
 	 */
 	public void recieveAllCommitteeMembers(ArrayList<String> committeeMembersList) {
 		
@@ -164,7 +195,8 @@ public class AppointTesterBoundary implements DataInitializable{
 	}
 
 	/**
-	 * This method is called by the controller after receiving change request update results
+	 * This method is called by the controller after receiving change request update results.
+	 *
 	 * @param affectedRows - number of rows in the database that were affected
 	 * According to the value will display proper message
 	 */
@@ -184,7 +216,8 @@ public class AppointTesterBoundary implements DataInitializable{
 	}
 
 	/**
-	 * This method is called by the controller after receiving new tester step update results
+	 * This method is called by the controller after receiving new tester step update results.
+	 *
 	 * @param affectedRows - number of rows in the database that were affected
 	 * According to the value will display proper message
 	 */
