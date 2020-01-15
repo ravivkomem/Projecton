@@ -18,6 +18,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * This is the login page boundary
+ * @author Raviv Komem
+ *
+ */
 public class LoginPageBoundary implements Initializable{
 
 	/* *******************************
@@ -41,6 +46,10 @@ public class LoginPageBoundary implements Initializable{
     /* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
+    /**
+     * This method is used in order to attem user sign in
+     * @param event - Mouse click on "sign in" button
+     */
     @FXML
     void signInButtonPressed(MouseEvent event) {
     	String userName = userNameTextField.getText();
@@ -57,6 +66,10 @@ public class LoginPageBoundary implements Initializable{
     	}
     }
     
+    /**
+     * This method is used to handle user attepmpt information from the controller
+     * @param resultUser - the user with the password and username entered by user
+     */
     public void handleUserAttempInformation(User resultUser)
     {
     	loginLoadingImageView.setVisible(false);

@@ -4,15 +4,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
-import assets.ProjectPages;
 import controllers.PerformanceReportController;
 import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.Step;
 import entities.TimeExtension;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
@@ -23,6 +20,11 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+/**
+ * This is the boundary for the performance report displayed on the tech manager page
+ * @author Raviv Komem
+ *
+ */
 public class PerformanceReportBoundary implements Initializable {
 
 	/* *************************************
@@ -55,11 +57,10 @@ public class PerformanceReportBoundary implements Initializable {
     /* *************************************
 	 * ********* FXML Methods **************
 	 * *************************************/
-    @FXML
-    void closePage(ActionEvent event) {
-    	ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
-    }
-    
+
+    /**
+     * Asks the controller for all relevant data
+     */
     @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
     	totalExtensionDaysTextField.setEditable(false);
@@ -80,6 +81,11 @@ public class PerformanceReportBoundary implements Initializable {
     /* *************************************
    	 * ********* Public Methods ************
    	 * *************************************/
+    /**
+     * Adding the extension days to the report
+     * @param timeExtensionList - all the approved time extensions
+     * Dividing all the time extensions to the different steps and counting it
+     */
     public void addExtensionDaysToReport(ArrayList<TimeExtension> timeExtensionList) {
     	long analysisDaysCounter = 0;
 		long committeeDaysCounter = 0;
@@ -121,6 +127,10 @@ public class PerformanceReportBoundary implements Initializable {
         totalExtensionDaysTextField.setText(Long.toString(analysisDaysCounter+committeeDaysCounter+executionDaysCounter+testingDaysCounter));
 	}
 
+    /**
+     * Adding the repeating steps to the report
+     * @param repeatingStepList - All the steps that were repeating (not included first time conducting the step)
+     */
 	public void addRepeatingStepsToReport(ArrayList<Step> repeatingStepList) {
 		long analysisDaysCounter = 0;
 		long committeeDaysCounter = 0;
@@ -170,6 +180,10 @@ public class PerformanceReportBoundary implements Initializable {
         totalRepeatingDaysTextField.setText(Long.toString(analysisDaysCounter+committeeDaysCounter+executionDaysCounter+testingDaysCounter));
 	}
 
+	/**
+	 * All the change requests that had deviation from their original analysis
+	 * @param deviationChangeRequestList
+	 */
 	public void addDeviationChangeRequestsToReport(ArrayList<ChangeRequest> deviationChangeRequestList) {
 		long totalDeviationDays = 0;
 		for (ChangeRequest changeRequest : deviationChangeRequestList)

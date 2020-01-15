@@ -3,6 +3,12 @@ package assets;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * This class is used to send sql queries to the database
+ * @author Raviv Komem
+ * @parm sqlQueryType - Which query we want to execute
+ * @parm actionVars - the variables that are needed for the query
+ */
 @SuppressWarnings("serial")
 public class SqlAction implements Serializable
 {

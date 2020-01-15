@@ -19,6 +19,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 
+/**
+ * This is a class for list view cell with a file attachment
+ * @author Raviv Komem
+ *
+ */
 public class AttachmentListCell extends ListCell<MyFile> {
 	    
     	protected static HashMap<String, Image> mapOfFileExtToSmallIcon = new HashMap<String, Image>();
@@ -30,6 +35,9 @@ public class AttachmentListCell extends ListCell<MyFile> {
     	protected ImageView imageView = new ImageView();
     	protected Button button = new Button();
 		 
+    	/**
+    	 * Empty constructor
+    	 */
 		public AttachmentListCell() {
 			super();
 			buttonImage = new Image(getClass().getResourceAsStream("/boundries/close_symbol.png"));

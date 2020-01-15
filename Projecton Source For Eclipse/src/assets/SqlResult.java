@@ -6,12 +6,23 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * This class is used to hold the result set from the server
+ * Used inorder to remove dependices on sql server connection
+ * @author Raviv Komem
+ *
+ */
 @SuppressWarnings("serial")
 public class SqlResult implements Serializable{ 
 	
 	private ArrayList<ArrayList<Object>> resultData;
 	private SqlQueryType actionType;
 
+	/**
+	 * Constructor using result set
+	 * @param rs - ResultSet object
+	 * @param actionType - Which action this result represents
+	 */
 	public SqlResult (ResultSet rs, SqlQueryType actionType)
 	{
 		this.actionType = actionType;
@@ -33,6 +44,11 @@ public class SqlResult implements Serializable{
 		}
 	}
 	
+	/**
+	 * Constructor using num
+	 * @param num - For update queries we will receive the number of rows affected
+	 * @param actionType - Result for which query
+	 */
 	public SqlResult (int num, SqlQueryType actionType)
 	{
 		this.actionType = actionType;

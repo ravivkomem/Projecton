@@ -13,6 +13,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
+/**
+ * This is the menu boundary
+ * @author Raviv Komem
+ *
+ */
 public class MenuBoundary implements Initializable {
 
 	/* *************************************
@@ -48,37 +53,64 @@ public class MenuBoundary implements Initializable {
     /* *************************************
 	 * ********* FXML Methods **************
 	 * *************************************/
+    /**
+     * This method is used to display the current user requests
+     * @param event - mouse click on "my requests" button
+     */
     @FXML
     void loadMyRequestsPage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
     }
 
+    /**
+     * This method is used to display the supervisor page
+     * @param event - mouse click on "supervisor" button
+     */
     @FXML
     void loadSupervisorPage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.SUPERVISOR_PAGE.getPath());
     }
 
+    /**
+     * This method is used to display the upload request page
+     * @param event - mouse click on "upload request" button
+     */
     @FXML
     void loadUploadRequestPage(ActionEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.UPLOAD_REQUEST_PAGE.getPath());
     }
 
+    /**
+     * This method is used to display the tech manager page
+     * @param event - mouse click on "tech manager" button
+     */
     @FXML
     void loadDepartmentHeadPage(ActionEvent event) {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.TECH_MANAGER_PAGE.getPath());
     }
     
+    /**
+     * This method is used to display the work station page
+     * @param event - mouse click on "workstation" button
+     */
     @FXML
     void loadWorkStationPage(ActionEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
 
+    /**
+     * This method is used for user logout
+     * @param event - mouse click on "Logout" button
+     */
     @FXML
     void userLogout(MouseEvent event) {
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
 
+    /**
+     * Sets the initial page display according to the user viewing it
+     */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	    /*Hide all buttons*/

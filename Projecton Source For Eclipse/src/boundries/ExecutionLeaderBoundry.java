@@ -161,8 +161,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ********** FXML Methods ** *************
      * ****************************************/
 	/**
-	 * @param event
-	 * This method handle the click on home page in menu
+	 * loading the project home page
+	 * @param event - mouse click on the "Home" button
 	 */
 	@FXML
 	public void loadHomePage(MouseEvent event) // return home page
@@ -331,6 +331,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/* ****************************************
      * ********** Public Methods **************
      * ****************************************/
+	/**
+	 * Will be called by the controller after he select the change request again
+	 * @param changeRequest - updated change request
+	 */
 	public void updateChangeRequest(ChangeRequest changeRequest) {
 		myChangeRequest = changeRequest;
 		recieveExecutionStep(executionStep); // To load page selection again
@@ -366,6 +370,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		}
 	}
 	
+	/**
+	 * this method is used to recieve the estimated end date updated status from the controller
+	 * @param affectedRows - number of database rows affected
+	 * the correct behaviour should be one row affected
+	 */
 	public void recieveEstimatedEndDateUpdateStatus(int affectedRows)
 	{
 		if (affectedRows == 1)
@@ -385,6 +394,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/* ****************************************
      * ********* Private Methods **************
      * ****************************************/
+	/**
+	 * method in order to set the page display for change requests in the 
+	 * "EXECUTION_SET_TIME" current step
+	 */
 	private void loadExecutionSetTimeDisplay()
 	{
 		if (waitApproveTimePane.isVisible() == true)
@@ -404,6 +417,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		timeRemainingTxt.setText("Time Remaining");
 	}
 	
+	/**
+	 * method in order to set the page display for change requests in the 
+	 * "EXECUTION_APPROVE_TIME" current step
+	 */
 	private void loadExecutionApproveTimeDisplay()
 	{
 		waitApproveTimePane.setVisible(true);
@@ -419,6 +436,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		timeRemainingTxt.setText("Time Remaining");
 	}
 	
+	/**
+	 * method in order to set the page display for change requests in the 
+	 * "EXECUTION_WORK" current step
+	 */
 	private void loadExecutionWorkDisplay()
 	{
 		executionWorkPane.setVisible(true);

@@ -12,8 +12,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-/* This class serves the same purpose as android toast object
- * makeText shows a small window for a predetermined amount of time */
+/**
+ *  This class serves the same purpose as android toast object
+ * makeText shows a small window for a predetermined amount of time 
+ * */
 public final class Toast
 {
     public static void makeText(Stage ownerStage, String toastMsg, int toastDelay, int fadeInDelay, int fadeOutDelay)

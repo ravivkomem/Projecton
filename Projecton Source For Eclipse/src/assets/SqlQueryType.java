@@ -126,14 +126,9 @@ public enum SqlQueryType {
 	CLOSE_EXECUTION_STEP(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	
-	
-	
-   /********************************************
-    * ******************************************
+   /* ******************************************
     * *********Supervisor Queries***************
-    ********************************************/
-	
-	
+    * ******************************************/
 	SELECT_USER_EMAIL(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUEST(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS(SqlExecutionType.EXECUTE_QUERY),
@@ -164,8 +159,6 @@ public enum SqlQueryType {
 	UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_TESTER_STEP_ESTIMATED_END_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_TIME_EXTENSION_STATUS_TO_DENY(SqlExecutionType.UPDATE_QUERY),
-	
-	
 	
 	/* *****************************************
 	 * ********Time Watcher Queries*************

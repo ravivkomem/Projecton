@@ -1,5 +1,11 @@
 package assets;
 
+/**
+ * Enum that represents all our project different steps during
+ * that change request handling process
+ * @author Raviv Komem
+ *
+ */
 public enum StepType {
 
 	ERROR("ERROR"),

@@ -15,6 +15,13 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+/**
+ * This is the main project application
+ * Used in order to start the client side and also to contain the following information:
+ * 
+ * @author Raviv Komem
+ *
+ */
 public class ProjectFX extends Application {
 
 	public static Stage mainStage;

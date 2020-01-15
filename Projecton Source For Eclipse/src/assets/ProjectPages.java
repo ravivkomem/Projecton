@@ -1,5 +1,10 @@
 package assets;
 
+/**
+ * Enum that represents all our project boundries
+ * @author Raviv Komem
+ *
+ */
 public enum ProjectPages {
 
 	SERVER_START_PAGE("/server/ServerStartGUI.fxml"),
