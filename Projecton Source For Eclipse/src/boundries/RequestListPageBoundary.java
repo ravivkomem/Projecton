@@ -32,7 +32,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 /**
  * Request List Page (Boundary)
- * @author user
+ * @author Ido Kadosh
  *
  */
 public class RequestListPageBoundary implements Initializable {
@@ -104,6 +104,7 @@ public class RequestListPageBoundary implements Initializable {
 
 	@FXML
 	private Button logoutUser;
+	
 	@FXML
 	private TextField displaySpecificID;
 	
@@ -118,6 +119,7 @@ public class RequestListPageBoundary implements Initializable {
 	 /* ***************************************
      * ********** FXML Methods Implementation *
      * ****************************************/
+	
 	/**
 	 * move the user back to the previous page 
 	 * @param event
@@ -144,7 +146,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * disconnect the user from the system 
+	 * disconnect the user from the system and update the data base 
 	 * @param event
 	 */
 	@FXML
@@ -152,17 +154,29 @@ public class RequestListPageBoundary implements Initializable {
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
-
+	
+	/**
+	 * in case the user pressed on this button, the user move to the home page 
+	 * @param event
+	 */
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
 
+	/**
+	 * by pressing this button the user shows all his requests 
+	 * @param event
+	 */
 	@FXML
 	void loadMyRequestsPage(MouseEvent event) {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.REQUEST_LIST_PAGE.getPath());
 	}
 
+	/**
+	 * by pressing this button its open an option to search change requests by specific dates 
+	 * @param event
+	 */
 	@FXML
 	void loadPageSearchByDate(MouseEvent event) {
 		searchByDatePane.setVisible(true);
@@ -171,6 +185,10 @@ public class RequestListPageBoundary implements Initializable {
 		noSubmitingRequest.setVisible(false);
 	}
 
+	/**
+	 * by using this button the system opens an option to search change request by its ID 
+	 * @param event
+	 */
 	@FXML
 	void loadSearchByIdPage(MouseEvent event) {
 		searchByDatePane.setVisible(false);
@@ -179,7 +197,11 @@ public class RequestListPageBoundary implements Initializable {
 		noSubmitingRequest.setVisible(false);
 		enterIdTextField.setText("");
 	}
-
+	
+	/**
+	 * by using this button the system opens an option to search change request by its status 
+	 * @param event
+	 */
 	@FXML
 	void loadSearchByStatusPage(MouseEvent event) {
 		searchByDatePane.setVisible(false);
@@ -188,6 +210,10 @@ public class RequestListPageBoundary implements Initializable {
 		noSubmitingRequest.setVisible(false);
 	}
 
+	/**
+	 * by using this button the user can search change requests by its ID 
+	 * @param event
+	 */
 	@FXML
 	void searchById(MouseEvent event) {
 		noSubmitingRequest.setVisible(false);
@@ -211,6 +237,10 @@ public class RequestListPageBoundary implements Initializable {
 		
 	}
 
+	/**
+	 * by using this button the user can search change requests by specific dates 
+	 * @param event
+	 */
 	@FXML
     void searchByDate(MouseEvent event) {
 		noSubmitingRequest.setVisible(false);
@@ -237,6 +267,10 @@ public class RequestListPageBoundary implements Initializable {
     	
     }
 
+	/**
+	 * by using this button the user can search change requests by specific status
+	 * @param event
+	 */
 	@FXML
 	void searchByStatus(MouseEvent event) {
 		noSubmitingRequest.setVisible(false);
@@ -278,6 +312,10 @@ public class RequestListPageBoundary implements Initializable {
 		});
 	}
 
+	/**
+	 * this method display all change requests for a specific user in a table 
+	 * @param resultList
+	 */
 	public void displayAllChangeRequestsForSpecifcUser(ArrayList<ChangeRequest> resultList) {
 
 		requestList.clear();
@@ -294,6 +332,10 @@ public class RequestListPageBoundary implements Initializable {
 		}
 
 	}
+	/**
+	 * this method dispaly all change requests for specific user with the requested filter 
+	 * @param resultList
+	 */
 	public void displayChangeRequestsByFilter(ArrayList<ChangeRequest> resultList)
 	{
 		requestList.clear();

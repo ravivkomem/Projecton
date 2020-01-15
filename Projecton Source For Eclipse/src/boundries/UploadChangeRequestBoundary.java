@@ -42,39 +42,56 @@ public class UploadChangeRequestBoundary implements Initializable {
 	 * ******************************/
 	@FXML
 	private Label currentStateDescriptionLbl;
+	
 	@FXML
 	private Label changeRequestDescLbl;
+	
 	@FXML
 	private Label reasonLbl;
+	
 	@FXML
 	private Label commentLbl;
+	
     @FXML
     private Button backBtn;
+    
     @FXML
     private Button browseBtn;
+    
     @FXML
     private Button logoutBtn;
+    
     @FXML
     private ComboBox<String> subSystemComboBox;
+    
     @FXML
     private Button submitBtn;
+    
     @FXML
     private TextArea currentStateDescriptionField;
+    
     @FXML
     private TextArea changeRequestDescriptionField;
+    
     @FXML
     private TextArea reasonTA;
+    
     @FXML
     private TextArea commentField;
+    
     @FXML
     private ListView<MyFile> filesListView;
+    
     @FXML
     private Label fileQuantityLabel;
+    
     @FXML
     private Label fileSizeLabel;
+    
     /* ****************************************
      * *********** Static Object **************
      * ****************************************/
+    
     private static final int MAX_CHAR = 100;
     private static final int LIST_ROW_HEIGHT = 24; // List element height is 24px
     private static final int FILE_QUANTITY_LIMIT = 3;
@@ -83,6 +100,7 @@ public class UploadChangeRequestBoundary implements Initializable {
     /* ****************************************
      * ********** Private Object **************
      * ****************************************/
+    
     private UploadChangeRequestController myController= new UploadChangeRequestController(this);////connection to my controller 
     private ChangeRequest newChangeRequest;
     private final String CURRENT_STEP = "ANALYZER_AUTO_APPOINT";
@@ -93,7 +111,7 @@ public class UploadChangeRequestBoundary implements Initializable {
      * ********** FXML Methods Implementation *
      * ************************************** */
     /**
-     * in case pressed this button its open a fileChooser window for user to choose which files to upload  
+     * in case this button pressed its open a fileChooser window for user to choose which files to upload  
      * @param event
      */
     @FXML
@@ -235,7 +253,6 @@ public class UploadChangeRequestBoundary implements Initializable {
 		alert2.setHeaderText(mess);
 		return alert2.showAndWait();
 	}
-    
 	@Override
 	/*initialize the combo box in this gui page  */
 	public void initialize(URL location, ResourceBundle resources) {

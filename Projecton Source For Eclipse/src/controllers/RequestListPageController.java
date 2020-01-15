@@ -12,7 +12,11 @@ import boundries.ProjectFX;
 import boundries.RequestListPageBoundary;
 import client.ClientConsole;
 import javafx.application.Platform;
-
+/**
+ * request list page for specific user (Controller)
+ * @author Ido Kadosh
+ *
+ */
 @SuppressWarnings("serial")
 public class RequestListPageController extends BasicController {
 	
@@ -56,6 +60,11 @@ public class RequestListPageController extends BasicController {
 		});
 		
 	}
+	/**
+	 * this method parse all the change requests for a specific user 
+	 * @param result
+	 * @return
+	 */
 	public ArrayList<ChangeRequest> parseSqlResultToChangeRequestArrayList(SqlResult result)
 	{
 		ArrayList<ChangeRequest> resultList = new ArrayList <>();
@@ -89,7 +98,7 @@ public class RequestListPageController extends BasicController {
 			}
 			catch (Exception e)
 			{
-				Toast.makeText(ProjectFX.mainStage, "ERROR IN CONTROLLER", 1500, 500, 500);
+				Toast.makeText(ProjectFX.mainStage, "ERROR", 1500, 500, 500);
 			}
 		}
 		
@@ -97,6 +106,9 @@ public class RequestListPageController extends BasicController {
 		
 		
 	}
+	/**
+	 * this method fills the table with all the change requests for a specific user 
+	 */
 	public void fillNecessaryFieldsInTable()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -105,6 +117,11 @@ public class RequestListPageController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
+	/**
+	 * this method executes a querey to get all the change requests for specific user with a requested date
+	 * @param from
+	 * @param to
+	 */
 	public void getChangeRequestsByDateSearch(Date from,Date to)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -115,6 +132,10 @@ public class RequestListPageController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	/**
+	 * this method executes a querey to get change request for specific user with a specific ID 
+	 * @param idNum
+	 */
 	public void getChangeRequestsByIdSearch(Integer idNum)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -124,6 +145,10 @@ public class RequestListPageController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	/**
+	 * this method executes a querey to get all the change requests for specific user with a requested status 
+	 * @param status
+	 */
 	public void getChangeRequestByStatus(String status)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();

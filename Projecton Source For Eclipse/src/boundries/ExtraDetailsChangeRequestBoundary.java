@@ -29,46 +29,66 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-
+/**
+ * extra details for specific change request page (Boundary)
+ * @author Ido Kadosh
+ *
+ */
 public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 
 	/* *******************************
 	 * ****** FXML Objects ***********
 	 * ******************************/
+	
 	@FXML
 	private TextField currentStepTF;
+	
 	@FXML
 	private TextField estimatedTimeForStepTF;
+	
     @FXML
     private Button backBtn;
+    
     @FXML
     private TextField initiatorNameTF;
+    
     @FXML
     private TextField subSystemTF;
+    
     @FXML
     private TextArea currentStateDescTA;
+    
     @FXML
     private TextArea RequestedChangeDescTF;
+    
     @FXML
     private TextArea reasonTF;
+    
     @FXML
     private TextArea commentTF;
+    
     @FXML
     private TextField StatusTF;
+    
     @FXML
     private Label filesErrorLabel;
+    
     @FXML
     private Button logoutUser;
+    
     @FXML
     private ListView<MyFile> fileListView;
+    
     @FXML
     private Button suspendButton;
+    
     @FXML
     private Text pageTitle;
 
     /* ***************************************
      * ********** Private Objects ***********
      * ***************************************/
+    
     private static final int LIST_ROW_HEIGHT = 24;
     //private MyFile currentFile;
     private String previousPagePath;
@@ -80,6 +100,11 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     /* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
+    
+    /**
+     * by pressing this button the user goes back to the prevoius page 
+     * @param event
+     */
     @FXML
     void backBtn(MouseEvent event) {
     	if (previousPagePath.equals(ProjectPages.ANALYZER_PAGE.getPath()))
@@ -93,6 +118,10 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     		
     }
 
+    /**
+     * by pressing this button the user disconnects from the system 
+     * @param event
+     */
     @FXML
     void logoutUser(MouseEvent event) {
     	ProjectFX.pagingController.userLogout();
@@ -186,7 +215,10 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 				suspendButton.setText("Un-Suspend");
 		}
 	}
-
+	/**
+	 * this method shows all the files that uploaded for this specific request 
+	 * @param downloadedFiles
+	 */
 	public void recieveFileList(List<MyFile> downloadedFiles) {
 		if (downloadedFiles!=null && !downloadedFiles.isEmpty())
 		{
@@ -198,7 +230,11 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			filesErrorLabel.setVisible(true);
 		}
 	}
-	
+	/**
+	 * this method allows to the user to download the files if necessary 
+	 * @param myFile
+	 * @param path
+	 */
 	private void downloadFile(MyFile myFile,String path) {
 		int i = myFile.getFileName().lastIndexOf('.');
 		String extension = "";
@@ -230,6 +266,11 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		
 		
 	}
+	/**
+	 * in case the user have a supervisor permission, this button allows to the supervisor to 
+	 * suspend or unsuspend a specific request 
+	 * @param event
+	 */
     @FXML
     void suspendChangeRequest(MouseEvent event) {
     	String updateStatus = null;

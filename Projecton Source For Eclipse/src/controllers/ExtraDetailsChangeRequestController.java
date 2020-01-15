@@ -11,7 +11,11 @@ import assets.SqlQueryType;
 import boundries.ExtraDetailsChangeRequestBoundary;
 import client.ClientConsole;
 import javafx.application.Platform;
-
+/**
+ * extra details page for a specific change request (Controller)
+ * @author Ido Kadosh
+ *
+ */
 @SuppressWarnings("serial")
 public class ExtraDetailsChangeRequestController extends BasicController {
 
@@ -21,6 +25,10 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		this.myBoundary = extraDetailsChangeRequestBoundary;
 	}
 
+	/**
+	 * execute querey in case the user attached a file to specific change request 
+	 * @param changeRequestID
+	 */
 	public void getChangeRequestFiles(Integer changeRequestID) {
 
 		/* Create sql action */
@@ -31,7 +39,6 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		this.sendSqlActionToClient(sqlFileAction);
 	}
 	
-	/*TODO: ask raviv : how myfile go inside sqlresult and its collapse the program */ 
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -63,6 +70,12 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		return;
 		
 	}
+	/**
+	 * this method belongs only to user with a supervisor permission and allows this user to 
+	 * suspend or unsuspend each specific request  
+	 * @param changeRequestId
+	 * @param updatedStatus
+	 */
 	public void updateStatusBySupervisor(int changeRequestId,String updatedStatus)
 	{
 		ArrayList<Object> data =new ArrayList<>();
