@@ -25,8 +25,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -80,8 +82,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	private Button btnTimeExtension;
 	@FXML
 	private Text txtDetailsWorkedOn;
-	@FXML
-	private TextField txtFieldForDetailsWorkedOn;
+    @FXML
+    private TextArea txtFieldForDetailsWorkedOn;
+    @FXML
+    private Label detailsLabel;
 
 	/* ****************************************
      * ********** Private Objects *************
@@ -110,12 +114,25 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		txtRefresh.setVisible(false);
 		txtDetailsWorkedOn.setVisible(false);
 		txtWorkingOnChangeRequestNumber.setVisible(true);
+		detailsLabel.setVisible(false);
+		txtFieldForDetailsWorkedOn.setWrapText(true);
 		
 		/* Change editable */
 		txtChangeRequestDetails.setEditable(false);
 		txtTimeForExecution.setEditable(false);
 		txtChangeRequestDetails.setWrapText(true);
 		flag = 0;
+		
+		txtFieldForDetailsWorkedOn.setTextFormatter(new TextFormatter<String>(change -> {
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= 100){
+				detailsLabel.setText(Integer.toString(changeLength) + "/ " + 100);
+				return change;
+			}
+			else{
+				return null;
+			}
+		}));
 	}
 	
 	@Override
@@ -204,7 +221,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	@FXML
 	public void UpdateChangeRequestStepAndExecutionLeaderStatus(MouseEvent event) // when execution commit working
 	{
-		if(txtFieldForDetailsWorkedOn.equals(""))
+		if(txtFieldForDetailsWorkedOn.getText().equals(""))
 		{
 			Toast.makeText(ProjectFX.mainStage, "First enter details you worked on", 1500, 500, 500);
 		}
@@ -336,6 +353,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		Toast.makeText(ProjectFX.mainStage, "Supervisor approved your estimated time", 1500, 500, 500);
 		btnRefresh.setVisible(false);
 		txtFieldForDetailsWorkedOn.setVisible(true);
+		detailsLabel.setVisible(true);
 		txtDetailsWorkedOn.setVisible(true);
 		txtRefresh.setVisible(false);
 		timeRemainingTextArea.setEditable(false);
