@@ -286,10 +286,10 @@ public class RequestListPageBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		selectStatusComboBox.getItems().add("Active");
-		selectStatusComboBox.getItems().add("Close");
-		selectStatusComboBox.getItems().add("Denied");
-		selectStatusComboBox.getItems().add("Suspended");
+		selectStatusComboBox.getItems().add("ACTIVE");
+		selectStatusComboBox.getItems().add("CLOSED");
+		selectStatusComboBox.getItems().add("DENIED");
+		selectStatusComboBox.getItems().add("SUSPEND");
 		requstIdClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		statusClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("status"));
 		subSystemClm.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("selectedSubsystem"));
