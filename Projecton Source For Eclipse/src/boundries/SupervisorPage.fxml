@@ -139,8 +139,8 @@
       <Button fx:id="btnSetExecutionLeader" layoutX="468.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnSetExecutionLeader" prefHeight="31.0" prefWidth="172.0" text="Set Execution Leader" />
       <Button fx:id="btnApproveAnalysisTime" layoutX="555.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Analysis Time" />
       <Button fx:id="btnDenyAnalysisTime" layoutX="559.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" prefHeight="25.0" prefWidth="136.0" text="Deny Analysis Time" />
-      <Button fx:id="btnDenyExecutionTime" layoutX="559.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" text="Deny Execution Time" />
-      <Button fx:id="btnApproveExecutionTime" layoutX="556.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" prefHeight="31.0" prefWidth="187.0" text="Approve Execution Time" />
+      <Button fx:id="btnDenyExecutionTime" layoutX="559.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" prefHeight="25.0" prefWidth="146.0" text="Deny Execution Time" />
+      <Button fx:id="btnApproveExecutionTime" layoutX="556.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" prefHeight="25.0" prefWidth="146.0" text="Approve Execution Time" />
       <TextField fx:id="txtFieldEstimatedTime" layoutX="342.0" layoutY="303.0" prefHeight="31.0" prefWidth="172.0" />
       <Text fx:id="txtExecutionEstimatedTime" layoutX="160.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution estimated time:" wrappingWidth="171.9999975635269" />
       <Text fx:id="txtAnalysisEstimatedTime" layoutX="161.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis estimated time:" wrappingWidth="170.00000225641224" />
