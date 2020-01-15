@@ -173,6 +173,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.INSERT_NEW_CLOSING_STEP.getCode()]=
     			"INSERT INTO icm.closing_step(ChangeRequestId,StartDate,Status)"
     			+ " VALUES (?,?,?)";
+    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID.getCode()] =
+    			"SELECT * FROM icm.change_request "
+    			+ "WHERE ChangeRequestID = ?";
     	
     	/* *****************************************************
 		 * *************** Login Queries ****************
@@ -403,22 +406,11 @@ public class MysqlConnection {
      			+ " ORDER BY ExecutionStepID DESC LIMIT 1";
     	sqlArray[SqlQueryType.UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE_BY_STEP_ID.getCode()]=
     			"UPDATE icm.execution_step SET EstimatedEndDate = ? WHERE ExecutionStepID = ?";
-    	
-    	
-    	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
-    			"UPDATE icm.execution_step SET Status = ?,EndDate = ?,ExecutionComment = ? WHERE ChangeRequestID = ?" + 
-    			" ORDER BY ExecutionStepID DESC LIMIT 1";
-    	sqlArray[SqlQueryType.SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK.getCode()] = 
-				"SELECT CurrentStep FROM icm.change_request WHERE ChangeRequestID = ?";
-    	
-    	
-    	sqlArray[SqlQueryType.SELECT_ESTIMATED_DATE_MINUS_START_DATE.getCode()] = 
-				"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.CLOSE_EXECUTION_STEP.getCode()]=
+    			"UPDATE icm.execution_step SET Status = ?,EndDate = ?,ExecutionComment = ? "
+    			+ "WHERE ExecutionStepID = ?";
     	
      	
-     	
-     	sqlArray[SqlQueryType.UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS.getCode()]=             // update change request status
-    			"UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestID = ?";
      	
      	sqlArray[SqlQueryType.UPDATE_CURRENT_STEP_TO_TESTER.getCode()]=
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";

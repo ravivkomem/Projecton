@@ -107,29 +107,27 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 	
+		timeRemainingTextArea.setDisable(true);
+		timeRemainingTextArea.setText("Work pending approval");
+		timeRemainingTxt.setText("Time Remaining");
+		timeRemainingTextArea.setWrapText(true);
+		
 		btnTimeExtension.setDisable(true);
-		btnAnalysisReport.setDisable(true);
 		
 		/* Change visibilities */
-		timeRemainingTextArea.setVisible(false);
-		timeRemainingTxt.setVisible(false);
-
-		txtWorkingOnChangeRequestNumber.setVisible(true);
-		
 		executionWorkPane.setVisible(false);
 		setTimePane.setVisible(false);
 		waitApproveTimePane.setVisible(false);
 		loadingGif.setVisible(false);
 		
-		
-		executionSummaryTextArea.setWrapText(true);
-		
+
 		/* Change editable */
+		executionSummaryTextArea.setWrapText(true);
+		txtChangeRequestDetails.setWrapText(true);
 		txtChangeRequestDetails.setEditable(false);
 		executionTimeDatePicker.setEditable(false);
 		
-		txtChangeRequestDetails.setWrapText(true);
-		
+		executionSummaryCharactersLabel.setText("0/" + MAX_CHARS);
 		executionSummaryTextArea.setTextFormatter(new TextFormatter<String>(change -> {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_CHARS){
@@ -262,7 +260,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 			}
 			else
 			{
-				executionStep.setEndDate(selectedDate);
+				executionStep.setEstimatedEndDate(selectedDate);
 				myChangeRequest.setCurrentStep(EXECUTION_APPROVE_TIME);
 				myController.updateExecutionStepEstimatedEndDate(selectedDate, executionStep.getStepID());
 				myController.updateChnageRequestCurrentStep(EXECUTION_APPROVE_TIME,
@@ -281,26 +279,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	public void refreshPage(MouseEvent event) // Refresh button
 	{
 		loadingGif.setVisible(true);
-		myController.getExecutionStepByChangeRequestId(myChangeRequest.getChangeRequestID());
+		myController.getUpdatedChangeRequest(myChangeRequest.getChangeRequestID());
 	}
 	
 	
-	
-	
-	/**
-	 * 
-	 * @param affectedRows
-	 * This method make toast after upload time for execution
-	 */
-	@FXML
-	public void ExecutionAprovedtInsertToDBSuccessfully(int affectedRows) {
-		if (affectedRows == 1) {
-			Toast.makeText(ProjectFX.mainStage, "The ExecutionTime uploaded successfully", 1500, 500, 500);
-		} else {
-			Toast.makeText(ProjectFX.mainStage, "The  ExecutionTime  upload failed", 1500, 500, 500);
-		}
-
-	}
 	/**
 	 * 
 	 * @param event
@@ -335,8 +317,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 				} 
 				else 
 				{
-					myController.UpdateExecutionLeaderDateAndStatus(myChangeRequest.getChangeRequestID(),executionSummaryTextArea.getText());
-					myController.UpdateCurrentStepOfChangeRequrstFromExecutionWorkToTesterCommitteeDirectorAppoint(
+					myController.closeExecutionStep(myChangeRequest.getChangeRequestID(),executionSummaryTextArea.getText());
+					myController.advanceChangeRequestToTesterStep(
 							myChangeRequest.getChangeRequestID());
 					ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 				}
@@ -346,6 +328,14 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	
+	/* ****************************************
+     * ********** Public Methods **************
+     * ****************************************/
+	public void updateChangeRequest(ChangeRequest changeRequest) {
+		myChangeRequest = changeRequest;
+		recieveExecutionStep(executionStep); // To load page selection again
+	}
+	
 	/**
 	 * This method is in order to recieve the execution step from the controller
 	 * @param executionStep - the current execution step as recieved
@@ -353,30 +343,60 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	 */
 	public void recieveExecutionStep(Step executionStep) {
 		loadingGif.setVisible(false);
-		this.executionStep = executionStep;
-		
-		/* Check the work status */
-		switch (myChangeRequest.getCurrentStep()) {
-			case EXECUTION_SET_TIME:
-				loadExecutionSetTimeDisplay();
-				break;
-			case EXECUTION_APPROVE_TIME:
-				loadExecutionApproveTimeDisplay();
-				break;
-			case EXECUTION_WORK:
-				loadExecutionWorkDisplay();	
-				break;
+		if (executionStep == null)
+		{
+			Toast.makeText(ProjectFX.mainStage, "ERROR - Database error, loading previous page", 1500, 500, 500);
+			loadPreviousPage(null);
+		}
+		else
+		{
+			this.executionStep = executionStep;
+			/* Check the work status */
+			switch (myChangeRequest.getCurrentStep()) {
+				case EXECUTION_SET_TIME:
+					loadExecutionSetTimeDisplay();
+					break;
+				case EXECUTION_APPROVE_TIME:
+					loadExecutionApproveTimeDisplay();
+					break;
+				case EXECUTION_WORK:
+					loadExecutionWorkDisplay();	
+					break;
+			}
 		}
 	}
 	
+	public void recieveEstimatedEndDateUpdateStatus(int affectedRows)
+	{
+		if (affectedRows == 1)
+		{
+			Toast.makeText(ProjectFX.mainStage, "Execution work time updated, waiting for superviosr approval",
+					1500, 500, 500);
+			loadExecutionApproveTimeDisplay();
+		}
+		else
+		{
+			Toast.makeText(ProjectFX.mainStage, "Error with database - please submit execution time again",
+					1500, 500, 500);
+		}
+	}
+	
+	
+	/* ****************************************
+     * ********* Private Methods **************
+     * ****************************************/
 	private void loadExecutionSetTimeDisplay()
 	{
+		if (waitApproveTimePane.isVisible() == true)
+		{
+			Toast.makeText(ProjectFX.mainStage, "Supervisor denied your execution time,\n"
+					+ "Please fill again", 1500, 500, 500);
+		}
 		setTimePane.setVisible(true);
 		
 		waitApproveTimePane.setVisible(false);
 		executionWorkPane.setVisible(false);
 		
-		btnAnalysisReport.setDisable(true);
 		btnTimeExtension.setDisable(true);
 		
 		timeRemainingTextArea.setDisable(true);
@@ -392,7 +412,6 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		setTimePane.setVisible(false);
 		executionWorkPane.setVisible(false);
 		
-		btnAnalysisReport.setDisable(true);
 		btnTimeExtension.setDisable(true);
 		
 		timeRemainingTextArea.setDisable(true);
@@ -407,26 +426,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 		setTimePane.setVisible(false);
 		waitApproveTimePane.setVisible(false);
 		
-		btnAnalysisReport.setDisable(false);
 		btnTimeExtension.setDisable(false);
 		
 		timeRemainingTextArea.setDisable(false);
 		displayTimeRemaining(executionStep.getEstimatedEndDate());
-	}
-	
-	public void recieveEstimatedEndDateUpdateStatus(int affectedRows)
-	{
-		if (affectedRows == 0)
-		{
-			Toast.makeText(ProjectFX.mainStage, "Execution work time updated, waiting for superviosr approval",
-					1500, 500, 500);
-			loadExecutionApproveTimeDisplay();
-		}
-		else
-		{
-			Toast.makeText(ProjectFX.mainStage, "Error with database - please submit execution time again",
-					1500, 500, 500);
-		}
 	}
 	
 	/**
@@ -447,28 +450,6 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 			timeRemainingTxt.setText("Time Remaining");
 			timeRemainingTextArea.setText(daysBetween + " Days");
 		}
-	}
-	
-	
-	
-	public void handleDataBaseSelectionError() {
-		Toast.makeText(ProjectFX.mainStage, "Error - Could not load the page", 1500, 500, 500);
-		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
-	}
-		/**
-		 * 
-		 * 
-		 * Toast
-		 */
-	public void chooseAgainTimeForExecution()
-	{
-		Toast.makeText(ProjectFX.mainStage, "Supervisor did not approve your estimated time, please choose another date", 1500, 500, 500);
-		executionTimeDatePicker.setVisible(true);
-		btnSubmitForTimeRequiredForExecution.setVisible(true);
-		executionTimeDatePicker.setValue(null);
-		btnRefresh.setVisible(false);
-		
-		
 	}
 
 }

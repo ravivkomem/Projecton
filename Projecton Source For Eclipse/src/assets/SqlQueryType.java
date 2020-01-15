@@ -13,6 +13,7 @@ public enum SqlQueryType {
 	UPDATE_CHANGE_REQUEST_CURRENT_STEP(SqlExecutionType.UPDATE_QUERY),
 	AUTOMATIC_CLOSE_NEW_TIME_EXTENSION(SqlExecutionType.UPDATE_QUERY),
 	INSERT_NEW_CLOSING_STEP(SqlExecutionType.UPDATE_QUERY),
+	SELECT_CHANGE_REQUEST_BY_ID(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********** Login Queries ****************
@@ -78,9 +79,9 @@ public enum SqlQueryType {
 	SELECT_TESTER_APPOINT_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_TESTER_STEP_CHANGE_REQUESTS_BY_HANDLER_NAME(SqlExecutionType.EXECUTE_QUERY),
 	
-	
-
-	/*Analysis Report Queries */
+	/* *****************************************
+	 * ********Analysis Report Queries**********
+	 * *****************************************/
 	SELECT_ANALYSIS_REPORT_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
@@ -88,7 +89,6 @@ public enum SqlQueryType {
 	 * *****************************************/
 	INSERT_NEW_FILE(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
 	INSERT_NEW_CHANGE_REQUEST(SqlExecutionType.INSERT_GET_AUTO_INCREMENT_ID),
-	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	DOWNLOAD_FILE_BY_CHANGE_REQUEST_ID(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_HANDLER_USER_NAME_BY_SYSTEM(SqlExecutionType.EXECUTE_QUERY),
 	
@@ -118,20 +118,13 @@ public enum SqlQueryType {
 	UPDATE_CHANGE_REQUEST_STEP_AND_HANDLER(SqlExecutionType.UPDATE_QUERY),
 	INSERT_NEW_TESTER_STEP(SqlExecutionType.UPDATE_QUERY),
 	
-	
-	
-   
 	/* *****************************************
 	 * ******** Execution Queries **************
 	 * *****************************************/
 	SELECT_EXECUTIOM_STEP_DETAILS(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE_BY_STEP_ID(SqlExecutionType.UPDATE_QUERY),
-	UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS(SqlExecutionType.UPDATE_QUERY),
-	UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP(SqlExecutionType.UPDATE_QUERY),
-	
-	
-	SELECT_IF_CURRENT_STEP_CHANGED_TO_EXECUTION_WORK(SqlExecutionType.EXECUTE_QUERY),
-	SELECT_ESTIMATED_DATE_MINUS_START_DATE(SqlExecutionType.EXECUTE_QUERY),
+	CLOSE_EXECUTION_STEP(SqlExecutionType.UPDATE_QUERY),
+	UPDATE_CURRENT_STEP_TO_TESTER(SqlExecutionType.UPDATE_QUERY),
 	
 	
 	
