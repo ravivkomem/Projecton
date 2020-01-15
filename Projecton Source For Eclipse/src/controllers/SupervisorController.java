@@ -14,6 +14,7 @@ import entities.ChangeRequest;
 import entities.CommitteeComment;
 import entities.Step;
 import entities.TimeExtension;
+import entities.User;
 import javafx.application.Platform;
 /**
  * 
@@ -173,7 +174,12 @@ public class SupervisorController extends BasicController
 					myBoundary.showDenyTimeExtension();
 					this.unsubscribeFromClientDeliveries();
 					break;
-	
+				case SELECT_USER_EMAIL:
+					this.unsubscribeFromClientDeliveries();
+					User user = new User((String)result.getResultData().get(0).get(3),
+							(String) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(5));
+					myBoundary.sendEmailToInitiatorUser(user);
+					break;
 				default:
 					break;
 			}

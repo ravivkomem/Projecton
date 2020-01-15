@@ -428,7 +428,7 @@ public class MysqlConnection {
     	 *******************************************************/
      	
      	sqlArray[SqlQueryType.SELECT_USER_EMAIL.getCode()] =
-     			"SELECT Email FROM icm.user WHERE UserName = ?";
+     			"SELECT * FROM icm.user WHERE UserName = ?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 
 				"SELECT * FROM icm.change_request";
     	

@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import assets.EmailTLS;
+import assets.MessagesCreator;
 import assets.ProjectPages;
 import assets.StepType;
 import assets.Toast;
@@ -15,6 +16,7 @@ import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.Step;
 import entities.TimeExtension;
+import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -792,8 +794,6 @@ public class SupervisorBoundary implements Initializable {
     	
     }
     
-    
-    
 
     @FXML
     void clickOnSend(MouseEvent event)
@@ -801,8 +801,7 @@ public class SupervisorBoundary implements Initializable {
     	myController.getUserEmail(myChangerequest.getInitiatorUserName());
     }
     
-    
-    
+ 
     /**
      * 
      * @param event
@@ -1017,6 +1016,12 @@ public class SupervisorBoundary implements Initializable {
     	
     	
     }  
+    
+    public void sendEmailToInitiatorUser(User initiator) {
+    	email.sendMessage(initiator.getEmail(), "Closed Request", 
+    			MessagesCreator.supervisorCloseChangeRequest(initiator.getFullName(),
+    					txtSendMessageToInitiator.getText()));
+    }
     
     
     /**
