@@ -21,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
@@ -96,7 +97,7 @@ public class SupervisorBoundary implements Initializable {
     private Button btnSend;
 
     @FXML
-    private TextField txtSendMessageToInitiator;
+    private TextArea txtSendMessageToInitiator;
     
     @FXML
     private Text txtSystemAutoAppoint;
@@ -180,6 +181,7 @@ public class SupervisorBoundary implements Initializable {
 		 setVisabilityValse();
 		 txtTextChange.setVisible(true);
 		 txtTextChange.setText("Hello and have a nice working day");
+		 txtSendMessageToInitiator.setWrapText(true);
 		 
 		 myController.SelectAllChangeRequest();
 		 
