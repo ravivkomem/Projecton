@@ -33,6 +33,13 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
+	public User(String firstName, String lastName, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+
 
 
 	private int userID;

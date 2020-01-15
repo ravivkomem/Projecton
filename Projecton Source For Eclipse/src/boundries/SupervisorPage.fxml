@@ -25,7 +25,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <VBox alignment="TOP_CENTER" prefHeight="465.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -102,6 +102,19 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnTimeExtension" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickOnTimeExtension" prefHeight="76.0" prefWidth="135.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@clock_image.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@btnBreak.png" />
+               </image>
+            </ImageView>
          </children>
       </VBox>
       <Button fx:id="btnExstraDetails" layoutX="318.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />
@@ -122,7 +135,7 @@
       <ComboBox fx:id="comboSelectAnalyizer" layoutX="219.0" layoutY="303.0" onMouseClicked="#clickOnSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="Select  Analyizer" />
       <Button fx:id="btnApproveAppointment" layoutX="382.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" prefHeight="26.0" prefWidth="79.0" text="Approve" />
       <Button fx:id="btnDenyAppointment" layoutX="492.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="Deny" />
-      <TableView fx:id="tableChangeRequest" layoutX="159.0" layoutY="94.0" prefHeight="161.0" prefWidth="558.0">
+      <TableView fx:id="tableChangeRequest" layoutX="159.0" layoutY="91.0" prefHeight="161.0" prefWidth="558.0">
          <columns>
             <TableColumn fx:id="tableColumnRequestID" prefWidth="100.0" text="Request ID" />
             <TableColumn fx:id="tableColumnStatus" prefWidth="96.0" text="Status" />
@@ -152,5 +165,16 @@
       </Text>
       <Text fx:id="txtTextExplantion" layoutX="164.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="558.0000140070915" />
       <Text fx:id="txtCloseTheRequest" layoutX="529.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please close the request to finish" wrappingWidth="187.00000551342964" />
+      <TableView fx:id="tableTimeExtension" layoutX="149.0" layoutY="395.0" prefHeight="173.0" prefWidth="558.0">
+        <columns>
+          <TableColumn fx:id="tableCoulmnStepId" prefWidth="92.0" text="StepID" />
+          <TableColumn fx:id="tableCoulmnStepType" prefWidth="111.0" text="StepType" />
+            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="94.66668701171875" text="OldDate" />
+            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="98.33331298828125" text="NewDate" />
+            <TableColumn fx:id="tableCoulmnReason" prefWidth="161.0" text="Reason" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnApproveTimeExtension" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveTimeExtension" text="Approve Time Extension" />
+      <Button fx:id="btnDenyTimeExtension" layoutX="480.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyTimeExtension" text="Deny Time Extension" />
    </children>
 </AnchorPane>
