@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -132,7 +133,7 @@
       </TableView>
       <Button fx:id="btnCloseTheRequest" layoutX="529.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#clickOnCloseRequest" prefHeight="26.0" prefWidth="127.0" text="Close The Request " />
       <Button fx:id="btnSend" layoutX="195.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" prefHeight="26.0" prefWidth="87.0" text="Send Mail" />
-      <TextField fx:id="txtSendMessageToInitiator" alignment="TOP_LEFT" layoutX="172.0" layoutY="301.0" prefHeight="123.0" prefWidth="347.0" promptText="send message to initiator" />
+      <TextArea fx:id="txtSendMessageToInitiator" layoutX="172.0" layoutY="301.0" prefHeight="123.0" prefWidth="347.0" />
       <Text fx:id="txtSystemAutoAppoint" layoutX="159.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="86.91162109375" />
       <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="246.0" layoutY="303.0" prefHeight="31.0" prefWidth="115.0" />
       <Button fx:id="btnSetAnalyzer" layoutX="477.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
