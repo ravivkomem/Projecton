@@ -173,8 +173,6 @@ public class AnalyzerBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * 
-	 * 
 	 * This method check date propriety and update the current step and the EstimatedEndDate to DB
 	 */
 	@FXML
@@ -196,15 +194,17 @@ public class AnalyzerBoundary implements DataInitializable {
 		// "UPDATE icm.analysis_step SET EndDate = ?,Status =
 		// ?,AnalysisReportDescription = ?,AnalysisReportAdvantages =
 		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
-		
+		Date date = Date.valueOf(durationDatePicker.getValue());
 		if (headertextArea.getText().equals("")||descriptiontextArea.getText().equals("")||advantagestextArea.getText().equals("")
 				||constraintstextArea.getText().equals("")|| durationDatePicker.getValue()==null)
 		{
 			Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
+		} else if(TimeManager.getDaysBetween(TimeManager.getCurrentDate(), date)<0) {
+			Toast.makeText(ProjectFX.mainStage, "Please fill valid date", 1500, 500, 500);
 		}
 		else
 		{
-			myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-");
+			myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-",date);
 			myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "CLOSED",headertextArea.getText(),
 			descriptiontextArea.getText(), advantagestextArea.getText(), Date.valueOf(durationDatePicker.getValue()), constraintstextArea.getText());
 			myController.getCommitteeDirector();

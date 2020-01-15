@@ -52,10 +52,11 @@ public class AnalyzerController extends BasicController {
 	
 	
 	
-	public void updateChangeRequestCurrentStepAndHandlerName(ChangeRequest changerequest,String currentstep,String handlerusername) {
+	public void updateChangeRequestCurrentStepAndHandlerName(ChangeRequest changerequest,String currentstep,String handlerusername,Date date) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(currentstep);
 		varArray.add(handlerusername);
+		varArray.add(date);
 		varArray.add(changerequest.getChangeRequestID());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
