@@ -47,6 +47,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Lee Hugi
+ * This class control the committee decision page
+ *
+ */
 public class CommitteeDecisionBoundary implements DataInitializable {
 
 	/* *************************************
@@ -154,6 +160,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * ******* FXML Methods *************
 	 * *************************************/
 	
+	/**
+	 * This method handle with press on send deny decision
+	 * the method call the controller for update the sql table in the data base
+	 * @param event
+	 */
     @FXML
     void sendDenyDecisionAndComment(MouseEvent event) {
     	
@@ -170,6 +181,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     	}
     }
 	
+    /**
+     * this method show the committee comment page
+     * @param event
+     */
 	@FXML
 	void loadAddCommentPage(MouseEvent event) {
 		committeeDirectorPane.setVisible(false);
@@ -177,6 +192,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 	}
 
+	/**
+	 * this method open in another window the analysis report page
+	 * @param event
+	 */
 	@FXML
 	void loadAnalysisReportPage(MouseEvent event) {
 		if (myAnalysisReportStage == null) {
@@ -191,6 +210,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	}
 
+	/**
+	 * this method show committee director page when the user with committee director permission
+	 * press on committee director button
+	 * @param event
+	 */
 	@FXML
 	void loadCommitteeDirectorPage(MouseEvent event) {
 		addCommentPane.setVisible(false);
@@ -198,6 +222,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 	}
 
+	/**
+	 * this method close the committee decision page and open the menu page
+	 * when the user press on home page button
+	 * @param event
+	 */
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		if (!(myTimeExtensionStage == null))
@@ -207,6 +236,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
 
+	/**
+	 * this method open the previous page when the user press on back button
+	 * @param event
+	 */
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
 		if (!(myTimeExtensionStage == null))
@@ -216,6 +249,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 
+	/**
+	 * this method open the time extension page in another window
+	 * @param event
+	 */
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
 		if (myTimeExtensionStage == null) {
@@ -227,7 +264,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 			myTimeExtensionStage = ProjectFX.pagingController
 					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(),committeeStep);
 		}
-
 	}
 
 	@FXML
@@ -235,6 +271,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		myController.getCommentsByChangeRequestId(currentChangeRequest.getChangeRequestID(),committeeStep.getStepID());
 	}
 
+	/**
+	 * this method send to the data base the decision of the committee director
+	 * according to his choice in the comboBox 
+	 * @param event
+	 */
 	@FXML
 	void sendDirectorDecision(MouseEvent event) {
 		if (decisionComboBox.getSelectionModel().isEmpty()) {
@@ -284,6 +325,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		}
 	}
 
+	/**
+	 * press on the submit button will send the comment the committee wrote to the data base
+	 * @param event
+	 */
 	@FXML
 	void submitComment(MouseEvent event) {
 		if (addCommentTextField.getText().equals("")) {

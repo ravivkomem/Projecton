@@ -16,6 +16,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * This class control the analysis report page
+ * @author Lee Hugi
+ *
+ */
 public class AnalysisReportBoundary implements DataInitializable{
 
 	/* *************************************
@@ -93,6 +98,7 @@ public class AnalysisReportBoundary implements DataInitializable{
     /* *************************************
 	 * ******* FXML Methods *************
 	 * *************************************/
+    
     @FXML
     void closingPage(MouseEvent event) {
     	((Node) event.getSource()).getScene().getWindow().hide();

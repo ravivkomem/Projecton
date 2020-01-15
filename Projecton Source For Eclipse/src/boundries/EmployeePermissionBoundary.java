@@ -58,6 +58,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	 * ******* FXML Methods *************
 	 * *************************************/
 	
+	/**
+	 * this method update subsystem supporter
+	 * @param event
+	 */
     @FXML
     void updateSupportSubsystem(MouseEvent event) {
     	if(subsystemComboBox.getSelectionModel().isEmpty()) {
@@ -75,6 +79,10 @@ public class EmployeePermissionBoundary implements DataInitializable{
     	
     }
 	
+    /**
+     * this method update to users there permission
+     * @param event
+     */
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
     	if(newPremissionComboBox.getSelectionModel().isEmpty()) {

@@ -29,6 +29,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * @author Lee Hugi
+ * This class control the activity report page
+ *
+ */
 public class ActivityReportBoundary implements Initializable {
 
 	/* *************************************
@@ -72,6 +77,10 @@ public class ActivityReportBoundary implements Initializable {
 	 * ******* FXML Methods *************
 	 * *************************************/
 
+	/**
+	 * This method display in the diagrams the report details
+	 * @param event
+	 */
 	@FXML
 	void showActivityReportDetails(MouseEvent event) {
 		requestStatusPieChart.getData().clear();
