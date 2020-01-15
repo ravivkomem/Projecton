@@ -401,6 +401,9 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_EXECUTIOM_STEP_DETAILS.getCode()] = 
 				"SELECT * FROM icm.execution_step WHERE ChangeRequestID = ?"
      			+ " ORDER BY ExecutionStepID DESC LIMIT 1";
+    	sqlArray[SqlQueryType.UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE_BY_STEP_ID.getCode()]=
+    			"UPDATE icm.execution_step SET EstimatedEndDate = ? WHERE ExecutionStepID = ?";
+    	
     	
     	sqlArray[SqlQueryType.UPDATE_STATUS_AND_DATE_IN_EXECUTION_STEP.getCode()]=
     			"UPDATE icm.execution_step SET Status = ?,EndDate = ?,ExecutionComment = ? WHERE ChangeRequestID = ?" + 
@@ -412,8 +415,7 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ESTIMATED_DATE_MINUS_START_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestID = ?";
     	
-     	sqlArray[SqlQueryType.INSERT_NEW_EXECUTION_ESTIMATED_TIME.getCode()]=                   // update estimated end time in execution step
-    			"UPDATE icm.execution_step SET EstimatedEndDate = ? WHERE ChangeRequestID = ?";
+     	
      	
      	sqlArray[SqlQueryType.UPDATE_NEW_EXECUTION_APPROVE_TIME_STATUS.getCode()]=             // update change request status
     			"UPDATE icm.change_request SET CurrentStep = ? WHERE ChangeRequestID = ?";

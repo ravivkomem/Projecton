@@ -220,7 +220,8 @@ public class UploadChangeRequestBoundary implements Initializable {
     		changeRequestDescriptionField.setText("");
     		currentStateDescriptionField.setText("");
     		subSystemComboBox.setPromptText("-sub systems-");
-    		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");	
+    		listViewData.clear();
+    		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");
     	}	
     }
     

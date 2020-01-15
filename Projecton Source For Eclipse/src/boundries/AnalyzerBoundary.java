@@ -202,23 +202,6 @@ public class AnalyzerBoundary implements DataInitializable {
 	 */
 	@FXML
 	void submit(MouseEvent event) {
-		/*
-		 * switch(subsystemComboBox.getSelectionModel().getSelectedItem()) { case
-		 * MOODLE_SYSTEM:
-		 * 
-		 * break; case EMPLOYEE_INFORMATION_STATION:
-		 * 
-		 * break; case LIBRARY_SYSTEM:
-		 * 
-		 * break; case LABORATORY:
-		 * 
-		 * break; case CLASS_ROOMS_WITH_COMPUTERS:
-		 * 
-		 * break; }
-		 */
-		// "UPDATE icm.analysis_step SET EndDate = ?,Status =
-		// ?,AnalysisReportDescription = ?,AnalysisReportAdvantages =
-		// ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 		Date date = Date.valueOf(durationDatePicker.getValue());
 		if (headertextArea.getText().equals("")||descriptiontextArea.getText().equals("")||advantagestextArea.getText().equals("")
 				||constraintstextArea.getText().equals("")|| durationDatePicker.getValue()==null)
@@ -234,8 +217,6 @@ public class AnalyzerBoundary implements DataInitializable {
 			descriptiontextArea.getText(), advantagestextArea.getText(), Date.valueOf(durationDatePicker.getValue()), constraintstextArea.getText());
 			myController.getCommitteeDirector();
 		}
-		
-		//ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 	}
 	 /**
 	 * 
