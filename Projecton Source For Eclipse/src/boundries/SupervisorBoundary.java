@@ -187,14 +187,6 @@ public class SupervisorBoundary implements Initializable {
 
     @FXML
     private TableColumn<TimeExtension, String> tableCoulmnReason;
-
-    @FXML
-    private TableColumn<TimeExtension, String> tableCoulmnStatus;
-    
-    
-    
-    
-    
     
     
     
@@ -229,22 +221,18 @@ public class SupervisorBoundary implements Initializable {
 		 txtTextChange.setVisible(true);
 		 txtTextChange.setText("Hello and have a nice working day");
 		 txtSendMessageToInitiator.setWrapText(true);
+		 btnCloseTheRequest.setVisible(false);
+		 txtCloseTheRequest.setVisible(false);
 		 
 		 myController.SelectAllChangeRequest();
-		 
 		 
 		 tableCoulmnStepId.setCellValueFactory(new PropertyValueFactory<TimeExtension,Integer>("StepID"));
 		 tableCoulmnStepType.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("StepType"));
 		 tableCoulmnOldDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("OldDate"));
 		 tableCoulmnNewDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("NewDate"));
 		 tableCoulmnReason.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("Reason"));
-		 tableCoulmnStatus.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("Status"));
-		 
-		 
 		 
 		 setComboBoxUsers1();
-		 
-		 
 		 
 		 tableTimeExtension.setRowFactory(tv -> {
 			    TableRow<TimeExtension> row = new TableRow<>();
@@ -256,9 +244,7 @@ public class SupervisorBoundary implements Initializable {
 			    });
 			    return row ;
 			});
-		 
-		 
-		 
+ 
 		 tableChangeRequest.setRowFactory(tv -> {
 			    TableRow<ChangeRequest> row = new TableRow<>();
 			    row.setOnMouseClicked(event -> {
@@ -467,13 +453,7 @@ public class SupervisorBoundary implements Initializable {
 			        }
 			    });
 			    return row ;
-			});
-		 
-		 
-		 
-		
-		 
-		
+			});	
 	}
 	
 	
@@ -492,7 +472,6 @@ public class SupervisorBoundary implements Initializable {
 			
 	}
 
-	
 	/**
 	 * 
 	 * @param event
@@ -507,8 +486,7 @@ public class SupervisorBoundary implements Initializable {
     	txtTextChange.setText("Employee appointment table is ready to use");
     	txtTextExplantion.setVisible(true);
     	txtTextExplantion.setText("Please select a request you would like to process");
-    	myController.SelectChangeRequestForAppointments();
-    		
+    	myController.SelectChangeRequestForAppointments();	
     }
 
     
@@ -527,7 +505,6 @@ public class SupervisorBoundary implements Initializable {
     	txtTextExplantion.setVisible(true);
     	txtTextExplantion.setText("Please select a request you would like to process");
     	myController.SelectAllChangeRequestForApprovals();
-    	
     }
 
     
@@ -539,14 +516,13 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void ClickBackFunction(MouseEvent event)
     {
-    	
     	if(!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 		if(!(myAnalysisReportStage == null))
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
-    	
     }
+    
     /**
      * This method set combo box 
      */
@@ -554,9 +530,7 @@ public class SupervisorBoundary implements Initializable {
     {
     	myController.setComboBox();
     }
-    
-
-    
+     
     /**
 	 * 
 	 * @param event
@@ -572,10 +546,7 @@ public class SupervisorBoundary implements Initializable {
     	txtTextExplantion.setVisible(true);
     	txtTextExplantion.setText("Please select a request you would like to process");
     	myController.SelectAllChangeRequestForClose();
-    	
-    	
     }
-    
     
     /**
    	 * 
@@ -593,7 +564,6 @@ public class SupervisorBoundary implements Initializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
     
-    
     /**
    	 * 
    	 * @param event
@@ -609,10 +579,7 @@ public class SupervisorBoundary implements Initializable {
 			myAnalysisReportStage.close();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
     }
-    
-    
 
-    
     /**
    	 * 
    	 * @param event
@@ -627,13 +594,9 @@ public class SupervisorBoundary implements Initializable {
     	txtTextChange.setText("All change requests are up to date and ready to use");
     	txtTextExplantion.setVisible(true);
     	txtTextExplantion.setText("Please select a request to work on, you can also use specific filters: Appointment,Approval or Closing Step");
-    	myController.SelectAllChangeRequest();
-    		
+    	myController.SelectAllChangeRequest();	
     }
-
-
-    
-    
+   
 /**
  * 
  * @param resultList
@@ -641,14 +604,11 @@ public class SupervisorBoundary implements Initializable {
  */
 	public void handleChangerequestResultForTable(ArrayList<ChangeRequest> resultList)     // set all change requests in the table
 	{
-		
 		requestList.clear();
 		if (!resultList.isEmpty()) {
 			requestList.addAll(resultList);
 			tableChangeRequest.setItems(requestList);
 		}
-		
-		
 	}
 	
 	
@@ -659,7 +619,6 @@ public class SupervisorBoundary implements Initializable {
 			extensionList.addAll(resultList);
 			tableTimeExtension.setItems(extensionList);
 		}
-		
 	}
 	
 	
@@ -720,9 +679,7 @@ public class SupervisorBoundary implements Initializable {
     	txtCloseTheRequest.setVisible(false);
     	tableTimeExtension.setVisible(false);
 		 btnApproveTimeExtension.setVisible(false);
-		 btnDenyTimeExtension.setVisible(false);
-    	
-    	
+		 btnDenyTimeExtension.setVisible(false);	
     }
 
     /**
@@ -743,14 +700,9 @@ public class SupervisorBoundary implements Initializable {
     	txtHandlerNameAutoAppoint.setVisible(false);
     	comboSelectAnalyizer.setVisible(true);
     	btnSetAnalyzer.setVisible(true);   
-    	myController.SelectChangeRequestForAppointments();
-    	
+    	myController.SelectChangeRequestForAppointments();	
     }
-    
-    
-    
-    
-    
+
     /**
      * 
      * @param event
@@ -787,21 +739,21 @@ public class SupervisorBoundary implements Initializable {
         	 tableTimeExtension.setVisible(false);
     		 btnApproveTimeExtension.setVisible(false);
     		 btnDenyTimeExtension.setVisible(false);
-        	
-        	
-    	
-    	}
-    	
+    	}	
     }
-    
 
     @FXML
     void clickOnSend(MouseEvent event)
     {
-    	myController.getUserEmail(myChangerequest.getInitiatorUserName());
+    	if(txtSendMessageToInitiator.getText().equals("")) {
+    		Toast.makeText(ProjectFX.mainStage, "Please write a message first", 1500, 500, 500);
+    	}else {
+    		btnCloseTheRequest.setVisible(true);
+        	txtCloseTheRequest.setVisible(true);
+        	myController.getUserEmail(myChangerequest.getInitiatorUserName());
+    	}
     }
     
- 
     /**
      * 
      * @param event
@@ -810,30 +762,16 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void clickOnCloseRequest(MouseEvent event)
     {
-
     	myController.setStatusToClosed(updateStepDate,"CLOSED","FINISH",myChangerequest.getChangeRequestID());
     	myController.setEndDate(updateStepDate,"CLOSED",myChangerequest.getChangeRequestID());
     	myController.SelectAllChangeRequestForClose();
-    	txtTextExplantion.setVisible(false);
-    	
-    	
+    	txtTextExplantion.setVisible(false);	
     }
-    
-    
     
     @FXML
     void clickOnSelectExecutionLeader(MouseEvent event)
-    {
-
-    	
-    	
+    { 	
     }
-
-
-
-
-
-
 
 	
     /**
@@ -871,17 +809,10 @@ public class SupervisorBoundary implements Initializable {
 		    	 txtCloseTheRequest.setVisible(false);
 		    	 tableTimeExtension.setVisible(false);
 				 btnApproveTimeExtension.setVisible(false);
-				 btnDenyTimeExtension.setVisible(false);
-		    	
-		    	
-		  }
-		  
+				 btnDenyTimeExtension.setVisible(false);	
+		  }	  
 	}
 
-
-
-
-	
 	/**
 	* 
 	* @param event
@@ -910,10 +841,7 @@ public class SupervisorBoundary implements Initializable {
     	 txtCloseTheRequest.setVisible(false);
     	 tableTimeExtension.setVisible(false);
 		 btnApproveTimeExtension.setVisible(false);
-		 btnDenyTimeExtension.setVisible(false);
-    	
-    	
-    	
+		 btnDenyTimeExtension.setVisible(false);	
     }
     
     /**
@@ -946,7 +874,6 @@ public class SupervisorBoundary implements Initializable {
     	tableTimeExtension.setVisible(false);
 		 btnApproveTimeExtension.setVisible(false);
 		 btnDenyTimeExtension.setVisible(false);
-    	
     }
 	
 	
@@ -979,9 +906,6 @@ public class SupervisorBoundary implements Initializable {
     	 tableTimeExtension.setVisible(false);
 		 btnApproveTimeExtension.setVisible(false);
 		 btnDenyTimeExtension.setVisible(false);
-    	
-    	
-    	
     }
     
     /**
@@ -1013,16 +937,13 @@ public class SupervisorBoundary implements Initializable {
     	tableTimeExtension.setVisible(false);
 		btnApproveTimeExtension.setVisible(false);
 		btnDenyTimeExtension.setVisible(false);
-    	
-    	
     }  
     
     public void sendEmailToInitiatorUser(User initiator) {
     	email.sendMessage(initiator.getEmail(), "Closed Request", 
     			MessagesCreator.supervisorCloseChangeRequest(initiator.getFullName(),
     					txtSendMessageToInitiator.getText()));
-    }
-    
+    }   
     
     /**
      * 
@@ -1036,7 +957,6 @@ public class SupervisorBoundary implements Initializable {
 		
 	}
 
-
 	/**
 	 * 
 	 * @param res2
@@ -1045,10 +965,8 @@ public class SupervisorBoundary implements Initializable {
 	public void getAnalysisEndDate(Date res2)
 	{
 		res2 = TimeManager.addDays(res2, 1);
-		txtFieldEstimatedTime.setText(res2.toString());
-		
+		txtFieldEstimatedTime.setText(res2.toString());	
 	}
-	
 	
     @FXML
     void clickOnTimeExtension(MouseEvent event)
@@ -1062,9 +980,7 @@ public class SupervisorBoundary implements Initializable {
     	btnApproveTimeExtension.setVisible(true);
     	btnDenyTimeExtension.setVisible(true);
     	txtTextExplantion.setText("Please select a request to approve or reject an extension");
-    	txtTextExplantion.setVisible(true);
-    	
-    	
+    	txtTextExplantion.setVisible(true);	
     }
     
     @FXML
@@ -1099,11 +1015,8 @@ public class SupervisorBoundary implements Initializable {
     		}
     		btnApproveTimeExtension.setVisible(false);
     		btnDenyTimeExtension.setVisible(false);
-    		txtTextExplantion.setVisible(false);
-    		
-    	}
-    	
-    	
+    		txtTextExplantion.setVisible(false);	
+    	}	
     }
     
     @FXML
@@ -1140,11 +1053,8 @@ public class SupervisorBoundary implements Initializable {
     		btnDenyTimeExtension.setVisible(false);
     		txtTextExplantion.setVisible(false);
     	}
-    	
     }
-    
-    
-    
+     
     /**
      * This method set all gui into invisible
      */
@@ -1187,64 +1097,46 @@ public class SupervisorBoundary implements Initializable {
 		Toast.makeText(ProjectFX.mainStage, "Execution Leader Appointment success", 1500, 500, 500);
 	}
 	
-    
-	
 	public void ShowSuccessAproveAppoint()
 	{
 		Toast.makeText(ProjectFX.mainStage, "Approving Analyzer successfuly", 1500, 500, 500);
-		
 	}
     
     public void showDenyAnalysisTime()
     {
     	Toast.makeText(ProjectFX.mainStage, "Deny Analysis time approved", 1500, 500, 500);
-		
 	}
     
     public void showApproveAnalysisTime()
-    {
-    	
-    	Toast.makeText(ProjectFX.mainStage, "Analysis time approved", 1500, 500, 500);
-		
+    {	
+    	Toast.makeText(ProjectFX.mainStage, "Analysis time approved", 1500, 500, 500);	
 	}
     
     public void showApproveExecutionTime()
 	{
     	Toast.makeText(ProjectFX.mainStage,"Execution time approved", 1500, 500, 500);
-		
 	}
     
     public void showDenyExecutionTime()
 	{
     	Toast.makeText(ProjectFX.mainStage,"Execution time Deny", 1500, 500, 500);
-		
 	}
-    
     
 	public void showChangeRequestSuspended()
 	{
 		Toast.makeText(ProjectFX.mainStage,"Change Request is Suspended", 1500, 500, 500);
-		
 	}
-
-
 
 	public void showChangeRequestUnsuspended()
 	{
 		Toast.makeText(ProjectFX.mainStage,"Change Request is Active", 1500, 500, 500);
-		
 	}
 	
-	
-	
+
 	public void showChangeRequestClosed()
 	{
-
 		Toast.makeText(ProjectFX.mainStage,"Change Request is Closed", 1500, 500, 500);
-		
 	}
-
-	
 	
 	public void ShowAnalyzerSupervisorAppointToast(int affectedRows)
 	{
@@ -1254,8 +1146,6 @@ public class SupervisorBoundary implements Initializable {
 			Toast.makeText(ProjectFX.mainStage, "Problam in update current step", 1500, 500, 500);
 	}
 
-
-
 	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
 	{
 		if(affectedRows2==1)
@@ -1264,56 +1154,15 @@ public class SupervisorBoundary implements Initializable {
 			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);	
 	}
 
-
 	public void showApproveTimeExtension()
 	{
 		Toast.makeText(ProjectFX.mainStage, "Your time extension approved", 1500, 500, 500);
 		
 	}
 
-
 	public void showDenyTimeExtension()
 	{
 		Toast.makeText(ProjectFX.mainStage, "Your time extension denied", 1500, 500, 500);
 		
 	}
-
-
-
-
-
-
-
-
-
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-
-	
-
-
-
 }

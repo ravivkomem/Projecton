@@ -167,12 +167,11 @@
       <Text fx:id="txtCloseTheRequest" layoutX="529.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please close the request to finish" wrappingWidth="187.00000551342964" />
       <TableView fx:id="tableTimeExtension" layoutX="149.0" layoutY="395.0" prefHeight="173.0" prefWidth="558.0">
         <columns>
-          <TableColumn fx:id="tableCoulmnStepId" prefWidth="82.0" text="StepID" />
-          <TableColumn fx:id="tableCoulmnStepType" prefWidth="83.0" text="StepType" />
-            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="90.0" text="OldDate" />
-            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="90.0" text="NewDate" />
-            <TableColumn fx:id="tableCoulmnReason" prefWidth="102.0" text="Reason" />
-            <TableColumn fx:id="tableCoulmnStatus" prefWidth="110.0" text="Status" />
+          <TableColumn fx:id="tableCoulmnStepId" prefWidth="92.0" text="StepID" />
+          <TableColumn fx:id="tableCoulmnStepType" prefWidth="111.0" text="StepType" />
+            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="94.66668701171875" text="OldDate" />
+            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="98.33331298828125" text="NewDate" />
+            <TableColumn fx:id="tableCoulmnReason" prefWidth="161.0" text="Reason" />
         </columns>
       </TableView>
       <Button fx:id="btnApproveTimeExtension" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveTimeExtension" text="Approve Time Extension" />
