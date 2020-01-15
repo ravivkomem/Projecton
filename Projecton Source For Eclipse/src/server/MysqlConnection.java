@@ -192,7 +192,7 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE.getCode()]=
                 "UPDATE icm.analysis_step SET EstimatedEndDate = ? WHERE AnalysisStepID = ?";
         sqlArray[SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME.getCode()]=
-                "UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
+                "UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ?,EstimatedDate=? WHERE ChangeRequestID = ?";
         
         sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_CLOSE.getCode()]=
                 "UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
