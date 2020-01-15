@@ -135,7 +135,7 @@ public enum SqlQueryType {
     ********************************************/
 	
 	
-	
+	SELECT_USER_EMAIL(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUEST(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_CHANGE_REQUEST_FOR_APPROVALS(SqlExecutionType.EXECUTE_QUERY),

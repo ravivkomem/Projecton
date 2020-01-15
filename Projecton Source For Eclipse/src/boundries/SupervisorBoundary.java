@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
+import assets.EmailTLS;
 import assets.ProjectPages;
 import assets.StepType;
 import assets.Toast;
@@ -203,6 +204,7 @@ public class SupervisorBoundary implements Initializable {
     java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
     ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
     ObservableList<TimeExtension> extensionList = FXCollections.observableArrayList();
+    private EmailTLS email = new EmailTLS();
     
     private Step SupervisorStep;
     Stage myTimeExtensionStage = null;
@@ -796,8 +798,7 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void clickOnSend(MouseEvent event)
     {
-
-    	
+    	myController.getUserEmail(myChangerequest.getInitiatorUserName());
     }
     
     

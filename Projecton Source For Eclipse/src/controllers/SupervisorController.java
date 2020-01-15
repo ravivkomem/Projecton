@@ -35,7 +35,13 @@ public class SupervisorController extends BasicController
 		this.myBoundary = myBoundary;
 	}
 	
-	
+	public void getUserEmail(String userName) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(userName);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_USER_EMAIL, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 	
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -167,15 +173,12 @@ public class SupervisorController extends BasicController
 					myBoundary.showDenyTimeExtension();
 					this.unsubscribeFromClientDeliveries();
 					break;
-					
-					
+	
 				default:
 					break;
-			
 			}
 		});
-		return;
-		
+		return;	
 	}
 
 /**
@@ -194,7 +197,6 @@ public class SupervisorController extends BasicController
 		return res;
 		
 	}
-
 
 /**
  * 
@@ -247,7 +249,6 @@ public class SupervisorController extends BasicController
  */
 	public void SelectChangeRequestForAppointments()
 	{
-		
 		ArrayList<Object> varArray = new ArrayList<>();
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array

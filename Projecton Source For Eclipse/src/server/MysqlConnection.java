@@ -422,18 +422,13 @@ public class MysqlConnection {
     			"UPDATE icm.change_request SET CurrentStep = ?,HandlerUserName = ? WHERE ChangeRequestID = ?";
      	
      	
-     	
-     	
-     	
-     	
-     	
-     	
      	/* ******************************************************
     	 * *************Supervisor Queries ****************
     	 *******************************************************
     	 *******************************************************/
      	
-     	
+     	sqlArray[SqlQueryType.SELECT_USER_EMAIL.getCode()] =
+     			"SELECT Email FROM icm.user WHERE UserName = ?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 
 				"SELECT * FROM icm.change_request";
     	
