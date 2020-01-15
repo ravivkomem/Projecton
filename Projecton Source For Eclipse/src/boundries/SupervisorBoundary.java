@@ -176,6 +176,7 @@ public class SupervisorBoundary implements Initializable {
 		 tableColumnStatus.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("status"));
 		 tableColumnSubSystem.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("selectedSubsystem"));
 		 txtFieldEstimatedTime.setEditable(false);
+		 txtHandlerNameAutoAppoint.setEditable(false);
 		 setVisabilityValse();
 		 txtTextChange.setVisible(true);
 		 txtTextChange.setText("Hello and have a nice working day");

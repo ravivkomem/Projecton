@@ -119,8 +119,11 @@ public class ActivityReportBoundary implements Initializable {
 	 */
 	public void createActivityReportList(ArrayList<ChangeRequest> requestList) {
 		Date endDate = Date.valueOf(endDatePicker.getValue());
-		if(requestList.isEmpty())
+		if(requestList.isEmpty()) {
+			activityReportDetailsPane.setVisible(false);
+			Toast.makeText(ProjectFX.mainStage, "No request for those dates", 1500, 500, 500);
 			return;
+		}
 		changeRequestList = requestList;
 		int active = 0, close = 0, suspended = 0, denied = 0;
 		ArrayList<Long> workDays = new ArrayList<>();
