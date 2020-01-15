@@ -129,10 +129,15 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <AnchorPane fx:id="datePane" layoutX="316.0" layoutY="244.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+      <AnchorPane fx:id="datePane" layoutX="232.0" layoutY="211.0" prefHeight="233.0" prefWidth="353.0">
          <children>
-            <DatePicker fx:id="timedurationPicker" layoutX="13.0" layoutY="14.0" promptText="dd/mm/yyyy" />
-            <Button fx:id="dateButton" layoutX="69.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#setDate" text="Approve" />
+            <DatePicker fx:id="timedurationPicker" layoutX="95.0" layoutY="66.0" promptText="dd/mm/yyyy" />
+            <Button fx:id="dateButton" layoutX="151.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#setDate" text="Approve" />
+            <Text layoutX="1.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please estimate the time you need to complete your work:" wrappingWidth="361.9999966621399">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <Text fx:id="notificationText" layoutX="188.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The requested date is examined by the supervisor..." visible="false" wrappingWidth="455.13671875">
