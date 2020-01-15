@@ -29,6 +29,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Lior Kauffman
+ * This class represents the analyzer boundary
+ * with all the methods and logic implementations
+ */
 public class AnalyzerBoundary implements DataInitializable {
 
 	/* *******************************
@@ -114,11 +120,19 @@ public class AnalyzerBoundary implements DataInitializable {
 	/* ***************************************
      * ********** FXML Methods ***************
      * ***************************************/
+	 /**
+     * This method load the home page
+     * @param event - mouse click 
+     */
 	@FXML
 	void loadHomePage(MouseEvent event) {
 		closeMyStages();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
 	}
+	 /**
+     * This method load the previous page
+     * @param event - mouse click 
+     */
 
 	@FXML
 	void loadPreviousPage(MouseEvent event) {
@@ -132,6 +146,10 @@ public class AnalyzerBoundary implements DataInitializable {
 		ProjectFX.pagingController.userLogout();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.LOGIN_PAGE.getPath());
 	}
+	 /**
+     * This method load extra details page with the details of the current change request
+     * @param event - mouse click 
+     */
 	
 	@FXML
 	void loadRequestDetails(MouseEvent event) {
@@ -142,7 +160,10 @@ public class AnalyzerBoundary implements DataInitializable {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.EXTRA_DETAILS_PAGE.getPath(),dataList);
 		
 	}
-
+	/**
+	 * this method open the time extension page in another window
+	 * @param event
+	 */
 	@FXML
 	void loadTimeExtensionPage(MouseEvent event) {
 		if (myTimeExtensionStage == null) {
@@ -155,7 +176,10 @@ public class AnalyzerBoundary implements DataInitializable {
 					.loadAdditionalStage(ProjectPages.TIME_EXTENSION_PAGE.getPath(), analyzerStep);
 		}
 	}
-
+	 /**
+     * This method display the time remaining for the current step if estimatedEndDate > current date or the delay time if estimatedEndDate < current in days
+     * @param estimatedEndDate
+     */
 	private void displayTimeRemaining(Date estimatedEndDate) {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
 		if(daysBetween < 0) {
@@ -174,6 +198,7 @@ public class AnalyzerBoundary implements DataInitializable {
 	
 	/**
 	 * This method check date propriety and update the current step and the EstimatedEndDate to DB
+	 * @param event - mouse click
 	 */
 	@FXML
 	void submit(MouseEvent event) {

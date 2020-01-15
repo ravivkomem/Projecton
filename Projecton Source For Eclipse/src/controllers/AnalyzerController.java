@@ -14,6 +14,11 @@ import entities.Step;
 import entities.User;
 import javafx.application.Platform;
 
+/**
+ * 
+ * @author Lior Kauffman
+ *This controller handle with the Analyzer page
+ */
 @SuppressWarnings("serial")
 public class AnalyzerController extends BasicController {
 	
@@ -26,13 +31,21 @@ public class AnalyzerController extends BasicController {
 	/* **************************************
 	 * ************ Public Methods **********
 	 * **************************************/
+	/**
+	 * this method create sql query that ask from data base analysis_step for change request
+	 * @param changeRequestID
+	 */
 	public void getCurrentStep(Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_STEP_BY_CHANGE_REQUEST_ID, varArray);
 		this.sendSqlActionToClient(sqlAction);
 	}
-	
+	/**
+	 * this method create sql query that update the estimatedDate by analysisStepId in the ANALYSIS_STEP data base
+	 * @param analysisStepId
+	 * @param estimatedDate
+	 */
 	public void updateAnalysisStepEstimatedEndDate(Integer analysisStepId,Date estimatedDate) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(estimatedDate);
@@ -40,7 +53,12 @@ public class AnalyzerController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE,varArray);
 		this.sendSqlActionToClient(sqlAction);
 	}
-	
+	/**
+	 * this method create sql query that update the current step by id to data base
+	 * @param changeRequestID
+	 * @param handlerUserName
+	 * @param currentstep
+	 */
 	public void updateChangeRequestCurrentStep(String currentstep, String handlerUserName, Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(currentstep);
@@ -50,7 +68,13 @@ public class AnalyzerController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
-	
+	/**
+	 * this method create sql query that update current step handler user name and date by change request id to change request data base
+	 * @param changerequest
+	 * @param currentstep
+	 * @param handlerusername
+	 * @param date
+	 */
 	
 	public void updateChangeRequestCurrentStepAndHandlerName(ChangeRequest changerequest,String currentstep,String handlerusername,Date date) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -62,6 +86,17 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	/**
+	 * this method create sql query that update analysis step data base to closed
+	 * @param changerequest
+	 * @param date
+	 * @param Status
+	 * @param AnalysisReportHeader
+	 * @param AnalysisReportDescription
+	 * @param AnalysisReportAdvantages
+	 * @param AnalysisReportDuration
+	 * @param AnalysisReportConstraints
+	 */
 	
 	//"UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
 	public void updateAnalysisStepClose(ChangeRequest changerequest,Date date,String Status,String AnalysisReportHeader, String AnalysisReportDescription,String AnalysisReportAdvantages,Date AnalysisReportDuration,String AnalysisReportConstraints) {
@@ -78,6 +113,15 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	/**
+	 * this method create sql query that insert new committee step to data base
+	 * @param changeRequestID
+	 * @param UserName
+	 * @param StartDate
+	 * @param Status
+	 * @param estimatedDate
+	 * 
+	 */
 	public void insertNewCommitteeStep(Integer ChangeRequestId, String UserName,Date StartDate,String Status,Date estimatedDate) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(ChangeRequestId);
@@ -89,12 +133,16 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
-	
+	/**
+	 * this method create sql query that ask for committee director
+	 * 
+	 */
 	public void getCommitteeDirector() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_COMMITTEE_DIRECTOR,new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -133,6 +181,10 @@ public class AnalyzerController extends BasicController {
 		return;
 	}
 	
+	/**
+	 * this method create new step from sqlResult
+	 * @param result
+	 */
 	private Step parseSqlResultToAnalysisStep(SqlResult result) {
 		
 		StepType testerType = StepType.ANALYSIS;
