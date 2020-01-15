@@ -502,6 +502,23 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.UPDATE_END_DATE_IN_CLOSING_STEP.getCode()] = "UPDATE icm.closing_step SET EndDate = ?, Status  = ? WHERE ChangeRequestID = ?";
     	
+    	sqlArray[SqlQueryType.SELECT_ALL_TIME_EXTENSIONS.getCode()] = 
+				"SELECT * FROM icm.time_extension" +
+						" WHERE Status = 'NEW'";
+    	
+    	sqlArray[SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED.getCode()] = "UPDATE icm.time_extension SET Status = ? WHERE StepID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_END_DATE.getCode()] = "UPDATE icm.analysis_step SET EstimatedEndDate = ? WHERE AnalysisStepID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_COMMITTEE_STEP_ESTIMATED_END_DATE.getCode()] = "UPDATE icm.committee_step SET EstimatedEndDate = ? WHERE CommitteeStepId = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE.getCode()] = "UPDATE icm.execution_step SET EstimatedEndDate = ? WHERE ExecutionStepID = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_TESTER_STEP_ESTIMATED_END_DATE.getCode()] = "UPDATE icm.tester_step SET EstimatedEndDate = ? WHERE TesterStepId = ?";
+    	
+    	sqlArray[SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_DENY.getCode()] = "UPDATE icm.time_extension SET Status = ? WHERE StepID = ?";
+    	
+    	
     	/* *****************************************************
 		 * ************* Time Watcher Queries ****************
 		 * *****************************************************/

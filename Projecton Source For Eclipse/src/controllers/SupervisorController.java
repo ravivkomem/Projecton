@@ -13,6 +13,7 @@ import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
 import entities.Step;
+import entities.TimeExtension;
 import javafx.application.Platform;
 /**
  * 
@@ -48,6 +49,13 @@ public class SupervisorController extends BasicController
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.handleChangerequestResultForTable(resultList);
 					break;
+				case SELECT_ALL_TIME_EXTENSIONS:
+					ArrayList<TimeExtension> resultList4=new ArrayList<>();
+					resultList4.addAll(this.changeResultToTimeExtension(result));
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.handleTimeExtensionForTable(resultList4);
+					break;
+					
 				case SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS:
 					ArrayList<ChangeRequest> resultList2=new ArrayList<>();
 					resultList2.addAll(this.changeResultToChangerequest(result));
@@ -61,10 +69,10 @@ public class SupervisorController extends BasicController
 					myBoundary.handleChangerequestResultForTable(resultList3);
 					break;
 				case SELECT_ALL_CHANGE_REQUEST_FOR_CLOSE:
-					ArrayList<ChangeRequest> resultList4=new ArrayList<>();
-					resultList4.addAll(this.changeResultToChangerequest(result));
+					ArrayList<ChangeRequest> resultList5=new ArrayList<>();
+					resultList5.addAll(this.changeResultToChangerequest(result));
 					this.unsubscribeFromClientDeliveries();
-					myBoundary.handleChangerequestResultForTable(resultList4);
+					myBoundary.handleChangerequestResultForTable(resultList5);
 					break;
 				case UPDATE_CURRENT_STEP_TO_ANALYZER_SUPERVISOR_APPOINT:
 					int affectedRows;
@@ -139,6 +147,27 @@ public class SupervisorController extends BasicController
 					myBoundary.getExecutionEndDate(res2);
 					this.unsubscribeFromClientDeliveries();
 					break;
+				case UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED:
+					myBoundary.showApproveTimeExtension();
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_ANALYSIS_STEP_ESTIMATED_END_DATE:
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_COMMITTEE_STEP_ESTIMATED_END_DATE:
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE:
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_TESTER_STEP_ESTIMATED_END_DATE:
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case UPDATE_TIME_EXTENSION_STATUS_TO_DENY:
+					myBoundary.showDenyTimeExtension();
+					this.unsubscribeFromClientDeliveries();
+					break;
+					
 					
 				default:
 					break;
@@ -183,6 +212,19 @@ public class SupervisorController extends BasicController
 					,(String)a.get(7),(String)a.get(8),(String)a.get(9)
 					,(String)a.get(10),(Date)a.get(11));
 			resultList.add( changeRequest);
+		}
+		return resultList;	
+	}
+	
+	
+	private ArrayList<TimeExtension> changeResultToTimeExtension(SqlResult result)
+	{
+		ArrayList<TimeExtension> resultList=new ArrayList<>();
+		for(ArrayList<Object> a: result.getResultData())
+		{
+			TimeExtension timeExtension = new TimeExtension((Integer)a.get(0),(Integer)a.get(1),(String)a.get(2),
+					(Date)a.get(3),(Date)a.get(4),(String)a.get(5),(String)a.get(6));
+			resultList.add(timeExtension);
 		}
 		return resultList;	
 	}
@@ -575,6 +617,93 @@ public class SupervisorController extends BasicController
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 		
 	}
+
+
+
+public void SelectAllTimeExtensions()
+{
+	ArrayList<Object> varArray = new ArrayList<>();
+	SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_TIME_EXTENSIONS, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);	
+}
+
+
+
+public void updateTimeExtensionStatus(String status, int stepID)
+{
+	ArrayList<Object> varArray = new ArrayList<>();
+	varArray.add(status);
+	varArray.add(stepID);
+	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	
+}
+
+
+
+public void updateAnalysisStepEstimatedEndDate(Date newDate, int stepID)
+{
+	ArrayList<Object> varArray = new ArrayList<>();
+	varArray.add(newDate);
+	varArray.add(stepID);
+	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_END_DATE, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);
+}
+
+
+
+public void updateCommitteeStepEstimatedEndDate(Date newDate, int stepID)
+{
+	
+	ArrayList<Object> varArray = new ArrayList<>();
+	varArray.add(newDate);
+	varArray.add(stepID);
+	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COMMITTEE_STEP_ESTIMATED_END_DATE, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);
+}
+
+
+
+public void updateExecutionStepEstimatedEndDate(Date newDate, int stepID)
+{
+	ArrayList<Object> varArray = new ArrayList<>();
+	varArray.add(newDate);
+	varArray.add(stepID);
+	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	
+}
+
+
+
+public void updateTestingStepEstimatedEndDate(Date newDate, int stepID)
+{
+	ArrayList<Object> varArray = new ArrayList<>();
+	varArray.add(newDate);
+	varArray.add(stepID);
+	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TESTER_STEP_ESTIMATED_END_DATE, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	
+}
+
+
+
+public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
+{
+	ArrayList<Object> varArray = new ArrayList<>();
+	varArray.add(status);
+	varArray.add(stepID);
+	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_DENY, varArray);
+	this.subscribeToClientDeliveries(); // subscribe to listener array
+	ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	
+}
 	
 	
 	

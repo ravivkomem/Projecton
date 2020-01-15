@@ -7,11 +7,13 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
+import assets.StepType;
 import assets.Toast;
 import controllers.SupervisorController;
 import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.Step;
+import entities.TimeExtension;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -111,6 +113,15 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     private Button btnApproveExecutionTime;
     
+    @FXML
+    private Button btnApproveTimeExtension;
+
+    @FXML
+    private Button btnDenyTimeExtension;
+    
+    @FXML
+    private Button btnTimeExtension;
+    
     
     @FXML
     private TextField txtFieldEstimatedTime;
@@ -155,12 +166,44 @@ public class SupervisorBoundary implements Initializable {
     
     
     
+    
+    @FXML
+    private TableView<TimeExtension> tableTimeExtension;
+
+    @FXML
+    private TableColumn<TimeExtension,Integer> tableCoulmnStepId;
+
+    @FXML
+    private TableColumn<TimeExtension, String> tableCoulmnStepType;
+
+    @FXML
+    private TableColumn<TimeExtension, Date> tableCoulmnOldDate;
+
+    @FXML
+    private TableColumn<TimeExtension, Date> tableCoulmnNewDate;
+
+    @FXML
+    private TableColumn<TimeExtension, String> tableCoulmnReason;
+
+    @FXML
+    private TableColumn<TimeExtension, String> tableCoulmnStatus;
+    
+    
+    
+    
+    
+    
+    
+    
     // Vars //
     
     private SupervisorController myController = new SupervisorController(this);
     private ChangeRequest myChangerequest;
+    private TimeExtension myTimeExtension;
     java.sql.Date updateStepDate = new java.sql.Date(Calendar.getInstance().getTime().getTime());
     ObservableList<ChangeRequest> requestList = FXCollections.observableArrayList();
+    ObservableList<TimeExtension> extensionList = FXCollections.observableArrayList();
+    
     private Step SupervisorStep;
     Stage myTimeExtensionStage = null;
 	Stage myAnalysisReportStage= null;
@@ -185,7 +228,32 @@ public class SupervisorBoundary implements Initializable {
 		 
 		 myController.SelectAllChangeRequest();
 		 
+		 
+		 tableCoulmnStepId.setCellValueFactory(new PropertyValueFactory<TimeExtension,Integer>("StepID"));
+		 tableCoulmnStepType.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("StepType"));
+		 tableCoulmnOldDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("OldDate"));
+		 tableCoulmnNewDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("NewDate"));
+		 tableCoulmnReason.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("Reason"));
+		 tableCoulmnStatus.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("Status"));
+		 
+		 
+		 
 		 setComboBoxUsers1();
+		 
+		 
+		 
+		 tableTimeExtension.setRowFactory(tv -> {
+			    TableRow<TimeExtension> row = new TableRow<>();
+			    row.setOnMouseClicked(event -> {
+			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
+			        {
+			        	myTimeExtension = row.getItem();
+			        }
+			    });
+			    return row ;
+			});
+		 
+		 
 		 
 		 tableChangeRequest.setRowFactory(tv -> {
 			    TableRow<ChangeRequest> row = new TableRow<>();
@@ -429,6 +497,7 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void ClickAppointmentFunction(MouseEvent event) 
     {
+    	tableChangeRequest.setVisible(true);
     	setVisabilityValse();
     	txtTextChange.setVisible(true);
     	txtTextChange.setText("Employee appointment table is ready to use");
@@ -447,6 +516,7 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void ClickApprovalFunction(MouseEvent event)
     {
+    	tableChangeRequest.setVisible(true);
     	setVisabilityValse();
     	txtTextChange.setVisible(true);
     	txtTextChange.setText("Approval and Rejection Table is ready to use");
@@ -491,6 +561,7 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void ClickClosingStepFunction(MouseEvent event)
     {
+    	tableChangeRequest.setVisible(true);
     	setVisabilityValse();
     	txtTextChange.setVisible(true);
     	txtTextChange.setText("Request closing table is ready to use");
@@ -546,6 +617,7 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void ClickRequestListFunction(MouseEvent event)
     {
+    	tableChangeRequest.setVisible(true);
     	setVisabilityValse();
     	txtTextChange.setVisible(true);
     	txtTextChange.setText("All change requests are up to date and ready to use");
@@ -572,6 +644,17 @@ public class SupervisorBoundary implements Initializable {
 			tableChangeRequest.setItems(requestList);
 		}
 		
+		
+	}
+	
+	
+	public void handleTimeExtensionForTable(ArrayList<TimeExtension> resultList)
+	{
+		extensionList.clear();
+		if (!resultList.isEmpty()) {
+			extensionList.addAll(resultList);
+			tableTimeExtension.setItems(extensionList);
+		}
 		
 	}
 	
@@ -631,6 +714,9 @@ public class SupervisorBoundary implements Initializable {
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
     	txtCloseTheRequest.setVisible(false);
+    	tableTimeExtension.setVisible(false);
+		 btnApproveTimeExtension.setVisible(false);
+		 btnDenyTimeExtension.setVisible(false);
     	
     	
     }
@@ -694,6 +780,9 @@ public class SupervisorBoundary implements Initializable {
         	txtExecutionEstimatedTime.setVisible(false);
         	txtFieldEstimatedTime.setVisible(false);
         	 txtCloseTheRequest.setVisible(false);
+        	 tableTimeExtension.setVisible(false);
+    		 btnApproveTimeExtension.setVisible(false);
+    		 btnDenyTimeExtension.setVisible(false);
         	
         	
     	
@@ -780,6 +869,9 @@ public class SupervisorBoundary implements Initializable {
 		    	txtExecutionEstimatedTime.setVisible(false);
 		    	txtFieldEstimatedTime.setVisible(false);
 		    	 txtCloseTheRequest.setVisible(false);
+		    	 tableTimeExtension.setVisible(false);
+				 btnApproveTimeExtension.setVisible(false);
+				 btnDenyTimeExtension.setVisible(false);
 		    	
 		    	
 		  }
@@ -816,6 +908,9 @@ public class SupervisorBoundary implements Initializable {
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
     	 txtCloseTheRequest.setVisible(false);
+    	 tableTimeExtension.setVisible(false);
+		 btnApproveTimeExtension.setVisible(false);
+		 btnDenyTimeExtension.setVisible(false);
     	
     	
     	
@@ -848,6 +943,9 @@ public class SupervisorBoundary implements Initializable {
     	txtFieldEstimatedTime.setVisible(false);
     	txtCloseTheRequest.setVisible(false);
     	txtAnalysisEstimatedTime.setVisible(false);
+    	tableTimeExtension.setVisible(false);
+		 btnApproveTimeExtension.setVisible(false);
+		 btnDenyTimeExtension.setVisible(false);
     	
     }
 	
@@ -878,6 +976,9 @@ public class SupervisorBoundary implements Initializable {
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
     	 txtCloseTheRequest.setVisible(false);
+    	 tableTimeExtension.setVisible(false);
+		 btnApproveTimeExtension.setVisible(false);
+		 btnDenyTimeExtension.setVisible(false);
     	
     	
     	
@@ -909,7 +1010,10 @@ public class SupervisorBoundary implements Initializable {
     	txtExecutionEstimatedTime.setVisible(false);
     	txtFieldEstimatedTime.setVisible(false);
     	txtCloseTheRequest.setVisible(false);
-    	;
+    	tableTimeExtension.setVisible(false);
+		btnApproveTimeExtension.setVisible(false);
+		btnDenyTimeExtension.setVisible(false);
+    	
     	
     }  
     
@@ -938,6 +1042,100 @@ public class SupervisorBoundary implements Initializable {
 		txtFieldEstimatedTime.setText(res2.toString());
 		
 	}
+	
+	
+    @FXML
+    void clickOnTimeExtension(MouseEvent event)
+    {
+    	myController.SelectAllTimeExtensions();
+    	setVisabilityValse();
+    	tableChangeRequest.setVisible(false);
+    	tableTimeExtension.setVisible(true);
+    	tableTimeExtension.setLayoutX(159);
+    	tableTimeExtension.setLayoutY(91);
+    	btnApproveTimeExtension.setVisible(true);
+    	btnDenyTimeExtension.setVisible(true);
+    	txtTextExplantion.setText("Please select a request to approve or reject an extension");
+    	txtTextExplantion.setVisible(true);
+    	
+    	
+    }
+    
+    @FXML
+    void clickOnApproveTimeExtension(MouseEvent event)
+    {
+    	if(myTimeExtension==null)
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "Please select requset for time extension", 1500, 500, 500);
+    	}
+    	else
+    	{
+    		String stepType = myTimeExtension.getStepType().getStepName();
+    		if(stepType.equals("Analysis"))
+    		{
+    			myController.updateTimeExtensionStatus("APPROVED",myTimeExtension.getStepID());
+    			myController.updateAnalysisStepEstimatedEndDate(myTimeExtension.getNewDate(),myTimeExtension.getStepID());
+    		}
+    		else if(stepType.equals("Committee"))
+    		{
+    			myController.updateTimeExtensionStatus("APPROVED",myTimeExtension.getStepID());
+    			myController.updateCommitteeStepEstimatedEndDate(myTimeExtension.getNewDate(),myTimeExtension.getStepID());
+    		}
+    		else if(stepType.equals("Execution"))
+    		{
+    			myController.updateTimeExtensionStatus("APPROVED",myTimeExtension.getStepID());
+    			myController.updateExecutionStepEstimatedEndDate(myTimeExtension.getNewDate(),myTimeExtension.getStepID());
+    		}
+    		else if(stepType.equals("Testing"))
+    		{
+    			myController.updateTimeExtensionStatus("APPROVED",myTimeExtension.getStepID());
+    			myController.updateTestingStepEstimatedEndDate(myTimeExtension.getNewDate(),myTimeExtension.getStepID());
+    		}
+    		btnApproveTimeExtension.setVisible(false);
+    		btnDenyTimeExtension.setVisible(false);
+    		txtTextExplantion.setVisible(false);
+    		
+    	}
+    	
+    	
+    }
+    
+    @FXML
+    void clickOnDenyTimeExtension(MouseEvent event)
+    {
+    	if(myTimeExtension==null)
+    	{
+    		Toast.makeText(ProjectFX.mainStage, "Please select requset for time extension", 1500, 500, 500);
+    	}
+    	else
+    	{
+    		String stepType = myTimeExtension.getStepType().getStepName();
+    		if(stepType.equals("Analysis"))
+    		{
+    			myController.updateTimeExtensionStatusAfterDeny("DENY",myTimeExtension.getStepID());
+    			myController.updateAnalysisStepEstimatedEndDate(myTimeExtension.getOldDate(),myTimeExtension.getStepID());
+    		}
+    		else if(stepType.equals("Committee"))
+    		{
+    			myController.updateTimeExtensionStatusAfterDeny("DENY",myTimeExtension.getStepID());
+    			myController.updateCommitteeStepEstimatedEndDate(myTimeExtension.getOldDate(),myTimeExtension.getStepID());
+    		}
+    		else if(stepType.equals("Execution"))
+    		{
+    			myController.updateTimeExtensionStatusAfterDeny("DENY",myTimeExtension.getStepID());
+    			myController.updateExecutionStepEstimatedEndDate(myTimeExtension.getOldDate(),myTimeExtension.getStepID());
+    		}
+    		else if(stepType.equals("Testing"))
+    		{
+    			myController.updateTimeExtensionStatusAfterDeny("DENY",myTimeExtension.getStepID());
+    			myController.updateTestingStepEstimatedEndDate(myTimeExtension.getOldDate(),myTimeExtension.getStepID());
+    		}
+    		btnApproveTimeExtension.setVisible(false);
+    		btnDenyTimeExtension.setVisible(false);
+    		txtTextExplantion.setVisible(false);
+    	}
+    	
+    }
     
     
     
@@ -969,6 +1167,9 @@ public class SupervisorBoundary implements Initializable {
 		 txtTextChange.setVisible(false);
 		 txtTextExplantion.setVisible(false);
 		 txtCloseTheRequest.setVisible(false);
+		 tableTimeExtension.setVisible(false);
+		 btnApproveTimeExtension.setVisible(false);
+		 btnDenyTimeExtension.setVisible(false);
 	}
     
     //**********************************TOASTS*************************************************//
@@ -1055,6 +1256,20 @@ public class SupervisorBoundary implements Initializable {
 			Toast.makeText(ProjectFX.mainStage, "Your Analyzer Appoint Approved", 1500, 500, 500);
 		else
 			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);	
+	}
+
+
+	public void showApproveTimeExtension()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Your time extension approved", 1500, 500, 500);
+		
+	}
+
+
+	public void showDenyTimeExtension()
+	{
+		Toast.makeText(ProjectFX.mainStage, "Your time extension denied", 1500, 500, 500);
+		
 	}
 
 
