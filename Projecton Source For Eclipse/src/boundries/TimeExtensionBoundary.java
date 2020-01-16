@@ -221,7 +221,8 @@ public class TimeExtensionBoundary implements DataInitializable  {
     		/*Updating text*/
 			timeExtensionHeaderText.setText("Requesting Time Extension For Change Request No."+myStep.getChangeRequestID());
 			currentStepTextField.setText(myStep.getType().getStepName());
-			currentEndDateTextField.setText(myStep.getEstimatedEndDate().toString());
+			currentEndDateTextField.setText(TimeManager.addDays(myStep.getEstimatedEndDate(), 1).toString());
+			//currentEndDateTextField.setText(myStep.getEstimatedEndDate().toString());
 			/*Visibility changes*/
 			submitTimeExtensionButton.setVisible(true);
 			closeTimeExtensionButton.setVisible(true);

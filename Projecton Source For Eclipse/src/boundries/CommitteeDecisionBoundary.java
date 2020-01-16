@@ -180,6 +180,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     /** The deny comment label. */
     @FXML
     private Label denyCommentLabel;
+    @FXML
+    private Text informationText;
 
      /* *************************************
 	  * ******* Private Objects *************
@@ -223,7 +225,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * This method handle with press on send deny decision
 	 * the method call the controller for update the sql table in the data base.
 	 *
-	 * @param event the event
+	 * @param event
 	 */
     @FXML
     void sendDenyDecisionAndComment(MouseEvent event) {
@@ -372,6 +374,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				 * update close_step 
 				 * update changeRequest table
 				 */
+				informationText.setText("Please write your deny decision");
 				denyCommentLabel.setVisible(true);
 				sendDenyCommentBtn.setVisible(true);
 				denyCommentTextArea.setVisible(true);

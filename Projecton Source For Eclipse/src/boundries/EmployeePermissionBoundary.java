@@ -93,6 +93,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	 */
     @FXML
     void updateSupportSubsystem(MouseEvent event) {
+    	errorText.setVisible(false);
     	if(subsystemComboBox.getSelectionModel().isEmpty()) {
     		popUpWindowMessage(AlertType.INFORMATION, "", "Please choose subsystem first");
     	} else {
@@ -115,6 +116,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
      */
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
+    	errorText.setVisible(false);
     	if(newPremissionComboBox.getSelectionModel().isEmpty()) {
     		errorText.setText("Please select permission");
     		errorText.setVisible(true);
@@ -207,6 +209,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     void replaceCommitteMember(MouseEvent event) {
     	if(committeeMemberComboBox.getSelectionModel().isEmpty()) {
     		errorText.setText("Please choose committee member");
+    		errorText.setVisible(true);
     		return;
     	}
     	User oldMember = null;

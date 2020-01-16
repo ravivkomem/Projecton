@@ -430,7 +430,7 @@ public class MysqlConnection {
     			+ "WHERE ChangeRequestID = ?";
     	sqlArray[SqlQueryType.INSERT_NEW_TESTER_STEP.getCode()] =
     			"INSERT INTO icm.tester_step(ChangeRequestId,HandlerUserName,Status,StartDate,EstimatedEndDate) "
-    	    	+ "VALUES (?,?,'Active',?,?)";
+    	    	+ "VALUES (?,?,'ACTIVE',?,?)";
     	
     	/* ******************************************************
     	 * *************Execution Leader Queries****************
@@ -511,16 +511,16 @@ public class MysqlConnection {
     	
     	sqlArray[SqlQueryType.SELECT_EXECUTION_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.execution_step" +
-						" WHERE ChangeRequestID = ?";
+						" WHERE ChangeRequestID = ? ORDER BY ExecutionStepID DESC LIMIT 1";
     	
     	sqlArray[SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE.getCode()] = 
 				"SELECT EstimatedEndDate FROM icm.analysis_step" +
-						" WHERE ChangeRequestID = ?";
+						" WHERE ChangeRequestID = ? ORDER BY AnalysisStepID DESC LIMIT 1";
     	
     	sqlArray[SqlQueryType.SELECT_ALL_ENGINEERS.getCode()] = 
     			"SELECT * FROM icm.user WHERE Permission = 'SUPERVISOR' OR Permission = 'INFORMATION_ENGINEER'" + 
     			" OR Permission = 'COMMITTEE_MEMBER' OR Permission = 'COMMITTEE_DIRECTOR' "
-    			+ "OR Permission = 'SUPERVISER_COMMITTEE_MEMBER' OR Permission = 'SUPERVISER_COMMITTEE_DIRECTOR' ";
+    			+ "OR Permission = 'SUPERVISOR_COMMITTEE_MEMBER' OR Permission = 'SUPERVISOR_COMMITTEE_DIRECTOR' ";
     			
     	
     	sqlArray[SqlQueryType.UPDATE_END_DATE_IN_CLOSING_STEP.getCode()] = "UPDATE icm.closing_step SET EndDate = ?, Status  = ? WHERE ChangeRequestID = ?";

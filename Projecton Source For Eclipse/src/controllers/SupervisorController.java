@@ -616,13 +616,11 @@ public class SupervisorController extends BasicController
  */
 	public void getAnalysisEstimatedDate(Integer changeRequestID)
 	{
-	
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_ESTIMATED_DATE, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
 	}
 
 
@@ -771,13 +769,6 @@ public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
 	ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	
 }
-	
-	
-	
-	
-	
-	
-	
 	
 	
 }

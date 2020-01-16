@@ -287,7 +287,7 @@ public class TesterBoundary implements DataInitializable {
 			Toast.makeText(ProjectFX.mainStage, "Please fill the failure report before submitting ", 1500, 500, 500);
 		} else {
 			myController.closeChangeRequestStep(testerStep.getStepID(), failureReportTextArea.getText());
-			myController.advanceChangeRequestStep("EXECUTION_LEADEAR_SUPERVISOR_APPOINT",
+			myController.advanceChangeRequestStep("EXECUTION_LEADER_SUPERVISOR_APPOINT",
 					currentChangeRequest.getChangeRequestID());
 			myController.automaticCloseNewTimeExtension(testerStep);
 			myController.createNewClosingStep(testerStep.getChangeRequestID());

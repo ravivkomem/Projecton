@@ -131,8 +131,9 @@ public class ExecutionLeaderController extends BasicController {
 					
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
 					this.unsubscribeFromClientDeliveries();
-					affectedRows = (Integer) (result.getResultData().get(0).get(0));
-					myBoundry.recieveEstimatedEndDateUpdateStatus(affectedRows);
+					myBoundry.loadExecutionApproveTimeDisplay();
+//					affectedRows = (Integer) (result.getResultData().get(0).get(0));
+//					myBoundry.recieveEstimatedEndDateUpdateStatus(affectedRows);
 					break;
 					
 					

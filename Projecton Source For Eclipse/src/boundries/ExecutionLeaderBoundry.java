@@ -487,7 +487,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	 * method in order to set the page display for change requests in the 
 	 * "EXECUTION_APPROVE_TIME" current step.
 	 */
-	private void loadExecutionApproveTimeDisplay()
+	public void loadExecutionApproveTimeDisplay()
 	{
 		waitApproveTimePane.setVisible(true);
 		timeRequestedLabel.setText("Time requestsed: " + executionStep.getEstimatedEndDate());

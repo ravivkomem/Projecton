@@ -155,12 +155,14 @@ public class AnalyzerController extends BasicController {
 			case UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME:
 			case UPDATE_ANALYSIS_STEP_ESTIMATED_DATE:
 			case UPDATE_ANALYSIS_STEP_CLOSE:
-				int affectedRows;
-				affectedRows = (Integer) (result.getResultData().get(0).get(0));
+//				int affectedRows;
+//				affectedRows = (Integer) (result.getResultData().get(0).get(0));
 				this.unsubscribeFromClientDeliveries();
-				myBoundary.updateTesterPageToDBSuccessfully(affectedRows);
+//				myBoundary.updateTesterPageToDBSuccessfully(affectedRows);
 				break;
-		
+			case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
+				this.unsubscribeFromClientDeliveries();
+				break;
 			case SELECT_ANALYSIS_STEP_BY_CHANGE_REQUEST_ID:
 				this.unsubscribeFromClientDeliveries();
 				Step recievedStep = this.parseSqlResultToAnalysisStep(result);

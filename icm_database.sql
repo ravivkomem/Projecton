@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: icm
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -37,7 +37,7 @@ CREATE TABLE `analysis_step` (
   `AnalysisReportConstraints` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`AnalysisStepID`),
   UNIQUE KEY `AnalysisStepID_UNIQUE` (`AnalysisStepID`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `analysis_step` (
 
 LOCK TABLES `analysis_step` WRITE;
 /*!40000 ALTER TABLE `analysis_step` DISABLE KEYS */;
-INSERT INTO `analysis_step` VALUES (1,1,'lior','2019-11-19','CLOSED','2019-11-26','2019-11-25','moodle changing','make the moodle beter','a','2020-01-01','aa'),(2,2,'itay','2019-11-19','CLOSED','2019-11-25','2019-11-26','website changing','fix a bug ','b','2020-01-01','bb'),(3,3,'itayz','2019-12-18','CLOSED','2019-12-19','2019-12-19','Moodle System changing','make it better','c','2020-01-01','cc'),(4,4,'ido','2019-12-18','CLOSED','2019-12-19','2019-12-18','College Website changing ','fix the problem','d','2020-01-01','dd'),(5,5,'itayz','2019-12-19','CLOSED','2019-12-21','2019-12-20','Employee Station ','fix a bug ','e','2020-01-01','ee'),(6,6,'gilad','2019-12-19','CLOSED','2019-12-21','2019-12-22','Employee Station ','make it better','f','2020-01-01','ff'),(7,71,'zeev','2019-12-20','CLOSED','2019-12-23','2019-12-23','Employee Station ','fix the problem','g','2020-01-01','gg'),(8,72,'lior','2019-12-20','CLOSED','2019-12-22','2019-12-21','Employee Station ','fix a bug ','h','2020-01-01','hh'),(9,73,'itay','2019-12-20','CLOSED','2019-12-22','2019-12-23','Employee Station ','fix the problem','i','2020-01-01','ii'),(10,74,'ido','2019-12-21','CLOSED','2019-12-22','2019-12-22','Library System changing','make it better','j','2020-01-01','jj'),(11,75,'ido','2019-12-22','CLOSED','2019-12-23','2019-12-23','Student Information Station changing','fix the problem','k','2020-01-01','kk'),(12,76,'lior','2019-12-23','ACTIVE','2020-01-11',NULL,NULL,NULL,NULL,NULL,NULL),(13,77,'itay','2019-12-23','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,78,'lior','2019-12-23','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,79,'ido','2019-12-24','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,80,'itay','2019-12-24','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,81,'itay','2019-12-29','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,82,'ido','2019-12-24','CLOSED','2019-12-25','2019-12-26','Moodle System changing','fix a bug ','r','2020-01-01','rr'),(20,84,'gilad','2020-01-10','CLOSED','2020-01-14','2020-01-10','moodle work slow','the moodle work slow, need to make it faster','non','2020-01-01','non'),(21,83,'lior','2020-01-10','CLOSED','2020-01-14','2020-01-13','a','a','a','2020-01-01','a'),(22,85,'lior','2020-01-13','CLOSED','2020-01-16','2020-01-13','1','1','1','2020-01-01','1'),(23,85,'gilad','2020-01-13','CLOSED','2020-01-17','2020-01-13','1','1','1','2020-01-01','1'),(24,83,'gilad','2020-01-13','CLOSED','2020-01-15','2020-01-13','a','a','a','2020-01-01','a'),(26,86,'ido','2020-01-15','CLOSED','2020-01-17','2020-01-15','aa','a','a','2020-01-23','a');
+INSERT INTO `analysis_step` VALUES (1,1,'lior','2019-11-19','CLOSED','2019-11-26','2019-11-25','moodle changing','make the moodle beter','a','2020-01-01','aa'),(2,2,'itay','2019-11-19','CLOSED','2019-11-25','2019-11-26','website changing','fix a bug ','b','2020-01-01','bb'),(3,3,'itayz','2019-12-18','CLOSED','2019-12-19','2019-12-19','Moodle System changing','make it better','c','2020-01-01','cc'),(4,4,'ido','2019-12-18','CLOSED','2019-12-19','2019-12-18','College Website changing ','fix the problem','d','2020-01-01','dd'),(5,5,'itayz','2019-12-19','CLOSED','2019-12-21','2019-12-20','Employee Station ','fix a bug ','e','2020-01-01','ee'),(6,6,'gilad','2019-12-19','CLOSED','2019-12-21','2019-12-22','Employee Station ','make it better','f','2020-01-01','ff'),(7,71,'zeev','2019-12-20','CLOSED','2019-12-23','2019-12-23','Employee Station ','fix the problem','g','2020-01-01','gg'),(8,72,'lior','2019-12-20','CLOSED','2019-12-22','2019-12-21','Employee Station ','fix a bug ','h','2020-01-01','hh'),(9,73,'itay','2019-12-20','CLOSED','2019-12-22','2019-12-23','Employee Station ','fix the problem','i','2020-01-01','ii'),(10,74,'ido','2019-12-21','CLOSED','2019-12-22','2019-12-22','Library System changing','make it better','j','2020-01-01','jj'),(11,75,'ido','2019-12-22','CLOSED','2019-12-23','2019-12-23','Student Information Station changing','fix the problem','k','2020-01-01','kk'),(12,76,'lior','2019-12-23','ACTIVE','2020-01-11',NULL,NULL,NULL,NULL,NULL,NULL),(13,77,'itay','2019-12-23','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(14,78,'lior','2019-12-23','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(15,79,'ido','2019-12-24','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(16,80,'itay','2019-12-24','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(17,81,'itay','2019-12-29','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(18,82,'ido','2019-12-24','CLOSED','2019-12-25','2019-12-26','Moodle System changing','fix a bug ','r','2020-01-01','rr'),(20,84,'gilad','2020-01-10','CLOSED','2020-01-14','2020-01-10','moodle work slow','the moodle work slow, need to make it faster','non','2020-01-01','non'),(21,83,'lior','2020-01-10','CLOSED','2020-01-14','2020-01-13','a','a','a','2020-01-01','a'),(22,85,'lior','2020-01-13','CLOSED','2020-01-16','2020-01-13','1','1','1','2020-01-01','1'),(23,85,'gilad','2020-01-13','CLOSED','2020-01-17','2020-01-13','1','1','1','2020-01-01','1'),(24,83,'gilad','2020-01-13','CLOSED','2020-01-15','2020-01-13','a','a','a','2020-01-01','a'),(26,86,'ido','2020-01-15','CLOSED','2020-01-17','2020-01-15','aa','a','a','2020-01-23','a'),(27,87,'gilad','2020-01-16','CLOSED','2020-01-17','2020-01-16','library bags','need to show books that taken','non','2020-01-22','a'),(28,76,'lior','2020-01-16','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(29,88,'zeev','2020-01-16','CLOSED','2020-01-18','2020-01-16','college web site down','the web site do not upload,\nprobably server problems.','non','2020-01-31','n'),(30,80,'lior','2020-01-16','ACTIVE',NULL,NULL,NULL,NULL,NULL,NULL,NULL),(31,88,'ido','2020-01-16','CLOSED','2020-01-24','2020-01-16','college web site down','the web site do not upload,\nprobably server problems.','non','2020-01-31','n'),(32,89,'itayz','2020-01-16','CLOSED','2020-01-23','2020-01-16','11','11','11','2020-01-31','11'),(33,90,'lior','2020-01-16','CLOSED','2020-01-18','2020-01-16','Add feacher to the Moodle','a','a','2020-01-31','a');
 /*!40000 ALTER TABLE `analysis_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -61,23 +61,23 @@ CREATE TABLE `change_request` (
   `ChangeRequestID` int(11) NOT NULL AUTO_INCREMENT,
   `InitiatorUserName` varchar(45) NOT NULL,
   `StartDate` date NOT NULL,
-  `SelectedSubsystem` varchar(45) NOT NULL,
-  `CurrentStateDescription` varchar(45) NOT NULL,
-  `DesiredChangeDescription` varchar(45) NOT NULL,
-  `DesiredChangeExplanation` varchar(45) NOT NULL,
-  `DesiredChangeComments` varchar(45) NOT NULL,
-  `Status` varchar(45) NOT NULL,
-  `CurrentStep` varchar(45) NOT NULL,
-  `HandlerUserName` varchar(45) NOT NULL,
+  `SelectedSubsystem` varchar(105) NOT NULL,
+  `CurrentStateDescription` varchar(105) NOT NULL,
+  `DesiredChangeDescription` varchar(105) NOT NULL,
+  `DesiredChangeExplanation` varchar(105) NOT NULL,
+  `DesiredChangeComments` varchar(105) NOT NULL,
+  `Status` varchar(105) NOT NULL,
+  `CurrentStep` varchar(105) NOT NULL,
+  `HandlerUserName` varchar(105) NOT NULL,
   `EndDate` date DEFAULT NULL,
-  `Email` varchar(45) NOT NULL,
-  `JobDescription` varchar(45) NOT NULL,
-  `FullName` varchar(45) NOT NULL,
+  `Email` varchar(105) NOT NULL,
+  `JobDescription` varchar(105) NOT NULL,
+  `FullName` varchar(105) NOT NULL,
   `EstimatedDate` date DEFAULT NULL,
   PRIMARY KEY (`ChangeRequestID`),
   UNIQUE KEY `ChangeRequestID_UNIQUE` (`ChangeRequestID`),
   KEY `UserName_idx` (`InitiatorUserName`,`HandlerUserName`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `change_request` (
 
 LOCK TABLES `change_request` WRITE;
 /*!40000 ALTER TABLE `change_request` DISABLE KEYS */;
-INSERT INTO `change_request` VALUES (1,'raviv','2019-11-19','Moodle System','Bad','Make it good','it is not working properly','make the color red','CLOSED','FINISH','lior','2019-12-07','ravivkomem@gmail.com','Student','Raviv Komem','2019-12-08'),(2,'lee','2019-11-19','College Website','Very Bad','Make it better','loading is very slow','make the loading faster','CLOSED','FINISH','-','2020-01-02','leehugi93@gmail.com','Tech Manager','Lee Hugi','2019-12-29'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','DENIED','FINISH','lior','2019-12-22','idokadosh@gmail.com','Committee Member','Ido Kadosh','2020-01-01'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','ACTIVE','TESTING_WORK','ido',NULL,'idokadosh@gmail.com','Committee Member','Ido Kadosh',NULL),(5,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','SUSPEND','COMMITTEE_WORK','lior',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(6,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','ACTIVE','EXECUTION_WORK','ido',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(71,'raviv','2019-12-20','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','ACTIVE','EXECUTION_LEADER_SUPERVISOR_APPOINT','',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(72,'raviv','2019-12-20','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','CLOSED','FINISH','lior','2019-12-30','ravivkomem@gmail.com','Student','Raviv Komem','2019-12-27'),(73,'raviv','2019-12-20','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','ACTIVE','TESTING_WORK','lior',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(74,'raviv','2019-12-21','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','DENIED','FINISH','itay','2019-12-23','ravivkomem@gmail.com','Student','Raviv Komem','2020-01-01'),(75,'raviv','2019-12-22','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','ACTIVE','COMMITTEE_WORK','ido',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(76,'raviv','2019-12-23','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','ACTIVE','ANALYZER_AUTO_APPOINT','itay',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(77,'raviv','2019-12-23','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','ACTIVE','ANALYZER_AUTO_APPOINT','itay',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(78,'raviv','2019-12-23','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','ACTIVE','ANALYZER_AUTO_APPOINT','lior',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','ACTIVE','ANALYZER_AUTO_APPOINT','itayz',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(80,'lee','2019-12-24','Moodle System','a','a','a','','ACTIVE','ANALYZER_AUTO_APPOINT','lior',NULL,'leehugi93@gmail.com','Tech Manager','Lee Hugi',NULL),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','ACTIVE','ANALYSIS_APPROVE_TIME','itay',NULL,'ravivkomem@gmail.com','Student','Raviv Komem',NULL),(82,'itayz','2019-12-24','Moodle System','aaa','aaa\naaa\naaa','aaa','','ACTIVE','DENY_STEP','',NULL,'itayziv@gmail.com','Committee Director','Itay Ziv ',NULL),(83,'lee','2020-01-10','Moodle System','work very bad 	','fix the bug		','because i said so ','do it fast ','ACTIVE','COMMITTEE_WORK','-',NULL,'leehugi93@gmail.com','Tech Manager','Lee Hugi',NULL),(84,'lee','2020-01-10','Moodle System','work very slow','make it fast','it\'s slow','','ACTIVE','TESTER_COMMITTEE_DIRECTOR_APPOINT','itayz',NULL,'leehugi93@gmail.com','Tech Manager','Lee Hugi',NULL),(85,'raviv','2020-01-13','Moodle System','moodle stucks  ','fix the bug ','so i can learn to my tests. ','','CLOSED','FINISH','','2020-01-13','ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(86,'itay','2020-01-15','Employee Information Station','a','a','a','','ACTIVE','COMMITTEE_WORK','-',NULL,'itaydavid22@gmail.com','Supervisor','Itay David','2020-01-23');
+INSERT INTO `change_request` VALUES (1,'raviv','2019-11-19','Moodle System','Bad','Make it good','it is not working properly','make the color red','CLOSED','FINISH','lior','2019-12-07','ravivkomem@gmail.com','Student','Raviv Komem','2019-12-08'),(2,'lee','2019-11-19','College Website','Very Bad','Make it better','loading is very slow','make the loading faster','CLOSED','FINISH','-','2020-01-02','leehugi93@gmail.com','Tech Manager','Lee Hugi','2019-12-29'),(3,'ido','2019-12-18','Moodle System','bad','asd','asd','asd','DENIED','FINISH','lior','2019-12-22','idokadosh@gmail.com','Committee Member','Ido Kadosh','2020-01-01'),(4,'ido','2019-12-18','College Website','abcdefg','abcd','abcde','abced','ACTIVE','TESTING_WORK','ido',NULL,'idokadosh@gmail.com','Committee Member','Ido Kadosh','2020-01-16'),(5,'raviv','2019-12-19','Employee Information Station','dfs','sfd','asdf','fasd','SUSPEND','COMMITTEE_WORK','lior',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(6,'raviv','2019-12-19','Employee Information Station','sdaf','afsd','asfd','sdfa','ACTIVE','EXECUTION_WORK','ido',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(71,'raviv','2019-12-20','Employee Information Station','asfdasfd','sadffffdsa','asdffff','sfad','ACTIVE','EXECUTION_LEADER_SUPERVISOR_APPOINT','',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(72,'raviv','2019-12-20','Employee Information Station','safdasdf','fasd','fasdafsdfdsa','sdfaasdffdas','CLOSED','FINISH','lior','2019-12-30','ravivkomem@gmail.com','Student','Raviv Komem','2019-12-27'),(73,'raviv','2019-12-20','Employee Information Station','sfdaafdsdasf','fdasfasd','fdasfadsafsd','fdsaadfs','ACTIVE','CLOSING_STEP','',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(74,'raviv','2019-12-21','Library System','fsdafasdfads','fads','asdfafdsfdas','fdsa','DENIED','FINISH','itay','2019-12-23','ravivkomem@gmail.com','Student','Raviv Komem','2020-01-01'),(75,'raviv','2019-12-22','Student Information Station','sfdasdaf','fdsafsda','fadsfsdasdfa','fdsaasdffdasfdas','ACTIVE','COMMITTEE_WORK','ido',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(76,'raviv','2019-12-23','Library System','dfsaafds','asfddsfa','sfdaafsdfdas','sadffasd','ACTIVE','ANALYSIS_SET_TIME','lior',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(77,'raviv','2019-12-23','Laboratory','asdf','fdsa','asdffdsafdsa','fsdafadsasfdfsda','ACTIVE','ANALYZER_AUTO_APPOINT','itay',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(78,'raviv','2019-12-23','Laboratory','sadfa','sddfas','adfsdfas','fsdaadsffda','ACTIVE','ANALYZER_AUTO_APPOINT','lior',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(79,'raviv','2019-12-24','Class Rooms With Computers','sdf','sdffds','fdssdf','fds','ACTIVE','ANALYZER_AUTO_APPOINT','itayz',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(80,'lee','2019-12-24','Moodle System','a','a','a','','ACTIVE','ANALYSIS_SET_TIME','lior',NULL,'leehugi93@gmail.com','Tech Manager','Lee Hugi','2020-01-16'),(81,'raviv','2019-12-29','Moodle System','dsfdsf','dfsd','sfdsfdsf','sdffsddfs','ACTIVE','ANALYSIS_APPROVE_TIME','itay',NULL,'ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(82,'itayz','2019-12-24','Moodle System','aaa','aaa\naaa\naaa','aaa','','CLOSED','FINISH','','2020-01-16','itayziv8@gmail.com','Committee Director','Itay Ziv ','2020-01-16'),(83,'lee','2020-01-10','Moodle System','work very bad 	','fix the bug		','because i said so ','do it fast ','ACTIVE','COMMITTEE_WORK','-',NULL,'leehugi93@gmail.com','Tech Manager','Lee Hugi','2020-01-16'),(84,'lee','2020-01-10','Moodle System','work very slow','make it fast','it\'s slow','','ACTIVE','TESTER_COMMITTEE_DIRECTOR_APPOINT','itayz',NULL,'leehugi93@gmail.com','Tech Manager','Lee Hugi','2020-01-16'),(85,'raviv','2020-01-13','Moodle System','moodle stucks  ','fix the bug ','so i can learn to my tests. ','','CLOSED','FINISH','','2020-01-13','ravivkomem@gmail.com','Student','Raviv Komem','2020-01-16'),(86,'itay','2020-01-15','Employee Information Station','a','a','a','','ACTIVE','CLOSING_STEP','',NULL,'itaydavid22@gmail.com','Supervisor','Itay David','2020-01-23'),(87,'lee','2020-01-16','Library System','not show the books i was take','please fix the bag','i have to know which books i was take','','CLOSED','FINISH','','2020-01-16','leehugi93@gmail.com','Tech Manager','Lee Hugi','2020-01-22'),(88,'moti','2020-01-16','College Website','the web site do not work','fix the web site bags','no one can enter the web site','','CLOSED','FINISH','','2020-01-16','notiben@gmail.com','Worker','Moti Ben Hamo','2020-01-31'),(89,'ido','2020-01-16','Moodle System','asdf	asf	','asd','asd','asd','CLOSED','FINISH','','2020-01-16','idokadosh1@gmail.com','Committee Member','Ido Kadosh','2020-01-31'),(90,'raviv','2020-01-16','Moodle System','the page show the courses with out\norder by','i want the moodle show\nmy courses alphabetically.','i think it\'s a good idea','','CLOSED','FINISH','','2020-01-16','ravivkomem@gmail.com','Student','Raviv Komem','2020-01-31');
 /*!40000 ALTER TABLE `change_request` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +105,7 @@ CREATE TABLE `closing_step` (
   `Status` varchar(45) NOT NULL COMMENT 'Close_Active\nClose_Finish\nDeny_Active\nDeny_Finish',
   PRIMARY KEY (`ClosingStepID`),
   UNIQUE KEY `ClosingStepID_UNIQUE` (`ClosingStepID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +114,7 @@ CREATE TABLE `closing_step` (
 
 LOCK TABLES `closing_step` WRITE;
 /*!40000 ALTER TABLE `closing_step` DISABLE KEYS */;
-INSERT INTO `closing_step` VALUES (1,1,'2019-12-07','2019-12-07','CLOSED'),(2,2,'2020-01-02','2020-01-02','CLOSED'),(3,3,'2019-12-21','2019-12-22','CLOSED'),(4,72,'2019-12-28','2019-12-30','CLOSED'),(6,82,'2020-01-13',NULL,'ACTIVE');
+INSERT INTO `closing_step` VALUES (1,1,'2019-12-07','2019-12-07','CLOSED'),(2,2,'2020-01-02','2020-01-02','CLOSED'),(3,3,'2019-12-21','2019-12-22','CLOSED'),(4,72,'2019-12-28','2019-12-30','CLOSED'),(6,82,'2020-01-13','2020-01-16','CLOSED'),(8,87,'2020-01-16','2020-01-16','CLOSED'),(9,88,'2020-01-16','2020-01-16','CLOSED'),(10,88,'2020-01-16','2020-01-16','CLOSED'),(11,89,'2020-01-16','2020-01-16','CLOSED'),(12,90,'2020-01-16','2020-01-16','CLOSED'),(13,73,'2020-01-16',NULL,'ACTIVE'),(14,86,'2020-01-16',NULL,'ACTIVE');
 /*!40000 ALTER TABLE `closing_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +133,7 @@ CREATE TABLE `committee_comment` (
   `comment` varchar(202) NOT NULL,
   PRIMARY KEY (`commentId`),
   UNIQUE KEY `commentId_UNIQUE` (`commentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `committee_comment` (
 
 LOCK TABLES `committee_comment` WRITE;
 /*!40000 ALTER TABLE `committee_comment` DISABLE KEYS */;
-INSERT INTO `committee_comment` VALUES (1,1,1,'ido','need to approve'),(2,1,1,'gilad','it\'s important'),(3,2,2,'gilad','approve'),(4,3,3,'ido','need to deny'),(5,4,4,'ido','good idea'),(6,7,71,'ido','good idea'),(7,8,72,'gilad','important request'),(8,13,84,'gilad','have to do it, need to approve'),(9,12,82,'itayz','i think it\'s a good idea'),(10,21,85,'gilad','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),(11,22,85,'itayz','DDSA'),(12,20,83,'itayz','aaa'),(13,20,83,'itayz','bbb');
+INSERT INTO `committee_comment` VALUES (1,1,1,'ido','need to approve'),(2,1,1,'gilad','it\'s important'),(3,2,2,'gilad','approve'),(4,3,3,'ido','need to deny'),(5,4,4,'ido','good idea'),(6,7,71,'ido','good idea'),(7,8,72,'gilad','important request'),(8,13,84,'gilad','have to do it, need to approve'),(9,12,82,'itayz','i think it\'s a good idea'),(10,21,85,'gilad','aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),(11,22,85,'itayz','DDSA'),(12,20,83,'itayz','aaa'),(13,20,83,'itayz','bbb'),(14,25,87,'ido','have to handle fast'),(15,26,88,'ido','need more information'),(16,27,88,'ido','need to fix fast'),(17,29,90,'ido','good idea.\nbut we do not have to do this changes');
 /*!40000 ALTER TABLE `committee_comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `committee_step` (
   `DenyComment` varchar(102) DEFAULT NULL,
   PRIMARY KEY (`CommitteeStepId`),
   UNIQUE KEY `CommitteeStepId_UNIQUE` (`CommitteeStepId`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,7 +173,7 @@ CREATE TABLE `committee_step` (
 
 LOCK TABLES `committee_step` WRITE;
 /*!40000 ALTER TABLE `committee_step` DISABLE KEYS */;
-INSERT INTO `committee_step` VALUES (1,1,'itayz','2019-11-25','2019-11-30','2019-12-02','CLOSED',NULL),(2,2,'gilad','2019-11-26','2019-11-30','2019-12-01','CLOSED',NULL),(3,3,'zeev','2019-12-19','2019-12-26','2019-12-21','CLOSED','not necessary'),(4,4,'lior','2019-12-19','2019-12-26','2019-12-20','CLOSED',NULL),(5,5,'ido','2019-12-20','2019-12-27',NULL,'SUSPEND',NULL),(6,6,'gilad','2019-12-22','2019-12-29','2019-12-25','CLOSED',NULL),(7,71,'ido','2019-12-23','2019-12-25','2019-12-24','CLOSED',NULL),(8,72,'itayz','2019-12-21','2019-12-28','2019-12-25','CLOSED',NULL),(9,73,'gilad','2019-12-23','2019-12-30','2019-12-26','CLOSED',NULL),(10,74,'zeev','2019-12-22','2019-12-29','2019-12-23','CLOSED','not important request'),(11,75,'ido','2019-12-23','2019-12-30',NULL,'ACTIVE',NULL),(12,82,'itayz','2019-12-26','2020-01-02','2020-01-13','CLOSED','ASD'),(13,84,'itayz','2020-01-10','2020-01-17','2020-01-10','CLOSED',''),(20,83,'itayz','2020-01-12','2020-01-19','2020-01-13','CLOSED',''),(21,85,'itayz','2020-01-13','2020-01-20','2020-01-13','CLOSED',''),(22,85,'itayz','2020-01-13','2020-01-20','2020-01-13','CLOSED',''),(23,83,'itayz','2020-01-13','2020-01-20',NULL,'ACTIVE',NULL),(24,86,'itayz','2020-01-15','2020-01-22',NULL,'ACTIVE',NULL);
+INSERT INTO `committee_step` VALUES (1,1,'itayz','2019-11-25','2019-11-30','2019-12-02','CLOSED',NULL),(2,2,'gilad','2019-11-26','2019-11-30','2019-12-01','CLOSED',NULL),(3,3,'zeev','2019-12-19','2019-12-26','2019-12-21','CLOSED','not necessary'),(4,4,'lior','2019-12-19','2019-12-26','2019-12-20','CLOSED',NULL),(5,5,'ido','2019-12-20','2019-12-27',NULL,'SUSPEND',NULL),(6,6,'gilad','2019-12-22','2019-12-29','2019-12-25','CLOSED',NULL),(7,71,'ido','2019-12-23','2019-12-25','2019-12-24','CLOSED',NULL),(8,72,'itayz','2019-12-21','2019-12-28','2019-12-25','CLOSED',NULL),(9,73,'gilad','2019-12-23','2019-12-30','2019-12-26','CLOSED',NULL),(10,74,'zeev','2019-12-22','2019-12-29','2019-12-23','CLOSED','not important request'),(11,75,'ido','2019-12-23','2019-12-30',NULL,'ACTIVE',NULL),(12,82,'itayz','2019-12-26','2020-01-02','2020-01-13','CLOSED','ASD'),(13,84,'itayz','2020-01-10','2020-01-17','2020-01-10','CLOSED',''),(20,83,'itayz','2020-01-12','2020-01-19','2020-01-13','CLOSED',''),(21,85,'itayz','2020-01-13','2020-01-20','2020-01-13','CLOSED',''),(22,85,'itayz','2020-01-13','2020-01-20','2020-01-13','CLOSED',''),(23,83,'itayz','2020-01-13','2020-01-20',NULL,'ACTIVE',NULL),(24,86,'itayz','2020-01-15','2020-01-22','2020-01-16','CLOSED',''),(25,87,'itayz','2020-01-16','2020-01-23','2020-01-16','CLOSED','it\'s not a bag.\nThe web work fine'),(26,88,'itayz','2020-01-16','2020-01-23','2020-01-16','CLOSED',''),(27,88,'itayz','2020-01-16','2020-01-23','2020-01-16','CLOSED',''),(28,89,'itayz','2020-01-16','2020-01-23','2020-01-16','CLOSED',''),(29,90,'itayz','2020-01-16','2020-01-23','2020-01-16','CLOSED','');
 /*!40000 ALTER TABLE `committee_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,7 +195,7 @@ CREATE TABLE `execution_step` (
   `ExecutionComment` varchar(600) DEFAULT NULL,
   PRIMARY KEY (`ExecutionStepID`),
   UNIQUE KEY `ExecutionStepID_UNIQUE` (`ExecutionStepID`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -204,7 +204,7 @@ CREATE TABLE `execution_step` (
 
 LOCK TABLES `execution_step` WRITE;
 /*!40000 ALTER TABLE `execution_step` DISABLE KEYS */;
-INSERT INTO `execution_step` VALUES (1,2,'itay','CLOSED','2019-12-01','2019-12-31','2019-12-31',NULL),(2,1,'lior','CLOSED','2019-12-02','2019-12-04','2019-12-05',NULL),(3,4,'ido','CLOSED','2019-12-20','2019-12-25','2019-12-24',NULL),(4,6,'gilad','ACTIVE','2019-12-25','2020-01-01',NULL,NULL),(5,73,'gilad','CLOSED','2019-12-26','2020-01-01','2020-01-01',NULL),(6,71,'lior','ACTIVE','2019-12-24','2019-12-30',NULL,NULL),(7,72,'zeev','CLOSED','2019-12-25','2019-12-28','2019-12-27',NULL),(15,84,'lior','CLOSE','2020-01-10','2020-01-14','2020-01-10','fix the problem'),(16,85,'ido','CLOSE','2020-01-13','2020-01-16','2020-01-13','ASDFGHJKL'),(17,85,'ido','CLOSE','2020-01-13','2020-01-16','2020-01-13','sad');
+INSERT INTO `execution_step` VALUES (1,2,'itay','CLOSED','2019-12-01','2019-12-31','2019-12-31',NULL),(2,1,'lior','CLOSED','2019-12-02','2019-12-04','2019-12-05',NULL),(3,4,'ido','CLOSED','2019-12-20','2019-12-25','2019-12-24',NULL),(4,6,'gilad','ACTIVE','2019-12-25','2020-01-01',NULL,NULL),(5,73,'gilad','CLOSED','2019-12-26','2020-01-01','2020-01-01',NULL),(6,71,'lior','ACTIVE','2019-12-24','2019-12-30',NULL,NULL),(7,72,'zeev','CLOSED','2019-12-25','2019-12-28','2019-12-27',NULL),(15,84,'lior','CLOSE','2020-01-10','2020-01-14','2020-01-10','fix the problem'),(16,85,'ido','CLOSE','2020-01-13','2020-01-16','2020-01-13','ASDFGHJKL'),(17,85,'ido','CLOSE','2020-01-13','2020-01-16','2020-01-13','sad'),(18,88,'lior','ACTIVE','2020-01-16','2020-01-20',NULL,NULL),(19,88,'lior','ACTIVE','2020-01-16','2020-01-18',NULL,NULL),(20,89,'lior','ACTIVE','2020-01-16','2020-01-21',NULL,NULL),(21,90,'lior','ACTIVE','2020-01-16','2020-01-17',NULL,NULL),(22,86,'lior','ACTIVE','2020-01-16','2020-01-24',NULL,NULL);
 /*!40000 ALTER TABLE `execution_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,7 +221,7 @@ CREATE TABLE `file` (
   `FileEnding` varchar(45) NOT NULL,
   PRIMARY KEY (`FileID`),
   UNIQUE KEY `FileID_UNIQUE` (`FileID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -230,7 +230,7 @@ CREATE TABLE `file` (
 
 LOCK TABLES `file` WRITE;
 /*!40000 ALTER TABLE `file` DISABLE KEYS */;
-INSERT INTO `file` VALUES (1,'79','jpg'),(2,'80','png'),(3,'81','jpg'),(4,'83','png'),(5,'84','png'),(6,'85','jpg');
+INSERT INTO `file` VALUES (1,'79','jpg'),(2,'80','png'),(3,'81','jpg'),(4,'83','png'),(5,'84','png'),(6,'85','jpg'),(7,'87','txt');
 /*!40000 ALTER TABLE `file` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -371,7 +371,7 @@ CREATE TABLE `tester_step` (
   `EndDate` date DEFAULT NULL,
   PRIMARY KEY (`TesterStepId`),
   UNIQUE KEY `TesterStepId_UNIQUE` (`TesterStepId`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -380,7 +380,7 @@ CREATE TABLE `tester_step` (
 
 LOCK TABLES `tester_step` WRITE;
 /*!40000 ALTER TABLE `tester_step` DISABLE KEYS */;
-INSERT INTO `tester_step` VALUES (1,1,'ido','CLOSED',NULL,'2019-12-05','2019-12-08','2019-12-07'),(2,2,'itayz','CLOSED',NULL,'2019-12-31','2020-01-01','2020-01-02'),(3,4,'itayz','ACTIVE',NULL,'2019-12-24','2019-12-26',NULL),(5,72,'gilad','CLOSED',NULL,'2019-12-27','2019-12-28','2019-12-28'),(6,73,'ido','ACTIVE',NULL,'2020-01-01','2020-01-10',NULL),(7,85,'ido','CLOSED','','2020-01-13','2020-01-20','2020-01-13'),(8,85,'gilad','CLOSED','','2020-01-13','2020-01-20','2020-01-13');
+INSERT INTO `tester_step` VALUES (1,1,'ido','CLOSED',NULL,'2019-12-05','2019-12-08','2019-12-07'),(2,2,'itayz','CLOSED',NULL,'2019-12-31','2020-01-01','2020-01-02'),(3,4,'itayz','ACTIVE',NULL,'2019-12-24','2019-12-26',NULL),(5,72,'gilad','CLOSED',NULL,'2019-12-27','2019-12-28','2019-12-28'),(6,73,'ido','CLOSED','','2020-01-01','2020-01-10','2020-01-16'),(7,85,'ido','CLOSED','','2020-01-13','2020-01-20','2020-01-13'),(8,85,'gilad','CLOSED','','2020-01-13','2020-01-20','2020-01-13'),(9,88,'ido','CLOSED','Failed Tests: \n2.  Check requirement coverage\n','2020-01-16','2020-01-23','2020-01-16'),(10,88,'ido','CLOSED','','2020-01-16','2020-01-23','2020-01-16'),(11,89,'ido','CLOSED','','2020-01-16','2020-01-23','2020-01-16'),(12,90,'ido','CLOSED','','2020-01-16','2020-01-23','2020-01-16'),(13,86,'ido','CLOSED','','2020-01-16','2020-01-23','2020-01-16');
 /*!40000 ALTER TABLE `tester_step` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -397,11 +397,11 @@ CREATE TABLE `time_extension` (
   `StepType` varchar(45) NOT NULL,
   `OldDate` date NOT NULL,
   `NewDate` date NOT NULL,
-  `Reason` varchar(45) DEFAULT NULL,
+  `Reason` varchar(200) DEFAULT NULL,
   `Status` varchar(45) NOT NULL DEFAULT 'NEW' COMMENT 'ENUM',
   PRIMARY KEY (`TimeExtensionID`),
   UNIQUE KEY `TimeExtensionID_UNIQUE` (`TimeExtensionID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -410,7 +410,7 @@ CREATE TABLE `time_extension` (
 
 LOCK TABLES `time_extension` WRITE;
 /*!40000 ALTER TABLE `time_extension` DISABLE KEYS */;
-INSERT INTO `time_extension` VALUES (1,4,'Committee','2019-12-30','2020-01-11','I need more time','APPROVED'),(2,5,'Analysis','2019-12-30','2020-01-11','fgdfg','APPROVED'),(3,22,'Analysis','2020-01-16','2020-01-15','1','NEW');
+INSERT INTO `time_extension` VALUES (1,4,'Committee','2019-12-30','2020-01-11','I need more time','APPROVED'),(2,5,'Analysis','2019-12-30','2020-01-11','fgdfg','APPROVED'),(3,22,'Analysis','2020-01-16','2020-01-15','1','NEW'),(4,27,'Analysis','2020-01-17','2020-01-18','i need more time','NEW'),(5,19,'Execution','2020-01-18','2020-01-18','a','NEW');
 /*!40000 ALTER TABLE `time_extension` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -445,7 +445,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','ravivravivraviv@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid22@gmail.com','Information Tech','Supervisor','SUPERVISOR','0239872341',1),(4,'lee','1234','Lee','Hugi','leehugi93@gmail.com','Information Tech','Tech Manager','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv@gmail.com','Information Tech','Committee Director','COMMITTEE_DIRECTOR','3333333333',0),(7,'nir','1234','Nir','Asolin','nirasolin@gmail.com','Software Engineering','Lecturer','BASIC_USER','2222222222',0),(8,'gilad','1234','Gilad','Eviatar','giladeviatar@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','1111111111',0),(9,'shira','1234','Shira','Noah','shiranoah@gmail.com','Math','Student','BASIC_USER','1212121212',0),(10,'moti','1234','Moti','Ben Hamo','notiben@gmail.com','Math','Worker','BASIC_USER','2121212121',0),(11,'zeev','1234','Zeev','Imber','zeev2@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','3131313131',0);
+INSERT INTO `user` VALUES (1,'raviv','1234','Raviv','Komem','ravivkomem@gmail.com','Software Engineering','Student','BASIC_USER','0546848161',0),(2,'lior','1234','Lior','Kauffman','ravivravivraviv@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','0540123121',0),(3,'itay','1234','Itay','David','itaydavid22@gmail.com','Information Tech','Supervisor','SUPERVISOR','0239872341',0),(4,'lee','1234','Lee','Hugi','leehugi93@gmail.com','Information Tech','Tech Manager','INFORMATION_ENGINEERING_DEPARTMENT_HEAD','1230911821',0),(5,'ido','1234','Ido','Kadosh','idokadosh1@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','3214891123',0),(6,'itayz','1234','Itay','Ziv','itayziv8@gmail.com','Information Tech','Committee Director','COMMITTEE_DIRECTOR','3333333333',0),(7,'nir','1234','Nir','Asolin','nirasolin@gmail.com','Software Engineering','Lecturer','BASIC_USER','2222222222',0),(8,'gilad','1234','Gilad','Eviatar','giladeviatar@gmail.com','Information Tech','Committee Member','COMMITTEE_MEMBER','1111111111',0),(9,'shira','1234','Shira','Noah','shiranoah@gmail.com','Math','Student','BASIC_USER','1212121212',0),(10,'moti','1234','Moti','Ben Hamo','notiben@gmail.com','Math','Worker','BASIC_USER','2121212121',0),(11,'zeev','1234','Zeev','Imber','zeev2@gmail.com','Information Tech','Information Engineer','INFORMATION_ENGINEER','3131313131',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -548,4 +548,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-15 15:26:47
+-- Dump completed on 2020-01-16 13:03:01

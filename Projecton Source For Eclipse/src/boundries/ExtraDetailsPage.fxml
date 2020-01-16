@@ -63,7 +63,7 @@
       </Label>
       <Text layoutX="18.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Step" />
       <TextField fx:id="currentStepTF" layoutX="207.0" layoutY="362.0" prefHeight="31.0" prefWidth="167.0" />
-      <Text layoutX="20.0" layoutY="424.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estimated Time For Current Step" wrappingWidth="131.10497760772705" />
+      <Text layoutX="20.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estimated End Time" wrappingWidth="131.10497760772705" />
       <TextField fx:id="estimatedTimeForStepTF" layoutX="207.0" layoutY="414.0" prefHeight="31.0" prefWidth="167.0" />
       <Button fx:id="suspendButton" layoutX="205.0" layoutY="500.0" mnemonicParsing="false" onMouseClicked="#suspendChangeRequest" text="Suspend Request" visible="false" />
    </children>

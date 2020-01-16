@@ -118,6 +118,7 @@ public class ActivityReportBoundary implements Initializable {
 		requestStatusPieChart.getData().clear();
 		workDaysBarChart.getData().clear();
 		if (startDatePicker.getValue() == null || endDatePicker.getValue() == null) {
+			activityReportDetailsPane.setVisible(false);
 			Toast.makeText(ProjectFX.mainStage, "Please select start date and end date", 1500, 500, 500);
 		} else {
 			activityReportDetailsPane.setVisible(true);
@@ -132,6 +133,7 @@ public class ActivityReportBoundary implements Initializable {
 			}
 			daysBetween = TimeManager.getDaysBetween(startDate, endDate);
 			if (daysBetween < 0) {
+				activityReportDetailsPane.setVisible(false);
 				Toast.makeText(ProjectFX.mainStage, "Please choose a valid date", 1500, 500, 500);
 				return;
 			}
