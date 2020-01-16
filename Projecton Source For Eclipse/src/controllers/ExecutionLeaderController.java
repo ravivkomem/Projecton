@@ -110,6 +110,21 @@ public class ExecutionLeaderController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID, varArray);
 		this.sendSqlActionToClient(sqlAction);
 	}
+	
+	/**
+	 * this method create sql query that update the time extension if necessary .
+	 *
+	 * @param stepID the step ID
+	 * @param stepType the step type
+	 */
+	public void updateTimeExtensionDB(int stepID, String stepType) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(stepID);
+		varArray.add(stepType);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -167,6 +182,7 @@ public class ExecutionLeaderController extends BasicController {
 				case CLOSE_EXECUTION_STEP:
 				case UPDATE_CURRENT_STEP_TO_TESTER:
 				case UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE_BY_STEP_ID:
+				case AUTOMATIC_CLOSE_NEW_TIME_EXTENSION:
 					this.unsubscribeFromClientDeliveries();
 					break;
 	

@@ -383,6 +383,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 					myController.closeExecutionStep(myChangeRequest.getChangeRequestID(),executionSummaryTextArea.getText());
 					myController.advanceChangeRequestToTesterStep(
 							myChangeRequest.getChangeRequestID());
+					myController.updateTimeExtensionDB(executionStep.getStepID(), "Execution");
 					ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 				}
 			}

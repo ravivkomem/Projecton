@@ -211,6 +211,9 @@ public class CommitteDecisionController extends BasicController{
 							(Date)result.getResultData().get(0).get(4),(Date)result.getResultData().get(0).get(5));
 					myBoundary.createCommitteStepDetails(newStep);
 					break;
+				case AUTOMATIC_CLOSE_NEW_TIME_EXTENSION:
+					this.unsubscribeFromClientDeliveries();
+					break;
 				default:
 					break;
 			}

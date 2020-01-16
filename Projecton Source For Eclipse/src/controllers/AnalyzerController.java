@@ -143,6 +143,20 @@ public class AnalyzerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * this method create sql query that update the time extension if necessary .
+	 *
+	 * @param stepID the step ID
+	 * @param stepType the step type
+	 */
+	public void updateTimeExtensionDB(int stepID, String stepType) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(stepID);
+		varArray.add(stepType);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.AUTOMATIC_CLOSE_NEW_TIME_EXTENSION,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}	
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -174,6 +188,9 @@ public class AnalyzerController extends BasicController {
 				myBoundary.getCommitteeDirectorUserName(UserName);
 				break;
 			case INSERT_NEW_COMMITTEE_STEP_FROM_ANALYZER:
+				this.unsubscribeFromClientDeliveries();
+				break;
+			case AUTOMATIC_CLOSE_NEW_TIME_EXTENSION:
 				this.unsubscribeFromClientDeliveries();
 				break;
 			default:

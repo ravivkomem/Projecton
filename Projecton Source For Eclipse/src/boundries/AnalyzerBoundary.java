@@ -317,6 +317,7 @@ public class AnalyzerBoundary implements DataInitializable {
 			myController.updateChangeRequestCurrentStepAndHandlerName(currentChangeRequest, "COMMITTEE_WORK", "-",date);
 			myController.updateAnalysisStepClose(currentChangeRequest, TimeManager.getCurrentDate(), "CLOSED",headertextArea.getText(),
 			descriptiontextArea.getText(), advantagestextArea.getText(), Date.valueOf(durationDatePicker.getValue()), constraintstextArea.getText());
+			myController.updateTimeExtensionDB(analyzerStep.getStepID(),"Analysis");
 			myController.getCommitteeDirector();
 		}
 	}
