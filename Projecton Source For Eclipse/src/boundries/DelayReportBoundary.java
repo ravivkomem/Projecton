@@ -19,10 +19,11 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class DelayReportBoundary.
+ * @author Lee Hugi
+ * This class control the delay report page
+ *
  */
 public class DelayReportBoundary implements Initializable{
 
@@ -30,7 +31,7 @@ public class DelayReportBoundary implements Initializable{
 	 * ********* FXML Objects **************
 	 * *************************************/
 	
-    /** The dealy bar chart. */
+    /** The delay bar chart. */
 	@FXML
     private BarChart<String, Number> dealyBarChart;
     
@@ -91,9 +92,6 @@ public class DelayReportBoundary implements Initializable{
 	 * ******* Public Methods *************
 	 * ************************************/
 
-	/* (non-Javadoc)
-     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-     */
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		medianTextField.setEditable(false);

@@ -93,8 +93,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private Button btnLogout;
 
-	/** The comment table add comment. */
 	// Add comment table
+	/** The comment table add comment. */
 	@FXML
 	private TableView<CommitteeComment> commentTable_addComment;
 	
@@ -106,8 +106,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableColumn<CommitteeComment, String> commentAddColumn;
 
-	/** The request info table. */
 	// request details table
+	/** The request info table. */
 	@FXML
 	private TableView<ChangeRequest> requestInfoTable;
 	
@@ -119,8 +119,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private TableColumn<ChangeRequest, String> descriptionColumn;
 
-	/** The comment tabel director. */
 	// comment director table
+	/** The comment tabel director. */
 	@FXML
 	private TableView<CommitteeComment> commentTabelDirector;
 	
@@ -501,7 +501,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * Creates the committe step details.
+	 * Creates the committee step details.
 	 *
 	 * @param resultStep the result step
 	 */
@@ -509,9 +509,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		committeeStep = resultStep;
 	}
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Committee");
@@ -581,9 +578,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see boundries.DataInitializable#initData(java.lang.Object)
-	 */
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
@@ -595,10 +589,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method will show up window with the msg that the method gets.
+	 * this method will show up window with the message that the method gets.
 	 *
 	 * @param alert the alert
-	 * @param msg the msg
+	 * @param msg the message
 	 * @param mess the mess
 	 * @return the optional
 	 */
