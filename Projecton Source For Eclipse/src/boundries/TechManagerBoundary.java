@@ -354,6 +354,7 @@ public class TechManagerBoundary implements Initializable{
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Tech Manager");
 		employeeAnchorPane.setVisible(false);
 		reportPageAnchorPane.setVisible(false);
 		requestListPane.setVisible(true);

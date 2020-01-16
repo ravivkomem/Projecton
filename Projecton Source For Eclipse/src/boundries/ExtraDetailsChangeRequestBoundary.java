@@ -161,6 +161,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Request List\\Extra Details");
 		/* FXML Objects init */
 		
 		initiatorNameTF.setEditable(false);

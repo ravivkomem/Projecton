@@ -157,6 +157,14 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}	
+	
+	public void getChangeRequestById(Integer changeRequestId) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(changeRequestId);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_CHANGE_REQUEST_BY_ID,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
 	@Override
 	public void getResultFromClient(SqlResult result) {
@@ -193,11 +201,26 @@ public class AnalyzerController extends BasicController {
 			case AUTOMATIC_CLOSE_NEW_TIME_EXTENSION:
 				this.unsubscribeFromClientDeliveries();
 				break;
+			case SELECT_CHANGE_REQUEST_BY_ID:
+				this.unsubscribeFromClientDeliveries();
+				myBoundary.getCurrentChangeRequestAfterRefresh(parseSqlResultToChangeRequest(result));
+				break;
 			default:
 				break;
 		}
 		});
 		return;
+	}
+	
+	private ChangeRequest parseSqlResultToChangeRequest(SqlResult result) {
+		ChangeRequest request = new ChangeRequest((Integer)result.getResultData().get(0).get(0),
+				(String)result.getResultData().get(0).get(1),(Date)result.getResultData().get(0).get(2),
+				(String)result.getResultData().get(0).get(3), (String)result.getResultData().get(0).get(4), 
+				(String)result.getResultData().get(0).get(5), (String)result.getResultData().get(0).get(6), 
+				(String)result.getResultData().get(0).get(7), (String)result.getResultData().get(0).get(8), 
+				(String)result.getResultData().get(0).get(9), (String)result.getResultData().get(0).get(10), 
+				(String)result.getResultData().get(0).get(14), (Date)result.getResultData().get(0).get(15));
+		return request;
 	}
 	
 	/**

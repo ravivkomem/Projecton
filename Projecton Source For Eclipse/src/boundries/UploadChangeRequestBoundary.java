@@ -307,6 +307,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 	@Override
 	/*initialize the combo box in this gui page  */
 	public void initialize(URL location, ResourceBundle resources) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Upload Change Request");
 		subSystemComboBox.getItems().add("Lecturer Information Station");
 		subSystemComboBox.getItems().add("Student Information Station");
 		subSystemComboBox.getItems().add("Employee Information Station");

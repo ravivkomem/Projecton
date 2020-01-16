@@ -33,7 +33,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CommitteeDecisionBoundary.
  *
@@ -238,7 +237,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     		myController.insertToClosingStepDbTable(currentChangeRequest.getChangeRequestID(), updateStepDate,
     				"ACTIVE");
     		myController.updateChangeRequestCurrentStep("DENY_STEP", "", currentChangeRequest.getChangeRequestID());
-    		popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+    		popUpWindowMessage(AlertType.INFORMATION, "Update Successfully", "Your Decision Upload successfully");
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     	}
     }
@@ -395,7 +394,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 				break;
 			}
 			myController.updateTimeExtensionDB(committeeStep.getStepID(),"Committee");
-			popUpWindowMessage(AlertType.INFORMATION, "", "Your Decision Upload successfully");
+			popUpWindowMessage(AlertType.INFORMATION, "Update Successfully", "Your Decision Upload successfully");
 			ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
 		}
 	}
@@ -515,6 +514,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Committee");
+		
 		employeeIdAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("employeeUserName"));
 		commentAddColumn.setCellValueFactory(new PropertyValueFactory<CommitteeComment, String>("comment"));
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
@@ -534,10 +535,6 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		
 		addCommentPane.setVisible(false);
 		committeeDirectorPane.setVisible(false);
-		btnCommitteeDirector.setVisible(false);
-		btnTimeExtension.setVisible(false);
-		image3point1.setVisible(false);
-		image3point2.setVisible(false);
 		
 		addCommentTextField.setTextFormatter(new TextFormatter<String>(change -> {
 			int changeLength = change.getControlNewText().length();
@@ -563,20 +560,20 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		
 		switch (ProjectFX.currentUser.getPermission()) {
 		case "COMMITTEE_MEMBER":
+			btnCommitteeDirector.setDisable(true);
+			btnTimeExtension.setDisable(true);
 			break;
 		case "SUPERVISOR_COMMITTEE_MEMBER":
+			btnCommitteeDirector.setDisable(true);
+			btnTimeExtension.setDisable(true);
 			break;
 		case "SUPERVISOR_COMMITTEE_DIRECTOR":
 			btnCommitteeDirector.setVisible(true);
 			btnTimeExtension.setVisible(true);
-			image3point1.setVisible(true);
-			image3point2.setVisible(true);
 			break;
 		case "COMMITTEE_DIRECTOR":
 			btnCommitteeDirector.setVisible(true);
 			btnTimeExtension.setVisible(true);
-			image3point1.setVisible(true);
-			image3point2.setVisible(true);
 			break;
 		default:
 			break;
@@ -609,6 +606,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		Alert alert2 = new Alert(alert);
 		alert2.setTitle(msg);
 		alert2.setHeaderText(mess);
+		alert2.setContentText("Press OK to move to work station");
 		return alert2.showAndWait();
 	}
 

@@ -38,7 +38,7 @@
          </font>
       </Button>
       <Button fx:id="backButton" layoutX="31.0" layoutY="558.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
-      <VBox alignment="TOP_CENTER" prefHeight="425.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="348.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -97,6 +97,17 @@
             <TableColumn fx:id="subsystemColumn" prefWidth="116.0" text="SubSystem" />
          </columns>
       </TableView>
+      <Button fx:id="btnRefresh" layoutX="478.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#refreshPage" prefHeight="35.0" prefWidth="57.0" visible="false">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="37.0">
+               <image>
+                  <Image url="@refresh_symbol.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Text fx:id="timeDisplayText" layoutX="619.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
+      <TextArea fx:id="timeRemainingTextArea" layoutX="625.0" layoutY="109.0" prefHeight="43.0" prefWidth="79.0" />
       <AnchorPane fx:id="createReportPane" layoutX="143.0" layoutY="84.0" prefHeight="520.0" prefWidth="603.0">
          <children>
             <Text layoutX="13.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
@@ -113,9 +124,7 @@
             <Button fx:id="submitButton" layoutX="498.0" layoutY="429.0" mnemonicParsing="false" onMouseClicked="#submit" text="Submit" />
             <TextArea fx:id="constraintstextArea" layoutX="390.0" layoutY="88.0" onKeyTyped="#updateConstraintsCharcterCounter" prefHeight="117.0" prefWidth="168.0" />
             <Text layoutX="23.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Header:" />
-            <Text fx:id="timeDisplayText" layoutX="479.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining :" />
             <DatePicker fx:id="durationDatePicker" layoutX="386.0" layoutY="248.0" prefHeight="26.0" prefWidth="174.0" />
-            <TextArea fx:id="timeRemainingTextArea" layoutX="479.0" layoutY="28.0" prefHeight="43.0" prefWidth="79.0" />
             <Text fill="RED" layoutX="14.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="4.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
             <Text fill="RED" layoutX="4.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*" />
@@ -132,8 +141,8 @@
       <AnchorPane fx:id="datePane" layoutX="232.0" layoutY="211.0" prefHeight="233.0" prefWidth="353.0">
          <children>
             <DatePicker fx:id="timedurationPicker" layoutX="95.0" layoutY="66.0" promptText="dd/mm/yyyy" />
-            <Button fx:id="dateButton" layoutX="151.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#setDate" text="Approve" />
-            <Text layoutX="1.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please estimate the time you need to complete your work:" wrappingWidth="361.9999966621399">
+            <Button fx:id="dateButton" layoutX="151.0" layoutY="124.0" mnemonicParsing="false" onMouseClicked="#setDate" prefHeight="25.0" prefWidth="54.0" text="Set" />
+            <Text layoutX="69.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter time required for analyzer:" wrappingWidth="225.9999966621399">
                <font>
                   <Font size="14.0" />
                </font>

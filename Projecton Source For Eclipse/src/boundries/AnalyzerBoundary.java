@@ -169,6 +169,9 @@ public class AnalyzerBoundary implements DataInitializable {
     /** The duration charcter counter label. */
     @FXML
     private Label durationCharcterCounterLabel;
+    
+    @FXML
+    private Button btnRefresh;
 
 	
 	/** The my controller. */
@@ -349,19 +352,34 @@ public class AnalyzerBoundary implements DataInitializable {
 				myController.updateChangeRequestCurrentStep(ANALYSIS_APPROVE_TIME, analyzerStep.getHandlerUserName(), analyzerStep.getChangeRequestID());
 				createReportPane.setVisible(false);
 				datePane.setVisible(false);
+				notificationText.setText("Work pending supervisor approval\nTime requestsed: " + 
+				selectedDate.toString()+"\nRefresh Page (To see if approved)");
 				notificationText.setVisible(true);
+				btnRefresh.setVisible(true);
 			}
 		}
 	}
+	
+    @FXML
+    void refreshPage(MouseEvent event) {
+    	
+    }
 
+
+	/* *****************************************
+     * ********** Public Methods ***************
+     * *****************************************/
+    
+    public void getCurrentChangeRequestAfterRefresh(ChangeRequest request) {
+    	currentChangeRequest = request;
+    	
+    }
+    
 	/**
 	 * Update tester page to DB successfully.
 	 *
 	 * @param affectedRows the affected rows
 	 */
-	/* *****************************************
-     * ********** Public Methods ***************
-     * *****************************************/
 	public void updateTesterPageToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "Updated successfully", 1500, 500, 500);
@@ -415,7 +433,7 @@ public class AnalyzerBoundary implements DataInitializable {
     @FXML
     void updateHeaderCharcterCounter(KeyEvent event) {
     	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
-
+    	recieveCurrentStep(analyzerStep);
     }
     
     /**
@@ -437,7 +455,7 @@ public class AnalyzerBoundary implements DataInitializable {
 	    */
 	   @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		   ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Analysis");
 		/* Init table view */
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("actualStep"));
@@ -512,14 +530,20 @@ public class AnalyzerBoundary implements DataInitializable {
 		/* Check the work status */
 		switch (currentChangeRequest.getCurrentStep()) {
 			case ANALYSIS_SET_TIME:
+				timeRemainingTextArea.setDisable(true);
 				datePane.setVisible(true);
 				break;
 			case ANALYSIS_APPROVE_TIME:
+				timeRemainingTextArea.setDisable(true);
 				createReportPane.setVisible(false);
 				datePane.setVisible(false);
+				notificationText.setText("Work pending supervisor approval\nTime requestsed: " + 
+						analyzerStep.getEstimatedEndDate()+"\nRefresh Page (To see if approved)");
 				notificationText.setVisible(true);
+				btnRefresh.setVisible(true);
 				break;
 			case ANALYSIS_WORK:
+				timeRemainingTextArea.setDisable(false);
 				timeextensionButton.setDisable(false);
 				
 				createReportPane.setVisible(true);
