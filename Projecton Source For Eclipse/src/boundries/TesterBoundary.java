@@ -399,7 +399,7 @@ public class TesterBoundary implements DataInitializable {
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Testing");
 		/* Set Text*/
 		pageHeaderText.setText("Loading Change Request Information");
 		

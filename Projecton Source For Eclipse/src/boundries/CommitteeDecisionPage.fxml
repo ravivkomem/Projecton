@@ -137,9 +137,9 @@
             </ImageView>
          </children>
       </VBox>
-      <Text layoutX="311.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Committee Decision" wrappingWidth="206.658203125">
+      <Text layoutX="262.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Committee Decision" wrappingWidth="249.32489013671875">
          <font>
-            <Font size="22.0" />
+            <Font size="26.0" />
          </font>
       </Text>
       <TextArea fx:id="timeRemainingTextAria" layoutX="622.0" layoutY="105.0" prefHeight="38.0" prefWidth="85.0" />
@@ -164,9 +164,9 @@
          </font>
       </Button>
       <Text fx:id="delayTimeTxt" layoutX="634.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Delay Time" visible="false" />
-      <Text fx:id="changeRequestNoText" layoutX="333.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request No.">
+      <Text fx:id="changeRequestNoText" layoutX="289.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request No.">
          <font>
-            <Font size="14.0" />
+            <Font size="20.0" />
          </font>
       </Text>
    </children>

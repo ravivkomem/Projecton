@@ -27,7 +27,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ActivityReportBoundary.
  *
@@ -80,10 +79,11 @@ public class ActivityReportBoundary implements Initializable {
     @FXML
     private NumberAxis DaysNumberBarChart;
 
-	 /** The my controller. */
  	/* *************************************
 	  * ******* Private Objects *************
 	  * *************************************/
+    
+    /** The my controller. */
 	private ActivityReportController myController = new ActivityReportController(this);
 	
 	/** The activity report. */
@@ -196,7 +196,7 @@ public class ActivityReportBoundary implements Initializable {
 	}
 	
 	/**
-	 * this method display the report in the page.
+	 * This method display the report in the page.
 	 *
 	 * @param report the report
 	 * @param workDays the work days
@@ -233,7 +233,7 @@ public class ActivityReportBoundary implements Initializable {
 	
 	/**
 	 * the method gets ArrayList of all the work days
-	 * sorting the days in 4 category 0-10,10-20,20-30,30+ days.
+	 * sorting the days in 4 category: 0-10,10-20,20-30,30+ days.
 	 *
 	 * @param workDays the work days
 	 * @return the int[]
@@ -253,9 +253,6 @@ public class ActivityReportBoundary implements Initializable {
 		return list;
 	}
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		activityReportDetailsPane.setVisible(false);

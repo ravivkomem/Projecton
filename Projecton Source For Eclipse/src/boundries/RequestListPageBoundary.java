@@ -328,6 +328,7 @@ public class RequestListPageBoundary implements Initializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Request List");
 		selectStatusComboBox.getItems().add("ACTIVE");
 		selectStatusComboBox.getItems().add("CLOSED");
 		selectStatusComboBox.getItems().add("DENIED");

@@ -145,6 +145,7 @@ public class MenuBoundary implements Initializable {
      */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu");
 	    /*Hide all buttons*/
 		uploadRequestButton.setVisible(false);
 	    viewMyRequestsButton.setVisible(false);

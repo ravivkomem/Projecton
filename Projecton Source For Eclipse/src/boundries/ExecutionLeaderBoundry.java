@@ -162,7 +162,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ****************************************/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Execution");
 		timeRemainingTextArea.setDisable(true);
 		timeRemainingTextArea.setText("Work pending approval");
 		timeRemainingTxt.setText("Time Remaining");

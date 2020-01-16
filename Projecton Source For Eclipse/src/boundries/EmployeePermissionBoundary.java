@@ -21,9 +21,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EmployeePermissionBoundary.
+ * @author Lee Hugi
+ * This class control the employee permission page
+ *
  */
 public class EmployeePermissionBoundary implements DataInitializable{
 
@@ -43,11 +45,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
     @FXML
     private ComboBox<String> committeeMemberComboBox;
     
-    /** The permossion text field. */
+    /** The permission text field. */
     @FXML
     private TextField permossionTextField;
     
-    /** The new premission combo box. */
+    /** The new permission combo box. */
     @FXML
     private ComboBox<String> newPremissionComboBox;
     
@@ -67,10 +69,11 @@ public class EmployeePermissionBoundary implements DataInitializable{
     @FXML
     private Button setSubsystemButton;
     
-    /** The employee user. */
     /* *************************************
    	 * ******* Private Objects *************
    	 * *************************************/
+    
+    /** The employee user. */
     private User employeeUser;
 	
 	/** The users. */
@@ -79,8 +82,8 @@ public class EmployeePermissionBoundary implements DataInitializable{
 	/** The my controller. */
 	private EmployeePermissionController myController = new EmployeePermissionController(this);
 	
-	/** The tech manager boundry. */
-	private TechManagerBoundary techManagerBoundry;
+	/** The tech manager boundary. */
+	private TechManagerBoundary techManagerBoundary;
 	
 	/* *************************************
 	 * ******* FXML Methods *************
@@ -112,7 +115,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     /**
      * this method update to users there permission.
      *
-     * @param event the new new employee permission
+     * @param event the new employee permission
      */
     @FXML
     void setNewEmployeePermission(MouseEvent event) {
@@ -140,7 +143,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 						u.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR")) {
 					if(u.getUserName().equals(employeeUser.getUserName())) {
 						handleSupervisorOneUser(employeeUser);
-						techManagerBoundry.setEmployeeListChanges(employeeUser);
+						techManagerBoundary.setEmployeeListChanges(employeeUser);
 					}
 					else
 						handleSupervasior(employeeUser,u);
@@ -179,7 +182,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 						u.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR")) {
 					if(u.getUserName().equals(employeeUser.getUserName())) {
 						handleCommitteeDirectorOneUser(employeeUser);
-						techManagerBoundry.setEmployeeListChanges(employeeUser);
+						techManagerBoundary.setEmployeeListChanges(employeeUser);
 					}
 					else
 						handleCommitteeDirector(employeeUser,u);
@@ -201,7 +204,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
     }
     
     /**
-     * Replace committe member.
+     * Replace committee member.
      *
      * @param event the event
      */
@@ -232,7 +235,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
      */
     private void createPermissionToOneUser(User newUser) {
     	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
-    	techManagerBoundry.setEmployeeListChanges(newUser);
+    	techManagerBoundary.setEmployeeListChanges(newUser);
     }
     
     /**
@@ -244,8 +247,8 @@ public class EmployeePermissionBoundary implements DataInitializable{
     private void createPermissoinsToUsers(User newUser, User oldUser) {
     	myController.updateEmployeePermission(newUser.getPermission(),newUser.getJobDescription(),newUser.getUserID());
     	myController.updateEmployeePermission(oldUser.getPermission(),oldUser.getJobDescription(),oldUser.getUserID());
-    	techManagerBoundry.setEmployeeListChanges(newUser);
-    	techManagerBoundry.setEmployeeListChanges(oldUser);
+    	techManagerBoundary.setEmployeeListChanges(newUser);
+    	techManagerBoundary.setEmployeeListChanges(oldUser);
     }
     
     /**
@@ -611,9 +614,6 @@ public class EmployeePermissionBoundary implements DataInitializable{
         }
     }
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		permossionTextField.setEditable(false);
@@ -637,23 +637,20 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		subsystemComboBox.getItems().add("College Website");
 	}
 
-	/* (non-Javadoc)
-	 * @see boundries.DataInitializable#initData(java.lang.Object)
-	 */
 	@Override
 	public void initData(Object data) {
 		employeeUser = (User)(((ArrayList<ArrayList<Object>>) data).get(0).get(0));
 		users.addAll(((ArrayList<ArrayList<User>>) data).get(1));
-		techManagerBoundry = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
+		techManagerBoundary = (TechManagerBoundary)(((ArrayList<ArrayList<Object>>) data).get(2).get(0));
 		employeeNameText.setText("Permission: "+employeeUser.getFirstName()+" "+employeeUser.getLastName());
 		permossionTextField.setText(employeeUser.getJobDescription());
 	}
 	
 	/**
-	 * this method will show up window with the msg that the method gets.
+	 * this method will show up window with the message that the method gets.
 	 *
 	 * @param alert the alert
-	 * @param msg the msg
+	 * @param msg the message
 	 * @param mess the mess
 	 * @return the optional
 	 */

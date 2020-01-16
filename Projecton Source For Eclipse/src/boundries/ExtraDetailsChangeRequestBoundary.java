@@ -161,6 +161,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Request List\\Extra Details");
 		/* FXML Objects init */
 		
 		initiatorNameTF.setEditable(false);
@@ -172,7 +173,6 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		currentStateDescTA.setEditable(false);
 		currentStepTF.setEditable(false);
 		estimatedTimeForStepTF.setEditable(false);
-		
 		
 		fileListView.setItems(fileList);
 		fileListView.setCellFactory(param -> {
@@ -234,7 +234,10 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 				estimatedTimeForStepTF.setText("");
 				estimatedTimeForStepTF.setDisable(true);
 			}
-			
+			if (currentChangeRequest.getCurrentStep().equals("FINISH"))
+			{
+				suspendButton.setDisable(true);
+			}
 			myController.getChangeRequestFiles(currentChangeRequest.getChangeRequestID());
 		}
 		catch (Exception e)
@@ -315,18 +318,17 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     void suspendChangeRequest(MouseEvent event) {
     	String updateStatus = null;
     	if (currentChangeRequest.getStatus().equals("ACTIVE"))
-    	{
-    		updateStatus="SUSPEND";
-    		currentChangeRequest.setStatus("SUSPEND");
-    		suspendButton.setText("Un-Suspend");
-    	}
-    	else if (currentChangeRequest.getStatus().equals("SUSPEND"))
-    	{
-    		updateStatus="ACTIVE";
-    		currentChangeRequest.setStatus("ACTIVE");
-    		suspendButton.setText("Suspend");
-    	}
-    	myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);
+        {
+        	updateStatus="SUSPEND";
+        	currentChangeRequest.setStatus("SUSPEND");
+        	suspendButton.setText("Un-Suspend");
+        }
+        else if (currentChangeRequest.getStatus().equals("SUSPEND"))
+        {
+        	updateStatus="ACTIVE";
+        	currentChangeRequest.setStatus("ACTIVE");
+        	suspendButton.setText("Suspend");
+        }
+        myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);
     }
-
 }

@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class control the analysis report page.
  *
@@ -61,35 +60,31 @@ public class AnalysisReportBoundary implements DataInitializable{
     @FXML
     private Text headerText;
     
-    /** The btn close page. */
     /*Button */
+    /** The btn close page. */
     @FXML
     private Button btnClosePage;
     
-    /** The current change request. */
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
+    
+    /** The current change request. */
     private ChangeRequest currentChangeRequest;
     
     /** The my controller. */
     private AnalysisReportController myController = new AnalysisReportController(this);
 	
-    /* (non-Javadoc)
-     * @see boundries.DataInitializable#initData(java.lang.Object)
-     */
     /* *************************************
 	 * ******* Public Methods *************
 	 * *************************************/
+    
 	@Override
 	public void initData(Object data) {
 		this.currentChangeRequest = (ChangeRequest)data;
 		myController.getAnalysisReportByChangeRequestId(currentChangeRequest.getChangeRequestID());
 	}
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		descriptionTextArea.setEditable(false);

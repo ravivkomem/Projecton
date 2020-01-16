@@ -26,9 +26,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TechManagerBoundary.
+ * @author Lee Hugi
+ *
  */
 public class TechManagerBoundary implements Initializable{
 
@@ -90,7 +91,7 @@ public class TechManagerBoundary implements Initializable{
     @FXML
     private TableView<User> employeeListTable;
     
-    /** The clm employe id. */
+    /** The column employee id. */
     @FXML
     private TableColumn<User, Integer> clmEmployeId;
     
@@ -156,10 +157,11 @@ public class TechManagerBoundary implements Initializable{
     @FXML
     private TableColumn<SubsystemSupporter, String> subsystemSupporterColumn;
     
-    /** The current change request. */
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
+    
+    /** The current change request. */
     private ChangeRequest currentChangeRequest;
 	
 	/** The employee user. */
@@ -330,7 +332,7 @@ public class TechManagerBoundary implements Initializable{
      * the method gets new employee user and replace the user in the same old user
      * the method search the new user in the user list as per user name.
      *
-     * @param employeeNewUser the new employee list changes
+     * @param employeeNewUser the new employee list
      */
     public void setEmployeeListChanges(User employeeNewUser) {
     	employeeUser = employeeNewUser;
@@ -349,11 +351,9 @@ public class TechManagerBoundary implements Initializable{
 		}
     }
 
-	/* (non-Javadoc)
-	 * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Tech Manager");
 		employeeAnchorPane.setVisible(false);
 		reportPageAnchorPane.setVisible(false);
 		requestListPane.setVisible(true);

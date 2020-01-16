@@ -260,6 +260,7 @@ public class SupervisorBoundary implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
 	{
+		ProjectFX.mainStage.setTitle("ICM - Menu\\Supervisor");
 		 tableColumnRequestID.setCellValueFactory(new PropertyValueFactory<ChangeRequest,Integer>("changeRequestID"));
 		 tableColumnCurrentStep.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("actualStep"));
 		 tableColumnDescription.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("currentStateDescription"));
