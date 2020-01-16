@@ -117,7 +117,7 @@
             </ImageView>
          </children>
       </VBox>
-      <Button fx:id="btnExstraDetails" layoutX="318.0" layoutY="551.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />
+      <Button fx:id="btnExstraDetails" layoutX="530.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />
       <Button fx:id="btnLogOut" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ClickLogOutFunction" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -137,11 +137,11 @@
       <Button fx:id="btnDenyAppointment" layoutX="492.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="Deny" />
       <TableView fx:id="tableChangeRequest" layoutX="159.0" layoutY="91.0" prefHeight="161.0" prefWidth="558.0">
          <columns>
-            <TableColumn fx:id="tableColumnRequestID" prefWidth="100.0" text="Request ID" />
-            <TableColumn fx:id="tableColumnStatus" prefWidth="96.0" text="Status" />
-            <TableColumn fx:id="tableColumnDescription" prefWidth="115.00006103515625" text="Description " />
-            <TableColumn fx:id="tableColumnSubSystem" prefWidth="91.0" text="SubSystem" />
-            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="162.0" text="CurrentStep" />
+            <TableColumn fx:id="tableColumnRequestID" prefWidth="53.0" text="ID" />
+            <TableColumn fx:id="tableColumnStatus" prefWidth="66.0" text="Status" />
+            <TableColumn fx:id="tableColumnDescription" prefWidth="152.0" text="Description " />
+            <TableColumn fx:id="tableColumnSubSystem" prefWidth="200.0" text="SubSystem" />
+            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="94.0" text="Step" />
          </columns>
       </TableView>
       <Button fx:id="btnSend" layoutX="195.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" prefHeight="26.0" prefWidth="127.0" text="Send Mail And Close" />
@@ -157,19 +157,19 @@
       <TextField fx:id="txtFieldEstimatedTime" layoutX="342.0" layoutY="303.0" prefHeight="31.0" prefWidth="172.0" />
       <Text fx:id="txtExecutionEstimatedTime" layoutX="160.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution estimated time:" wrappingWidth="171.9999975635269" />
       <Text fx:id="txtAnalysisEstimatedTime" layoutX="161.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis estimated time:" wrappingWidth="170.00000225641224" />
-      <Text fx:id="txtTextChange" layoutX="229.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Options">
+      <Text fx:id="txtTextChange" layoutX="161.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Type: XXXX">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fx:id="txtTextExplantion" layoutX="164.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="558.0000140070915" />
-      <TableView fx:id="tableTimeExtension" layoutX="149.0" layoutY="395.0" prefHeight="173.0" prefWidth="558.0">
+      <Text fx:id="txtTextExplantion" layoutX="164.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please press on change request to view work details" wrappingWidth="338.0000140070915" />
+      <TableView fx:id="tableTimeExtension" layoutX="201.0" layoutY="501.0" prefHeight="173.0" prefWidth="558.0">
         <columns>
-          <TableColumn fx:id="tableCoulmnStepId" prefWidth="92.0" text="StepID" />
-          <TableColumn fx:id="tableCoulmnStepType" prefWidth="111.0" text="StepType" />
-            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="94.66668701171875" text="OldDate" />
-            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="98.33331298828125" text="NewDate" />
-            <TableColumn fx:id="tableCoulmnReason" prefWidth="161.0" text="Reason" />
+          <TableColumn fx:id="tableCoulmnStepId" prefWidth="68.0" text="Step ID" />
+          <TableColumn fx:id="tableCoulmnStepType" prefWidth="105.0" text="Step" />
+            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="104.0" text="Current Date" />
+            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="125.0" text="Requested Date" />
+            <TableColumn fx:id="tableCoulmnReason" prefWidth="156.0" text="Reason" />
         </columns>
       </TableView>
       <Button fx:id="btnApproveTimeExtension" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveTimeExtension" text="Approve Time Extension" />

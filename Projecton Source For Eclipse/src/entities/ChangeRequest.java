@@ -611,17 +611,33 @@ public class ChangeRequest {
 		{
 		
 			case "ANALYZER_AUTO_APPOINT":
-			case "ANALYSIS_SET_TIME":
+				actualStep = "Appoint Analyzer";
+				break;
+				
+			case "ANALYZER_SUPERVISOR_APPOINT":
+				actualStep = "Appoint Analyzer";
+				break;
+				
 			case "ANALYSIS_APPROVE_TIME":
+				actualStep = "Analysis Time Pending";
+				break;
+				
+			case "ANALYSIS_SET_TIME":
 			case "ANALYSIS_WORK":
 				actualStep = "Analysis";
 				break;
 			
 			case "EXECUTION_LEADER_SUPERVISOR_APPOINT":
+				actualStep = "Appoint Execution Leader";
+				break;
+				
 			case "EXECUTION_SET_TIME":
-			case "EXECUTION_APPROVE_TIME":
 			case "EXECUTION_WORK":
 				actualStep = "Execution";
+				break;
+				
+			case "EXECUTION_APPROVE_TIME":
+				actualStep = "Execution Time Pending";
 				break;
 			
 			case "TESTING_WORK":
@@ -635,17 +651,15 @@ public class ChangeRequest {
 			case "FINISH":
 				actualStep = "Finish";
 				break;
+				
 			case "CLOSING_STEP":
 				actualStep = "Closing step";
 				break;
+				
 			case "DENY_STEP":
 				actualStep= "Deny Step";
 				break;
-				
-			case "CLOSE_STEP":
-				actualStep="Close Step";
-				break;
-				
+
 			case "TESTER_COMMITTEE_DIRECTOR_APPOINT":
 				actualStep="Tester Appoint";
 				break;

@@ -256,8 +256,6 @@ public class SupervisorBoundary implements Initializable {
 	/**
 	 * This method initialize all GUI.
 	 *
-	 * @param arg0 the arg 0
-	 * @param arg1 the arg 1
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1)
@@ -1008,6 +1006,7 @@ public class SupervisorBoundary implements Initializable {
     	email.sendMessage(initiator.getEmail(), "Closed Request", 
     			MessagesCreator.supervisorCloseChangeRequest(initiator.getFullName(),
     					txtSendMessageToInitiator.getText()));
+    	txtSendMessageToInitiator.setText("");
     }   
     
     /**
