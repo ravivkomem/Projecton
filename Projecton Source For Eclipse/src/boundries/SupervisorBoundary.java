@@ -290,6 +290,9 @@ public class SupervisorBoundary implements Initializable {
 			        if (! row.isEmpty() && event.getButton()==MouseButton.PRIMARY)
 			        {
 			        	myTimeExtension = row.getItem();
+			        	btnApproveTimeExtension.setVisible(true);
+			        	btnDenyTimeExtension.setVisible(true);
+			        	txtTextExplantion.setVisible(true);
 			        }
 			    });
 			    return row ;
@@ -1045,10 +1048,10 @@ public class SupervisorBoundary implements Initializable {
     	tableTimeExtension.setVisible(true);
     	tableTimeExtension.setLayoutX(159);
     	tableTimeExtension.setLayoutY(91);
-    	btnApproveTimeExtension.setVisible(true);
-    	btnDenyTimeExtension.setVisible(true);
-    	txtTextExplantion.setText("Please select a request to approve or reject an extension");
-    	txtTextExplantion.setVisible(true);	
+    	btnApproveTimeExtension.setVisible(false);
+    	btnDenyTimeExtension.setVisible(false);
+    	txtTextExplantion.setText("Please select a request to approve or reject an extension");	
+    	txtTextExplantion.setVisible(true);
     }
     
     /**
@@ -1086,6 +1089,7 @@ public class SupervisorBoundary implements Initializable {
     			myController.updateTimeExtensionStatus("APPROVED",myTimeExtension.getStepID());
     			myController.updateTestingStepEstimatedEndDate(myTimeExtension.getNewDate(),myTimeExtension.getStepID());
     		}
+    		myController.SelectAllTimeExtensions();
     		btnApproveTimeExtension.setVisible(false);
     		btnDenyTimeExtension.setVisible(false);
     		txtTextExplantion.setVisible(false);	
@@ -1127,6 +1131,7 @@ public class SupervisorBoundary implements Initializable {
     			myController.updateTimeExtensionStatusAfterDeny("DENY",myTimeExtension.getStepID());
     			myController.updateTestingStepEstimatedEndDate(myTimeExtension.getOldDate(),myTimeExtension.getStepID());
     		}
+    		myController.SelectAllTimeExtensions();
     		btnApproveTimeExtension.setVisible(false);
     		btnDenyTimeExtension.setVisible(false);
     		txtTextExplantion.setVisible(false);
