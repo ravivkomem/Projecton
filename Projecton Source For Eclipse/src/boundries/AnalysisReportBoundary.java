@@ -16,7 +16,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// TODO: Auto-generated Javadoc
 /**
  * This class control the analysis report page.
  *
@@ -61,15 +60,16 @@ public class AnalysisReportBoundary implements DataInitializable{
     @FXML
     private Text headerText;
     
-    /** The btn close page. */
     /*Button */
+    /** The btn close page. */
     @FXML
     private Button btnClosePage;
     
-    /** The current change request. */
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
+    
+    /** The current change request. */
     private ChangeRequest currentChangeRequest;
     
     /** The my controller. */
