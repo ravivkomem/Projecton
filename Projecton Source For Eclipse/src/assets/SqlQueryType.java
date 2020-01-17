@@ -104,6 +104,7 @@ public enum SqlQueryType {
 	 * *************** Extra Details Queries ***************
 	 * *****************************************************/
 	UPDATE_STATUS_BY_SUPERVISOR(SqlExecutionType.UPDATE_QUERY),
+	SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Extension Queries***********

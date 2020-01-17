@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,8 +74,20 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 						}
 						myBoundary.recieveFileList(myFileList);
 					}
+					break;
 				case UPDATE_STATUS_BY_SUPERVISOR:
 					this.unsubscribeFromClientDeliveries();
+					break;
+				case SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE:
+					this.unsubscribeFromClientDeliveries();
+					if (result.getResultData().isEmpty())
+					{
+						myBoundary.fillEstimatedEndDateField(null);
+					}
+					else
+					{
+						myBoundary.fillEstimatedEndDateField((Date) result.getResultData().get(0).get(0));
+					}
 					break;
 				default:
 					break;
@@ -99,6 +112,14 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR,data);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+
+	public void getStepEstimatedEndDate(Integer changeRequestID) {
+		
+		ArrayList<Object> data =new ArrayList<>();
+		data.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE, data);
+		this.sendSqlActionToClient(sqlAction);
 	}
 	
 

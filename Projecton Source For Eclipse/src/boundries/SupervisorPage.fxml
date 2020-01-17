@@ -548,8 +548,8 @@
                </font>
             </Label>
             <TextField fx:id="executionRequiredTimeTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="212.0" text="Estimated Work Time" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <Button fx:id="btnApproveExecutionTime" mnemonicParsing="false" onAction="#clickOnApproveExecutionTime" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Time" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="btnDenyExecutionTime" mnemonicParsing="false" onAction="#clickOnDenyExecutionTime" onMouseClicked="#clickOnDenyAnalysisTime" prefHeight="25.0" prefWidth="94.0" text="Deny Time" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Button fx:id="btnApproveExecutionTime" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" text="Approve Time" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="btnDenyExecutionTime" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" prefHeight="25.0" prefWidth="94.0" text="Deny Time" GridPane.columnIndex="2" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <GridPane fx:id="timeExtensionRequestGridPane" layoutX="810.0" layoutY="310.0" prefHeight="263.0" prefWidth="529.0">

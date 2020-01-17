@@ -584,6 +584,9 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR.getCode()]=
     			"UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE.getCode()] =
+    			"SELECT EstimatedEndDate From icm.mergred_steps " + 
+    			"WHERE ChangeRequestID = ? AND Status = 'ACTIVE'";
     }
     
 }
