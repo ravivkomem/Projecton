@@ -43,6 +43,7 @@ public class ChangeRequest {
 		this.endDate = endDate;
 		
 		actualStep=getActutalStepByCurrentStep(currentStep);
+		actualStatus = parseStatusToCamelCaptial(status);
 		
 	}
 	
@@ -84,6 +85,7 @@ public class ChangeRequest {
 		this.fullName = fullName;
 		this.estimatedEndDate = estimatedEndDate;
 		actualStep=getActutalStepByCurrentStep(currentStep);
+		actualStatus = parseStatusToCamelCaptial(status);
 	}
 
 
@@ -123,6 +125,7 @@ public class ChangeRequest {
 		this.fullName = fullName;
 		this.estimatedEndDate = estimatedEndDate;
 		actualStep=getActutalStepByCurrentStep(currentStep);
+		actualStatus = parseStatusToCamelCaptial(status);
 	}
 
 
@@ -164,6 +167,7 @@ public class ChangeRequest {
 		this.estimatedEndDate=estimatedEndDate;
 		
 		actualStep=getActutalStepByCurrentStep(currentStep);
+		actualStatus = parseStatusToCamelCaptial(status);
 	}
 	
 	/**
@@ -194,6 +198,7 @@ public class ChangeRequest {
 		this.handlerUserName=handlerUserName;
 		this.currentStep=currentStep;
 		actualStep=getActutalStepByCurrentStep(currentStep);
+		actualStatus = parseStatusToCamelCaptial(status);
 	}
 	
 	/**
@@ -239,6 +244,7 @@ public class ChangeRequest {
 		fullName=fullName2;
 		estimatedEndDate=estimatedDate;
 		actualStep=getActutalStepByCurrentStep(currentStep);
+		actualStatus = parseStatusToCamelCaptial(status);
 	}
 
 	/** The change request ID. */
@@ -292,6 +298,7 @@ public class ChangeRequest {
 	/** The estimated end date. */
 	private Date estimatedEndDate;
 	
+	private String actualStatus;
 	/**
 	 * Gets the estimated end date.
 	 *
@@ -669,6 +676,19 @@ public class ChangeRequest {
 				break;
 		}
 		return actualStep;
+	}
+
+	public String getActualStatus() {
+		return actualStatus;
+	}
+
+	public void setActualStatus(String actualStatus) {
+		this.actualStatus = actualStatus;
+	}
+	
+	private String parseStatusToCamelCaptial(String status)
+	{
+		return String.valueOf(status.charAt(0)).toUpperCase() + status.substring(1).toLowerCase();
 	}
 	
 }

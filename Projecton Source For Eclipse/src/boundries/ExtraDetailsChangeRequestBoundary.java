@@ -164,7 +164,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ProjectFX.mainStage.setTitle("ICM - Menu\\Request List\\Extra Details");
+		
 		/* FXML Objects init */
 		
 		initiatorNameTF.setEditable(false);
@@ -212,6 +212,27 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		{
 			currentChangeRequest = (ChangeRequest)((ArrayList<Object>) data).get(0);
 			previousPagePath = (String)((ArrayList<Object>) data).get(1);
+			if (previousPagePath.equals(ProjectPages.REQUEST_LIST_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Request List\\Extra Details");
+			} 
+			else if (previousPagePath.equals(ProjectPages.SUPERVISOR_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Supervisor\\Extra Details");
+			}
+			else if (previousPagePath.equals(ProjectPages.TECH_MANAGER_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Tech Manager\\Extra Details");
+			}
+			else if (previousPagePath.equals(ProjectPages.ANALYZER_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Analysis\\Extra Details");
+			}
+			else
+			{
+				ProjectFX.mainStage.setTitle("ICM - Information Change Mangement System");
+			}
+			
 			initiatorNameTF.setText(currentChangeRequest.getInitiatorUserName());
 			subSystemTF.setText(currentChangeRequest.getSelectedSubsystem());
 			currentStateDescTA.setText(currentChangeRequest.getCurrentStateDescription());

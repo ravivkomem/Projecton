@@ -345,10 +345,10 @@ public class SupervisorBoundary implements Initializable {
 		 tableColumnRequestID.setCellValueFactory(new PropertyValueFactory<ChangeRequest,Integer>("changeRequestID"));
 		 tableColumnCurrentStep.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("actualStep"));
 		 tableColumnDescription.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("currentStateDescription"));
-		 tableColumnStatus.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("status"));
+		 tableColumnStatus.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("actualStatus"));
 		 tableColumnSubSystem.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("selectedSubsystem"));
 		 /* Init time extension table view*/
-		 tableCoulmnStepType.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("StepType"));
+		 tableCoulmnStepType.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("actualStep"));
 		 tableCoulmnOldDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("OldDate"));
 		 tableCoulmnNewDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("NewDate"));
 		 tableCoulmnReason.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("Reason"));
@@ -901,9 +901,20 @@ public class SupervisorBoundary implements Initializable {
     	if(emailMessageTextArea.getText().equals("")) {
     		Toast.makeText(ProjectFX.mainStage, "Please write a message first", 1500, 500, 500);
     	}else {
-        	myController.getUserEmail(selectedChangeRequest.getInitiatorUserName());
+        	//myController.getUserEmail(selectedChangeRequest.getInitiatorUserName());
         	myController.setStatusToClosed(TimeManager.getCurrentDate(),"CLOSED","FINISH",selectedChangeRequest.getChangeRequestID());
         	myController.setEndDate(TimeManager.getCurrentDate(),"CLOSED",selectedChangeRequest.getChangeRequestID());
+        	if (selectedChangeRequest.getCurrentStep().equals("CLOSING_STEP"))
+        	{
+        		emailSender.sendMessage(selectedChangeRequest.getEmail(), "leehugi93@gmail.com" ,"Closed Request", 
+            			MessagesCreator.supervisorCloseChangeRequest(selectedChangeRequest.getFullName(), emailMessageTextArea.getText()));
+        	}
+        	else
+        	{
+        		emailSender.sendMessage(selectedChangeRequest.getEmail(),"Denied request", 
+            			MessagesCreator.supervisorCloseChangeRequest(selectedChangeRequest.getFullName(), emailMessageTextArea.getText()));
+        	}			
+        	emailMessageTextArea.setText("");
         	setAllDisplaysVisibilityOff();
         	updateTablesUsingLastFilter();
     	}
@@ -915,10 +926,7 @@ public class SupervisorBoundary implements Initializable {
      * @param initiator the initiator
      */
     public void sendEmailToInitiatorUser(User initiator) {
-    	emailSender.sendMessage(initiator.getEmail(), "Closed Request", 
-    			MessagesCreator.supervisorCloseChangeRequest(initiator.getFullName(),
-    					emailMessageTextArea.getText()));
-    	emailMessageTextArea.setText("");
+    	
     }   
     
     /**
@@ -974,7 +982,7 @@ public class SupervisorBoundary implements Initializable {
      */
     public void ShowAppointExecutionLeaderSuccess()
 	{
-		Toast.makeText(ProjectFX.mainStage, "Execution Leader Appointment success", 1500, 500, 500);
+		Toast.makeText(ProjectFX.mainStage, "Execution leader assigned successfully", 1500, 500, 500);
 	}
 	
 	/**
@@ -982,7 +990,7 @@ public class SupervisorBoundary implements Initializable {
 	 */
 	public void ShowSuccessAproveAppoint()
 	{
-		Toast.makeText(ProjectFX.mainStage, "Approving Analyzer successfuly", 1500, 500, 500);
+		Toast.makeText(ProjectFX.mainStage, "Analyzer assigned successfully", 1500, 500, 500);
 	}
     
     /**
@@ -990,7 +998,7 @@ public class SupervisorBoundary implements Initializable {
      */
     public void showDenyAnalysisTime()
     {
-    	Toast.makeText(ProjectFX.mainStage, "Deny Analysis time approved", 1500, 500, 500);
+    	Toast.makeText(ProjectFX.mainStage, "Analysis requested time denied", 1500, 500, 500);
 	}
     
     /**
@@ -998,7 +1006,7 @@ public class SupervisorBoundary implements Initializable {
      */
     public void showApproveAnalysisTime()
     {	
-    	Toast.makeText(ProjectFX.mainStage, "Analysis time approved", 1500, 500, 500);	
+    	Toast.makeText(ProjectFX.mainStage, "Analysis requested time approved", 1500, 500, 500);	
 	}
     
     /**
@@ -1006,7 +1014,7 @@ public class SupervisorBoundary implements Initializable {
      */
     public void showApproveExecutionTime()
 	{
-    	Toast.makeText(ProjectFX.mainStage,"Execution time approved", 1500, 500, 500);
+    	Toast.makeText(ProjectFX.mainStage,"Execution requested time approved", 1500, 500, 500);
 	}
     
     /**
@@ -1014,7 +1022,7 @@ public class SupervisorBoundary implements Initializable {
      */
     public void showDenyExecutionTime()
 	{
-    	Toast.makeText(ProjectFX.mainStage,"Execution time Deny", 1500, 500, 500);
+    	Toast.makeText(ProjectFX.mainStage,"Execution requested time denied", 1500, 500, 500);
 	}
     
 	/**
@@ -1039,7 +1047,7 @@ public class SupervisorBoundary implements Initializable {
 	 */
 	public void showChangeRequestClosed()
 	{
-		Toast.makeText(ProjectFX.mainStage,"Change Request is Closed", 1500, 500, 500);
+		Toast.makeText(ProjectFX.mainStage,"Change Request closed successfully", 1500, 500, 500);
 	}
 	
 	/**
@@ -1053,7 +1061,7 @@ public class SupervisorBoundary implements Initializable {
 			//Toast.makeText(ProjectFX.mainStage, "Please Set an Analyzer", 1500, 500, 500);
 		}
 		else
-			Toast.makeText(ProjectFX.mainStage, "Problam in update current step", 1500, 500, 500);
+			Toast.makeText(ProjectFX.mainStage, "Database error, please contact system admin", 1500, 500, 500);
 	}
 
 	/**
@@ -1064,9 +1072,9 @@ public class SupervisorBoundary implements Initializable {
 	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
 	{
 		if(affectedRows2==1)
-			Toast.makeText(ProjectFX.mainStage, "Your Analyzer Appoint Approved", 1500, 500, 500);
+			Toast.makeText(ProjectFX.mainStage, "Analyzer assigned successfully", 1500, 500, 500);
 		else
-			Toast.makeText(ProjectFX.mainStage, "Analyzer Appoint did not success", 1500, 500, 500);	
+			Toast.makeText(ProjectFX.mainStage, "Database error, please contact system admin", 1500, 500, 500);	
 	}
 
 	/**
@@ -1074,7 +1082,7 @@ public class SupervisorBoundary implements Initializable {
 	 */
 	public void showApproveTimeExtension()
 	{
-		Toast.makeText(ProjectFX.mainStage, "Your time extension approved", 1500, 500, 500);
+		Toast.makeText(ProjectFX.mainStage, "Time extension approved", 1500, 500, 500);
 	}
 
 	/**
@@ -1082,6 +1090,6 @@ public class SupervisorBoundary implements Initializable {
 	 */
 	public void showDenyTimeExtension()
 	{
-		Toast.makeText(ProjectFX.mainStage, "Your time extension denied", 1500, 500, 500);
+		Toast.makeText(ProjectFX.mainStage, "Time extension denied", 1500, 500, 500);
 	}
 }
