@@ -38,7 +38,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <VBox alignment="TOP_CENTER" prefHeight="387.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="452.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -101,6 +101,15 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnSuspensions" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickSuspensions" prefHeight="58.0" prefWidth="119.0" style="-fx-background-color: #ddf1ff;" text="Suspensions" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@suspend_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
       <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">

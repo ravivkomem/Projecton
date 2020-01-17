@@ -462,7 +462,9 @@ public class MysqlConnection {
      			"SELECT * FROM icm.user WHERE UserName = ?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 
 				"SELECT * FROM icm.change_request";
-    	
+    	sqlArray[SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE.getCode()] =
+    			"INSERT INTO icm.supervisor_update(ChangeRequestId,SupervisorUserName,Essence,Update_Date)"
+    			+ " VALUES (?,?,?,?) ";
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS.getCode()] = 
 				"SELECT * FROM icm.change_request" +

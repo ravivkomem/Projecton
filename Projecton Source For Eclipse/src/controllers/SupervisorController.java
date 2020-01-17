@@ -54,6 +54,17 @@ public class SupervisorController extends BasicController
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	public void inserntNewSupervisorUpdate(Integer id, String name, String essence, Date updateDate) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(id);
+		varArray.add(name);
+		varArray.add(essence);
+		varArray.add(updateDate);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 	/* (non-Javadoc)
 	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
 	 */
@@ -193,11 +204,8 @@ public class SupervisorController extends BasicController
 							(String) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(5));
 					myBoundary.sendEmailToInitiatorUser(user);
 					break;
-				case SELECT_ALL_SUSPENDED_CHANGE_REQUESTS:
+				case INSERT_NEW_SUPERVISOR_UPDATE:
 					this.unsubscribeFromClientDeliveries();
-					ArrayList<ChangeRequest> suspendedList =new ArrayList<>();
-					suspendedList.addAll(this.changeResultToChangerequest(result));
-					myBoundary.handleChangerequestResultForTable(suspendedList);
 					break;
 				default:
 					break;
@@ -793,11 +801,7 @@ public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
 	
 }
 
-public void SelectChangeRequestForSuspensions() {
-	ArrayList<Object> varArray = new ArrayList<>();
-	SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS, varArray);
-	this.sendSqlActionToClient(sqlAction);
-}
+
 	
 	
 }

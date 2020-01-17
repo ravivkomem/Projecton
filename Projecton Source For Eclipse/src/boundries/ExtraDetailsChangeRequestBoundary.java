@@ -274,8 +274,31 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
 		{
 			suspendButton.setVisible(true);
-			if (currentChangeRequest.getStatus().equals("SUSPEND"))
+			suspendButton.setDisable(true);
+			suspendButton.setText("Suspend");
+			if (currentChangeRequest.getStatus().equals("ACTIVE"))
+			{
+				suspendButton.setDisable(false);
+			} 
+			else if (currentChangeRequest.getStatus().equals("SUSPEND"))
+			{
 				suspendButton.setText("Un-Suspend");
+			}
+				
+		}
+		if(ProjectFX.currentUser.getPermission().equals("INFORMATION_ENGINEERING_DEPARTMENT_HEAD")) {
+			suspendButton.setVisible(true);
+			suspendButton.setText("Un-Suspend");
+			suspendButton.setDisable(true);
+			if (currentChangeRequest.getStatus().equals("SUSPEND"))
+			{
+				suspendButton.setDisable(false);
+			}
+			else if (currentChangeRequest.getStatus().equals("ACTIVE"))
+			{
+				suspendButton.setDisable(true);
+				suspendButton.setText("Suspend");
+			} 
 		}
 	}
 	
@@ -370,6 +393,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
         	currentChangeRequest.setStatus("SUSPEND");
         	StatusTF.setText("Suspend");
         	suspendButton.setText("Un-Suspend");
+        	suspendButton.setDisable(true);
         }
         else if (currentChangeRequest.getStatus().equals("SUSPEND"))
         {
@@ -377,6 +401,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
         	currentChangeRequest.setStatus("ACTIVE");
         	StatusTF.setText("Active");
         	suspendButton.setText("Suspend");
+        	suspendButton.setDisable(true);
         }
         myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);
     }

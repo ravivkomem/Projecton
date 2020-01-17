@@ -34,6 +34,12 @@ public class TechManagerController extends BasicController {
 	public TechManagerController(TechManagerBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
+	
+	public void SelectChangeRequestForSuspensions() {
+		ArrayList<Object> varArray = new ArrayList<>();
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS, varArray);
+		this.sendSqlActionToClient(sqlAction);
+	}
 
 	/**
 	 * this method create sql query that ask for all the change request in the data base.
@@ -88,6 +94,12 @@ public class TechManagerController extends BasicController {
 				break;
 			case SELECT_SUBSYSTEM_BY_USER_NAME:
 				myBoundary.displaySubsystemTable(createSubsystemSupporter(result));
+				break;
+			case SELECT_ALL_SUSPENDED_CHANGE_REQUESTS:
+				this.unsubscribeFromClientDeliveries();
+				ArrayList<ChangeRequest> suspendedList =new ArrayList<>();
+				suspendedList.addAll(this.createChangeRequestFromResult(result));
+				myBoundary.displayChangeRequestTable(suspendedList);
 				break;
 			default:
 				break;

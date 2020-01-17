@@ -157,6 +157,8 @@ public class TechManagerBoundary implements Initializable{
     @FXML
     private TableColumn<SubsystemSupporter, String> subsystemSupporterColumn;
     
+    @FXML
+    private Button btnSuspensions;
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
@@ -186,6 +188,15 @@ public class TechManagerBoundary implements Initializable{
 	 * ******* FXML Methods *************
 	 * *************************************/
 	
+    @FXML
+    void clickSuspensions(MouseEvent event) {
+    	reportPageAnchorPane.setVisible(false);
+		requestListPane.setVisible(true);
+		employeeAnchorPane.setVisible(false);
+    	myController.SelectChangeRequestForSuspensions();	
+    	
+    }
+    
 	/**
 	 * this method load in click on button extra details for the current change request.
 	 *

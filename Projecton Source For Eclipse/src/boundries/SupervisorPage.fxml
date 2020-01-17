@@ -30,7 +30,7 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <VBox alignment="TOP_CENTER" prefHeight="552.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="517.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -120,15 +120,6 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnSuspensions" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickSuspensions" prefHeight="58.0" prefWidth="119.0" style="-fx-background-color: #ddf1ff;" text="Suspensions" textAlignment="CENTER" wrapText="true">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@suspend_icon.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
          </children>
       </VBox>
       <Button fx:id="extraDetailsButton" layoutX="530.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />
@@ -741,9 +732,9 @@
          </columnConstraints>
          <rowConstraints>
             <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="46.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="53.666656494140625" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="29.333343505859375" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="22.333343505859375" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
          </rowConstraints>
@@ -758,7 +749,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="66.0" prefWidth="348.0" text="This change request is suspended" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label prefHeight="56.0" prefWidth="423.0" text="This change request is suspended, only the tech manager can unsuspend it." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
                </font>
@@ -768,7 +759,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label text="Unsuspended the change request" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <Label text="Nothing" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />
                </font>
@@ -778,7 +769,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label prefHeight="57.0" prefWidth="422.0" text="Press &quot;View Change Request Details&quot; to view change request details, and decide regarding unsuspension" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="TOP">
+            <Label prefHeight="57.0" prefWidth="422.0" text="Press &quot;View Change Request Details&quot; to view change request details." wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="TOP">
                <font>
                   <Font size="16.0" />
                </font>
