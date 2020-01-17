@@ -35,6 +35,7 @@ public class TimeExtension {
 		this.newDate = newDate;
 		this.reason = reason;
 		this.timeExtensionStatus = timeExtensionStatus;
+		actualStep = stepType;
 	}
 	
 	/** The time extension ID. */
@@ -58,6 +59,7 @@ public class TimeExtension {
 	/** The time extension status. */
 	String timeExtensionStatus;
 	
+	private String actualStep;
 	/**
 	 * Gets the time extension ID.
 	 *
@@ -190,6 +192,18 @@ public class TimeExtension {
 	 */
 	public void setTimeExtensionStatus(String timeExtensionStatus) {
 		this.timeExtensionStatus = timeExtensionStatus;
+	}
+
+	public String getActualStep() {
+		return actualStep;
+	}
+
+	public void setActualStep(String actualStep) {
+		this.actualStep = actualStep;
+	}
+
+	public void setStepType(StepType stepType) {
+		this.stepType = stepType;
 	}
 	
 }

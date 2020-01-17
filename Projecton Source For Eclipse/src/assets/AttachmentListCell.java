@@ -40,7 +40,7 @@ public class AttachmentListCell extends ListCell<MyFile> {
     	 */
 		public AttachmentListCell() {
 			super();
-			buttonImage = new Image(getClass().getResourceAsStream("/boundries/close_symbol.png"));
+			buttonImage = new Image(getClass().getResourceAsStream("/boundries/X_icon.jpeg"));
             HBox.setHgrow(pane, Priority.ALWAYS);
             ImageView buttomImageView = new ImageView(buttonImage);
             buttomImageView.setFitHeight(LIST_ROW_HEIGHT);

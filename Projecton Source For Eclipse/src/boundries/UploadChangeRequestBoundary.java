@@ -146,7 +146,7 @@ public class UploadChangeRequestBoundary implements Initializable {
      * ********** FXML Methods Implementation *
      * ************************************** */
     /**
-     * in case this button pressed its open a fileChooser window for user to choose which files to upload  .
+     * In case this button pressed its open a fileChooser window for user to choose which files to upload  .
      *
      * @param event the event
      */
@@ -176,7 +176,7 @@ public class UploadChangeRequestBoundary implements Initializable {
     }
     
     /**
-     * move the user back to the home page .
+     * Move the user back to the home page .
      *
      * @param event the event
      */
@@ -186,7 +186,7 @@ public class UploadChangeRequestBoundary implements Initializable {
     }
     
     /**
-     * disconnect the user from the system and update the data base. 
+     * Disconnect the user from the system and updates the data base. 
      *
      * @param event the event
      */
@@ -197,9 +197,9 @@ public class UploadChangeRequestBoundary implements Initializable {
     }
 
     /**
-     * this method called when pressed the submit button while user upload a new change request 
-     * here I am building the change request from the gui page and send it to the controller, in case the user 
-     * did not fill a necessary field it shows a message that alert the user to fill all the necessary fields 
+     * This method called when pressed the submit button while user upload a new change request 
+     * here I am building the change request from the GUI page and send it to the controller, in case the user 
+     * did not fill all the necessary fields it shows a message that alert the user to fill all the necessary fields 
      * and just after all the fields are filled the user can submit the change request .
      *
      * @param event the event
@@ -240,7 +240,7 @@ public class UploadChangeRequestBoundary implements Initializable {
     }
     
     /**
-     * This method gets a change request id and checks whether the change request uploaded successfully to the data base 
+     * This method gets a change request ID and checks whether the change request uploaded successfully to the data base 
      * if there was no problems it calls popUpWindowMessage function that inform the user with the new change request id, else
      * shows an error message .
      *

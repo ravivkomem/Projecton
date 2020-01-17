@@ -150,7 +150,7 @@ public class SupervisorController extends BasicController
 				case SELECT_ALL_ENGINEERS:
 					ArrayList<String> employees;
 					employees = this.createArrayListOfUserName(result);
-					myBoundary.SetComboBox2(employees);
+					myBoundary.recieveAllInformationEngineers(employees);
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case UPDATE_CHANGE_REQUEST_STATUS_TO_CLOSED:
@@ -164,7 +164,7 @@ public class SupervisorController extends BasicController
 					break;
 				case SELECT_ANALYSIS_ESTIMATED_DATE:
 					Date res2 = (Date)result.getResultData().get(0).get(0);
-					myBoundary.getExecutionEndDate(res2);
+					myBoundary.getAnalysisEndDate(res2);
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED:
@@ -226,13 +226,30 @@ public class SupervisorController extends BasicController
 	private ArrayList<ChangeRequest> changeResultToChangerequest(SqlResult result)    
 	{
 		ArrayList<ChangeRequest> resultList=new ArrayList<>();
-		for(ArrayList<Object> a: result.getResultData())
+		for(ArrayList<Object> resultRow: result.getResultData())
 		{
-			ChangeRequest changeRequest=new ChangeRequest((Integer)a.get(0),(String)a.get(1),(Date)a.get(2),
-					(String)a.get(3),(String)a.get(4),(String)a.get(5),(String)a.get(6)
-					,(String)a.get(7),(String)a.get(8),(String)a.get(9)
-					,(String)a.get(10),(Date)a.get(11));
-			resultList.add( changeRequest);
+			int changeRequestId = (Integer)resultRow.get(0);
+			String initiatorUserName = (String)resultRow.get(1);
+			Date startDate = (Date)resultRow.get(2);
+			String selectedSubsystem = (String)resultRow.get(3);
+			String currentStateDescription = (String)resultRow.get(4);
+			String desiredChangeDescription = (String)resultRow.get(5);
+			String desiredChangeExplanation = (String)resultRow.get(6);
+			String desiredChangeComments = (String)resultRow.get(7);
+			String status = (String)resultRow.get(8);
+			String currentStep = (String)resultRow.get(9);
+			String handlerUserName = (String)resultRow.get(10);
+			Date endDate = (Date)resultRow.get(11);
+			String email = (String)resultRow.get(12);
+			String jobDescription = (String)resultRow.get(13);
+			String fullName = (String)resultRow.get(14);
+			Date estimatedDate = (Date)resultRow.get(15);
+			
+			ChangeRequest changeRequest = new ChangeRequest(
+					changeRequestId, initiatorUserName, startDate, selectedSubsystem,
+					currentStateDescription, desiredChangeDescription, desiredChangeExplanation, desiredChangeComments,
+					status, currentStep, handlerUserName, endDate, email, jobDescription, fullName, estimatedDate);
+			resultList.add(changeRequest);
 		}
 		return resultList;	
 	}
@@ -260,7 +277,7 @@ public class SupervisorController extends BasicController
 /**
  * This method get all the change requests.
  */
-	public void SelectAllChangeRequest()      
+	public void getAllChangeRequests()      
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUEST, varArray);

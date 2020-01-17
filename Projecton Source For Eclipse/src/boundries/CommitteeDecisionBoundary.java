@@ -536,7 +536,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		addCommentTextField.setTextFormatter(new TextFormatter<String>(change -> {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_COMMITTEE_CHARS){
-				committeeCommentLabel.setText(Integer.toString(changeLength) + "/ " + MAX_COMMITTEE_CHARS);
+				committeeCommentLabel.setText(Integer.toString(changeLength) + "/" + MAX_COMMITTEE_CHARS);
 				return change;
 			}
 			else{
@@ -547,7 +547,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 		denyCommentTextArea.setTextFormatter(new TextFormatter<String>(change -> {
 			int changeLength = change.getControlNewText().length();
 			if (changeLength <= MAX_DENY_CHARS){
-				denyCommentLabel.setText(Integer.toString(changeLength) + "/ " + MAX_DENY_CHARS);
+				denyCommentLabel.setText(Integer.toString(changeLength) + "/" + MAX_DENY_CHARS);
 				return change;
 			}
 			else{

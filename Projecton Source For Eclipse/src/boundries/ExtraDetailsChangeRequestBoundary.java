@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -20,7 +21,9 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -32,7 +35,7 @@ import javafx.stage.FileChooser;
 // TODO: Auto-generated Javadoc
 
 /**
- * extra details for specific change request page (Boundary).
+ * Extra details for specific change request page (Boundary).
  *
  * @author Ido Kadosh
  */
@@ -128,7 +131,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
      * ***************************************/
     
     /**
-     * by pressing this button the user goes back to the prevoius page .
+     * By pressing this button the user goes back to the prevoius page .
      *
      * @param event the event
      */
@@ -146,7 +149,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     }
 
     /**
-     * by pressing this button the user disconnects from the system .
+     * By pressing this button the user disconnects from the system .
      *
      * @param event the event
      */
@@ -161,7 +164,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ProjectFX.mainStage.setTitle("ICM - Menu\\Request List\\Extra Details");
+		
 		/* FXML Objects init */
 		
 		initiatorNameTF.setEditable(false);
@@ -209,6 +212,27 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 		{
 			currentChangeRequest = (ChangeRequest)((ArrayList<Object>) data).get(0);
 			previousPagePath = (String)((ArrayList<Object>) data).get(1);
+			if (previousPagePath.equals(ProjectPages.REQUEST_LIST_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Request List\\Extra Details");
+			} 
+			else if (previousPagePath.equals(ProjectPages.SUPERVISOR_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Supervisor\\Extra Details");
+			}
+			else if (previousPagePath.equals(ProjectPages.TECH_MANAGER_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Tech Manager\\Extra Details");
+			}
+			else if (previousPagePath.equals(ProjectPages.ANALYZER_PAGE.getPath()))
+			{
+				ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Analysis\\Extra Details");
+			}
+			else
+			{
+				ProjectFX.mainStage.setTitle("ICM - Information Change Mangement System");
+			}
+			
 			initiatorNameTF.setText(currentChangeRequest.getInitiatorUserName());
 			subSystemTF.setText(currentChangeRequest.getSelectedSubsystem());
 			currentStateDescTA.setText(currentChangeRequest.getCurrentStateDescription());
@@ -245,7 +269,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			System.out.println("Couldn't init data in Extra details page");
 			this.logoutUser(null);
 		}
-		if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR"))
+		if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR") ||
+				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_MEMBER") ||
+				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
 		{
 			suspendButton.setVisible(true);
 			if (currentChangeRequest.getStatus().equals("SUSPEND"))
@@ -254,7 +280,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * this method shows all the files that uploaded for this specific request .
+	 * This method shows all the files that uploaded for this specific request .
 	 *
 	 * @param downloadedFiles the downloaded files
 	 */
@@ -271,7 +297,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * this method allows to the user to download the files if necessary .
+	 * This method allows to the user to download the files if necessary .
 	 *
 	 * @param myFile the my file
 	 * @param path the path
@@ -309,7 +335,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * in case the user have a supervisor permission, this button allows to the supervisor to 
+	 * In case the user have a supervisor permission, this button allows to the supervisor to 
 	 * suspend or unsuspend a specific request .
 	 *
 	 * @param event the event
@@ -317,16 +343,39 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     @FXML
     void suspendChangeRequest(MouseEvent event) {
     	String updateStatus = null;
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    	alert.setTitle("Confirmation");
+    	alert.setHeaderText("Please confirm your decision");
+    	if (currentChangeRequest.getStatus().equals("ACTIVE"))
+    	{
+    		alert.setContentText("Are you sure you want to SUSPEND the change request?");
+    	}
+    	else
+    	{
+    		alert.setContentText("Are you sure you want to UN-SUSPEND the change request?");
+    	}
+    	Optional<ButtonType> res = alert.showAndWait();
+        if(res.isPresent()) 
+        {
+            if(res.get().equals(ButtonType.CANCEL))
+            {
+            	event.consume();
+            	return;
+            }
+        }
+    	
     	if (currentChangeRequest.getStatus().equals("ACTIVE"))
         {
         	updateStatus="SUSPEND";
         	currentChangeRequest.setStatus("SUSPEND");
+        	StatusTF.setText("Suspend");
         	suspendButton.setText("Un-Suspend");
         }
         else if (currentChangeRequest.getStatus().equals("SUSPEND"))
         {
         	updateStatus="ACTIVE";
         	currentChangeRequest.setStatus("ACTIVE");
+        	StatusTF.setText("Active");
         	suspendButton.setText("Suspend");
         }
         myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);

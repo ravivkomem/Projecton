@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
@@ -9,6 +11,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -32,7 +37,7 @@
                   <Image url="@icm%20icom%20til.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickHomePageFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +51,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnRequestList" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickRequestListFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnRequestList" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAllChangeRequests" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -74,25 +79,11 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnApproval" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickApprovalFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Approval" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnApproval" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickApprovalFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Approvals" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@request%20list.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@btnBreak.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="btnClosingStep" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickClosingStepFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Closing step" textAlignment="CENTER" wrapText="true">
-               <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@request_info.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -115,9 +106,23 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnClosingStep" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickClosingStepFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Closing Step" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@request_info.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@btnBreak.png" />
+               </image>
+            </ImageView>
          </children>
       </VBox>
-      <Button fx:id="btnExstraDetails" layoutX="530.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />
+      <Button fx:id="extraDetailsButton" layoutX="530.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />
       <Button fx:id="btnLogOut" layoutX="665.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#ClickLogOutFunction" style="-fx-background-color: #2196F3;" text="log out">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -131,48 +136,645 @@
          </font>
       </Button>
       <Button fx:id="btnBack" layoutX="14.0" layoutY="562.0" mnemonicParsing="false" onMouseClicked="#ClickBackFunction" text="Back" />
-      <ComboBox fx:id="comboSelectExecutionLeader" layoutX="219.0" layoutY="303.0" onMouseClicked="#clickOnSelectExecutionLeader" prefHeight="31.0" prefWidth="209.0" promptText="select execution leader " />
-      <ComboBox fx:id="comboSelectAnalyizer" layoutX="219.0" layoutY="303.0" onMouseClicked="#clickOnSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="Select  Analyizer" />
-      <Button fx:id="btnApproveAppointment" layoutX="382.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" prefHeight="26.0" prefWidth="79.0" text="Approve" />
-      <Button fx:id="btnDenyAppointment" layoutX="492.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="62.0" text="Deny" />
       <TableView fx:id="tableChangeRequest" layoutX="159.0" layoutY="91.0" prefHeight="161.0" prefWidth="558.0">
          <columns>
-            <TableColumn fx:id="tableColumnRequestID" prefWidth="53.0" text="ID" />
-            <TableColumn fx:id="tableColumnStatus" prefWidth="66.0" text="Status" />
-            <TableColumn fx:id="tableColumnDescription" prefWidth="152.0" text="Description " />
-            <TableColumn fx:id="tableColumnSubSystem" prefWidth="200.0" text="SubSystem" />
-            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="94.0" text="Step" />
+            <TableColumn fx:id="tableColumnRequestID" prefWidth="34.33331298828125" text="ID" />
+            <TableColumn fx:id="tableColumnStatus" prefWidth="70.33331298828125" text="Status" />
+            <TableColumn fx:id="tableColumnDescription" prefWidth="166.66665649414062" text="Description " />
+            <TableColumn fx:id="tableColumnSubSystem" prefWidth="181.33331298828125" text="SubSystem" />
+            <TableColumn fx:id="tableColumnCurrentStep" prefWidth="112.66668701171875" text="Step" />
          </columns>
       </TableView>
-      <Button fx:id="btnSend" layoutX="195.0" layoutY="442.0" mnemonicParsing="false" onMouseClicked="#clickOnSend" prefHeight="26.0" prefWidth="127.0" text="Send Mail And Close" />
-      <TextArea fx:id="txtSendMessageToInitiator" layoutX="172.0" layoutY="301.0" prefHeight="123.0" prefWidth="347.0" />
-      <Text fx:id="txtSystemAutoAppoint" layoutX="159.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="System auto appoint:" wrappingWidth="86.91162109375" />
-      <TextField fx:id="txtHandlerNameAutoAppoint" layoutX="246.0" layoutY="303.0" prefHeight="31.0" prefWidth="115.0" />
-      <Button fx:id="btnSetAnalyzer" layoutX="477.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" />
-      <Button fx:id="btnSetExecutionLeader" layoutX="468.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnSetExecutionLeader" prefHeight="31.0" prefWidth="172.0" text="Set Execution Leader" />
-      <Button fx:id="btnApproveAnalysisTime" layoutX="555.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Analysis Time" />
-      <Button fx:id="btnDenyAnalysisTime" layoutX="555.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" prefHeight="25.0" prefWidth="136.0" text="Deny Analysis Time" />
-      <Button fx:id="btnDenyExecutionTime" layoutX="559.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyExecutionTime" prefHeight="25.0" prefWidth="146.0" text="Deny Execution Time" />
-      <Button fx:id="btnApproveExecutionTime" layoutX="556.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveExecutionTime" prefHeight="25.0" prefWidth="146.0" text="Approve Execution Time" />
-      <TextField fx:id="txtFieldEstimatedTime" layoutX="342.0" layoutY="303.0" prefHeight="31.0" prefWidth="172.0" />
-      <Text fx:id="txtExecutionEstimatedTime" layoutX="160.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution estimated time:" wrappingWidth="171.9999975635269" />
-      <Text fx:id="txtAnalysisEstimatedTime" layoutX="161.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Analysis estimated time:" wrappingWidth="170.00000225641224" />
-      <Text fx:id="txtTextChange" layoutX="161.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Type: XXXX">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Text>
-      <Text fx:id="txtTextExplantion" layoutX="164.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Please press on change request to view work details" wrappingWidth="338.0000140070915" />
-      <TableView fx:id="tableTimeExtension" layoutX="201.0" layoutY="501.0" prefHeight="173.0" prefWidth="558.0">
+      <Text fx:id="tableExplanationText" layoutX="164.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press on table row to view work details" wrappingWidth="338.0000140070915" />
+      <TableView fx:id="tableTimeExtension" layoutX="-2.0" layoutY="625.0" prefHeight="161.0" prefWidth="558.0">
         <columns>
-          <TableColumn fx:id="tableCoulmnStepId" prefWidth="68.0" text="Step ID" />
-          <TableColumn fx:id="tableCoulmnStepType" prefWidth="105.0" text="Step" />
-            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="104.0" text="Current Date" />
-            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="125.0" text="Requested Date" />
-            <TableColumn fx:id="tableCoulmnReason" prefWidth="156.0" text="Reason" />
+          <TableColumn fx:id="tableCoulmnStepType" prefWidth="79.66665649414062" text="Step" />
+            <TableColumn fx:id="tableCoulmnOldDate" prefWidth="116.00003051757812" text="Current Date" />
+            <TableColumn fx:id="tableCoulmnNewDate" prefWidth="139.0" text="Requested Date" />
+            <TableColumn fx:id="tableCoulmnReason" prefWidth="221.0" text="Reason" />
         </columns>
       </TableView>
-      <Button fx:id="btnApproveTimeExtension" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnApproveTimeExtension" text="Approve Time Extension" />
-      <Button fx:id="btnDenyTimeExtension" layoutX="480.0" layoutY="303.0" mnemonicParsing="false" onMouseClicked="#clickOnDenyTimeExtension" text="Deny Time Extension" />
+      <GridPane layoutX="163.0" layoutY="61.0" prefHeight="30.0" prefWidth="551.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.0" minWidth="10.0" prefWidth="80.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="300.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="136.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="34.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fx:id="filterTypeText" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Type:" wrappingWidth="78.99999878718518">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label prefHeight="30.0" prefWidth="170.0" text="Total List Elements: " GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="listElementsCounterLabel" text="YYY" GridPane.columnIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane fx:id="closingStepGridPane" layoutX="-2.0" layoutY="793.0" prefHeight="301.0" prefWidth="558.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="126.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="119.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="121.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="201.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Closing Step Work:" underline="true" GridPane.columnSpan="2">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="closingStepDescriptionLabel" text="This step was XXX by your staff" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Notify the initator via email" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Initiator Name" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="initatorNameLabel" text="FULL NAME" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Job Description" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="jobDescriptionLabel" text="XXXXXXXX" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Email Address" underline="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="emailAddressLabel" text="ZZZZZZZZ" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Email Message:" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="emailMessageTextArea" prefHeight="123.0" prefWidth="347.0" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+            <Button fx:id="sendEmailToInitatorButton" mnemonicParsing="false" onMouseClicked="#clickOnSend" prefHeight="26.0" prefWidth="127.0" text="Send Mail And Close" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+            <Label fx:id="emailMessageCharLabel" text="0/200" GridPane.columnIndex="3" GridPane.rowIndex="6" GridPane.valignment="TOP">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane fx:id="analyzerAutoAppointGridPane" layoutX="159.0" layoutY="292.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Analyzer Automatic Appoint:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="The system automaticaly appointed an analyzer for this change request" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Approve or deny the appointment" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="System Appointee" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtHandlerNameAutoAppoint" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="btnApproveAppointment" mnemonicParsing="false" onMouseClicked="#clickOnApproveAppointment" prefHeight="23.0" prefWidth="70.0" text="Approve" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="btnDenyAppointment" mnemonicParsing="false" onMouseClicked="#clickOnDenyAppointment" prefHeight="25.0" prefWidth="67.0" text="Deny" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="analyzerSupervisorAppointGridPane" layoutX="585.0" layoutY="625.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Analyzer Supervisor Appoint:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="You denied the system automatic appointee, therfore you need to select an analyzer" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Select analyzer from the information engineers list" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="222.0" text="Information Engineers List" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboSelectAnalyizer" prefHeight="31.0" prefWidth="161.0" promptText="Select  Analyizer" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Button fx:id="btnSetAnalyzer" mnemonicParsing="false" onMouseClicked="#clickOnSetAnalyzer" prefHeight="31.0" prefWidth="115.0" text="Set Analyzer" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="executionLeaderAppointGridPane" layoutX="497.0" layoutY="866.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Execution Leader Appoint:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="55.0" prefWidth="400.0" text="The selected change request finished the committee step. Need to decide who will conduct the execution" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Select execution leader from the information engineers list" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="222.0" text="Information Engineers List" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="comboSelectExecutionLeader" prefHeight="31.0" prefWidth="175.0" promptText="Select Execution Leader" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Button fx:id="btnSetExecutionLeader" mnemonicParsing="false" onMouseClicked="#clickOnSetExecutionLeader" prefHeight="31.0" prefWidth="172.0" text="Set Execution Leader" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="analysisTimePendingGridPane" layoutX="1091.0" layoutY="608.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Analysis Time Pending:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="The analyzer has submmitted time required to complete his step" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Approve or deny the step time" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="258.0" text="Submitted Estimated End Date" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="analysisRequiredTimeTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="212.0" text="Estimated Work Time" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Button fx:id="btnApproveAnalysisTime" mnemonicParsing="false" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Time" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="btnDenyAnalysisTime" mnemonicParsing="false" onMouseClicked="#clickOnDenyAnalysisTime" prefHeight="25.0" prefWidth="94.0" text="Deny Time" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="executionTimePendingGridLayout" layoutX="1078.0" layoutY="866.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Execution Time Pending:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="The execution leader has submmitted time required to complete his step" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Approve or deny the step time" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="258.0" text="Submitted Estimated End Date" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <TextField fx:id="executionRequiredTimeTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="212.0" text="Estimated Work Time" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <Button fx:id="btnApproveExecutionTime" mnemonicParsing="false" onAction="#clickOnApproveExecutionTime" onMouseClicked="#clickOnApproveAnalysisTime" text="Approve Time" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="btnDenyExecutionTime" mnemonicParsing="false" onAction="#clickOnDenyExecutionTime" onMouseClicked="#clickOnDenyAnalysisTime" prefHeight="25.0" prefWidth="94.0" text="Deny Time" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="timeExtensionRequestGridPane" layoutX="810.0" layoutY="310.0" prefHeight="263.0" prefWidth="529.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="106.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="156.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="131.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="137.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Time Extension Request:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="The step leader is close to his deadline and asked to extend the deadline" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Approve or deny the request" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="123.0" text="Current Deadline" underline="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnApproveTimeExtension" mnemonicParsing="false" onMouseClicked="#clickOnApproveTimeExtension" text="Approve Time Extension" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="btnDenyTimeExtension" mnemonicParsing="false" onMouseClicked="#clickOnDenyTimeExtension" text="Deny Time Extension" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label prefHeight="25.0" prefWidth="123.0" text="Requested Date" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="123.0" text="Reason" underline="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="currentDeadlineDateLabel" text="XX/XX/XX" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Label fx:id="requestedTimeExtensionDateLabel" text="XX/XX/XX" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+            <Label fx:id="reasonLabel" prefHeight="15.0" prefWidth="137.0" text="XX/XX/XX" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2" GridPane.valignment="TOP" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="changeRequestInProgressGridPane" layoutX="810.0" layoutY="14.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="59.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Change Request In Progress:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="The change request is in progress, being handled by your staff" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Nothing" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="422.0" text="Press &quot;View Change Request Details&quot; for more information" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane fx:id="changeRequestFinishedGridPane" layoutX="1299.0" layoutY="304.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Finished Change Request:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="This change request is already finished" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Nothing" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="422.0" text="Press &quot;View Change Request Details&quot; for more information" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <GridPane fx:id="suspendedChangeRequestGridPane" layoutX="1347.0" layoutY="27.0" prefHeight="228.0" prefWidth="537.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="113.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="123.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="392.0" minWidth="10.0" prefWidth="308.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="55.0" minHeight="4.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="151.0" minHeight="0.0" prefHeight="46.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="0.0" prefHeight="53.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="163.0" minHeight="7.0" prefHeight="38.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Suspended Change Request:" underline="true" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Description:" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="66.0" prefWidth="348.0" text="This change request is suspended" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="113.0" text="Work To Do:" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label text="Unsuspended the change request" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="25.0" prefWidth="154.0" text="Information:" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label prefHeight="57.0" prefWidth="422.0" text="Press &quot;View Change Request Details&quot; to view change request details, and decide regarding unsuspension" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.rowSpan="2" GridPane.valignment="TOP">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

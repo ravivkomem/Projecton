@@ -15,7 +15,7 @@ import javafx.application.Platform;
 
 
 /**
- * request list page for specific user (Controller).
+ * Request list page for specific user (Controller).
  *
  * @author Ido Kadosh
  */
@@ -73,7 +73,7 @@ public class RequestListPageController extends BasicController {
 	}
 	
 	/**
-	 * this method parse all the change requests for a specific user .
+	 * This method parse all the change requests for a specific user .
 	 *
 	 * @param result the result
 	 * @return the array list
@@ -121,7 +121,7 @@ public class RequestListPageController extends BasicController {
 	}
 	
 	/**
-	 * this method fills the table with all the change requests for a specific user.
+	 *This method fills the table with all the change requests for a specific user.
 	 */
 	public void fillNecessaryFieldsInTable()
 	{
@@ -133,7 +133,7 @@ public class RequestListPageController extends BasicController {
 	}
 	
 	/**
-	 * this method executes a query to get all the change requests for specific user with a requested date.
+	 * This method executes a query to get all the change requests for specific user with a requested date.
 	 *
 	 * @param from the from
 	 * @param to the to
@@ -151,7 +151,7 @@ public class RequestListPageController extends BasicController {
 	}
 	
 	/**
-	 * this method executes a querey to get change request for specific user with a specific ID .
+	 * This method executes a querey to get change request for specific user with a specific ID .
 	 *
 	 * @param idNum the id num
 	 * @return the change requests by id search
@@ -167,7 +167,7 @@ public class RequestListPageController extends BasicController {
 	}
 	
 	/**
-	 * this method executes a query to get all the change requests for specific user with a requested status .
+	 * This method executes a query to get all the change requests for specific user with a requested status .
 	 *
 	 * @param status the status
 	 * @return the change request by status
