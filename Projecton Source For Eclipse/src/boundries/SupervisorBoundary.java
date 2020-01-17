@@ -607,6 +607,8 @@ public class SupervisorBoundary implements Initializable {
     	setAllDisplaysVisibilityOff();
     	myController.changeCurrentStepToAnalysisSetTime(selectedChangeRequest.getChangeRequestID());
     	myController.InsertNewAnalysisStepAfterApprove(selectedChangeRequest.getChangeRequestID(),selectedChangeRequest.getHandlerUserName(),TimeManager.getCurrentDate(),"ACTIVE");
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Appoint analyzer", TimeManager.getCurrentDate());
     	updateTablesUsingLastFilter();
     }
     
@@ -651,6 +653,8 @@ public class SupervisorBoundary implements Initializable {
     				,selectedChangeRequest.getChangeRequestID());
     		myController.InsertNewAnalysisStep(selectedChangeRequest.getChangeRequestID()
     				,comboSelectAnalyizer.getSelectionModel().getSelectedItem(),TimeManager.getCurrentDate(),"ACTIVE");
+    		myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+        			ProjectFX.currentUser.getUserName(), "Appoint analyzer", TimeManager.getCurrentDate());
     		updateTablesUsingLastFilter();
     	}	
     }
@@ -675,7 +679,9 @@ public class SupervisorBoundary implements Initializable {
   				,"EXECUTION_SET_TIME",selectedChangeRequest.getChangeRequestID());
 			  myController.InsertNewExecutionLeaderStep(selectedChangeRequest.getChangeRequestID()
 				,comboSelectExecutionLeader.getSelectionModel().getSelectedItem(),TimeManager.getCurrentDate(),"ACTIVE");
-			 updateTablesUsingLastFilter();
+			  myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+		    			ProjectFX.currentUser.getUserName(), "Appoint execution", TimeManager.getCurrentDate());
+			  updateTablesUsingLastFilter();
 		  }	  
 	}
     
@@ -692,6 +698,8 @@ public class SupervisorBoundary implements Initializable {
     {
     	setAllDisplaysVisibilityOff();
     	myController.approvedAnalysisTime("ANALYSIS_WORK",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Approve analysis time", TimeManager.getCurrentDate());
     	updateTablesUsingLastFilter();
     }  
 	
@@ -705,6 +713,8 @@ public class SupervisorBoundary implements Initializable {
     {
     	setAllDisplaysVisibilityOff();
     	myController.denyAnalysisTime("ANALYSIS_SET_TIME",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Deny Analysis time", TimeManager.getCurrentDate());
     	updateTablesUsingLastFilter();	
     }
 	  
@@ -721,6 +731,8 @@ public class SupervisorBoundary implements Initializable {
     {
     	setAllDisplaysVisibilityOff();
     	myController.approvedExecutionTime("EXECUTION_WORK",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Approve execution time", TimeManager.getCurrentDate());
     	updateTablesUsingLastFilter();
     }
     
@@ -734,6 +746,8 @@ public class SupervisorBoundary implements Initializable {
     {
     	setAllDisplaysVisibilityOff();
     	myController.denyExecutionTime("EXECUTION_SET_TIME",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Deny execution time", TimeManager.getCurrentDate());
     	updateTablesUsingLastFilter();
     }   
 	  
@@ -757,21 +771,29 @@ public class SupervisorBoundary implements Initializable {
     		String stepType = selectedTimeExtension.getStepType().getStepName();
     		if(stepType.equals("Analysis"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve analysis time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateAnalysisStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Committee"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve committee time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateCommitteeStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Execution"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve execution time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateExecutionStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Testing"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve testing time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateTestingStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
@@ -801,21 +823,29 @@ public class SupervisorBoundary implements Initializable {
     		String stepType = selectedTimeExtension.getStepType().getStepName();
     		if(stepType.equals("Analysis"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny analysis time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateAnalysisStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Committee"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny committee time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateCommitteeStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Execution"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny execution time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateExecutionStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Testing"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny testing time extension", TimeManager.getCurrentDate());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateTestingStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
@@ -908,6 +938,8 @@ public class SupervisorBoundary implements Initializable {
     		Toast.makeText(ProjectFX.mainStage, "Please write a message first", 1500, 500, 500);
     	}else {
         	//myController.getUserEmail(selectedChangeRequest.getInitiatorUserName());
+    		myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+	    			ProjectFX.currentUser.getUserName(), "Closed change request", TimeManager.getCurrentDate());
         	myController.setStatusToClosed(TimeManager.getCurrentDate(),"CLOSED","FINISH",selectedChangeRequest.getChangeRequestID());
         	myController.setEndDate(TimeManager.getCurrentDate(),"CLOSED",selectedChangeRequest.getChangeRequestID());
         	if (selectedChangeRequest.getCurrentStep().equals("CLOSING_STEP"))
