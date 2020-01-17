@@ -145,8 +145,8 @@ public class TimeExtensionBoundary implements DataInitializable  {
     		/* Decide which is bigger, current date or estimated end date */
     		Date dayToCompare = TimeManager.getMaxDate(myStep.getEstimatedEndDate(), TimeManager.getCurrentDate());
         	/* Date is prior to the current date */
-    		long daysBetween = TimeManager.getDaysBetween(dayToCompare, selectedDate);
-        	if (daysBetween <= 0)
+    		long daysBetween = TimeManager.getDaysBetween(TimeManager.addDays(dayToCompare, 1), selectedDate);
+        	if (daysBetween <= 1)
         	{
         		alert.setAlertType(AlertType.ERROR);
         		alert.setTitle("ERROR");

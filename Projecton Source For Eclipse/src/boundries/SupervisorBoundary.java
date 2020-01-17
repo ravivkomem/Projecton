@@ -114,11 +114,6 @@ public class SupervisorBoundary implements Initializable {
     /** The table time extension. */
     @FXML
     private TableView<TimeExtension> tableTimeExtension;
-
-    /** The table coulmn step id. */
-    @FXML
-    private TableColumn<TimeExtension,Integer> tableCoulmnStepId;
-
     /** The table coulmn step type. */
     @FXML
     private TableColumn<TimeExtension, String> tableCoulmnStepType;
@@ -353,7 +348,6 @@ public class SupervisorBoundary implements Initializable {
 		 tableColumnStatus.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("status"));
 		 tableColumnSubSystem.setCellValueFactory(new PropertyValueFactory<ChangeRequest,String>("selectedSubsystem"));
 		 /* Init time extension table view*/
-		 tableCoulmnStepId.setCellValueFactory(new PropertyValueFactory<TimeExtension,Integer>("StepID"));
 		 tableCoulmnStepType.setCellValueFactory(new PropertyValueFactory<TimeExtension,String>("StepType"));
 		 tableCoulmnOldDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("OldDate"));
 		 tableCoulmnNewDate.setCellValueFactory(new PropertyValueFactory<TimeExtension,Date>("NewDate"));
@@ -622,9 +616,17 @@ public class SupervisorBoundary implements Initializable {
     @FXML
     void clickOnDenyAppointment(MouseEvent event)
     {
-    	setAllDisplaysVisibilityOff();
+    	analyzerAutoAppointGridPane.setVisible(false);
+    	analyzerSupervisorAppointGridPane.setVisible(true);
+    	for (ChangeRequest cr : observableChangeRequestList)
+    	{
+    		if (cr.getChangeRequestID().equals(selectedChangeRequest.getChangeRequestID()))
+    		{
+    			cr.setActualStep("Supervisor Appoint Analyzer");
+    		}
+    	}
+    	
     	myController.changeCurrentStepFromAnalyzerAutoAppoint(selectedChangeRequest.getChangeRequestID());
-    	updateTablesUsingLastFilter();	
     }
     
     /* ****************************************

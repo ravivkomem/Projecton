@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import assets.ProjectPages;
@@ -20,7 +21,9 @@ import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -245,7 +248,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			System.out.println("Couldn't init data in Extra details page");
 			this.logoutUser(null);
 		}
-		if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR"))
+		if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR") ||
+				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_MEMBER") ||
+				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
 		{
 			suspendButton.setVisible(true);
 			if (currentChangeRequest.getStatus().equals("SUSPEND"))
@@ -317,16 +322,39 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     @FXML
     void suspendChangeRequest(MouseEvent event) {
     	String updateStatus = null;
+    	Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    	alert.setTitle("Confirmation");
+    	alert.setHeaderText("Please confirm your decision");
+    	if (currentChangeRequest.getStatus().equals("ACTIVE"))
+    	{
+    		alert.setContentText("Are you sure you want to SUSPEND the change request?");
+    	}
+    	else
+    	{
+    		alert.setContentText("Are you sure you want to UN-SUSPEND the change request?");
+    	}
+    	Optional<ButtonType> res = alert.showAndWait();
+        if(res.isPresent()) 
+        {
+            if(res.get().equals(ButtonType.CANCEL))
+            {
+            	event.consume();
+            	return;
+            }
+        }
+    	
     	if (currentChangeRequest.getStatus().equals("ACTIVE"))
         {
         	updateStatus="SUSPEND";
         	currentChangeRequest.setStatus("SUSPEND");
+        	StatusTF.setText("Suspend");
         	suspendButton.setText("Un-Suspend");
         }
         else if (currentChangeRequest.getStatus().equals("SUSPEND"))
         {
         	updateStatus="ACTIVE";
         	currentChangeRequest.setStatus("ACTIVE");
+        	StatusTF.setText("Active");
         	suspendButton.setText("Suspend");
         }
         myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);

@@ -327,6 +327,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 				myController.updateExecutionStepEstimatedEndDate(selectedDate, executionStep.getStepID());
 				myController.updateChnageRequestCurrentStep(EXECUTION_APPROVE_TIME,
 						myChangeRequest.getHandlerUserName(), myChangeRequest.getChangeRequestID());
+				executionTimeDatePicker.setValue(null);
 			}
 		}
 		

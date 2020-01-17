@@ -101,7 +101,8 @@ public class WorkStationBoundary implements Initializable{
     /** The start change request work button. */
     @FXML
     private Button startChangeRequestWorkButton;
-    
+    @FXML
+    private Button backButton;
     /** The committee button break image. */
     /*Image Views*/
     @FXML
@@ -138,6 +139,10 @@ public class WorkStationBoundary implements Initializable{
     	myController.selectAllChangeRequest();
     }
 
+    @FXML
+    void loadPreviousPage(ActionEvent event) {
+    	loadHomePage(null);
+    }
     /**
      * Display analysis step change requests.
      *

@@ -50,9 +50,11 @@ public class WorkStationController extends BasicController{
 				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_NOT_COMMITTEE;
 				break;
 			case "COMMITTEE_MEMBER":
+			case "SUPERVISOR_COMMITTEE_MEMBER":
 				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_MEMBER;
 				break;
 			case "COMMITTEE_DIRECTOR":
+			case "SUPERVISOR_COMMITTEE_DIRECTOR":
 				requiredSqlQueryType = SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_HANDLER_NAME_COMMITTEE_DIRECTOR;
 				break;
 			
