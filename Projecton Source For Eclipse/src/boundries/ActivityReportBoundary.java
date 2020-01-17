@@ -78,6 +78,17 @@ public class ActivityReportBoundary implements Initializable {
     /** The Days number bar chart. */
     @FXML
     private NumberAxis DaysNumberBarChart;
+    @FXML
+    private TextField activeTextField;
+
+    @FXML
+    private TextField closedTextField;
+
+    @FXML
+    private TextField suspendedTextField;
+
+    @FXML
+    private TextField deniedTextField;
 
  	/* *************************************
 	  * ******* Private Objects *************
@@ -229,8 +240,13 @@ public class ActivityReportBoundary implements Initializable {
 		else {
 			Toast.makeText(ProjectFX.mainStage, "there is not change request in sql table", 1500, 500, 500);
 		}
+
+		activeTextField.setText(Integer.toString(report.getActiveChageRequest()));
+		closedTextField.setText(Integer.toString(report.getCloseChangeRequest()));
+		suspendedTextField.setText(Integer.toString(report.getSuspendedChangeRequest()));
+		deniedTextField.setText(Integer.toString(report.getDeniedChangeRequest()));
 	}
-	
+
 	/**
 	 * the method gets ArrayList of all the work days
 	 * sorting the days in 4 category: 0-10,10-20,20-30,30+ days.

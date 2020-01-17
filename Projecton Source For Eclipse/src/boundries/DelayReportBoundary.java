@@ -97,7 +97,6 @@ public class DelayReportBoundary implements Initializable{
 		medianTextField.setEditable(false);
 		stdTextField.setEditable(false);
 		dealyBarChart.setTitle("");
-		delayCategoryBarChart.setLabel("Delay Days");
 		delayCategoryBarChart.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY,FIFTH_CATAGORY
                 		,SIXTH_CATAGORY,SEVENTH_CATAGORY,EIGHTH_CATAGORY,NINTH_CATAGORY)));
@@ -112,20 +111,38 @@ public class DelayReportBoundary implements Initializable{
 	 */
 	public void displayDealyReport(ArrayList<DelayReport> delayReportList) {
 		ArrayList<Long> delayDays = new ArrayList<>();
-		int[] delayDaysCntArray;
+		int[] deleysCounter;
 		delayDays.addAll(createDelayDaysList(delayReportList));
-		delayDaysCntArray = createDelayDaysCntArray(delayReportList);
+		deleysCounter = createDelayDaysCntArray(delayReportList);
+		long[] avgDayDeleysCounter;
+		avgDayDeleysCounter = creatreAvgDayDeleyCounter(delayReportList);
+		
 		XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>();
-		series1.getData().add(new XYChart.Data<String,Number>(FIRST_CATAGORY, delayDaysCntArray[0]));
-		series1.getData().add(new XYChart.Data<String,Number>(SECOND_CATAGORY, delayDaysCntArray[1]));
-		series1.getData().add(new XYChart.Data<String,Number>(THIRD_CATAGORY, delayDaysCntArray[2]));
-		series1.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, delayDaysCntArray[3]));
-		series1.getData().add(new XYChart.Data<String,Number>(FIFTH_CATAGORY, delayDaysCntArray[4]));
-		series1.getData().add(new XYChart.Data<String,Number>(SIXTH_CATAGORY, delayDaysCntArray[5]));
-		series1.getData().add(new XYChart.Data<String,Number>(SEVENTH_CATAGORY, delayDaysCntArray[6]));
-		series1.getData().add(new XYChart.Data<String,Number>(EIGHTH_CATAGORY, delayDaysCntArray[7]));
-		series1.getData().add(new XYChart.Data<String,Number>(NINTH_CATAGORY, delayDaysCntArray[8]));
+		series1.getData().add(new XYChart.Data<String,Number>(FIRST_CATAGORY, deleysCounter[0]));
+		series1.getData().add(new XYChart.Data<String,Number>(SECOND_CATAGORY, deleysCounter[1]));
+		series1.getData().add(new XYChart.Data<String,Number>(THIRD_CATAGORY, deleysCounter[2]));
+		series1.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, deleysCounter[3]));
+		series1.getData().add(new XYChart.Data<String,Number>(FIFTH_CATAGORY, deleysCounter[4]));
+		series1.getData().add(new XYChart.Data<String,Number>(SIXTH_CATAGORY, deleysCounter[5]));
+		series1.getData().add(new XYChart.Data<String,Number>(SEVENTH_CATAGORY, deleysCounter[6]));
+		series1.getData().add(new XYChart.Data<String,Number>(EIGHTH_CATAGORY, deleysCounter[7]));
+		series1.getData().add(new XYChart.Data<String,Number>(NINTH_CATAGORY, deleysCounter[8]));
+		series1.setName("Delay Counter");
 		dealyBarChart.getData().addAll(series1);
+		
+		XYChart.Series<String,Number> series2 = new XYChart.Series<String, Number>();
+		series2.getData().add(new XYChart.Data<String,Number>(FIRST_CATAGORY, deleysCounter[0] == 0 ? 0 :avgDayDeleysCounter[0]/deleysCounter[0]));
+		series2.getData().add(new XYChart.Data<String,Number>(SECOND_CATAGORY, deleysCounter[1] == 0 ? 0 :avgDayDeleysCounter[1]/deleysCounter[1]));
+		series2.getData().add(new XYChart.Data<String,Number>(THIRD_CATAGORY, deleysCounter[2] == 0 ? 0 :avgDayDeleysCounter[2]/deleysCounter[2]));
+		series2.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, deleysCounter[3] == 0 ? 0 :avgDayDeleysCounter[3]/deleysCounter[3]));
+		series2.getData().add(new XYChart.Data<String,Number>(FIFTH_CATAGORY, deleysCounter[4] == 0 ? 0 :avgDayDeleysCounter[4]/deleysCounter[4]));
+		series2.getData().add(new XYChart.Data<String,Number>(SIXTH_CATAGORY, deleysCounter[5] == 0 ? 0 :avgDayDeleysCounter[5]/deleysCounter[5]));
+		series2.getData().add(new XYChart.Data<String,Number>(SEVENTH_CATAGORY, deleysCounter[6] == 0 ? 0 :avgDayDeleysCounter[6]/deleysCounter[6]));
+		series2.getData().add(new XYChart.Data<String,Number>(EIGHTH_CATAGORY, deleysCounter[7] == 0 ? 0 :avgDayDeleysCounter[7]/deleysCounter[7]));
+		series2.getData().add(new XYChart.Data<String,Number>(NINTH_CATAGORY, deleysCounter[8] == 0 ? 0 :avgDayDeleysCounter[8]/deleysCounter[8]));
+		series2.setName("Avg Delay Days");
+		dealyBarChart.getData().addAll(series2);
+		
 		if(!delayDays.isEmpty()) {
 			medianTextField.setText(Utilizer.calcMedian(delayDays) + "");
 			stdTextField.setText(Utilizer.calcStd(delayDays) + "");
@@ -135,6 +152,48 @@ public class DelayReportBoundary implements Initializable{
 		}
 	}
 	
+	private long[] creatreAvgDayDeleyCounter(ArrayList<DelayReport> delayReportList) {
+		long[] array = new long[CATEGORY];
+		for(int i=0;i<delayReportList.size();i++) {
+			long daysBetween = TimeManager.getDaysBetween(delayReportList.get(i).getEstimateDate(),
+					delayReportList.get(i).getEndDate());
+			if(daysBetween > 1) {
+				switch (delayReportList.get(i).getSubsystem()) {
+				case "Lecturer Information Station":
+					array[0] += daysBetween;
+					break;
+				case "Student Information Station":
+					array[1] += daysBetween;
+					break;
+				case "Employee Information Station":
+					array[2] += daysBetween;
+					break;
+				case "Moodle System":
+					array[3] += daysBetween;
+					break;
+				case "Library System":
+					array[4] += daysBetween;
+					break;
+				case "Class Rooms With Computers":
+					array[5] += daysBetween;
+					break;
+				case "Laboratory":
+					array[6] += daysBetween;
+					break;
+				case "Computer Farm":
+					array[7] += daysBetween;
+					break;
+				case "College Website":
+					array[8] += daysBetween;
+					break;
+				default:
+					break;
+				}
+			}
+		}
+		return array;
+	}
+
 	/**
 	 * this method create delay days counter array for display at bar chart .
 	 *
