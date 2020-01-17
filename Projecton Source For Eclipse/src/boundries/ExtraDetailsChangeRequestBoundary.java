@@ -32,7 +32,7 @@ import javafx.stage.FileChooser;
 // TODO: Auto-generated Javadoc
 
 /**
- * extra details for specific change request page (Boundary).
+ * Extra details for specific change request page (Boundary).
  *
  * @author Ido Kadosh
  */
@@ -128,7 +128,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
      * ***************************************/
     
     /**
-     * by pressing this button the user goes back to the prevoius page .
+     * By pressing this button the user goes back to the prevoius page .
      *
      * @param event the event
      */
@@ -146,7 +146,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     }
 
     /**
-     * by pressing this button the user disconnects from the system .
+     * By pressing this button the user disconnects from the system .
      *
      * @param event the event
      */
@@ -254,7 +254,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * this method shows all the files that uploaded for this specific request .
+	 * This method shows all the files that uploaded for this specific request .
 	 *
 	 * @param downloadedFiles the downloaded files
 	 */
@@ -271,7 +271,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * this method allows to the user to download the files if necessary .
+	 * This method allows to the user to download the files if necessary .
 	 *
 	 * @param myFile the my file
 	 * @param path the path
@@ -309,7 +309,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * in case the user have a supervisor permission, this button allows to the supervisor to 
+	 * In case the user have a supervisor permission, this button allows to the supervisor to 
 	 * suspend or unsuspend a specific request .
 	 *
 	 * @param event the event

@@ -148,7 +148,7 @@ public class RequestListPageBoundary implements Initializable {
      * ****************************************/
 	
 	/**
- 	 * move the user back to the previous page .
+ 	 * Move the user back to the previous page .
  	 *
  	 * @param event the event
  	 */
@@ -158,7 +158,8 @@ public class RequestListPageBoundary implements Initializable {
 	}
 	
 	/**
-	 * move to extra details page for specific request .
+	 * Move to extra details page for specific request by pressing a row on the tabel first, filter to the 
+	 * specific change request ID pressed.
 	 *
 	 * @param event the event
 	 */
@@ -176,7 +177,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * disconnect the user from the system and update the data base .
+	 * Disconnect the user from the system and update the data base .
 	 *
 	 * @param event the event
 	 */
@@ -187,7 +188,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 	
 	/**
-	 * in case the user pressed on this button, the user move to the home page .
+	 * In case the user pressed on this button, the user move to the home page .
 	 *
 	 * @param event the event
 	 */
@@ -197,7 +198,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by pressing this button the user shows all his requests .
+	 * By pressing this button the user shows all his requests .
 	 *
 	 * @param event the event
 	 */
@@ -207,7 +208,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by pressing this button its open an option to search change requests by specific dates .
+	 * By pressing this button its open an option to search change requests by specific dates .
 	 *
 	 * @param event the event
 	 */
@@ -220,7 +221,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by using this button the system opens an option to search change request by its ID .
+	 * By using this button the system opens an option to search change request by its ID .
 	 *
 	 * @param event the event
 	 */
@@ -234,7 +235,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 	
 	/**
-	 * by using this button the system opens an option to search change request by its status .
+	 * By using this button the system opens an option to search change request by its status .
 	 *
 	 * @param event the event
 	 */
@@ -247,7 +248,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by using this button the user can search change requests by its ID .
+	 * By using this button the user can search change requests by its ID .
 	 *
 	 * @param event the event
 	 */
@@ -275,7 +276,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * by using this button the user can search change requests by specific dates .
+	 * By using this button the user can search change requests by specific dates .
 	 *
 	 * @param event the event
 	 */
@@ -306,7 +307,7 @@ public class RequestListPageBoundary implements Initializable {
     }
 
 	/**
-	 * by using this button the user can search change requests by specific status.
+	 * By using this button the user can search change requests by specific status.
 	 *
 	 * @param event the event
 	 */
@@ -356,7 +357,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 
 	/**
-	 * this method display all change requests for a specific user in a table .
+	 * This method display all change requests for a specific user in a table .
 	 *
 	 * @param resultList the result list
 	 */
@@ -378,7 +379,7 @@ public class RequestListPageBoundary implements Initializable {
 	}
 	
 	/**
-	 * this method dispaly all change requests for specific user with the requested filter .
+	 * This method dispaly all change requests for specific user with the requested filter .
 	 *
 	 * @param resultList the result list
 	 */
