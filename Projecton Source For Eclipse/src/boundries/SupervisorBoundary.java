@@ -899,7 +899,6 @@ public class SupervisorBoundary implements Initializable {
     	if(emailMessageTextArea.getText().equals("")) {
     		Toast.makeText(ProjectFX.mainStage, "Please write a message first", 1500, 500, 500);
     	}else {
-    		emailMessageTextArea.setText("");
         	myController.getUserEmail(selectedChangeRequest.getInitiatorUserName());
         	myController.setStatusToClosed(TimeManager.getCurrentDate(),"CLOSED","FINISH",selectedChangeRequest.getChangeRequestID());
         	myController.setEndDate(TimeManager.getCurrentDate(),"CLOSED",selectedChangeRequest.getChangeRequestID());
