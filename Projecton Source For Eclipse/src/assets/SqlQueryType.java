@@ -159,6 +159,7 @@ public enum SqlQueryType {
 	UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_TESTER_STEP_ESTIMATED_END_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_TIME_EXTENSION_STATUS_TO_DENY(SqlExecutionType.UPDATE_QUERY),
+	SELECT_ALL_SUSPENDED_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Watcher Queries*************

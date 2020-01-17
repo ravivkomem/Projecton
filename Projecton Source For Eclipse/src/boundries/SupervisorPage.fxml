@@ -37,7 +37,7 @@
                   <Image url="@icm%20icom%20til.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="61.0" prefWidth="116.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -51,9 +51,9 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnRequestList" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAllChangeRequests" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnRequestList" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAllChangeRequests" prefHeight="58.0" prefWidth="117.0" style="-fx-background-color: #ddf1ff;" text="Request List" textAlignment="CENTER" wrapText="true">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@my_requests_image.png" />
                      </image>
@@ -65,9 +65,9 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnAppointment" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickAppointmentFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Appointment" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnAppointment" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickAppointmentFunction" prefHeight="59.0" prefWidth="115.0" style="-fx-background-color: #ddf1ff;" text="Appointment" textAlignment="CENTER" wrapText="true">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@appoint_tester_image.png" />
                      </image>
@@ -79,9 +79,9 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnApproval" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickApprovalFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Approvals" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnApproval" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickApprovalFunction" prefHeight="57.0" prefWidth="113.0" style="-fx-background-color: #ddf1ff;" text="Time Approvals" textAlignment="CENTER" wrapText="true">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@request%20list.png" />
                      </image>
@@ -93,7 +93,7 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnTimeExtension" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickOnTimeExtension" prefHeight="76.0" prefWidth="135.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+            <Button fx:id="btnTimeExtension" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickOnTimeExtension" prefHeight="67.0" prefWidth="121.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
                <graphic>
                   <ImageView fitHeight="36.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -106,11 +106,11 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="btnClosingStep" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickClosingStepFunction" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Closing Step" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnClosingStep" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#ClickClosingStepFunction" prefHeight="58.0" prefWidth="119.0" style="-fx-background-color: #ddf1ff;" text="Closing Step" textAlignment="CENTER" wrapText="true">
                <graphic>
                   <ImageView fitHeight="38.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@request_info.png" />
+                        <Image url="@closedIcon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -120,6 +120,15 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
+            <Button fx:id="btnSuspensions" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickSuspensions" prefHeight="58.0" prefWidth="119.0" style="-fx-background-color: #ddf1ff;" text="Suspensions" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@suspend_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
       <Button fx:id="extraDetailsButton" layoutX="530.0" layoutY="261.0" mnemonicParsing="false" onMouseClicked="#clickOnExstraDetails" prefHeight="31.0" prefWidth="187.0" text="View Change Request Details" />

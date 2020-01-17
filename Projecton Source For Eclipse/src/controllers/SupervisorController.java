@@ -193,6 +193,12 @@ public class SupervisorController extends BasicController
 							(String) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(5));
 					myBoundary.sendEmailToInitiatorUser(user);
 					break;
+				case SELECT_ALL_SUSPENDED_CHANGE_REQUESTS:
+					this.unsubscribeFromClientDeliveries();
+					ArrayList<ChangeRequest> suspendedList =new ArrayList<>();
+					suspendedList.addAll(this.changeResultToChangerequest(result));
+					myBoundary.handleChangerequestResultForTable(suspendedList);
+					break;
 				default:
 					break;
 			}
@@ -785,6 +791,12 @@ public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
 	this.subscribeToClientDeliveries(); // subscribe to listener array
 	ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	
+}
+
+public void SelectChangeRequestForSuspensions() {
+	ArrayList<Object> varArray = new ArrayList<>();
+	SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS, varArray);
+	this.sendSqlActionToClient(sqlAction);
 }
 	
 	

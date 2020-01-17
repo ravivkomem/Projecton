@@ -356,13 +356,16 @@ public class AnalyzerBoundary implements DataInitializable {
 				selectedDate.toString()+"\nRefresh Page (To see if approved)");
 				notificationText.setVisible(true);
 				btnRefresh.setVisible(true);
+				timedurationPicker.setValue(null);
 			}
 		}
 	}
 	
     @FXML
     void refreshPage(MouseEvent event) {
-    	
+    	btnRefresh.setVisible(false);
+    	notificationText.setVisible(false);
+    	myController.getChangeRequestById(currentChangeRequest.getChangeRequestID());
     }
 
 
@@ -372,6 +375,7 @@ public class AnalyzerBoundary implements DataInitializable {
     
     public void getCurrentChangeRequestAfterRefresh(ChangeRequest request) {
     	currentChangeRequest = request;
+    	recieveCurrentStep(analyzerStep);
     	
     }
     

@@ -454,7 +454,10 @@ public class MysqlConnection {
     	 * *************Supervisor Queries ****************
     	 *******************************************************
     	 *******************************************************/
-     	
+     	sqlArray[SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS.getCode()] =
+     			"SELECT * FROM icm.change_request "
+     			+ "WHERE Status = 'SUSPEND'";
+     			
      	sqlArray[SqlQueryType.SELECT_USER_EMAIL.getCode()] =
      			"SELECT * FROM icm.user WHERE UserName = ?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 

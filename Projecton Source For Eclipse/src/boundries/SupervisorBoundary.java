@@ -65,7 +65,8 @@ public class SupervisorBoundary implements Initializable {
     /** The btn back. */
     @FXML
     private Button btnBack;
-    
+    @FXML
+    private Button btnSuspensions;
     
     /* *******************************
 	 * ********* Main Area  **********
@@ -260,6 +261,7 @@ public class SupervisorBoundary implements Initializable {
     private static final String TIME_APPROVAL = "Time Approvals";
     private static final String TIME_EXTENSIONS = "Time Extensions";
     private static final String CLOSING_STEP = "Closing Step";
+    private static final String SUSPENSIONS = "Suspended Change Requests";
     private static final int MAX_CHARS = 200;
 
     /* *******************************
@@ -544,6 +546,15 @@ public class SupervisorBoundary implements Initializable {
     	myController.SelectChangeRequestForAppointments();	
     }
     
+    @FXML
+    void clickSuspensions(MouseEvent event) {
+    	tableChangeRequest.setVisible(true);
+    	tableTimeExtension.setVisible(false);
+    	setAllDisplaysVisibilityOff();
+    	filterTypeText.setText(SUSPENSIONS);
+    	myController.SelectChangeRequestForSuspensions();	
+    	
+    }
     /**
      * Click approval function.
      *
