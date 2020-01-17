@@ -469,8 +469,6 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
 				" WHERE CurrentStep = 'ANALYZER_AUTO_APPOINT' OR CurrentStep = 'EXECUTION_LEADER_SUPERVISOR_APPOINT' OR CurrentStep = 'ANALYZER_SUPERVISOR_APPOINT' ";
-    	
-    	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPROVALS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
 						" WHERE CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME'";
