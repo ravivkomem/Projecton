@@ -611,11 +611,11 @@ public class ChangeRequest {
 		{
 		
 			case "ANALYZER_AUTO_APPOINT":
-				actualStep = "Appoint Analyzer";
+				actualStep = "Automatic Appoint Analyzer";
 				break;
 				
 			case "ANALYZER_SUPERVISOR_APPOINT":
-				actualStep = "Appoint Analyzer";
+				actualStep = "Supervisor Appoint Analyzer";
 				break;
 				
 			case "ANALYSIS_APPROVE_TIME":
