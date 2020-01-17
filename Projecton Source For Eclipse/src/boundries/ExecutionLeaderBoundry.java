@@ -220,7 +220,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ********** FXML Methods ** *************
      * ****************************************/
 	/**
-	 * loading the project home page.
+	 * loading the project home page when clicking on the home page button.
 	 *
 	 * @param event - mouse click on the "Home" button
 	 */
@@ -239,7 +239,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * Display analysis report.
 	 *
-	 * @param event This method handle the click on analysis report in menu
+	 * @param event This method handle the click on analysis report in menu and open the analysis report of the choosen request
 	 */
 	@FXML
 	public void displayAnalysisReport(MouseEvent event) // show anaylisis report
@@ -258,7 +258,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * Display time extension.
 	 *
-	 * @param event This method handle the click time extension in menu
+	 * @param event This method handle the click time extension in menu when execution leader needs more time to execute the request
 	 */
 	@FXML
 	public void displayTimeExtension(MouseEvent event) // opet time extension
@@ -277,7 +277,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * Load previous page.
 	 *
-	 * @param event This method handle the click on back in menu
+	 * @param event This method handle the click on back in menu and return to the last page
 	 */
 	@FXML
 	void loadPreviousPage(MouseEvent event) // back to the work station page
@@ -304,7 +304,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * Submit execution time.
 	 *
-	 * @param event This method send the time required for execution to the supervisor
+	 * @param event This method send the time required for execution to the supervisor for approve or deny the time
 	 */
 	@FXML
 	public void submitExecutionTime(MouseEvent event) // submit execution time
@@ -349,7 +349,8 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * Finish execution work.
 	 *
-	 * @param event This method update DB after click finish work
+	 * @param event This method update DB with the execution summary after click finish work 
+	 * 
 	 */
 	@FXML
 	public void finishExecutionWork(MouseEvent event) // when execution commit working
