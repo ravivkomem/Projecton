@@ -14,7 +14,7 @@ import javafx.application.Platform;
 
 
 /**
- * extra details page for a specific change request (Controller).
+ * Extra details page for a specific change request (Controller).
  *
  * @author Ido Kadosh
  */
@@ -34,7 +34,7 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 	}
 
 	/**
-	 * execute querey in case the user attached a file to specific change request .
+	 * Execute querey in case the user attached a file to specific change request .
 	 *
 	 * @param changeRequestID the change request ID
 	 * @return the change request files
@@ -85,8 +85,8 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 	}
 	
 	/**
-	 * this method belongs only to user with a supervisor permission and allows this user to 
-	 * suspend or unsuspend each specific request  .
+	 * This method belongs only to user with a supervisor permission and allows this user to 
+	 * suspend or un-suspend each specific request  .
 	 *
 	 * @param changeRequestId the change request id
 	 * @param updatedStatus the updated status

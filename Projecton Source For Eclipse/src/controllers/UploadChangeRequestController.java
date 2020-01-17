@@ -40,7 +40,7 @@ public class UploadChangeRequestController extends BasicController {
 	}
 	
 	/**
-	 * Building the change request with the data from the boundary .
+	 * Building the change request with the inserted in the boundary from the user.
 	 *
 	 * @param newchangerequest the newchangerequest
 	 */
@@ -78,7 +78,7 @@ public class UploadChangeRequestController extends BasicController {
 	}
 	
 	/**
-	 * in case the user chose to upload file with the change request save the file on the server for reuse .
+	 * In case the user chose to attach file with the change request saves the file on the server for reuse .
 	 *
 	 * @param filesToUploadList the files to upload list
 	 * @param chnageRequestId the chnage request id
@@ -167,7 +167,7 @@ public class UploadChangeRequestController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}*/
 	/**
-	 * this method calls a querey to update change request with the necessary handler.
+	 * This method calls a querey to update change request with the necessary handler.
 	 */
 	public void appointHandlerBySystemRequired()
 	{
