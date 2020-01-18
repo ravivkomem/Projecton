@@ -584,6 +584,15 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR.getCode()]=
     			"UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_ANALYSIS_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.analysis_step WHERE ChangeRequestID= ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_COMMITTEE_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestID= ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_EXECUTION_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestID= ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestID= ?";
+    	
     }
     
 }

@@ -249,10 +249,21 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			filesErrorLabel.setVisible(false);
 			currentStepTF.setText(currentChangeRequest.getActualStep());
 			pageTitle.setText("Change Request No. "+currentChangeRequest.getChangeRequestID()+" Details");
-			if (currentChangeRequest.getEstimatedEndDate()==null)
+			/*Gets the time for each step */
+			if (!(currentChangeRequest.getCurrentStep().equals("ANALYSIS_WORK")||currentChangeRequest.getCurrentStep().equals("COMMITTEE_WORK")
+				||currentChangeRequest.getCurrentStep().equals("EXECUTION_WORK")||currentChangeRequest.getCurrentStep().equals("TESTING_WORK")))
+			{
 				estimatedTimeForStepTF.setText("In Evaluation");
-			else
+			}
+			else if (currentChangeRequest.getCurrentStep().equals("CLOSING_STEP"))
+			{
 				estimatedTimeForStepTF.setText(currentChangeRequest.getEstimatedEndDate().toString());
+			}
+			else
+			{
+				getEstimatedEndTimeForEachStep();
+			}
+			/**/
 			if (currentChangeRequest.getStatus().equals("CLOSED")||currentChangeRequest.getStatus().equals("DENIED"))
 			{
 				estimatedTimeForStepTF.setText("");
@@ -404,5 +415,14 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
         	suspendButton.setDisable(true);
         }
         myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);
+    }
+    /**/
+    public void getEstimatedEndTimeForEachStep()
+    {
+    		myController.updateEstimatedTimeByStep(currentChangeRequest.getChangeRequestID(), currentChangeRequest.getCurrentStep());
+    }
+    public void parseEstimatedEndTime(String timeForStep)
+    {
+    	estimatedTimeForStepTF.setText(timeForStep);
     }
 }

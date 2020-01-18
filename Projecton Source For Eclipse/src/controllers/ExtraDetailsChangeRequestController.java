@@ -76,6 +76,22 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 				case UPDATE_STATUS_BY_SUPERVISOR:
 					this.unsubscribeFromClientDeliveries();
 					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_ANALYSIS_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_COMMITTEE_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_EXECUTION_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
 				default:
 					break;
 			}
@@ -99,6 +115,39 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR,data);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	public void updateEstimatedTimeByStep(int changeRequestId,String currentStep)
+	{
+		ArrayList<Object> estimatedEndTimeData =new ArrayList<>();
+		estimatedEndTimeData.add(changeRequestId);
+		if (currentStep.equals("ANALYSIS_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_ANALYSIS_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
+		else if(currentStep.equals("COMMITTEE_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_COMMITTEE_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
+		else if (currentStep.equals("EXECUTION_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_EXECUTION_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
+		else if (currentStep.equals("TESTING_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
 	}
 	
 
