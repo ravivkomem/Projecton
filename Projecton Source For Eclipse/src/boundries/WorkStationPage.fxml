@@ -9,6 +9,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -28,7 +31,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TableView fx:id="changeRequestTableView" layoutX="147.0" layoutY="111.0" prefHeight="333.0" prefWidth="584.0">
+      <TableView fx:id="changeRequestTableView" layoutX="147.0" layoutY="106.0" prefHeight="333.0" prefWidth="584.0">
          <columns>
             <TableColumn fx:id="requestIdColumn" prefWidth="41.0" text="ID" />
             <TableColumn fx:id="stepColumn" prefWidth="90.0" text="Step" />
@@ -47,9 +50,14 @@
       </Button>
       <VBox alignment="TOP_CENTER" prefHeight="523.0" prefWidth="123.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
-            <Button fx:id="homePageButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#loadHomePage" prefHeight="62.0" prefWidth="104.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+            <ImageView fitHeight="59.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icm%20icom%20til.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="homePageButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#loadHomePage" prefHeight="50.0" prefWidth="98.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
                <graphic>
-                  <ImageView fitHeight="36.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="25.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@home.png" />
                      </image>
@@ -64,9 +72,9 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Button fx:id="viewAllWorkButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAllWorkChangeRequests" prefHeight="43.0" prefWidth="110.0" style="-fx-background-color: #ddf1ff;" text="All Work">
+            <Button fx:id="viewAllWorkButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAllWorkChangeRequests" prefHeight="48.0" prefWidth="103.0" style="-fx-background-color: #ddf1ff;" text="All Work">
                <graphic>
-                  <ImageView fitHeight="39.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="32.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@list_image.png" />
                      </image>
@@ -81,9 +89,9 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Button fx:id="viewAnalysisStepWorkButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAnalysisStepChangeRequests" prefHeight="55.0" prefWidth="116.0" style="-fx-background-color: #ddf1ff;" text="Analysis Step">
+            <Button fx:id="viewAnalysisStepWorkButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAnalysisStepChangeRequests" prefHeight="50.0" prefWidth="108.0" style="-fx-background-color: #ddf1ff;" text="Analysis Step">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="30.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@analysis_image.png" />
                      </image>
@@ -95,9 +103,9 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="viewExecutionStepButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayExecutionStepChangeRequests" prefHeight="56.0" prefWidth="109.0" style="-fx-background-color: #ddf1ff;" text="Execution Step">
+            <Button fx:id="viewExecutionStepButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayExecutionStepChangeRequests" prefHeight="57.0" prefWidth="99.0" style="-fx-background-color: #ddf1ff;" text="Execution Step">
                <graphic>
-                  <ImageView fitHeight="47.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="42.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@execution_image.png" />
                      </image>
@@ -109,9 +117,9 @@
                   <Image url="@btnBreak.png" />
                </image>
             </ImageView>
-            <Button fx:id="viewTesterStepButton" contentDisplay="TOP" layoutX="11.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#displayTesterStepChangeRequests" prefHeight="56.0" prefWidth="112.0" style="-fx-background-color: #ddf1ff;" text="Tester Step">
+            <Button fx:id="viewTesterStepButton" contentDisplay="TOP" layoutX="11.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#displayTesterStepChangeRequests" prefHeight="67.0" prefWidth="100.0" style="-fx-background-color: #ddf1ff;" text="Tester Step">
                <graphic>
-                  <ImageView fitHeight="52.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="41.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@testing_image.png" />
                      </image>
@@ -125,7 +133,7 @@
             </ImageView>
             <Button fx:id="viewCommitteStepButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayCommitteDecisionChangeRequests" prefHeight="67.0" prefWidth="118.0" style="-fx-background-color: #ddf1ff;" text="Committee Step">
                <graphic>
-                  <ImageView fitHeight="46.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="41.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@committe_image.png" />
                      </image>
@@ -139,7 +147,7 @@
             </ImageView>
             <Button fx:id="viewTesterAppointButton" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayTesterAppointChangeRequest" prefHeight="67.0" prefWidth="118.0" style="-fx-background-color: #ddf1ff;" text="Appoint Tester">
                <graphic>
-                  <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="34.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@appoint_tester_image.png" />
                      </image>
@@ -160,13 +168,46 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="startChangeRequestWorkButton" layoutX="337.0" layoutY="458.0" mnemonicParsing="false" onMouseClicked="#loadChangeRequestWorkPage" prefHeight="24.0" prefWidth="191.0" text="Start Change Request Work" />
-      <TextArea fx:id="selectedChangeRequestIdTextArea" layoutX="150.0" layoutY="452.0" prefHeight="17.0" prefWidth="177.0" promptText="Selected Change Request ID" />
-      <Label layoutX="147.0" layoutY="80.0" text="Please press on a table row, to start work on it">
+      <Button fx:id="startChangeRequestWorkButton" layoutX="337.0" layoutY="471.0" mnemonicParsing="false" onMouseClicked="#loadChangeRequestWorkPage" prefHeight="24.0" prefWidth="191.0" text="Start Change Request Work" />
+      <TextArea fx:id="selectedChangeRequestIdTextArea" layoutX="150.0" layoutY="470.0" prefHeight="17.0" prefWidth="177.0" promptText="Selected Change Request ID" />
+      <Label layoutX="149.0" layoutY="441.0" text="Please press on a table row, to start work on it">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="35.0" layoutY="552.0" mnemonicParsing="false" onAction="#loadPreviousPage" text="Back" />
+      <GridPane layoutX="173.0" layoutY="71.0" prefHeight="30.0" prefWidth="551.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.0" minWidth="10.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="300.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="136.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="314.0" minWidth="10.0" prefWidth="34.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Text fx:id="filterTypeText" strokeType="OUTSIDE" strokeWidth="0.0" text="XXXXX" GridPane.columnIndex="1">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filter Type:" wrappingWidth="78.99999878718518">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Label prefHeight="30.0" prefWidth="170.0" text="Total List Elements: " GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="listElementsCounterLabel" text="YYY" GridPane.columnIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

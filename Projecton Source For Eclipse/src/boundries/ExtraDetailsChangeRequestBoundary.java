@@ -6,15 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import assets.ProjectPages;
 import assets.Toast;
 import assets.AttachmentListCellNonRemoveable;
 import controllers.ExtraDetailsChangeRequestController;
+import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.MyFile;
 import javafx.beans.binding.Bindings;
@@ -30,6 +31,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 // TODO: Auto-generated Javadoc
@@ -97,9 +99,17 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     @FXML
     private ListView<MyFile> fileListView;
     
+    /** The high management grid pane. */
+    @FXML
+    private GridPane highMangementGridPane;
+
     /** The suspend button. */
     @FXML
     private Button suspendButton;
+
+    /** The unsuspend button. */
+    @FXML
+    private Button unsuspendButton;
     
     /** The page title. */
     @FXML
@@ -113,11 +123,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
     private static final int LIST_ROW_HEIGHT = 24;
     
     /** The previous page path. */
-    //private MyFile currentFile;
     private String previousPagePath;
     
     /** The current change request. */
-    //private File downloadedFile;
     private ChangeRequest currentChangeRequest;
     
     /** The my controller. */
@@ -166,7 +174,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		/* FXML Objects init */
-		
+		highMangementGridPane.setVisible(false);
 		initiatorNameTF.setEditable(false);
 		subSystemTF.setEditable(false);
 		RequestedChangeDescTF.setEditable(false);
@@ -242,6 +250,7 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			String userDisplayedStatus = currentChangeRequest.getStatus();
 			userDisplayedStatus = String.valueOf(userDisplayedStatus.charAt(0)).toUpperCase() + userDisplayedStatus.substring(1).toLowerCase();
 			StatusTF.setText(userDisplayedStatus);
+			colorStatusField(currentChangeRequest.getStatus());
 			reasonTF.setWrapText(true);
 			commentTF.setWrapText(true);
 			RequestedChangeDescTF.setWrapText(true);
@@ -249,57 +258,48 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
 			filesErrorLabel.setVisible(false);
 			currentStepTF.setText(currentChangeRequest.getActualStep());
 			pageTitle.setText("Change Request No. "+currentChangeRequest.getChangeRequestID()+" Details");
-			if (currentChangeRequest.getEstimatedEndDate()==null)
-				estimatedTimeForStepTF.setText("In Evaluation");
-			else
-				estimatedTimeForStepTF.setText(currentChangeRequest.getEstimatedEndDate().toString());
-			if (currentChangeRequest.getStatus().equals("CLOSED")||currentChangeRequest.getStatus().equals("DENIED"))
-			{
-				estimatedTimeForStepTF.setText("");
-				estimatedTimeForStepTF.setDisable(true);
-			}
+			
+			myController.getStepEstimatedEndDate(currentChangeRequest.getChangeRequestID());
+			
 			if (currentChangeRequest.getCurrentStep().equals("FINISH"))
 			{
 				suspendButton.setDisable(true);
+				unsuspendButton.setDisable(true);
 			}
 			myController.getChangeRequestFiles(currentChangeRequest.getChangeRequestID());
+			
+			
+			if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR") ||
+					ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_MEMBER") ||
+					ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
+			{
+				highMangementGridPane.setVisible(true);
+				suspendButton.setDisable(true);
+				unsuspendButton.setDisable(true);
+				if (currentChangeRequest.getStatus().equals("ACTIVE"))
+				{
+					suspendButton.setDisable(false);
+				}
+					
+			}
+			else if(ProjectFX.currentUser.getPermission().equals("INFORMATION_ENGINEERING_DEPARTMENT_HEAD")) {
+				highMangementGridPane.setVisible(true);
+				suspendButton.setDisable(true);
+				unsuspendButton.setDisable(true);
+				if (currentChangeRequest.getStatus().equals("SUSPEND"))
+				{
+					unsuspendButton.setDisable(false);
+				} 
+			}
+			
 		}
 		catch (Exception e)
 		{
 			System.out.println("Couldn't init data in Extra details page");
 			this.logoutUser(null);
 		}
-		if (ProjectFX.currentUser.getPermission().equals("SUPERVISOR") ||
-				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_MEMBER") ||
-				ProjectFX.currentUser.getPermission().equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
-		{
-			suspendButton.setVisible(true);
-			suspendButton.setDisable(true);
-			suspendButton.setText("Suspend");
-			if (currentChangeRequest.getStatus().equals("ACTIVE"))
-			{
-				suspendButton.setDisable(false);
-			} 
-			else if (currentChangeRequest.getStatus().equals("SUSPEND"))
-			{
-				suspendButton.setText("Un-Suspend");
-			}
-				
-		}
-		if(ProjectFX.currentUser.getPermission().equals("INFORMATION_ENGINEERING_DEPARTMENT_HEAD")) {
-			suspendButton.setVisible(true);
-			suspendButton.setText("Un-Suspend");
-			suspendButton.setDisable(true);
-			if (currentChangeRequest.getStatus().equals("SUSPEND"))
-			{
-				suspendButton.setDisable(false);
-			}
-			else if (currentChangeRequest.getStatus().equals("ACTIVE"))
-			{
-				suspendButton.setDisable(true);
-				suspendButton.setText("Suspend");
-			} 
-		}
+		
+		
 	}
 	
 	/**
@@ -392,17 +392,71 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
         	updateStatus="SUSPEND";
         	currentChangeRequest.setStatus("SUSPEND");
         	StatusTF.setText("Suspend");
-        	suspendButton.setText("Un-Suspend");
         	suspendButton.setDisable(true);
+        	myController.inserntNewSupervisorUpdate(currentChangeRequest.getChangeRequestID(), 
+        			ProjectFX.currentUser.getUserName(), "Suspend change request", TimeManager.getCurrentDate(),
+        			ProjectFX.currentUser.getFullName());
         }
         else if (currentChangeRequest.getStatus().equals("SUSPEND"))
         {
         	updateStatus="ACTIVE";
         	currentChangeRequest.setStatus("ACTIVE");
         	StatusTF.setText("Active");
-        	suspendButton.setText("Suspend");
-        	suspendButton.setDisable(true);
+        	unsuspendButton.setDisable(true);
         }
+    	colorStatusField(currentChangeRequest.getStatus());
         myController.updateStatusBySupervisor(currentChangeRequest.getChangeRequestID(), updateStatus);
     }
+    
+    
+    private void colorStatusField (String status)
+    {
+    	switch (status)
+    	{
+    		case "ACTIVE":
+    			StatusTF.setStyle("-fx-text-inner-color: green; "
+    					+ "-fx-font-weight: bold;");
+    			break;
+    		case "DENIED":
+    			StatusTF.setText(StatusTF.getText() + ": " + currentChangeRequest.getEndDate());
+    			StatusTF.setStyle("-fx-text-inner-color: red; "
+    					+ "-fx-font-weight: bold;");
+    			break;
+    		case "SUSPEND":
+    			StatusTF.setStyle("-fx-text-inner-color: blue; "
+    					+ "-fx-font-weight: bold;");
+    			break;
+    		case "CLOSED":
+    			StatusTF.setText(StatusTF.getText() + ": " + currentChangeRequest.getEndDate());
+    			StatusTF.setStyle("-fx-text-inner-color: black; "
+    					+ "-fx-font-weight: bold;");
+    			break;
+    	}	
+    }
+
+	public void fillEstimatedEndDateField(Date estimatedEndDate) {
+		
+		if (estimatedEndDate != null)
+		{
+			
+			estimatedTimeForStepTF.setText(TimeManager.addDays(estimatedEndDate, 1).toString());
+		}
+		else
+		{
+			if (currentChangeRequest.getCurrentStep().equals("CLOSING_STEP") || currentChangeRequest.getCurrentStep().equals("DENY_STEP"))
+			{
+				estimatedTimeForStepTF.setText("Wrapping up work");
+			}
+			else if (currentChangeRequest.getCurrentStep().equals("FINISH"))
+			{
+				estimatedTimeForStepTF.setText("");
+				estimatedTimeForStepTF.setDisable(true);
+			}
+			else
+			{
+				estimatedTimeForStepTF.setText("In evaluation");
+			}
+		}
+		
+	}
 }

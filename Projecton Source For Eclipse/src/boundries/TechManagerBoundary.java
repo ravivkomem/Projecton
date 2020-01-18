@@ -1,6 +1,7 @@
 package boundries;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import assets.ProjectPages;
@@ -8,6 +9,7 @@ import assets.Toast;
 import controllers.TechManagerController;
 import entities.ChangeRequest;
 import entities.SubsystemSupporter;
+import entities.SupervisorUpdate;
 import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -69,6 +71,8 @@ public class TechManagerBoundary implements Initializable{
     /** The view request details button. */
     @FXML
     private Button viewRequestDetailsButton;
+    @FXML
+    private Button btnSupervisorUpdates;
 
     /** The request list pane. */
     @FXML
@@ -159,6 +163,21 @@ public class TechManagerBoundary implements Initializable{
     
     @FXML
     private Button btnSuspensions;
+    @FXML
+    private AnchorPane supervisorUpdatePane;
+    /*Supervisor update table*/
+    @FXML
+    private TableView<SupervisorUpdate> supervisorUpdateTable;
+    @FXML
+    private TableColumn<SupervisorUpdate, Integer> requestID_supervisorColumn;
+    @FXML
+    private TableColumn<SupervisorUpdate, String> supervisorNameColumn;
+    @FXML
+    private TableColumn<SupervisorUpdate, String> essenceColumn;
+    @FXML
+    private TableColumn<SupervisorUpdate, Date> updateDateColumn;
+    
+    
     /* *************************************
 	 * ******* Private Objects *************
 	 * *************************************/
@@ -183,13 +202,30 @@ public class TechManagerBoundary implements Initializable{
 	
 	/** The subsystem list. */
 	ObservableList<SubsystemSupporter> subsystemList = FXCollections.observableArrayList();
+	
+	ObservableList<SupervisorUpdate> supervisorList = FXCollections.observableArrayList();
 
 	/* *************************************
 	 * ******* FXML Methods *************
 	 * *************************************/
 	
+
+    @FXML
+    void clickSupervisorUpdates(MouseEvent event) {
+    	supervisorUpdatePane.setVisible(true);
+    	reportPageAnchorPane.setVisible(false);
+		requestListPane.setVisible(false);
+		employeeAnchorPane.setVisible(false);
+		myController.getSupervisorUpdateDetails();
+    }
+	
+    /**
+     * this method filter the change request table and show just the suspended request
+     * @param event
+     */
     @FXML
     void clickSuspensions(MouseEvent event) {
+    	supervisorUpdatePane.setVisible(false);
     	reportPageAnchorPane.setVisible(false);
 		requestListPane.setVisible(true);
 		employeeAnchorPane.setVisible(false);
@@ -221,6 +257,7 @@ public class TechManagerBoundary implements Initializable{
      */
     @FXML
     void loadEmployeePage(MouseEvent event) {
+    	supervisorUpdatePane.setVisible(false);
 		reportPageAnchorPane.setVisible(false);
 		requestListPane.setVisible(false);
 		employeeAnchorPane.setVisible(true);
@@ -254,6 +291,7 @@ public class TechManagerBoundary implements Initializable{
      */
     @FXML
     void loadReportPage(MouseEvent event) {
+    	supervisorUpdatePane.setVisible(false);
     	employeeAnchorPane.setVisible(false);
     	requestListPane.setVisible(false);
 		reportPageAnchorPane.setVisible(true);
@@ -266,6 +304,7 @@ public class TechManagerBoundary implements Initializable{
      */
     @FXML
     void loadRequestListPage(MouseEvent event) {
+    	supervisorUpdatePane.setVisible(false);
     	employeeAnchorPane.setVisible(false);
     	reportPageAnchorPane.setVisible(false);
     	requestListPane.setVisible(true);
@@ -389,6 +428,11 @@ public class TechManagerBoundary implements Initializable{
 		
 	    subsystemSupporterColumn.setCellValueFactory(new PropertyValueFactory<SubsystemSupporter, String>("subsystem"));;
 		
+	    requestID_supervisorColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, Integer>("changerRequestId"));
+	   supervisorNameColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, String>("fullName"));
+	   essenceColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, String>("essence"));
+	   updateDateColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, Date>("updateDate"));
+	    
 		employeeListTable.setRowFactory(tv -> {
 		    TableRow<User> row = new TableRow<>();
 		    row.setOnMouseClicked(event -> {
@@ -454,6 +498,14 @@ public class TechManagerBoundary implements Initializable{
 		if (!resultList.isEmpty()) {
 			subsystemList.addAll(resultList);
 			subsystemSupporterTable.setItems(subsystemList);
+		}
+	}
+
+	public void displaySupervisorUpdate(ArrayList<SupervisorUpdate> resultList) {
+		supervisorList.clear();
+		if(!resultList.isEmpty()) {
+			supervisorList.addAll(resultList);
+			supervisorUpdateTable.setItems(supervisorList);
 		}
 	}
 

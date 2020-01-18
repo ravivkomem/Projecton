@@ -16,6 +16,7 @@ import entities.ChangeRequest;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -271,11 +272,17 @@ public class ActivityReportBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		activeTextField.setEditable(false);
+		closedTextField.setEditable(false);
+		suspendedTextField.setEditable(false);
+		deniedTextField.setEditable(false);
 		activityReportDetailsPane.setVisible(false);
 		startDatePicker.setEditable(false);
 		endDatePicker.setEditable(false);
 		workDaysBarChart.setTitle("Work Duration");
 		workDaysChartBarCategory.setLabel("Work Days");
+		DaysNumberBarChart.setLabel("Request");
+		requestStatusPieChart.setLegendSide(Side.RIGHT);
 		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
 	}
