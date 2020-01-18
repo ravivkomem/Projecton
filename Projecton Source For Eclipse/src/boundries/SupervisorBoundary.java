@@ -13,7 +13,6 @@ import controllers.SupervisorController;
 import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.TimeExtension;
-import entities.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,7 +31,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-// TODO: Auto-generated Javadoc
+
 
 /**
  * The Class SupervisorBoundary.
@@ -44,25 +43,31 @@ public class SupervisorBoundary implements Initializable {
 	/* *******************************
 	 * ****** Side Bar Menu **********
 	 * *******************************/
-    /** The home page button */
+    /**  The home page button. */
     @FXML
     private Button btnHomePage;
-    /** The request list button */
+    
+    /**  The request list button. */
     @FXML
     private Button btnRequestList;
-    /** The appointment button */
+    
+    /**  The appointment button. */
     @FXML
     private Button btnAppointment;
-    /** The approval button */
+    
+    /**  The approval button. */
     @FXML
     private Button btnApproval;
-    /** The closing step  */
+    
+    /**  The closing step button. */
     @FXML
     private Button btnClosingStep;
-    /** The btn log out. */
+    
+    /**  The log out button. */
     @FXML
     private Button btnLogOut;
-    /** The btn back. */
+    
+    /**  The back button. */
     @FXML
     private Button btnBack;
 
@@ -76,35 +81,38 @@ public class SupervisorBoundary implements Initializable {
     /** The filter type text. */
     @FXML
     private Text filterTypeText;
-    /** The change request table */
+    
+    /**  The change request table. */
     @FXML
     private Label listElementsCounterLabel;
-    /** The table explanation text */
+    
+    /**  The table explanation text. */
     @FXML
     private Text tableExplanationText;
     
     /* *******************************
 	 * ***** Change Request Table ****
 	 * *******************************/
+    /**  The change request table view. */
     @FXML
     private TableView<ChangeRequest> tableChangeRequest;
-    /** The table column request ID. */
+    /** The change request table column request ID. */
     @FXML
     private TableColumn<ChangeRequest, Integer> tableColumnRequestID;
 
-    /** The table column status. */
+    /** The change request table column status. */
     @FXML
     private TableColumn<ChangeRequest, String> tableColumnStatus;
 
-    /** The table column description. */
+    /** The change request table column description. */
     @FXML
     private TableColumn<ChangeRequest, String> tableColumnDescription;
 
-    /** The table column sub system. */
+    /** The change request table column sub system. */
     @FXML
     private TableColumn<ChangeRequest, String> tableColumnSubSystem;
 
-    /** The table column current step. */
+    /** The change request table column current step. */
     @FXML
     private TableColumn<ChangeRequest, String> tableColumnCurrentStep;
     
@@ -114,82 +122,90 @@ public class SupervisorBoundary implements Initializable {
     /** The table time extension. */
     @FXML
     private TableView<TimeExtension> tableTimeExtension;
-    /** The table coulmn step type. */
+    /** The time extension table column step type. */
     @FXML
     private TableColumn<TimeExtension, String> tableCoulmnStepType;
 
-    /** The table coulmn old date. */
+    /** The time extension table column old date. */
     @FXML
     private TableColumn<TimeExtension, Date> tableCoulmnOldDate;
 
-    /** The table coulmn new date. */
+    /** The time extension table column new date. */
     @FXML
     private TableColumn<TimeExtension, Date> tableCoulmnNewDate;
 
-    /** The table coulmn reason. */
+    /** The time extension table column reason. */
     @FXML
     private TableColumn<TimeExtension, String> tableCoulmnReason;
-    
     
     /* *******************************
 	 * ***** Auto Appoint Analyzer ***
 	 * *******************************/
+    /** The analyzer auto appoint grid pane. */
     @FXML
     private GridPane analyzerAutoAppointGridPane;
-    /** The txt handler name auto appoint. */
+    
+    /**  The handler name auto appoint text. */
     @FXML
     private TextField txtHandlerNameAutoAppoint;
-    /** The btn approve appointment. */
+    
+    /**  The approve analyzer appointment button. */
     @FXML
     private Button btnApproveAppointment;
-    /** The btn deny appointment. */
+    /** The deny analyzer appointment button. */
     @FXML
     private Button btnDenyAppointment;
     
     /* *********************************
 	 * ** Supervisor Appoint Analyzer **
 	 * *********************************/
+    /**  The analyzer supervisor appoint grid pane. */
     @FXML
     private GridPane analyzerSupervisorAppointGridPane;
-    /** The set analyzer button */
+    /**  The set analyzer button. */
     @FXML
     private Button btnSetAnalyzer;
-    /** The combo select analyizer. */
+    /** The combo select analyzer. */
     @FXML
     private ComboBox<String> comboSelectAnalyizer;
-    
     /* *********************************
 	 * *** Execution Leader Appoint ****
 	 * *********************************/
+    /** The execution leader appoint grid pane. */
     @FXML
     private GridPane executionLeaderAppointGridPane;
     /** The combo select execution leader. */
     @FXML
     private ComboBox<String> comboSelectExecutionLeader;
-    /** The btn set execution leader. */
+    /**  The set execution leader button. */
     @FXML
     private Button btnSetExecutionLeader;
     
     /* *********************************
 	 * ***** Analysis Time Pending *****
 	 * *********************************/
+    /** The analysis time pending grid pane. */
     @FXML
-    private GridPane analysisTimePendingGridPane;
-    /** The txt field estimated time. */
+    private GridPane analysisTimePendingGridPane;  
+    /**  The field estimated time text field. */
     @FXML
     private TextField analysisRequiredTimeTextField;
-    /** The btn approve analysis time. */
+    
+    /**  The approve analysis time button. */
     @FXML
     private Button btnApproveAnalysisTime;
-    /** The btn deny analysis time. */
+    
+    /**  The deny analysis time button. */
     @FXML
     private Button btnDenyAnalysisTime;
     
     /* *********************************
-	 * **** Execution Time Pending *****
-	 * *********************************/
+   	 * **** Execution Time Pending *****
+   	 * *********************************/
+    /** The execution time pending grid layout. */
     @FXML
     private GridPane executionTimePendingGridLayout;
+    /** The execution required time text field. */
     @FXML
     private TextField executionRequiredTimeTextField;
     /** The btn approve execution time. */
@@ -202,12 +218,16 @@ public class SupervisorBoundary implements Initializable {
     /* *********************************
 	 * ********* Time Extension ********
 	 * *********************************/
+    /** The time extension request grid pane. */
     @FXML
-    private GridPane timeExtensionRequestGridPane;
+    private GridPane timeExtensionRequestGridPane;    
+    /** The current deadline date label. */
     @FXML
     private Label currentDeadlineDateLabel;
+    /** The requested time extension date label. */
     @FXML
     private Label requestedTimeExtensionDateLabel;
+    /** The reason label. */
     @FXML
     private Label reasonLabel;
     /** The btn approve time extension. */
@@ -223,19 +243,25 @@ public class SupervisorBoundary implements Initializable {
     /* *******************************
    	 * ********* Closing Step ********
    	 * *******************************/
+    /** The closing step grid pane. */
     @FXML
     private GridPane closingStepGridPane;
+    /** The closing step description label. */
     @FXML
     private Label closingStepDescriptionLabel;
     /** The txt send message to initiator. */
     @FXML
     private TextArea emailMessageTextArea;
+    /** The initiator name label. */
     @FXML
     private Label initatorNameLabel;
+    /** The job description label. */
     @FXML
     private Label jobDescriptionLabel;
+    /** The email address label. */
     @FXML
     private Label emailAddressLabel;
+    /** The email message char label. */
     @FXML
     private Label emailMessageCharLabel;
     /** The btn send. */
@@ -245,22 +271,35 @@ public class SupervisorBoundary implements Initializable {
     /* *******************************
    	 * * Change Request In Progress **
    	 * *******************************/
+    /** The change request in progress grid pane. */
     @FXML
     private GridPane changeRequestInProgressGridPane;
+    /** The change request finished grid pane. */
     @FXML
     private GridPane changeRequestFinishedGridPane;
+    /** The suspended change request grid pane. */
     @FXML
     private GridPane suspendedChangeRequestGridPane;
     
     /* *******************************
 	 * ***** Constants Objects *******
 	 * *******************************/
+    /** The Constant ALL_CHANGE_REQUESTS. */
     private static final String ALL_CHANGE_REQUESTS = "All Change Requests";
+    
+    /** The Constant APPOINTMENTS. */
     private static final String APPOINTMENTS = "Appointments";
+    
+    /** The Constant TIME_APPROVAL. */
     private static final String TIME_APPROVAL = "Time Approvals";
+    
+    /** The Constant TIME_EXTENSIONS. */
     private static final String TIME_EXTENSIONS = "Time Extensions";
+    
+    /** The Constant CLOSING_STEP. */
     private static final String CLOSING_STEP = "Closing Step";
-   // private static final String SUSPENSIONS = "Suspended Change Requests";
+   
+   /** The Constant MAX_CHARS. */
     private static final int MAX_CHARS = 200;
 
     /* *******************************
@@ -276,9 +315,12 @@ public class SupervisorBoundary implements Initializable {
     private ObservableList<ChangeRequest> observableChangeRequestList = FXCollections.observableArrayList();
     /** The extension list. */
     private ObservableList<TimeExtension> observableTimeExtensionList = FXCollections.observableArrayList();
-    /**  The email sender */
+    /**   The email sender. */
     private EmailTLS emailSender = new EmailTLS();
     	
+    /* (non-Javadoc)
+     * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
+     */
     /* ****************************************
      * *********** Init Method ****************
      * ****************************************/
@@ -466,20 +508,21 @@ public class SupervisorBoundary implements Initializable {
      * ****** Page Loading Methods ************
      * ****************************************/
 	/**
-     * Load home page.
-     *
-     * @param event 
-     */
+	 * Load home page.
+	 *
+	 * @param event - Mouse click on the "Home page" button
+	 */
     @FXML
     void loadHomePage(MouseEvent event)       // Return to home page
     {
     	setAllDisplaysVisibilityOff();
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
+    
     /**
-     * Click log out function.
+     * Perform application logout and load the login page.
      *
-     * @param event
+     * @param event - Mouse click on "Logout" button
      */
     @FXML
     void ClickLogOutFunction(MouseEvent event)    // Log Out from supervisor page
@@ -489,8 +532,9 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     *Load previous page
-     * @param event 
+     * Load previous page.
+     *
+     * @param event - Mouse click on "Back" button
      */
     @FXML
     void ClickBackFunction(MouseEvent event)
@@ -499,8 +543,12 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     * Load extra details page
-     * @param event
+     * Load extra details page.
+     *
+     * Display the selected change request extra details page
+     * Incase there isn't any selected change request it will instead display a Toast error message
+     * 
+     * @param event - Mouse click on "Load extra details" button
      */
     @FXML
     void clickOnExstraDetails(MouseEvent event)
@@ -519,9 +567,11 @@ public class SupervisorBoundary implements Initializable {
      * ****** Side Bar Menu *******************
      * ****************************************/
     /**
-     * Click request list.
+     * displays all the change requests in the system
+     * It will be displayed in the change requests table view in the middle
+     * of the page display as set in the scene builder
      *
-     * @param event 
+     * @param event - Mouse click on "All change requets" button
      */
     @FXML
     void displayAllChangeRequests(MouseEvent event)
@@ -534,10 +584,11 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-	 * This method handle click on appointment button
-	 *
-	 * @param event 
-	 */
+     * Displays all the change requests that require supervisor appointments
+     * Will be displayed in the change requests table view
+     *
+     * @param event - Mouse click on the appointments button
+     */
     @FXML
     void ClickAppointmentFunction(MouseEvent event) 
     {
@@ -550,9 +601,13 @@ public class SupervisorBoundary implements Initializable {
     
 
     /**
-     * This method handle click on approval.
+     * Displays all the change requests that require supervisor approval of the 
+     * time set by the step leader. (Only in the analysis and executions steps according to the client
+     * requirements).
+     * 
+     * It will be displayed in the change request table view
      *
-     * @param event
+     * @param event - Mouse click on the "Approval" button
      */
     @FXML
     void ClickApprovalFunction(MouseEvent event)
@@ -565,9 +620,14 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     * Click on time extension.
+     * Displays all the change requests that have an active time extension request
+     * that require the supervisor to handle (Either approve or deny)
+     * 
+     * It will be displayed in the time extension table.
+     * Changes the visibility of the two page tables (i.e change request table will be invisible while the 
+     * time extension table will be visible)
      *
-     * @param event 
+     * @param event - Mouse click on the "Time Extension" button
      */
     @FXML
     void clickOnTimeExtension(MouseEvent event)
@@ -576,14 +636,16 @@ public class SupervisorBoundary implements Initializable {
     	tableTimeExtension.setVisible(true);
     	setAllDisplaysVisibilityOff();
     	filterTypeText.setText(TIME_EXTENSIONS);
-    	myController.SelectAllTimeExtensions();
+    	myController.selectNewTimeExtensions();
     }
     
     
     /**
-     *  This method handle click on closing step.
+     *  Displays all the change requests that require the supervisor to close them
+     *  either change request in the "CLOSING_STEP" or in the "DENY_STEP"
+     *  It will be displayed in the change requests tableview
      *
-     * @param event
+     * @param event - Mouse click on the "Closing Step" button
      */
     @FXML
     void ClickClosingStepFunction(MouseEvent event)
@@ -600,9 +662,11 @@ public class SupervisorBoundary implements Initializable {
      * ******* Analyzer Auto Appoint **********
      * ****************************************/
     /**
-     * This method update DB when click on approve appointment of analyzer.
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the selection of the analyzer in the DB
      *
-     * @param event 
+     * @param event - Mouse click on "Approve Appointment" button
      */
     @FXML
     void clickOnApproveAppointment(MouseEvent event)
@@ -617,9 +681,11 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     *  This method update DB when click on deny appointment of analyzer.
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the selection of the analyzer in the DB
      *
-     * @param event
+     * @param event - Mouse click on "Deny Appointment" button
      */
     @FXML
     void clickOnDenyAppointment(MouseEvent event)
@@ -641,9 +707,11 @@ public class SupervisorBoundary implements Initializable {
      * ***** Analyzer Supervisor Appoint ******
      * ****************************************/
     /**
-     * This method update DB when click on set analyzer.
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the selection of the analyzer in the DB
      *
-     * @param event 
+     * @param event - Mouse click on "Set analyzer" button
      */
     @FXML
     void clickOnSetAnalyzer(MouseEvent event)
@@ -668,9 +736,11 @@ public class SupervisorBoundary implements Initializable {
      * ***** Execution Leader Appoint ******
      * ****************************************/
     /**
-     * This method update DB when click on set execution leader.
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the selection of the execution leader in the DB
      *
-     * @param event 
+     * @param event - Mouse click on "Set Execution" button
      */
 	  @FXML
 	void clickOnSetExecutionLeader(MouseEvent event)
@@ -695,10 +765,12 @@ public class SupervisorBoundary implements Initializable {
    * ******* Analysis Time Pending **********
    * ****************************************/
 	  /**
-	 * This method update DB when click on approve analysis time.
-	 *
-	 * @param event 
-	 */
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the approval of analysis time in the DB
+     *
+     * @param event - Mouse click on "Approve Analysis Time" button
+     */
     @FXML
     void clickOnApproveAnalysisTime(MouseEvent event)
     {
@@ -711,10 +783,12 @@ public class SupervisorBoundary implements Initializable {
     }  
 	
     /**
-	 *This method update DB when click on deny execution leader.
-	 *
-	 * @param event 
-	 */
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the denial of analysis time in the DB
+     *
+     * @param event - Mouse click on "Deny Analysis Time" button
+     */
     @FXML
     void clickOnDenyAnalysisTime(MouseEvent event)
     {
@@ -730,9 +804,11 @@ public class SupervisorBoundary implements Initializable {
      * ******* Execution Time Pending **********
      * ****************************************/  
     /**
-     * This method update DB when click on approve execution time.
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the approval of execution time in the DB
      *
-     * @param event 
+     * @param event - Mouse click on "Approve Execution Time" button
      */
     @FXML
     void clickOnApproveExecutionTime(MouseEvent event)
@@ -746,9 +822,11 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     * This method update DB when click on deny execution time.
+     * This method sets the visibly to display only the change requests table
+     * with the last filter selected.
+     * Also calls the controller function in order to update the denial of execution time in the DB
      *
-     * @param event 
+     * @param event - Mouse click on "Deny Execution Time" button
      */
     @FXML
     void clickOnDenyExecutionTime(MouseEvent event)
@@ -765,9 +843,11 @@ public class SupervisorBoundary implements Initializable {
      * *********** Time Extensions ************
      * ****************************************/
     /**
-     * Click on approve time extension.
-     *
-     * @param event 
+     * This method change the visibility of the page to contain only the menu bar
+     * and the time extension table view, also calls the controller to update
+     * the time extension table in the DB with the supervisor approval.
+     * 
+     * @param event - Mouse click on the "Approve Time Extension" button
      */
     @FXML
     void clickOnApproveTimeExtension(MouseEvent event)
@@ -821,9 +901,11 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     * Click on deny time extension.
-     *
-     * @param event the event
+     * This method change the visibility of the page to contain only the menu bar
+     * and the time extension table view, also calls the controller to update
+     * the time extension table in the DB with the supervisor denial.
+     * 
+     * @param event - Mouse click on the "Deny Time Extension" button
      */
     @FXML
     void clickOnDenyTimeExtension(MouseEvent event)
@@ -877,8 +959,10 @@ public class SupervisorBoundary implements Initializable {
      * ****************************************/
     
     /**
-     * This method get all information engineers from data base.
-     * @param informationEngineers
+     * This method is for the controller to send a list of all the information engineers 
+     * that exists in the DB, for the boundary to update the comboboxes of the analyzers and execution leaders
+     * 
+     * @param informationEngineers - List of all the information engineers user names
      */
 	public void recieveAllInformationEngineers(ArrayList<String> informationEngineers)
 	{
@@ -890,38 +974,46 @@ public class SupervisorBoundary implements Initializable {
 	}
 
    
-/**
- * This method display in change request table view all the change request from data base.
- * @param resultList
- */
-	public void handleChangerequestResultForTable(ArrayList<ChangeRequest> resultList)
+	
+	/**
+	 * This method is called by the controller, in order to update the change request tableview
+	 * with all the change requests as received from the DB by the selected filter as described in the above functions.
+	 * Also updates the label that contains the quantity of elements in the table
+	 * 
+	 * @param changeRequestsList - All the change requests that were selected by the controller
+	 */
+	public void handleChangerequestResultForTable(ArrayList<ChangeRequest> changeRequestsList)
 	{
 		observableChangeRequestList.clear();
-		if (!resultList.isEmpty()) {
-			observableChangeRequestList.addAll(resultList);
+		if (!changeRequestsList.isEmpty()) {
+			observableChangeRequestList.addAll(changeRequestsList);
 		}
 		listElementsCounterLabel.setText(Integer.toString(observableChangeRequestList.size()));
 	}
 	
 	
 	/**
-	 * This method display time extension in the table view.
-	 *
-	 * @param resultList the result list
+	 * This method is called by the controller, in order to update the time extensions tableview
+	 * with all the time extensions as received from the DB by the selected filter as described in the above functions.
+	 * Also updates the label that contains the quantity of elements in the table
+	 * 
+	 * @param timeExtensionsList - All the time extensions selected by the controller
 	 */
-	public void handleTimeExtensionForTable(ArrayList<TimeExtension> resultList)
+	public void handleTimeExtensionForTable(ArrayList<TimeExtension> timeExtensionsList)
 	{
 		observableTimeExtensionList.clear();
-		if (!resultList.isEmpty()) {
-			observableTimeExtensionList.addAll(resultList);
+		if (!timeExtensionsList.isEmpty()) {
+			observableTimeExtensionList.addAll(timeExtensionsList);
 		}
 		listElementsCounterLabel.setText(Integer.toString(observableTimeExtensionList.size()));
 	}
-   
 
-    
-    
-
+    /**
+     * Update tables using last filter.
+     * This method is used to "refresh" the table after supervisor actions
+     * that impacted the change requests / time extensions in the corresponding tables
+     * 
+     */
     private void updateTablesUsingLastFilter() {
     	switch (filterTypeText.getText())
     	{
@@ -946,14 +1038,12 @@ public class SupervisorBoundary implements Initializable {
     	}
 	}
 
-	
-
-    
-
     /**
-     * This method send mail to the initiator and closing the step.
+     * This method send mail to the initiator and closes the step.
+     * Also writes the tech manager in the mail (In BCC option) incase the step was closed
+     * If it was denied only a mail to the initator will be send
      *
-     * @param event the event
+     * @param event - Mouse click on "Send" button
      */
     @FXML
     void clickOnSend(MouseEvent event)
@@ -982,42 +1072,37 @@ public class SupervisorBoundary implements Initializable {
         	updateTablesUsingLastFilter();
     	}
     }
-    
-   
-    public void sendEmailToInitiatorUser(User initiator) {
-    	
-    }   
-    
+      
     /**
-     * Gets the execution end date.
+     * Gets the execution required time as submitted by the execution leader
+     * Displays that date the execution required time text field for the supervisor to view
+     * this method is called by the controller in order to update the display with data from the DB
      *
-     * @param res 
-     * @return the execution end date
+     * @param executionRequiredTime - The date that was asked by the execution leader
      */
-	public void getExecutionEndDate(Date res)
+	public void getExecutionRequiredTime(Date executionRequiredTime)
 	{
-		res = TimeManager.addDays(res, 1);
-		executionRequiredTimeTextField.setText(res.toString());
+		executionRequiredTime = TimeManager.addDays(executionRequiredTime, 1);
+		executionRequiredTimeTextField.setText(executionRequiredTime.toString());
 	}
 
 	/**
-	 * Gets the analysis end date.
-	 *
-	 * @param res 
-	 * @return the analysis end date
-	 */
-	public void getAnalysisEndDate(Date res)
+     * Gets the execution required time as submitted by the analyzer
+     * Displays that date the analysis required time text field for the supervisor to view
+     * this method is called by the controller in order to update the display with data from the DB
+     *
+     * @param analysisRequiredTime - The date that was asked by the execution leader
+     */
+	public void getAnalysisRequiredTime(Date analysisRequiredTime)
 	{
-		res = TimeManager.addDays(res, 1);
-		analysisRequiredTimeTextField.setText(res.toString());	
+		analysisRequiredTime = TimeManager.addDays(analysisRequiredTime, 1);
+		analysisRequiredTimeTextField.setText(analysisRequiredTime.toString());	
 	}
 	
-
-    
-    
-     
     /**
-     * This method set all gui into invisible.
+     * This method is used in order to "reset" the page displays
+     * Sets all the different grid panes visibility to false
+     * (Does not include the side bar menu and the main area which will be handled diffrently)
      */
     public void setAllDisplaysVisibilityOff()
 	{
@@ -1037,6 +1122,9 @@ public class SupervisorBoundary implements Initializable {
     //**********************************TOASTS*************************************************//
     
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
      * Show appoint execution leader success.
      */
     public void ShowAppointExecutionLeaderSuccess()
@@ -1045,6 +1133,9 @@ public class SupervisorBoundary implements Initializable {
 	}
 	
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show success approve appoint.
 	 */
 	public void ShowSuccessAproveAppoint()
@@ -1053,6 +1144,9 @@ public class SupervisorBoundary implements Initializable {
 	}
     
     /**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
      * Show deny analysis time.
      */
     public void showDenyAnalysisTime()
@@ -1061,6 +1155,9 @@ public class SupervisorBoundary implements Initializable {
 	}
     
     /**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
      * Show approve analysis time.
      */
     public void showApproveAnalysisTime()
@@ -1069,6 +1166,9 @@ public class SupervisorBoundary implements Initializable {
 	}
     
     /**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+     * 
      * Show approve execution time.
      */
     public void showApproveExecutionTime()
@@ -1077,6 +1177,9 @@ public class SupervisorBoundary implements Initializable {
 	}
     
     /**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+     * 
      * Show deny execution time.
      */
     public void showDenyExecutionTime()
@@ -1085,6 +1188,9 @@ public class SupervisorBoundary implements Initializable {
 	}
     
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show change request suspended.
 	 */
 	public void showChangeRequestSuspended()
@@ -1093,6 +1199,9 @@ public class SupervisorBoundary implements Initializable {
 	}
 
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show change request unsuspended.
 	 */
 	public void showChangeRequestUnsuspended()
@@ -1102,6 +1211,9 @@ public class SupervisorBoundary implements Initializable {
 	
 
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show change request closed.
 	 */
 	public void showChangeRequestClosed()
@@ -1110,9 +1222,12 @@ public class SupervisorBoundary implements Initializable {
 	}
 	
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show analyzer supervisor appoint toast.
 	 *
-	 * @param affectedRows the affected rows
+	 * @param affectedRows - affected rows in the database (Expecting only one row to be affected)
 	 */
 	public void ShowAnalyzerSupervisorAppointToast(int affectedRows)
 	{
@@ -1124,19 +1239,25 @@ public class SupervisorBoundary implements Initializable {
 	}
 
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show success analyzer appoint.
 	 *
-	 * @param affectedRows2 the affected rows 2
+	 * @param affectedRows - affected rows in the database (Expecting only one row to be affected)
 	 */
-	public void ShowSuccessAnalyzerAppoint(int affectedRows2)
+	public void ShowSuccessAnalyzerAppoint(int affectedRows)
 	{
-		if(affectedRows2==1)
+		if(affectedRows==1)
 			Toast.makeText(ProjectFX.mainStage, "Analyzer assigned successfully", 1500, 500, 500);
 		else
 			Toast.makeText(ProjectFX.mainStage, "Database error, please contact system admin", 1500, 500, 500);	
 	}
 
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show approve time extension.
 	 */
 	public void showApproveTimeExtension()
@@ -1145,6 +1266,9 @@ public class SupervisorBoundary implements Initializable {
 	}
 
 	/**
+	 * This method is called by to controller to indicate the database update status
+	 * in order to have user feedback in the page displays.
+	 * 
 	 * Show deny time extension.
 	 */
 	public void showDenyTimeExtension()
