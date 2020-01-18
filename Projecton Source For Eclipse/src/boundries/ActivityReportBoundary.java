@@ -225,6 +225,8 @@ public class ActivityReportBoundary implements Initializable {
 		if(report.getSuspendedChangeRequest() > 0)
 			requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		
+		requestStatusPieChart.setLegendSide(Side.BOTTOM);
+		requestStatusPieChart.setLegendVisible(true);
 		workDaysArray = workDaysCalc(workDays);
 		
 		XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>();
@@ -232,7 +234,7 @@ public class ActivityReportBoundary implements Initializable {
 		series1.getData().add(new XYChart.Data<String,Number>(SECOND_CATAGORY, workDaysArray[1]));
 		series1.getData().add(new XYChart.Data<String,Number>(THIRD_CATAGORY, workDaysArray[2]));
 		series1.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, workDaysArray[3]));
-		
+		series1.setName("Number Of Change Requests");
 		workDaysBarChart.getData().addAll(series1);
 		if(!workDays.isEmpty()) {
 			medianTextField.setText(""+ Utilizer.calcMedian(workDays));
@@ -276,6 +278,8 @@ public class ActivityReportBoundary implements Initializable {
 		closedTextField.setEditable(false);
 		suspendedTextField.setEditable(false);
 		deniedTextField.setEditable(false);
+		medianTextField.setEditable(false);
+		stdTextField.setEditable(false);
 		activityReportDetailsPane.setVisible(false);
 		startDatePicker.setEditable(false);
 		endDatePicker.setEditable(false);
