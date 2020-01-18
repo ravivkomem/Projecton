@@ -29,9 +29,8 @@ import javafx.scene.layout.AnchorPane;
 
 
 /**
- * The Class TechManagerBoundary.
  * @author Lee Hugi
- *
+ * This class control the thech manager page with all the methods and logic implementations
  */
 public class TechManagerBoundary implements Initializable{
 
@@ -39,28 +38,28 @@ public class TechManagerBoundary implements Initializable{
 	 * ********* FXML Objects **************
 	 * *************************************/
 	
-	/** The btn back. */
+	/** The button back. */
 	/*button*/
     @FXML
     private Button btnBack;
     
-    /** The btn log out. */
+    /** The button log out. */
     @FXML
     private Button btnLogOut;
     
-    /** The btn home page. */
+    /** The home page button. */
     @FXML
     private Button btnHomePage;
     
-    /** The btn request list. */
+    /** The request list button. */
     @FXML
     private Button btnRequestList;
     
-    /** The btn employee. */
+    /** The employee button. */
     @FXML
     private Button btnEmployee;
     
-    /** The btn report page. */
+    /** The report page button. */
     @FXML
     private Button btnReportPage;
     
@@ -124,7 +123,7 @@ public class TechManagerBoundary implements Initializable{
     @FXML
     private TextField departmentTextField;
 
-    /** The hl view permission. */
+    /** The hyperlink view permission. */
     @FXML
     private Hyperlink hlViewPermission;
 
@@ -209,7 +208,12 @@ public class TechManagerBoundary implements Initializable{
 	 * ******* FXML Methods *************
 	 * *************************************/
 	
-
+	/**
+	 * The method show the supervisor update page when the user press on the supervisor update button.
+	 * Then the method calls to the controller and ask for the details from the supervidor_update table
+	 * in the database.
+	 * @param event
+	 */
     @FXML
     void clickSupervisorUpdates(MouseEvent event) {
     	supervisorUpdatePane.setVisible(true);
@@ -220,7 +224,8 @@ public class TechManagerBoundary implements Initializable{
     }
 	
     /**
-     * this method filter the change request table and show just the suspended request
+     * This method filter the change request table and show just the suspended request from the change_request
+     * table in the database.
      * @param event
      */
     @FXML
@@ -234,7 +239,7 @@ public class TechManagerBoundary implements Initializable{
     }
     
 	/**
-	 * this method load in click on button extra details for the current change request.
+	 * This method load the current change request when the user click on button extra details.
 	 *
 	 * @param event the event
 	 */
@@ -251,7 +256,7 @@ public class TechManagerBoundary implements Initializable{
     }
 	
     /**
-     * the method load employee page when the user press on employee button.
+     * The method load employee page when the user press on employee button.
      *
      * @param event the event
      */
@@ -265,7 +270,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * the method will close this page and open the menu page if the user press on home page button.
+     * The method will close this page and open the menu page if the user press on home page button.
      *
      * @param event the event
      */
@@ -275,7 +280,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * the method will close this page and open the previous page if the user press on back button.
+     * The method will close this page and open the previous page if the user press on back button.
      *
      * @param event the event
      */
@@ -285,7 +290,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method show the report page.
+     * This method show the report page.
      *
      * @param event the event
      */
@@ -298,7 +303,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method show request list page when the user click on request list button.
+     * This method show request list page when the user click on request list button.
      *
      * @param event the event
      */
@@ -312,7 +317,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method open the specific report that the user choose in the comboBox.
+     * This method open the specific report that the user choose in the comboBox.
      *
      * @param event the event
      */
@@ -339,7 +344,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * this method open new window for the employee permission page.
+     * This method open new window for the employee permission page.
      *
      * @param event the event
      */
@@ -364,7 +369,7 @@ public class TechManagerBoundary implements Initializable{
     }
 
     /**
-     * Log out user.
+     * Log out the user from the program.
      *
      * @param event the event
      */
@@ -379,10 +384,9 @@ public class TechManagerBoundary implements Initializable{
 	 * *************************************/
     
     /**
-     * the method gets new employee user and replace the user in the same old user
-     * the method search the new user in the user list as per user name.
+     * Change the user permission
      *
-     * @param employeeNewUser the new employee list
+     * @param employeeNewUser the new employee
      */
     public void setEmployeeListChanges(User employeeNewUser) {
     	employeeUser = employeeNewUser;
@@ -462,7 +466,7 @@ public class TechManagerBoundary implements Initializable{
 	}
 	
 	/**
-	 * the method gets change request list and display the list in the change request table.
+	 * The method gets change request list and display the list in the change request table.
 	 *
 	 * @param resultList the result list
 	 */
@@ -475,7 +479,7 @@ public class TechManagerBoundary implements Initializable{
 	}
 	
 	/**
-	 * the method gets users list and display the list in the employee table.
+	 * The method gets users list and display the list in the employee table.
 	 *
 	 * @param resultList the result list
 	 */
@@ -489,7 +493,7 @@ public class TechManagerBoundary implements Initializable{
 	}
 
 	/**
-	 * this method gets subsystem supporter list and display the list in the subsystem table.
+	 * This method gets subsystem supporter list and display the list in the subsystem table.
 	 *
 	 * @param resultList the result list
 	 */
@@ -501,6 +505,10 @@ public class TechManagerBoundary implements Initializable{
 		}
 	}
 
+	/**
+	 * The method gets supervisor update list and display the list in the supervisor update table.
+	 * @param resultList
+	 */
 	public void displaySupervisorUpdate(ArrayList<SupervisorUpdate> resultList) {
 		supervisorList.clear();
 		if(!resultList.isEmpty()) {

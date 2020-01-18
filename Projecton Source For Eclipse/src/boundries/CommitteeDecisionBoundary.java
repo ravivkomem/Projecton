@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  * The Class CommitteeDecisionBoundary.
  *
  * @author Lee Hugi
- * This class control the committee decision page
+ * This class control the committee decision page with all the methods and logic implementations
  */
 public class CommitteeDecisionBoundary implements DataInitializable {
 
@@ -53,61 +53,61 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private AnchorPane committeeDirectorPane;
 
-	/** The btn home page. */
+	/** The home page button. */
 	@FXML
 	private Button btnHomePage;
 	
-	/** The btn analysis report. */
+	/** The analysis report button. */
 	@FXML
 	private Button btnAnalysisReport;
 	
-	/** The btn add comment. */
+	/** The add comment button. */
 	@FXML
 	private Button btnAddComment;
 	
-	/** The btn committee director. */
+	/** The committee director button. */
 	@FXML
 	private Button btnCommitteeDirector;
 	
-	/** The btn time extension. */
+	/** The time extension button. */
 	@FXML
 	private Button btnTimeExtension;
 	
-	/** The btn submit comment. */
+	/** The submit comment button. */
 	@FXML
 	private Button btnSubmitComment;
 	
-	/** The btn refresh table. */
+	/** The refresh table button. */
 	@FXML
 	private Button btnRefreshTable;
 	
-	/** The btn back. */
+	/** The back button. */
 	@FXML
 	private Button btnBack;
 	
-	/** The btn send decision. */
+	/** The send decision button. */
 	@FXML
 	private Button btnSendDecision;
 	
-	/** The btn logout. */
+	/** The logout button. */
 	@FXML
 	private Button btnLogout;
 
 	// Add comment table
-	/** The comment table add comment. */
+	/** The comment table. */
 	@FXML
 	private TableView<CommitteeComment> commentTable_addComment;
 	
-	/** The employee id add column. */
+	/** The employee id column. */
 	@FXML
 	private TableColumn<CommitteeComment, String> employeeIdAddColumn;
 	
-	/** The comment add column. */
+	/** The comment column. */
 	@FXML
 	private TableColumn<CommitteeComment, String> commentAddColumn;
 
 	// request details table
-	/** The request info table. */
+	/** The request information table. */
 	@FXML
 	private TableView<ChangeRequest> requestInfoTable;
 	
@@ -120,15 +120,15 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	private TableColumn<ChangeRequest, String> descriptionColumn;
 
 	// comment director table
-	/** The comment tabel director. */
+	/** The comment table in the director page. */
 	@FXML
 	private TableView<CommitteeComment> commentTabelDirector;
 	
-	/** The employee id director column. */
+	/** The employee id column. */
 	@FXML
 	private TableColumn<CommitteeComment, String> employeeIdDirectorColumn;
 	
-	/** The comment director column. */
+	/** The comment column. */
 	@FXML
 	private TableColumn<CommitteeComment, String> commentDirectorColumn;
 
@@ -136,7 +136,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     @FXML
     private TextArea addCommentTextField;
 
-	/** The time remaining text aria. */
+	/** The time remaining text area. */
 	@FXML
 	private TextArea timeRemainingTextAria;
 
@@ -152,11 +152,11 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	@FXML
 	private ImageView image3point2;
 
-	/** The time remaining txt. */
+	/** The time remaining text. */
 	@FXML
 	private Text timeRemainingTxt;
 
-	/** The delay time txt. */
+	/** The delay time text. */
 	@FXML
 	private Text delayTimeTxt;
 	
@@ -168,7 +168,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     @FXML
     private TextArea denyCommentTextArea;//need to handle
     
-    /** The send deny comment btn. */
+    /** The send deny comment button. */
     @FXML
     private Button sendDenyCommentBtn;
     
@@ -210,10 +210,10 @@ public class CommitteeDecisionBoundary implements DataInitializable {
  	/** The Constant MAX_COMMITTEE_CHARS. */
  	private static final int MAX_COMMITTEE_CHARS = 200;
 
-	/** The my time extension stage. */
+	/** The time extension stage. */
 	Stage myTimeExtensionStage = null;
 	
-	/** The my analysis report stage. */
+	/** The analysis report stage. */
 	Stage myAnalysisReportStage = null;
 
 	/* *************************************
@@ -222,7 +222,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	
 	/**
 	 * This method handle with press on send deny decision
-	 * the method call the controller for update the sql table in the data base.
+	 * the method call the controller for update the sql table in the data base just if
+	 * the user field the text area.
 	 *
 	 * @param event
 	 */
@@ -243,7 +244,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
     }
 	
     /**
-     * this method show the committee comment page.
+     * This method show the committee comment page.
      *
      * @param event the event
      */
@@ -255,7 +256,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method open in another window the analysis report page.
+	 * This method open in another window the analysis report page.
 	 *
 	 * @param event the event
 	 */
@@ -274,7 +275,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method show committee director page when the user with committee director permission
+	 * This method show committee director page when the user with committee director permission
 	 * press on committee director button.
 	 *
 	 * @param event the event
@@ -287,7 +288,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method close the committee decision page and open the menu page
+	 * This method close the committee decision page and open the menu page
 	 * when the user press on home page button.
 	 *
 	 * @param event the event
@@ -302,7 +303,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method open the previous page when the user press on back button.
+	 * This method open the previous page when the user press on back button.
 	 *
 	 * @param event the event
 	 */
@@ -316,7 +317,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method open the time extension page in another window.
+	 * This method open the time extension page in another window.
 	 *
 	 * @param event the event
 	 */
@@ -334,7 +335,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * Refresh table details.
+	 * This method refresh the comment table.
 	 *
 	 * @param event the event
 	 */
@@ -344,8 +345,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method send to the data base the decision of the committee director
-	 * according to his choice in the comboBox .
+	 * This method send to the data base the decision of the committee director
+	 * according to his choice in the comboBox.
 	 *
 	 * @param event the event
 	 */
@@ -400,7 +401,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * press on the submit button will send the comment the committee wrote to the data base.
+	 * press on the submit button will send the comment that the committee field in the
+	 * text area to the data base.
 	 *
 	 * @param event the event
 	 */
@@ -416,7 +418,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * User logout.
+	 * This method will logout the user from the program
 	 *
 	 * @param event the event
 	 */
@@ -436,8 +438,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	 * ************************************/
 	
 	/**
-	 * the method get ArrayList of comments
-	 * display the comment in comment table in the page.
+	 * The method get ArrayList of comments from the database and
+	 * display the comment in the comment table.
 	 *
 	 * @param resultList the result list
 	 */
@@ -451,8 +453,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method gets int object
-	 * if the object equals to 1 the data base is update.
+	 * This method gets int object.
+	 * If the object equals to 1 the data base is update successfully.
 	 *
 	 * @param affectedRows the affected rows
 	 */
@@ -468,8 +470,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method gets string
-	 * the method update the change_request table in the data base.
+	 * This method gets the handler user name.
+	 * The method update the current step in the change_request table in the data base.
 	 *
 	 * @param handlerUserName the handler user name
 	 */
@@ -479,7 +481,8 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method display time remaining for the step or delay time.
+	 * This method gets estimated end date from the step table in the database,
+	 * and display time remaining or delay time for the user in the time remaining text field.
 	 *
 	 * @param estimatedEndDate the estimated end date
 	 */
@@ -589,7 +592,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	}
 
 	/**
-	 * this method will show up window with the message that the method gets.
+	 * This method will show up window with the message that the method gets.
 	 *
 	 * @param alert the alert
 	 * @param msg the message

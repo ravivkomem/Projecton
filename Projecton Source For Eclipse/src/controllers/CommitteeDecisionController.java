@@ -16,7 +16,7 @@ import javafx.application.Platform;
  * The Class CommitteDecisionController.
  *
  * @author Lee Hugi
- * This controller handle with the committee decision page
+ * This controller handle with the committee decision page.
  */
 @SuppressWarnings("serial")
 public class CommitteeDecisionController extends BasicController{
@@ -34,7 +34,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query that ask from the data base committee comments.
+	 * this method send query that ask from the data base committee comments.
 	 *
 	 * @param id the id
 	 * @param stepId the step id
@@ -50,7 +50,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query that insert to the data base comment.
+	 * This method send query that insert to the data base comment.
 	 *
 	 * @param newComment the new comment
 	 * @param stepId the step id
@@ -67,7 +67,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query and update the committee step table in the data base.
+	 * This method send query and update the committee step table in the data base.
 	 *
 	 * @param status the status
 	 * @param date the date
@@ -86,7 +86,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query and update the change request table in the data base.
+	 * This method send query and update the change request table in the data base.
 	 *
 	 * @param currentStep the current step
 	 * @param handlerUserName the handler user name
@@ -103,7 +103,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query that insert new row in the closing step data base table.
+	 * This method send query that insert new row in the closing step data base table.
 	 *
 	 * @param changeRequestID the change request ID
 	 * @param StartStepDate the start step date
@@ -120,7 +120,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * Gets the start time from committee step.
+	 * Send query that ask for the start time from committee step table.
 	 *
 	 * @param changeRequestId the change request id
 	 * @return the start time from committee step
@@ -134,7 +134,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 *  this method create query that ask for committee step from the data base.
+	 *  This method send query that ask for committee step details from the data base.
 	 *
 	 * @param changeRequestId the change request id
 	 * @return the committee step details
@@ -148,7 +148,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create sql query that update the time extension if necessary .
+	 * this method send query that update the time extension table.
 	 *
 	 * @param stepID the step ID
 	 * @param stepType the step type
@@ -162,9 +162,6 @@ public class CommitteeDecisionController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
-	/* (non-Javadoc)
-	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
-	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -222,10 +219,10 @@ public class CommitteeDecisionController extends BasicController{
 	}
 	
 	/**
-	 * this method create array list of committee comment object from the data base result.
+	 * This method create array list of committee comment from the data base result.
 	 *
 	 * @param result the result
-	 * @return the array list
+	 * @return Array list of comments
 	 */
 	private ArrayList<CommitteeComment> changeResultToCommitteeComment(SqlResult result){
 		ArrayList<CommitteeComment> resultList=new ArrayList<>();
@@ -238,7 +235,7 @@ public class CommitteeDecisionController extends BasicController{
 	}
 
 	/**
-	 * this method create sql query that ask for subsystem supporter user.
+	 * This method send query that ask for subsystem supporter user.
 	 *
 	 * @param subsystem the subsystem
 	 */

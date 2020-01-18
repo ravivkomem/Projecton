@@ -17,7 +17,7 @@ import javafx.application.Platform;
  * The Class AnalyzerController.
  *
  * @author Lior Kauffman
- * This controller handle with the Analyzer page
+ * This controller handle with the Analyzer page.
  */
 @SuppressWarnings("serial")
 public class AnalyzerController extends BasicController {
@@ -38,8 +38,9 @@ public class AnalyzerController extends BasicController {
 	/* **************************************
 	 * ************ Public Methods **********
 	 * **************************************/
+	
 	/**
-	 * this method create sql query that ask from data base analysis_step for change request.
+	 * This method create sql query that ask for analysis step by change request id form analysis_step table.
 	 *
 	 * @param changeRequestID the change request ID
 	 * @return the current step
@@ -52,7 +53,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that update the estimatedDate by analysisStepId in the ANALYSIS_STEP data base.
+	 * This method create sql query that update the estimated date in the analysis_step table.
 	 *
 	 * @param analysisStepId the analysis step id
 	 * @param estimatedDate the estimated date
@@ -66,7 +67,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that update the current step by id to data base.
+	 * This method create sql query that update the current step by change request id in the change_request table.
 	 *
 	 * @param currentstep the currentstep
 	 * @param handlerUserName the handler user name
@@ -82,7 +83,9 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that update current step handler user name and date by change request id to change request data base.
+	 * This method create sql query that update current step, handler user name 
+	 * and date by change request id in the change_request table.
+	 * 
 	 * @param changeRequest - the change request 
 	 * @param currentStep - the current step
 	 * @param handlerUserName - the handler user name
@@ -100,9 +103,10 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that update analysis step data base to closed.
+	 * This method create sql query that update analysis step with analysis report details in the
+	 * analysis_step table.
 	 *
-	 * @param changerequest the changerequest
+	 * @param changerequest the change request
 	 * @param date the date
 	 * @param Status the status
 	 * @param AnalysisReportHeader the analysis report header
@@ -129,7 +133,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that insert new committee step to data base.
+	 * This method create sql query that insert new committee step to committee_step table.
 	 *
 	 * @param ChangeRequestId the change request id
 	 * @param UserName the user name
@@ -150,7 +154,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that ask for committee director.
+	 * This method create sql query that ask for the user with committee director permission.
 	 *
 	 * @return the committee director
 	 */
@@ -161,7 +165,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that update the time extension if necessary .
+	 * This method create sql query that update the time extension if necessary .
 	 *
 	 * @param stepID the step ID
 	 * @param stepType the step type
@@ -176,7 +180,7 @@ public class AnalyzerController extends BasicController {
 	}	
 	
 	/**
-	 * Gets the change request by id.
+	 * Gets the change request from the database by change request id.
 	 *
 	 * @param changeRequestId the change request id
 	 * @return the change request by id
@@ -189,9 +193,6 @@ public class AnalyzerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
-	/* (non-Javadoc)
-	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
-	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -237,7 +238,7 @@ public class AnalyzerController extends BasicController {
 	 * Parses the sql result to change request.
 	 *
 	 * @param result the result
-	 * @return The change request the result represnts
+	 * @return The change request the result represents
 	 */
 	private ChangeRequest parseSqlResultToChangeRequest(SqlResult result) {
 		ChangeRequest request = new ChangeRequest((Integer)result.getResultData().get(0).get(0),
@@ -251,7 +252,7 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create new step from sqlResult.
+	 * This method create new step from the sqlResult.
 	 *
 	 * @param result the result
 	 * @return the step the result represnts

@@ -33,7 +33,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class AnalyzerBoundary.
  *
@@ -62,19 +62,19 @@ public class AnalyzerBoundary implements DataInitializable {
 	@FXML
 	private Button backButton;
 	
-	/** The homepage button. */
+	/** The home page button. */
 	@FXML
 	private Button homepageButton;
 	
-	/** The requestdetails button. */
+	/** The request details button. */
 	@FXML
 	private Button requestdetailsButton;
 	
-	/** The createreport button. */
+	/** The create report button. */
 	@FXML
 	private Button createreportButton;
 	
-	/** The timeextension button. */
+	/** The time extension button. */
 	@FXML
 	private Button timeextensionButton;
 	
@@ -102,19 +102,19 @@ public class AnalyzerBoundary implements DataInitializable {
 	@FXML
 	private AnchorPane createReportPane;
 	
-	/** The descriptiontext area. */
+	/** The description text area. */
 	@FXML
 	private TextArea descriptiontextArea;
 	
-	/** The advantagestext area. */
+	/** The advantages text area. */
 	@FXML
 	private TextArea advantagestextArea;
 	
-	/** The constraintstext area. */
+	/** The constraints text area. */
 	@FXML
 	private TextArea constraintstextArea;
 	
-	/** The headertext area. */
+	/** The header text area. */
 	@FXML
     private TextArea headertextArea;
     
@@ -130,7 +130,7 @@ public class AnalyzerBoundary implements DataInitializable {
     @FXML
     private TextArea timeRemainingTextArea;
 	
-	/** The timeduration picker. */
+	/** The time duration picker. */
 	@FXML
 	private DatePicker timedurationPicker;
 	
@@ -150,23 +150,23 @@ public class AnalyzerBoundary implements DataInitializable {
 	@FXML
 	private Text notificationText;
     
-    /** The header charcter counter label. */
+    /** The header character counter label. */
     @FXML
     private Label headerCharcterCounterLabel;
     
-    /** The description charcter counter label. */
+    /** The description character counter label. */
     @FXML
     private Label descriptionCharcterCounterLabel;
     
-    /** The advantages charcter counter label. */
+    /** The advantages character counter label. */
     @FXML
     private Label advantagesCharcterCounterLabel;
     
-    /** The constraints charcter counter label. */
+    /** The constraints character counter label. */
     @FXML
     private Label constraintsCharcterCounterLabel;
     
-    /** The duration charcter counter label. */
+    /** The duration character counter label. */
     @FXML
     private Label durationCharcterCounterLabel;
     
@@ -174,10 +174,10 @@ public class AnalyzerBoundary implements DataInitializable {
     private Button btnRefresh;
 
 	
-	/** The my controller. */
 	/* ****************************************
      * ********** Private Variables ***********
      * ***************************************/
+    /** The my controller. */
 	private AnalyzerController myController = new AnalyzerController(this);
 	
 	/** The Constant ANALYSIS_SET_TIME. */
@@ -277,7 +277,9 @@ public class AnalyzerBoundary implements DataInitializable {
 	}
 	 
  	/**
- 	 * This method display the time remaining for the current step if estimatedEndDate > current date or the delay time if estimatedEndDate < current in days.
+ 	 * This method display the time remaining for the current step,
+ 	 * the method compares between  the estimatedEndDate and the current date,
+ 	 * and then show delay time or time remaining to the user
  	 *
  	 * @param estimatedEndDate the estimated end date
  	 */
@@ -298,7 +300,8 @@ public class AnalyzerBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * This method check date propriety and update the current step and the EstimatedEndDate to DB.
+	 * This method update the current step and the EstimatedEndDate in the database.
+	 * The method check if all the fields are field and then send all the details to the database.
 	 *
 	 * @param event - mouse click
 	 */
@@ -326,7 +329,8 @@ public class AnalyzerBoundary implements DataInitializable {
 	}
 	 
  	/**
- 	 * This method check date propriety and update the current step and the EstimatedEndDate to DB.
+ 	 * This method update EstimatedEndDate to the current step in the database,
+ 	 * first the method check if the date is valid and then send it to the database.
  	 *
  	 * @param event the new date
  	 */
@@ -361,6 +365,10 @@ public class AnalyzerBoundary implements DataInitializable {
 		}
 	}
 	
+	/**
+	 * This method refresh the page if the user press on the refresh button.
+	 * @param event
+	 */
     @FXML
     void refreshPage(MouseEvent event) {
     	btnRefresh.setVisible(false);
@@ -373,17 +381,17 @@ public class AnalyzerBoundary implements DataInitializable {
      * ********** Public Methods ***************
      * *****************************************/
     
+    /**
+     * The method gets ChangeRequest object after the user press refresh,
+     * the method update the currentChangeRequest with the new request that received.
+     * @param request
+     */
     public void getCurrentChangeRequestAfterRefresh(ChangeRequest request) {
     	currentChangeRequest = request;
     	recieveCurrentStep(analyzerStep);
-    	
     }
     
-	/**
-	 * Update tester page to DB successfully.
-	 *
-	 * @param affectedRows the affected rows
-	 */
+
 	public void updateTesterPageToDBSuccessfully(int affectedRows) {
 		if (affectedRows == 1) {
 			Toast.makeText(ProjectFX.mainStage, "Updated successfully", 1500, 500, 500);
@@ -394,7 +402,7 @@ public class AnalyzerBoundary implements DataInitializable {
 	}
 	 
  	/**
- 	 * This method count the length of advantagestextArea and display it.
+ 	 * This method counts the length of advantagestextArea and display it in the label.
  	 *
  	 * @param event the event
  	 */
@@ -406,7 +414,7 @@ public class AnalyzerBoundary implements DataInitializable {
 	    }
 	 
  	/**
- 	 * This method count the length of constraintstextArea and display it.
+ 	 * This method counts the length of constraintstextArea and display it in the label.
  	 *
  	 * @param event the event
  	 */
@@ -417,7 +425,7 @@ public class AnalyzerBoundary implements DataInitializable {
     }
 
     /**
-     * Update description charcter counter.
+     * This method counts the length of descriptiontextArea and display it in the label.
      *
      * @param event the event
      */
@@ -428,10 +436,10 @@ public class AnalyzerBoundary implements DataInitializable {
     }
     
     /**
-     * This method insert new change request to Committee_Step table in the DB and load the work station page.
+     * This method insert new row to committee_step table in the database, 
+     * and load the work station page.
      *
-     * @param name the name
-     * @return the committee director user name
+     * @param name the committee director user name
      */
 
     public void getCommitteeDirectorUserName(String name) {
@@ -441,9 +449,7 @@ public class AnalyzerBoundary implements DataInitializable {
     	ProjectFX.pagingController.loadBoundary(ProjectPages.WORK_STATION_PAGE.getPath());
     }
    	
-	   /* (non-Javadoc)
-	    * @see javafx.fxml.Initializable#initialize(java.net.URL, java.util.ResourceBundle)
-	    */
+
 	   @Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		   ProjectFX.mainStage.setTitle("ICM - Menu\\Work Station\\Analysis");
@@ -465,8 +471,6 @@ public class AnalyzerBoundary implements DataInitializable {
 		
 		/* Disable buttons */
 		requestdetailsButton.setDisable(true);
-		
-		
 		
 		advantagestextArea.setWrapText(true);
 		constraintstextArea.setWrapText(true);
@@ -534,19 +538,12 @@ public class AnalyzerBoundary implements DataInitializable {
 				return null;
 			}
 		}));
-		
-		
 	}
 
-	/* (non-Javadoc)
-	 * @see boundries.DataInitializable#initData(java.lang.Object)
-	 */
 	@Override
 	public void initData(Object data) {
 		currentChangeRequest = (ChangeRequest) data;
 		myController.getCurrentStep(currentChangeRequest.getChangeRequestID());
-		
-		
 		// load table and header
 		// switch case on currentChangeRequest.getCurrentStep
 		// if ANALYSIS_SET_TIME - display datepicker
@@ -555,9 +552,10 @@ public class AnalyzerBoundary implements DataInitializable {
 	}
 	
 	/**
-	 * Recieve current step.
+	 * The method gets recievedStep - the analysis current step,
+	 *  and show all the step details in the page filtered by the current step of the change request.
 	 *
-	 * @param recievedStep the recieved step
+	 * @param recievedStep the received step
 	 */
 	public void recieveCurrentStep(Step recievedStep) {
 		analyzerStep = recievedStep;
@@ -597,19 +595,21 @@ public class AnalyzerBoundary implements DataInitializable {
 		}
 	}
 	
-	/**
-	 * Close my stages.
-	 */
+	
 	/* *****************************************
      * ********** Private Methods **************
      * *****************************************/
+	
+	/**
+	 * this method close the time extension stages if it's open.
+	 */
 	private void closeMyStages() {
 		if (!(myTimeExtensionStage == null))
 			myTimeExtensionStage.close();
 	}
 	
 	/**
-	 * this method will show up window with the msg that the method gets.
+	 * this method will show up window with the message that the method gets.
 	 *
 	 * @param alert the alert
 	 * @param msg the msg
