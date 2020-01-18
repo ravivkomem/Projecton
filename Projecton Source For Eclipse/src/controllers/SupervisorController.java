@@ -9,7 +9,6 @@ import boundries.SupervisorBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.TimeExtension;
-import entities.User;
 import javafx.application.Platform;
 
 
@@ -33,21 +32,7 @@ public class SupervisorController extends BasicController
 	{
 		this.myBoundary = myBoundary;
 	}
-	
-	/**
-	 * Gets the user email.
-	 *
-	 * @param userName the user name
-	 * Send SQL action to the server to get the email of the sent user name
-	 */
-	public void getUserEmail(String userName) {
-		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(userName);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_USER_EMAIL, varArray);
-		this.subscribeToClientDeliveries(); // subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	}
-	
+
 	/**
 	 *  The method insert new supervisor update to data base
 	 * @param id - The change request ID
@@ -148,14 +133,6 @@ public class SupervisorController extends BasicController
 					myBoundary.showDenyExecutionTime();
 					this.unsubscribeFromClientDeliveries();
 					break;
-				case UPDATE_CHANGE_REQUEST_STATUS_TO_SUSPENDED:
-					myBoundary.showChangeRequestSuspended();
-					this.unsubscribeFromClientDeliveries();
-					break;
-				case UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE:
-					myBoundary.showChangeRequestUnsuspended();
-					this.unsubscribeFromClientDeliveries();
-					break;
 				case SELECT_ALL_ENGINEERS:
 					ArrayList<String> employees;
 					employees = this.createArrayListOfUserName(result);
@@ -168,12 +145,12 @@ public class SupervisorController extends BasicController
 					break;
 				case SELECT_EXECUTION_ESTIMATED_DATE:
 					Date res = (Date)result.getResultData().get(0).get(0);
-					myBoundary.getExecutionEndDate(res);
+					myBoundary.getExecutionRequiredTime(res);
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case SELECT_ANALYSIS_ESTIMATED_DATE:
 					Date res2 = (Date)result.getResultData().get(0).get(0);
-					myBoundary.getAnalysisEndDate(res2);
+					myBoundary.getAnalysisRequiredTime(res2);
 					this.unsubscribeFromClientDeliveries();
 					break;
 				case UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED:
@@ -195,12 +172,6 @@ public class SupervisorController extends BasicController
 				case UPDATE_TIME_EXTENSION_STATUS_TO_DENY:
 					myBoundary.showDenyTimeExtension();
 					this.unsubscribeFromClientDeliveries();
-					break;
-				case SELECT_USER_EMAIL:
-					this.unsubscribeFromClientDeliveries();
-					User user = new User((String)result.getResultData().get(0).get(3),
-							(String) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(5));
-					myBoundary.sendEmailToInitiatorUser(user);
 					break;
 				case INSERT_NEW_SUPERVISOR_UPDATE:
 					this.unsubscribeFromClientDeliveries();
@@ -411,6 +382,9 @@ public class SupervisorController extends BasicController
  * Change current step to analysis set time.
  *
  * @param changeRequestID - The change request ID
+ * 
+ * 
+ * Send SQL Action to the server to set the change request current step to "ANALYSIS_SET_TIME"
  */
 	public void changeCurrentStepToAnalysisSetTime(Integer changeRequestID)
 	{
@@ -430,6 +404,8 @@ public class SupervisorController extends BasicController
  * @param handlerUserName the handler user name
  * @param updateStepDate the update step date
  * @param status - the step status
+ * 
+ * Send SQL Action to the server to insert new analysis step
  */
 	public void InsertNewAnalysisStepAfterApprove(Integer changeRequestID, String handlerUserName, Date updateStepDate,
 			String status)
@@ -452,6 +428,9 @@ public class SupervisorController extends BasicController
  * @param executionLeader the execution leader
  * @param nextStep the next step
  * @param changeRequestID 
+ * 
+ * Send SQL Action to the server to update the change request current step and handler user name
+ * (Will be called when a change request is moved to the execution step)
  */
 	public void UpdateExecutionLeaderBySupervisor(String executionLeader,String nextStep, Integer changeRequestID)
 	{
@@ -473,7 +452,9 @@ public class SupervisorController extends BasicController
  * @param changeRequestID the change request ID
  * @param handlerUserName the handler user name
  * @param updateStepDate the update step date
- * @param status - the steps tatus
+ * @param status - the step status
+ * 
+ * Send SQL Action to the server to insert new execution step
  */
 	public void InsertNewExecutionLeaderStep(Integer changeRequestID, String handlerUserName, Date updateStepDate,
 			String status)
@@ -495,6 +476,9 @@ public class SupervisorController extends BasicController
  *
  * @param lastStep the last step
  * @param changeRequestID  - the change request ID
+ * 
+ * Send SQL Action to the server to update the change request current step back to the last step
+ * Because the analysis time was denied, the analyzer shall request time again
  */
 	public void denyAnalysisTime(String lastStep, Integer changeRequestID)
 	{
@@ -514,6 +498,9 @@ public class SupervisorController extends BasicController
  *
  * @param nextStep the next step
  * @param changeRequestID - the change request ID
+ * 
+ * Send SQL Action to the server update the change request current step to the next step
+ * Will be called after analysis time was approved by the supervisor
  */
 	public void approvedAnalysisTime(String nextStep, Integer changeRequestID)
 	{
@@ -532,6 +519,9 @@ public class SupervisorController extends BasicController
  *
  * @param nextStep the next step
  * @param changeRequestID - the change request ID
+ * 
+ * Send SQL Action to the server update the change request current step to the next step
+ * Will be called after execution time was approved
  */
 	public void approvedExecutionTime(String nextStep, Integer changeRequestID)
 	{
@@ -549,6 +539,11 @@ public class SupervisorController extends BasicController
  *
  * @param lastStep the last step
  * @param changeRequestID - the change request ID
+ * 
+ * 
+ * Send SQL Action to the server update the change request current step to the last step
+ * Will be called after execution time was denied by the supervisor
+ * Therefore the execution leader will have to select time again for his step
  */
 	public void denyExecutionTime(String lastStep, Integer changeRequestID)
 	{
@@ -561,46 +556,11 @@ public class SupervisorController extends BasicController
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
-/**
- * This method update change request status to suspended
- *
- * @param newStatus the new status
- * @param changeRequestID - the change request ID
- */
-	public void suspendChangeRequest(String newStatus,Integer changeRequestID)
-	{
-		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(newStatus);
-		varArray.add(changeRequestID);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_SUSPENDED, varArray);
-		this.subscribeToClientDeliveries(); // subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		
-		
-	}
-
-
-/**
- * This method update change request status into active
- *
- * @param newStatus the new status
- * @param changeRequestID 
- */
-	public void unsuspendChangeRequest(String newStatus, Integer changeRequestID)
-	{
-		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(newStatus);
-		varArray.add(changeRequestID);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_STATUS_TO_ACTIVE, varArray);
-		this.subscribeToClientDeliveries(); // subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-		
-	}
-
-
-/**
- * This method insert into the combo box all the engineers.
- */
+	
+	/**
+	 * This method is called by the supervisor boundary during the initallize 
+	 * Send SQL action to the server inorder to get all the system information engineers
+	 */
 	public void setComboBox()
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -616,7 +576,9 @@ public class SupervisorController extends BasicController
  * @param updateStepDate the update step date
  * @param newStatus the new status
  * @param newStep the new step
- * @param changeRequestID 
+ * @param changeRequestID - Change request ID
+ * 
+ * Send SQL action to the server to update the change request status to closed and the current step to finished
  */
 	public void setStatusToClosed(Date updateStepDate,String newStatus,String newStep, Integer changeRequestID)
 	{
@@ -634,9 +596,11 @@ public class SupervisorController extends BasicController
 
 /**
  * Gets the execution estimated date.
+ *This method is called by the supervisor boundary
  *
- * @param changeRequestID 
- * @return the execution estimated date
+ * @param changeRequestID - The change request ID
+ * 
+ * Send SQL action to the server to get the execution leader estimated date for completion of his stage
  */
 	public void getExecutionEstimatedDate(Integer changeRequestID)
 	{
@@ -652,8 +616,10 @@ public class SupervisorController extends BasicController
 /**
  * Gets the analysis estimated date.
  *
- * @param changeRequestID 
- * @return the analysis estimated date
+ * @param changeRequestID - the change request Id
+ * 
+ * Send SQL action to the server to get the analysis estimated date for completion of his stage
+ * 
  */
 	public void getAnalysisEstimatedDate(Integer changeRequestID)
 	{
@@ -670,7 +636,9 @@ public class SupervisorController extends BasicController
  *
  * @param updateStepDate the update step date
  * @param newStatus the new status
- * @param changeRequestID 
+ * @param changeRequestID  - the change request ID
+ * 
+ * Send SQL action to the server to update the change request end date in the DB
  */
 	public void setEndDate(Date updateStepDate,String newStatus, Integer changeRequestID)
 	{
@@ -685,133 +653,142 @@ public class SupervisorController extends BasicController
 		
 	}
 
+	/**
+	 * Select all time extensions.
+	 * 
+	 * Send SQL action to the server in order to get all the time extensions in the DB
+	 * With the status of 'NEW' to represent that this is a new time extension that require
+	 * the supervisor attention to either deny or approve.
+	 * 
+	 */
+	public void selectNewTimeExtensions()
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_TIME_EXTENSIONS, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);	
+	}
 
+	/**
+	 * Update time extension status.
+	 *
+	 * @param status - The new status
+	 * @param timeExtensionID - The time extensions ID
+	 * 
+	 * Send SQL action to the server to update the status of the time extension with the following ID
+	 */
+	public void updateTimeExtensionStatus(String status, int timeExtensionID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(status);
+		varArray.add(timeExtensionID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
 
-/**
- * Select all time extensions.
- */
-public void SelectAllTimeExtensions()
-{
-	ArrayList<Object> varArray = new ArrayList<>();
-	SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_TIME_EXTENSIONS, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);	
-}
+	/**
+	 * Update analysis step estimated end date.
+	 *
+	 * @param newDate the new date
+	 * @param stepID the step ID
+	 * 
+	 * Send SQL action to the server to update the estimated end date of 
+	 *  Analysis step with the following ID 
+	 *  to be the new date
+	 */
+	public void updateAnalysisStepEstimatedEndDate(Date newDate, int stepID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newDate);
+		varArray.add(stepID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_END_DATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
+	/**
+	 * Update committee step estimated end date.
+	 *
+	 * @param newDate the new date
+	 * @param stepID the step ID
+	 * 
+	 *  Send SQL action to the server to update the estimated end date of 
+	 *  Committee step with the following ID 
+	 *  to be the new date
+	 */
+	public void updateCommitteeStepEstimatedEndDate(Date newDate, int stepID)
+	{
+		
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newDate);
+		varArray.add(stepID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COMMITTEE_STEP_ESTIMATED_END_DATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
 
+	/**
+	 * Update execution step estimated end date.
+	 *
+	 * @param newDate the new date
+	 * @param stepID the step ID
+	 * 
+	 *  Send SQL action to the server to update the estimated end date of 
+	 *  Execution step with the following ID 
+	 *  to be the new date
+	 */
+	public void updateExecutionStepEstimatedEndDate(Date newDate, int stepID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newDate);
+		varArray.add(stepID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
 
-/**
- * Update time extension status.
- *
- * @param status the status
- * @param stepID the step ID
- */
-public void updateTimeExtensionStatus(String status, int stepID)
-{
-	ArrayList<Object> varArray = new ArrayList<>();
-	varArray.add(status);
-	varArray.add(stepID);
-	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_APPROVED, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	
-}
+	/**
+	 * Update testing step estimated end date.
+	 *
+	 * @param newDate the new date
+	 * @param stepID the step ID
+	 * 
+	 *  Send SQL action to the server to update the estimated end date of 
+	 *  Testing step with the following ID 
+	 *  to be the new date
+	 */
+	public void updateTestingStepEstimatedEndDate(Date newDate, int stepID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(newDate);
+		varArray.add(stepID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TESTER_STEP_ESTIMATED_END_DATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
 
-
-
-/**
- * Update analysis step estimated end date.
- *
- * @param newDate the new date
- * @param stepID the step ID
- */
-public void updateAnalysisStepEstimatedEndDate(Date newDate, int stepID)
-{
-	ArrayList<Object> varArray = new ArrayList<>();
-	varArray.add(newDate);
-	varArray.add(stepID);
-	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_END_DATE, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);
-}
-
-
-
-/**
- * Update committee step estimated end date.
- *
- * @param newDate the new date
- * @param stepID the step ID
- */
-public void updateCommitteeStepEstimatedEndDate(Date newDate, int stepID)
-{
-	
-	ArrayList<Object> varArray = new ArrayList<>();
-	varArray.add(newDate);
-	varArray.add(stepID);
-	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_COMMITTEE_STEP_ESTIMATED_END_DATE, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);
-}
-
-
-
-/**
- * Update execution step estimated end date.
- *
- * @param newDate the new date
- * @param stepID the step ID
- */
-public void updateExecutionStepEstimatedEndDate(Date newDate, int stepID)
-{
-	ArrayList<Object> varArray = new ArrayList<>();
-	varArray.add(newDate);
-	varArray.add(stepID);
-	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	
-}
-
-
-
-/**
- * Update testing step estimated end date.
- *
- * @param newDate the new date
- * @param stepID the step ID
- */
-public void updateTestingStepEstimatedEndDate(Date newDate, int stepID)
-{
-	ArrayList<Object> varArray = new ArrayList<>();
-	varArray.add(newDate);
-	varArray.add(stepID);
-	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TESTER_STEP_ESTIMATED_END_DATE, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	
-}
-
-
-
-/**
- * Update time extension status after deny.
- *
- * @param status the status
- * @param stepID the step ID
- */
-public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
-{
-	ArrayList<Object> varArray = new ArrayList<>();
-	varArray.add(status);
-	varArray.add(stepID);
-	SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_DENY, varArray);
-	this.subscribeToClientDeliveries(); // subscribe to listener array
-	ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	
-}
-
-
-	
+	/**
+	 * Update time extension status after deny.
+	 *
+	 * @param status the status
+	 * @param stepID the step ID
+	 * 
+	 * Send SQL action to the server to update the time extension status to "DENY"
+	 * after the supervisor press on "Deny" button in the boundary display
+	 */
+	public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
+	{
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(status);
+		varArray.add(stepID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_TIME_EXTENSION_STATUS_TO_DENY, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+		
+	}
 	
 }
