@@ -36,6 +36,9 @@ public class TechManagerController extends BasicController {
 		this.myBoundary = myBoundary;
 	}
 	
+	/**
+	 * The method send query to ask for all the suspend change request.
+	 */
 	public void SelectChangeRequestForSuspensions() {
 		ArrayList<Object> varArray = new ArrayList<>();
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS, varArray);
@@ -43,9 +46,8 @@ public class TechManagerController extends BasicController {
 	}
 
 	/**
-	 * this method create sql query that ask for all the change request in the data base.
+	 * This method send query that ask for all the change request in the data base.
 	 *
-	 * @return the all the active change request
 	 */
 	public void getAllTheActiveChangeRequest() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_CHANGE_REQUESTS, new ArrayList<Object>());
@@ -54,9 +56,8 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * this method crate sql query that ask for all the information engineer from the data base.
+	 * This method send query that ask for all the information engineer from the data base.
 	 *
-	 * @return the all the employee
 	 */
 	public void getAllTheEmployee() {
 				SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_EMPLOYEE, new ArrayList<Object>());
@@ -65,10 +66,10 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that ask for all the subsystem for specific user.
+	 * This method send query that ask for all the subsystem for specific user.
 	 *
 	 * @param userName the user name
-	 * @return the subsystem supporter by user name
+	 * @return subsystem supporter by user name
 	 */
 	public void getSubsystemSupporterByUserName(String userName) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -78,6 +79,9 @@ public class TechManagerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/**
+	 * The method send query that ask for supervisor update details.
+	 */
 	public void getSupervisorUpdateDetails() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_SUPERVISOR_UPDATES, new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
@@ -117,6 +121,11 @@ public class TechManagerController extends BasicController {
 		return;
 	}
 	
+	/**
+	 * The method create ArrayList of supervisor update from the sqlResult
+	 * @param result
+	 * @return ArrayList of supervisor update
+	 */
 	private ArrayList<SupervisorUpdate> createSupervisorUpdate(SqlResult result){
 		ArrayList<SupervisorUpdate> list = new ArrayList<>();
 		for(ArrayList<Object> u: result.getResultData()) {
@@ -128,10 +137,10 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * return array list of subsystem supporter from the data base result.
+	 * Returns array list of subsystem supporter from the data base result.
 	 *
 	 * @param result the result
-	 * @return the array list
+	 * @return Array list of subsystem supporter
 	 */
 	private ArrayList<SubsystemSupporter> createSubsystemSupporter(SqlResult result){
 		ArrayList<SubsystemSupporter> list = new ArrayList<>();
@@ -143,10 +152,10 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * The method create from result ChangeRequest list.
+	 * The method create from the database result ChangeRequest list.
 	 *
 	 * @param result the result
-	 * @return change request list
+	 * @return Change request list
 	 */
 	private ArrayList<ChangeRequest> createChangeRequestFromResult(SqlResult result){
 		ArrayList<ChangeRequest> resultList=new ArrayList<>();
@@ -160,10 +169,10 @@ public class TechManagerController extends BasicController {
 	}
 	
 	/**
-	 * The method create from result User list.
+	 * The method create from the database result User list.
 	 *
 	 * @param result the result
-	 * @return user list
+	 * @return User list
 	 */
 	private ArrayList<User> createUserListFromResult(SqlResult result){
 		ArrayList<User> resultList=new ArrayList<>();
@@ -174,7 +183,5 @@ public class TechManagerController extends BasicController {
 		}
 		return resultList;
 	}
-
-
 
 }
