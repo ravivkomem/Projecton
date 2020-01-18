@@ -11,25 +11,33 @@ import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.Step;
 import javafx.application.Platform;
+
+
 /**
- * 
- * @author Itay David
+ * The Class ExecutionLeaderController.
  *
+ * @author Itay David
  */
 @SuppressWarnings("serial")
 public class ExecutionLeaderController extends BasicController {
 	
-	private ExecutionLeaderBoundry myBoundry;
+	/** The my boundary controlled by this controller. */
+	private ExecutionLeaderBoundry myBoundary;
 	
-	public ExecutionLeaderController(ExecutionLeaderBoundry myBoundry) {
-		this.myBoundry = myBoundry;
+	/**
+	 * Instantiates a new execution leader controller.
+	 *
+	 * @param myBoundary the boundary controlled by this controller
+	 */
+	public ExecutionLeaderController(ExecutionLeaderBoundry myBoundary) {
+		this.myBoundary = myBoundary;
 	}
 	
 	/**
 	 * Gets the execution step by change request id.
-	 *
-	 * @param changeRequestID 	This method initialize step
-	 * @return the execution step by change request id
+	 * 	This method initialize step
+	 * 
+	 * @param changeRequestID - The change request ID
 	 */
 	public void getExecutionStepByChangeRequestId(Integer changeRequestID)
 	{
@@ -41,13 +49,19 @@ public class ExecutionLeaderController extends BasicController {
 	}
 	
 	/**
-	 * Update chnage request current step.
+	 * Update change request current step.
 	 *
 	 * @param newStep the new step
 	 * @param handlerUserName the handler user name
 	 * @param changeRequestID This method update DB change request step to execution approve time
+	 * 
+	 * Send SQL action to the server in order to update the change request with the sent ID
+	 * To have the sent step and the following handler user name
+	 * 
+	 * This method is called by the boundary after submission of the execution time required,
+	 * In order for the change request to have the step of "EXECUTION_APPRIVE_TIME"
 	 */
-	public void updateChnageRequestCurrentStep(String newStep ,String handlerUserName, Integer changeRequestID)
+	public void updateChangeRequestCurrentStep(String newStep ,String handlerUserName, Integer changeRequestID)
 	{
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(newStep);
@@ -58,9 +72,14 @@ public class ExecutionLeaderController extends BasicController {
 	}
 	
 	/**
-	 * 
-	 * @param changeRequestID - the change request ID
+	 * Close execution step.
+	 *
+	 * @param executionStepId the execution step id
 	 * @param executionSummary - the execution summary entered by the execution leader
+	 * 
+	 * Send SQL action to the server in order to close the execution step with the following ID
+	 * And also for the step to include the execution summary for future logs and displays
+	 *
 	 * This method update DB execution step with the comment
 	 */
 	public void closeExecutionStep(Integer executionStepId,String executionSummary)
@@ -75,9 +94,11 @@ public class ExecutionLeaderController extends BasicController {
 	}
 	
 	/**
-	 * 
+	 * Advance change request to tester step.
+	 *
 	 * @param changeRequestID - the change request ID
-	 * This method update current step of the change request sent in DB to tester committee director appoint 
+	 * 
+	 * This method update current step of the change request sent in DB to tester committee director appoint
 	 */
 	public void advanceChangeRequestToTesterStep(Integer changeRequestID)
 	{
@@ -90,10 +111,12 @@ public class ExecutionLeaderController extends BasicController {
 	}
 	
 	/**
-	 * This method insert new estimated date to execution step and change request 
-	 * @param estimatedEndDate - The estimated end date 
+	 * This method insert new estimated date to execution step and change request .
+	 *
+	 * @param estimatedEndDate - The estimated end date
 	 * @param executionStepId - The execution step ID
 	 * 
+	 *  Send SQL action to the server in order to update the execution step with the new estimated end date
 	 */
 	public void updateExecutionStepEstimatedEndDate(Date estimatedEndDate,Integer executionStepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -103,6 +126,15 @@ public class ExecutionLeaderController extends BasicController {
 		this.sendSqlActionToClient(sqlAction);
 	}
 	
+	/**
+	 * Gets the updated change request.
+	 *
+	 * @param changeRequestID the change request ID
+	 * 
+	 * This method is used to get the change request with the sent ID
+	 * In order for the boundary to decide if the the change request step has changed
+	 * since the last time it was seen.
+	 */
 	public void getUpdatedChangeRequest(Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestID);
@@ -115,6 +147,11 @@ public class ExecutionLeaderController extends BasicController {
 	 *
 	 * @param stepID the step ID
 	 * @param stepType the step type
+	 * 
+	 * Send SQL action to the server to automatically close the time extension incase
+	 * there was an active time extension request and the step has already finished.
+	 * Because if the execution leader finished his execution without time extension it was not necessary
+	 * and should be active anymore in the database
 	 */
 	public void updateTimeExtensionDB(int stepID, String stepType) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -125,6 +162,9 @@ public class ExecutionLeaderController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -134,17 +174,17 @@ public class ExecutionLeaderController extends BasicController {
 					this.unsubscribeFromClientDeliveries();
 					if(result.getResultData().get(0).isEmpty())
 					{
-						myBoundry.recieveExecutionStep(null);
+						myBoundary.recieveExecutionStep(null);
 					}
 					Step executionStep = new Step(StepType.EXECUTION,(Integer)result.getResultData().get(0).get(0),(Integer) result.getResultData().get(0).get(1),(String) result.getResultData().get(0).get(2),
 							(Date) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(3),
 							(Date) result.getResultData().get(0).get(5), (Date)result.getResultData().get(0).get(6));
-					myBoundry.recieveExecutionStep(executionStep);
+					myBoundary.recieveExecutionStep(executionStep);
 					break;
 					
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
 					this.unsubscribeFromClientDeliveries();
-					myBoundry.loadExecutionApproveTimeDisplay();
+					myBoundary.loadExecutionApproveTimeDisplay();
 					break;
 					
 					
@@ -172,7 +212,7 @@ public class ExecutionLeaderController extends BasicController {
 							changeRequestId, initiatorUserName, startDate, selectedSubsystem,
 							currentStateDescription, desiredChangeDescription, desiredChangeExplanation, desiredChangeComments,
 							status, currentStep, handlerUserName, endDate, email, jobDescription, fullName, estimatedDate);
-					myBoundry.updateChangeRequest(changeRequest);
+					myBoundary.updateChangeRequest(changeRequest);
 					break;
 					
 				case CLOSE_EXECUTION_STEP:

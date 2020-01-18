@@ -25,7 +25,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-// TODO: Auto-generated Javadoc
+
 
 /**
  * The Class ExecutionLeaderBoundry.
@@ -121,10 +121,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	@FXML
 	private TextArea timeRemainingTextArea;
 
-    /** The Constant EXECUTION_SET_TIME. */
     /* ****************************************
      * ********** Static Objects *************
      * ****************************************/
+    /** The Constant EXECUTION_SET_TIME. */
     private static final String EXECUTION_SET_TIME = "EXECUTION_SET_TIME";
     
     /** The Constant EXECUTION_APPROVE_TIME. */
@@ -136,10 +136,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
     /** The Constant MAX_CHARS. */
     private static final int MAX_CHARS = 100;
     
-	/** The my controller. */
 	/* ****************************************
      * ********** Private Objects *************
      * ****************************************/
+	/** The my controller. */
 	private ExecutionLeaderController myController = new ExecutionLeaderController(this);
 	
 	/** The my change request. */
@@ -237,9 +237,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * Display analysis report.
+	 * Display analysis report stage
+	 * This method handle the click on analysis report in menu and open the analysis report of the chosen request
+	 * By opening additional stage of analysis report
 	 *
-	 * @param event This method handle the click on analysis report in menu and open the analysis report of the choosen request
+	 * @param event - Mouse click on "Analysis Report" button
 	 */
 	@FXML
 	public void displayAnalysisReport(MouseEvent event) // show anaylisis report
@@ -256,9 +258,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * Display time extension.
-	 *
-	 * @param event This method handle the click time extension in menu when execution leader needs more time to execute the request
+	 * Display time extension stage
+	 * This method handle the click time extension in menu when execution leader needs more time to execute the request
+	 * @param event - Mouse click on the "Time Extension" button
 	 */
 	@FXML
 	public void displayTimeExtension(MouseEvent event) // opet time extension
@@ -276,8 +278,9 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	/**
 	 * Load previous page.
-	 *
-	 * @param event This method handle the click on back in menu and return to the last page
+	 * This method handle the click on back in menu and return to the last page
+	 * 
+	 * @param event - Mouse click on "Back" button 
 	 */
 	@FXML
 	void loadPreviousPage(MouseEvent event) // back to the work station page
@@ -287,8 +290,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	/**
 	 * Log out user.
-	 *
-	 * @param event This method handle the click on log out
+	 * This method handle the click on log out
+	 * Will perform application logout and also close all the additional stages
+	 * And set the page to the login page
+	 * 
+	 * @param event - Mouse click on the  "LOGOUT" button 
 	 */
 	@FXML
 	void logOutUser(MouseEvent event) // logout from execution page
@@ -303,8 +309,14 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	/**
 	 * Submit execution time.
-	 *
-	 * @param event This method send the time required for execution to the supervisor for approve or deny the time
+	 * This method send the time required for execution to the supervisor for approve or deny the time
+	 * 1. Checks if the date entered is valid -> if not display proper error message via Toast
+	 * 2. Calls the controller methods to update the step estimated end date
+	 * and also to update the change request current step
+	 * 3. Sets the page displays in order to display to the user that the request is submitted and
+	 * now waiting for the supervisor approval
+	 * 
+	 * @param event - Mouse click on the "Submit" button 
 	 */
 	@FXML
 	public void submitExecutionTime(MouseEvent event) // submit execution time
@@ -325,7 +337,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 				executionStep.setEstimatedEndDate(selectedDate);
 				myChangeRequest.setCurrentStep(EXECUTION_APPROVE_TIME);
 				myController.updateExecutionStepEstimatedEndDate(selectedDate, executionStep.getStepID());
-				myController.updateChnageRequestCurrentStep(EXECUTION_APPROVE_TIME,
+				myController.updateChangeRequestCurrentStep(EXECUTION_APPROVE_TIME,
 						myChangeRequest.getHandlerUserName(), myChangeRequest.getChangeRequestID());
 				executionTimeDatePicker.setValue(null);
 			}
@@ -334,7 +346,11 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * This methods refreshed the execution page.
+	 * This methods refresh the execution page.
+	 * It will get the change request information again by using the controller
+	 * And incase the current step is different, the page will be displayed differently
+	 * If it is "EXECUTION_SET_TIME" it will display the time submission again
+	 * If it is "EXECUTION_WORK" it will display the execution work display
 	 *
 	 * @param event - mouse click on "Refresh button"
 	 * Page refreshed and display may change accordingly
@@ -349,8 +365,16 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	
 	/**
 	 * Finish execution work.
-	 *
-	 * @param event This method update DB with the execution summary after click finish work 
+	 * 
+	 * 1. Checks if the execution summary was submitted, if not an error alert will be displayed
+	 * 2. Displays information alert for the execution leader to verify that he is indeed finish and willing 
+	 * to commit his work.
+	 * 3. If the execution leader decided to commit the following will happen:
+	 * This method calls the controller to update the DB 
+	 * with the execution summary after click finish work
+	 * And also advance the change request current step and to close the execution step.
+	 * 
+	 * @param event - Mouse click on the "Submit" button  
 	 * 
 	 */
 	@FXML
@@ -399,6 +423,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
      * ****************************************/
 	/**
 	 * Will be called by the controller after he select the change request again.
+	 * The new change request is used to decide if the page is in need of a refresh
 	 *
 	 * @param changeRequest - updated change request
 	 */
@@ -408,10 +433,14 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * This method is in order to recieve the execution step from the controller.
+	 * This method is in order to receive the execution step from the controller.
 	 *
-	 * @param executionStep - the current execution step as recieved
-	 * Starts the page work progress
+	 * @param executionStep - the current execution step as received
+	 * 
+	 * Checks if the execution step is valid, if not display proper error message and goes back 
+	 * to the previous page
+	 * Set the page display according to the change request current status,
+	 * Either display of execution set time, wait for supervisor approval or the execution work
 	 */
 	public void recieveExecutionStep(Step executionStep) {
 		loadingGif.setVisible(false);
@@ -439,10 +468,12 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * this method is used to recieve the estimated end date updated status from the controller.
+	 * this method is used to receive the estimated end date updated status from the controller.
 	 *
 	 * @param affectedRows - number of database rows affected
-	 * the correct behaviour should be one row affected
+	 * 
+	 * the correct behavior should be one row affected
+	 * Therefore it will display proper Toast message incase the affected rows are indeed 1 or something diffrent
 	 */
 	public void recieveEstimatedEndDateUpdateStatus(int affectedRows)
 	{
@@ -466,6 +497,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * method in order to set the page display for change requests in the 
 	 * "EXECUTION_SET_TIME" current step.
+	 * 
+	 * If this method was called after a refresh action it will display proper
+	 * Toast message for the user to know that the supervisor has denied his previous time request
+	 * Otherwise it will simply load the decide time displays
 	 */
 	private void loadExecutionSetTimeDisplay()
 	{
@@ -523,9 +558,10 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	}
 	
 	/**
-	 * Display time remaining.
+	 * Display time remaining in the time remaining text area
+	 * Either display the time delay, time remaining, or last day
 	 *
-	 * @param estimatedEndDate This method update the time left for execution
+	 * @param estimatedEndDate - The step estimated end date
 	 */
 	private void displayTimeRemaining(Date estimatedEndDate) {
 		long daysBetween = TimeManager.getDaysBetween(TimeManager.getCurrentDate(), estimatedEndDate);
