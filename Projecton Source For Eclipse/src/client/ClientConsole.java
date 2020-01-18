@@ -106,7 +106,8 @@ public class ClientConsole implements ChatIF
 
 	public static void connection(String[] args) {
 		String host = "";
-	    int port = 0;  //The port number
+	    @SuppressWarnings("unused")
+		int port = 0;  //The port number
 	
 	    try
 	    {
@@ -116,7 +117,8 @@ public class ClientConsole implements ChatIF
 	    {
 	      host = "localhost";
 	    }
-	    ClientConsole chat= new ClientConsole(host, DEFAULT_PORT);
+	    @SuppressWarnings("unused")
+		ClientConsole chat= new ClientConsole(host, DEFAULT_PORT);
 	    /* chat.accept();  */ //Wait for console data
 		
 	}
