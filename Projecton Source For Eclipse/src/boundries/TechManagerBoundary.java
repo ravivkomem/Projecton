@@ -507,7 +507,7 @@ public class TechManagerBoundary implements Initializable{
 
 	/**
 	 * The method gets supervisor update list and display the list in the supervisor update table.
-	 * @param resultList
+	 * @param resultList - The result list as received from the data base
 	 */
 	public void displaySupervisorUpdate(ArrayList<SupervisorUpdate> resultList) {
 		supervisorList.clear();

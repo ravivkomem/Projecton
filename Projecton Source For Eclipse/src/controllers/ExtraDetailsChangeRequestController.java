@@ -38,7 +38,7 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 	 * Execute query in case the user attached a file to specific change request .
 	 *
 	 * @param changeRequestID the change request ID
-	 * @return the change request files
+	 * send SQL action to the server to get all the change request files
 	 */
 	public void getChangeRequestFiles(Integer changeRequestID) {
 

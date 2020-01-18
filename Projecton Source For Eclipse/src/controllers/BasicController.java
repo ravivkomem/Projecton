@@ -20,7 +20,7 @@ public abstract class BasicController implements Serializable {
 	 * Gets the result from client.
 	 *
 	 * @param result - The result recieved from the DB
-	 * @return - Handles the result as implemented by the non abstract class, should activate the boundary
+	 * Handles the result as implemented by the non abstract class, should activate the boundary
 	 */
 	public abstract void getResultFromClient(SqlResult result);
 	

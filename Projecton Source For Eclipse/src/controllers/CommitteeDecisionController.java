@@ -38,7 +38,8 @@ public class CommitteeDecisionController extends BasicController{
 	 *
 	 * @param id the id
 	 * @param stepId the step id
-	 * @return the comments by change request id
+	 * 
+ 	 * Send SQL action to the server to get the comments by change request id
 	 */
 	public void getCommentsByChangeRequestId(int id, int stepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -123,7 +124,7 @@ public class CommitteeDecisionController extends BasicController{
 	 * Send query that ask for the start time from committee step table.
 	 *
 	 * @param changeRequestId the change request id
-	 * @return the start time from committee step
+	 * Send SQL action to the server to get the start time from committee step
 	 */
 	public void getStartTimeFromCommitteeStep(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -137,7 +138,7 @@ public class CommitteeDecisionController extends BasicController{
 	 *  This method send query that ask for committee step details from the data base.
 	 *
 	 * @param changeRequestId the change request id
-	 * @return the committee step details
+	 * Send SQL action to the server to get the committee step details
 	 */
 	public void getCommitteeStepDetails(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();

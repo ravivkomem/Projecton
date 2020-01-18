@@ -62,7 +62,7 @@ public class AppointTesterController extends BasicController{
 	/**
 	 * Gets the all committee members.
 	 *
-	 * @return send SQL action to the DB to get all the comittee members
+	 *  send SQL action to the DB to get all the committee members
 	 */
 	public void getAllCommitteeMembers() {
 		/* Create sql action */
@@ -96,7 +96,7 @@ public class AppointTesterController extends BasicController{
 	 *
 	 * @param committeeMemberSelected the committee member selected
 	 * @param changeRequestId the change request id
-	 * @return - Send SQL action to the server to update the change request step and handler
+	 *  Send SQL action to the server to update the change request step and handler
 	 */
 	public void updateChangeRequestStepAndHandler(String committeeMemberSelected, int changeRequestId) {
 		
@@ -114,7 +114,7 @@ public class AppointTesterController extends BasicController{
 	 *
 	 * @param committeeMemberSelected the committee member selected
 	 * @param changeRequestID the change request ID
-	 * @return Send SQL action to insert new tester step in the DB
+	 *  Send SQL action to insert new tester step in the DB
 	 */
 	public void createNewTesterStep(String committeeMemberSelected, int changeRequestID) {
 		

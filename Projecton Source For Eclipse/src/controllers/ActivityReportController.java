@@ -38,7 +38,8 @@ public class ActivityReportController extends BasicController{
 	 *
 	 * @param start - The start date for the report
 	 * @param end - The end date for the report
-	 * @return the all change request
+	 * 
+	 * Send SQL action to the server to get all change request between those days
 	 */
 	public void getAllChangeRequest(Date start,Date end) {
 		ArrayList<Object> varArray = new ArrayList<Object>();

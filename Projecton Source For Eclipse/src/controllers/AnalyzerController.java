@@ -43,7 +43,7 @@ public class AnalyzerController extends BasicController {
 	 * This method create sql query that ask for analysis step by change request id form analysis_step table.
 	 *
 	 * @param changeRequestID the change request ID
-	 * @return the current step
+	 * Send SQL action to the server to get the current step
 	 */
 	public void getCurrentStep(Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -156,7 +156,7 @@ public class AnalyzerController extends BasicController {
 	/**
 	 * This method create sql query that ask for the user with committee director permission.
 	 *
-	 * @return the committee director
+	 * Send SQL action to the server to get the committee director
 	 */
 	public void getCommitteeDirector() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_COMMITTEE_DIRECTOR,new ArrayList<Object>());
@@ -183,7 +183,7 @@ public class AnalyzerController extends BasicController {
 	 * Gets the change request from the database by change request id.
 	 *
 	 * @param changeRequestId the change request id
-	 * @return the change request by id
+	 * Send SQL action to the server to get the change request by id
 	 */
 	public void getChangeRequestById(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();

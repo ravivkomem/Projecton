@@ -137,7 +137,7 @@ public class RequestListPageController extends BasicController {
 	 *
 	 * @param from the from date 
 	 * @param to the to to date
-	 * @return the change requests by date search
+	 * Send SQL action to the server to get the change requests by date search
 	 */
 	public void getChangeRequestsByDateSearch(Date from,Date to)
 	{
@@ -154,7 +154,7 @@ public class RequestListPageController extends BasicController {
 	 * This method executes a query to get change request for specific user with a specific ID .
 	 *
 	 * @param idNum the id num
-	 * @return the change requests by id search
+	 * Send SQL action to the server to get the change request with the idNum
 	 */
 	public void getChangeRequestsByIdSearch(Integer idNum)
 	{
@@ -170,7 +170,8 @@ public class RequestListPageController extends BasicController {
 	 * This method executes a query to get all the change requests for specific user with a requested status .
 	 *
 	 * @param status the status
-	 * @return the change request by status
+	 * Send SQL action to the server to get all the change requests by status
+	 * Used by one of the page filters
 	 */
 	public void getChangeRequestByStatus(String status)
 	{

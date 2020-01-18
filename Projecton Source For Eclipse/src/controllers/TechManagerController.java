@@ -69,7 +69,9 @@ public class TechManagerController extends BasicController {
 	 * This method send query that ask for all the subsystem for specific user.
 	 *
 	 * @param userName the user name
-	 * @return subsystem supporter by user name
+	 * 
+	 *  Send SQL action to the server to get the subsystem supporter by user name
+	 *  Used inorder to display the permissions of all the information engineers
 	 */
 	public void getSubsystemSupporterByUserName(String userName) {
 		ArrayList<Object> varArray = new ArrayList<>();

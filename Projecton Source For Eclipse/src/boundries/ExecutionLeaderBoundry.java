@@ -310,7 +310,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 	/**
 	 * Submit execution time.
 	 * This method send the time required for execution to the supervisor for approve or deny the time
-	 * 1. Checks if the date entered is valid -> if not display proper error message via Toast
+	 * 1. Checks if the date entered is valid, if not display proper error message via Toast
 	 * 2. Calls the controller methods to update the step estimated end date
 	 * and also to update the change request current step
 	 * 3. Sets the page displays in order to display to the user that the request is submitted and

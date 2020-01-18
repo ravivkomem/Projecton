@@ -8,7 +8,7 @@ public interface DataInitializable extends Initializable {
 	
 	/**
 	 * This method is used to initialize the boundary with specific object data
-	 * @param data
+	 * @param data - The data sent to the boundary
 	 */
 	public void initData(Object data);
 	

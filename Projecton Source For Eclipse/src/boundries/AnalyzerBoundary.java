@@ -384,7 +384,7 @@ public class AnalyzerBoundary implements DataInitializable {
     /**
      * The method gets ChangeRequest object after the user press refresh,
      * the method update the currentChangeRequest with the new request that received.
-     * @param request
+     * @param request - The change request
      */
     public void getCurrentChangeRequestAfterRefresh(ChangeRequest request) {
     	currentChangeRequest = request;

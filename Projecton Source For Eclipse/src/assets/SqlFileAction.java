@@ -9,8 +9,6 @@ import entities.MyFile;
  * Used for upload / download of files to/from server.
  *
  * @author Raviv Komem
- * @parm myFile - MyFile object
- * @parm upload - Boolean for wether it is upload or download action
  */
 @SuppressWarnings("serial")
 public class SqlFileAction extends SqlAction {

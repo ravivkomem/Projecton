@@ -170,8 +170,8 @@ public class TimeExtensionBoundary implements DataInitializable  {
      * Get the number of affected rows from the controller.
      *
      * @param affectedRows - database rows affected by the update
-     * If it is 1 ---> correct behaviour, display success
-     * else ---> display fail
+     * If it is 1, correct behaviour, display success
+     * else display fail
      */
     public void recieveSubmissionAnswer(int affectedRows)
     {

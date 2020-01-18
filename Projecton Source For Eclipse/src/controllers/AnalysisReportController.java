@@ -35,7 +35,8 @@ public class AnalysisReportController extends BasicController {
 	 * of specific change request.
 	 *
 	 * @param changeRequestId - The change request id
-	 * @return Gets the change requests ID and start a sequence for getting all the information from the DB
+	 * Send SQL action to the server to get the change requests ID and start a sequence
+	 *  for getting all the information from the DB
 	 */
 	public void getAnalysisReportByChangeRequestId(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();

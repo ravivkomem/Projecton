@@ -4,12 +4,11 @@ import java.sql.Date;
 
 import assets.StepType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TimeExtension.
  *
  * @author Raviv Komem
- * @see this class represents a single time extension request
+ * this class represents a single time extension request
  * includes all the fields as described in the time_extension table
  */
 public class TimeExtension {
