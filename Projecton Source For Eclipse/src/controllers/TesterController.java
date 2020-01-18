@@ -19,7 +19,7 @@ import javafx.application.Platform;
 @SuppressWarnings("serial")
 public class TesterController extends BasicController {
 	
-	/** The my boundary. */
+	/** The boundary controlled by this controller */
 	private TesterBoundary myBoundary;
 
 	/**

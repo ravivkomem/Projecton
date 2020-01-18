@@ -21,7 +21,7 @@ import javafx.application.Platform;
 @SuppressWarnings("serial")
 public class PerformanceReportController extends BasicController {
 
-	/** The my boundary. */
+	/** The boundary controlled by this controller. */
 	private PerformanceReportBoundary myBoundary;
 	
 	/**
@@ -35,8 +35,7 @@ public class PerformanceReportController extends BasicController {
 	
 	/**
 	 * Gets the all extension requests from server.
-	 *
-	 * @return the all extension requests from server
+	 * Send SQL action to get all the approved extensions from the DB
 	 */
 	public void getAllExtensionRequestsFromServer()
 	{
@@ -48,8 +47,7 @@ public class PerformanceReportController extends BasicController {
 	
 	/**
 	 * Gets the all repeating steps from server.
-	 *
-	 * @return the all repeating steps from server
+	 * Send SQL action to get all the repeating steps from the server
 	 */
 	public void getAllRepeatingStepsFromServer() {
 		/*Creating Sql Action*/
@@ -60,8 +58,9 @@ public class PerformanceReportController extends BasicController {
 	
 	/**
 	 * Gets the all change requests with deviations.
-	 *
-	 * @return the all change requests with deviations
+	 * Send SQL action to get all change requests with deviations from the Server
+	 * Deviation means that the change request 'END DATE' is after the 'ESTIMATED END DATE' 
+	 * that was submitted during the analysis step
 	 */
 	public void getAllChangeRequestsWithDeviations() {
 		/*Creating Sql Action*/
@@ -103,8 +102,8 @@ public class PerformanceReportController extends BasicController {
 	/**
 	 * Parses the sql result to change request list.
 	 *
-	 * @param result the result
-	 * @return the array list
+	 * @param result the SQL result recived from the server
+	 * @return An arraylist of change requests
 	 */
 	private ArrayList<ChangeRequest> parseSqlResultToChangeRequestList(SqlResult result) {
 		ArrayList<ChangeRequest> changeRequestList = new ArrayList<ChangeRequest>();
@@ -140,8 +139,8 @@ public class PerformanceReportController extends BasicController {
 	/**
 	 * Parses the sql result to step list.
 	 *
-	 * @param result the result
-	 * @return the array list
+	 * @param result - the result recived from the server
+	 * @return an arraylist of steps
 	 */
 	private ArrayList<Step> parseSqlResultToStepList(SqlResult result) {
 		ArrayList<Step> stepList = new ArrayList<Step>();
@@ -173,8 +172,8 @@ public class PerformanceReportController extends BasicController {
 	/**
 	 * Parses the sql result to time extension list.
 	 *
-	 * @param result the result
-	 * @return the array list
+	 * @param result - the result received from the server
+	 * @return an arraylist of time extensions
 	 */
 	private ArrayList<TimeExtension> parseSqlResultToTimeExtensionList(SqlResult result) {
 		ArrayList<TimeExtension> timeExtensionList = new ArrayList<TimeExtension>();

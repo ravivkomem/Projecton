@@ -12,24 +12,33 @@ import entities.ChangeRequest;
 import javafx.application.Platform;
 
 /**
- * 
- * @author Lee Hugi
- *This controller handle with the activity report page
+ * The Class ActivityReportController.
  *
+ * @author Lee Hugi
+ * This controller handle with the activity report page
  */
+@SuppressWarnings("serial")
 public class ActivityReportController extends BasicController{
 
+	/** The boundary controlled by this controller. */
 	ActivityReportBoundary myBoundary;
 	
+	/**
+	 * Instantiates a new activity report controller.
+	 *
+	 * @param myBoundary - The boundary controlled by this controller
+	 */
 	public ActivityReportController(ActivityReportBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
 
 	/**
 	 * the method create sql query with the start and end date and
-	 * gets from the data base all the change request between those dates
-	 * @param start
-	 * @param end
+	 * gets from the data base all the change request between those dates.
+	 *
+	 * @param start - The start date for the report
+	 * @param end - The end date for the report
+	 * @return the all change request
 	 */
 	public void getAllChangeRequest(Date start,Date end) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -40,6 +49,9 @@ public class ActivityReportController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -57,9 +69,10 @@ public class ActivityReportController extends BasicController{
 	}
 	
 	/**
-	 * this method gets the result from the data base and create array list of change request
-	 * @param result
-	 * @return
+	 * this method gets the result from the data base and create array list of change request.
+	 *
+	 * @param result - The result recieved from the DB
+	 * @return An arraylist of change requests that this result represents
 	 */
 	private ArrayList<ChangeRequest> createChangeRequestList(SqlResult result){
 		ArrayList<ChangeRequest> resultList=new ArrayList<>();

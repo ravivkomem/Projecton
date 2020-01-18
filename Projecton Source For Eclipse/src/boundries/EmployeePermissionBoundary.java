@@ -637,6 +637,7 @@ public class EmployeePermissionBoundary implements DataInitializable{
 		subsystemComboBox.getItems().add("College Website");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initData(Object data) {
 		employeeUser = (User)(((ArrayList<ArrayList<Object>>) data).get(0).get(0));

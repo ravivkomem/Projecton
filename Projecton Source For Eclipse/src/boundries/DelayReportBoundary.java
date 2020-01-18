@@ -112,6 +112,7 @@ public class DelayReportBoundary implements Initializable{
 	 *
 	 * @param delayReportList the delay report list
 	 */
+	@SuppressWarnings("unchecked")
 	public void displayDealyReport(ArrayList<DelayReport> delayReportList) {
 		ArrayList<Long> delayDays = new ArrayList<>();
 		int[] deleysCounter;

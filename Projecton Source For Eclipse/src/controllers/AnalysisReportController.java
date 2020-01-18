@@ -7,27 +7,35 @@ import assets.SqlQueryType;
 import assets.SqlResult;
 import boundries.AnalysisReportBoundary;
 import client.ClientConsole;
-import entities.ChangeRequest;
 import javafx.application.Platform;
 
 /**
- * 
- * @author Lee Hugi
- *This controller handle with the analysis report page
+ * The Class AnalysisReportController.
  *
+ * @author Lee Hugi
+ * This controller handle with the analysis report page
  */
+@SuppressWarnings("serial")
 public class AnalysisReportController extends BasicController {
 	
+	/** The boundary controlled by this controller. */
 	AnalysisReportBoundary myBoundary;
 
+	/**
+	 * Instantiates a new analysis report controller.
+	 *
+	 * @param myBoundary - The boundary controlled by this controller
+	 */
 	public AnalysisReportController(AnalysisReportBoundary myBoundary) {
 		this.myBoundary=myBoundary;
 	}
 	
 	/**
 	 * this method create sql query that ask for the analysis report
-	 * of specific change request
-	 * @param changeRequestId
+	 * of specific change request.
+	 *
+	 * @param changeRequestId - The change request id
+	 * @return Gets the change requests ID and start a sequence for getting all the information from the DB
 	 */
 	public void getAnalysisReportByChangeRequestId(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -37,6 +45,9 @@ public class AnalysisReportController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -54,9 +65,10 @@ public class AnalysisReportController extends BasicController {
 	}
 	
 	/**
-	 * this method create array list of object from the data base result
-	 * @param result
-	 * @return
+	 * this method create array list of object from the data base result.
+	 *
+	 * @param result - The result received from the DB
+	 * @return an arrayList of objects that represnts the analysis report information
 	 */
 	private ArrayList<Object> createArrayListFromResult(SqlResult result){
 		ArrayList<Object> resultList = new ArrayList<>();

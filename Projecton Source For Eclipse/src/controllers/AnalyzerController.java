@@ -11,19 +11,26 @@ import boundries.AnalyzerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.Step;
-import entities.User;
 import javafx.application.Platform;
 
 /**
- * 
+ * The Class AnalyzerController.
+ *
  * @author Lior Kauffman
- *This controller handle with the Analyzer page
+ * This controller handle with the Analyzer page
  */
 @SuppressWarnings("serial")
 public class AnalyzerController extends BasicController {
 	
+	/**  The boundary controlled by this controller. */
 	private AnalyzerBoundary myBoundary;
 	
+	
+	/**
+	 * Instantiates a new analyzer controller.
+	 *
+	 * @param myBoundary the my boundary
+	 */
 	public AnalyzerController(AnalyzerBoundary myBoundary) {
 		this.myBoundary = myBoundary;
 	}
@@ -32,8 +39,10 @@ public class AnalyzerController extends BasicController {
 	 * ************ Public Methods **********
 	 * **************************************/
 	/**
-	 * this method create sql query that ask from data base analysis_step for change request
-	 * @param changeRequestID
+	 * this method create sql query that ask from data base analysis_step for change request.
+	 *
+	 * @param changeRequestID the change request ID
+	 * @return the current step
 	 */
 	public void getCurrentStep(Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -41,10 +50,12 @@ public class AnalyzerController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ANALYSIS_STEP_BY_CHANGE_REQUEST_ID, varArray);
 		this.sendSqlActionToClient(sqlAction);
 	}
+	
 	/**
-	 * this method create sql query that update the estimatedDate by analysisStepId in the ANALYSIS_STEP data base
-	 * @param analysisStepId
-	 * @param estimatedDate
+	 * this method create sql query that update the estimatedDate by analysisStepId in the ANALYSIS_STEP data base.
+	 *
+	 * @param analysisStepId the analysis step id
+	 * @param estimatedDate the estimated date
 	 */
 	public void updateAnalysisStepEstimatedEndDate(Integer analysisStepId,Date estimatedDate) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -53,11 +64,13 @@ public class AnalyzerController extends BasicController {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_ANALYSIS_STEP_ESTIMATED_DATE,varArray);
 		this.sendSqlActionToClient(sqlAction);
 	}
+	
 	/**
-	 * this method create sql query that update the current step by id to data base
-	 * @param changeRequestID
-	 * @param handlerUserName
-	 * @param currentstep
+	 * this method create sql query that update the current step by id to data base.
+	 *
+	 * @param currentstep the currentstep
+	 * @param handlerUserName the handler user name
+	 * @param changeRequestId the change request id
 	 */
 	public void updateChangeRequestCurrentStep(String currentstep, String handlerUserName, Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -69,33 +82,34 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create sql query that update current step handler user name and date by change request id to change request data base
-	 * @param changerequest
-	 * @param currentstep
-	 * @param handlerusername
-	 * @param date
+	 * this method create sql query that update current step handler user name and date by change request id to change request data base.
+	 * @param changeRequest - the change request 
+	 * @param currentStep - the current step
+	 * @param handlerUserName - the handler user name
+	 * @param date - the date
 	 */
-	
-	public void updateChangeRequestCurrentStepAndHandlerName(ChangeRequest changerequest,String currentstep,String handlerusername,Date date) {
+	public void updateChangeRequestCurrentStepAndHandlerName(ChangeRequest changeRequest,String currentStep,String handlerUserName,Date date) {
 		ArrayList<Object> varArray = new ArrayList<>();
-		varArray.add(currentstep);
-		varArray.add(handlerusername);
+		varArray.add(currentStep);
+		varArray.add(handlerUserName);
 		varArray.add(date);
-		varArray.add(changerequest.getChangeRequestID());
+		varArray.add(changeRequest.getChangeRequestID());
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	/**
-	 * this method create sql query that update analysis step data base to closed
-	 * @param changerequest
-	 * @param date
-	 * @param Status
-	 * @param AnalysisReportHeader
-	 * @param AnalysisReportDescription
-	 * @param AnalysisReportAdvantages
-	 * @param AnalysisReportDuration
-	 * @param AnalysisReportConstraints
+	 * this method create sql query that update analysis step data base to closed.
+	 *
+	 * @param changerequest the changerequest
+	 * @param date the date
+	 * @param Status the status
+	 * @param AnalysisReportHeader the analysis report header
+	 * @param AnalysisReportDescription the analysis report description
+	 * @param AnalysisReportAdvantages the analysis report advantages
+	 * @param AnalysisReportDuration the analysis report duration
+	 * @param AnalysisReportConstraints the analysis report constraints
 	 */
 	
 	//"UPDATE icm.analysis_step SET EndDate = ?,Status = ?,AnalysisReportHeader = ?,AnalysisReportDescription = ?,AnalysisReportAdvantages = ?,AnalysisReportDuration = ?,AnalysisReportConstraints = ? WHERE ChangeRequestID = ?";
@@ -113,14 +127,15 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	/**
-	 * this method create sql query that insert new committee step to data base
-	 * @param changeRequestID
-	 * @param UserName
-	 * @param StartDate
-	 * @param Status
-	 * @param estimatedDate
-	 * 
+	 * this method create sql query that insert new committee step to data base.
+	 *
+	 * @param ChangeRequestId the change request id
+	 * @param UserName the user name
+	 * @param StartDate the start date
+	 * @param Status the status
+	 * @param estimatedDate the estimated date
 	 */
 	public void insertNewCommitteeStep(Integer ChangeRequestId, String UserName,Date StartDate,String Status,Date estimatedDate) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -133,9 +148,11 @@ public class AnalyzerController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
+	
 	/**
-	 * this method create sql query that ask for committee director
-	 * 
+	 * this method create sql query that ask for committee director.
+	 *
+	 * @return the committee director
 	 */
 	public void getCommitteeDirector() {
 		SqlAction sqlAction = new SqlAction(SqlQueryType.GET_COMMITTEE_DIRECTOR,new ArrayList<Object>());
@@ -158,6 +175,12 @@ public class AnalyzerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}	
 	
+	/**
+	 * Gets the change request by id.
+	 *
+	 * @param changeRequestId the change request id
+	 * @return the change request by id
+	 */
 	public void getChangeRequestById(Integer changeRequestId) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(changeRequestId);
@@ -166,10 +189,11 @@ public class AnalyzerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 
+	/* (non-Javadoc)
+	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	 */
 	@Override
 	public void getResultFromClient(SqlResult result) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
 		Platform.runLater(() -> {
 		switch (result.getActionType()) {
 		
@@ -177,10 +201,7 @@ public class AnalyzerController extends BasicController {
 			case UPDATE_CHANGE_REQUEST_CURRENTSTEP_HANDLERNAME:
 			case UPDATE_ANALYSIS_STEP_ESTIMATED_DATE:
 			case UPDATE_ANALYSIS_STEP_CLOSE:
-//				int affectedRows;
-//				affectedRows = (Integer) (result.getResultData().get(0).get(0));
 				this.unsubscribeFromClientDeliveries();
-//				myBoundary.updateTesterPageToDBSuccessfully(affectedRows);
 				break;
 			case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
 				this.unsubscribeFromClientDeliveries();
@@ -212,6 +233,12 @@ public class AnalyzerController extends BasicController {
 		return;
 	}
 	
+	/**
+	 * Parses the sql result to change request.
+	 *
+	 * @param result the result
+	 * @return The change request the result represnts
+	 */
 	private ChangeRequest parseSqlResultToChangeRequest(SqlResult result) {
 		ChangeRequest request = new ChangeRequest((Integer)result.getResultData().get(0).get(0),
 				(String)result.getResultData().get(0).get(1),(Date)result.getResultData().get(0).get(2),
@@ -224,8 +251,10 @@ public class AnalyzerController extends BasicController {
 	}
 	
 	/**
-	 * this method create new step from sqlResult
-	 * @param result
+	 * this method create new step from sqlResult.
+	 *
+	 * @param result the result
+	 * @return the step the result represnts
 	 */
 	private Step parseSqlResultToAnalysisStep(SqlResult result) {
 		

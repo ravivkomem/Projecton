@@ -123,11 +123,7 @@ public class UploadChangeRequestController extends BasicController {
 				case INSERT_NEW_CHANGE_REQUEST:
 					int changeRequestId = -1;
 					this.unsubscribeFromClientDeliveries();
-					/*TODO: Check if result is empty ---> something wrong happend */
-					if (true)
-					{
-						changeRequestId = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
-					}
+					changeRequestId = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
 					myBoundary.displayChangeRequestId(changeRequestId);
 					break;
 				case SELECT_ALL_INFROMATION_ENGINEERS:
@@ -144,9 +140,7 @@ public class UploadChangeRequestController extends BasicController {
 					uploadTheInsertedNewChangeRequestToDataBase();
 					break;
 				case INSERT_NEW_FILE:
-					/*TODO: Do something */
-					int fileID = ((BigInteger) (result.getResultData().get(0).get(0))).intValue();
-					
+					this.unsubscribeFromClientDeliveries();
 					break;
 				case SELECT_HANDLER_USER_NAME_BY_SYSTEM:
 					this.unsubscribeFromClientDeliveries();
@@ -159,15 +153,8 @@ public class UploadChangeRequestController extends BasicController {
 		});
 		return;	
 	}
-	/*execute the select all information engineers query  */
-	/*public void chooseAutomaticallyAnalyzer()
-	{
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_INFROMATION_ENGINEERS,new ArrayList<Object>());
-		this.subscribeToClientDeliveries();		//subscribe to listener array
-		ClientConsole.client.handleMessageFromClientUI(sqlAction);
-	}*/
 	/**
-	 * This method calls a querey to update change request with the necessary handler.
+	 * This method calls a query to update change request with the necessary handler.
 	 */
 	public void appointHandlerBySystemRequired()
 	{

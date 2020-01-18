@@ -135,8 +135,8 @@ public class RequestListPageController extends BasicController {
 	/**
 	 * This method executes a query to get all the change requests for specific user with a requested date.
 	 *
-	 * @param from the from
-	 * @param to the to
+	 * @param from the from date 
+	 * @param to the to to date
 	 * @return the change requests by date search
 	 */
 	public void getChangeRequestsByDateSearch(Date from,Date to)

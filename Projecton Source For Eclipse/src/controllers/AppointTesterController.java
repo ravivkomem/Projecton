@@ -10,17 +10,19 @@ import javafx.application.Platform;
 
 /**
  * The Class AppointTesterController.
+ * @author Raviv Komem
+ *
  */
 @SuppressWarnings("serial")
 public class AppointTesterController extends BasicController{
 
-	/** The my boundary. */
+	/** The boundary controlled by this controller. */
 	private AppointTesterBoundary myBoundary;
 	
 	/**
 	 * Instantiates a new appoint tester controller.
 	 *
-	 * @param appointTesterBoundary the appoint tester boundary
+	 * @param appointTesterBoundary -  the appoint tester boundary
 	 */
 	public AppointTesterController(AppointTesterBoundary appointTesterBoundary)
 	{
@@ -60,7 +62,7 @@ public class AppointTesterController extends BasicController{
 	/**
 	 * Gets the all committee members.
 	 *
-	 * @return the all committee members
+	 * @return send SQL action to the DB to get all the comittee members
 	 */
 	public void getAllCommitteeMembers() {
 		/* Create sql action */
@@ -74,7 +76,7 @@ public class AppointTesterController extends BasicController{
 	 * Parses the sql result to array list string.
 	 *
 	 * @param result the result
-	 * @return the array list
+	 * @return An arraylist of strings
 	 */
 	private ArrayList<String> parseSqlResultToArrayListString (SqlResult result)
 	{
@@ -94,6 +96,7 @@ public class AppointTesterController extends BasicController{
 	 *
 	 * @param committeeMemberSelected the committee member selected
 	 * @param changeRequestId the change request id
+	 * @return - Send SQL action to the server to update the change request step and handler
 	 */
 	public void updateChangeRequestStepAndHandler(String committeeMemberSelected, int changeRequestId) {
 		
@@ -111,6 +114,7 @@ public class AppointTesterController extends BasicController{
 	 *
 	 * @param committeeMemberSelected the committee member selected
 	 * @param changeRequestID the change request ID
+	 * @return Send SQL action to insert new tester step in the DB
 	 */
 	public void createNewTesterStep(String committeeMemberSelected, int changeRequestID) {
 		

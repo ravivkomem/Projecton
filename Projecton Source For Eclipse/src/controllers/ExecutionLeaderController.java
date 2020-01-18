@@ -16,7 +16,6 @@ import javafx.application.Platform;
  * @author Itay David
  *
  */
-
 @SuppressWarnings("serial")
 public class ExecutionLeaderController extends BasicController {
 	
@@ -60,8 +59,8 @@ public class ExecutionLeaderController extends BasicController {
 	
 	/**
 	 * 
-	 * @param changeRequestID
-	 * @param executionSummary
+	 * @param changeRequestID - the change request ID
+	 * @param executionSummary - the execution summary entered by the execution leader
 	 * This method update DB execution step with the comment
 	 */
 	public void closeExecutionStep(Integer executionStepId,String executionSummary)
@@ -77,8 +76,8 @@ public class ExecutionLeaderController extends BasicController {
 	
 	/**
 	 * 
-	 * @param changeRequestID
-	 * This method update current step in DB to tester committee director appoint 
+	 * @param changeRequestID - the change request ID
+	 * This method update current step of the change request sent in DB to tester committee director appoint 
 	 */
 	public void advanceChangeRequestToTesterStep(Integer changeRequestID)
 	{
@@ -92,8 +91,8 @@ public class ExecutionLeaderController extends BasicController {
 	
 	/**
 	 * This method insert new estimated date to execution step and change request 
-	 * @param estimatedEndDate
-	 * @param executionStepId
+	 * @param estimatedEndDate - The estimated end date 
+	 * @param executionStepId - The execution step ID
 	 * 
 	 */
 	public void updateExecutionStepEstimatedEndDate(Date estimatedEndDate,Integer executionStepId) {
@@ -129,7 +128,6 @@ public class ExecutionLeaderController extends BasicController {
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
-			int affectedRows;
 			switch(result.getActionType())
 			{
 				case SELECT_EXECUTIOM_STEP_DETAILS:
@@ -147,8 +145,6 @@ public class ExecutionLeaderController extends BasicController {
 				case UPDATE_CHANGE_REQUEST_CURRENT_STEP:
 					this.unsubscribeFromClientDeliveries();
 					myBoundry.loadExecutionApproveTimeDisplay();
-//					affectedRows = (Integer) (result.getResultData().get(0).get(0));
-//					myBoundry.recieveEstimatedEndDateUpdateStatus(affectedRows);
 					break;
 					
 					

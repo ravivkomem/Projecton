@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import assets.ProjectPages;
 import assets.Toast;
-import controllers.CommitteDecisionController;
+import controllers.CommitteeDecisionController;
 import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.CommitteeComment;
@@ -187,7 +187,7 @@ public class CommitteeDecisionBoundary implements DataInitializable {
 	  * *************************************/
     
 	/** The my controller. */
-     private CommitteDecisionController myController = new CommitteDecisionController(this);
+     private CommitteeDecisionController myController = new CommitteeDecisionController(this);
 	
 	/** The current change request. */
 	private ChangeRequest currentChangeRequest;

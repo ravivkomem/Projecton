@@ -6,6 +6,8 @@ import javax.mail.internet.MimeMessage;
 import java.util.Collection;
 import java.util.Properties;
 
+
+
 /** 
  * 
  * @author Raviv Komem
@@ -42,11 +44,11 @@ public class EmailTLS {
 	 * This method will send a mail to the recipient and the bcc recipients
 	 * The email will consists of the subject and body will be the message
 	 * 
-	 * @param toRecipient
-	 * @param bccRecipient
-	 * @param subject
-	 * @param message
-	 * @return message sent properly or not
+	 * @param toRecipient - the email address to be located in the: To segment 
+	 * @param bccRecipient - the email address to be located in the: BCC segment
+	 * @param subject - the email subject
+	 * @param message - the email message
+	 * @return boolean of the message status, true if it was sent properly and false otherwise
 	 */
 	public boolean sendMessage(String toRecipient, String bccRecipient, String subject, String message)
 	{
@@ -74,11 +76,26 @@ public class EmailTLS {
         }
 	}
 	
+	
+	/**
+	 * 
+	 * @param toRecipient -the recipent email address
+	 * @param subject - the email subject
+	 * @param message - the email message
+	 * @return boolean of the message status, true if it was sent properly and false otherwise
+	 */
 	public boolean sendMessage(String toRecipient, String subject, String message)
 	{	
 		return this.sendMessage(toRecipient,"", subject, message);	
 	}
 	
+	/**
+	 * 
+	 * @param toRecipients - A collections of multiple to recipents
+	 * @param subject - the email subject
+	 * @param message - the email message
+	 * @return boolean of the message status, true if it was sent properly and false otherwise
+	 */
 	public boolean sendMessage(Collection<String> toRecipients, String subject, String message)
 	{
 		String toRecipientsList ="";
@@ -90,6 +107,15 @@ public class EmailTLS {
 		return this.sendMessage(toRecipientsList,"", subject, message);	
 	}
 	
+	
+	/**
+	 * 
+	 * @param toRecipients - A collection of multiple to recipents
+	 * @param bccRecipient - the bcc recipent 
+	 * @param subject - the email subject
+	 * @param message - the email message
+	 * @return boolean of the message status, true if it was sent properly and false otherwise
+	 */
 	public boolean sendMessage(Collection<String> toRecipients, String bccRecipient, String subject, String message)
 	{
 		String toRecipientsList ="";
@@ -101,6 +127,14 @@ public class EmailTLS {
 		return this.sendMessage(toRecipientsList, bccRecipient, subject, message);	
 	}
 	
+	/**
+	 * 
+	 * @param toRecipient - the to recipent email address
+	 * @param bccRecipients - A collection of bcc recipents email address
+	 * @param subject - the email subject
+	 * @param message - the email message
+	 * @return boolean of the message status, true if it was sent properly and false otherwise
+	 */
 	public boolean sendMessage(String toRecipient, Collection<String> bccRecipients, String subject, String message)
 	{	
 		String bccRecipientsList ="";
@@ -113,6 +147,14 @@ public class EmailTLS {
 	}
 	
 	
+	/**
+	 * 
+	 * @param toRecipients - Collection of all the "TO" email addresses
+	 * @param bccRecipients - Collection of all the "BCC" email addresses
+	 * @param subject - the email subject
+	 * @param message - the email message
+	 * @return boolean of the message status, true if it was sent properly and false otherwise
+	 */
 	public boolean sendMessage(Collection<String> toRecipients, Collection<String> bccRecipients, String subject, String message)
 	{
 		String toRecipientsList ="";

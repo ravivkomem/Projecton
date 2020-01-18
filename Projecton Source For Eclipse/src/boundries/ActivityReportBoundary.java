@@ -98,9 +98,6 @@ public class ActivityReportBoundary implements Initializable {
     /** The my controller. */
 	private ActivityReportController myController = new ActivityReportController(this);
 	
-	/** The activity report. */
-	private ActivityReport activityReport;
-	
 	/** The change request list. */
 	private ArrayList<ChangeRequest> changeRequestList;
 	
@@ -123,7 +120,7 @@ public class ActivityReportBoundary implements Initializable {
 	/**
 	 * This method display in the diagrams the report details.
 	 *
-	 * @param event the event
+	 * @param event - Mouse click on the "SHOW" button
 	 */
 	@FXML
 	void showActivityReportDetails(MouseEvent event) {
@@ -204,7 +201,7 @@ public class ActivityReportBoundary implements Initializable {
 				workDays.add(daysBetween);
 			}
 		}
-		displayActivityReport(activityReport = new ActivityReport(active, close, suspended,denied, workDays),workDays);
+		displayActivityReport(new ActivityReport(active, close, suspended,denied, workDays),workDays);
 	}
 	
 	/**
@@ -213,6 +210,7 @@ public class ActivityReportBoundary implements Initializable {
 	 * @param report the report
 	 * @param workDays the work days
 	 */
+	@SuppressWarnings("unchecked")
 	private void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
 		int[] workDaysArray;
 		requestStatusPieChart.setTitle("Change Request Status");

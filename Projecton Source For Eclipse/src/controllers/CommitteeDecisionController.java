@@ -18,19 +18,18 @@ import javafx.application.Platform;
  * @author Lee Hugi
  * This controller handle with the committee decision page
  */
-
 @SuppressWarnings("serial")
-public class CommitteDecisionController extends BasicController{
+public class CommitteeDecisionController extends BasicController{
 	
-	/** The my boundary. */
+	/** The boundary controlled by this controller. */
 	private CommitteeDecisionBoundary myBoundary;
 	
 	/**
-	 * Instantiates a new committe decision controller.
+	 * Instantiates a new committee decision controller.
 	 *
 	 * @param myBoundary the my boundary
 	 */
-	public CommitteDecisionController(CommitteeDecisionBoundary myBoundary){
+	public CommitteeDecisionController(CommitteeDecisionBoundary myBoundary){
 		this.myBoundary=myBoundary;
 	}
 	
@@ -90,13 +89,13 @@ public class CommitteDecisionController extends BasicController{
 	 * this method create sql query and update the change request table in the data base.
 	 *
 	 * @param currentStep the current step
-	 * @param HamdlerUserName the hamdler user name
+	 * @param handlerUserName the handler user name
 	 * @param changeRequestID the change request ID
 	 */
-	public void updateChangeRequestCurrentStep(String currentStep, String HamdlerUserName, Integer changeRequestID) {
+	public void updateChangeRequestCurrentStep(String currentStep, String handlerUserName, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(currentStep);
-		varArray.add(HamdlerUserName);
+		varArray.add(handlerUserName);
 		varArray.add(changeRequestID);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.UPDATE_CHANGE_REQUEST_CURRENT_STEP,varArray);
 		this.subscribeToClientDeliveries();		//subscribe to listener array

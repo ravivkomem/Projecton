@@ -35,7 +35,7 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 	}
 
 	/**
-	 * Execute querey in case the user attached a file to specific change request .
+	 * Execute query in case the user attached a file to specific change request .
 	 *
 	 * @param changeRequestID the change request ID
 	 * @return the change request files
