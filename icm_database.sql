@@ -366,6 +366,7 @@ CREATE TABLE `supervisor_update` (
   `SupervisorUserName` varchar(45) NOT NULL,
   `Essence` varchar(45) NOT NULL,
   `Update_Date` date NOT NULL,
+  `SupervisorFullName` varchar(45) NOT NULL,
   PRIMARY KEY (`UpdateId`),
   UNIQUE KEY `UpdateId_UNIQUE` (`UpdateId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -377,7 +378,7 @@ CREATE TABLE `supervisor_update` (
 
 LOCK TABLES `supervisor_update` WRITE;
 /*!40000 ALTER TABLE `supervisor_update` DISABLE KEYS */;
-INSERT INTO `supervisor_update` VALUES (1,71,'itay','Appoint execution','2020-01-17');
+INSERT INTO `supervisor_update` VALUES (1,71,'itay','Appoint execution','2020-01-17','Itay David');
 /*!40000 ALTER TABLE `supervisor_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -576,4 +577,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-01-17 17:03:00
+-- Dump completed on 2020-01-18 11:38:58
