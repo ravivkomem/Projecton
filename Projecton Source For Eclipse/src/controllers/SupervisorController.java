@@ -54,12 +54,13 @@ public class SupervisorController extends BasicController
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	public void inserntNewSupervisorUpdate(Integer id, String name, String essence, Date updateDate) {
+	public void inserntNewSupervisorUpdate(Integer id, String name, String essence, Date updateDate, String fullName) {
 		ArrayList<Object> varArray = new ArrayList<>();
 		varArray.add(id);
 		varArray.add(name);
 		varArray.add(essence);
 		varArray.add(updateDate);
+		varArray.add(fullName);
 		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE, varArray);
 		this.subscribeToClientDeliveries(); // subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
