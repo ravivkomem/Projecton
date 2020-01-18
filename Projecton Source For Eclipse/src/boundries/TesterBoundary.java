@@ -26,7 +26,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TesterBoundary.
  *
@@ -158,42 +157,33 @@ public class TesterBoundary implements DataInitializable {
     @FXML
     private RadioButton test5FailRadioButton;
 
-    /** The Constant MAX_CHARS. */
     /* ****************************************
      * ********** Static Objects **************
      * ****************************************/
+    /** The Constant MAX_CHARS. */
     private static final int MAX_CHARS = 600;
     
-    /** The my controller. */
     /* ****************************************
      * ********** Private Objects *************
      * ****************************************/
+    /** The my controller. */
     private TesterController myController = new TesterController(this);
-    
     /** The test 1 group. */
     private final ToggleGroup test1Group = new ToggleGroup();
-    
     /** The test 2 group. */
     private final ToggleGroup test2Group = new ToggleGroup();
-    
     /** The test 3 group. */
     private final ToggleGroup test3Group = new ToggleGroup();
-    
     /** The test 4 group. */
     private final ToggleGroup test4Group = new ToggleGroup();
-    
     /** The test 5 group. */
     private final ToggleGroup test5Group = new ToggleGroup();
-    
     /** The current change request. */
     private ChangeRequest currentChangeRequest;
-	
 	/** The tester step. */
 	private Step testerStep;
-	
 	/** The my time extension stage. */
 	private Stage myTimeExtensionStage;
-	
 	/** The my analysis report stage. */
 	private Stage myAnalysisReportStage;
 	
@@ -204,7 +194,10 @@ public class TesterBoundary implements DataInitializable {
      * This method is used to log out from the system.
      *
      * @param event - mouse click on "logout" button
-     * Logout the user and moves to the login page
+     * 
+     * Closes all the open additional stages
+     * Perform application user logout
+     * Load the project "Login page"
      */
     @FXML
     void LogOut(MouseEvent event) {
@@ -217,7 +210,8 @@ public class TesterBoundary implements DataInitializable {
      * This method is used to load the home page.
      *
      * @param event - mouse click on "Home" button
-     * Moves the main stage to the login page
+     * 
+     * Moves the main stage to the menu page
      */
 	@FXML
     void loadHomePage(MouseEvent event) {
@@ -229,6 +223,7 @@ public class TesterBoundary implements DataInitializable {
 	 * This method is used to load the previous page.
 	 *
 	 * @param event - mouse click on "Back" button
+	 * 
 	 * Moves the main stage to the previous page
 	 */
     @FXML
@@ -241,6 +236,7 @@ public class TesterBoundary implements DataInitializable {
      * This method is used to open additional page for requesting time extension.
      *
      * @param event - mouse click on "Time Extension" button
+     * 
      * Another stage is displayed
      */
     @FXML
@@ -260,6 +256,7 @@ public class TesterBoundary implements DataInitializable {
      * This method is used to open additional page for displaying analysis report.
      *
      * @param event - mouse click on "Analysis report" button
+     * 
      * Another stage is displayed
      */
     @FXML
@@ -279,6 +276,7 @@ public class TesterBoundary implements DataInitializable {
      * This method is used to report the test fail.
      *
      * @param event - mouse click on "Submit Report Fail" button
+     * 
      * Updates the database accordingly and moves back to the workstation page
      */
     @FXML
@@ -381,7 +379,10 @@ public class TesterBoundary implements DataInitializable {
 	 * This method is called by the controller after receiving database update results.
 	 *
 	 * @param affectedRows - number of rows in the database that were affected
-	 * According to the value will display proper message
+	 * 
+	 * According to the value will display proper message,
+	 * the correct behavior we expect is to have only one affected Row
+	 * So the messages will be displayed according to this behavior
 	 */
     public void updateTesterPageToDBSuccessfully(int affectedRows) {
     	if(affectedRows == 1) {
@@ -394,8 +395,8 @@ public class TesterBoundary implements DataInitializable {
     /**
      * Init all the FXML objects in the boundary.
      *
-     * @param location the location
-     * @param resources the resources
+     * Used to set all the displays, and to group all the radio buttons into 
+     * thier test groups.
      */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -523,6 +524,7 @@ public class TesterBoundary implements DataInitializable {
 	 * @param answer3 - Test3 answer
 	 * @param answer4 - Test4 answer
 	 * @param answer5 - Test5 answer
+	 * 
 	 * @return true if all are filled, else false
 	 */
     private boolean isFullyFilled(RadioButton answer1, RadioButton answer2, RadioButton answer3, RadioButton answer4,

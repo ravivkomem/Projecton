@@ -36,7 +36,9 @@ public class TesterController extends BasicController {
 	 * and set in motion sql action to get the most recent tester step for that change request.
 	 *
 	 * @param changeRequestID the change request ID
-	 * @return the current step
+	 * 
+	 * Send SQL action to the server in order to get the tester step for
+	 * the entered change request ID
 	 */
 	public void getCurrentStep(Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<Object>();
@@ -50,6 +52,9 @@ public class TesterController extends BasicController {
 	 *
 	 * @param testerStepId the tester step id
 	 * @param failReport the fail report
+	 * 
+	 * Send SQL action to the server to close the testing step (by his ID)
+	 * and also to update the fail report information in the DB
 	 */
 	public void closeChangeRequestStep(Integer testerStepId, String failReport) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -66,6 +71,11 @@ public class TesterController extends BasicController {
 	 *
 	 * @param nextStep the next step
 	 * @param changeRequestID the change request ID
+	 * 
+	 * Send SQL action to the server to advance the change request to the following step,
+	 * Used to advance from "TESTING_WORK" to either "SUPERVISOR_APPOINT_EXECUTION_LEADER"
+	 * incase the test were resulted in failure.
+	 * Or to advance from "TESTING_WORK" to "CLOSING_STEP" incase all the tests passed.
 	 */
 	public void advanceChangeRequestStep(String nextStep, Integer changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -77,9 +87,11 @@ public class TesterController extends BasicController {
 	}
 	
 	/**
-	 * Creates the new closing step.
+	 * Creates new closing step.
 	 *
 	 * @param changeRequestID the change request ID
+	 * 
+	 * Send SQL action to create new closing step in the DB for future refreences and logs
 	 */
 	public void createNewClosingStep(int changeRequestID) {
 		ArrayList<Object> varArray = new ArrayList<>();
@@ -126,7 +138,7 @@ public class TesterController extends BasicController {
 	 * Be careful as this method expect the fields to be presented in a specific order.
 	 *
 	 * @param result the result
-	 * @return Step
+	 * @return Step - The step that was parsed from the result
 	 */
 	private Step parseSqlResultToTesterStep(SqlResult result) {
 		
@@ -147,7 +159,12 @@ public class TesterController extends BasicController {
 	/**
 	 * Automatic close new time extension.
 	 *
-	 * @param testerStep the tester step
+	 * @param testerStep - tester step 
+	 * 
+	 * Send SQL action to the server to close any time extensions requested for this step
+	 * that are still in the "NEW" status.
+	 * This method is called upon step finish work, because if it was finished without time extension
+	 * they were unneccasry and therefore need to be closed without any supervisor action
 	 */
 	public void automaticCloseNewTimeExtension(Step testerStep) {
 		ArrayList<Object> varArray = new ArrayList<>();
