@@ -38,7 +38,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <VBox alignment="TOP_CENTER" prefHeight="452.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+      <VBox alignment="TOP_CENTER" prefHeight="513.0" prefWidth="137.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
          <children>
             <ImageView fitHeight="69.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -110,6 +110,20 @@
                   </ImageView>
                </graphic>
             </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnSupervisorUpdates" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#clickSupervisorUpdates" prefHeight="58.0" prefWidth="119.0" style="-fx-background-color: #ddf1ff;" text="Supevisor Updates" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@shejiyeiconwklipd5vzrc.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </VBox>
       <AnchorPane fx:id="employeeAnchorPane" layoutX="148.0" layoutY="85.0" prefHeight="441.0" prefWidth="586.0" visible="false">
@@ -166,6 +180,18 @@
             </TableView>
             <Button fx:id="viewRequestDetailsButton" layoutX="383.0" layoutY="284.0" mnemonicParsing="false" onMouseClicked="#loadExtraDetailsPage" text="View Request Details" />
             <Text layoutX="19.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press on a row in the table to view change request extra details" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="supervisorUpdatePane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0" visible="false">
+         <children>
+            <TableView fx:id="supervisorUpdateTable" layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="493.0">
+              <columns>
+                <TableColumn fx:id="requestID_supervisorColumn" prefWidth="75.0" text="Request ID" />
+                <TableColumn fx:id="supervisorNameColumn" prefWidth="113.66668701171875" text="Supervisor Name" />
+                  <TableColumn fx:id="essenceColumn" prefWidth="161.0" text="Essence" />
+                  <TableColumn fx:id="updateDateColumn" prefWidth="112.3333740234375" text="Update Date" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>

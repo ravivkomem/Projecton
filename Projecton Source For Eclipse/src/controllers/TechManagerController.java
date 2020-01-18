@@ -77,9 +77,13 @@ public class TechManagerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	/* (non-Javadoc)
-	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
-	 */
+	public void getSupervisorUpdateDetails() {
+		// TODO Auto-generated method stub
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_SUPERVISOR_UPDATES, new ArrayList<Object>());
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -101,6 +105,8 @@ public class TechManagerController extends BasicController {
 				suspendedList.addAll(this.createChangeRequestFromResult(result));
 				myBoundary.displayChangeRequestTable(suspendedList);
 				break;
+			case SELECT_SUPERVISOR_UPDATES:
+				this.unsubscribeFromClientDeliveries();
 			default:
 				break;
 			}
@@ -156,5 +162,7 @@ public class TechManagerController extends BasicController {
 		}
 		return resultList;
 	}
+
+
 
 }
