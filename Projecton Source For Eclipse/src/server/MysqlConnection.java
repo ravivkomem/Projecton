@@ -326,6 +326,8 @@ public class MysqlConnection {
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
 		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_SUPERVISOR_UPDATES.getCode()] = 
+    			"SELECT * FROM icm.supervisor_update";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
     			"SELECT * FROM icm.change_request";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE.getCode()]=
@@ -454,18 +456,21 @@ public class MysqlConnection {
     	 * *************Supervisor Queries ****************
     	 *******************************************************
     	 *******************************************************/
-     	
+     	sqlArray[SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS.getCode()] =
+     			"SELECT * FROM icm.change_request "
+     			+ "WHERE Status = 'SUSPEND'";
+     			
      	sqlArray[SqlQueryType.SELECT_USER_EMAIL.getCode()] =
      			"SELECT * FROM icm.user WHERE UserName = ?";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 
 				"SELECT * FROM icm.change_request";
-    	
+    	sqlArray[SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE.getCode()] =
+    			"INSERT INTO icm.supervisor_update(ChangeRequestId,SupervisorUserName,Essence,Update_Date,SupervisorFullName)"
+    			+ " VALUES (?,?,?,?,?) ";
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
 				" WHERE CurrentStep = 'ANALYZER_AUTO_APPOINT' OR CurrentStep = 'EXECUTION_LEADER_SUPERVISOR_APPOINT' OR CurrentStep = 'ANALYZER_SUPERVISOR_APPOINT' ";
-    	
-    	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPROVALS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
 						" WHERE CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME'";
@@ -579,6 +584,9 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR.getCode()]=
     			"UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
+    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE.getCode()] =
+    			"SELECT EstimatedEndDate From icm.mergred_steps " + 
+    			"WHERE ChangeRequestID = ? AND Status = 'ACTIVE'";
     }
     
 }

@@ -10,6 +10,7 @@ import boundries.TechManagerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.SubsystemSupporter;
+import entities.SupervisorUpdate;
 import entities.User;
 import javafx.application.Platform;
 
@@ -33,6 +34,12 @@ public class TechManagerController extends BasicController {
 	 */
 	public TechManagerController(TechManagerBoundary myBoundary) {
 		this.myBoundary = myBoundary;
+	}
+	
+	public void SelectChangeRequestForSuspensions() {
+		ArrayList<Object> varArray = new ArrayList<>();
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ALL_SUSPENDED_CHANGE_REQUESTS, varArray);
+		this.sendSqlActionToClient(sqlAction);
 	}
 
 	/**
@@ -71,9 +78,12 @@ public class TechManagerController extends BasicController {
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	/* (non-Javadoc)
-	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
-	 */
+	public void getSupervisorUpdateDetails() {
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_SUPERVISOR_UPDATES, new ArrayList<Object>());
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -89,12 +99,32 @@ public class TechManagerController extends BasicController {
 			case SELECT_SUBSYSTEM_BY_USER_NAME:
 				myBoundary.displaySubsystemTable(createSubsystemSupporter(result));
 				break;
+			case SELECT_ALL_SUSPENDED_CHANGE_REQUESTS:
+				this.unsubscribeFromClientDeliveries();
+				ArrayList<ChangeRequest> suspendedList =new ArrayList<>();
+				suspendedList.addAll(this.createChangeRequestFromResult(result));
+				myBoundary.displayChangeRequestTable(suspendedList);
+				break;
+			case SELECT_SUPERVISOR_UPDATES:
+				this.unsubscribeFromClientDeliveries();
+				myBoundary.displaySupervisorUpdate(createSupervisorUpdate(result));
+				break;
 			default:
 				break;
 			}
 
 		});
 		return;
+	}
+	
+	private ArrayList<SupervisorUpdate> createSupervisorUpdate(SqlResult result){
+		ArrayList<SupervisorUpdate> list = new ArrayList<>();
+		for(ArrayList<Object> u: result.getResultData()) {
+			SupervisorUpdate update = new SupervisorUpdate((Integer)u.get(0), (Integer)u.get(1),
+					(String)u.get(2), (String)u.get(3), (Date)u.get(4),(String) u.get(5));
+			list.add(update);
+		}
+		return list;
 	}
 	
 	/**
@@ -144,5 +174,7 @@ public class TechManagerController extends BasicController {
 		}
 		return resultList;
 	}
+
+
 
 }

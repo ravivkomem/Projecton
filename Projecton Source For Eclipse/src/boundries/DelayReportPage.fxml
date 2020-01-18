@@ -17,9 +17,11 @@
           <NumberAxis fx:id="delayNumberBarChart" side="LEFT" />
         </yAxis>
       </BarChart>
-      <Text layoutX="66.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:" />
-      <TextField fx:id="medianTextField" layoutX="177.0" layoutY="303.0" prefHeight="25.0" prefWidth="59.0" />
-      <Text layoutX="66.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Standart Deviation:" />
-      <TextField fx:id="stdTextField" layoutX="177.0" layoutY="347.0" prefHeight="25.0" prefWidth="59.0" />
+      <Text layoutX="66.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All systems median:" />
+      <TextField fx:id="medianTextField" layoutX="251.0" layoutY="303.0" prefHeight="25.0" prefWidth="59.0" />
+      <Text layoutX="66.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All systems standart deviation:" />
+      <TextField fx:id="stdTextField" layoutX="251.0" layoutY="347.0" prefHeight="25.0" prefWidth="59.0" />
+      <Text layoutX="66.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All systems average:" />
+      <TextField fx:id="avgTextField" layoutX="251.0" layoutY="392.0" prefHeight="25.0" prefWidth="59.0" />
    </children>
 </AnchorPane>

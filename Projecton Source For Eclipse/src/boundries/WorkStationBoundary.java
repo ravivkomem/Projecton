@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -22,6 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -107,6 +109,10 @@ public class WorkStationBoundary implements Initializable{
     /*Image Views*/
     @FXML
     private ImageView committeeButtonBreakImage;
+    @FXML
+    private Text filterTypeText;
+    @FXML
+    private Label listElementsCounterLabel;
     
     /** The my controller. */
     /* ***************************************
@@ -336,6 +342,8 @@ public class WorkStationBoundary implements Initializable{
     	changeRequestTableView.setItems(changeRequestList);
     	clickedChangeRequest = null;
     	selectedChangeRequestIdTextArea.setText("");
+    	listElementsCounterLabel.setText(Integer.toString(changeRequestList.size()));
+    	filterTypeText.setText(currentFilter.toString());
     }
     
 	/* (non-Javadoc)
@@ -366,21 +374,22 @@ public class WorkStationBoundary implements Initializable{
 		clickedChangeRequest = null;
 		/* Hide displays */
 		selectedChangeRequestIdTextArea.setEditable(false);
-		viewCommitteStepButton.setVisible(false);
-		viewTesterAppointButton.setVisible(false);
-		committeeButtonBreakImage.setVisible(false);
+		
+		viewCommitteStepButton.setDisable(true);
+		viewTesterAppointButton.setDisable(true);
+		committeeButtonBreakImage.setDisable(true);
 		
 		/* Displays with preconditions */
 		String userPermission = ProjectFX.currentUser.getPermission(); 
 		if (userPermission.equals("COMMITTEE_MEMBER") || userPermission.equals("SUPERVISOR_COMMITTEE_MEMBER"))
 		{
-			viewCommitteStepButton.setVisible(true);
+			viewCommitteStepButton.setDisable(false);
 		}
 		else if (userPermission.equals("COMMITTEE_DIRECTOR") || userPermission.equals("SUPERVISOR_COMMITTEE_DIRECTOR"))
 		{
-			viewCommitteStepButton.setVisible(true);
-			committeeButtonBreakImage.setVisible(true);
-			viewTesterAppointButton.setVisible(true);
+			viewCommitteStepButton.setDisable(false);
+			committeeButtonBreakImage.setDisable(false);
+			viewTesterAppointButton.setDisable(false);
 		}
 		
 		/* Call the method to automatically display */
@@ -422,22 +431,34 @@ public class WorkStationBoundary implements Initializable{
 	{
 		
 		/** The all change request. */
-		ALL_CHANGE_REQUEST,
+		ALL_CHANGE_REQUEST("All change requests"),
 		
 		/** The analysis step. */
-		ANALYSIS_STEP,
+		ANALYSIS_STEP("Analysis Step"),
 		
 		/** The committee step. */
-		COMMITTEE_STEP,
+		COMMITTEE_STEP("Committee Step"),
 		
 		/** The execution step. */
-		EXECUTION_STEP,
+		EXECUTION_STEP("Execution Step"),
 		
 		/** The tester appoint step. */
-		TESTER_APPOINT_STEP,
+		TESTER_APPOINT_STEP("Tester Appoint Step"),
 		
 		/** The testing step. */
-		TESTING_STEP;
+		TESTING_STEP("Testing Step");
+		
+		private String name;
+		
+		private WorkStationFilter(String name)
+		{
+			this.name = name;
+		}
+		
+		public String toString()
+		{
+			return name;
+		}
 	}
 
 }

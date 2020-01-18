@@ -16,6 +16,7 @@ import entities.ChangeRequest;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -78,6 +79,17 @@ public class ActivityReportBoundary implements Initializable {
     /** The Days number bar chart. */
     @FXML
     private NumberAxis DaysNumberBarChart;
+    @FXML
+    private TextField activeTextField;
+
+    @FXML
+    private TextField closedTextField;
+
+    @FXML
+    private TextField suspendedTextField;
+
+    @FXML
+    private TextField deniedTextField;
 
  	/* *************************************
 	  * ******* Private Objects *************
@@ -213,6 +225,8 @@ public class ActivityReportBoundary implements Initializable {
 		if(report.getSuspendedChangeRequest() > 0)
 			requestStatusPieChart.getData().add( new PieChart.Data("Suspended", report.getSuspendedChangeRequest()));
 		
+		requestStatusPieChart.setLegendSide(Side.BOTTOM);
+		requestStatusPieChart.setLegendVisible(true);
 		workDaysArray = workDaysCalc(workDays);
 		
 		XYChart.Series<String,Number> series1 = new XYChart.Series<String, Number>();
@@ -220,7 +234,7 @@ public class ActivityReportBoundary implements Initializable {
 		series1.getData().add(new XYChart.Data<String,Number>(SECOND_CATAGORY, workDaysArray[1]));
 		series1.getData().add(new XYChart.Data<String,Number>(THIRD_CATAGORY, workDaysArray[2]));
 		series1.getData().add(new XYChart.Data<String,Number>(FOURTH_CATAGORY, workDaysArray[3]));
-		
+		series1.setName("Number Of Change Requests");
 		workDaysBarChart.getData().addAll(series1);
 		if(!workDays.isEmpty()) {
 			medianTextField.setText(""+ Utilizer.calcMedian(workDays));
@@ -229,8 +243,13 @@ public class ActivityReportBoundary implements Initializable {
 		else {
 			Toast.makeText(ProjectFX.mainStage, "there is not change request in sql table", 1500, 500, 500);
 		}
+
+		activeTextField.setText(Integer.toString(report.getActiveChageRequest()));
+		closedTextField.setText(Integer.toString(report.getCloseChangeRequest()));
+		suspendedTextField.setText(Integer.toString(report.getSuspendedChangeRequest()));
+		deniedTextField.setText(Integer.toString(report.getDeniedChangeRequest()));
 	}
-	
+
 	/**
 	 * the method gets ArrayList of all the work days
 	 * sorting the days in 4 category: 0-10,10-20,20-30,30+ days.
@@ -255,11 +274,19 @@ public class ActivityReportBoundary implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		activeTextField.setEditable(false);
+		closedTextField.setEditable(false);
+		suspendedTextField.setEditable(false);
+		deniedTextField.setEditable(false);
+		medianTextField.setEditable(false);
+		stdTextField.setEditable(false);
 		activityReportDetailsPane.setVisible(false);
 		startDatePicker.setEditable(false);
 		endDatePicker.setEditable(false);
 		workDaysBarChart.setTitle("Work Duration");
 		workDaysChartBarCategory.setLabel("Work Days");
+		DaysNumberBarChart.setLabel("Request");
+		requestStatusPieChart.setLegendSide(Side.RIGHT);
 		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
 	}

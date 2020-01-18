@@ -1,5 +1,6 @@
 package controllers;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +74,22 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 						}
 						myBoundary.recieveFileList(myFileList);
 					}
+					break;
 				case UPDATE_STATUS_BY_SUPERVISOR:
+					this.unsubscribeFromClientDeliveries();
+					break;
+				case SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE:
+					this.unsubscribeFromClientDeliveries();
+					if (result.getResultData().isEmpty())
+					{
+						myBoundary.fillEstimatedEndDateField(null);
+					}
+					else
+					{
+						myBoundary.fillEstimatedEndDateField((Date) result.getResultData().get(0).get(0));
+					}
+					break;
+				case INSERT_NEW_SUPERVISOR_UPDATE:
 					this.unsubscribeFromClientDeliveries();
 					break;
 				default:
@@ -100,6 +116,25 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
-	
 
+	public void getStepEstimatedEndDate(Integer changeRequestID) {
+		
+		ArrayList<Object> data =new ArrayList<>();
+		data.add(changeRequestID);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE, data);
+		this.sendSqlActionToClient(sqlAction);
+	}
+
+	public void inserntNewSupervisorUpdate(Integer id, String userName, String essence, Date date, String fullName) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(id);
+		varArray.add(userName);
+		varArray.add(essence);
+		varArray.add(date);
+		varArray.add(fullName);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 }

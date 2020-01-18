@@ -55,6 +55,7 @@ public enum SqlQueryType {
 	SELECT_SUBSYSTEM_BY_USER_NAME(SqlExecutionType.EXECUTE_QUERY),
 	UPDATE_EMPLOYEE_PERMISSION(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_SUBSYSTEM_SUPPORTER(SqlExecutionType.UPDATE_QUERY),
+	SELECT_SUPERVISOR_UPDATES(SqlExecutionType.EXECUTE_QUERY),
 	// Performance report
 	SELECT_ALL_APPROVED_TIME_EXTNESIONS(SqlExecutionType.EXECUTE_QUERY),
 	SELECT_ALL_REPEATRING_STEPS(SqlExecutionType.EXECUTE_QUERY),
@@ -104,6 +105,7 @@ public enum SqlQueryType {
 	 * *************** Extra Details Queries ***************
 	 * *****************************************************/
 	UPDATE_STATUS_BY_SUPERVISOR(SqlExecutionType.UPDATE_QUERY),
+	SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Extension Queries***********
@@ -159,6 +161,8 @@ public enum SqlQueryType {
 	UPDATE_EXECUTION_STEP_ESTIMATED_END_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_TESTER_STEP_ESTIMATED_END_DATE(SqlExecutionType.UPDATE_QUERY),
 	UPDATE_TIME_EXTENSION_STATUS_TO_DENY(SqlExecutionType.UPDATE_QUERY),
+	SELECT_ALL_SUSPENDED_CHANGE_REQUESTS(SqlExecutionType.EXECUTE_QUERY),
+	INSERT_NEW_SUPERVISOR_UPDATE(SqlExecutionType.UPDATE_QUERY),
 	
 	/* *****************************************
 	 * ********Time Watcher Queries*************

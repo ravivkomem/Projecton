@@ -54,9 +54,27 @@ public class SupervisorController extends BasicController
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	/* (non-Javadoc)
-	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
+	/**
+	 *  The method insert new supervisor update to data base
+	 * @param id
+	 * @param name
+	 * @param essence
+	 * @param updateDate
+	 * @param fullName
 	 */
+	public void inserntNewSupervisorUpdate(Integer id, String name, String essence, Date updateDate, String fullName) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(id);
+		varArray.add(name);
+		varArray.add(essence);
+		varArray.add(updateDate);
+		varArray.add(fullName);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
+	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -193,6 +211,9 @@ public class SupervisorController extends BasicController
 							(String) result.getResultData().get(0).get(4), (String) result.getResultData().get(0).get(5));
 					myBoundary.sendEmailToInitiatorUser(user);
 					break;
+				case INSERT_NEW_SUPERVISOR_UPDATE:
+					this.unsubscribeFromClientDeliveries();
+					break;
 				default:
 					break;
 			}
@@ -201,10 +222,11 @@ public class SupervisorController extends BasicController
 	}
 
 /**
- * Creates the array list of user name.
+ * The method create ArrayList From Users
+ * 
  *
  * @param result the result
- * @return The method create ArrayList From Users
+ * @return  array list of user name.
  */
 	private ArrayList<String> createArrayListOfUserName(SqlResult result)
 	{
@@ -218,10 +240,11 @@ public class SupervisorController extends BasicController
 	}
 
 /**
- * Change result to changerequest.
+ * This method filter result from DB into change requests
+ * 
  *
  * @param result the result
- * @return This method filter result from DB into change requests
+ * @return ArrayList of ChangeRequest
  */
 	private ArrayList<ChangeRequest> changeResultToChangerequest(SqlResult result)    
 	{
@@ -256,10 +279,10 @@ public class SupervisorController extends BasicController
 	
 	
 	/**
-	 * Change result to time extension.
+	 * Create array list of time extension from sql result
 	 *
 	 * @param result the result
-	 * @return the array list
+	 * @return  array list of time extension
 	 */
 	private ArrayList<TimeExtension> changeResultToTimeExtension(SqlResult result)
 	{
@@ -325,9 +348,10 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Change current step from analyzer auto appoint.
+ * This method change the step into supervisor appointment
+ * 
  *
- * @param changeRequestID This method change the step into supervisor appointment
+ * @param changeRequestID 
  */
 	public void changeCurrentStepFromAnalyzerAutoAppoint(int changeRequestID)
 	{
@@ -345,7 +369,7 @@ public class SupervisorController extends BasicController
  * Update new analyzer by supervisor.
  *
  * @param newAnalyzerBySupervisorAppoint the new analyzer by supervisor appoint
- * @param changeRequestID This method update new analyzer by the supervisor
+ * @param changeRequestID 
  */
 	public void UpdateNewAnalyzerBySupervisor(String newAnalyzerBySupervisorAppoint, Integer changeRequestID)
 	{
@@ -366,7 +390,7 @@ public class SupervisorController extends BasicController
  * @param changeRequestID the change request ID
  * @param selectedItem the selected item
  * @param updateStepDate the update step date
- * @param status This method create new analysis step
+ * @param status 
  */
 	public void InsertNewAnalysisStep(Integer changeRequestID, String selectedItem, Date updateStepDate,
 			String status)
@@ -386,7 +410,7 @@ public class SupervisorController extends BasicController
 /**
  * Change current step to analysis set time.
  *
- * @param changeRequestID This method change the step into analysis set time
+ * @param changeRequestID 
  */
 	public void changeCurrentStepToAnalysisSetTime(Integer changeRequestID)
 	{
@@ -405,7 +429,7 @@ public class SupervisorController extends BasicController
  * @param changeRequestID the change request ID
  * @param handlerUserName the handler user name
  * @param updateStepDate the update step date
- * @param status This method insert new step into analysis table after supervisor approvment
+ * @param status 
  */
 	public void InsertNewAnalysisStepAfterApprove(Integer changeRequestID, String handlerUserName, Date updateStepDate,
 			String status)
@@ -427,7 +451,7 @@ public class SupervisorController extends BasicController
  *
  * @param executionLeader the execution leader
  * @param nextStep the next step
- * @param changeRequestID This method update execution leader for a change request after supervisor appoint
+ * @param changeRequestID 
  */
 	public void UpdateExecutionLeaderBySupervisor(String executionLeader,String nextStep, Integer changeRequestID)
 	{
@@ -449,7 +473,7 @@ public class SupervisorController extends BasicController
  * @param changeRequestID the change request ID
  * @param handlerUserName the handler user name
  * @param updateStepDate the update step date
- * @param status This method insert new execution step
+ * @param status 
  */
 	public void InsertNewExecutionLeaderStep(Integer changeRequestID, String handlerUserName, Date updateStepDate,
 			String status)
@@ -467,10 +491,10 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Deny analysis time.
+ * This method update change request after deny analysis time
  *
  * @param lastStep the last step
- * @param changeRequestID This method update change request after deny analysis time
+ * @param changeRequestID 
  */
 	public void denyAnalysisTime(String lastStep, Integer changeRequestID)
 	{
@@ -486,10 +510,10 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Approved analysis time.
+ * This method update change request after approve analysis time
  *
  * @param nextStep the next step
- * @param changeRequestID This method update change request after approve analysis time
+ * @param changeRequestID 
  */
 	public void approvedAnalysisTime(String nextStep, Integer changeRequestID)
 	{
@@ -504,10 +528,10 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Approved execution time.
+ *This method update change request table after supervisor approve execution time
  *
  * @param nextStep the next step
- * @param changeRequestID This method update change request table after supervisor approve execution time
+ * @param changeRequestID 
  */
 	public void approvedExecutionTime(String nextStep, Integer changeRequestID)
 	{
@@ -521,10 +545,10 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Deny execution time.
+ * This method update change request step after supervisor deny execution time
  *
  * @param lastStep the last step
- * @param changeRequestID This method update change request step after supervisor deny execution time
+ * @param changeRequestID 
  */
 	public void denyExecutionTime(String lastStep, Integer changeRequestID)
 	{
@@ -538,10 +562,10 @@ public class SupervisorController extends BasicController
 	}
 
 /**
- * Suspend change request.
+ * This method update change request status to suspended
  *
  * @param newStatus the new status
- * @param changeRequestID This method update change request status to suspended
+ * @param changeRequestID 
  */
 	public void suspendChangeRequest(String newStatus,Integer changeRequestID)
 	{
@@ -557,10 +581,10 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Unsuspend change request.
+ * This method update change request status into active
  *
  * @param newStatus the new status
- * @param changeRequestID This method pdate change request status into active
+ * @param changeRequestID 
  */
 	public void unsuspendChangeRequest(String newStatus, Integer changeRequestID)
 	{
@@ -592,7 +616,7 @@ public class SupervisorController extends BasicController
  * @param updateStepDate the update step date
  * @param newStatus the new status
  * @param newStep the new step
- * @param changeRequestID This method update change request status into closed
+ * @param changeRequestID 
  */
 	public void setStatusToClosed(Date updateStepDate,String newStatus,String newStep, Integer changeRequestID)
 	{
@@ -611,7 +635,7 @@ public class SupervisorController extends BasicController
 /**
  * Gets the execution estimated date.
  *
- * @param changeRequestID This method get execution estimated time for work
+ * @param changeRequestID 
  * @return the execution estimated date
  */
 	public void getExecutionEstimatedDate(Integer changeRequestID)
@@ -628,7 +652,7 @@ public class SupervisorController extends BasicController
 /**
  * Gets the analysis estimated date.
  *
- * @param changeRequestID This method get analysis estimated time
+ * @param changeRequestID 
  * @return the analysis estimated date
  */
 	public void getAnalysisEstimatedDate(Integer changeRequestID)
@@ -642,11 +666,11 @@ public class SupervisorController extends BasicController
 
 
 /**
- * Sets the end date.
+ * This method update close step end date
  *
  * @param updateStepDate the update step date
  * @param newStatus the new status
- * @param changeRequestID This method update close step end date
+ * @param changeRequestID 
  */
 	public void setEndDate(Date updateStepDate,String newStatus, Integer changeRequestID)
 	{
@@ -786,6 +810,8 @@ public void updateTimeExtensionStatusAfterDeny(String status, int stepID)
 	ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	
 }
+
+
 	
 	
 }

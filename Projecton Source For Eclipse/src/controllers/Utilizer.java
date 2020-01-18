@@ -1,7 +1,7 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The Class Utilizer.
@@ -17,7 +17,12 @@ public class Utilizer {
 	 * @param list the list
 	 * @return the double
 	 */
-	public static double calcMedian(ArrayList<Long> list) {
+	public static double calcMedian(List<Long> list) {
+		if (list.isEmpty())
+		{
+			return 0.0;
+		}
+		
 		Collections.sort(list);
 		double median;
 		if (list.size() % 2 == 0)
@@ -33,7 +38,12 @@ public class Utilizer {
 	 * @param list the list
 	 * @return the double
 	 */
-	public static double calcStd(ArrayList<Long> list) {
+	public static double calcStd(List<Long> list) {
+		if (list.isEmpty())
+		{
+			return 0.0;
+		}
+		
 		double avg = calcAvg(list);
 		double sum = 0;
 		for (int i = 0; i < list.size(); i++) {
@@ -48,7 +58,7 @@ public class Utilizer {
 	 * @param list the list
 	 * @return the double
 	 */
-	public static double calcAvg(ArrayList<Long> list) {
+	public static double calcAvg(List<Long> list) {
 		long sum=0;
 		for (int i = 0; i < list.size(); i++) {
 			sum += list.get(i);

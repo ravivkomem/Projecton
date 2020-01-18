@@ -65,7 +65,7 @@ public class SupervisorBoundary implements Initializable {
     /** The btn back. */
     @FXML
     private Button btnBack;
-    
+
     
     /* *******************************
 	 * ********* Main Area  **********
@@ -260,6 +260,7 @@ public class SupervisorBoundary implements Initializable {
     private static final String TIME_APPROVAL = "Time Approvals";
     private static final String TIME_EXTENSIONS = "Time Extensions";
     private static final String CLOSING_STEP = "Closing Step";
+   // private static final String SUSPENSIONS = "Suspended Change Requests";
     private static final int MAX_CHARS = 200;
 
     /* *******************************
@@ -465,9 +466,9 @@ public class SupervisorBoundary implements Initializable {
      * ****** Page Loading Methods ************
      * ****************************************/
 	/**
-     * Click home page function.
+     * Load home page.
      *
-     * @param event This method handle click on home page in menu
+     * @param event 
      */
     @FXML
     void loadHomePage(MouseEvent event)       // Return to home page
@@ -478,7 +479,7 @@ public class SupervisorBoundary implements Initializable {
     /**
      * Click log out function.
      *
-     * @param event This method handle click on log out
+     * @param event
      */
     @FXML
     void ClickLogOutFunction(MouseEvent event)    // Log Out from supervisor page
@@ -488,8 +489,8 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-     * Click back function.
-     * @param event This method handle click on back in menu
+     *Load previous page
+     * @param event 
      */
     @FXML
     void ClickBackFunction(MouseEvent event)
@@ -497,7 +498,10 @@ public class SupervisorBoundary implements Initializable {
 		ProjectFX.pagingController.loadBoundary(ProjectPages.MENU_PAGE.getPath());
     }
     
-    
+    /**
+     * Load extra details page
+     * @param event
+     */
     @FXML
     void clickOnExstraDetails(MouseEvent event)
     {	
@@ -515,9 +519,9 @@ public class SupervisorBoundary implements Initializable {
      * ****** Side Bar Menu *******************
      * ****************************************/
     /**
-     * Click request list function.
+     * Click request list.
      *
-     * @param event This method handle click on request list in menu
+     * @param event 
      */
     @FXML
     void displayAllChangeRequests(MouseEvent event)
@@ -530,9 +534,9 @@ public class SupervisorBoundary implements Initializable {
     }
     
     /**
-	 * Click appointment function.
+	 * This method handle click on appointment button
 	 *
-	 * @param event This method handle click on appointment in menu
+	 * @param event 
 	 */
     @FXML
     void ClickAppointmentFunction(MouseEvent event) 
@@ -544,10 +548,11 @@ public class SupervisorBoundary implements Initializable {
     	myController.SelectChangeRequestForAppointments();	
     }
     
+
     /**
-     * Click approval function.
+     * This method handle click on approval.
      *
-     * @param event This method handle click on approval in menu
+     * @param event
      */
     @FXML
     void ClickApprovalFunction(MouseEvent event)
@@ -562,7 +567,7 @@ public class SupervisorBoundary implements Initializable {
     /**
      * Click on time extension.
      *
-     * @param event the event
+     * @param event 
      */
     @FXML
     void clickOnTimeExtension(MouseEvent event)
@@ -576,9 +581,9 @@ public class SupervisorBoundary implements Initializable {
     
     
     /**
-     * Click closing step function.
+     *  This method handle click on closing step.
      *
-     * @param event This method handle click on closing step in menu
+     * @param event
      */
     @FXML
     void ClickClosingStepFunction(MouseEvent event)
@@ -595,9 +600,9 @@ public class SupervisorBoundary implements Initializable {
      * ******* Analyzer Auto Appoint **********
      * ****************************************/
     /**
-     * Click on approve appointment.
+     * This method update DB when click on approve appointment of analyzer.
      *
-     * @param event This method update DB when click on approve appointment of analyzer
+     * @param event 
      */
     @FXML
     void clickOnApproveAppointment(MouseEvent event)
@@ -605,13 +610,16 @@ public class SupervisorBoundary implements Initializable {
     	setAllDisplaysVisibilityOff();
     	myController.changeCurrentStepToAnalysisSetTime(selectedChangeRequest.getChangeRequestID());
     	myController.InsertNewAnalysisStepAfterApprove(selectedChangeRequest.getChangeRequestID(),selectedChangeRequest.getHandlerUserName(),TimeManager.getCurrentDate(),"ACTIVE");
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Appoint analyzer", TimeManager.getCurrentDate(),
+    			ProjectFX.currentUser.getFullName());
     	updateTablesUsingLastFilter();
     }
     
     /**
-     * Click on deny appointment.
+     *  This method update DB when click on deny appointment of analyzer.
      *
-     * @param event This method update DB when click on deny appointment of analyzer
+     * @param event
      */
     @FXML
     void clickOnDenyAppointment(MouseEvent event)
@@ -633,9 +641,9 @@ public class SupervisorBoundary implements Initializable {
      * ***** Analyzer Supervisor Appoint ******
      * ****************************************/
     /**
-     * Click on set analyzer.
+     * This method update DB when click on set analyzer.
      *
-     * @param event This method update DB when click on set analyzer
+     * @param event 
      */
     @FXML
     void clickOnSetAnalyzer(MouseEvent event)
@@ -649,6 +657,9 @@ public class SupervisorBoundary implements Initializable {
     				,selectedChangeRequest.getChangeRequestID());
     		myController.InsertNewAnalysisStep(selectedChangeRequest.getChangeRequestID()
     				,comboSelectAnalyizer.getSelectionModel().getSelectedItem(),TimeManager.getCurrentDate(),"ACTIVE");
+    		myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+        			ProjectFX.currentUser.getUserName(), "Appoint analyzer", TimeManager.getCurrentDate(),
+        			ProjectFX.currentUser.getFullName());
     		updateTablesUsingLastFilter();
     	}	
     }
@@ -657,9 +668,9 @@ public class SupervisorBoundary implements Initializable {
      * ***** Execution Leader Appoint ******
      * ****************************************/
     /**
-     * Click on set execution leader.
+     * This method update DB when click on set execution leader.
      *
-     * @param event This method update DB when click on set execution leader
+     * @param event 
      */
 	  @FXML
 	void clickOnSetExecutionLeader(MouseEvent event)
@@ -673,7 +684,10 @@ public class SupervisorBoundary implements Initializable {
   				,"EXECUTION_SET_TIME",selectedChangeRequest.getChangeRequestID());
 			  myController.InsertNewExecutionLeaderStep(selectedChangeRequest.getChangeRequestID()
 				,comboSelectExecutionLeader.getSelectionModel().getSelectedItem(),TimeManager.getCurrentDate(),"ACTIVE");
-			 updateTablesUsingLastFilter();
+			  myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+		    			ProjectFX.currentUser.getUserName(), "Appoint execution", TimeManager.getCurrentDate(),
+		    			ProjectFX.currentUser.getFullName());
+			  updateTablesUsingLastFilter();
 		  }	  
 	}
     
@@ -681,28 +695,34 @@ public class SupervisorBoundary implements Initializable {
    * ******* Analysis Time Pending **********
    * ****************************************/
 	  /**
-	 * Click on approve analysis time.
+	 * This method update DB when click on approve analysis time.
 	 *
-	 * @param event This method update DB when click on approve analysis time
+	 * @param event 
 	 */
     @FXML
     void clickOnApproveAnalysisTime(MouseEvent event)
     {
     	setAllDisplaysVisibilityOff();
     	myController.approvedAnalysisTime("ANALYSIS_WORK",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Approve analysis time", TimeManager.getCurrentDate(),
+    			ProjectFX.currentUser.getFullName());
     	updateTablesUsingLastFilter();
     }  
 	
     /**
-	 * Click on deny analysis time.
+	 *This method update DB when click on deny execution leader.
 	 *
-	 * @param event This method update DB when click on deny execution leader
+	 * @param event 
 	 */
     @FXML
     void clickOnDenyAnalysisTime(MouseEvent event)
     {
     	setAllDisplaysVisibilityOff();
     	myController.denyAnalysisTime("ANALYSIS_SET_TIME",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Deny Analysis time", TimeManager.getCurrentDate(),
+    			ProjectFX.currentUser.getFullName());
     	updateTablesUsingLastFilter();	
     }
 	  
@@ -710,28 +730,34 @@ public class SupervisorBoundary implements Initializable {
      * ******* Execution Time Pending **********
      * ****************************************/  
     /**
-     * Click on approve execution time.
+     * This method update DB when click on approve execution time.
      *
-     * @param event This method update DB when click on approve execution time
+     * @param event 
      */
     @FXML
     void clickOnApproveExecutionTime(MouseEvent event)
     {
     	setAllDisplaysVisibilityOff();
     	myController.approvedExecutionTime("EXECUTION_WORK",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Approve execution time", TimeManager.getCurrentDate(),
+    			ProjectFX.currentUser.getFullName());
     	updateTablesUsingLastFilter();
     }
     
     /**
-     * Click on deny execution time.
+     * This method update DB when click on deny execution time.
      *
-     * @param event This method update DB when click on deny execution time
+     * @param event 
      */
     @FXML
     void clickOnDenyExecutionTime(MouseEvent event)
     {
     	setAllDisplaysVisibilityOff();
     	myController.denyExecutionTime("EXECUTION_SET_TIME",selectedChangeRequest.getChangeRequestID());
+    	myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    			ProjectFX.currentUser.getUserName(), "Deny execution time", TimeManager.getCurrentDate(),
+    			ProjectFX.currentUser.getFullName());
     	updateTablesUsingLastFilter();
     }   
 	  
@@ -741,7 +767,7 @@ public class SupervisorBoundary implements Initializable {
     /**
      * Click on approve time extension.
      *
-     * @param event the event
+     * @param event 
      */
     @FXML
     void clickOnApproveTimeExtension(MouseEvent event)
@@ -755,26 +781,42 @@ public class SupervisorBoundary implements Initializable {
     		String stepType = selectedTimeExtension.getStepType().getStepName();
     		if(stepType.equals("Analysis"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve analysis time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateAnalysisStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Committee"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve committee time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateCommitteeStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Execution"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve execution time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateExecutionStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Testing"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Approve testing time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatus("APPROVED",selectedTimeExtension.getStepID());
     			myController.updateTestingStepEstimatedEndDate(selectedTimeExtension.getNewDate(),selectedTimeExtension.getStepID());
     		}
     		setAllDisplaysVisibilityOff();
     		updateTablesUsingLastFilter();
+    		emailSender.sendMessage("leehugi93@gmail.com", "Approved time extension",
+    				"Supervisor has approved:\n"
+    				+ "Time Extension ID " + selectedTimeExtension.getStepID() + " For step " + stepType +"\n"
+    				+ "Have a nice day");
     	}	
     }
     
@@ -795,21 +837,33 @@ public class SupervisorBoundary implements Initializable {
     		String stepType = selectedTimeExtension.getStepType().getStepName();
     		if(stepType.equals("Analysis"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny analysis time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateAnalysisStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Committee"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny committee time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateCommitteeStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Execution"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny execution time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateExecutionStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
     		else if(stepType.equals("Testing"))
     		{
+    			myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+    	    			ProjectFX.currentUser.getUserName(), "Deny testing time extension", TimeManager.getCurrentDate(),
+    	    			ProjectFX.currentUser.getFullName());
     			myController.updateTimeExtensionStatusAfterDeny("DENY",selectedTimeExtension.getStepID());
     			myController.updateTestingStepEstimatedEndDate(selectedTimeExtension.getOldDate(),selectedTimeExtension.getStepID());
     		}
@@ -822,7 +876,10 @@ public class SupervisorBoundary implements Initializable {
      * *********** Closing Step ***************
      * ****************************************/
     
-    
+    /**
+     * This method get all information engineers from data base.
+     * @param informationEngineers
+     */
 	public void recieveAllInformationEngineers(ArrayList<String> informationEngineers)
 	{
 		for(int i=0;i<informationEngineers.size();i++)
@@ -833,7 +890,10 @@ public class SupervisorBoundary implements Initializable {
 	}
 
    
-
+/**
+ * This method display in change request table view all the change request from data base.
+ * @param resultList
+ */
 	public void handleChangerequestResultForTable(ArrayList<ChangeRequest> resultList)
 	{
 		observableChangeRequestList.clear();
@@ -845,7 +905,7 @@ public class SupervisorBoundary implements Initializable {
 	
 	
 	/**
-	 * Handle time extension for table.
+	 * This method display time extension in the table view.
 	 *
 	 * @param resultList the result list
 	 */
@@ -891,7 +951,7 @@ public class SupervisorBoundary implements Initializable {
     
 
     /**
-     * Click on send.
+     * This method send mail to the initiator and closing the step.
      *
      * @param event the event
      */
@@ -902,6 +962,9 @@ public class SupervisorBoundary implements Initializable {
     		Toast.makeText(ProjectFX.mainStage, "Please write a message first", 1500, 500, 500);
     	}else {
         	//myController.getUserEmail(selectedChangeRequest.getInitiatorUserName());
+    		myController.inserntNewSupervisorUpdate(selectedChangeRequest.getChangeRequestID(), 
+	    			ProjectFX.currentUser.getUserName(), "Closed change request", TimeManager.getCurrentDate(),
+	    			ProjectFX.currentUser.getFullName());
         	myController.setStatusToClosed(TimeManager.getCurrentDate(),"CLOSED","FINISH",selectedChangeRequest.getChangeRequestID());
         	myController.setEndDate(TimeManager.getCurrentDate(),"CLOSED",selectedChangeRequest.getChangeRequestID());
         	if (selectedChangeRequest.getCurrentStep().equals("CLOSING_STEP"))
@@ -920,11 +983,7 @@ public class SupervisorBoundary implements Initializable {
     	}
     }
     
-    /**
-     * Send email to initiator user.
-     *
-     * @param initiator the initiator
-     */
+   
     public void sendEmailToInitiatorUser(User initiator) {
     	
     }   
@@ -932,7 +991,7 @@ public class SupervisorBoundary implements Initializable {
     /**
      * Gets the execution end date.
      *
-     * @param res This method get execution end date
+     * @param res 
      * @return the execution end date
      */
 	public void getExecutionEndDate(Date res)
@@ -944,7 +1003,7 @@ public class SupervisorBoundary implements Initializable {
 	/**
 	 * Gets the analysis end date.
 	 *
-	 * @param res This method get analysis end date
+	 * @param res 
 	 * @return the analysis end date
 	 */
 	public void getAnalysisEndDate(Date res)
@@ -986,7 +1045,7 @@ public class SupervisorBoundary implements Initializable {
 	}
 	
 	/**
-	 * Show success aprove appoint.
+	 * Show success approve appoint.
 	 */
 	public void ShowSuccessAproveAppoint()
 	{

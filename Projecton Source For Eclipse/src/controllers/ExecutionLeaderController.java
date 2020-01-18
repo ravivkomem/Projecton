@@ -91,10 +91,10 @@ public class ExecutionLeaderController extends BasicController {
 	}
 	
 	/**
-	 * 
+	 * This method insert new estimated date to execution step and change request 
 	 * @param estimatedEndDate
 	 * @param executionStepId
-	 * This method insert new estimated date to execution step and change request 
+	 * 
 	 */
 	public void updateExecutionStepEstimatedEndDate(Date estimatedEndDate,Integer executionStepId) {
 		ArrayList<Object> varArray = new ArrayList<>();
