@@ -202,6 +202,8 @@ public class TechManagerBoundary implements Initializable{
 	
 	/** The subsystem list. */
 	ObservableList<SubsystemSupporter> subsystemList = FXCollections.observableArrayList();
+	
+	ObservableList<SupervisorUpdate> supervisorList = FXCollections.observableArrayList();
 
 	/* *************************************
 	 * ******* FXML Methods *************
@@ -426,7 +428,10 @@ public class TechManagerBoundary implements Initializable{
 		
 	    subsystemSupporterColumn.setCellValueFactory(new PropertyValueFactory<SubsystemSupporter, String>("subsystem"));;
 		
-	    //TODO : initialize the supervisorUpdate table
+	    requestID_supervisorColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, Integer>("changerRequestId"));
+	   supervisorNameColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, String>("fullName"));
+	   essenceColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, String>("essence"));
+	   updateDateColumn.setCellValueFactory(new PropertyValueFactory<SupervisorUpdate, Date>("updateDate"));
 	    
 		employeeListTable.setRowFactory(tv -> {
 		    TableRow<User> row = new TableRow<>();
@@ -493,6 +498,14 @@ public class TechManagerBoundary implements Initializable{
 		if (!resultList.isEmpty()) {
 			subsystemList.addAll(resultList);
 			subsystemSupporterTable.setItems(subsystemList);
+		}
+	}
+
+	public void displaySupervisorUpdate(ArrayList<SupervisorUpdate> resultList) {
+		supervisorList.clear();
+		if(!resultList.isEmpty()) {
+			supervisorList.addAll(resultList);
+			supervisorUpdateTable.setItems(supervisorList);
 		}
 	}
 

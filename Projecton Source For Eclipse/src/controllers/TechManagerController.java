@@ -10,6 +10,7 @@ import boundries.TechManagerBoundary;
 import client.ClientConsole;
 import entities.ChangeRequest;
 import entities.SubsystemSupporter;
+import entities.SupervisorUpdate;
 import entities.User;
 import javafx.application.Platform;
 
@@ -78,7 +79,6 @@ public class TechManagerController extends BasicController {
 	}
 	
 	public void getSupervisorUpdateDetails() {
-		// TODO Auto-generated method stub
 		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_SUPERVISOR_UPDATES, new ArrayList<Object>());
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
@@ -107,12 +107,24 @@ public class TechManagerController extends BasicController {
 				break;
 			case SELECT_SUPERVISOR_UPDATES:
 				this.unsubscribeFromClientDeliveries();
+				myBoundary.displaySupervisorUpdate(createSupervisorUpdate(result));
+				break;
 			default:
 				break;
 			}
 
 		});
 		return;
+	}
+	
+	private ArrayList<SupervisorUpdate> createSupervisorUpdate(SqlResult result){
+		ArrayList<SupervisorUpdate> list = new ArrayList<>();
+		for(ArrayList<Object> u: result.getResultData()) {
+			SupervisorUpdate update = new SupervisorUpdate((Integer)u.get(0), (Integer)u.get(1),
+					(String)u.get(2), (String)u.get(3), (Date)u.get(4),(String) u.get(5));
+			list.add(update);
+		}
+		return list;
 	}
 	
 	/**
