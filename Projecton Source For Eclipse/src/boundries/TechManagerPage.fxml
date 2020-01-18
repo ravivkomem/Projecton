@@ -182,16 +182,17 @@
             <Text layoutX="19.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press on a row in the table to view change request extra details" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="supervisorUpdatePane" layoutX="168.0" layoutY="85.0" prefHeight="410.0" prefWidth="526.0" visible="false">
+      <AnchorPane fx:id="supervisorUpdatePane" layoutX="168.0" layoutY="68.0" prefHeight="427.0" prefWidth="526.0" visible="false">
          <children>
-            <TableView fx:id="supervisorUpdateTable" layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="493.0">
+            <TableView fx:id="supervisorUpdateTable" layoutX="17.0" layoutY="34.0" prefHeight="339.0" prefWidth="493.0">
               <columns>
                 <TableColumn fx:id="requestID_supervisorColumn" prefWidth="75.0" text="Request ID" />
                 <TableColumn fx:id="supervisorNameColumn" prefWidth="113.66668701171875" text="Supervisor Name" />
-                  <TableColumn fx:id="essenceColumn" prefWidth="161.0" text="Essence" />
-                  <TableColumn fx:id="updateDateColumn" prefWidth="112.3333740234375" text="Update Date" />
+                  <TableColumn fx:id="essenceColumn" prefWidth="169.66668701171875" text="Essence" />
+                  <TableColumn fx:id="updateDateColumn" prefWidth="129.33331298828125" text="Update Date" />
               </columns>
             </TableView>
+            <Text layoutX="17.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The table show all the supervisor updates" />
          </children>
       </AnchorPane>
    </children>
