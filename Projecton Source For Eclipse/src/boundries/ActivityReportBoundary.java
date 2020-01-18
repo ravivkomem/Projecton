@@ -281,6 +281,7 @@ public class ActivityReportBoundary implements Initializable {
 		endDatePicker.setEditable(false);
 		workDaysBarChart.setTitle("Work Duration");
 		workDaysChartBarCategory.setLabel("Work Days");
+		DaysNumberBarChart.setLabel("Request");
 		requestStatusPieChart.setLegendSide(Side.RIGHT);
 		workDaysChartBarCategory.setCategories(FXCollections.<String>observableArrayList(
                 Arrays.asList(FIRST_CATAGORY, SECOND_CATAGORY, THIRD_CATAGORY, FOURTH_CATAGORY)));
