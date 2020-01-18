@@ -111,8 +111,8 @@
       <AnchorPane fx:id="createReportPane" layoutX="143.0" layoutY="84.0" prefHeight="520.0" prefWidth="603.0">
          <children>
             <Text layoutX="13.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:" />
-            <Label fx:id="headerCharcterCounterLabel" layoutX="262.0" layoutY="80.0" text="0/100" />
-            <TextArea fx:id="headertextArea" layoutX="88.0" layoutY="85.0" onKeyTyped="#updateHeaderCharcterCounter" prefHeight="98.0" prefWidth="168.0" />
+            <Label fx:id="headerCharcterCounterLabel" layoutX="262.0" layoutY="80.0" text="0/20" />
+            <TextArea fx:id="headertextArea" layoutX="88.0" layoutY="85.0" prefHeight="98.0" prefWidth="168.0" />
             <TextArea fx:id="descriptiontextArea" layoutX="88.0" layoutY="200.0" onKeyTyped="#updateDescriptionCharcterCounter" prefHeight="109.0" prefWidth="168.0" />
             <Label fx:id="descriptionCharcterCounterLabel" layoutX="256.0" layoutY="197.0" text="0/100" />
             <Label fx:id="advantagesCharcterCounterLabel" layoutX="262.0" layoutY="332.0" text="0/100" />

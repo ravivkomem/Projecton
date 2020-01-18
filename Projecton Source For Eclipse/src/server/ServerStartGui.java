@@ -1,16 +1,22 @@
 package server;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import assets.Toast;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ServerStartGui.
  */
-public class ServerStartGui {
+public class ServerStartGui implements Initializable{
 
     /** The Connect button. */
     @FXML
@@ -19,7 +25,10 @@ public class ServerStartGui {
     /** The Dissconnect button. */
     @FXML
     private Button DissconnectButton;
-
+    
+    @FXML
+    private Label serverStatusLabel;
+    
     /** The is connected. */
     private static boolean isConnected = false;
     
@@ -39,6 +48,9 @@ public class ServerStartGui {
     		isConnected = false;
     		sqlConnection.disconnectAllLoggedUsers();
     		EchoServer.temp.close();
+    		DissconnectButton.setDisable(true);
+    		ConnectButton.setDisable(false);
+    		serverStatusLabel.setText("Server status is: DISCONNECTED");
     	}
     }
 
@@ -51,5 +63,17 @@ public class ServerStartGui {
     void connectServer(ActionEvent event) {
     	EchoServer.startServer(ServerApp.newargs); 
     	isConnected = true;
+    	DissconnectButton.setDisable(false);
+		ConnectButton.setDisable(true);
+		serverStatusLabel.setText("Server status is: CONNECTED");
+    	
     }
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		DissconnectButton.setDisable(true);
+		ConnectButton.setDisable(false);
+		serverStatusLabel.setText("Server status is: DISCONNECTED");
+		
+	}
 }

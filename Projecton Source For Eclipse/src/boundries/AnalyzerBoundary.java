@@ -428,19 +428,6 @@ public class AnalyzerBoundary implements DataInitializable {
     }
     
     /**
-     * This method count the length of headertextArea and display it.
-     *
-     * @param event the event
-     */
-
-  
-    @FXML
-    void updateHeaderCharcterCounter(KeyEvent event) {
-    	headerCharcterCounterLabel.setText(headertextArea.getText().length() + "/" + MAX_CHARS);
-    	recieveCurrentStep(analyzerStep);
-    }
-    
-    /**
      * This method insert new change request to Committee_Step table in the DB and load the work station page.
      *
      * @param name the name
@@ -487,16 +474,68 @@ public class AnalyzerBoundary implements DataInitializable {
 		headertextArea.setWrapText(true);
 		
 		timeextensionButton.setDisable(true);
-		advantagestextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		constraintstextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		descriptiontextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
-		headertextArea.setTextFormatter(new TextFormatter<String>(change -> 
-        change.getControlNewText().length() <= MAX_CHARS ? change : null));
+		
 		timedurationPicker.setEditable(false);
-		 durationDatePicker.setEditable(false);
+		durationDatePicker.setEditable(false);
+		headerCharcterCounterLabel.setText("0/20");
+		headertextArea.setTextFormatter(new TextFormatter<String>(change -> 
+		{
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= 20)
+			{
+				headerCharcterCounterLabel.setText(Integer.toString(changeLength) + "/" + Integer.toString(20));
+				return change;
+			}
+			else
+			{
+				return null;
+			}
+		}));
+		
+		advantagestextArea.setTextFormatter(new TextFormatter<String>(change -> 
+		{
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_CHARS)
+			{
+				advantagesCharcterCounterLabel.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHARS));
+				return change;
+			}
+			else
+			{
+				return null;
+			}
+		}));
+		
+		
+		constraintstextArea.setTextFormatter(new TextFormatter<String>(change -> 
+		{
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_CHARS)
+			{
+				constraintsCharcterCounterLabel.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHARS));
+				return change;
+			}
+			else
+			{
+				return null;
+			}
+		}));
+		
+		descriptiontextArea.setTextFormatter(new TextFormatter<String>(change -> 
+		{
+			int changeLength = change.getControlNewText().length();
+			if (changeLength <= MAX_CHARS)
+			{
+				descriptionCharcterCounterLabel.setText(Integer.toString(changeLength) + "/" + Integer.toString(MAX_CHARS));
+				return change;
+			}
+			else
+			{
+				return null;
+			}
+		}));
+		
+		
 	}
 
 	/* (non-Javadoc)

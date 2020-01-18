@@ -215,7 +215,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="closingStepDescriptionLabel" text="This step was XXX by your staff" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <Label fx:id="closingStepDescriptionLabel" prefHeight="25.0" prefWidth="362.0" text="This step was XXX by your staff" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
                <font>
                   <Font size="16.0" />
                </font>

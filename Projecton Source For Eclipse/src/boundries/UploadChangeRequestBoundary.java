@@ -235,6 +235,7 @@ public class UploadChangeRequestBoundary implements Initializable {
 			newCurrentStateDescription,newChangeRequestDescription,newChangeRequestComment,
 			newChangeRequestExplanation,TimeManager.getCurrentDate() ,newChangeRequestStatus,HandlerUserName,newCurrentStep,
 			newJobDescription,newEmail,newFullName,newEstimatedDate);
+			submitBtn.setDisable(true);
 			myController.buildChangeRequestBeforeSendToDataBase(newChangeRequest);
     	}
     }
@@ -264,6 +265,7 @@ public class UploadChangeRequestBoundary implements Initializable {
     		currentStateDescriptionField.setText("");
     		subSystemComboBox.setPromptText("-sub systems-");
     		listViewData.clear();
+    		submitBtn.setDisable(false);
     		popUpWindowMessage(AlertType.CONFIRMATION,"Upload Successfuly","Your change request id is :"+changeRequestId+"");
     	}	
     }
