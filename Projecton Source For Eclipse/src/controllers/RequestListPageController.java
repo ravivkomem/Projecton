@@ -151,7 +151,7 @@ public class RequestListPageController extends BasicController {
 	}
 	
 	/**
-	 * This method executes a querey to get change request for specific user with a specific ID .
+	 * This method executes a query to get change request for specific user with a specific ID .
 	 *
 	 * @param idNum the id num
 	 * @return the change requests by id search

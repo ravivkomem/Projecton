@@ -574,7 +574,7 @@ public class SupervisorController extends BasicController
  * Unsuspend change request.
  *
  * @param newStatus the new status
- * @param changeRequestID This method pdate change request status into active
+ * @param changeRequestID This method update change request status into active
  */
 	public void unsuspendChangeRequest(String newStatus, Integer changeRequestID)
 	{
