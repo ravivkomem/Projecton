@@ -34,10 +34,10 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 	}
 
 	/**
-	 * Execute querey in case the user attached a file to specific change request .
+	 * Execute query in case the user attached a file to specific change request .
 	 *
 	 * @param changeRequestID the change request ID
-	 * @return the change request files
+	 * send SQL action to the server to get all the change request files
 	 */
 	public void getChangeRequestFiles(Integer changeRequestID) {
 
@@ -91,6 +91,9 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 				case SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP:
 					this.unsubscribeFromClientDeliveries();
 					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case INSERT_NEW_SUPERVISOR_UPDATE:
+					this.unsubscribeFromClientDeliveries();
 					break;
 				default:
 					break;
@@ -149,6 +152,17 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 			return;
 		}
 	}
-	
 
+	public void inserntNewSupervisorUpdate(Integer id, String userName, String essence, Date date, String fullName) {
+		ArrayList<Object> varArray = new ArrayList<>();
+		varArray.add(id);
+		varArray.add(userName);
+		varArray.add(essence);
+		varArray.add(date);
+		varArray.add(fullName);
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE, varArray);
+		this.subscribeToClientDeliveries(); // subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 }

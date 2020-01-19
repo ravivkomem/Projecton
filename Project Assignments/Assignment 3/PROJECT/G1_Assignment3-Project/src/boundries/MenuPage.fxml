@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.MenuBoundary">
+   <children>
+      <ImageView fitHeight="601.0" fitWidth="758.0" layoutX="1.0" pickOnBounds="true">
+         <image>
+            <Image url="@background_image.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="292.0" fitWidth="304.0" layoutX="275.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@menu_image.gif" />
+         </image>
+      </ImageView>
+      <Text fx:id="helloUserTextField" layoutX="203.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello User" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#0c6ba6" />
+                  <Stop color="#2faee0" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Text>
+      <Button fx:id="logoutButton" layoutX="656.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#userLogout" style="-fx-background-color: #2196F3;" text="log out">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logout_symbol.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="acDashBord" prefHeight="601.0" prefWidth="135.0">
+         <children>
+            <AnchorPane layoutX="1.0" prefHeight="601.0" prefWidth="134.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+               <children>
+                  <ImageView fx:id="menuImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="51.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@btnBreak.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="uploadRequestImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="51.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@btnBreak.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="uploadRequestButton" contentDisplay="TOP" layoutX="6.0" layoutY="126.0" mnemonicParsing="false" onAction="#loadUploadRequestPage" prefHeight="67.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Upload Request" textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@uploadRequest.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ImageView fx:id="myRequestsImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="51.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@btnBreak.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="workStation_DepartmentHeadImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="51.0" layoutY="379.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@btnBreak.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="viewMyRequestsButton" contentDisplay="TOP" layoutX="6.0" layoutY="209.0" mnemonicParsing="false" onAction="#loadMyRequestsPage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="My Requests" textAlignment="CENTER" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@my_requests_image.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="workStationButton" contentDisplay="TOP" layoutX="5.0" layoutY="295.0" mnemonicParsing="false" onAction="#loadWorkStationPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Work Station">
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@work_station_image.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ImageView fx:id="supervisorImageBreak" fitHeight="5.0" fitWidth="114.0" layoutX="51.0" layoutY="469.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@btnBreak.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="#5a5e65" layoutX="40.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="supervisorButton" contentDisplay="TOP" layoutX="7.0" layoutY="387.0" mnemonicParsing="false" onAction="#loadSupervisorPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Supervisor Area">
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@shejiyeiconwklipd5vzrc.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="departmentHeadButton" contentDisplay="TOP" layoutX="7.0" layoutY="297.0" mnemonicParsing="false" onAction="#loadDepartmentHeadPage" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Department Head">
+                     <graphic>
+                        <ImageView fitHeight="38.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@tech_manage_image.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <ImageView fitHeight="69.0" fitWidth="128.0" layoutX="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icm%20icom%20til.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+   </children>
+</AnchorPane>

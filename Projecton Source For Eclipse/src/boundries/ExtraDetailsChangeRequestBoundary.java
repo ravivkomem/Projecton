@@ -405,6 +405,9 @@ public class ExtraDetailsChangeRequestBoundary implements DataInitializable {
         	StatusTF.setText("Suspend");
         	suspendButton.setText("Un-Suspend");
         	suspendButton.setDisable(true);
+        	myController.inserntNewSupervisorUpdate(currentChangeRequest.getChangeRequestID(), 
+        			ProjectFX.currentUser.getUserName(), "Suspend change request", TimeManager.getCurrentDate(),
+        			ProjectFX.currentUser.getFullName());
         }
         else if (currentChangeRequest.getStatus().equals("SUSPEND"))
         {

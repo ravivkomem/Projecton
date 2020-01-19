@@ -326,6 +326,8 @@ public class MysqlConnection {
     	/* *****************************************************
 		 * *************** Tech Manager Queries **************
 		 * *****************************************************/
+    	sqlArray[SqlQueryType.SELECT_SUPERVISOR_UPDATES.getCode()] = 
+    			"SELECT * FROM icm.supervisor_update";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS.getCode()]=
     			"SELECT * FROM icm.change_request";
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUESTS_BY_DATE.getCode()]=
@@ -463,8 +465,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST.getCode()] = 
 				"SELECT * FROM icm.change_request";
     	sqlArray[SqlQueryType.INSERT_NEW_SUPERVISOR_UPDATE.getCode()] =
-    			"INSERT INTO icm.supervisor_update(ChangeRequestId,SupervisorUserName,Essence,Update_Date)"
-    			+ " VALUES (?,?,?,?) ";
+    			"INSERT INTO icm.supervisor_update(ChangeRequestId,SupervisorUserName,Essence,Update_Date,SupervisorFullName)"
+    			+ " VALUES (?,?,?,?,?) ";
     	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
