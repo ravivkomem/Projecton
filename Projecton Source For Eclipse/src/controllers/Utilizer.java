@@ -59,6 +59,10 @@ public class Utilizer {
 	 * @return the double
 	 */
 	public static double calcAvg(List<Long> list) {
+		if (list.isEmpty())
+		{
+			return 0.0;
+		}
 		long sum=0;
 		for (int i = 0; i < list.size(); i++) {
 			sum += list.get(i);
