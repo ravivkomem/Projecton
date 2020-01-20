@@ -406,7 +406,7 @@ public class ExecutionLeaderBoundry implements Initializable, DataInitializable 
 				} 
 				else 
 				{
-					myController.closeExecutionStep(executionStep.getStepID() ,executionSummaryTextArea.getText());
+					myController.closeExecutionStep(myChangeRequest.getChangeRequestID(),executionSummaryTextArea.getText());
 					myController.advanceChangeRequestToTesterStep(
 							myChangeRequest.getChangeRequestID());
 					myController.updateTimeExtensionDB(executionStep.getStepID(), "Execution");

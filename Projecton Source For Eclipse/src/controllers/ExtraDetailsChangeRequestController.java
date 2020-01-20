@@ -1,6 +1,5 @@
 package controllers;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,20 +73,24 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 						}
 						myBoundary.recieveFileList(myFileList);
 					}
-					break;
 				case UPDATE_STATUS_BY_SUPERVISOR:
 					this.unsubscribeFromClientDeliveries();
 					break;
-				case SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE:
+				case SELECT_ESTIMATED_END_TIME_FOR_ANALYSIS_STEP:
 					this.unsubscribeFromClientDeliveries();
-					if (result.getResultData().isEmpty())
-					{
-						myBoundary.fillEstimatedEndDateField(null);
-					}
-					else
-					{
-						myBoundary.fillEstimatedEndDateField((Date) result.getResultData().get(0).get(0));
-					}
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_COMMITTEE_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_EXECUTION_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
+					break;
+				case SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP:
+					this.unsubscribeFromClientDeliveries();
+					myBoundary.parseEstimatedEndTime(result.getResultData().get(0).get(0).toString());
 					break;
 				case INSERT_NEW_SUPERVISOR_UPDATE:
 					this.unsubscribeFromClientDeliveries();
@@ -116,13 +119,38 @@ public class ExtraDetailsChangeRequestController extends BasicController {
 		this.subscribeToClientDeliveries();		//subscribe to listener array
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
-
-	public void getStepEstimatedEndDate(Integer changeRequestID) {
-		
-		ArrayList<Object> data =new ArrayList<>();
-		data.add(changeRequestID);
-		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE, data);
-		this.sendSqlActionToClient(sqlAction);
+	public void updateEstimatedTimeByStep(int changeRequestId,String currentStep)
+	{
+		ArrayList<Object> estimatedEndTimeData =new ArrayList<>();
+		estimatedEndTimeData.add(changeRequestId);
+		if (currentStep.equals("ANALYSIS_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_ANALYSIS_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
+		else if(currentStep.equals("COMMITTEE_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_COMMITTEE_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
+		else if (currentStep.equals("EXECUTION_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_EXECUTION_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
+		else if (currentStep.equals("TESTING_WORK"))
+		{
+			SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP,estimatedEndTimeData);
+			this.subscribeToClientDeliveries();		//subscribe to listener array
+			ClientConsole.client.handleMessageFromClientUI(sqlAction);
+			return;
+		}
 	}
 
 	public void inserntNewSupervisorUpdate(Integer id, String userName, String essence, Date date, String fullName) {

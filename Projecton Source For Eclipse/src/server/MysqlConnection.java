@@ -471,6 +471,8 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPOINTMENTS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
 				" WHERE CurrentStep = 'ANALYZER_AUTO_APPOINT' OR CurrentStep = 'EXECUTION_LEADER_SUPERVISOR_APPOINT' OR CurrentStep = 'ANALYZER_SUPERVISOR_APPOINT' ";
+    	
+    	
     	sqlArray[SqlQueryType.SELECT_ALL_CHANGE_REQUEST_FOR_APPROVALS.getCode()] = 
 				"SELECT * FROM icm.change_request" +
 						" WHERE CurrentStep = 'ANALYSIS_APPROVE_TIME' OR CurrentStep = 'EXECUTION_APPROVE_TIME'";
@@ -584,9 +586,15 @@ public class MysqlConnection {
 		 * *****************************************************/
     	sqlArray[SqlQueryType.UPDATE_STATUS_BY_SUPERVISOR.getCode()]=
     			"UPDATE icm.change_request SET Status  = ? WHERE ChangeRequestID = ?";
-    	sqlArray[SqlQueryType.SELECT_CHANGE_REQUEST_STEP_ESTIMATED_END_DATE.getCode()] =
-    			"SELECT EstimatedEndDate From icm.mergred_steps " + 
-    			"WHERE ChangeRequestID = ? AND Status = 'ACTIVE'";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_ANALYSIS_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.analysis_step WHERE ChangeRequestID= ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_COMMITTEE_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.committee_step WHERE ChangeRequestID= ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_EXECUTION_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.execution_step WHERE ChangeRequestID= ?";
+    	sqlArray[SqlQueryType.SELECT_ESTIMATED_END_TIME_FOR_TESTING_STEP.getCode()]=
+    			"SELECT EstimatedEndDate FROM icm.tester_step WHERE ChangeRequestID= ?";
+    	
     }
     
 }
