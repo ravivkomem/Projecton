@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import assets.SqlAction;
 import assets.SqlQueryType;
 import assets.SqlResult;
+import assets.Toast;
 import boundries.ActivityReportBoundary;
+import boundries.ProjectFX;
 import client.ClientConsole;
+import entities.ActivityReport;
 import entities.ChangeRequest;
 import javafx.application.Platform;
 
@@ -22,7 +25,7 @@ public class ActivityReportController extends BasicController{
 
 	/** The boundary controlled by this controller. */
 	ActivityReportBoundary myBoundary;
-	
+	Date activityReportEndDate;
 	/**
 	 * Instantiates a new activity report controller.
 	 *
@@ -42,6 +45,7 @@ public class ActivityReportController extends BasicController{
 	 * Send SQL action to the server to get all change request between those days
 	 */
 	public void getAllChangeRequest(Date start,Date end) {
+		activityReportEndDate = end;
 		ArrayList<Object> varArray = new ArrayList<Object>();
 		varArray.add(start);
 		varArray.add(end);
@@ -50,9 +54,23 @@ public class ActivityReportController extends BasicController{
 		ClientConsole.client.handleMessageFromClientUI(sqlAction);
 	}
 	
-	/* (non-Javadoc)
-	 * @see controllers.BasicController#getResultFromClient(assets.SqlResult)
-	 */
+	public void insertNewActivityReport(ActivityReport activityReport) {
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		varArray.add(activityReport.getActiveChageRequest());
+		varArray.add(activityReport.getCloseChangeRequest());
+		varArray.add(activityReport.getDeniedChangeRequest());
+		varArray.add(activityReport.getSuspendedChangeRequest());
+		varArray.add(activityReport.getMedian());
+		varArray.add(activityReport.getStd());
+		varArray.add(activityReport.getSpentWorkDays().get(0));
+		varArray.add(activityReport.getSpentWorkDays().get(1));
+		varArray.add(activityReport.getSpentWorkDays().get(2));
+		varArray.add(activityReport.getSpentWorkDays().get(3));
+		SqlAction sqlAction = new SqlAction(SqlQueryType.INSERT_NEW_ACTIVITY_REPORT,varArray);
+		this.subscribeToClientDeliveries();		//subscribe to listener array
+		ClientConsole.client.handleMessageFromClientUI(sqlAction);
+	}
+	
 	@Override
 	public void getResultFromClient(SqlResult result) {
 		Platform.runLater(() -> {
@@ -60,7 +78,13 @@ public class ActivityReportController extends BasicController{
 			{
 				case SELECT_ALL_CHANGE_REQUESTS_BY_DATE:
 					this.unsubscribeFromClientDeliveries();
-					myBoundary.createActivityReportList(createChangeRequestList(result));
+					ActivityReport report;
+					report = createActivityReport(createChangeRequestList(result));
+					insertNewActivityReport(report);
+					break;
+				case INSERT_NEW_ACTIVITY_REPORT:
+					//TODO: save the report in the database
+					//checkInsertSuccessfully();
 					break;
 				default:
 					break;
@@ -85,5 +109,47 @@ public class ActivityReportController extends BasicController{
 		}
 		return resultList;
 	}
+	
+	public ActivityReport createActivityReport(ArrayList<ChangeRequest> requestList) {
+		if(requestList.isEmpty()) {
+			//return;
+		}
+		int active = 0, close = 0, suspended = 0, denied = 0;
+		ArrayList<Long> workDays = new ArrayList<>();
+		for (int i = 0; i < requestList.size(); i++) {	
+			if (requestList.get(i).getStatus().equals("ACTIVE")) {
+				active++;
+				long daysBetween = TimeManager.getDaysBetween(requestList.get(i).getStartDate(),
+						TimeManager.getCurrentDate());
+				workDays.add(daysBetween);
+			} else if (requestList.get(i).getStatus().equals("DENIED")) {
+				if(TimeManager.getDaysBetween(requestList.get(i).getEndDate(), activityReportEndDate) < 0) {
+					active++;
+				} else {
+					denied++; }
+				long daysBetween = TimeManager.getDaysBetween(requestList.get(i).getStartDate(),
+						requestList.get(i).getEndDate());
+				workDays.add(daysBetween);
+			} else if (requestList.get(i).getStatus().equals("SUSPEND")) {
+				suspended++;
+				long daysBetween = TimeManager.getDaysBetween(requestList.get(i).getStartDate(),
+						TimeManager.getCurrentDate());
+				workDays.add(daysBetween);
+			} else if(requestList.get(i).getStatus().equals("CLOSED")) {
+				if(TimeManager.getDaysBetween(requestList.get(i).getEndDate(), activityReportEndDate) < 0) {
+					active++;
+				} else {
+					close++;
+				}
+				long daysBetween = TimeManager.getDaysBetween(requestList.get(i).getStartDate(),
+						requestList.get(i).getEndDate());
+				workDays.add(daysBetween);
+			}
+		}
+		ActivityReport activityReport = new ActivityReport(active, close, suspended,denied, workDays);
+		activityReport.setMedian(Utilizer.calcMedian(workDays));
+		activityReport.setStd(Utilizer.calcStd(workDays));
+		return activityReport;
+		}
 
 }

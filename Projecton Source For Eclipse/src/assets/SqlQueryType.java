@@ -6,7 +6,12 @@ package assets;
  * This enum will represent all the queries in our project
  */
 public enum SqlQueryType {
-
+	
+	/* *****************************************
+	 * ********** ActivityReport Queries ****************
+	 * *****************************************/
+	INSERT_NEW_ACTIVITY_REPORT(SqlExecutionType.UPDATE_QUERY),
+	
 	/* *****************************************
 	 * ********** Common Queries ****************
 	 * *****************************************/

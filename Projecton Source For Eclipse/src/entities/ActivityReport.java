@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * includes all the fields as described in the activity report page
  */
 
-public class ActivityReport {
+public class ActivityReport{
 	
 	/** The active change request. */
 	private int activeChageRequest;
@@ -27,6 +27,11 @@ public class ActivityReport {
 	/** The spent work days. */
 	private ArrayList<Long> spentWorkDays;
 	
+	private double std;
+	
+	private double median;
+	
+
 	/**
 	 * Instantiates a new activity report.
 	 *
@@ -45,7 +50,23 @@ public class ActivityReport {
 		this.deniedChangeRequest = deniedChangeRequest;
 		this.spentWorkDays = spentWorkDays;
 	}
-	
+
+	public double getStd() {
+		return std;
+	}
+
+	public void setStd(double std) {
+		this.std = std;
+	}
+
+	public double getMedian() {
+		return median;
+	}
+
+	public void setMedian(double median) {
+		this.median = median;
+	}
+
 	/**
 	 * Gets the active chage request.
 	 *
@@ -135,5 +156,36 @@ public class ActivityReport {
 	public void setSpentWorkDays(ArrayList<Long> spentWorkDays) {
 		this.spentWorkDays = spentWorkDays;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ActivityReport other = (ActivityReport) obj;
+		if (activeChageRequest != other.activeChageRequest)
+			return false;
+		if (closeChangeRequest != other.closeChangeRequest)
+			return false;
+		if (deniedChangeRequest != other.deniedChangeRequest)
+			return false;
+		if (Double.doubleToLongBits(median) != Double.doubleToLongBits(other.median))
+			return false;
+		if (spentWorkDays == null) {
+			if (other.spentWorkDays != null)
+				return false;
+		} else if (!spentWorkDays.equals(other.spentWorkDays))
+			return false;
+		if (Double.doubleToLongBits(std) != Double.doubleToLongBits(other.std))
+			return false;
+		if (suspendedChangeRequest != other.suspendedChangeRequest)
+			return false;
+		return true;
+	}
+
+
 	
 }

@@ -237,11 +237,12 @@ public class ActivityReportBoundary implements Initializable {
 		if(!workDays.isEmpty()) {
 			medianTextField.setText(""+ Utilizer.calcMedian(workDays));
 			stdTextField.setText(String.format("%.2f", Utilizer.calcStd(workDays)));
+			report.setMedian(Utilizer.calcMedian(workDays));
+			report.setStd(Utilizer.calcStd(workDays));
 		}
 		else {
 			Toast.makeText(ProjectFX.mainStage, "there is not change request in sql table", 1500, 500, 500);
 		}
-
 		activeTextField.setText(Integer.toString(report.getActiveChageRequest()));
 		closedTextField.setText(Integer.toString(report.getCloseChangeRequest()));
 		suspendedTextField.setText(Integer.toString(report.getSuspendedChangeRequest()));
