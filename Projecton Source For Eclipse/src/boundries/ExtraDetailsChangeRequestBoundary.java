@@ -15,6 +15,7 @@ import assets.ProjectPages;
 import assets.Toast;
 import assets.AttachmentListCellNonRemoveable;
 import controllers.ExtraDetailsChangeRequestController;
+import controllers.TimeManager;
 import entities.ChangeRequest;
 import entities.MyFile;
 import javafx.beans.binding.Bindings;
