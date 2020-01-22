@@ -196,6 +196,15 @@ public class MysqlConnection {
     {
     	sqlArray = new String[SqlQueryType.MAX_SQL_QUERY.getCode()];
     	
+    	/* ********************************************************
+    	 * ********** Dependency Injections Testing **************
+    	 * ******************************************************/
+    	sqlArray[SqlQueryType.SELECT_DATES_OF_ACTIVE_CHANGE_REQUESTS_BETWEEN.getCode()]=
+    			"SELECT StartDate FROM icm.change_request "
+    			+ "WHERE Status = 'ACTIVE' AND StartDate BETWEEN ? AND ?";
+    	
+    	
+    	
     	/* *****************************************************
 		 * *************** Common Queries ****************
 		 * *****************************************************/

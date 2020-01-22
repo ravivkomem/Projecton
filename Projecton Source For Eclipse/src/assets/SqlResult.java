@@ -14,7 +14,11 @@ import java.util.ArrayList;
  */
 @SuppressWarnings("serial")
 public class SqlResult implements Serializable{ 
-	
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+
 	private ArrayList<ArrayList<Object>> resultData;
 	private SqlQueryType actionType;
 
@@ -63,7 +67,9 @@ public class SqlResult implements Serializable{
 	{
 		this.actionType = actionType;
 		resultData = new ArrayList<ArrayList<Object>>();
-		resultData.add(list);
+		
+		if (!list.isEmpty())
+			resultData.add(list);
 	}
 
 	public ArrayList<ArrayList<Object>> getResultData()
@@ -81,4 +87,33 @@ public class SqlResult implements Serializable{
 		resultData.clear();
 		resultData.add(dataSet);
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SqlResult other = (SqlResult) obj;
+		if (actionType != other.actionType)
+			return false;
+		if (resultData == null) {
+			if (other.resultData != null)
+				return false;
+		} else if (!resultData.equals(other.resultData))
+			return false;
+		return true;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "SqlResult [resultData=" + resultData + ", actionType=" + actionType + "]";
+	}
+	
+	
 }
