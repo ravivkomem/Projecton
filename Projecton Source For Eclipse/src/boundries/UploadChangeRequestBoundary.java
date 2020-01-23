@@ -160,14 +160,29 @@ public class UploadChangeRequestBoundary implements Initializable {
     		for (int i = 0; i < selectedFiles.size(); i++)
     		{
     			File file = selectedFiles.get(i);
+    			String path = file.getName();
+				String extension = "";
+
+				int index = path.lastIndexOf('.');
+				if (index > 0) {
+				    extension = path.substring(index+1);
+				}
+				
+				if (extension.equals("exe"))
+				{
+					popUpWindowMessage(Alert.AlertType.ERROR, "Upload Error",
+    						"You can not upload EXE files");
+					break;
+				}
+    			
     			if (listViewData.size() < FILE_QUANTITY_LIMIT)
     			{
     				listViewData.add(MyFile.parseToMyFile(file.getPath()));
     			}
     			else
     			{
-    				Toast.makeText(ProjectFX.mainStage, "You can only upload up to " + FILE_QUANTITY_LIMIT +" files"
-    						, 1500, 500, 500);
+    				popUpWindowMessage(Alert.AlertType.ERROR, "Upload Error",
+    						"You can upload up to 3 files only");
     				break;
     			}
     			
@@ -222,12 +237,16 @@ public class UploadChangeRequestBoundary implements Initializable {
     	/*in case the user didn't fill all the required fields*/
     	if (subSystemComboBox.getSelectionModel().isEmpty()|| newCurrentStateDescription.equals("")||newChangeRequestDescription.equals("")||newChangeRequestExplanation.equals(""))
     	{
-    		Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
+    		popUpWindowMessage(Alert.AlertType.ERROR, "Upload Error",
+    						"Please fill all the required fields");
+    		//Toast.makeText(ProjectFX.mainStage, "Please fill all the required fields", 1500, 500, 500);
     	}
     	/*while the required fields are filled properly create a new change request and send to the controller*/
     	else if (isOverQuantityLimit == true)
     	{
-    		Toast.makeText(ProjectFX.mainStage, "You exceeded the file size limit, please delete files", 1500, 500, 500);
+    		popUpWindowMessage(Alert.AlertType.ERROR, "Upload Error",
+					"You exceeded the file size limit");
+    		//Toast.makeText(ProjectFX.mainStage, "You exceeded the file size limit, please delete files", 1500, 500, 500);
     	}
     	else
     	{
