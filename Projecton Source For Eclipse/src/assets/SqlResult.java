@@ -69,7 +69,16 @@ public class SqlResult implements Serializable{
 		resultData = new ArrayList<ArrayList<Object>>();
 		
 		if (!list.isEmpty())
-			resultData.add(list);
+		{
+			for (Object obj : list)
+			{
+				ArrayList<Object> resultRow = new ArrayList<Object>();
+				resultRow.add(obj);
+				resultData.add(resultRow);
+			}
+			
+		}
+		//resultData.add(list);
 	}
 
 	public ArrayList<ArrayList<Object>> getResultData()

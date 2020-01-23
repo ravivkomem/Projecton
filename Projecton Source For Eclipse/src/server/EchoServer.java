@@ -122,10 +122,10 @@ public class EchoServer extends AbstractServer
   }
 
     
-  private SqlResult getResultFromDB(SqlAction sqlAction) {
+  public SqlResult getResultFromDB(SqlAction sqlAction) {
 	SqlResult sqlResult = sqlConnection.getResult(sqlAction);
 	return sqlResult;
-}
+  }
 
 /**
    * This method overrides the one in the superclass.  Called

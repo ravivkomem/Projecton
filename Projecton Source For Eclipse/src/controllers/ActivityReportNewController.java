@@ -69,7 +69,7 @@ public class ActivityReportNewController extends BasicController{
 		
 	}
 
-	private ArrayList<Date> createDateList(SqlResult result) {
+	public ArrayList<Date> createDateList(SqlResult result) {
 		
 		try
 		{
@@ -88,8 +88,11 @@ public class ActivityReportNewController extends BasicController{
 		return null;
 	}
 	
-	private NewActivityReport createNewActivityReport(ArrayList<Date> dateList)
+	public NewActivityReport createNewActivityReport(ArrayList<Date> dateList)
 	{
+		if(dateList == null) {
+			return null;
+		}
 		long[] numberOfChangeRequests = new long[SPLIT_SIZE];
 		
 		long startDateLong = startDate.getTime();
@@ -102,7 +105,12 @@ public class ActivityReportNewController extends BasicController{
 		{
 			long dateTime = date.getTime();
 			long daysSinceStart = dateTime - startDateLong;
-			numberOfChangeRequests[(int) (daysSinceStart/jumpDays)]++;			
+			int index =(int)(daysSinceStart/jumpDays);
+			if (index == 10)
+			{
+				index = 9;
+			}
+			numberOfChangeRequests[index]++;			
 		}
 		
 		return new NewActivityReport(numberOfChangeRequests, startDate, endDate);
@@ -111,6 +119,12 @@ public class ActivityReportNewController extends BasicController{
 //		{
 //			System.out.println("Array index " + i +" Is equal: " + numberOfChangeRequests[i]);	
 //		}
+	}
+	
+	public void setDates (Date startDate, Date endDate)
+	{
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 	
 	

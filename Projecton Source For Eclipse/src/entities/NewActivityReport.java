@@ -98,5 +98,10 @@ public class NewActivityReport {
 		return true;
 	}
 	
+	@Override
+	public String toString() {
+		return "NewActivityReport [numberOfChangeRequests=" + Arrays.toString(numberOfChangeRequests) + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", std=" + std + ", median=" + median + "]";
+	}
 	
 }
