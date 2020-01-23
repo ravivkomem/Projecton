@@ -27,6 +27,7 @@ public enum ProjectPages {
 	PERFORMANCE_REPORT_PAGE("/boundries/PerformanceReportPage.fxml"),
 	APPOINT_TESTER("/boundries/AppointTesterPage.fxml"),
 	ACTIVITY_REPORT_PAGE("/boundries/ActivityReportPage.fxml"),
+	ACTIVITY_REPORT_NEW_PAGE("/boundries/ActivityReportNewPage.fxml"),
 	DELAY_REPORT_PAGE("/boundries/DelayReportPage.fxml");
 	
 	private String path;

@@ -337,6 +337,8 @@ public class TechManagerBoundary implements Initializable{
 			case "Delay Report":
 				reportDisplayAnchorPane.getChildren().setAll((AnchorPane) ProjectFX.pagingController.loadBoundaryInPane(ProjectPages.DELAY_REPORT_PAGE.getPath()));
 				break;
+			case "New Activity Report":
+				reportDisplayAnchorPane.getChildren().setAll((AnchorPane) ProjectFX.pagingController.loadBoundaryInPane(ProjectPages.ACTIVITY_REPORT_NEW_PAGE.getPath()));
 			default:
 				break;
 			}
@@ -421,6 +423,7 @@ public class TechManagerBoundary implements Initializable{
 		reportTypeComboBox.getItems().add("Activity Report");
 		reportTypeComboBox.getItems().add("Performance Report");
 		reportTypeComboBox.getItems().add("Delay Report");
+		reportTypeComboBox.getItems().add("New Activity Report");
 		
 		requestIdColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, Integer>("changeRequestID"));
 		stepColumn.setCellValueFactory(new PropertyValueFactory<ChangeRequest, String>("actualStep"));

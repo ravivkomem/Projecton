@@ -8,13 +8,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import assets.*;
+import unittests.ISqlConnection;
 
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class MysqlConnection.
  */
-public class MysqlConnection {
+public class MysqlConnection implements ISqlConnection {
 	
 	/* Initialize database constants */
 	/** The Constant DATABASE_DRIVER. */
@@ -407,6 +408,10 @@ public class MysqlConnection {
     	sqlArray[SqlQueryType.SELECT_DATES_FROM_CLOSED_CHANGE_REQUEST.getCode()]=
     			"SELECT SelectedSubsystem , EstimatedDate , EndDate FROM icm.change_request"
     			+ " WHERE Status = 'CLOSED'";
+    	sqlArray[SqlQueryType.INSERT_NEW_ACTIVITY_REPORT.getCode()] = 
+    			"INSERT INTO icm.activity_report(StartDate,EndDate,Catgory1,Catgory2,Catgory3,Catgory4,"
+    			+ "Catgory5,Catgory6,Catgory7,Catgory8,Catgory9,Catgory10,std,median) "
+    			+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     	/* *****************************************************
 		 * *********** Upload Change Request Queries ***********
 		 * *****************************************************/

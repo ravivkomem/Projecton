@@ -8,7 +8,6 @@ package assets;
 public enum SqlQueryType {
 	
 	SELECT_DATES_OF_ACTIVE_CHANGE_REQUESTS_BETWEEN(SqlExecutionType.EXECUTE_QUERY),
-	INSERT_NEW_ACTIVITY_REPORT(SqlExecutionType.UPDATE_QUERY),
 	
 	
 	/* *****************************************

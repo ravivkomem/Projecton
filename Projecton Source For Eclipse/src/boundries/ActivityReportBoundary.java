@@ -211,7 +211,7 @@ public class ActivityReportBoundary implements Initializable {
 	 * @param workDays the work days
 	 */
 	@SuppressWarnings("unchecked")
-	private void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
+	public void displayActivityReport(ActivityReport report, ArrayList<Long> workDays) {
 		int[] workDaysArray;
 		requestStatusPieChart.setTitle("Change Request Status");
 		if(report.getDeniedChangeRequest()>0)

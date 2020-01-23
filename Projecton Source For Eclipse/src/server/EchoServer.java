@@ -15,6 +15,7 @@ import assets.SqlFileAction;
 import assets.SqlResult;
 import entities.MyFile;
 import ocsf.server.*;
+import unittests.ISqlConnection;
 
 /**
  * This class overrides some of the methods in the abstract 
@@ -35,6 +36,7 @@ public class EchoServer extends AbstractServer
    */
   final public static int DEFAULT_PORT = 5555;
   final public static String FILLE_DIRECTORY ="C:\\ServerFiles\\";
+  ISqlConnection sqlConnection = new MysqlConnection();
   
   //Constructors ****************************************************
   
@@ -48,6 +50,11 @@ public class EchoServer extends AbstractServer
     super(port);
   }
 
+  public void setSqlConnection(ISqlConnection newConnection)
+  {
+	  if (newConnection != null)
+		  sqlConnection = newConnection;
+  }
   
   //Instance methods ************************************************
   
@@ -60,8 +67,8 @@ public class EchoServer extends AbstractServer
   public void handleMessageFromClient (Object msg, ConnectionToClient client)
   {
 	  SqlAction sqlAction = (SqlAction) msg;
-	  MysqlConnection sqlConnection = new MysqlConnection();
-	  SqlResult sqlResult = sqlConnection.getResult(sqlAction);
+	  SqlResult sqlResult = getResultFromDB(sqlAction);
+	  //MysqlConnection sqlConnection = new MysqlConnection();
 	  System.out.println("Message received: " + sqlResult.getResultData().toString() + " from " + client);
 	 
 	  /* If it is a file request also upload it to the server */
@@ -115,7 +122,12 @@ public class EchoServer extends AbstractServer
   }
 
     
-  /**
+  private SqlResult getResultFromDB(SqlAction sqlAction) {
+	SqlResult sqlResult = sqlConnection.getResult(sqlAction);
+	return sqlResult;
+}
+
+/**
    * This method overrides the one in the superclass.  Called
    * when the server starts listening for connections.
    */

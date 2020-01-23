@@ -80,7 +80,8 @@ public class ActivityReportController extends BasicController{
 					this.unsubscribeFromClientDeliveries();
 					ActivityReport report;
 					report = createActivityReport(createChangeRequestList(result));
-					insertNewActivityReport(report);
+					//insertNewActivityReport(report);
+					myBoundary.displayActivityReport(report,report.getSpentWorkDays());
 					break;
 				case INSERT_NEW_ACTIVITY_REPORT:
 					//TODO: save the report in the database
