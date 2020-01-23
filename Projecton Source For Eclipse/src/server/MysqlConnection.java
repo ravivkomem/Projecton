@@ -159,7 +159,7 @@ public class MysqlConnection {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
     	finally {
     		this.disconnect();

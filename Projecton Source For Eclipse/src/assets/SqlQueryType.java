@@ -7,6 +7,10 @@ package assets;
  */
 public enum SqlQueryType {
 	
+	SELECT_DATES_OF_ACTIVE_CHANGE_REQUESTS_BETWEEN(SqlExecutionType.EXECUTE_QUERY),
+	INSERT_NEW_ACTIVITY_REPORT(SqlExecutionType.UPDATE_QUERY),
+	
+	
 	/* *****************************************
 	 * ********** ActivityReport Queries ****************
 	 * *****************************************/
@@ -181,7 +185,6 @@ public enum SqlQueryType {
 	GET_HIGH_MANGEMENT_MAILS(SqlExecutionType.EXECUTE_QUERY),
 	GET_USER_EMAIL(SqlExecutionType.EXECUTE_QUERY),
 	GET_USER_FULL_NAME(SqlExecutionType.EXECUTE_QUERY),
-	SELECT_DATES_OF_ACTIVE_CHANGE_REQUESTS_BETWEEN(SqlExecutionType.EXECUTE_QUERY),
 	
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */
 	/* DO NOT CHANGE THE LOCATION OF MAX_SQL_QUERY!!! */

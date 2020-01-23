@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -16,7 +15,8 @@ import assets.SqlResult;
 import assets.SqlAction;
 import assets.SqlQueryType;
 
-/* Testing the actual connection to the DataBase */
+/* Testing the actual connection to the DataBase 
+ * The database is loaded using: "icm_database.sql" version 1.3.2 (As submitted) */
 
 class MysqlConnectionTest {
 
@@ -39,7 +39,7 @@ class MysqlConnectionTest {
 	 * the first date and the second date, and get correct results
 	 */
 	@Test
-	void testGetResult_SelectingChangeRequestsSuccess() {
+	void testGetResultOfChangeRequests_SelectingChangeRequestsSuccess() {
 		SqlResult expectedSqlResult;
 		ArrayList<Object> expectedArray = new ArrayList<Object>();
 		expectedArray.add(date3);
@@ -54,11 +54,11 @@ class MysqlConnectionTest {
 		assertEquals(expectedSqlResult.toString(), actualSqlResult.toString());
 	}
 	
-	/* This test is select all change requests between 
-	 * the first date and the second date, and get correct results
+	/* 
+	 * This test is to get empty results from the database
 	 */
 	@Test
-	void testGetResult_SelectingEmptyResults() {
+	void testGetResultOfChangeRequests_SelectingEmptyResults() {
 		SqlResult expectedSqlResult;
 		ArrayList<Object> expectedArray = new ArrayList<Object>();
 		expectedSqlResult = new SqlResult(expectedArray, SqlQueryType.SELECT_DATES_OF_ACTIVE_CHANGE_REQUESTS_BETWEEN);
@@ -71,5 +71,20 @@ class MysqlConnectionTest {
 		SqlResult actualSqlResult = sqlConnection.getResult(sqlAction);
 		assertEquals(expectedSqlResult.toString(), actualSqlResult.toString());
 	}
+	
+	
+	/* 
+	 * This test checks invalid variables sent to the server
+	 */
+	@Test
+	void testGetResultOfChangeRequests_InvalidVars() {
+		SqlResult expectedSqlResult = null;
+		
+		ArrayList<Object> varArray = new ArrayList<Object>();
+		SqlAction sqlAction = new SqlAction(SqlQueryType.SELECT_DATES_OF_ACTIVE_CHANGE_REQUESTS_BETWEEN, varArray);
+		SqlResult actualSqlResult = sqlConnection.getResult(sqlAction);
+		assertEquals(expectedSqlResult, actualSqlResult);
+	}
+	
 
 }
