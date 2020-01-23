@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="758.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.ExecutionLeaderBoundry">
+   <children>
+      <ImageView fitHeight="601.0" fitWidth="758.0" pickOnBounds="true">
+         <image>
+            <Image url="@background_image.jpg" />
+         </image>
+      </ImageView>
+      <Text layoutX="247.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Execution Page" wrappingWidth="302.5">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Text>
+      <Text layoutX="137.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Change Request Details:" wrappingWidth="136.99999290704727" />
+      <Button fx:id="backButton" layoutX="21.0" layoutY="550.0" mnemonicParsing="false" onMouseClicked="#loadPreviousPage" text="Back" />
+      <Button fx:id="btnLogOut" layoutX="633.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#logOutUser" style="-fx-background-color: #2196F3;" text="log out">
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@logout_symbol.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="timeRemainingTextArea" layoutX="608.0" layoutY="171.0" prefHeight="53.0" prefWidth="97.0" />
+      <VBox alignment="TOP_CENTER" prefHeight="341.0" prefWidth="112.0" style="-fx-border-color: #2196F3; -fx-background-color: #ddf1ff;">
+         <children>
+            <ImageView fitHeight="63.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@icm%20icom%20til.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnHomePage" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#loadHomePage" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Home Page" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@home.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnAnalysisReport" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayAnalysisReport" prefHeight="68.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Analysis Report" textAlignment="CENTER" wrapText="true">
+               <graphic>
+                  <ImageView fitHeight="33.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@analysis_image.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/btnBreak.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="btnTimeExtension" contentDisplay="TOP" mnemonicParsing="false" onMouseClicked="#displayTimeExtension" prefHeight="78.0" prefWidth="127.0" style="-fx-background-color: #ddf1ff;" text="Time Extension">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icon-clock-21.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <ImageView fitHeight="5.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/btnBreak.png" />
+               </image>
+            </ImageView>
+         </children>
+      </VBox>
+      <Text fx:id="txtWorkingOnChangeRequestNumber" layoutX="200.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Working on change request No. XX" wrappingWidth="519.6708984375">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="timeRemainingTxt" layoutX="608.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Remaining" wrappingWidth="97.00000256299973" />
+      <TextArea fx:id="txtChangeRequestDetails" layoutX="275.0" layoutY="170.0" prefHeight="135.0" prefWidth="240.0" />
+      <GridPane fx:id="setTimePane" layoutX="128.0" layoutY="335.0" prefHeight="43.0" prefWidth="468.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="182.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="238.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="68.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnSubmitForTimeRequiredForExecution" mnemonicParsing="false" onMouseClicked="#submitExecutionTime" text="Submit" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter time required for execution" wrappingWidth="178.17834249138832" />
+            <DatePicker fx:id="executionTimeDatePicker" prefHeight="31.0" prefWidth="197.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+         </children>
+      </GridPane>
+      <GridPane fx:id="waitApproveTimePane" layoutX="216.0" layoutY="328.0" prefHeight="93.0" prefWidth="345.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="278.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="48.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#393939" strokeType="OUTSIDE" strokeWidth="0.0" text="Work pending supervisor approval" wrappingWidth="356.0000046938658" GridPane.columnSpan="2">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <Label fx:id="timeRequestedLabel" text="Time requestsed: XX / XX /XX" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnRefresh" mnemonicParsing="false" onMouseClicked="#refreshPage" prefHeight="35.0" prefWidth="57.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="37.0">
+                     <image>
+                        <Image url="@refresh_symbol.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Text fx:id="txtRefresh" fill="#393838" strokeType="OUTSIDE" strokeWidth="0.0" text="Refresh Page (To see if approved)" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+         </children>
+      </GridPane>
+      <GridPane fx:id="executionWorkPane" layoutX="128.0" layoutY="350.0" prefHeight="162.0" prefWidth="491.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="185.0" minWidth="10.0" prefWidth="139.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="249.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="108.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter execution summary" wrappingWidth="178.00000256299973" GridPane.valignment="TOP" />
+            <TextArea fx:id="executionSummaryTextArea" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="3" />
+            <Button fx:id="btnCommitExecution" mnemonicParsing="false" onMouseClicked="#finishExecutionWork" prefHeight="24.0" prefWidth="101.0" text="Finish Work" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Button>
+            <Label fx:id="executionSummaryCharactersLabel" text="X/Y" GridPane.columnIndex="2" GridPane.valignment="TOP">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </GridPane>
+      <ImageView fx:id="loadingGif" fitHeight="150.0" fitWidth="200.0" layoutX="289.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@loginPendingGIF.gif" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="459.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.DelayReportBoundary">
+   <children>
+      <BarChart fx:id="dealyBarChart" layoutX="22.0" layoutY="7.0" prefHeight="281.0" prefWidth="547.0">
+        <xAxis>
+          <CategoryAxis fx:id="delayCategoryBarChart" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="delayNumberBarChart" side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Text layoutX="66.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All systems median:" />
+      <TextField fx:id="medianTextField" layoutX="251.0" layoutY="303.0" prefHeight="25.0" prefWidth="59.0" />
+      <Text layoutX="66.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All systems standart deviation:" />
+      <TextField fx:id="stdTextField" layoutX="251.0" layoutY="347.0" prefHeight="25.0" prefWidth="59.0" />
+      <Text layoutX="66.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All systems average:" />
+      <TextField fx:id="avgTextField" layoutX="251.0" layoutY="392.0" prefHeight="25.0" prefWidth="59.0" />
+   </children>
+</AnchorPane>

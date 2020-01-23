@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="459.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boundries.ActivityReportBoundary">
+   <children>
+      <Text layoutX="83.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="From:" />
+      <Text layoutX="324.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To:" />
+      <DatePicker fx:id="startDatePicker" layoutX="128.0" layoutY="20.0" prefHeight="25.0" prefWidth="115.0" promptText="start date" />
+      <DatePicker fx:id="endDatePicker" layoutX="355.0" layoutY="20.0" prefHeight="25.0" prefWidth="115.0" promptText="end date" />
+      <Button fx:id="showDetailsButton" layoutX="491.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#showActivityReportDetails" text="Show" />
+      <AnchorPane fx:id="activityReportDetailsPane" layoutY="57.0" prefHeight="402.0" prefWidth="586.0">
+         <children>
+            <PieChart fx:id="requestStatusPieChart" animated="false" layoutX="241.0" layoutY="7.0" prefHeight="242.0" prefWidth="338.0" />
+            <Text layoutX="34.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Median:" />
+            <TextField fx:id="medianTextField" layoutX="147.0" layoutY="272.0" prefHeight="25.0" prefWidth="61.0" />
+            <Text layoutX="34.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Standart Deviation:" />
+            <TextField fx:id="stdTextField" layoutX="147.0" layoutY="310.0" prefHeight="25.0" prefWidth="61.0" />
+            <BarChart fx:id="workDaysBarChart" layoutX="-1.0" layoutY="7.0" prefHeight="220.0" prefWidth="259.0">
+              <xAxis>
+                <CategoryAxis fx:id="workDaysChartBarCategory" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="DaysNumberBarChart" side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <GridPane alignment="CENTER" layoutX="347.0" layoutY="252.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Closed:" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Active:" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Denied:" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Suspended:" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                  <TextField fx:id="activeTextField" GridPane.columnIndex="1" />
+                  <TextField fx:id="closedTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="suspendedTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="deniedTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
